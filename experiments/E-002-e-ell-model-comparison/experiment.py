@@ -4,7 +4,7 @@ Independent statistical reverification of the e(l) growth-model comparison
 from the previous paper (Section 7, Empirical Result 7.2), for H-001.
 
 IMPORTANT FRAMING: H-001's computational extension (E-001) reached exactly one level past the
-previous paper's table (l=21, after a memory-ceiling fix; l=22 needs ~86GiB for the DP's state
+previous paper's table (l=21, after a memory-ceiling fix; l=22 needs ~84GiB for the DP's state
 array alone and is not reachable on this hardware regardless of implementation). So this is
 mostly an independent, from-scratch statistical verification of the previous paper's finding
 using the SAME l=1..20 data (recomputed and cross-checked independently in E-001, not just
@@ -51,7 +51,7 @@ DATA = [
 ]
 # l=21 is new data (H-001, 2026-07-22): not in the previous paper's table, computed by the
 # memory-optimized Rust reimplementation (E-001) after a dense-bitset memory ceiling was found
-# and fixed enough to reach this one additional level. l=22 needs ~86GiB for the DP's state array
+# and fixed enough to reach this one additional level. l=22 needs ~84GiB for the DP's state array
 # alone (before any transient), which no in-place optimization changes; l=21 is the ceiling on
 # this hardware for this algorithm. No independent cross-check exists at l=21 itself (the
 # brute-force method is only tractable to l<=4); confidence rests on exact agreement with the

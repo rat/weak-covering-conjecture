@@ -6,7 +6,7 @@ Related hypothesis: H-001 (`notes/H-001.md`).
 
 The computational extension (E-001) reached exactly one level past the previous paper's table:
 l=21 (j*(21)=25), after a memory-ceiling problem was found and fixed enough to reach it; l=22
-needs ~86GiB for the DP's state array alone and is not reachable on this hardware at all. So this
+needs ~84GiB for the DP's state array alone and is not reachable on this hardware at all. So this
 is mostly an independent, from-scratch statistical verification of the previous paper's finding
 (Section 7, Empirical Result 7.2) using the same l=1..20 data (recomputed and cross-checked
 independently in E-001), with more rigor than the previous paper's text reports (explicit 95%

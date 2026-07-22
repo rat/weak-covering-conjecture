@@ -238,10 +238,12 @@ resolutions:
    the three growth models remain mutually indistinguishable).
 5. **Minor**: framing zero new `j*(l)` values as a "successful stopping point" is honestly
    disclosed (the checklist item is explicitly left unchecked, with the reason stated), but is
-   still worth naming plainly: Part A's original goal (extend past l=20) was not achieved; what
-   was achieved is a faster, independently-verified reproduction of the existing table plus a
-   precise characterization of why extending it further is not currently possible on this
-   hardware.
+   still worth naming plainly: at the time of this critique round, Part A's original goal (extend
+   past l=20) had not been achieved. **[Superseded shortly after this critique round]**: a memory
+   inefficiency in the parallelization was found and fixed, and l=21 was subsequently reached
+   (j*(21)=25); see "Results" above and the second critique round below. This item is left as
+   originally written, dated, rather than edited after the fact, per this project's own rule of
+   appending critique history rather than rewriting it.
 
 The critique independently re-verified (by re-running the code itself) that every `j*(l)` value,
 every statistical output number, and the previous paper's quoted Empirical Result 7.2 text all
@@ -270,11 +272,15 @@ under a non-release build and the statistical section's framing.
   l<=20 (0.075 vs ~0.072) was not chased down further; both are well above the conventional 0.05
   threshold and the qualitative reading (marginal, same direction) is unaffected either way.
 - No formal checksum of the j*(l) results was produced (the checklist mentions this as a
-  reproducibility aid); the values are small non-negative integers independently confirmed by
-  two methods (through l=20) and by matching a previously published table exactly, which is a
-  stronger check than a checksum would add on top for that range; l=21 itself has no second
-  independent method behind it (see above), which is a real, disclosed limitation, not an
-  oversight.
+  reproducibility aid). The actual verification tiering, stated precisely rather than as a
+  blanket "two methods through l=20" (a second-critique-round correction: that blanket framing
+  overstated it): for l<=4, two genuinely different *algorithms* agree (brute-force enumeration
+  and the bitset-rotation DP); for l=5..20, this Rust implementation agrees with the previous
+  paper's independently-run Python implementation of the *same* bitset-rotation algorithm (catches
+  implementation bugs, not an algorithmic error in the shared method); for l=21, only this one
+  implementation of the one algorithm exists, with no second method at all. This is weaker at
+  l=21 than at l<=20, and weaker at l=5..20 than at l<=4; disclosed here precisely rather than
+  glossed over.
 - This report has been through one critique pass (see above), but that pass reviewed an earlier
   version of `image_size` (the cross-c collect-then-merge parallelization) and did not see the
   l=21 result, the memory-optimization rewrite, or the invertible-residue packing analysis, all
