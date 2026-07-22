@@ -8,10 +8,12 @@
 H-001 asked two things: (A) extend the exact computation of j*(l), Wirsching's Weak Covering
 Conjecture object, past the previous paper's l=1..20 table, with a fast, independently verified
 reimplementation; and (B) redo the statistical model comparison for the growth of
-e(l) = j*(l) - l*log_4(3) with the extended data. Part A did not extend past l=20 (see below);
-Part B is accordingly an independent statistical reverification using the same data, not a
-re-analysis with new points. Both outcomes are reported honestly here, including where the
-project's own initial assumptions turned out to be wrong.
+e(l) = j*(l) - l*log_4(3) with the extended data. Part A reached exactly one level past the
+previous paper's table (l=21, after a memory-ceiling problem was found and fixed); l=22 was
+re-examined carefully after l=21 succeeded and is not reachable on this hardware, for reasons
+given below. Part B folds the one new point into the same model comparison the previous paper
+ran. Both outcomes are reported honestly here, including two rounds of the project's own
+assumptions turning out to be wrong before landing on the current numbers.
 
 ## Methodology
 
@@ -94,6 +96,7 @@ l   j*   j*/l    e(l)     wall time (this Rust implementation)
 18  22   1.2222   7.735    22.828s
 19  23   1.2105   7.943    78.022s
 20  24   1.2000   8.150   271.156s  (cumulative 381.1s = 6.35 min for the full l=1..20 run)
+21  25   1.1905   8.358   748.080s  (l=21 alone, after the memory-optimized rewrite below; new data)
 ```
 
 For comparison, the previous paper's pure-Python implementation took 139s, 485s, and 1597s for
@@ -108,33 +111,77 @@ count-indexed table must stay live throughout the computation. On this 62GB mach
 
 ```
 l=20: state ~=  8.7 GiB  -- completed
-l=21: state ~= 27.4 GiB  -- peak with transients pushed system-wide free memory to ~610MB; killed
-l=22: state ~= 86.1 GiB  -- exceeds total physical memory outright
+l=21: state ~= 27.4 GiB  -- completed (see "memory optimization" below for how)
+l=22: state ~= 84.0 GiB  -- exceeds total physical memory outright, even packed (see below)
 ```
 
-This is not an artifact of Python vs. Rust, or of this implementation's specific parallelism
-choice: any implementation holding the full DP table faces the same asymptotic memory wall. The
-non-multiple-of-3 packing optimization considered in the original technical guide would save at
-most ~33% (a constant factor), not change the exponential growth rate, so it would buy at most a
-fraction of one additional level, not reach l=25-28.
+This is not an artifact of Python vs. Rust: any implementation holding the full DP table (all
+l+1 count-levels live at once, an intrinsic feature of this knapsack-style DP, not an
+implementation choice) faces the same asymptotic memory wall.
+
+**Memory optimization that got l=21 to actually complete.** The first attempt at l=21 (below the
+threshold in isolation but pushing system-wide free memory to ~610MB, see the critique-era
+section below) revealed the parallelization strategy itself was wasteful: computing all `ell`
+rotated bitsets for a given exponent step in parallel and merging afterward held up to `ell`
+extra full-size bitsets alongside the `l+1`-bitset state array. Rewritten to process count-index
+`c` sequentially (matching the original single-threaded algorithm's own correctness argument,
+which needs no "snapshot" trick), with parallelism moved *inside* each individual rotate/shift/OR
+call instead (word-chunked; each output word depends on at most two fixed input words, so this
+needs no cross-thread synchronization). This keeps only one extra full-size temporary alive at a
+time, cutting peak memory from `~2*(l+1)*3^l/8` to `~(l+2)*3^l/8` bytes, and was also faster
+(l=20 in 198.1s vs. 271.2s). Re-validated against both build profiles and the full l=1..20 table
+before trusting it with a real l=21 attempt.
+
+**l=21, attempted again with this fix and a watchdog tracking both process RSS and system-wide
+available memory, completed successfully**: j*(21)=25, e(21)=8.358 (a new maximum in the series).
+Memory oscillated between ~2GiB and ~28GiB repeatedly (`find_j_star` frees `state` between
+non-covering attempts and reallocates for the next `j`, scanning from `j=21` upward), comfortably
+under both the 43GiB per-process and 4GiB system-available safety thresholds throughout the
+748.1s total search. No independent cross-check exists at l=21 itself (brute-force enumeration is
+only tractable to l<=4); confidence rests on the same, unchanged, doubly-validated code path that
+reproduced l=1..20 exactly.
+
+**l=22 was re-examined after l=21 succeeded, and does not fit, even with a further optimization.**
+All elements of R_{j,k} are units mod 3, so for count-index c>=1, every `state[c]` bitset in the
+DP contains only residues invertible mod 3 (2/3 of the full 3^l residues). Since every transition
+c -> c+1 (for c>=1) adds a multiple of 3, this splits cleanly into two independent bitsets of size
+3^(l-1) per level (verified by hand against l=2), cutting the *packed* state array for l=22 to
+about 53.6 GiB from 84.0 GiB unpacked. That number alone looked promising, but it repeats the
+exact blind spot the first l=21 near-miss was supposed to have taught: it is a per-process
+estimate, not a system-wide one. Using this session's own measured numbers from the successful
+l=21 run (process RSS ~26.8 GiB against `MemAvailable` ~27.0 GiB out of 62 GiB total), non-process
+system overhead is measured at ~8 GiB and does not disappear at l=22. `53.6 (resident, packed
+state) + 8 (measured overhead) ~= 61.6 GiB`, before a single transient rotation buffer - already
+at the ceiling with nothing left over, on a machine whose swap is only 8GiB. **l=22 needs a
+bigger-RAM machine, not a better implementation**, and even setting memory aside, l=23 would need
+~3x more even with packing (~160GiB, impossible regardless), so this was not pursued further: the
+packing derivation is kept on record as correct and useful if this line is revisited on larger
+hardware, but does not change what is reachable on this machine.
 
 **Statistical model comparison** (full output in `experiments/E-002-e-ell-model-comparison/`,
-tail l=10..20, n=11):
+tail l=10..21, n=12, one point more than the previous paper's l=10..20/n=11):
 
 | model | k | ΔAIC | ΔBIC | LOOCV RMSE |
 |---|---|---|---|---|
-| constant | 1 | 5.036 | 4.638 | 0.369 |
-| logarithmic | 2 | 0.000 | 0.000 | 0.283 |
-| square-root | 2 | 0.234 | 0.234 | 0.286 |
-| slow-linear | 2 | 0.468 | 0.468 | 0.289 |
+| constant | 1 | 8.067 | 7.583 | 0.409 |
+| logarithmic | 2 | 0.000 | 0.000 | 0.281 |
+| square-root | 2 | 0.030 | 0.030 | 0.282 |
+| slow-linear | 2 | 0.082 | 0.082 | 0.283 |
+
+(Without the new l=21 point, the same comparison gave ΔAIC=5.036/ΔBIC=4.638 for constant and
+ΔAIC<0.5 among the growth models; see below for the reading of this change.)
 
 95% CIs on the growth-model slopes are all bounded away from zero: logarithmic
-[0.215, 1.904], square-root [0.102, 1.002], slow-linear [0.012, 0.130]. Regressor correlations
-between the three growth models are all >=0.995 (an identifiability limit, matching the previous
-paper's own framing, not a method failure). The plateau-frequency test (1 plateau observed in 19
-increments) gives a one-sided binomial p=0.075 against the expected ~3.9/19 rate under pure
-stabilization, close to but not numerically identical to the previous paper's reported p~=0.072
-(a minor difference in how the null rate was operationalized, not a disagreement in substance).
+[0.472, 1.976], square-root [0.244, 1.027], slow-linear [0.031, 0.132] (descriptive, not
+classical sampling inference, see the caveat below). Regressor correlations between the three
+growth models are all >=0.995 (an identifiability limit, matching the previous paper's own
+framing, not a method failure). The plateau-frequency test (1 plateau observed in 20 increments,
+up from 19) gives a one-sided binomial p=0.062 against the expected rate under pure stabilization,
+down from p=0.075 without l=21 (moving in the same direction as the AIC finding, still short of
+the conventional 0.05 threshold). Without l=21, the plateau test against the previous paper's
+exact reported rate gave p=0.075, close to but not numerically identical to the previous paper's
+own reported p~=0.072 (a minor difference in how the null rate was operationalized, not a
+disagreement in substance).
 
 ## Explicit comparison with the previous paper's Empirical Result 7.2
 
@@ -143,15 +190,19 @@ $\ell\le 20$... The excess $e(\ell)$ qualitatively favors unbounded slow growth 
 stabilization (two independent statistics, $\Delta\mathrm{AIC}$ and plateau frequency, in the
 same direction but not individually decisive)."
 
-This work **confirms** that finding independently: same j*(l) values (recomputed from scratch,
-cross-checked by two independent methods, not copied), same qualitative reading (stabilization
-disfavored, slow-growth models indistinguishable from each other), and adds confidence intervals
-and LOOCV that were not in the previous paper's reported numbers. It does **not** strengthen the
-finding with new data (the original goal), and it establishes, for the first time, that reaching
-new data with this exact algorithmic approach is not a matter of a faster implementation: the
-memory wall is structural. This is itself new information relative to the previous paper, which
-only estimated a time-based extension limit ("~3.3x/step... l=21+ would cost ~90min, ~5h, ~16h"),
-not a memory-based one.
+This work **confirms and strengthens** that finding: same j*(l) values through l=20 (recomputed
+from scratch, cross-checked by two independent methods, not copied), same qualitative reading
+(stabilization disfavored, slow-growth models indistinguishable from each other), confidence
+intervals and LOOCV that were not in the previous paper's reported numbers, and one genuinely new
+data point (l=21) that moves the finding further in the same direction (ΔAIC against
+stabilization rises from 5.04 to 8.07 with the new point). It falls short of the original goal
+(l=25-28), and it establishes, for the first time, that reaching further new data with this exact
+algorithmic approach is a memory question, not a speed one: even after finding and fixing a real
+inefficiency in the parallel implementation (which is what got l=21 to complete at all) and
+re-deriving a legitimate packing optimization for l=22 specifically, the honest floor for l=22 is
+still slightly above what this machine has. This is itself new information relative to the
+previous paper, which only estimated a time-based extension limit ("~3.3x/step... l=21+ would
+cost ~90min, ~5h, ~16h"), not a memory-based one.
 
 ## Independent critique pass (2026-07-22, Rule 8/15)
 
@@ -201,20 +252,31 @@ under a non-release build and the statistical section's framing.
 
 - The entropy-count bridge from Wirsching's set-covering statement to Tao's probability-bound
   statement (H-002) is unrelated to this computational work and remains unverified.
-- A fundamentally different, sub-`3^l`-memory algorithm for this DP (e.g., not materializing the
-  full count-indexed table, or a smarter combinatorial representation of R_{j,k}) is a real
-  research question that could reopen the computational extension, but was not pursued here: it
-  is a genuine algorithmic research risk, not an engineering afterthought, and doing it under
-  time pressure to "rescue" H-001's original data-extension goal would risk exactly the kind of
-  overclaiming this project's rules are meant to prevent.
-- The plateau-frequency test's small numerical mismatch with the previous paper's p-value
-  (0.075 vs ~0.072) was not chased down further; both are well above the conventional 0.05
+- A fundamentally different, sub-`3^l`-memory algorithm for this DP (not just the invertible-
+  residue packing re-derived above, which was checked and does not close the gap) is a real
+  research question that could reopen the computational extension beyond l=21, but was not
+  pursued here: it is a genuine algorithmic research risk, not an engineering afterthought, and
+  its marginal statistical value is low regardless (the growth models don't separate before
+  l~40, per the model comparison above), so doing it under time pressure to "rescue" further
+  data-extension would risk exactly the kind of overclaiming this project's rules are meant to
+  prevent.
+- `find_j_star`'s scan assumes `j*(l) >= l` (clamped via `j_start.max(ell)`, matching
+  `image_size`'s own domain precondition). True throughout the range this project reaches
+  (l<=21, j*/l falling from 2.0 toward log_4(3)~=0.79 but still at 1.19 at l=21), not proven by
+  the code. Since e(l) is o(l), `j*(l) < l` becomes mathematically possible only around l~38+;
+  unreached here, but this assumption would need revisiting before any future run on
+  higher-memory hardware reaches that range.
+- The plateau-frequency test's small numerical mismatch with the previous paper's p-value at
+  l<=20 (0.075 vs ~0.072) was not chased down further; both are well above the conventional 0.05
   threshold and the qualitative reading (marginal, same direction) is unaffected either way.
 - No formal checksum of the j*(l) results was produced (the checklist mentions this as a
   reproducibility aid); the values are small non-negative integers independently confirmed by
-  two methods and by matching a previously published table exactly, which is a stronger check
-  than a checksum would add on top, so this was treated as satisfied in substance rather than
-  literally.
-- This report itself has not yet been through a critique pass (Rule 8/15): before H-001 is
-  marked `closed-*` in `HYPOTHESES.md`, a fresh-context critique of this report and the
-  underlying code is still needed.
+  two methods (through l=20) and by matching a previously published table exactly, which is a
+  stronger check than a checksum would add on top for that range; l=21 itself has no second
+  independent method behind it (see above), which is a real, disclosed limitation, not an
+  oversight.
+- This report has been through one critique pass (see above), but that pass reviewed an earlier
+  version of `image_size` (the cross-c collect-then-merge parallelization) and did not see the
+  l=21 result, the memory-optimization rewrite, or the invertible-residue packing analysis, all
+  added afterward. A second critique round covering this new material is needed before H-001 is
+  marked `closed-*` in `HYPOTHESES.md`.
