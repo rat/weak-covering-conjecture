@@ -16,6 +16,14 @@ use rayon::prelude::*;
 use std::env;
 use std::time::Instant;
 
+// Below this many words, run the per-word loop serially: rayon's dispatch
+// overhead isn't worth it for small bitsets (early/small l), but for large l
+// (where memory and time actually matter) the loop is embarrassingly
+// parallel: each output word depends only on at most two fixed input words,
+// with no dependency between output words, so splitting ranges across
+// threads needs no synchronization.
+const PAR_THRESHOLD: usize = 50_000;
+
 fn pow_mod(base: u64, mut exp: u64, modu: u64) -> u64 {
     if modu == 1 {
         return 0;
@@ -83,19 +91,28 @@ impl BigBitset {
         let word_shift = (k / 64) as usize;
         let bit_shift = (k % 64) as u32;
         let mut out = vec![0u64; nwords];
-        if bit_shift == 0 {
-            for i in (word_shift..nwords).rev() {
-                out[i] = self.words[i - word_shift];
-            }
-        } else {
-            for i in (word_shift..nwords).rev() {
-                let hi = self.words[i - word_shift] << bit_shift;
+        let src = &self.words;
+        let compute = move |i: usize| -> u64 {
+            if bit_shift == 0 {
+                src[i - word_shift]
+            } else {
+                let hi = src[i - word_shift] << bit_shift;
                 let lo = if i > word_shift {
-                    self.words[i - word_shift - 1] >> (64 - bit_shift)
+                    src[i - word_shift - 1] >> (64 - bit_shift)
                 } else {
                     0
                 };
-                out[i] = hi | lo;
+                hi | lo
+            }
+        };
+        let span = &mut out[word_shift..nwords];
+        if span.len() >= PAR_THRESHOLD {
+            span.par_iter_mut()
+                .enumerate()
+                .for_each(|(off, o)| *o = compute(word_shift + off));
+        } else {
+            for (off, o) in span.iter_mut().enumerate() {
+                *o = compute(word_shift + off);
             }
         }
         let mut b = BigBitset {
@@ -114,14 +131,23 @@ impl BigBitset {
         let word_shift = (k / 64) as usize;
         let bit_shift = (k % 64) as u32;
         let mut out = vec![0u64; nwords];
-        for i in 0..(nwords - word_shift) {
-            let lo = self.words[i + word_shift] >> bit_shift;
+        let src = &self.words;
+        let compute = move |i: usize| -> u64 {
+            let lo = src[i + word_shift] >> bit_shift;
             let hi = if bit_shift > 0 && i + word_shift + 1 < nwords {
-                self.words[i + word_shift + 1] << (64 - bit_shift)
+                src[i + word_shift + 1] << (64 - bit_shift)
             } else {
                 0
             };
-            out[i] = lo | hi;
+            lo | hi
+        };
+        let span = &mut out[0..(nwords - word_shift)];
+        if span.len() >= PAR_THRESHOLD {
+            span.par_iter_mut().enumerate().for_each(|(i, o)| *o = compute(i));
+        } else {
+            for (i, o) in span.iter_mut().enumerate() {
+                *o = compute(i);
+            }
         }
         BigBitset {
             words: out,
@@ -129,23 +155,29 @@ impl BigBitset {
         }
     }
 
-    fn rotate_left_cyclic(&self, offset: u64) -> Self {
-        let a = self.shl(offset);
-        if offset == 0 {
-            return a;
+    /// Rotates left and ORs the result into `target`, one full-size
+    /// temporary at a time (shl's result is OR'd in and dropped before shr's
+    /// result is even computed), not two held simultaneously: this is what
+    /// keeps peak memory at state-size-plus-one, not state-size-plus-two.
+    fn rotate_left_and_or_into(&self, offset: u64, target: &mut Self) {
+        let shifted = self.shl(offset);
+        target.or_assign(&shifted);
+        drop(shifted);
+        if offset != 0 {
+            let wrapped = self.shr(self.nbits - offset);
+            target.or_assign(&wrapped);
         }
-        let b = self.shr(self.nbits - offset);
-        let mut out = a;
-        for i in 0..out.words.len() {
-            out.words[i] |= b.words[i];
-        }
-        out.mask_top();
-        out
     }
 
     fn or_assign(&mut self, other: &Self) {
-        for i in 0..self.words.len() {
-            self.words[i] |= other.words[i];
+        let dst = &mut self.words;
+        let src = &other.words;
+        if dst.len() >= PAR_THRESHOLD {
+            dst.par_iter_mut().enumerate().for_each(|(i, d)| *d |= src[i]);
+        } else {
+            for i in 0..dst.len() {
+                dst[i] |= src[i];
+            }
         }
     }
 
@@ -170,22 +202,22 @@ fn image_size(ell: u32, j: u32) -> u64 {
 
     for v in (0..=max_exp).rev() {
         let p2 = pow_mod(2, v as u64, modu);
-        // For fixed v, each c reads state[c] and writes state[c+1]: distinct
-        // targets, no aliasing, safe to compute the rotations in parallel
-        // and merge sequentially afterward.
-        let updates: Vec<(usize, BigBitset)> = (0..ell as usize)
-            .into_par_iter()
-            .filter_map(|c| {
-                if state[c].is_zero() {
-                    return None;
-                }
-                let p3 = pow_mod(3, c as u64, modu);
-                let offset = ((p2 as u128 * p3 as u128) % modu as u128) as u64;
-                Some((c + 1, state[c].rotate_left_cyclic(offset)))
-            })
-            .collect();
-        for (idx, rotated) in updates {
-            state[idx].or_assign(&rotated);
+        // Sequential, decreasing c: matches the original single-threaded
+        // 0/1-knapsack structure exactly (reads state[c] before it could
+        // ever be written this v-iteration, since only targets > c have
+        // been touched so far). Parallelism comes from inside each
+        // rotate/OR call (word-level, no cross-c dependency), which keeps
+        // at most one extra full-size bitset alive at a time instead of up
+        // to `ell` of them - this is what brings peak memory down from
+        // ~2*(ell+1)*3^ell/8 bytes to ~(ell+2)*3^ell/8.
+        for c in (0..ell as usize).rev() {
+            if state[c].is_zero() {
+                continue;
+            }
+            let p3 = pow_mod(3, c as u64, modu);
+            let offset = ((p2 as u128 * p3 as u128) % modu as u128) as u64;
+            let (left, right) = state.split_at_mut(c + 1);
+            left[c].rotate_left_and_or_into(offset, &mut right[0]);
         }
     }
     state[ell as usize].popcount()

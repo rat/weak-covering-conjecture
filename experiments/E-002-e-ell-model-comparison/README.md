@@ -4,31 +4,36 @@ Related hypothesis: H-001 (`notes/H-001.md`).
 
 ## What was done
 
-The computational extension (E-001) did not reach past l=20 (memory ceiling on the available
-hardware). So this is NOT a re-analysis with new data points; it is an independent, from-scratch
-statistical verification of the previous paper's finding (Section 7, Empirical Result 7.2) using
-the same l=1..20 data (recomputed and cross-checked independently in E-001), with more rigor than
-the previous paper's text reports: explicit 95% confidence intervals and leave-one-out
-cross-validation (LOOCV/PRESS) in addition to AIC/BIC, as the original research brief asked for.
+The computational extension (E-001) reached exactly one level past the previous paper's table:
+l=21 (j*(21)=25), after a memory-ceiling problem was found and fixed enough to reach it; l=22
+needs ~86GiB for the DP's state array alone and is not reachable on this hardware at all. So this
+is mostly an independent, from-scratch statistical verification of the previous paper's finding
+(Section 7, Empirical Result 7.2) using the same l=1..20 data (recomputed and cross-checked
+independently in E-001), with more rigor than the previous paper's text reports (explicit 95%
+confidence intervals and leave-one-out cross-validation, LOOCV/PRESS, in addition to AIC/BIC, as
+the original research brief asked for), plus one genuinely new data point folded into the same
+comparison.
 
-Fits four models to e(l) = j*(l) - l*log_4(3) on the tail l=10..20 (n=11, matching the previous
-paper's chosen range): constant (stabilization), logarithmic, square-root, slow-linear.
+Fits four models to e(l) = j*(l) - l*log_4(3) on the tail l=10..21 (n=12, the previous paper used
+l=10..20/n=11; same range choice, one more point): constant (stabilization), logarithmic,
+square-root, slow-linear.
 
 ## Result
 
-Confirms the previous paper's qualitative finding: pure stabilization is disfavored (ΔAIC=5.04,
-ΔBIC=4.64, matching the paper's reported "ΔAIC≈5"), while the three slow-growth models remain
-statistically indistinguishable from each other (ΔAIC<0.5, ΔBIC<0.5). Regressor correlations
-between the three growth models are ≥0.995 (an identifiability limit, not a method failure,
-matching the paper's own framing). The plateau-frequency test (1 plateau observed in 19
-increments) gives p=0.075 (one-sided binomial against the paper's expected ~3.9/19 rate),
-close to but not identical to the paper's reported p≈0.072 (a minor difference from how the null
-rate was operationalized, not a disagreement in substance).
+**With l=21 added, the qualitative finding strengthens.** Pure stabilization is now more strongly
+disfavored (ΔAIC=8.07, ΔBIC=7.58, up from ΔAIC=5.04/ΔBIC=4.64 without l=21), while the three
+slow-growth models remain statistically indistinguishable from each other (ΔAIC<0.1, ΔBIC<0.1,
+tighter than before). Regressor correlations between the three growth models are still ≥0.995
+(an identifiability limit, not a method failure, matching the paper's own framing). The
+plateau-frequency test (still 1 plateau, now in 20 increments since l=21 added one more
+non-plateau step) gives p=0.062 (one-sided binomial against the expected ~4.1/20 rate), down from
+p=0.075 without the new point - moving in the same direction as the AIC finding, still not below
+the conventional 0.05 threshold.
 
-New beyond the previous paper's text: LOOCV RMSE is lowest for the logarithmic model (0.283)
-versus sqrt (0.286) and slow-linear (0.289), a very small margin, consistent with "statistically
+New beyond the previous paper's text: LOOCV RMSE is lowest for the logarithmic model (0.281)
+versus sqrt (0.282) and slow-linear (0.283), a very small margin, consistent with "statistically
 indistinguishable" rather than a tiebreaker. 95% CIs on the growth-model slopes are all bounded
-away from zero (logarithmic: [0.215, 1.904]; sqrt: [0.102, 1.002]; slow-linear: [0.012, 0.130]).
+away from zero (logarithmic: [0.472, 1.976]; sqrt: [0.244, 1.027]; slow-linear: [0.031, 0.132]).
 
 **Caveat (added after an independent critique pass)**: e(l) is an exact, deterministic sequence,
 not a noisy measurement, so the AIC/BIC/LOOCV/CI machinery here is a descriptive comparison of

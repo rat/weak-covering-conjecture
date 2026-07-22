@@ -3,19 +3,18 @@
 Independent statistical reverification of the e(l) growth-model comparison
 from the previous paper (Section 7, Empirical Result 7.2), for H-001.
 
-IMPORTANT FRAMING: H-001's computational extension (E-001) did not reach
-past l=20 (memory ceiling on the available hardware, see notes/H-001.md).
-So this is NOT a re-analysis with new data points; it is an independent,
-from-scratch statistical verification of the previous paper's finding using
-the SAME l=1..20 data (recomputed and cross-checked independently in E-001,
-not just copied from the previous paper), done with more rigor than the
-previous paper's text reports: explicit confidence intervals and
-leave-one-out cross-validation (LOOCV) in addition to AIC/BIC, as the
-research brief originally asked for.
+IMPORTANT FRAMING: H-001's computational extension (E-001) reached exactly one level past the
+previous paper's table (l=21, after a memory-ceiling fix; l=22 needs ~86GiB for the DP's state
+array alone and is not reachable on this hardware regardless of implementation). So this is
+mostly an independent, from-scratch statistical verification of the previous paper's finding
+using the SAME l=1..20 data (recomputed and cross-checked independently in E-001, not just
+copied from the previous paper), done with more rigor than the previous paper's text reports
+(explicit CIs and LOOCV in addition to AIC/BIC, as the research brief originally asked for),
+plus one genuinely new data point (l=21) folded into the same comparison below.
 
-Models fit to e(l) = j*(l) - l*log_4(3), on the tail l=10..20 (n=11 points,
-matching the previous paper's choice of range, which avoids small-l
-transient behavior):
+Models fit to e(l) = j*(l) - l*log_4(3), on the tail l>=10 (l=10..21 with the new point, n=12;
+the previous paper used l=10..20, n=11; the range choice, not the endpoint, is what matches the
+previous paper's, avoiding small-l transient behavior):
   1. constant:     e(l) = c
   2. logarithmic:  e(l) = a + b*ln(l)
   3. square-root:  e(l) = a + b*sqrt(l)
@@ -48,8 +47,15 @@ from scipy import stats
 DATA = [
     (1, 1), (2, 4), (3, 6), (4, 7), (5, 9), (6, 10), (7, 11), (8, 12),
     (9, 13), (10, 15), (11, 16), (12, 17), (13, 18), (14, 19), (15, 20),
-    (16, 20), (17, 21), (18, 22), (19, 23), (20, 24),
+    (16, 20), (17, 21), (18, 22), (19, 23), (20, 24), (21, 25),
 ]
+# l=21 is new data (H-001, 2026-07-22): not in the previous paper's table, computed by the
+# memory-optimized Rust reimplementation (E-001) after a dense-bitset memory ceiling was found
+# and fixed enough to reach this one additional level. l=22 needs ~86GiB for the DP's state array
+# alone (before any transient), which no in-place optimization changes; l=21 is the ceiling on
+# this hardware for this algorithm. No independent cross-check exists at l=21 itself (the
+# brute-force method is only tractable to l<=4); confidence rests on exact agreement with the
+# previous paper through l=20 and on the same, unchanged algorithm/code path being used.
 LOG4_3 = math.log(3) / math.log(4)
 
 
@@ -114,7 +120,7 @@ def main():
     ells_t = ells[tail_mask]
     e_t = e_vals[tail_mask]
     n = len(ells_t)
-    print(f"\n=== Model comparison on tail l=10..20 (n={n}) ===\n")
+    print(f"\n=== Model comparison on tail l>=10 (l={int(ells_t[0])}..{int(ells_t[-1])}, n={n}) ===\n")
 
     models = {}
 
