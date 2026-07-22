@@ -157,6 +157,11 @@ impl BigBitset {
 /// Image size of R_{j-1,j} mod 3^ell, via the R_{ell-1,j} reduction (a unit
 /// multiple, same population count).
 fn image_size(ell: u32, j: u32) -> u64 {
+    // The R_{j-1,j} = 2^{j-ell} * R_{ell-1,j} reduction requires j >= ell;
+    // silently wrong (not just slow) if violated, since e(l) is o(l) means
+    // j*(l) < l is possible for large enough l (unreachable at this
+    // implementation's actual memory ceiling of l~21, but cheap to guard).
+    debug_assert!(j >= ell, "reduction R_{{j-1,j}}=2^(j-ell)*R_{{ell-1,j}} requires j >= ell");
     let modu = 3u64.checked_pow(ell).expect("3^ell overflows u64");
     let nbits = modu;
     let max_exp = ell + j - 1; // exponents range 0..=max_exp, choose ell of them

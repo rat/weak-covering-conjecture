@@ -4,7 +4,7 @@ Last updated: 2026-07-22
 
 | ID | Title | Status | Impact | One-line summary | Detail | Opened | Closed |
 |----|-------|--------|--------|-------------------|--------|--------|--------|
-| H-001 | Extend j*(l) past l=20 and characterize e(l) growth | in-progress | high | Reimplement the j*(l) covering computation (Rust/C++, bitset+rotation, redução j>=l) fast enough to push exact data past l=20, then redo AIC/BIC model comparison for e(l)=j*(l)-log_4(3)*l with the extended data. Definitions and l=1..20 reference table verified against the primary source. | notes/H-001.md | 2026-07-22 | |
+| H-001 | Extend j*(l) past l=20 and characterize e(l) growth | in-progress | high | Rust reimplementation (bitset+rotation, rayon-parallelized) reproduces l=1..20 exactly, ~6-9x faster than Python. Honest benchmark reveals the REAL constraint is memory, not time: state holds (l+1) full 3^l-bit bitsets simultaneously, ~doubling at peak; l=21 is memory-marginal on this 62GB machine, l=22+ is not reachable with the dense-bitset approach at all. Contradicts the brief's "meta realista l=25-28" (extrapolated from time alone). Decision pending on how to proceed. | notes/H-001.md | 2026-07-22 | |
 | H-002 | Reverify the WCC => beta=1 entropy-count bridge | open-unexplored | high | Object-identity between Tao's Syracuse variable and Wirsching's R_{j,k} confirmed independently (2026-07-22); the one non-mechanical step still open is the entropy-count conversion from set-covering to a probability lower bound. Not "verify the equivalence": the paper claims only WCC=>beta=1 plus a stated weak converse, not bidirectional equivalence. | notes/H-002.md | 2026-07-22 | |
 
 ## Notes
