@@ -21,6 +21,21 @@ transient behavior):
   3. square-root:  e(l) = a + b*sqrt(l)
   4. slow-linear:  e(l) = a + b*l
 
+CAVEAT (flagged by an independent critique pass, kept here deliberately):
+e(l) is an exact, deterministic integer-derived sequence, not a noisy
+measurement. AIC/BIC/LOOCV and the t-based confidence intervals below all
+assume iid residuals; here the residuals are pure model-misspecification of
+a deterministic sawtooth (e rises ~0.208 per unit increment of j*, drops
+~0.792 at a plateau) and are strongly autocorrelated. Read every number in
+this script as a DESCRIPTIVE comparison of how well each functional form
+fits the existing points and extrapolates under leave-one-out removal, not
+as inferential statistics in the classical sampling sense. This is still a
+real, useful, independent check of the previous paper's qualitative
+reading (stabilization is a comparatively poor fit; the three growth forms
+are mutually indistinguishable) - it is not evidence of a sampling
+distribution that would license a textbook "with 95% confidence" reading of
+the interval below.
+
 Reproduce: python3 experiment.py
 """
 import math
@@ -141,6 +156,8 @@ def main():
               f"{r['press']:>10.4f}{r['rmse_cv']:>10.4f}")
 
     print("\n=== Slope coefficients with 95% CI (growth models only) ===")
+    print("    (descriptive, not classical inference: e(l) is deterministic, not noisy - see")
+    print("    the caveat in this file's module docstring before quoting these as 'confidence')")
     for name in ["logarithmic", "sqrt", "slow-linear"]:
         r = results[name]
         center, lo, hi, se = confint_slope(r["X"], e_t, r["coeffs"], r["rss"], 1)

@@ -193,7 +193,12 @@ fn image_size(ell: u32, j: u32) -> u64 {
 
 fn find_j_star(ell: u32, j_start: u32, j_max: u32) -> Option<(u32, u64)> {
     let target = 2u64 * 3u64.checked_pow(ell - 1).expect("2*3^(ell-1) overflows u64");
-    let mut j = j_start.max(1);
+    // image_size's reduction is only valid for j >= ell (see its own debug_assert); never
+    // evaluate it outside that domain. Note this clamp assumes j*(l) >= l, true throughout the
+    // range this project actually reaches (l<=21, memory-limited); since e(l) is o(l) and the
+    // entropy threshold log_4(3) < 1, j*(l) < l becomes possible only around l~38+, unreached
+    // here but worth revisiting if the memory ceiling is ever overcome.
+    let mut j = j_start.max(ell).max(1);
     while j <= j_max {
         let sz = image_size(ell, j);
         if sz == target {

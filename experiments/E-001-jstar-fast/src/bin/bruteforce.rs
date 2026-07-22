@@ -34,7 +34,9 @@ fn pow_mod128(base: u64, mut exp: u64, modu: u64) -> u64 {
 /// variable must be >= remaining-1 to leave room for the rest.
 fn recurse(
     remaining: u32,
-    upper_bound: u32,
+    upper_bound: i64, // i64, not u32: can legitimately go to -1 at the deepest call, where it's
+    // unused (remaining==0 hits the base case before ever reading it); u32 would underflow that
+    // subtraction and panic under debug-mode overflow checks even though the value is dead.
     chosen: &mut Vec<u32>,
     modu: u64,
     image: &mut HashSet<u64>,
@@ -50,11 +52,11 @@ fn recurse(
         image.insert(sum as u64);
         return;
     }
-    let lo = remaining - 1; // must leave room for (remaining-1) more values below, down to 0
-    let mut a = upper_bound as i64;
-    while a >= lo as i64 {
+    let lo = remaining as i64 - 1; // must leave room for (remaining-1) more values below, down to 0
+    let mut a = upper_bound;
+    while a >= lo {
         chosen.push(a as u32);
-        recurse(remaining - 1, a as u32 - 1, chosen, modu, image);
+        recurse(remaining - 1, a - 1, chosen, modu, image);
         chosen.pop();
         a -= 1;
     }
@@ -67,7 +69,7 @@ fn image_size_direct(ell: u32, j: u32) -> u64 {
     let max_exp = 2 * j - 1;
     let mut chosen: Vec<u32> = Vec::with_capacity(j as usize);
     let mut image: HashSet<u64> = HashSet::new();
-    recurse(j, max_exp, &mut chosen, modu, &mut image);
+    recurse(j, max_exp as i64, &mut chosen, modu, &mut image);
     image.len() as u64
 }
 

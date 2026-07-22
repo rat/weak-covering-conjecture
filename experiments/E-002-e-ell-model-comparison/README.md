@@ -28,9 +28,16 @@ rate was operationalized, not a disagreement in substance).
 New beyond the previous paper's text: LOOCV RMSE is lowest for the logarithmic model (0.283)
 versus sqrt (0.286) and slow-linear (0.289), a very small margin, consistent with "statistically
 indistinguishable" rather than a tiebreaker. 95% CIs on the growth-model slopes are all bounded
-away from zero (logarithmic: [0.215, 1.904]; sqrt: [0.102, 1.002]; slow-linear: [0.012, 0.130]),
-which is additional quantitative support (not previously reported) that some positive growth is
-present, on top of the qualitative AIC/plateau reading.
+away from zero (logarithmic: [0.215, 1.904]; sqrt: [0.102, 1.002]; slow-linear: [0.012, 0.130]).
+
+**Caveat (added after an independent critique pass)**: e(l) is an exact, deterministic sequence,
+not a noisy measurement, so the AIC/BIC/LOOCV/CI machinery here is a descriptive comparison of
+fit and extrapolation quality, not classical statistical inference with a real sampling
+interpretation (residuals are a strongly autocorrelated deterministic sawtooth, not iid noise).
+Treat every number as "how well does this functional form fit and extrapolate," not as "with 95%
+confidence." This does not weaken the qualitative reading (stabilization fits comparatively
+poorly; the three growth forms are mutually indistinguishable), it just describes accurately what
+kind of evidence this is.
 
 ## Reproduce
 

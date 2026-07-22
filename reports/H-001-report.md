@@ -153,6 +153,50 @@ memory wall is structural. This is itself new information relative to the previo
 only estimated a time-based extension limit ("~3.3x/step... l=21+ would cost ~90min, ~5h, ~16h"),
 not a memory-based one.
 
+## Independent critique pass (2026-07-22, Rule 8/15)
+
+A fresh-context critique (Agent tool, opus, adversarial mandate) reviewed the Rust code, the
+statistical script, and this report before H-001's status was touched further. Findings and
+resolutions:
+
+1. **Both Rust binaries panicked under a plain debug build** (`cargo build` without
+   `--release`): `jstar-fast`'s `debug_assert!(j >= ell)` fired because `find_j_star` scanned
+   from `j=1`, below the reduction's valid domain; `bruteforce`'s recursion underflowed a `u32`
+   subtraction at its deepest level (harmless in release, where it wraps and the value is unused,
+   but a hard panic under debug's overflow checks). Fixed: `find_j_star` now clamps its scan to
+   start at `j=max(j_start, ell)`, matching the reduction's own precondition instead of violating
+   it; `bruteforce`'s recursion now carries `upper_bound` as `i64` throughout, removing the
+   underflow entirely. Both binaries now pass identically under `cargo build` and
+   `cargo build --release`.
+2. **The `j >= ell` fix also closes a correctness gap, not just a build-mode one**: before the
+   fix, `image_size` was being evaluated for `j < ell` (outside the domain its own reduction
+   identity is valid for) during every small-`l` search, and only returned the right final answer
+   because the out-of-domain image sizes never happened to equal the target early. That was
+   empirically true over the tested range but not guaranteed by the code. Now `find_j_star` never
+   evaluates `image_size` outside its documented domain.
+3. **The `run` command's `j_start = prev_j - 2` heuristic assumes j*(l) is non-decreasing in l
+   and never drops by 3 or more.** True throughout the range this project reaches, not proven by
+   the code; noted here and in the source rather than silently relied on.
+4. **The statistical section's confidence intervals and AIC/BIC/LOOCV machinery, applied to an
+   exact deterministic sequence, are descriptive, not classical statistical inference** (no iid
+   sampling process, residuals are a deterministic, autocorrelated sawtooth). The original framing
+   ("more rigor than the previous paper") risked implying a sampling-based "95% confidence"
+   reading that doesn't apply here. `experiment.py`, its README, and this report were all reworded
+   to describe the CIs/AIC/BIC/LOOCV as descriptive fit-and-extrapolation comparisons; this does
+   not change any number or the qualitative conclusion (stabilization fits comparatively poorly;
+   the three growth models remain mutually indistinguishable).
+5. **Minor**: framing zero new `j*(l)` values as a "successful stopping point" is honestly
+   disclosed (the checklist item is explicitly left unchecked, with the reason stated), but is
+   still worth naming plainly: Part A's original goal (extend past l=20) was not achieved; what
+   was achieved is a faster, independently-verified reproduction of the existing table plus a
+   precise characterization of why extending it further is not currently possible on this
+   hardware.
+
+The critique independently re-verified (by re-running the code itself) that every `j*(l)` value,
+every statistical output number, and the previous paper's quoted Empirical Result 7.2 text all
+match exactly; no numerical claim in this report needed correction, only the code's robustness
+under a non-release build and the statistical section's framing.
+
 ## What remains open
 
 - The entropy-count bridge from Wirsching's set-covering statement to Tao's probability-bound
