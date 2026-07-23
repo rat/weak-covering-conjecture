@@ -173,11 +173,16 @@ explicit decision (see Rule 1), not something to re-trigger casually.
 > Paper-repo policy: dedicated reproducibility repository per paper (Rule 12). For this
 > project's paper, the repo already exists: git@github.com:faculdade/weak-covering-conjecture.git.
 >
-> Compute environment: personal machine, exclusively the researcher's, idle. 16 CPU cores,
-> 62GB RAM, no discrete GPU (integrated Intel graphics only, so no CUDA/Metal path), 1.7TB
-> free disk. Rule 9b applies in full: use all free cores, memory up to ~90% of total, no need
-> to ask before scaling up a computation. Neither Rust nor a C++ toolchain (g++) is installed
-> yet; install what Part A's implementation needs when that work starts.
+> Compute environment (updated 2026-07-23, machine replaced since project start): personal
+> machine, dedicated exclusively to this project. AMD Ryzen 7 5700U, 8 cores/16 threads, 62GB
+> RAM, integrated Radeon graphics only (no discrete GPU, no CUDA/Metal path), 468GB disk (427GB
+> free at last check). A dedicated 1.8TiB swap partition (`/dev/nvme1n1p1`) was added during
+> H-001's work specifically to extend the j*(l) computation past physical-RAM limits (see
+> notes/H-001.md, "l=22 reached via swap"); treat it as a real, load-bearing resource for this
+> project's memory-bound computations, not just overflow insurance. Rule 9b applies in full: use
+> all free cores, memory up to ~90% of total, no need to ask before scaling up a computation.
+> Rust (cargo) is installed and in use (`experiments/E-001-jstar-fast/`); no C++ toolchain
+> (g++) installed as of this update, install it if a future experiment needs it.
 
 Everything below this line is the standing framework. It does not change
 per project; only Section 1 does.
