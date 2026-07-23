@@ -3,16 +3,16 @@
 Independent statistical reverification of the e(l) growth-model comparison
 from the previous paper (Section 7, Empirical Result 7.2), for H-001.
 
-IMPORTANT FRAMING: H-001's computational extension (E-001) reached exactly one level past the
-previous paper's table (l=21, after a memory-ceiling fix; l=22 needs ~84GiB for the DP's state
-array alone and is not reachable on this hardware regardless of implementation). So this is
-mostly an independent, from-scratch statistical verification of the previous paper's finding
+IMPORTANT FRAMING: H-001's computational extension (E-001) reached two levels past the previous
+paper's table: l=21 (fits in RAM after a memory-ceiling fix) and l=22 (required 500GiB of swap
+added to this machine specifically for this run, ~3h with swap I/O as the bottleneck). So this
+is mostly an independent, from-scratch statistical verification of the previous paper's finding
 using the SAME l=1..20 data (recomputed and cross-checked independently in E-001, not just
 copied from the previous paper), done with more rigor than the previous paper's text reports
 (explicit CIs and LOOCV in addition to AIC/BIC, as the research brief originally asked for),
-plus one genuinely new data point (l=21) folded into the same comparison below.
+plus two genuinely new data points (l=21, l=22) folded into the same comparison below.
 
-Models fit to e(l) = j*(l) - l*log_4(3), on the tail l>=10 (l=10..21 with the new point, n=12;
+Models fit to e(l) = j*(l) - l*log_4(3), on the tail l>=10 (l=10..22 with the new points, n=13;
 the previous paper used l=10..20, n=11; the range choice, not the endpoint, is what matches the
 previous paper's, avoiding small-l transient behavior):
   1. constant:     e(l) = c
@@ -47,13 +47,13 @@ from scipy import stats
 DATA = [
     (1, 1), (2, 4), (3, 6), (4, 7), (5, 9), (6, 10), (7, 11), (8, 12),
     (9, 13), (10, 15), (11, 16), (12, 17), (13, 18), (14, 19), (15, 20),
-    (16, 20), (17, 21), (18, 22), (19, 23), (20, 24), (21, 25),
+    (16, 20), (17, 21), (18, 22), (19, 23), (20, 24), (21, 25), (22, 26),
 ]
-# l=21 is new data (H-001, 2026-07-22): not in the previous paper's table, computed by the
-# memory-optimized Rust reimplementation (E-001) after a dense-bitset memory ceiling was found
-# and fixed enough to reach this one additional level. l=22 needs ~84GiB for the DP's state array
-# alone (before any transient), which no in-place optimization changes; l=21 is the ceiling on
-# this hardware for this algorithm. No independent cross-check exists at l=21 itself (the
+# l=21 and l=22 are new data (H-001, 2026-07-22): not in the previous paper's table, computed by
+# the memory-optimized Rust reimplementation (E-001). l=21's dense state array fits in RAM
+# (~26.8 GiB); l=22's does not (~84.0 GiB), so l=22 required swap (500GiB added to this machine
+# specifically for this run) and took ~10749s (~3h) with swap I/O as the bottleneck, versus
+# ~748s for l=21 without swap. No independent cross-check exists for l=21 or l=22 (the
 # brute-force method is only tractable to l<=4); confidence rests on exact agreement with the
 # previous paper through l=20 and on the same, unchanged algorithm/code path being used.
 LOG4_3 = math.log(3) / math.log(4)
