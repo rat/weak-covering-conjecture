@@ -1,10 +1,10 @@
 # Hypotheses
 
-Last updated: 2026-07-22
+Last updated: 2026-07-23
 
 | ID | Title | Status | Impact | One-line summary | Detail | Opened | Closed |
 |----|-------|--------|--------|-------------------|--------|--------|--------|
-| H-001 | Extend j*(l) past l=20 and characterize e(l) growth | in-progress | high | Rust reimplementation reproduces l=1..20 exactly, ~6-9x faster than Python. After fixing a memory-wasteful parallelization strategy, l=21 succeeded (j*(21)=25, e(21)=8.358, new max), the first new data point beyond the previous table; folded into E-002, strengthening the qualitative finding against stabilization (dAIC 5.04->8.07). l=22 re-examined carefully (including a real invertible-residue packing optimization) and confirmed out of reach: packed state + measured system overhead already exceeds 62GB before any compute. l=21 is this machine's ceiling. Needs a second critique pass (covering the l=21 result and the rewritten parallelism) before closure. | notes/H-001.md | 2026-07-22 | |
+| H-001 | Extend j*(l) past l=20 and characterize e(l) growth | in-progress | high | Rust reimplementation reproduces l=1..20 exactly, ~6-9x faster than Python. l=21 succeeded after a memory-wasteful parallelization fix (j*(21)=25, e(21)=8.358). l=22 needed the researcher to add swap (500GiB, since resized to 1.8TiB) since packed state already exceeded 62GB RAM; succeeded via swap I/O (j*(22)=26, e(22)=8.565, ~3h wall time), a second new data point past the previous table. Folded into E-002 (now l=10..22, n=13): dAIC against stabilization now 11.90, plateau-frequency test p=0.052. l=23 (~263GiB state) launched 2026-07-23 09:07 via detached process with a memory watchdog; outcome pending. Needs a third critique pass (covering l=21, l=22, and the swap-based methodology, plus l=23 once it resolves) before closure. | notes/H-001.md | 2026-07-22 | |
 | H-002 | Reverify the WCC => beta=1 entropy-count bridge | open-unexplored | high | Object-identity between Tao's Syracuse variable and Wirsching's R_{j,k} confirmed independently (2026-07-22); the one non-mechanical step still open is the entropy-count conversion from set-covering to a probability lower bound. Not "verify the equivalence": the paper claims only WCC=>beta=1 plus a stated weak converse, not bidirectional equivalence. | notes/H-002.md | 2026-07-22 | |
 
 ## Notes
