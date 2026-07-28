@@ -14,9 +14,9 @@
 
 use rayon::prelude::*;
 use std::env;
-use std::fs::{File, OpenOptions};
-use std::io::{Read, Write};
-use std::time::{Duration, Instant};
+use std::fs::OpenOptions;
+use std::io::Write;
+use std::time::Instant;
 
 // Below this many words, run the per-word loop serially: rayon's dispatch
 // overhead isn't worth it for small bitsets (early/small l), but for large l
@@ -188,153 +188,21 @@ impl BigBitset {
     }
 }
 
-// --- Checkpointing (added 2026-07-23 after an unprotected multi-hour l=23
-// attempt was lost to a systemd-oomd kill, not a real crash: the process was
-// never durably saving progress, so any interruption meant starting the
-// whole ~263GiB-state attempt over). Two files per (ell, j) attempt:
-//   checkpoints/state_l{ell}_j{j}.bin   - the live `state` array, in place,
-//     overwritten wholesale on each save (no temp-file+rename: at l=23 a
-//     second copy would need another ~263GiB, more than this disk has free,
-//     so a torn write is possible on a mid-write kill; the checksum trailer
-//     below is what makes that safe to detect rather than silently loading
-//     garbage into a "trusted" j*(l) result, per this project's honesty
-//     rule 1 - never report an unverified value).
-//   checkpoints/progress_l{ell}.txt     - one line per j already confirmed
-//     NOT covering (with its image size), appended as each attempt finishes,
-//     so a restart after several completed-but-failed j's doesn't redo them.
-const CKPT_MAGIC: u64 = 0x5743_4331_4c6c_6a3f; // arbitrary fixed marker, "WCC1" + junk
-
+// --- Progress log (state checkpointing removed 2026-07-27; see
+// notes/H-001.md "Plan for l=24 onward" for why: it dominated l=23's wall
+// time once the state reached hundreds of GiB, and the systemd-oomd kill
+// that originally motivated it is now fixed at the root cause, oomd
+// disabled). What remains is the cheap part: one line per j already
+// confirmed NOT covering (with its image size), appended as each attempt
+// finishes, so a restart after several completed-but-failed j's doesn't
+// redo them. This is a tiny text file, not a multi-hundred-GiB state dump,
+// so it stays.
 fn checkpoint_dir() -> &'static str {
     "checkpoints"
 }
 
-fn checkpoint_path(ell: u32, j: u32) -> String {
-    format!("{}/state_l{}_j{}.bin", checkpoint_dir(), ell, j)
-}
-
 fn progress_path(ell: u32) -> String {
     format!("{}/progress_l{}.txt", checkpoint_dir(), ell)
-}
-
-/// Reinterprets a `[u64]` as raw little-endian-native bytes for bulk I/O.
-/// Sound: any valid `&[u64]`/`&mut [u64]` is trivially also a valid
-/// `&[u8]`/`&mut [u8]` view of the same memory (u8 has no alignment
-/// requirement and the byte length is exactly `len * 8`); this machine reads
-/// back whatever it wrote, so native-endianness round-trips exactly.
-fn u64_slice_as_bytes(s: &[u64]) -> &[u8] {
-    unsafe { std::slice::from_raw_parts(s.as_ptr() as *const u8, s.len() * 8) }
-}
-fn u64_slice_as_bytes_mut(s: &mut [u64]) -> &mut [u8] {
-    unsafe { std::slice::from_raw_parts_mut(s.as_mut_ptr() as *mut u8, s.len() * 8) }
-}
-
-fn fnv1a_update(mut h: u64, bytes: &[u8]) -> u64 {
-    for &b in bytes {
-        h ^= b as u64;
-        h = h.wrapping_mul(0x100000001b3);
-    }
-    h
-}
-
-/// Overwrites the checkpoint file in place (see module note above on why not
-/// temp+rename). Returns Err on any I/O failure; caller treats that as
-/// non-fatal (just means this particular save is skipped, not that the
-/// computation itself is wrong).
-fn save_checkpoint(
-    ell: u32,
-    j: u32,
-    next_v: u32,
-    nbits: u64,
-    state: &[BigBitset],
-) -> std::io::Result<()> {
-    std::fs::create_dir_all(checkpoint_dir())?;
-    let path = checkpoint_path(ell, j);
-    let mut f = File::create(&path)?;
-    f.write_all(&CKPT_MAGIC.to_le_bytes())?;
-    f.write_all(&ell.to_le_bytes())?;
-    f.write_all(&j.to_le_bytes())?;
-    f.write_all(&next_v.to_le_bytes())?;
-    f.write_all(&nbits.to_le_bytes())?;
-    f.write_all(&(state.len() as u32).to_le_bytes())?;
-    let mut checksum: u64 = 0xcbf2_9ce4_8422_2325; // FNV-1a offset basis
-    for bs in state {
-        let bytes = u64_slice_as_bytes(&bs.words);
-        f.write_all(bytes)?;
-        checksum = fnv1a_update(checksum, bytes);
-    }
-    f.write_all(&checksum.to_le_bytes())?;
-    f.sync_all()?;
-    Ok(())
-}
-
-/// Loads and validates a checkpoint for exactly this (ell, j, nbits). Any
-/// mismatch, short read, or checksum failure (including a torn write from a
-/// mid-save kill) returns None, meaning "start this attempt fresh" - never
-/// returns a state that didn't pass its own checksum.
-fn load_checkpoint(ell: u32, j: u32, nbits: u64) -> Option<(u32, Vec<BigBitset>)> {
-    let path = checkpoint_path(ell, j);
-    let mut f = File::open(&path).ok()?;
-    let mut b8 = [0u8; 8];
-    let mut b4 = [0u8; 4];
-    f.read_exact(&mut b8).ok()?;
-    if u64::from_le_bytes(b8) != CKPT_MAGIC {
-        return None;
-    }
-    f.read_exact(&mut b4).ok()?;
-    if u32::from_le_bytes(b4) != ell {
-        return None;
-    }
-    f.read_exact(&mut b4).ok()?;
-    if u32::from_le_bytes(b4) != j {
-        return None;
-    }
-    f.read_exact(&mut b4).ok()?;
-    let next_v = u32::from_le_bytes(b4);
-    f.read_exact(&mut b8).ok()?;
-    if u64::from_le_bytes(b8) != nbits {
-        return None;
-    }
-    f.read_exact(&mut b4).ok()?;
-    let n_entries = u32::from_le_bytes(b4);
-    if n_entries != ell + 1 {
-        return None;
-    }
-    let nwords = BigBitset::nwords(nbits);
-    let mut state = Vec::with_capacity(n_entries as usize);
-    let mut checksum: u64 = 0xcbf2_9ce4_8422_2325;
-    for _ in 0..n_entries {
-        let mut words = vec![0u64; nwords];
-        {
-            let view = u64_slice_as_bytes_mut(&mut words);
-            if f.read_exact(view).is_err() {
-                return None;
-            }
-            checksum = fnv1a_update(checksum, view);
-        }
-        state.push(BigBitset { words, nbits });
-    }
-    f.read_exact(&mut b8).ok()?;
-    let stored_checksum = u64::from_le_bytes(b8);
-    if stored_checksum != checksum {
-        eprintln!(
-            "[checkpoint] l={} j={}: checksum mismatch (torn write from a prior kill), discarding and starting this attempt over",
-            ell, j
-        );
-        return None;
-    }
-    Some((next_v, state))
-}
-
-fn remove_checkpoint(ell: u32, j: u32) {
-    let _ = std::fs::remove_file(checkpoint_path(ell, j));
-}
-
-fn checkpoint_interval() -> Duration {
-    let secs: u64 = env::var("WCC_CHECKPOINT_SECS")
-        .ok()
-        .and_then(|s| s.parse().ok())
-        .unwrap_or(600);
-    Duration::from_secs(secs)
 }
 
 /// The highest j for this ell already confirmed (in a possibly earlier,
@@ -374,24 +242,10 @@ fn image_size(ell: u32, j: u32) -> u64 {
     let nbits = modu;
     let max_exp = ell + j - 1; // exponents range 0..=max_exp, choose ell of them
 
-    let (mut state, start_v) = match load_checkpoint(ell, j, nbits) {
-        Some((next_v, loaded)) => {
-            eprintln!(
-                "[checkpoint] l={} j={}: resuming from v={} (of max_exp={})",
-                ell, j, next_v, max_exp
-            );
-            (loaded, next_v)
-        }
-        None => {
-            let mut s: Vec<BigBitset> = (0..=ell).map(|_| BigBitset::zero(nbits)).collect();
-            s[0] = BigBitset::with_bit0(nbits);
-            (s, max_exp)
-        }
-    };
+    let mut state: Vec<BigBitset> = (0..=ell).map(|_| BigBitset::zero(nbits)).collect();
+    state[0] = BigBitset::with_bit0(nbits);
 
-    let interval = checkpoint_interval();
-    let mut last_checkpoint = Instant::now();
-    let mut v = start_v;
+    let mut v = max_exp;
     loop {
         let p2 = pow_mod(2, v as u64, modu);
         // Sequential, decreasing c: matches the original single-threaded
@@ -414,23 +268,8 @@ fn image_size(ell: u32, j: u32) -> u64 {
         if v == 0 {
             break;
         }
-        if last_checkpoint.elapsed() >= interval {
-            let t0 = Instant::now();
-            match save_checkpoint(ell, j, v - 1, nbits, &state) {
-                Ok(()) => eprintln!(
-                    "[checkpoint] l={} j={}: saved at v={} ({:.1}s)",
-                    ell,
-                    j,
-                    v - 1,
-                    t0.elapsed().as_secs_f64()
-                ),
-                Err(e) => eprintln!("[checkpoint] l={} j={}: save failed: {}", ell, j, e),
-            }
-            last_checkpoint = Instant::now();
-        }
         v -= 1;
     }
-    remove_checkpoint(ell, j);
     state[ell as usize].popcount()
 }
 

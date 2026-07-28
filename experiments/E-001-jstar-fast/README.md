@@ -50,32 +50,32 @@ Running `l>=21` uses noticeably more memory (l=21 peaks around 27-28 GiB) and, f
 than physical RAM (see notes/H-001.md, "l=22 reached via swap"); this machine now has a 1.8TiB
 swap partition specifically for that.
 
-## Checkpointing (added 2026-07-23)
+## Checkpointing (added 2026-07-23, removed 2026-07-27)
 
-A multi-hour `run`/`size` call (l>=22) periodically saves the live DP `state` array to
-`checkpoints/state_l{l}_j{j}.bin` (overwritten in place each save, not temp+rename: at l=23 a
-second copy would need more disk than this machine has free) with an FNV-1a checksum trailer; a
-save killed mid-write leaves an invalid checksum, which is detected and discarded on the next
-start rather than trusted, per this project's honesty rules. `find_j_star` also logs each
-confirmed-not-covering `j` to `checkpoints/progress_l{l}.txt` so a restart doesn't redo already-
-settled j's. Simply re-running the same `run`/`size` command resumes automatically from whatever
-checkpoints exist; nothing else to pass on the command line.
+l=23's run added full-state checkpoint/resume (`checkpoints/state_l{l}_j{j}.bin`,
+FNV-1a-checksummed) after an unprotected first attempt was lost to a `systemd-oomd` policy kill.
+It worked and was verified correct, but turned out to dominate wall time once the state reached
+hundreds of GiB (each save took over an hour). Once `systemd-oomd` was disabled at the root cause
+(rather than just buffered against), the checkpoint mechanism was removed entirely, see
+notes/H-001.md "Plan for l=24 onward" for the reasoning and trade-off. `run`/`size` now always
+computes an attempt start-to-finish in one pass; killing the process loses that attempt's
+progress, there is no resume.
 
-Save interval defaults to 600s, override with `WCC_CHECKPOINT_SECS=<seconds>` (0 checkpoints
-after every single `v` step - very slow, only useful for testing resume itself, not production).
-Verified end-to-end (2026-07-23): killed a `size 18 18` call with `-9` mid-run, confirmed the
-checkpoint file was the exact expected byte size before resuming, then confirmed the resumed run's
-final `image_size` matched a separate uninterrupted baseline run exactly (248594244, both runs).
+The lightweight `checkpoints/progress_l{l}.txt` log (one line per `j` already confirmed not
+covering, so `find_j_star` doesn't redo a settled `j` after a restart) was kept, since it costs
+nothing (a few bytes per line, not a state dump).
 
-Known residual risk: because saves overwrite in place (no temp+rename), a kill that lands *during*
-a save's write window can lose that checkpoint too, not just progress since the last one - the
-window is small at l<=21 (well under a megabyte-scale write) but could be minutes wide at l=23's
-~263GiB per checkpoint. Not eliminated in this pass; would need the invertible-residue packing
-optimization (analyzed but not implemented, see notes/H-001.md) to shrink checkpoints enough for
-real temp+rename on this disk's free space.
+**Correction to an earlier plan**: session notes at one point proposed also switching `state` to
+a "packed/bitset" representation to save memory, on the assumption the existing representation
+wasn't already bit-packed. That assumption was wrong: `state` was already `Vec<BigBitset>` with
+`BigBitset.words: Vec<u64>`, i.e. exactly 1 bit per residue, `(ell+1)` full `3^ell`-bit bitsets
+held at once (verified directly in the code and against every observed memory/checkpoint size).
+Total memory is `(l+1) * 3^l / 8` bytes exactly; this `(l+1)` factor is structural to the
+rotation-DP algorithm itself, not a representation inefficiency. There was no bitset conversion
+to do, and none was done.
 
 ## Status
 
 See HYPOTHESES.md (H-001) and notes/H-001.md in the repository root for the full checklist and
-the honest benchmark/memory history, including why l=21 needed no swap, l=22 and l=23 do, and how
-l=22 was actually reached.
+the honest benchmark/memory history: why l=21 needed no swap, l=22 and l=23 did, how l=22 was
+reached, and l=23's result (j*(23)=27, e(23)=8.773, ~104h wall time).
