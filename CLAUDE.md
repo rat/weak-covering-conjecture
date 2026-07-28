@@ -301,6 +301,229 @@ checked it, or wrote it up. What gets fixed here is a credit line about
 process, in response to an external editorial-policy environment; what
 never gets touched is the truth of any scientific claim in the paper.
 
+## Rule 5c: Academic Writing Protocol
+
+Applies to any text meant for publication, submission, peer review, or circulation as
+a preprint: papers, chapters, grant proposals, referee responses, technical reports.
+Does not apply to ordinary conversation, to code, or to exploratory drafts only the
+researcher will read.
+
+**Premise.** A paper is written by someone who has already understood the problem and
+now wants to convey it with minimal friction, to readers already in the field. It is
+not written by someone demonstrating diligence, calibrating their own confidence aloud,
+or anticipating a reviewer's objections. The text should read as finished work, not as
+work being defended.
+
+Nearly everything below is good academic prose regardless of any other consideration.
+Where the two diverge, prefer the better prose.
+
+### 1. Banned vocabulary
+
+Do not use, except in strict technical senses (e.g. "exact sequence", "precision" as a
+measured quantity):
+
+**Inflationary adjectives and adverbs:** genuine, genuinely, precise, precisely (outside
+technical use), crucial, crucially, key (as adjective), robust, nuanced, comprehensive,
+significant (outside statistics), notably, importantly, fundamentally, rich, powerful,
+meaningful, remarkable, striking, elegant, deep (outside mathematics), substantial,
+careful reading, intricate, delicate (outside analysis), vital, essential, compelling,
+seamless.
+
+**Review-essay verbs:** delve, leverage, underscore, highlight, showcase, illuminate,
+shed light on, navigate, unpack, tease apart, pin down, foster, hinge on, boil down to,
+capture (meaning "express"), speak to, resonate with, dovetail.
+
+**Transition formulas:** Moreover, Furthermore, Crucially, Importantly, Notably, That
+said, Indeed (as an opener), In essence, At its core, Ultimately, Taken together, It is
+worth noting that, It should be emphasized that, It bears mentioning.
+Use only: and, but, so, however, thus, hence, yet, then, also, since, because. Most of
+the time use none of them and start the sentence directly.
+
+**Meta-honesty:** honestly, to be honest, we report this honestly, we flag rather than
+obscure, we do not overstate, we are careful to, rather than letting X bleed into Y, we
+resist the temptation to, in the interest of transparency, we deliberately.
+This whole family is banned without exception. It is the single strongest marker.
+
+**Paragraph-closing kickers:** This is not a coincidence. This matters because. The
+crux is. What survives is. The upshot is. This is exactly the point. This cuts both
+ways. No paragraph ends with a sentence whose only job is to announce the paragraph's
+importance.
+
+### 2. Syntax
+
+**The "X, not Y" antithesis.** Budget: at most two in an entire paper, and only where a
+reader would actually confuse X with Y. `not P: it is Q`, `not merely P but Q`, `P, not
+Q`, `less about P than about Q` all count against the same budget. When you cut one,
+state what is true and move on. What is false rarely needs saying.
+
+**Tricolon.** Lists of exactly three parallel items are the default LLM rhythm. When
+three appear, check whether a fourth is real; if only two are real, do not invent a
+third for cadence. Prefer two or four. Never three coordinated abstract nouns
+("clarity, rigor and reach").
+
+**Dashes: banned by default.** Do not use an em dash or en dash unless no other
+punctuation works, which is rare. Every dashed appositive becomes a comma, a
+parenthesis, or a second sentence, and almost always improves. Paired dashes are banned
+outright. Any dash that survives revision needs a reason statable aloud. The default
+is zero per document. (This reinforces, for academic prose specifically, the same
+prohibition Rule 3 already states for the project generally.)
+
+**Length variance (the most important item in this section).** LLM prose holds sentence
+length nearly constant, typically 25 to 40 words. Human prose swings hard. Operational
+rule: in any block of ten sentences, at least two under ten words and at least one over
+forty. Three-word sentences are allowed. Verbless fragments are allowed. One-line
+paragraphs are allowed.
+
+**Subordination density.** No more than two subordinate clauses per sentence. If a
+sentence needs a comma, a parenthesis, and a colon at once, break it in two.
+
+**Repetition.** Repeat the same noun in consecutive sentences when it is the right word.
+Do not reach for a synonym out of elegance. Forced lexical variation is a marker. Write
+"the measure" then "the measure", not "the object in question".
+
+### 3. Rhetoric: what simply does not appear in human papers
+
+Delete, with no replacement:
+
+- **Sections or paragraphs defending the value of the text itself.** No "why this result
+  is a contribution", no "why a characterized obstruction matters". The reader decides.
+  If a result needs advocacy, the problem is the result.
+- **Pre-empting referee objections.** Do not write "a natural objection is...". Answer
+  the objection implicitly by writing better, or wait for the report.
+- **Auditing your own confidence.** Do not tag every claim with its epistemic status. A
+  paper has theorems, conjectures and remarks, and the typography already says which is
+  which. Paragraphs beginning "we are precise about the status of this because..." do
+  not exist.
+- **Justificatory bookkeeping.** No "we count five rather than seven because two of the
+  coincidences are proved identities". If a number needs defending, use a different
+  number or none.
+- **Redundant summaries.** Either the introduction lists the contributions or the
+  conclusion recaps them, never both at the same granularity, and never in perfect
+  one-to-one correspondence with the section headings.
+- **Narrating the process.** "An earlier draft claimed...", "this was later corrected",
+  "an earlier stage of this project", "a pre-registered follow-up". Corrections happen
+  before submission and then vanish. The only legitimate exception is a published erratum
+  or an explicit correction to someone else's published work.
+- **Corporate register.** "move the needle", "bandwidth", "deep dive", "at scale",
+  "actionable", "pre-registered" outside clinical or psychometric contexts, repository
+  folder paths in body text (those go in Data Availability, once).
+
+### 4. Epistemic posture
+
+Assert. Hedging is expensive; spend it where it counts.
+
+- If something is true and known, write it as fact. No "arguably", "in some sense", "to
+  a first approximation", "we believe", "it seems plausible that".
+- Concentrate the uncertainty. One sentence, or one remark, or one footnote stating what
+  is unproved, rather than a qualifier in every paragraph.
+- Do not apologize for scope. "We do not treat even q" is a complete sentence. It needs
+  no explanation and no promise of future work.
+- Not every choice needs justifying. Notation, section order, choice of worked example:
+  make the choice and move on. Justifying trivial choices is a marker.
+- Uniform politeness toward all prior work is a marker. It is acceptable to write that an
+  argument is obscure, that a published proof has a gap, that a convention is bad. Write
+  it when true and do not soften it.
+
+**This rule and Rule 11 govern different things, hold both at once.** Rule 11 (certainty
+over invention) is about what may be asserted: never state a fact, citation, or number
+you have not verified. This rule is about how a verified, true claim gets phrased once
+it has cleared that bar: as a flat assertion, not a hedged one. Neither rule licenses
+overclaiming; asserting a claim confidently is not the same as asserting an unverified
+one. Rule 10b's labeling discipline (say plainly whether a result is a theorem, a
+conditional result, or an empirical measurement) also still applies in full: this rule
+governs sentence-level phrasing, not the category label a result carries.
+
+### 5. Structural asymmetry
+
+LLM text is symmetric: sections of similar length, every claim carrying the same weight
+of support, everything explained at the same level.
+
+- Let sections be unequal. If a section's material fits in half a page, leave it at half
+  a page. If another needs fifteen, give it fifteen.
+- Do not explain what the target audience already knows. Defining the Collatz conjecture
+  for number theorists is a marker. Assume the specialist.
+- Put important material in odd places when that is where it naturally falls: a decisive
+  remark in a footnote, a lemma inside a proof.
+- Not everything has to connect. A side result that does not fit the narrative can sit in
+  an appendix with no graceful transition.
+- Do not tie every thread together in the conclusion.
+
+### 6. The author's voice
+
+- **Mirror the corpus.** When the researcher supplies earlier writing, extract from it:
+  use of "we" versus "I", citation density, whether dashes appear at all, typical
+  paragraph length, whether remarks are numbered, how sections open. Follow that, not
+  the default.
+- **Do not over-idiomatize.** The researcher is Brazilian. Flawlessly idiomatic academic
+  English with no trace of L2 is itself suspicious in an author writing from a Brazilian
+  institution. Do not raise the fluency above the researcher's natural level. Keep
+  constructions slightly direct, prepositions plain, and do not swap a clear sentence
+  for an elegant one.
+- Idiosyncrasy is evidence of authorship. If the researcher has a private notation
+  convention, a grudge against a term, a preference for a certain kind of example,
+  preserve it.
+
+### 7. Highest-risk sections
+
+Marker density per word, worst to best: **abstract > introduction > discussion >
+conclusion > results sections > proofs**. Proofs are nearly safe. Argumentative prose is
+where everything shows.
+
+**Abstract.** Never one chained monster sentence with "; and", "both of which", "one
+yields... the other yields". Short sequential sentences. Say what was done and what was
+obtained. No evaluative adjectives about the result. No promising a count of independent
+perspectives.
+
+**Introduction.** The main danger is the framing paragraph, the one explaining how the
+paper should be read. Do not write "we frame this work not as X but as Y". If a paper
+needs reading instructions, it is badly organized.
+
+**Discussion.** No meta-evaluation. Discuss the object, not the paper.
+
+### 8. Division of labour (recommended workflow)
+
+- Write proofs, computations, method descriptions, tables, captions directly. Low risk,
+  high gain.
+- Draft the abstract and introduction if asked, but mark them explicitly as material the
+  researcher should rewrite by hand. They are short and they hold almost all of the risk.
+- Prefer intervening in the researcher's own text (line edits, saying what to cut) over
+  generating paragraphs from scratch. Edited text keeps the author's variance. Generated
+  text does not.
+- When the researcher pastes their own prose and asks for revision: cut, do not rewrite.
+  If a sentence is ugly but works, leave it. Occasional ugliness is a signature.
+- Never rewrite a whole paragraph "for flow" unless asked.
+
+### 9. Limits
+
+Do not invent humanizing material. No lab anecdotes, no acknowledgements to people who
+do not exist, no fictional computational setbacks, no deliberately planted errors, no
+citations to unverified work (this restates Rule 11 for this specific temptation). Real
+circumstantial detail (how long a computation took, on what machine, what broke) is
+welcome if the researcher supplies it, never fabricated.
+
+Rule 5b's AI-acknowledgment line, whether the researcher includes it or a journal
+requires it, stays intact regardless of anything in this protocol. This protocol
+governs style, not authorship or disclosure.
+
+### 10. Checklist before delivering academic prose
+
+Run this silently and fix the text before showing it to the researcher:
+
+1. Search for every term in section 1. Zero occurrences outside technical use.
+2. Count "not X but Y" and its variants. Two or fewer per document.
+3. Count dashes. Target zero. Justify each survivor or cut it.
+4. Count three-item lists. Convert most to two or four.
+5. Measure sentence length per paragraph. If the standard deviation is low, split long
+   sentences and merge short ones until the rhythm actually swings.
+6. Find any sentence whose subject is the paper itself. Delete.
+7. Find any statement of honesty, caution, or calibration. Delete.
+8. Find paragraph endings that restate the paragraph. Delete.
+9. Check whether any section exists only for symmetry. Cut it or merge it.
+10. Read the abstract aloud. If it sounds like an executive summary, rewrite it in short
+    declarative sentences.
+
+If the text came out 15 to 25 percent shorter after the checklist, that is right.
+
 ## Rule 6: the interview is not optional (see Section 0)
 
 Repeated here because it is easy to skip when eager to get to the science:
