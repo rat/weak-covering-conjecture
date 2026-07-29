@@ -57,3 +57,17 @@ to start and risked competing with the concurrent l=24 computation's memory. Do 
 resume this sweep past `k=11` without checking `free -h` and l=24's status first;
 `n` triples each step and this solver's memory footprint (~1.8GB at k=10-11) may
 scale worse than linearly.
+
+## Novelty note (2026-07-29, checked before any claim of a new technique)
+
+The general technique here (representing a covering-type combinatorial problem as a
+mean-payoff game and computing a decreasing sequence of exact rational bounds) is
+NOT new: it is a direct application of Ehrenfeucht-Mycielski's 1979 mean-payoff
+games, and a very close methodological precedent exists in the coding-theory
+literature -- Meyerovitch & Young, "Rationality and computability of the covering
+radius for sofic shifts" (arXiv:2603.21449, 2026, L-062 in `literature/INDEX.md`),
+which proves rationality/computability of a covering-radius quantity for sofic
+shifts via essentially the same kind of construction. What is new here is the
+*application* to Wirsching's `j*(l)`, not the technique. Any future write-up of
+this result should cite both as methodological precedent, not present the
+mean-payoff-game framing itself as a novel contribution.
