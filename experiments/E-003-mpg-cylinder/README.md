@@ -37,9 +37,9 @@ non-increasing in `k` with `inf_k rho_k = limsup_l j*(l)/l >= log_4(3)`.
 
 ## Result (all exact, self-certified matching min-max certificates)
 
-| k | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
-|---|---|---|---|---|---|---|---|----|
-| rho_k | 2 | 5/3 | 3/2 | 3/2 | 7/5 | 25/19 | 5/4 | 11/9 |
+| k | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 |
+|---|---|---|---|---|---|---|---|----|----|
+| rho_k | 2 | 5/3 | 3/2 | 3/2 | 7/5 | 25/19 | 5/4 | 11/9 | 6/5 |
 | C_k | 5 | 19/3 | 15/2 | 9 | 10 | 207/19 | 47/4 | -- |
 
 `rho_4 = 5/3` improves the leading constant of the best proven bound on `j*(l)` from
@@ -48,3 +48,12 @@ rate; a trailing `L + A/k` extrapolation gives `L ~ 0.78-0.79 ~ log_4(3)`, consi
 with (not proof of) `rho_k -> log_4(3)`. Reproduced three independent ways: Karp
 certificates (k=3,4,5), long value iteration (k=7 -> 1.4003), and dcap-robustness
 (k=7,8 stable across action caps 20/40/80).
+
+**Update, 2026-07-29: `rho_11 = 6/5 = 1.2`, tight, `n=118098`.** A leftover background
+process from this round (left running unattended in `/home/rat/wcc_mpg/`, outside
+this repo) had already computed `k=10` (matching the table above) and `k=11` before
+being found and killed for memory safety -- `k=12` (`n=354294`, 3x larger) was about
+to start and risked competing with the concurrent l=24 computation's memory. Do not
+resume this sweep past `k=11` without checking `free -h` and l=24's status first;
+`n` triples each step and this solver's memory footprint (~1.8GB at k=10-11) may
+scale worse than linearly.
