@@ -1,0 +1,77 @@
+You are being consulted as a genuinely independent adversarial reviewer on a research project
+studying Wirsching's Weak Covering Conjecture (1998, Springer LNM 1681, Conjecture 3.9). Do not be
+agreeable. This is a follow-up to an earlier review you gave this same project today (you correctly
+predicted a numerical "rollover" that was then confirmed, and independently strengthened a different
+conditional bridge argument to a stronger form, both accepted). This time: a new claim from a
+different investigation, be equally skeptical.
+
+## Setup
+
+j*(l) := smallest j such that R_{j-1,j} := { sum_{i=0}^{j} 2^{a_i} 3^i : j+k>=a_0>...>a_j>=0 } covers
+(Z/3^l Z)^* mod 3^l. Known EXACTLY (brute-force-verified computation, not estimated) for l=1..23:
+1,4,6,7,9,10,11,12,13,15,16,17,18,19,20,20,21,22,23,24,25,26,27 (l=1..23 in order). e(l) :=
+j*(l) - l*log_4(3), the quantity whose growth rate (bounded / log(l) / sqrt(l) / slow-linear) is this
+project's central open question.
+
+## The new claim to review
+
+A subagent found (and this project independently re-verified, exact integer match, all 23 points)
+that j*(l) equals B*(l) - l, where B*(l) := max_z min{A(a) : Syrac_l(a) = z mod 3^l} is the "Tao cost"
+formulation (Syrac_l is Tao's Syracuse random variable on Z/3^l Z, A(a) the cost of a witness tuple
+a). This identity itself is exact algebra given an already-established object identity in this
+project (R_{j-1,j} mod 3^l is a unit multiple of the set of Syrac_l values reachable at cost <= some
+B), not itself in dispute.
+
+Given this, e(l) decomposes EXACTLY as:
+  e(l) = (j*(l) - l) + (1 - log_4(3)) * l = (j*(l) - l) + 0.20752 * l
+
+Looking at the exact, non-extrapolated table of j*(l) - l for l = 1..23:
+  l:        1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23
+  j*(l)-l:  0  2  3  3  4  4  4  4  4  5  5  5  5  5  5  4  4  4  4  4  4  4  4
+
+This stays in the narrow range {2,...,5} across the ENTIRE known table, non-monotonically (rises to
+5 at l=10-15, falls back to 4 at l=16-23), with no visible upward trend, even though e(l) itself
+(the usual quantity this project tracks) rises steadily from about 0.2 at l=1 to 8.77 at l=23. Since
+e(l) = (j*(l)-l) + 0.20752*l exactly, and (j*(l)-l) itself shows no growth in the entire known range,
+essentially ALL of e(l)'s observed growth in the accessible data is mechanically coming from the
+0.20752*l linear term, not from (j*(l)-l) growing.
+
+The subagent drew out (explicitly labeled as its own reasoning, not proven, flagging it for exactly
+this kind of independent review) the following observation: IF (j*(l)-l) stayed bounded forever (not
+claimed as established, just: this is what the ENTIRE currently-accessible range is consistent with),
+then e(l) would be asymptotically LINEAR (~0.20752*l), which would be a definitive answer ruling out
+the bounded/log(l)/sqrt(l) possibilities in favor of the fourth option this project has always listed
+(slow-linear) -- the opposite of what an earlier line of evidence in this same project (a decreasing
+sequence of proven upper-bound rate constants rho_k, currently rho_13=119/104=1.1442, extrapolating
+toward roughly log_4(3)=0.7925 as k grows, though NOT proven to reach it) had been suggestively
+pointing toward.
+
+## What to review
+
+1. Is the exact identity `e(l) = (j*(l)-l) + (1-log_4(3))*l` correct algebra? (Trivial to check, but
+   confirm no error.)
+2. Is there an obvious statistical/methodological reason the "(j*(l)-l) stays bounded across l=1..23"
+   observation is a weak or misleading signal, distinct from just "small sample size"? For instance:
+   is there a reason (j*(l)-l) staying in a narrow integer-valued range is much LESS informative than
+   it sounds, given l is only up to 23 and j*(l)-l is a small integer that can only take a handful of
+   values regardless of the true asymptotic regime (a base-rate / discretization concern)? Or does the
+   observation genuinely carry information?
+3. Is this actually new information, or is it a trivial restatement/relabeling of the existing e(l)
+   table that looks more dramatic only because of how it's decomposed? (Be blunt if it's the latter.)
+4. This project already has a separate, independent finding from earlier today (via a different
+   subagent) that the proven upper-bound sequence rho_k may have an irreducible gap above the true
+   asymptotic rate (evidence, not proof, from lifting window-optimal cycles back to real 3-adic
+   targets and finding they cost less than rho_k*l predicts) -- meaning the "rho_k -> log_4(3)"
+   extrapolation might be reading the wrong limit. Does that finding and this one point in a
+   genuinely consistent direction (both suggesting e(l) might be closer to linear than the rho_k
+   extrapolation alone would suggest), or are they unrelated / is connecting them itself an
+   overreach?
+5. What is the single most informative additional check the researchers could run with data they
+   already have (l<=23 exact) to get more signal on whether (j*(l)-l) is genuinely stable or just
+   under-sampled?
+6. Your own confidence, 0-100%, that "(j*(l)-l) staying bounded across l=1..23" is a meaningful signal
+   about e(l)'s true asymptotic character, versus a coincidence of the accessible range.
+
+Be genuinely skeptical. This project has a documented pattern this same session of numerical patterns
+that looked clean over a limited range and then failed a more careful test; treat this with the same
+scrutiny.
