@@ -37,11 +37,21 @@ non-increasing in `k` with `inf_k rho_k = limsup_l j*(l)/l >= log_4(3)`.
 
 ## Result (all exact, self-certified matching min-max certificates)
 
-| k | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 |
-|---|---|---|---|---|---|---|---|----|----|----|
-| rho_k | 2 | 5/3 | 3/2 | 3/2 | 7/5 | 25/19 | 5/4 | 11/9 | 6/5 | 7/6 |
+| k | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 |
+|---|---|---|---|---|---|---|---|----|----|----|----|
+| rho_k | 2 | 5/3 | 3/2 | 3/2 | 7/5 | 25/19 | 5/4 | 11/9 | 6/5 | 7/6 | 119/104 |
 
-**Update, 2026-07-30: `rho_12 = 7/6 = 1.1667`, tight, `n=354294`.** Computed by
+**Update, 2026-07-30: `rho_13 = 119/104 = 1.144231`, tight, `n=1062882`.** Same solver, ran
+~5h30m of wall time (k=12 and k=13 launched together as `mpg4.py 12 13`). `j*(l) <= (119/104)*l
++ O(1)` now the best proven ceiling, replacing `7/6`. **`C_k` was NOT captured for k=10-13**:
+the running script only printed `rho_k`/`lb`, the potential `h` (needed for `C_k = max h - min
+h`) was computed internally but never saved, exactly the loss H-009 warned about. Fixed same
+day: `mpg4.py`'s `solve()` now returns `Ck`, `h`, and `lam`, and its `__main__` block saves a
+full certificate (policy + potentials, as exact fractions) to `certificate_k<K>.json` on every
+run, so this cannot happen again. Re-running k=10-13 under the patched script to recover their
+`C_k` values is queued, not yet done (would compete with H-002's concurrent l=19 DP for memory).
+
+**Update, 2026-07-30 (earlier): `rho_12 = 7/6 = 1.1667`, tight, `n=354294`.** Computed by
 `mpg4.py`'s nested Howard solver (the main, cross-checked solver), matching min-policy
 upper bound and adversary lower bound exactly. Took ~1h16m of wall time (pure Python,
 n=354294 with a nested up-to-100k-outer x up-to-100k-inner iteration structure) -- slow

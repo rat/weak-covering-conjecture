@@ -72,11 +72,12 @@ def solve(k, dcap=40, verbose=False):
     rho, sigma, lam, h = nested_howard(states, actions, sigma0, verbose=verbose)
     lb = adversary_lower_bound(states, actions, lam, h)
     maxd = max(sigma[s][0] for s in states)
+    Ck = max(h.values()) - min(h.values())
     return dict(k=k, n=len(states), rho=rho, lb=lb, proven=(rho==lb), maxd=maxd, dcap=dcap,
-                sigma=sigma, states=states, actions=actions)
+                Ck=Ck, sigma=sigma, h=h, lam=lam, states=states, actions=actions)
 
 if __name__ == "__main__":
-    import sys
+    import sys, json
     ks = [int(x) for x in sys.argv[1:]] or [3,4,5,6]
     known = {3:Fraction(2),4:Fraction(5,3),5:Fraction(3,2)}
     for k in ks:
@@ -85,4 +86,14 @@ if __name__ == "__main__":
         if k in known:
             chk = f"  [proven-Karp={known[k]}, match={r['rho']==known[k]}]"
         print(f"k={k}: rho_k={r['rho']}={float(r['rho']):.6f}  lower={r['lb']}={float(r['lb']):.6f}  "
-              f"tight={r['proven']}  n={r['n']}  maxd={r['maxd']}{chk}", flush=True)
+              f"tight={r['proven']}  n={r['n']}  maxd={r['maxd']}  C_k={r['Ck']}={float(r['Ck']):.6f}{chk}", flush=True)
+        # save the certificate (policy + potentials) so C_k / A3-style diamond checks never need a re-solve
+        cert = {
+            "k": k, "n": r["n"], "rho": [r["rho"].numerator, r["rho"].denominator],
+            "Ck": [r["Ck"].numerator, r["Ck"].denominator],
+            "sigma": {str(s): r["sigma"][s][0] for s in r["states"]},
+            "h": {str(s): [r["h"][s].numerator, r["h"][s].denominator] for s in r["states"]},
+            "lam": {str(s): [r["lam"][s].numerator, r["lam"][s].denominator] for s in r["states"]},
+        }
+        with open(f"certificate_k{k}.json", "w") as f:
+            json.dump(cert, f)
