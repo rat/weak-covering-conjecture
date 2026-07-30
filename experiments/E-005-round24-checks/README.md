@@ -35,3 +35,20 @@ constant) undershoots the true `j*(l)` and breaks the covering property itself w
 `l=80` (some shallow cylinder gets zero tuples, `q=0`). A concrete illustration of why
 `e(l)` cannot be waved away with a small constant. Extending this analysis past `l=23`
 needs a properly justified `j(l)` schedule, not naive extrapolation; deferred.
+
+## Update: the pattern above does not survive a decisive test (Gemini caught this)
+
+Sent to Gemini (`gemini-3.6-flash`, max thinking, independent vendor) as an adversarial review.
+It gave 5% confidence the pattern was genuine, predicting that `C(l,r):=-log(q_{l,r})/r` must
+roll over (decline) as `r/l -> 1`, since covering is known to hold at `r=l` with a modest,
+bounded `e(l)` -- extrapolating the shallow-`r` linear trend to `r=l^delta` would assume the
+conclusion. Tested directly: `rollover_test.py` pushes `r` up to 13 (kept small to avoid
+competing with concurrent memory-heavy runs) at `l=14,16,18,20,23`, reaching `r/l` up to 0.93.
+**`C(l,r)` peaks near `r=2` and declines monotonically at every `l` tested, all the way to the
+largest `r/l` reached.** This confirms Gemini's prediction and corrects the headline finding
+above: what looked like sustained linear growth was the front end of a concave, decelerating
+curve, visible only because the original test never pushed `r` far enough relative to `l`.
+Consistent with (not evidence for or against beyond) the mainstream expectation that `e(l)` grows
+slowly. This numerical probe is closed; see `notes/H-003.md`'s matching section for full detail
+and a methodological note on the failure mode this illustrates (a bounded-range test can look
+like a trend simply because it never reaches a known boundary condition).

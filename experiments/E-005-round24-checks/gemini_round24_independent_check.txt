@@ -1,0 +1,88 @@
+You are being consulted as a genuinely independent adversarial reviewer (different vendor from the
+model that produced the claims below) on a research project studying Wirsching's Weak Covering
+Conjecture (1998, Springer LNM 1681, Conjecture 3.9). Do not be agreeable. Find what is wrong, or
+confirm precisely what survives. Two independent items below; review each on its own.
+
+## Background definitions
+
+R_{j,k} := { sum_{i=0}^{j} 2^{a_i} 3^i : j+k >= a_0 > a_1 > ... > a_j >= 0 } (subset of Z_3^*).
+j*(l) := smallest j such that R_{j-1,j} covers (Z/3^l Z)^* mod 3^l. Known exactly for l=1..23.
+e(l) := j*(l) - l*log_4(3). Best proven upper bound: j*(l) <= (119/104)*l + O(1) (an exact
+mean-payoff-game solve). Best proven lower bound: e(l) >= (1/4)*log_2(l) - O(1) (elementary
+pigeonhole). This project's own value = sum_{i=1}^{l} 2^{s_i} 3^{i-1} for chosen decreasing
+exponents s_1>...>s_l, is proven equal to a unit multiple of Tao's Syracuse random variable
+Syrac(Z/3^n Z) := sum_{m=1}^{n} 3^{m-1} 2^{-a_[1,m]}, a_j iid Geom(2), P(a_j=k)=2^{-k}, k>=1,
+under a budget constraint absent from Tao's version.
+
+## ITEM 1: a candidate conditional bridge (does the algebra hold?)
+
+Claim: let c_n := min_z P(Syrac(Z/3^n Z)=z). Tao's own "beta=1" conjecture (stated informally in
+his blog post "Equidistribution of Syracuse random variables and density of Collatz preimages",
+2020; NOT stated this way in the peer-reviewed Forum Math. Pi 10 (2022) e12 version, which uses a
+different total-variation-distance formulation instead) is exactly c_n = 3^{-n+o(n)}.
+
+Derivation to check: let A := sum_{m=1}^n a_m (so A is a sum of n iid Geom(2) variables, mean 2
+each). Let U_n(B) := { z : no witness of Syrac=z has A<=B }. For any z in U_n(B), the entire event
+{Syrac=z} lies inside {A>B} (since every witness of z has cost >B). The events {Syrac=z} for
+distinct z are disjoint, so summing gives |U_n(B)| * c_n <= sum_{z in U_n(B)} P(Syrac=z) <= P(A>B).
+Chernoff for a sum of n iid Geom(2) gives P(A > (2+delta)n) <= exp(-c*delta^2*n) for fixed delta>0
+and an absolute constant c. Assuming beta=1 (c_n = 3^{-n+o(n)}), choose delta_n -> 0 slowly enough
+that delta_n^2 * n dominates the unknown o(n) term inside c_n's exponent. Conclusion claimed:
+|U_n((2+delta_n)*n)| / (2*3^{n-1}) -> 0, i.e. a DENSITY-ONE (not full) subset of residues has a
+witness with cost within (2+o(1))*n -- IF beta=1 holds. Explicitly labeled by the researchers as
+conditional on beta=1 (itself an unproven conjecture, not a theorem), and explicitly noted to be a
+WEAKER budget rate (~2*l) than the unconditionally-proven 119/104*l already in hand, so its value
+(if it holds) is a first honest formalization of "beta=1 implies a WCC-type statement," not a
+numeric improvement.
+
+Check specifically: (a) is the disjointness/counting step correct as stated; (b) is the Chernoff
+step correct (mean of Geom(2) is 2, tail bound form); (c) is there a hidden error in treating c_n
+as literally the "beta=1" quantity, or in how delta_n needs to relate to the unknown o(n) term;
+(d) is there a sharper or different conclusion the same setup should have given but didn't; (e)
+your own confidence this specific chain of reasoning is correct, 0-100%.
+
+## ITEM 2: a preliminary numerical pattern (needs a genuinely skeptical read)
+
+Define q_{l,r} := (2*3^{r-1}) * min_b p_{l,r}(b), where p_{l,r}(b) is the fraction of the exact
+C(2*j*(l)-1, j*(l)) admissible tuples (at the true critical budget j=j*(l)) whose value is
+congruent to b mod 3^r (a "shallow cylinder", r<l). Surjectivity of the covering property gives
+the exact inequality (domain size)/(2*3^{l-1}) >= q_{l,r}^{-1}, so a bound on how small q_{l,r}
+can be translates directly into a lower bound on j*(l) (hence on e(l)).
+
+Computed q_{l,r} EXACTLY (not estimated) for every l=4..23 (all currently known exact j*(l)
+values) and r up to 12, via a reduced-modulus rerun of an already-validated rotation-DP (the
+DP tracks partial sums mod 3^r instead of mod 3^l; reduction mod 3^r only depends on the r
+LARGEST chosen exponents in this project's rank/value convention, so this is exact, not an
+approximation, and was sanity-checked against a full-modulus DP's own aggregation before use).
+
+Finding across several scalings (fixed r as l grows to 23; r~sqrt(l); fixed ratios r/l~0.33 and
+~0.7; r up to 12 at the largest available l=23): -log(q_{l,r}) grows roughly LINEARLY in r and
+stays close to CONSTANT once l is comfortably larger than r -- no sign of q_{l,r} decaying
+exponentially in l at any scaling tried, in the range l<=23 that was actually tested.
+
+The researchers explicitly flag they have NOT tested the regime that would matter most (r growing
+WITH l, e.g. r=l^delta for fixed delta<1, l -> infinity), because only l<=23 is known exactly, and
+a naive attempt to push l past 23 by guessing j (constant offset on log_4(3)*l, or the proven-safe
+upper bound with a small guessed constant) undershoots the true j*(l) and breaks the covering
+property itself (some cylinder gets zero tuples) by l~50-80.
+
+IF this roughly-r-linear, l-independent pattern held robustly all the way into the r=l^delta
+regime, it would give q_{l,r} ~ exp(-c*l^delta), and via the inequality above, e(l) >=
+c'*l^delta - O(1) -- a substantial strengthening over the current elementary (1/4)*log_2(l) - O(1)
+lower bound.
+
+Be genuinely skeptical here, this is exactly the kind of small-l numerical pattern that looks
+clean and then evaporates or reverses at scale, or that has a mundane combinatorial explanation
+unrelated to any deep asymptotic behavior. Specifically address: (a) is there an obvious reason
+this pattern (r-linear, l-independent, for l up to only ~2x the largest tested r) is a small-scale
+artifact rather than a real asymptotic signal, e.g. a boundary effect, a finite-size correction
+that should vanish, or an artifact of the specific j*(l) sequence's own known irregularity;
+(b) does the claimed inequality (domain size/(2*3^{l-1}) >= q_{l,r}^{-1}) actually hold as stated,
+or is there a subtlety in going from "some residue mod 3^r is starved" to "j*(l) itself must be
+large"; (c) what is the single most informative additional numerical test the researchers could
+run with what they already have (l up to 23 exact, or a properly-computed larger l if they can
+get one) to distinguish "real early-onset asymptotic" from "small-l coincidence"; (d) your own
+confidence this pattern reflects anything genuine about e(l)'s asymptotics, 0-100%, separate from
+your confidence in the derivation/inequality itself.
+
+Answer ITEM 1 and ITEM 2 as separate sections. Do not soften negative findings.
