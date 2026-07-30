@@ -1,0 +1,45 @@
+{"ts": "2026-07-30T09:01:32", "query": "all:\"weighted zero-sum\" AND all:index", "start": 0, "max_results": 10, "total_returned": 0, "new_count": 0, "ids": []}
+{"ts": "2026-07-30T09:01:42", "query": "all:greedoid AND all:rank", "start": 0, "max_results": 10, "total_returned": 3, "new_count": 3, "ids": ["1201.1831v1", "2607.08151v1", "2607.16347v3"]}
+{"ts": "2026-07-30T09:01:50", "query": "all:\"Mahonian\" AND all:\"q-analog\"", "start": 0, "max_results": 10, "total_returned": 6, "new_count": 6, "ids": ["0908.2089v1", "0804.1935v1", "math/0608274v1", "2604.17387v1", "0812.0764v2", "0805.2416v1"]}
+{"ts": "2026-07-30T09:01:54", "query": "all:\"weighted Davenport constant\"", "start": 0, "max_results": 10, "total_returned": 10, "new_count": 10, "ids": ["1803.09705v3", "1308.3316v1", "1807.04112v1", "1912.07509v1", "2607.02132v1", "2212.13386v6", "1407.1966v2", "2209.14779v1", "2202.11887v1", "2108.00822v1"]}
+{"ts": "2026-07-30T09:02:04", "query": "id:1807.04112v1", "start": 0, "max_results": 1, "total_returned": 1, "new_count": 0, "ids": ["1807.04112v1"]}
+{"ts": "2026-07-30T09:02:07", "query": "id:2202.11887v1", "start": 0, "max_results": 1, "total_returned": 1, "new_count": 0, "ids": ["2202.11887v1"]}
+{"ts": "2026-07-30T09:02:23", "query": "all:\"abstract numeration system\" AND all:representable", "start": 0, "max_results": 10, "total_returned": 10, "new_count": 10, "ids": ["1108.5711v1", "0706.0431v2", "1101.0036v1", "0907.0942v1", "cs/0212018v1", "0907.0615v1", "2106.07249v2", "2103.16966v1", "0907.0620v1", "1907.01464v2"]}
+{"ts": "2026-07-30T09:02:24", "query": "all:\"rank-dependent\" AND all:\"exponential sum\"", "start": 0, "max_results": 10, "total_returned": 0, "new_count": 0, "ids": []}
+{"ts": "2026-07-30T09:02:39", "query": "all:\"position-dependent\" AND all:\"exponential sum\"", "start": 0, "max_results": 10, "total_returned": 0, "new_count": 0, "ids": []}
+{"ts": "2026-07-30T09:02:40", "query": "all:\"linear extension\" AND all:poset AND all:\"exponential sum\"", "start": 0, "max_results": 10, "total_returned": 0, "new_count": 0, "ids": []}
+{"ts": "2026-07-30T09:02:50", "query": "all:\"sorted subset\" AND all:sum AND all:weight", "start": 0, "max_results": 10, "total_returned": 0, "new_count": 0, "ids": []}
+{"ts": "2026-07-30T09:02:50", "query": "all:\"order statistics\" AND all:\"character sum\"", "start": 0, "max_results": 10, "total_returned": 0, "new_count": 0, "ids": []}
+{"ts": "2026-07-30T09:03:10", "query": "all:\"hook length\" AND all:\"exponential sum\"", "start": 0, "max_results": 10, "total_returned": 0, "new_count": 0, "ids": []}
+{"ts": "2026-07-30T09:03:11", "query": "all:\"record statistics\" AND all:\"subset sum\"", "start": 0, "max_results": 10, "total_returned": 0, "new_count": 0, "ids": []}
+{"ts": "2026-07-30T09:03:28", "query": "all:\"L-statistic\" AND all:\"exponential sum\"", "start": 0, "max_results": 10, "total_returned": 0, "new_count": 0, "ids": []}
+{"ts": "2026-07-30T09:03:28", "query": "all:\"L-statistics\" AND all:modular", "start": 0, "max_results": 10, "total_returned": 0, "new_count": 0, "ids": []}
+{"ts": "2026-07-30T09:03:40", "query": "all:\"L-statistics\" AND all:\"number theory\"", "start": 0, "max_results": 10, "total_returned": 0, "new_count": 0, "ids": []}
+{"ts": "2026-07-30T09:03:41", "query": "all:\"trimmed sum\" AND all:\"finite field\"", "start": 0, "max_results": 10, "total_returned": 0, "new_count": 0, "ids": []}
+{"ts": "2026-07-30T09:03:41", "query": "all:\"spacings\" AND all:\"exponential sum\" AND all:modular", "start": 0, "max_results": 10, "total_returned": 1, "new_count": 1, "ids": ["1711.02705v2"]}
+{"ts": "2026-07-30T09:03:56", "query": "all:\"rank metric\" AND all:\"exponential sum\"", "start": 0, "max_results": 10, "total_returned": 0, "new_count": 0, "ids": []}
+{"ts": "2026-07-30T09:03:56", "query": "all:\"noncommutative\" AND all:\"exponential sum\" AND all:\"finite ring\"", "start": 0, "max_results": 10, "total_returned": 0, "new_count": 0, "ids": []}
+{"ts": "2026-07-30T09:12:23", "query": "all:\"Syracuse random variable\"", "start": 0, "max_results": 8, "total_returned": 0, "new_count": 0, "ids": []}
+{"ts": "2026-07-30T09:12:26", "query": "all:\"multilinear oscillatory integral\"", "start": 0, "max_results": 8, "total_returned": 8, "new_count": 8, "ids": ["1912.08737v1", "1107.2352v1", "1904.05428v1", "2302.00048v1", "1612.00050v1", "1107.2350v1", "1901.01489v4", "math/0311039v1"]}
+{"ts": "2026-07-30T09:12:29", "query": "all:\"branching random walk\" AND all:\"logarithmic correction\" AND all:minimum", "start": 0, "max_results": 8, "total_returned": 0, "new_count": 0, "ids": []}
+{"ts": "2026-07-30T09:12:32", "query": "all:\"lossy source coding\" AND all:\"second-order\" AND all:dispersion", "start": 0, "max_results": 8, "total_returned": 2, "new_count": 2, "ids": ["2401.14962v5", "1410.2687v1"]}
+{"ts": "2026-07-30T09:12:35", "query": "all:\"covering code\" AND all:\"asymptotic redundancy\"", "start": 0, "max_results": 8, "total_returned": 0, "new_count": 0, "ids": []}
+{"ts": "2026-07-30T09:12:38", "query": "all:\"Bernoulli convolution\" AND all:\"p-adic\"", "start": 0, "max_results": 8, "total_returned": 0, "new_count": 0, "ids": []}
+{"ts": "2026-07-30T09:12:41", "query": "all:\"Garsia entropy\"", "start": 0, "max_results": 8, "total_returned": 6, "new_count": 6, "ids": ["1912.10987v3", "0811.3009v3", "2303.07785v2", "1801.07118v1", "2103.12684v3", "1609.02131v2"]}
+{"ts": "2026-07-30T09:12:44", "query": "all:\"Fourier decay\" AND all:\"self-similar measure\" AND all:\"digit\"", "start": 0, "max_results": 8, "total_returned": 1, "new_count": 1, "ids": ["2508.14698v1"]}
+{"ts": "2026-07-30T09:12:47", "query": "all:\"digit expansion\" AND all:\"variable weight\"", "start": 0, "max_results": 8, "total_returned": 0, "new_count": 0, "ids": []}
+{"ts": "2026-07-30T09:12:50", "query": "all:\"record process\" AND all:\"modular arithmetic\"", "start": 0, "max_results": 8, "total_returned": 0, "new_count": 0, "ids": []}
+{"ts": "2026-07-30T09:12:53", "query": "all:\"prefix code\" AND all:\"rank-dependent\"", "start": 0, "max_results": 8, "total_returned": 0, "new_count": 0, "ids": []}
+{"ts": "2026-07-30T09:12:56", "query": "all:\"Lyndon word\" AND all:\"exponential sum\"", "start": 0, "max_results": 8, "total_returned": 0, "new_count": 0, "ids": []}
+{"ts": "2026-07-30T09:16:20", "query": "all:\"logarithmic correction\" AND all:\"first passage percolation\"", "start": 0, "max_results": 8, "total_returned": 0, "new_count": 0, "ids": []}
+{"ts": "2026-07-30T09:16:23", "query": "all:\"minimal displacement\" AND all:\"branching\"", "start": 0, "max_results": 8, "total_returned": 5, "new_count": 5, "ids": ["2603.13025v1", "1404.0422v2", "0912.1392v1", "2502.07363v3", "2211.13109v5"]}
+{"ts": "2026-07-30T09:16:26", "query": "all:\"coupon collector\" AND all:\"second order\" AND all:threshold", "start": 0, "max_results": 8, "total_returned": 0, "new_count": 0, "ids": []}
+{"ts": "2026-07-30T09:16:29", "query": "all:\"additive basis\" AND all:\"powers of 2\"", "start": 0, "max_results": 8, "total_returned": 0, "new_count": 0, "ids": []}
+{"ts": "2026-07-30T09:16:32", "query": "all:\"sums of distinct powers\" AND all:\"residue\"", "start": 0, "max_results": 8, "total_returned": 0, "new_count": 0, "ids": []}
+{"ts": "2026-07-30T09:16:35", "query": "all:\"shift radix system\"", "start": 0, "max_results": 8, "total_returned": 7, "new_count": 7, "ids": ["0907.4872v2", "1312.0386v1", "1401.5259v1", "1711.09596v2", "1410.7667v1", "2402.16588v1", "1203.0758v2"]}
+{"ts": "2026-07-30T09:16:38", "query": "all:\"anticipation\" AND all:\"sofic shift\"", "start": 0, "max_results": 8, "total_returned": 0, "new_count": 0, "ids": []}
+{"ts": "2026-07-30T09:16:41", "query": "all:\"worst-case redundancy\" AND all:\"universal code\"", "start": 0, "max_results": 8, "total_returned": 1, "new_count": 1, "ids": ["1701.08785v1"]}
+{"ts": "2026-07-30T09:16:44", "query": "all:\"large deviations\" AND all:\"mean payoff game\"", "start": 0, "max_results": 8, "total_returned": 0, "new_count": 0, "ids": []}
+{"ts": "2026-07-30T09:16:47", "query": "all:\"Collatz\" AND all:\"exponential sum\"", "start": 0, "max_results": 8, "total_returned": 0, "new_count": 0, "ids": []}
+{"ts": "2026-07-30T09:16:50", "query": "all:\"3x+1\" AND all:\"Fourier\"", "start": 0, "max_results": 8, "total_returned": 1, "new_count": 1, "ids": ["2010.12987v1"]}
+{"ts": "2026-07-30T09:16:53", "query": "all:\"2-adic\" AND all:\"powers of two\" AND all:distribution", "start": 0, "max_results": 8, "total_returned": 0, "new_count": 0, "ids": []}

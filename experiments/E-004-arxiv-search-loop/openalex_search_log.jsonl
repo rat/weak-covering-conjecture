@@ -1,0 +1,6 @@
+{"ts": "2026-07-30T09:18:53", "source": "openalex", "label": "fulltext:\"Syracuse random variable\"", "params": {"filter": "fulltext.search:\"Syracuse random variable\"", "per_page": 25}, "count": 7, "n": 7}
+{"ts": "2026-07-30T09:18:56", "source": "openalex", "label": "fulltext:\"weak covering conjecture\"", "params": {"filter": "fulltext.search:\"weak covering conjecture\"", "per_page": 25}, "count": 0, "n": 0}
+{"ts": "2026-07-30T09:18:59", "source": "openalex", "label": "search:Almost all orbits of the Collatz map attain almost bounded values", "params": {"search": "Almost all orbits of the Collatz map attain almost bounded values", "per_page": 3}, "count": 255, "n": 3}
+{"ts": "2026-07-30T09:19:52", "source": "openalex", "label": "cites:W2972077893@p1", "params": {"filter": "cites:W2972077893", "per_page": 50, "page": 1}, "count": 141, "n": 50}
+{"ts": "2026-07-30T09:19:55", "source": "openalex", "label": "cites:W2972077893@p2", "params": {"filter": "cites:W2972077893", "per_page": 50, "page": 2}, "count": 141, "n": 50}
+{"ts": "2026-07-30T09:19:58", "source": "openalex", "label": "cites:W2972077893@p3", "params": {"filter": "cites:W2972077893", "per_page": 50, "page": 3}, "count": 141, "n": 41}
