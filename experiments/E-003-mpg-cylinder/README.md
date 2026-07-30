@@ -37,9 +37,19 @@ non-increasing in `k` with `inf_k rho_k = limsup_l j*(l)/l >= log_4(3)`.
 
 ## Result (all exact, self-certified matching min-max certificates)
 
-| k | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 |
-|---|---|---|---|---|---|---|---|----|----|
-| rho_k | 2 | 5/3 | 3/2 | 3/2 | 7/5 | 25/19 | 5/4 | 11/9 | 6/5 |
+| k | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 |
+|---|---|---|---|---|---|---|---|----|----|----|
+| rho_k | 2 | 5/3 | 3/2 | 3/2 | 7/5 | 25/19 | 5/4 | 11/9 | 6/5 | 7/6 |
+
+**Update, 2026-07-30: `rho_12 = 7/6 = 1.1667`, tight, `n=354294`.** Computed by
+`mpg4.py`'s nested Howard solver (the main, cross-checked solver), matching min-policy
+upper bound and adversary lower bound exactly. Took ~1h16m of wall time (pure Python,
+n=354294 with a nested up-to-100k-outer x up-to-100k-inner iteration structure) -- slow
+but confirmed not stuck (CPU time climbed steadily throughout, no algorithmic bug found
+on inspection). Ran concurrently with H-002's DP extension (notes/H-002.md), which was
+paused via SIGSTOP partway through to remove memory/swap contention that was slowing
+this computation down; contention, not a bug, explained most of the early slowness.
+`j*(l) <= (7/6)*l + O(1)` now replaces `6/5` as the best proven explicit ceiling.
 | C_k | 5 | 19/3 | 15/2 | 9 | 10 | 207/19 | 47/4 | -- |
 
 `rho_4 = 5/3` improves the leading constant of the best proven bound on `j*(l)` from
