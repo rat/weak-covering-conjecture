@@ -18,6 +18,22 @@ before deciding whether either is worth deeper investment.
   of mod `3^l`, exact since reduction mod `3^r` only depends on the `r` largest chosen
   exponents). Includes its own sanity check against the full-modulus DP before trusting the
   shortcut. Run: `python3 shallow_cylinder_occupancy.py`.
+- `rollover_test.py` -- the decisive follow-up Gemini's independent review suggested for the
+  cylinder-occupancy pattern below: pushes `r` close to `l` (up to 13, kept memory-safe) at
+  several `l`, to check whether the pattern survives near full depth. It does not; see the
+  "Update" section below.
+- `mean_cost_per_residue.py` -- a second, unrelated decisive test, this one Gemini suggested for
+  the B1/B2 "Finding 0" question (see `notes/H-002.md`'s matching section): compares the MEAN
+  cost `E[A|z]` across residues to the already-known MAX cost `B*(l)=j*(l)+l`. Reuses the B1/B2/C2
+  subagent's own brute-force-validated joint (residue, cost) DP (`core.py`, kept in scratch, not
+  this repo); two more memory-efficient approaches were tried first and both failed for a real,
+  documented structural reason (see the script's own docstring), so this is capped to `l` up to
+  about 16 by memory, not the much larger range originally hoped for. Queued to run automatically
+  behind H-002's concurrent l=19 computation (`/home/rat/.claude/jobs/a8d2d60e/tmp/round24_queue.sh`,
+  not in this repo, references this script and `mpg4.py`'s k=10-13 rerun in sequence); results not
+  in yet as of this note. A preliminary observation from small-l validation (`l<=10`, not the
+  target range) is recorded in `notes/H-002.md`, not repeated here to avoid the exact
+  "mentioned in one place, forgotten" failure mode this project is trying to avoid.
 
 ## Headline finding (preliminary, not yet independently reviewed)
 
