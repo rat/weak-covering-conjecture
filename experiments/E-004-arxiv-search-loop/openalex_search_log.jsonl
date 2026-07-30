@@ -4,3 +4,9 @@
 {"ts": "2026-07-30T09:19:52", "source": "openalex", "label": "cites:W2972077893@p1", "params": {"filter": "cites:W2972077893", "per_page": 50, "page": 1}, "count": 141, "n": 50}
 {"ts": "2026-07-30T09:19:55", "source": "openalex", "label": "cites:W2972077893@p2", "params": {"filter": "cites:W2972077893", "per_page": 50, "page": 2}, "count": 141, "n": 50}
 {"ts": "2026-07-30T09:19:58", "source": "openalex", "label": "cites:W2972077893@p3", "params": {"filter": "cites:W2972077893", "per_page": 50, "page": 3}, "count": 141, "n": 41}
+{"ts": "2026-07-30T09:35:23", "source": "openalex", "label": "fulltext:\"Wirsching\" \"covering\"", "params": {"filter": "fulltext.search:\"Wirsching\" \"covering\"", "per_page": 12}, "count": 511, "n": 12}
+{"ts": "2026-07-30T09:35:25", "source": "openalex", "label": "fulltext:\"weak covering conjecture\" Collatz", "params": {"filter": "fulltext.search:\"weak covering conjecture\" Collatz", "per_page": 12}, "count": 0, "n": 0}
+{"ts": "2026-07-30T09:35:28", "source": "openalex", "label": "fulltext:\"predecessor density\" 3n+1", "params": {"filter": "fulltext.search:\"predecessor density\" 3n+1", "per_page": 12}, "count": 3, "n": 3}
+{"ts": "2026-07-30T09:35:31", "source": "openalex", "label": "fulltext:\"rank-dependent weight\" exponential sum", "params": {"filter": "fulltext.search:\"rank-dependent weight\" exponential sum", "per_page": 12}, "count": 5, "n": 5}
+{"ts": "2026-07-30T09:35:35", "source": "openalex", "label": "fulltext:\"Syracuse\" \"characteristic function\" \"3-adic\"", "params": {"filter": "fulltext.search:\"Syracuse\" \"characteristic function\" \"3-adic\"", "per_page": 12}, "count": 4, "n": 4}
+{"ts": "2026-07-30T09:36:00", "source": "openalex", "label": "search:Wirsching 3n+1 predecessor densities uniform distribution", "params": {"search": "Wirsching 3n+1 predecessor densities uniform distribution", "per_page": 8}, "count": 7, "n": 7}

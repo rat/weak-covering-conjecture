@@ -43,3 +43,31 @@
 {"ts": "2026-07-30T09:16:47", "query": "all:\"Collatz\" AND all:\"exponential sum\"", "start": 0, "max_results": 8, "total_returned": 0, "new_count": 0, "ids": []}
 {"ts": "2026-07-30T09:16:50", "query": "all:\"3x+1\" AND all:\"Fourier\"", "start": 0, "max_results": 8, "total_returned": 1, "new_count": 1, "ids": ["2010.12987v1"]}
 {"ts": "2026-07-30T09:16:53", "query": "all:\"2-adic\" AND all:\"powers of two\" AND all:distribution", "start": 0, "max_results": 8, "total_returned": 0, "new_count": 0, "ids": []}
+{"ts": "2026-07-30T09:32:01", "query": "all:\"relative value function\" AND all:\"average cost\" AND all:unbounded", "start": 0, "max_results": 6, "total_returned": 2, "new_count": 2, "ids": ["1609.08252v2", "2008.01644v7"]}
+{"ts": "2026-07-30T09:32:04", "query": "all:\"vanishing discount\" AND all:\"unbounded cost\"", "start": 0, "max_results": 6, "total_returned": 2, "new_count": 2, "ids": ["2001.01357v3", "1901.03374v1"]}
+{"ts": "2026-07-30T09:32:07", "query": "all:\"bias\" AND all:\"mean payoff\" AND all:\"finite horizon\" AND all:\"convergence rate\"", "start": 0, "max_results": 6, "total_returned": 0, "new_count": 0, "ids": []}
+{"ts": "2026-07-30T09:32:10", "query": "all:\"turnpike\" AND all:\"average cost\" AND all:\"rate of convergence\"", "start": 0, "max_results": 6, "total_returned": 0, "new_count": 0, "ids": []}
+{"ts": "2026-07-30T09:32:13", "query": "all:\"Poisson equation\" AND all:\"Markov decision\" AND all:\"unbounded solution\"", "start": 0, "max_results": 6, "total_returned": 0, "new_count": 0, "ids": []}
+{"ts": "2026-07-30T09:32:16", "query": "all:\"corrector\" AND all:\"stochastic homogenization\" AND all:\"rate of convergence\"", "start": 0, "max_results": 6, "total_returned": 3, "new_count": 3, "ids": ["2301.01267v2", "1507.06935v3", "1206.2601v4"]}
+{"ts": "2026-07-30T09:32:19", "query": "all:\"subadditive\" AND all:\"second order\" AND all:\"correction term\"", "start": 0, "max_results": 6, "total_returned": 0, "new_count": 0, "ids": []}
+{"ts": "2026-07-30T09:32:22", "query": "all:\"ergodic control\" AND all:\"non-compact\" AND all:\"growth of the potential\"", "start": 0, "max_results": 6, "total_returned": 0, "new_count": 0, "ids": []}
+{"ts": "2026-07-30T09:32:25", "query": "all:\"covering radius\" AND all:\"min-plus\"", "start": 0, "max_results": 6, "total_returned": 0, "new_count": 0, "ids": []}
+{"ts": "2026-07-30T09:32:28", "query": "all:\"max-plus\" AND all:\"eigenvector\" AND all:\"unbounded\" AND all:\"growth\"", "start": 0, "max_results": 6, "total_returned": 0, "new_count": 0, "ids": []}
+{"ts": "2026-07-30T09:32:31", "query": "all:\"value iteration\" AND all:\"sublinear\" AND all:\"correction\"", "start": 0, "max_results": 6, "total_returned": 0, "new_count": 0, "ids": []}
+{"ts": "2026-07-30T09:32:34", "query": "all:\"first passage\" AND all:\"tree\" AND all:\"logarithmic correction\" AND all:minimum", "start": 0, "max_results": 6, "total_returned": 0, "new_count": 0, "ids": []}
+{"ts": "2026-07-30T09:32:59", "query": "all:\"random energy model\" AND all:hierarchical", "start": 0, "max_results": 6, "total_returned": 6, "new_count": 6, "ids": ["0912.3634v3", "0712.4209v1", "1007.1531v2", "cond-mat/0002024v1", "1503.04064v1", "2007.03290v1"]}
+{"ts": "2026-07-30T09:33:02", "query": "all:\"spin glass\" AND all:\"ranked\" AND all:interaction", "start": 0, "max_results": 6, "total_returned": 6, "new_count": 6, "ids": ["cond-mat/0504561v1", "1503.07796v2", "0706.3558v2", "1002.2811v2", "1403.7370v2", "2504.08925v1"]}
+{"ts": "2026-07-30T09:33:05", "query": "all:\"plethysm\" AND all:\"exponential\"", "start": 0, "max_results": 6, "total_returned": 4, "new_count": 4, "ids": ["1006.4266v1", "2606.15891v1", "2605.01182v1", "2203.11930v1"]}
+{"ts": "2026-07-30T09:33:08", "query": "all:\"crystal basis\" AND all:\"weight function\" AND all:rank", "start": 0, "max_results": 6, "total_returned": 0, "new_count": 0, "ids": []}
+{"ts": "2026-07-30T09:33:11", "query": "all:\"RSK correspondence\" AND all:weighted", "start": 0, "max_results": 6, "total_returned": 6, "new_count": 6, "ids": ["2001.01867v2", "2203.00406v2", "1002.1509v2", "2506.21052v1", "1210.5126v2", "1408.5326v1"]}
+{"ts": "2026-07-30T09:33:14", "query": "all:\"vertex operator\" AND all:\"symmetric function\" AND all:sum", "start": 0, "max_results": 6, "total_returned": 6, "new_count": 6, "ids": ["1806.07776v3", "math/9901016v3", "1802.08977v1", "2606.22058v1", "1405.6303v6", "math/0601348v3"]}
+{"ts": "2026-07-30T09:33:17", "query": "all:\"Huffman\" AND all:\"position-dependent\"", "start": 0, "max_results": 6, "total_returned": 0, "new_count": 0, "ids": []}
+{"ts": "2026-07-30T09:33:20", "query": "all:\"priority encoding\"", "start": 0, "max_results": 6, "total_returned": 6, "new_count": 6, "ids": ["2601.20067v1", "1806.01443v1", "1712.03478v1", "1306.0785v3", "0809.0543v2", "2205.07000v1"]}
+{"ts": "2026-07-30T09:33:23", "query": "all:\"necklace\" AND all:\"non-uniform weight\"", "start": 0, "max_results": 6, "total_returned": 0, "new_count": 0, "ids": []}
+{"ts": "2026-07-30T09:33:26", "query": "all:\"runs and records\" AND all:modular", "start": 0, "max_results": 6, "total_returned": 0, "new_count": 0, "ids": []}
+{"ts": "2026-07-30T09:33:29", "query": "all:\"Zeckendorf\" AND all:\"cost\"", "start": 0, "max_results": 6, "total_returned": 0, "new_count": 0, "ids": []}
+{"ts": "2026-07-30T09:33:32", "query": "all:\"beta-expansion\" AND all:\"sorted\"", "start": 0, "max_results": 6, "total_returned": 0, "new_count": 0, "ids": []}
+{"ts": "2026-07-30T09:33:35", "query": "all:\"renewal theory\" AND all:\"rank-dependent\"", "start": 0, "max_results": 6, "total_returned": 0, "new_count": 0, "ids": []}
+{"ts": "2026-07-30T09:33:38", "query": "all:\"adaptive weight\" AND all:\"subset sum\"", "start": 0, "max_results": 6, "total_returned": 0, "new_count": 0, "ids": []}
+{"ts": "2026-07-30T09:33:41", "query": "all:\"order statistics\" AND all:\"finite field\"", "start": 0, "max_results": 6, "total_returned": 1, "new_count": 1, "ids": ["2606.08709v1"]}
+{"ts": "2026-07-30T09:33:44", "query": "all:\"context-dependent\" AND all:\"subset sum\"", "start": 0, "max_results": 6, "total_returned": 0, "new_count": 0, "ids": []}
