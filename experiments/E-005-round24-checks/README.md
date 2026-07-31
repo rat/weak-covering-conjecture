@@ -25,8 +25,10 @@ before deciding whether either is worth deeper investment.
 - `mean_cost_per_residue.py` -- a second, unrelated decisive test, this one Gemini suggested for
   the B1/B2 "Finding 0" question (see `notes/H-002.md`'s matching section): compares the MEAN
   cost `E[A|z]` across residues to the already-known MAX cost `B*(l)=j*(l)+l`. Reuses the B1/B2/C2
-  subagent's own brute-force-validated joint (residue, cost) DP (`core.py`, kept in scratch, not
-  this repo); two more memory-efficient approaches were tried first and both failed for a real,
+  subagent's own brute-force-validated joint (residue, cost) DP (`core.py`, copied into this
+  directory 2026-07-30's critique round -- it originally lived only in a session-scoped scratch
+  path, a real reproducibility gap, now fixed); two more memory-efficient approaches were tried
+  first and both failed for a real,
   documented structural reason (see the script's own docstring), so this is capped to `l` up to
   about 16 by memory, not the much larger range originally hoped for. Queued to run automatically
   behind H-002's concurrent l=19 computation (`/home/rat/.claude/jobs/a8d2d60e/tmp/round24_queue.sh`,

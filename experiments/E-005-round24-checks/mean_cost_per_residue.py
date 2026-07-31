@@ -30,8 +30,7 @@ import time
 import json
 import numpy as np
 
-sys.path.insert(0, "/tmp/claude-1000/-home-rat-weak-covering-conjecture/a8d2d60e-9133-436f-a13c-a0fb27ee7018/scratchpad/wcc")
-import core  # noqa: E402
+import core  # local copy, same directory (critique round, 2026-07-30: this used to import from a session-scoped scratch path that would not survive)
 
 JSTAR_FULL = {1: 1, 2: 4, 3: 6, 4: 7, 5: 9, 6: 10, 7: 11, 8: 12, 9: 13, 10: 15, 11: 16,
               12: 17, 13: 18, 14: 19, 15: 20, 16: 20, 17: 21, 18: 22, 19: 23, 20: 24,
