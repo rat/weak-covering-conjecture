@@ -1,57 +1,48 @@
-# E-006: attempted numerical phase-locking check for H-006's Conjecture 3
+# E-006: numerical evaluation of phi(t) near t=0, for H-006's Conjecture 3
 
-## What this tests
+## Attempt 1: Fourier inversion (phi_eval.py, sweep.py) -- FAILED, genuinely
 
-H-006's Conjecture 3 (see `notes/H-006.md`) needs `phi(z_l)/phi_0(z_l) -> c > 0` along
-`z_l ~ l*3^{-l}`. A proposed mechanism (Codex, round 27) suggested the ratio might
-"phase-lock" along this specific sequence even though it need not converge off-sequence.
-This experiment attempts a cheap numerical check: evaluate `phi(t_l)` for `t_l = l*3^{-l}`
-and several `l`, and look for a stable pattern.
+`phi(t)` was evaluated via Fourier inversion of its known exact characteristic
+function, using `mpmath` arbitrary precision. Validated correctly against a real,
+solver-independent fact (`phi(0.3) = phi(0.7)`, since `X` is symmetric about 1/2).
+But for `t_l = l*3^{-l}` with `l >= 8`, the oscillatory integral does not converge
+under `mpmath.quad`: doubling the cutoff changes the answer by orders of magnitude
+and even flips its sign, which is impossible for a density. `mpmath.quadosc` (the
+dedicated oscillatory-integral routine) was also tried and also failed. This is a
+genuine numerical-analysis failure of generic quadrature, not a "needs more time"
+problem.
 
-## What was built
+## Attempt 2: real-variable saddlepoint (saddlepoint.py) -- WORKS
 
-`phi_eval.py` implements `phi(t)` via Fourier inversion of the known exact characteristic
-function `phihat(xi) = exp(i*xi/2) * prod_{r=1}^N sin(xi/3^r)/(xi/3^r)` (`phi` is the density
-of `X = sum_r U_r/3^r`, `U_r` iid Uniform`[0,2]`), using `mpmath` arbitrary-precision
-arithmetic. `sweep.py` sweeps `l` and compares `ln(phi(t_l))` against the leading-order
-saddle-point exponent `-beta*ln(1/t_l)^2`, `beta = 1/(2*ln 3)` (derived by hand from the
-truncated equation `phi'(t) = (9/2)*phi(3t)` via the standard de Bruijn/Mahler-partition
-balance argument -- this is only the leading exponential order, not Berg-Kruppel's full
-`g_0` with its power-law and log-log correction terms, whose exact constants were not
-re-extracted from L-097 this session).
+Proposed by Codex (round 2 of the 2026-07-31 four-round "where are we stuck"
+consultation, `/home/rat/.claude/jobs/a8d2d60e/tmp/codex_stuck_round2_out.txt`).
+Rather than inverting the characteristic function by oscillatory integration, solve
+the real saddle equation `M(s) = s*t` (a monotone real root-find; `M(s) := -s*K'(s)`,
+`K := log` of the Laplace transform, `M(s) = sum_r m(s/3^r)`, `m(x) = 1-2x/(e^{2x}-1)`),
+then evaluate the (real, rapidly convergent) saddlepoint density formula
+`phi(t) ~ s/sqrt(2*pi*V(s)) * exp(K(s)+s*t)` at the solved `s`. No oscillation
+anywhere: `K`, `M`, and `V` (the second-cumulant analogue) are each sums of a
+smooth, rapidly-decaying real function over `r=1,2,3,...`, truncated once terms
+underflow below working precision.
 
-## Result: the method is correctly implemented but does not converge for small t
+**Validated two ways before trusting small-t results**:
+1. `L(0) = exp(K(0)) = 1` (normalization), holds exactly.
+2. At moderate `t` (0.1-0.4), where the Fourier method from attempt 1 still worked,
+   the two independent methods agree to within the saddlepoint approximation's own
+   expected `O(1/l)`-type error (e.g. `t=0.3`: Fourier gives `1.4867` [trusted, exact
+   up to quadrature precision], saddlepoint gives `1.5093`, a ~1.5% difference,
+   consistent with a genuine asymptotic approximation at a small effective scale).
 
-**Validation passed**: `phi(0.3) == phi(0.7)` to all computed digits, confirming the
-characteristic-function/Fourier-inversion setup is correct (`X` is symmetric about 1/2,
-a real, checkable fact, independent of any solver).
-
-**But the small-t evaluation fails, genuinely, not just slowly**: for `l >= 8`
-(`t_l ~ 1.2e-3`), doubling the integration cutoff `xi_max` does not converge the integral;
-values swing by orders of magnitude and change sign, which is impossible for a density.
-Switching to `mpmath.quadosc` (its dedicated oscillatory-integral routine) also produced a
-result inconsistent with the expected order of magnitude. This is not a "needs more time"
-problem: generic numerical quadrature, even at high working precision, is not resolving
-this oscillatory integral reliably once the target value becomes as small as the log^2
-decay predicts (astronomic cancellation between an O(1)-amplitude oscillating integrand and
-a target value as small as `1e-9` to `1e-50`+ for the `l` range of interest).
-
-## Why, and what would actually work
-
-This confirms the assessment already recorded in `notes/H-006.md`: evaluating this family
-of atomic functions reliably near a boundary point is a real numerical-analysis problem,
-not a quick script. Volk (L-099) wrote an entire dedicated paper solving exactly this for
-the simpler `a=2` case, using Taylor-expansion/Horner-scheme evaluation at dyadic points
-derived from the function's exact piecewise-polynomial structure, not generic quadrature.
-The analogous approach here would use the exact rational polynomial-piece construction
-established in Kabaya-Iri (1987, L-105, Theorem 2/Lemma 4) and Berg-Kruppel (L-096): `phi`
-is polynomial (with rational coefficients, computable via a finite recursive construction)
-on each interval of the complement of the underlying Cantor set, and `t_l` for large `l`
-lies deep in this recursive interval hierarchy. Building that construction correctly for
-`alpha=2/3` is a real, bounded implementation task, not attempted here.
+**Then swept `l=3..40` (`t_l = l*3^{-l}`) with no failures at all**: the sequence
+`ln(phi(t_l))` decreases smoothly and monotonically (values from `-0.98` at `l=3` to
+`-804` at `l=40`), with no sign flips, no cutoff-dependence, no instability of any
+kind -- the opposite of attempt 1's behavior. `l=40` corresponds to `t_l ~ 3.3e-18`,
+far beyond anything attempt 1 could reach even in principle.
 
 ## Status
 
-Deferred, not resolved. If picked up again: implement the exact polynomial-piece recursion
-with `fractions.Fraction` (exact rational arithmetic, no precision/convergence concerns) as
-described above, rather than any form of numerical quadrature.
+This is now a working, validated, arbitrary-depth evaluator for `phi(t_l)`. It does
+NOT yet, by itself, test Conjecture 3 (which needs comparison against Berg-Kruppel's
+specific `phi_0` normalization, not just an internally-consistent asymptotic for
+`phi`). Fed the concrete numbers back to Codex in round 3 to identify the precise
+next comparison. See `notes/H-006.md` for how this connects to the standing gap.
