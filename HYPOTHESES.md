@@ -17,6 +17,36 @@ Last updated: 2026-07-30 (H-003's round 24: 9 candidate directions from gpt-5.6-
 
 ## Notes
 
+- **2026-07-30: full critique round (Rule 8), covering the entire accumulated project state, not
+  just the latest diff, per the researcher's explicit request ("vamos ver se até agora temos um
+  furo na lógica atual").** An Opus subagent, fresh context, read `HYPOTHESES.md` in full, every
+  `notes/H-XXX.md` file, `literature/INDEX.md`, all experiment READMEs, `git log`, and
+  spot-checked six citations against primary sources. 22 findings, ranked by severity. Two were
+  genuine mathematical/logical errors, independently re-verified by hand before accepting: (1)
+  H-009's central optimization formula had the wrong exponent (`l^{p/(p+1)}` instead of the
+  correct `l^{1/(p+1)}`), which reversed its own conclusion (the accessible data, correctly read,
+  suggests an exponent AT OR ABOVE 1/2, not below it); (2) the C1 conditional-bridge comparisons
+  in H-002 mixed Tao's A/B-cost scale with the j-scale, a category error of exactly one `l`, which
+  also reversed part of the conclusion (the density-one conditional rate is actually smaller than
+  the proven unconditional bound on a corrected comparison, though still conditional and weaker in
+  kind). Both fixed, with the corrected math independently re-derived by hand and/or numerically
+  before any fix was applied (Rule 8c). Also fixed: a "corrected in both places it appeared" claim
+  that had actually reached only one of three places; several "theorem"/"proven" labels applied to
+  results only checked at small, finite values (Rule 10b); a meta-claim from round 6 ("any
+  framework must hit this wall") directly refuted by this project's own rounds 19-21; two swapped
+  citation IDs; a stale status header; two uncommitted certificate files; a false claim that
+  checkpointing protected the l=23 run (it was never triggered, per an earlier, unactioned
+  critique finding -- Rule 8b's named failure mode, confirmed occurring at least five times in
+  this record); a stale "final technical report" describing l=21-era results; an unverified
+  back-of-envelope estimate (`l~40-42`) that had been stated as if derived; and a session-scoped
+  scratch-path dependency in two E-005 scripts (now copied into the repo). Not yet acted on (lower
+  severity, deferred): `literature/INDEX.md`'s table has ~35 rows missing a column; `notes/H-003.md`'s
+  H-003 row is a single ~9,000-word table cell overdue for the `HYPOTHESES-archive.md` split Rule
+  7/14 describes; Rule 3 (no em dashes) is violated in roughly 80 places across the notes; `rho_9`
+  through `rho_13` never got the `dcap` action-cap robustness check that `rho_4`-`rho_8` got (now
+  flagged explicitly in `experiments/E-003-mpg-cylinder/README.md`, not silently carried). No
+  computed number was found wrong anywhere; every failure was in the layer above the computation
+  (summaries that did not follow their own corrections, and labels stronger than the evidence).
 - 2026-07-29: H-006 given a real tractability scoping pass (not another literature-existence
   check). Wirsching's 2003 paper re-fetched from the Bielefeld mirror and re-read line by line;
   full write-up in literature/notes/L-002.md ("Deep read" section). Three findings worth
