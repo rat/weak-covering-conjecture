@@ -46,7 +46,7 @@ so treat `rho_k -> log_4(3)` as an unproven extrapolation, not an established fa
 | k | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 |
 |---|---|---|---|---|---|---|---|----|----|----|----|
 | rho_k | 2 | 5/3 | 3/2 | 3/2 | 7/5 | 25/19 | 5/4 | 11/9 | 6/5 | 7/6 | 119/104 |
-| C_k | 5 | 19/3 | 15/2 | 9 | 10 | 207/19 | 47/4 | 115/9 | 69/5 | pending | pending |
+| C_k | 5 | 19/3 | 15/2 | 9 | 10 | 207/19 | 47/4 | 115/9 | 69/5 | 44/3 | pending |
 
 **Update, 2026-07-30: `rho_13 = 119/104 = 1.144231`, tight, `n=1062882`.** Same solver, ran
 ~5h30m of wall time (k=12 and k=13 launched together as `mpg4.py 12 13`). `j*(l) <= (119/104)*l
