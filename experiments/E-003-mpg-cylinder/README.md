@@ -56,12 +56,18 @@ min h`) was computed internally but never saved, exactly the loss H-009 warned a
 day: `mpg4.py`'s `solve()` now returns `Ck`, `h`, and `lam`, and its `__main__` block saves a
 full certificate (policy + potentials, as exact fractions) to `certificate_k<K>.json` on every
 run. Re-run under the patched script: `C_10=115/9`, `C_11=69/5` (both landed in the table above,
-re-deriving the already-known `rho_10`, `rho_11` values as an incidental cross-check); `k=12,13`
-still running as of this note (`certificate_k10.json`, `certificate_k11.json` in this directory).
-**Known gap, flagged not silently carried**: the `dcap` (action-cap) robustness check documented
-below for `rho_4`-`rho_8` was never repeated for `rho_9`-`rho_13`; those values are trusted on the
-strength of the solver's own matching min-max self-certificate alone, not an independent
-cap-robustness sweep.
+re-deriving the already-known `rho_10`, `rho_11` values as an incidental cross-check); `k=12` done
+2026-07-30 (`C_12=44/3`), `k=13` still running as of this note (`certificate_k10.json`,
+`certificate_k11.json`, `certificate_k12.json` in this directory).
+
+**`dcap` (action-cap) robustness, partially checked, 2026-07-30**: re-ran `k=9` at `dcap=15,25,40`
+and `k=10` at `dcap=15` (alongside its already-recorded `dcap=40` value); both match exactly
+(`rho_9=5/4`, `rho_10=11/9`) at every cap tried, all well below the default `dcap=40`. `k=11,12,13`
+not re-checked at an alternate cap (each re-solve costs comparable time to the original run --
+minutes to hours -- and this was judged not worth delaying the `k=13` computation in progress for);
+their `rho_k`/`C_k` values are trusted on the solver's own matching min-max self-certificate alone,
+consistent with `k=9,10`'s confirmed robustness but not independently re-verified at a different
+cap. Flagged, not silently carried; revisit if resources allow.
 
 **Update, 2026-07-30 (earlier): `rho_12 = 7/6 = 1.1667`, tight, `n=354294`.** Computed by
 `mpg4.py`'s nested Howard solver (the main, cross-checked solver), matching min-policy
