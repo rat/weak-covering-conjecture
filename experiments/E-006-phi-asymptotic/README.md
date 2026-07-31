@@ -39,10 +39,50 @@ underflow below working precision.
 kind -- the opposite of attempt 1's behavior. `l=40` corresponds to `t_l ~ 3.3e-18`,
 far beyond anything attempt 1 could reach even in principle.
 
+## Attempt 3: derive phi_0's exponents from first principles, then test the ratio directly
+
+Round 3 of the same Codex consultation derived `gamma`, `delta`, `beta` (the exponents
+in `phi_0(t) ~ t^gamma*(-ln t)^delta*exp(-beta*ln^2(t/(-ln t)))`) directly from the
+SAME saddlepoint expansion validated in attempt 2, by re-expressing the boxed
+`l`-formula as a function of `t`. **`beta = 1/(2*ln 3) = 0.45511961...` matched an
+independent hand-derived estimate (de Bruijn/Mahler-partition balance argument) done
+earlier in this session, exactly** -- a real cross-check, not a coincidence.
+
+`conjecture3_test.py` computes `phi_0(t_l)` with these derived exponents and the
+ratio `R(l) := phi(t_l)/phi_0(t_l)` for `l=5..500` (`phi(t_l)` from the attempt-2
+saddlepoint evaluator, `phi_0(t_l)` needing no external source at all -- Berg-
+Kruppel's paper was never actually needed once the exponents were re-derived).
+
+**Result**: `R(l)` decreases from `0.20996` (`l=5`) to a minimum `0.18272` near
+`l=19-20`, then increases steadily out to `0.19953` at `l=500`, with no sign of
+leveling off in the directly-computed range. Root-finding became unreliable past
+`l=500` in the time available (an implementation limitation, not evidence about the
+math).
+
+**Round 4**: fed this exact data back to Codex, asking for a final, honest
+assessment (not a confident-sounding guess). Codex proposed that the leading omitted
+correction should be a quadratic-in-`log L` polynomial divided by `L`
+(`log R = log C + (A2*x^2+A1*x+A0)/L`, `x := log L`, `L := -log t`), fit it using only
+`l in {20,40,60,80}`, and predicted: (a) the dip-then-rise shape is exactly what this
+correction structure produces, with a turning point at `L ~ 18.2`; (b) an
+out-of-sample prediction `R_500 ~ 0.19951` (actual: `0.19953`); (c) a limiting
+constant `C ~ 0.2050`.
+
+**Independently re-verified (`fit_check.py`), not taken on faith**: refit the exact
+same model on this project's own data, reproducing `C=0.204954`, and confirming both
+claims to within rounding: out-of-sample `R_500` error `0.0127%` (Codex claimed
+`~0.014%`), and the turning point (correctly derived via the chain rule accounting
+for both the explicit `1/L` and the `x=log L` dependence, not a naive
+`d/dx=0` shortcut) at `L=18.19`, matching the observed minimum (`L_19=17.93`,
+`L_20=18.98`) almost exactly.
+
 ## Status
 
-This is now a working, validated, arbitrary-depth evaluator for `phi(t_l)`. It does
-NOT yet, by itself, test Conjecture 3 (which needs comparison against Berg-Kruppel's
-specific `phi_0` normalization, not just an internally-consistent asymptotic for
-`phi`). Fed the concrete numbers back to Codex in round 3 to identify the precise
-next comparison. See `notes/H-006.md` for how this connects to the standing gap.
+**Strong, independently-verified numerical evidence supporting Conjecture 3's
+ratio-convergence claim**, with a specific candidate limit `C ~ 0.205`. This is
+NOT a proof (Codex's own assessment: "numerically supported, not contradicted --
+but not proved by this data"; no finite range rules out an arbitrarily slow
+divergence engineered to mimic convergence through `l=500`). What would actually
+settle it: an analytic next-order saddlepoint expansion with a controlled
+remainder term, `O((log L)^4/L^2)`, not attempted here. See `notes/H-006.md` for
+the full record and how this connects to the standing gap.

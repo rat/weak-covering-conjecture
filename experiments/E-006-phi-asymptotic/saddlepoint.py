@@ -92,7 +92,7 @@ def V_series(s, terms=200):
     return total
 
 
-def solve_saddle(t, terms=200):
+def solve_saddle(t, terms=200, guess=None):
     """Solve M(s) = s*t for s > 0 (monotone real root-find)."""
     def F(s):
         return M_series(s, terms) - s * t
@@ -100,13 +100,14 @@ def solve_saddle(t, terms=200):
     # bracket: M(s) -> 0 as s->0, M(s) -> infinity slowly (like log_3(s)) as s->infinity;
     # s*t grows without bound, so F(s) = M(s)-s*t goes from ~0 (s small) to -infinity
     # (s large); we want the root, use mpmath's findroot with a decent starting guess.
-    guess = 1 / t if t > 0 else mp.mpf(1)
+    if guess is None:
+        guess = 1 / t if t > 0 else mp.mpf(1)
     return mp.findroot(F, guess)
 
 
-def phi_saddle(t, terms=200):
+def phi_saddle(t, terms=200, guess=None):
     t = mp.mpf(t)
-    s = solve_saddle(t, terms)
+    s = solve_saddle(t, terms, guess=guess)
     K_s = K_series(s, terms)
     V_s = V_series(s, terms)
     P = s / mp.sqrt(2 * mp.pi * V_s) * mp.e ** (K_s + s * t)
