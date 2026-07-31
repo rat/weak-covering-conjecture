@@ -3,16 +3,18 @@
 Independent statistical reverification of the e(l) growth-model comparison
 from the previous paper (Section 7, Empirical Result 7.2), for H-001.
 
-IMPORTANT FRAMING: H-001's computational extension (E-001) reached two levels past the previous
-paper's table: l=21 (fits in RAM after a memory-ceiling fix) and l=22 (required 500GiB of swap
-added to this machine specifically for this run, ~3h with swap I/O as the bottleneck). So this
-is mostly an independent, from-scratch statistical verification of the previous paper's finding
-using the SAME l=1..20 data (recomputed and cross-checked independently in E-001, not just
-copied from the previous paper), done with more rigor than the previous paper's text reports
-(explicit CIs and LOOCV in addition to AIC/BIC, as the research brief originally asked for),
-plus two genuinely new data points (l=21, l=22) folded into the same comparison below.
+IMPORTANT FRAMING: H-001's computational extension (E-001) reached three levels past the previous
+paper's table: l=21 (fits in RAM after a memory-ceiling fix), l=22 (required 500GiB of swap
+added to this machine specifically for this run, ~3h with swap I/O as the bottleneck), and l=23
+(~263GiB state, ~104h; docstring corrected 2026-07-30, critique round, it previously described
+only l=21/l=22 and was stale by two levels). So this is mostly an independent, from-scratch
+statistical verification of the previous paper's finding using the SAME l=1..20 data (recomputed
+and cross-checked independently in E-001, not just copied from the previous paper), done with
+more rigor than the previous paper's text reports (explicit CIs and LOOCV in addition to AIC/BIC,
+as the research brief originally asked for), plus three genuinely new data points (l=21, l=22,
+l=23) folded into the same comparison below.
 
-Models fit to e(l) = j*(l) - l*log_4(3), on the tail l>=10 (l=10..22 with the new points, n=13;
+Models fit to e(l) = j*(l) - l*log_4(3), on the tail l>=10 (l=10..23 with the new points, n=14;
 the previous paper used l=10..20, n=11; the range choice, not the endpoint, is what matches the
 previous paper's, avoiding small-l transient behavior):
   1. constant:     e(l) = c
