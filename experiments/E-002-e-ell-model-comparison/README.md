@@ -1,4 +1,4 @@
-# E-002 — Independent statistical reverification of the e(l) growth-model comparison (H-001)
+# E-002: Independent statistical reverification of the e(l) growth-model comparison (H-001)
 
 Related hypothesis: H-001 (`notes/H-001.md`).
 

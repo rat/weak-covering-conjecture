@@ -71,7 +71,7 @@ Last updated: 2026-07-30 (H-003's round 24: 9 candidate directions from gpt-5.6-
   tooling itself (verified correct as an algebraic reformulation, exact match on l=2/l=3 ground
   truth) was independently found, and Gemini itself agreed on cross-examination, to collapse into
   the same S(t) obstruction round 6 already proved general, and to suffer the same second-moment
-  barrier this project's own earlier L2-decay test already found — no new leverage on H-003
+  barrier this project's own earlier L2-decay test already found, no new leverage on H-003
   either. Both notes/H-003.md and notes/H-004.md carry the full corrected account.
 - 2026-07-28: fresh critique round on H-004 (post l=3 stress test) caught a real, confirmed
   citation error in the same-day "j=l boundary" reverification: it misread Wirsching's covering-

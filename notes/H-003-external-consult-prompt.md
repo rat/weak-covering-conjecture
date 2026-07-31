@@ -71,14 +71,14 @@ j=2: image = {1,2,5,7} mod 9).
 
 ## The four attempts, all self-authorized within one AI session, none independently checked
 
-**Attempt 1 — Bajnok's sumset/critical-number survey** (B. Bajnok, arXiv:1512.03038, general
+**Attempt 1: Bajnok's sumset/critical-number survey** (B. Bajnok, arXiv:1512.03038, general
 theory of h-fold/restricted/signed sumsets in finite abelian groups and their "critical numbers").
 Verdict: does not apply. Every sumset type in that theory requires a chosen element's contribution
 to be independent of what else was chosen (order/rank-independent); R_{j,k}'s value is provably
 rank-dependent, as shown above. Also, "critical number" is a worst-case-over-all-subsets quantity,
 a different kind of question than j*(l) (behavior of one specific structured family).
 
-**Attempt 2 — Direct polynomial method / Combinatorial Nullstellensatz / Erdős–Heilbronn**, applied
+**Attempt 2: Direct polynomial method / Combinatorial Nullstellensatz / Erdős-Heilbronn**, applied
 directly to Z/3^l Z. Verdict: blocked by two independent obstacles. (a) Z/3^l Z is not an integral
 domain for l>=2 (has zero divisors, e.g. 3 * 3^(l-1) = 0), which breaks the "a nonzero degree-d
 polynomial has at most d roots" lemma the Combinatorial Nullstellensatz's proof needs (verified
@@ -89,26 +89,26 @@ in any ring. Reducing to F_3 loses the fine mod-3^l structure the question is ac
 lifting to the 3-adic integers Z_3 sidesteps the ring issue but turns the question into a density
 statement (Tao's beta=1 framing), not a new angle.
 
-**Attempt 3 — Reframe on the "ordered exponent domain"** instead of inside Z/3^l Z: work with the
+**Attempt 3: Reframe on the "ordered exponent domain"** instead of inside Z/3^l Z: work with the
 sequence (a_0,...,a_l) itself (which lives in an honestly ordered set of integers before any
 reduction mod 3^l), and only map into Z/3^l Z at the final evaluation step. Verdict: this
-collapses to the same object as the original definition — R_{j,k} was never an "unordered set,
+collapses to the same object as the original definition. R_{j,k} was never an "unordered set,
 then sorted" construction to begin with; the descending-chain constraint a_0 > a_1 > ... > a_l IS
 the original definition, present from the start. There is no separate symmetric/unordered version
 of the problem underneath for a Vandermonde-style symmetry-breaking device to add value to; the
 reframing just re-derives the same explicit map on the same explicit domain the project already
 computes directly by brute force.
 
-**Attempt 4 — Character sums / Ramanujan sums** (J. Li & D. Wan, "Counting Subset Sums of Finite
+**Attempt 4: Character sums / Ramanujan sums** (J. Li & D. Wan, "Counting Subset Sums of Finite
 Abelian Groups," https://www.math.uci.edu/~dwan/liwan4.pdf), which natively handle Z/p^k Z
 (prime-power moduli) without any field requirement, unlike attempts 2-3. Setting up the standard
 Fourier/character decomposition N(c) = (1/n) * sum_t e^{-2pi*i*t*c/n} * S(t) for the counting
 function is unconditionally valid (verified numerically for l=2,j=2, matching direct enumeration
-exactly) — this is a genuinely different, more promising outcome than attempts 2-3, which failed
+exactly). This is a genuinely different, more promising outcome than attempts 2-3, which failed
 to even produce a valid object to work with. BUT: Li-Wan's specific closed-form evaluation of
 their analogous sum requires the summed elements to be a generic/symmetric subset of the whole
 group, which R_{j,k}'s rank-coupled terms are not (same core obstruction, restated in the
-character-sum setting) — no closed form for S(t) was found. The natural fallback (compute S(t)
+character-sum setting). No closed form for S(t) was found. The natural fallback (compute S(t)
 directly via a recursive process) turns out to be structurally the same cost as the DP already
 used to brute-force the answer: no shortcut. One specific, unpursued sub-lead was flagged: 2 is
 verified (for l=1..7, and provably in general via lifting-the-exponent) to be a primitive root
@@ -137,5 +137,5 @@ resolved either way.
    specific base-2-mod-3^l primitive-root structure connects to known results on digit expansions
    or beta-expansions.
 3. Please flag clearly which of your own suggestions are "worth serious investment" versus
-   "speculative, low-confidence, but worth a quick look" — I don't want another round of
+   "speculative, low-confidence, but worth a quick look." I don't want another round of
    confident-sounding dead ends, I'd rather know your actual confidence level per idea.

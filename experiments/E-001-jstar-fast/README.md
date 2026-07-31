@@ -1,4 +1,4 @@
-# E-001 — Fast reimplementation of the j*(l) covering computation (H-001)
+# E-001: Fast reimplementation of the j*(l) covering computation (H-001)
 
 Rust reimplementation of `experiment_wcc.py` (E-098, previous project): computes j*(l), the
 smallest j such that R_{j-1,j} covers all invertible residues mod 3^l, using a native `Vec<u64>`
