@@ -1,6 +1,16 @@
 # H-001 technical report: reimplementation and honest benchmark of the j*(l) covering computation
 
-2026-07-22. Renato Augusto Tavares. Related: `HYPOTHESES.md` (H-001, H-002),
+> **STALE, 2026-07-30 (critique round): this report describes results as of l=21 and is now
+> factually wrong about the project's headline computational result.** It states "Part A reached
+> exactly one level past the previous paper's table" and "l=22 is not reachable on this hardware,
+> not a software problem" -- both false as of 2026-07-27/28: l=22 (j*(22)=26) and l=23 (j*(23)=27)
+> were both successfully computed on this same hardware (with added swap). See `HYPOTHESES.md`'s
+> H-001 row and `notes/H-001.md` for the current, correct state. A full rewrite of this report is
+> still pending; do not cite or rely on this file's Part A conclusions or its statistics (dAIC,
+> p-value, increment counts) until that happens, use `HYPOTHESES.md` / `notes/H-001.md` /
+> `experiments/E-002-.../README.md` instead.
+
+2026-07-22 (superseded, see notice above). Renato Augusto Tavares. Related: `HYPOTHESES.md` (H-001, H-002),
 `notes/H-001.md`, `experiments/E-001-jstar-fast/`, `experiments/E-002-e-ell-model-comparison/`.
 
 ## What this report covers
