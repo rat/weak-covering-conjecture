@@ -1,6 +1,6 @@
 # Hypotheses
 
-Last updated: 2026-07-31 (H-003 round 26: 56 researcher-supplied papers triaged, one (Okounkov-Reshetikhin) motivated a genuine new free-fermion/determinantal question for S(t), sent to Codex and closed with a real, independently-verified proof that it doesn't bypass the obstruction, a new technique class rigorously ruled out; H-002/H-006/H-008/H-010 also given real follow-up passes; no new bound on j*(l); l=24 remains deferred, ready to relaunch once H-009's k=14 rerun finishes)
+Last updated: 2026-07-31 (H-006 deep dive: tracked down and read in full, primary-source, the actual paper Conjecture 3's premise comes from (Berg-Kruppel 1998, ZAA 17:159-181) plus 3 more Berg-Kruppel/Volk papers the researcher supplied directly; confirmed, from the authors' own words, that Conjecture 3 was never proven or even formally conjectured by its originators, only "expected"; 6 papers in this family now read in full, none closes the gap, 4 candidates remain unread. Also this session: H-003 round 26 (free-fermion/determinantal route to S(t) rigorously closed via a verified Codex derivation), automated + manual keyword literature searches for GAP A/B/C (Codex's 27-term list, real new citations found, none resolving anything), H-001's l=24 launched then killed (severe swap thrashing alongside H-009's k=14), queued to relaunch once k=14 finishes. No new bound on j*(l).)
 
 | ID | Title | Status | Impact | One-line summary | Detail | Opened | Closed |
 |----|-------|--------|--------|-------------------|--------|--------|--------|
