@@ -55,7 +55,8 @@ DATA = [
 # fits in RAM (~26.8 GiB); l=22's does not (~84.0 GiB), so l=22 required swap (500GiB added to
 # this machine specifically for this run) and took ~10749s (~3h) with swap I/O as the bottleneck,
 # versus ~748s for l=21 without swap. l=23 needed ~263GiB and took ~375615s (~104h) with
-# checkpoint/resume protecting the run across an oomd kill; j*(23)=27 came after three very close
+# checkpoint/resume in place but never actually triggered (this run had no interruption; the oomd
+# kill it guarded against hit the earlier, uncheckpointed attempt); j*(23)=27 came after three very close
 # non-covering attempts (j=24 missing 9,558,755 of 62,762,119,218; j=25 missing 34,055; j=26
 # missing only 2). No independent cross-check exists for l=21, l=22 or l=23 (the brute-force
 # method is only tractable to l<=4); confidence rests on exact agreement with the previous paper

@@ -8,8 +8,12 @@ The computational extension (E-001) reached three levels past the previous paper
 (j*(21)=25, fits in RAM after a memory-ceiling fix), l=22 (j*(22)=26, required 500GiB of swap
 added to this machine specifically for this run; took ~10749s / ~3h with swap I/O as the
 bottleneck, versus ~748s for l=21 without swap), and l=23 (j*(23)=27, ~263GiB state, ~375615s /
-~104h with checkpoint/resume protecting the run across an interruption; see notes/H-001.md for
-the full story, including three successive near-misses on the way to j=27). So this is mostly an
+~104h. **Correction, 2026-07-30 (critique round)**: this successful run had no interruption, so
+checkpoint/resume was never actually exercised, per H-001's own 2026-07-28 critique round
+(`notes/H-001.md`, "checkpoint confirmed inert at l=23"). The checkpointing existed to guard
+against the oomd kill that hit the FIRST l=23 attempt, before this run. See notes/H-001.md for
+the full story, including three successive near-misses on the way to j=27). So
+this is mostly an
 independent, from-scratch statistical verification of the previous paper's finding (Section 7,
 Empirical Result 7.2) using the same l=1..20 data (recomputed and cross-checked independently in
 E-001), with more rigor than the previous paper's text reports (explicit 95% confidence intervals
@@ -24,10 +28,18 @@ square-root, slow-linear.
 
 **With l=23 added, the plateau-frequency test crosses the conventional 0.05 threshold for the
 first time.** p=0.0426 (down from 0.052 with l=22, 0.062 with l=21, 0.075 with neither), on 1
-observed plateau in 22 increments. Per this file's own caveat below, treat this as "the
-observed increment pattern is less consistent with a constant-e(l) source than a conventional
-significance cutoff would tolerate," not as a formal p<0.05 result in the classical sense, since
-e(l) is deterministic, not sampled. Stabilization is disfavored even more sharply on the
+observed plateau in 22 increments. **This p-value pools all 22 increments, l=1..23, including the
+steep l=1..9 region that the model comparison itself discards** (flagged in H-001's own
+2026-07-28 critique round, `notes/H-001.md`, and never actually surfaced here until this
+correction, 2026-07-30, critique round -- exactly the Rule 8b failure mode this project names as
+its own most-validated lesson). Restricting to the same tail the model comparison actually uses
+(13 increments, still 1 observed plateau) gives **p ~ 0.22**, well above the conventional
+threshold. Both numbers are real and both are reported here now, side by side, rather than
+headlining only the pooled figure: state the tail-only number alongside the pooled one whenever
+this result is cited, per that critique round's own recommendation. Per this file's own caveat
+below, treat either as "the observed increment pattern is [more/less] consistent with a
+constant-e(l) source than a conventional significance cutoff would tolerate," not as a formal
+p<0.05 result in the classical sense, since e(l) is deterministic, not sampled. Stabilization is disfavored even more sharply on the
 information-criterion side too: ΔAIC=16.09, ΔBIC=15.45 (up from ΔAIC=11.90/ΔBIC=11.33 with l=22,
 and ΔAIC=5.04/ΔBIC=4.64 with neither l=21 nor l=22). Every statistic added since l=21 has moved
 in the same direction; l=23 is the third point in a row to do so.
