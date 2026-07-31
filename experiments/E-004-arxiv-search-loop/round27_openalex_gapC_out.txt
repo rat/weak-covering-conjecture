@@ -1,0 +1,435 @@
+=== oaft: 'small deviations series independent positive random variables weights close to exponential' ===
+  2008 [W2092190966 https://doi.org/10.3103/s1055134408030024] Small deviations of series of independent positive random variables with weights close to exponential
+        А. А. Боровков, Pavel Ruzankin; Siberian Advances in Mathematics; cited_by=13
+        ABS: Let ξ, ξ0, ξ1, ... be independent identically distributed (i.i.d.) positive random variables. The present paper is a continuation of the article [1] in which the asymptotics of probabilities of small deviations of series S = Σ =0 ∞ a(j)ξ j was studied under different assumptions on the rate of decre
+  2015 [W2146512944 https://doi.org/10.1093/nar/gkv007] limma powers differential expression analyses for RNA-sequencing and microarray studies
+        Matthew E. Ritchie, Belinda Phipson, Di Wu; Nucleic Acids Research; cited_by=43738
+        ABS: limma is an R/Bioconductor software package that provides an integrated solution for analysing data from gene expression experiments. It contains rich features for handling complex experimental designs and for information borrowing to overcome the problem of small sample sizes. Over the past decade,
+  1998 [W2112796928 https://doi.org/10.1109/5.726791] Gradient-based learning applied to document recognition
+        Yann LeCun, Léon Bottou, Yoshua Bengio; Proceedings of the IEEE; cited_by=58790
+        ABS: Multilayer neural networks trained with the back-propagation algorithm constitute the best example of a successful gradient based learning technique. Given an appropriate network architecture, gradient-based learning algorithms can be used to synthesize a complex decision surface that can classify h
+  2003 [W1980458704 https://doi.org/10.1016/s0370-1573(03)00120-0] Cosmological constant—the weight of the vacuum
+        T Padmanabhan; Physics Reports; cited_by=3195
+  2006 [W2135838082 https://doi.org/10.1016/j.socnet.2006.08.003] Recent developments in exponential random graph (p*) models for social networks
+        Garry Robins, Tom A. B. Snijders, Peng Wang; Social Networks; cited_by=846
+  1997 [W2092583264 https://doi.org/10.1103/revmodphys.69.731] Random-matrix theory of quantum transport
+        C. W. J. Beenakker; Reviews of Modern Physics; cited_by=2552
+        ABS: This is a review of the statistical properties of the scattering matrix of a mesoscopic system. Two geometries are contrasted: A quantum dot and a disordered wire. The quantum dot is a confined region with a chaotic classical dynamics, which is coupled to two electron reservoirs via point contacts. 
+  2011 [W1837874438 https://doi.org/10.1111/j.1467-9868.2011.00777.x] An Explicit Link between Gaussian Fields and Gaussian Markov Random Fields: The Stochastic Partial Differential Equation Approach
+        Finn Lindgren, Håvard Rue, Johan Lindström; Journal of the Royal Statistical Society Series B (Statistical Methodology); cited_by=2766
+        ABS: Summary Continuously indexed Gaussian fields (GFs) are the most important ingredient in spatial statistical modelling and geostatistics. The specification through the covariance function gives an intuitive interpretation of the field properties. On the computational side, GFs are hampered with the b
+  2000 [W2156523753 https://doi.org/10.3758/bf03212979] The power law repealed: The case for an exponential law of practice
+        Andrew Heathcote, Scott Brown, D. J. K. Mewhort; Psychonomic Bulletin & Review; cited_by=752
+  2012 [W2077415351 https://doi.org/10.1371/journal.pone.0039504] A New Body Shape Index Predicts Mortality Hazard Independently of Body Mass Index
+        Nir Y. Krakauer, Jesse C. Krakauer; PLoS ONE; cited_by=1315
+        ABS: BACKGROUND: Obesity, typically quantified in terms of Body Mass Index (BMI) exceeding threshold values, is considered a leading cause of premature death worldwide. For given body size (BMI), it is recognized that risk is also affected by body shape, particularly as a marker of abdominal fat deposits
+  2017 [W2760894977 https://doi.org/10.3390/a10040114] Variable Selection in Time Series Forecasting Using Random Forests
+        Hristos Tyralis, Georgia Papacharalampous; Algorithms; cited_by=198
+        ABS: Time series forecasting using machine learning algorithms has gained popularity recently. Random forest is a machine learning algorithm implemented in time series forecasting; however, most of its forecasting properties have remained unexplored. Here we focus on assessing the performance of random f
+  1991 [W2102201073 https://doi.org/10.1214/aos/1176347963] Multivariate Adaptive Regression Splines
+        Jerome H. Friedman; The Annals of Statistics; cited_by=8096
+        ABS: A new method is presented for flexible regression modeling of high dimensional data. The model takes the form of an expansion in product spline basis functions, where the number of basis functions as well as the parameters associated with each one (product degree and knot locations) are automaticall
+  2008 [W2008640468 https://doi.org/10.1214/08-aoas191] A weakly informative default prior distribution for logistic and other regression models
+        Andrew Gelman, Aleks Jakulin, Maria Grazia Pittau; The Annals of Applied Statistics; cited_by=1814
+        ABS: We propose a new prior distribution for classical (nonhierarchical) logistic regression models, constructed by first scaling all nonbinary variables to have mean 0 and standard deviation 0.5, and then placing independent Student-t prior distributions on the coefficients. As a default choice, we reco
+  2022 [W4292121737 https://doi.org/10.1038/s41586-022-04992-8] A compute-in-memory chip based on resistive random-access memory
+        Weier Wan, Rajkumar Kubendran, Clemens Schaefer; Nature; cited_by=862
+        ABS: Abstract Realizing increasingly complex artificial intelligence (AI) functionalities directly on edge devices calls for unprecedented energy efficiency of edge hardware. Compute-in-memory (CIM) based on resistive random-access memory (RRAM) 1 promises to meet such demand by storing AI model weights 
+  1997 [W2155653793 https://doi.org/10.1016/s0031-3203(96)00142-2] The use of the area under the ROC curve in the evaluation of machine learning algorithms
+        Andrew P. Bradley; Pattern Recognition; cited_by=7273
+  1978 [W2140262981 https://doi.org/10.1090/s0002-9904-1978-14532-7] Quasi-Monte Carlo methods and pseudo-random numbers
+        Harald Niederreiter; Bulletin of the American Mathematical Society; cited_by=830
+        ABS: Nothing in Nature is random. ... A thing appears random only through the incompleteness of our knowledge.
+  2003 [W2073603601 https://doi.org/10.1103/revmodphys.75.559] The cosmological constant and dark energy
+        P. J. E. Peebles, Bharat Ratra; Reviews of Modern Physics; cited_by=5270
+        ABS: Physics welcomes the idea that space contains energy whose gravitational effect approximates that of Einstein's cosmological constant, \ensuremath{\Lambda}; today the concept is termed dark energy or quintessence. Physics also suggests that dark energy could be dynamical, allowing for the arguably a
+  2017 [W2566971417 https://doi.org/10.1016/j.physrep.2017.07.007] Random walks and diffusion on networks
+        Naoki Masuda, Mason A. Porter, Renaud Lambiotte; Physics Reports; cited_by=652
+        ABS: Random walks are ubiquitous in the sciences, and they are interesting from both theoretical and practical perspectives. They are one of the most fundamental types of stochastic processes; can be used to model numerous phenomena, including diffusion, interactions, and opinions among humans and animal
+  2009 [W2132262459 https://doi.org/10.1002/jcc.21287] CHARMM: The biomolecular simulation program
+        Bernard R. Brooks, Charles L. Brooks, Alexander D. MacKerell; Journal of Computational Chemistry; cited_by=9204
+        ABS: CHARMM (Chemistry at HARvard Molecular Mechanics) is a highly versatile and widely used molecular simulation program. It has been developed over the last three decades with a primary focus on molecules of biological interest, including proteins, peptides, lipids, nucleic acids, carbohydrates, and sm
+  2007 [W2145037371 https://doi.org/10.1214/07-ps094] A survey of random processes with reinforcement
+        Robin Pemantle; Probability Surveys; cited_by=587
+        ABS: The models surveyed include generalized Pólya urns, reinforced random walks, interacting urn models, and continuous reinforced processes. Emphasis is on methods and results, with sketches provided of some proofs. Applications are discussed in statistics, biology, economics and a number of other area
+  1987 [W2166414208 https://doi.org/10.3386/w2168] Stock Market Prices Do Not Follow Random Walks: Evidence From a Simple Specification Test
+        Andrew W. Lo, A. Craig MacKinlay; National Bureau of Economic Research; cited_by=757
+        ABS: In this paper, we test the random walk hypothesis for weekly stock market returns by comparing variance estimators derived from data sampled at different frequencies. The random walk model is strongly rejected for the entire sample period and for all sub-periods for a variety of aggregate returns in
+
+=== oaft: 'Borovkov Ruzankin small deviations' ===
+  2007 [W2027171824 https://doi.org/10.1007/s10958-007-0518-2] Small deviation probabilities for sums of independent positive random variables
+        L. V. Rozovsky; Journal of Mathematical Sciences; cited_by=16
+  2014 [W2129304848 https://doi.org/10.1214/ejp.v19-2993] Small deviations for time-changed Brownian motions and applications to second-order chaos
+        Daniel Dobbs, Tai Melcher; Electronic Journal of Probability; cited_by=2
+        ABS: We prove strong small deviations results for Brownian motion under independent time-changes satisfying their own asymptotic criteria. We then apply these results to certain stochastic integrals which are elements of second-order homogeneous chaos.
+  2023 [W4381684590 https://doi.org/10.1214/23-ps20] L2-small ball asymptotics for Gaussian random functions: A survey
+        Alexander I. Nazarov, Yulia Petrova; Probability Surveys; cited_by=2
+        ABS: This article is a survey of the results on asymptotic behavior of small ball probabilities in L2-norm. Recent progress in this field is mainly based on the methods of spectral theory of differential and integral operators.
+  2008 [W2312843335 https://doi.org/10.4213/tvp2466] Малые уклонения гладких стационарных гауссовских процессов
+        Frank Aurzada, Frank Aurzada, И. А. Ибрагимов; Теория вероятностей и ее применения; cited_by=4
+        ABS: 1 ) , . , . , ,
+  2022 [W4285283751 https://doi.org/10.1214/22-ps8] Compound Poisson approximation
+        V. Čekanavičius, S. Y. Novak; Probability Surveys; cited_by=7
+        ABS: We overview the results on the topic of compound Poisson approximation to the distribution of a sum Sn=X1+⋯+Xn of (possibly dependent) random variables. We indicate a number of open problems and discuss directions of further research.
+  2008 [W2952290049 https://doi.org/10.48550/arxiv.0803.4238] Small Deviations of Smooth Stationary Gaussian Processes
+        Frank Aurzada, И. А. Ибрагимов, Mikhail Lifshits; arXiv (Cornell University); cited_by=0
+        ABS: We investigate the small deviation probabilities of a class of very smooth stationary Gaussian processes playing an important role in Bayesian statistical inference. Our calculations are based on the appropriate modification of the entropy method due to Kuelbs, Li, and Linde as well as on classical 
+  2012 [W314426654 ] Entropy of convex hulls and Kuelbs-Li inequalities
+        Oliver Kley; Common Library Network (Der Gemeinsame Bibliotheksverbund); cited_by=2
+        ABS: The leitmotif of this work can be described in quite a simple manner: Given three distinct points in the plane, one needs at most three disks of arbitrary radius to cover them. Those three points may be regarded to constitute the vertices of a triangle. Obviously, many more than three disks are nece
+  2007 [W4301296684 https://doi.org/10.1017/s0001867800046826] Author Index
+        ; Advances in Applied Probability; cited_by=1
+        ABS: An abstract is not available for this content so a preview has been provided. As you have access to this content, a full PDF is available via the ‘Save PDF’ action button.
+  2023 [W4376988489 https://doi.org/10.48550/arxiv.2305.08927] $L_2$-small ball asymptotics for Gaussian random functions: a survey
+        Alexander I. Nazarov, Yulia Petrova; arXiv (Cornell University); cited_by=0
+        ABS: This article is a survey of the results on asymptotic behavior of small ball probabilities in $L_2$-norm. Recent progress in this field is mainly based on the methods of spectral theory of differential and integral operators.
+  2008 [W2952350064 https://doi.org/10.48550/arxiv.0803.1945] Resampling and requantization of band-limited Gaussian stochastic signals with flat power spectrum
+        Marco Lanucara, Riccardo Borghi; arXiv (Cornell University); cited_by=0
+        ABS: A theoretical analysis, aimed at characterizing the degradation induced by the resampling and requantization processes applied to band-limited Gaussian signals with flat power spectrum, available through their digitized samples, is presented. The analysis provides an efficient algorithm for computin
+  2024 [W4386556180 https://doi.org/10.1016/j.spa.2024.104299] Wetting on a wall and wetting in a well: Overview of equilibrium properties
+        Quentin Berger, Brune Massoulié; Stochastic Processes and their Applications; cited_by=0
+        ABS: We study the wetting model, which considers a random walk constrained to remain above a hard wall, but with additional pinning potential for each contact with the wall. This model is known to exhibit a wetting phase transition, from a localized phase (with trajectories pinned to the wall) to a deloc
+  2017 [W2897731256 https://doi.org/10.17863/cam.30586] Nonparametric Methods in Financial Time Series Analysis
+        Seok Young Hong; Apollo (University of Cambridge); cited_by=0
+        ABS: The fundamental objective of the analysis of financial time series is to unveil the random mechanism, i.e. the probability law, underlying financial data. The effort to identify the truth that governs the observations involves proposing and estimating reasonable statistical models that well explain 
+  2005 [W1551452070 https://doi.org/10.14279/depositonce-1267] Skeletal Isomerization of Butane by Sulfated Zirconia Catalysts – A Branched Field
+        Barbara S. Klose; DepositOnce; cited_by=0
+        ABS: In dieser Arbeit wurde der Einfluß von Handhabe und Lagerung auf Struktur und n-Butan-Isomerisierungsaktivität von sulfatierten Zirconiumdioxidkatalysatoren untersucht (SZ sowie FeSZ und MnSZ mit je 0.5 und 2.0 Gew% Metallgehalt), welche mit einem kommerziellen Ausgangsmaterial präpariert worden war
+  2002 [W1604438718 https://doi.org/10.18419/opus-743] FTIR-Messungen und quantenchemische Rechnungen an Sondenmolekülen auf lewis- und brönstedsauren Y-Zeolithen
+        Georg Hübner; OPUS Publication Server of the University of Stuttgart (University of Stuttgart); cited_by=0
+        ABS: Diese Arbeit beschäftigt sich mit der Charakterisierung verschiedener Y-Zeolithe unter Verwendung der FTIR- und DRIFT-Spektroskopie an oberflächenadsorbierten Sondenmolekülen. Neben molekularem Stickstoff (15N2 und 14N2) zur Untersuchung alkalimetall-, seltenerdmetall- und kupferausgetauschter NaY-Z
+
+=== oaft: 'Rozovsky comparison theorems small deviations weighted series' ===
+  2015 [W3035805403 https://doi.org/10.17863/cam.46480] Bayesian Time Series Learning with Gaussian Processes
+        Roger Frigola; Apollo (University of Cambridge); cited_by=95
+        ABS: The analysis of time series data is important in fields as disparate as the social sciences, biology, engineering or econometrics. In this dissertation, we present a number of algorithms designed to learn Bayesian nonparametric models of time series. The goal of these kinds of models is twofold. Fir
+  2017 [W2608671270 https://doi.org/10.1214/17-ba1057] Efficient Model Comparison Techniques for Models Requiring Large Scale Data Augmentation
+        Panayiota Touloupou, Naif Alzahrani, Peter Neal; Bayesian Analysis; cited_by=25
+        ABS: Selecting between competing statistical models is a challenging problem especially when the competing models are non-nested. In this paper we offer a simple solution by devising an algorithm which combines MCMC and importance sampling to obtain computationally efficient estimates of the marginal lik
+  2014 [W2129304848 https://doi.org/10.1214/ejp.v19-2993] Small deviations for time-changed Brownian motions and applications to second-order chaos
+        Daniel Dobbs, Tai Melcher; Electronic Journal of Probability; cited_by=2
+        ABS: We prove strong small deviations results for Brownian motion under independent time-changes satisfying their own asymptotic criteria. We then apply these results to certain stochastic integrals which are elements of second-order homogeneous chaos.
+  2016 [W2228050892 https://doi.org/10.1016/bs.hesmac.2016.03.006] Solution and Estimation Methods for DSGE Models
+        Jesús Fernández‐Villaverde, Juan Francisco Rubio-Ramı́rez, Frank Schorfheide; Handbook of macroeconomics; cited_by=171
+  2020 [W3183532081 https://doi.org/10.21638/spbu01.2020.307] Small deviation probabilities for sums of independent positive random variables
+        L. V. Rozovsky; Vestnik of Saint Petersburg University Mathematics Mechanics Astronomy; cited_by=1
+        ABS: «Вестник Санкт-Петербургского университета. Математика. Механика. Астрономия» — научно-теоретический рецензируемый журнал, публикующий исследования в области математики, механики и астрономии, а также математического моделирования.
+  2016 [W1752690783 https://doi.org/10.1007/s10955-016-1446-7] Adaptive Importance Sampling for Control and Inference
+        Hilbert J. Kappen, H. C. Ruiz; Journal of Statistical Physics; cited_by=90
+        ABS: Path integral (PI) control problems are a restricted class of non-linear control problems that can be solved formally as a Feynman–Kac PI and can be estimated using Monte Carlo sampling. In this contribution we review PI control theory in the finite horizon case. We subsequently focus on the problem
+  2016 [W2198904917 https://doi.org/10.1080/01621459.2016.1222291] The Iterated Auxiliary Particle Filter
+        Pieralberto Guarniero, Adam M. Johansen, Anthony Lee; Journal of the American Statistical Association; cited_by=69
+        ABS: We present an offline, iterated particle filter to facilitate statistical inference in general state space hidden Markov models. Given a model and a sequence of observations, the associated marginal likelihood L is central to likelihood-based inference for unknown statistical parameters. We define a
+  2023 [W4381684590 https://doi.org/10.1214/23-ps20] L2-small ball asymptotics for Gaussian random functions: A survey
+        Alexander I. Nazarov, Yulia Petrova; Probability Surveys; cited_by=2
+        ABS: This article is a survey of the results on asymptotic behavior of small ball probabilities in L2-norm. Recent progress in this field is mainly based on the methods of spectral theory of differential and integral operators.
+  2024 [W4393004266 https://doi.org/10.1038/s41467-024-46723-9] Activation and friction in enzymatic loop opening and closing dynamics
+        Kirill Zinovjev, Paul Guénon, Carlos A. Ramos‐Guzmán; Nature Communications; cited_by=30
+        ABS: Protein loop dynamics have recently been recognized as central to enzymatic activity, specificity and stability. However, the factors controlling loop opening and closing kinetics have remained elusive. Here, we combine molecular dynamics simulations with string-method determination of complex react
+  2014 [W2106949461 https://doi.org/10.3384/lic.diva-106752] Sequential Monte Carlo for inference in nonlinear state space models
+        Johan Dahlin; Linköping University Electronic Press eBooks; cited_by=33
+        ABS: Nonlinear state space models (SSMs) are a useful class of models to describe many different kinds of systems. Some examples of its applications are to model; the volatility in financial markets, the number of infected persons during an influenza epidemic and the annual number of major earthquakes ar
+  2023 [W4387530044 https://doi.org/10.1007/s10543-023-00986-8] Galerkin–Chebyshev approximation of Gaussian random fields on compact Riemannian manifolds
+        Annika Lang, Mike Pereira; BIT Numerical Mathematics; cited_by=5
+        ABS: Abstract A new numerical approximation method for a class of Gaussian random fields on compact connected oriented Riemannian manifolds is introduced. This class of random fields is characterized by the Laplace–Beltrami operator on the manifold. A Galerkin approximation is combined with a polynomial 
+  2021 [W3179554558 https://doi.org/10.48550/arxiv.2107.02667] Galerkin--Chebyshev approximation of Gaussian random fields on compact Riemannian manifolds
+        Annika Lang, Mike Pereira; arXiv (Cornell University); cited_by=4
+        ABS: A new numerical approximation method for a class of Gaussian random fields on compact connected oriented Riemannian manifolds is introduced. This class of random fields is characterized by the Laplace--Beltrami operator on the manifold. A Galerkin approximation is combined with a polynomial approxim
+  2019 [W2115823661 https://doi.org/10.18637/jss.v088.c02] Getting Started with Particle Metropolis-Hastings for Inference in Nonlinear Dynamical Models
+        Johan Dahlin, Thomas B. Schön; Journal of Statistical Software; cited_by=6
+        ABS: This tutorial provides a gentle introduction to the particle Metropolis-Hastings (PMH) algorithm for parameter inference in nonlinear state-space models together with a software implementation in the statistical programming language R. We employ a step-by-step approach to develop an implementation o
+  2024 [W4403120808 https://doi.org/10.1007/s11203-024-09318-1] Parameter estimation for second-order SPDEs in multiple space dimensions
+        Patrick Bossert; Statistical Inference for Stochastic Processes; cited_by=3
+        ABS: Abstract We analyse a second-order SPDE model in multiple space dimensions and develop estimators for the parameters of this model based on discrete observations of a solution in time and space on a bounded domain. While parameter estimation for one and two spatial dimensions was established in rece
+  2023 [W4386942681 https://doi.org/10.48550/arxiv.2309.10918] Posterior Contraction Rates for Matérn Gaussian Processes on Riemannian Manifolds
+        Paul Rosa, Viacheslav Borovitskiy, Alexander Terenin; arXiv (Cornell University); cited_by=1
+        ABS: Gaussian processes are used in many machine learning applications that rely on uncertainty quantification. Recently, computational tools for working with these models in geometric settings, such as when inputs lie on a Riemannian manifold, have been developed. This raises the question: can these int
+  2018 [W2914374808 https://doi.org/10.21638/11701/spbu01.2018.303] To the history of Saint-Petersburg school of Probability and Statistics. II. Random processes and dependent variables
+        Dmitry Zaporozhets, И. А. Ибрагимов, Mikhail Lifshits; Vestnik of Saint Petersburg University Mathematics Mechanics Astronomy; cited_by=1
+        ABS: -- 1947 2017 . , , , , , , , . , , . , .
+  2015 [W2201269482 https://doi.org/10.1137/140992060] Algorithms for Propagating Uncertainty Across Heterogeneous Domains
+        Heyrim Cho, Xiu Yang, Daniele Venturi; SIAM Journal on Scientific Computing; cited_by=8
+        ABS: We address an important research area in stochastic multiscale modeling, namely, the propagation of uncertainty across heterogeneous domains characterized by partially correlated processes with vastly different correlation lengths. This class of problems arises very often when computing stochastic P
+  2021 [W3138849073 https://doi.org/10.3390/math9060655] On Small Deviation Asymptotics in the L2-Norm for Certain Gaussian Processes
+        L. V. Rozovsky; Mathematics; cited_by=0
+        ABS: The results obtained allow finding sharp small deviations in a Hilbert norm for centered Gaussian processes in the case where their covariances have a special form of the eigenvalues and allow us to describe small deviation asymptotics for certain Gaussian processes.
+  2019 [W4288358051 https://doi.org/10.48550/arxiv.1905.03869] Almost-sure exponential mixing of passive scalars by the stochastic Navier-Stokes equations
+        Jacob Bedrossian, Alex Blumenthal, Samuel Punshon‐Smith; arXiv (Cornell University); cited_by=7
+        ABS: We deduce almost-sure exponentially fast mixing of passive scalars advected by solutions of the stochastically-forced 2D Navier-Stokes equations and 3D hyper-viscous Navier-Stokes equations in $\mathbb T^d$ subjected to non-denegenerate $H^σ$-regular noise for any $σ$ sufficiently large. That is, fo
+  2023 [W4321484527 https://doi.org/10.5705/ss.202022.0243] A Divide and Conquer Sequential Monte Carlo Approach to High Dimensional Filtering
+        Francesca R. Crucinio, Adam M. Johansen; Statistica Sinica; cited_by=4
+        ABS: We propose a divide-and-conquer approach to filtering which decomposes the state variable into low-dimensional components to which standard particle filtering tools can be successfully applied and recursively merges them to recover the full filtering distribution.It is less dependent upon factorizat
+
+=== oaft: 'Aurzada small deviations exponentially decreasing weights' ===
+  2009 [W2098282686 https://doi.org/10.3150/09-bej212] Small deviations of stable processes and entropy of the associated random operators
+        Frank Aurzada, Mikhail Lifshits, Werner Linde; Bernoulli; cited_by=7
+        ABS: We investigate the relation between the small deviation problem for a symmetric $α$-stable random vector in a Banach space and the metric entropy properties of the operator generating it. This generalizes former results due to Li and Linde and to Aurzada. It is shown that this problem is related to 
+  2014 [W2129304848 https://doi.org/10.1214/ejp.v19-2993] Small deviations for time-changed Brownian motions and applications to second-order chaos
+        Daniel Dobbs, Tai Melcher; Electronic Journal of Probability; cited_by=2
+        ABS: We prove strong small deviations results for Brownian motion under independent time-changes satisfying their own asymptotic criteria. We then apply these results to certain stochastic integrals which are elements of second-order homogeneous chaos.
+  2023 [W4381684590 https://doi.org/10.1214/23-ps20] L2-small ball asymptotics for Gaussian random functions: A survey
+        Alexander I. Nazarov, Yulia Petrova; Probability Surveys; cited_by=2
+        ABS: This article is a survey of the results on asymptotic behavior of small ball probabilities in L2-norm. Recent progress in this field is mainly based on the methods of spectral theory of differential and integral operators.
+  2021 [W3125543047 https://doi.org/10.1088/1742-5468/abf5d5] Survival probability of a run-and-tumble particle in the presence of a drift
+        Benjamin De Bruyne, Satya N Majumdar, Grégory Schehr; Journal of Statistical Mechanics Theory and Experiment; cited_by=33
+        ABS: Abstract We consider a one-dimensional run-and-tumble particle, or persistent random walk, in the presence of an absorbing boundary located at the origin. After each tumbling event, which occurs at a constant rate γ , the (new) velocity of the particle is drawn randomly from a distribution W ( v ). 
+  2022 [W4214718096 https://doi.org/10.1016/j.physrep.2022.02.002] Persistence in complex systems
+        Sancho Salcedo‐Sanz, David Casillas-Pérez, Javier Del Ser; Physics Reports; cited_by=68
+        ABS: Persistence is an important characteristic of many complex systems in nature, related to how long the system remains at a certain state before changing to a different one. The study of complex systems’ persistence involves different definitions and uses different techniques, depending on whether sho
+  2011 [W2016146109 https://doi.org/10.1214/10-aihp394] Ageing in the parabolic Anderson model
+        Peter Mörters, Marcel Ortgiese, Nadia Sidorova; Annales de l Institut Henri Poincaré Probabilités et Statistiques; cited_by=28
+        ABS: Le modèle parabolique d’Anderson est le problème de Cauchy pour l’équation de la chaleur avec un potentiel aléatoire. Nous considérons ce modèle en temps continu et espace discret. Nous nous intéressons à des potentiels constants dans le temps, indépendants et identiquement distribués avec queues po
+  2012 [W314426654 ] Entropy of convex hulls and Kuelbs-Li inequalities
+        Oliver Kley; Common Library Network (Der Gemeinsame Bibliotheksverbund); cited_by=2
+        ABS: The leitmotif of this work can be described in quite a simple manner: Given three distinct points in the plane, one needs at most three disks of arbitrary radius to cover them. Those three points may be regarded to constitute the vertices of a triangle. Obviously, many more than three disks are nece
+  2008 [W2312843335 https://doi.org/10.4213/tvp2466] Малые уклонения гладких стационарных гауссовских процессов
+        Frank Aurzada, Frank Aurzada, И. А. Ибрагимов; Теория вероятностей и ее применения; cited_by=4
+        ABS: 1 ) , . , . , ,
+  2015 [W1990299017 https://doi.org/10.1239/aap/1427814585] Persistence Probability for a Class of Gaussian Processes Related to Random Interface Models
+        Hironobu Sakagawa; Advances in Applied Probability; cited_by=3
+        ABS: We consider a class of Gaussian processes which are obtained as height processes of some ( d + 1)-dimensional dynamic random interface model on ℤ d . We give an estimate of persistence probability, namely, large T asymptotics of the probability that the process does not exceed a fixed level up to ti
+  2008 [W2952290049 https://doi.org/10.48550/arxiv.0803.4238] Small Deviations of Smooth Stationary Gaussian Processes
+        Frank Aurzada, И. А. Ибрагимов, Mikhail Lifshits; arXiv (Cornell University); cited_by=0
+        ABS: We investigate the small deviation probabilities of a class of very smooth stationary Gaussian processes playing an important role in Bayesian statistical inference. Our calculations are based on the appropriate modification of the entropy method due to Kuelbs, Li, and Linde as well as on classical 
+  2015 [W4244029144 https://doi.org/10.1017/s0001867800007746] Persistence Probability for a Class of Gaussian Processes Related to Random Interface Models
+        Hironobu Sakagawa; Advances in Applied Probability; cited_by=1
+        ABS: We consider a class of Gaussian processes which are obtained as height processes of some ( d + 1)-dimensional dynamic random interface model on ℤ d . We give an estimate of persistence probability, namely, large T asymptotics of the probability that the process does not exceed a fixed level up to ti
+  2019 [W2994826936 https://doi.org/10.48550/arxiv.1912.05738] Variable Selection Consistency of Gaussian Process Regression
+        Sheng Jiang, Surya T. Tokdar; arXiv (Cornell University); cited_by=1
+        ABS: Bayesian nonparametric regression under a rescaled Gaussian process prior offers smoothness-adaptive function estimation with near minimax-optimal error rates. Hierarchical extensions of this approach, equipped with stochastic variable selection, are known to also adapt to the unknown intrinsic dime
+  2021 [W3160942546 https://doi.org/10.48550/arxiv.2105.07410] Posterior contraction for deep Gaussian process priors
+        Gianluca Finocchio, Schmidt-Hieber, Johannes; arXiv (Cornell University); cited_by=1
+        ABS: We study posterior contraction rates for a class of deep Gaussian process priors applied to the nonparametric regression problem under a general composition assumption on the regression function. It is shown that the contraction rates can achieve the minimax convergence rate (up to $\log n$ factors)
+  2026 [W4403571144 https://doi.org/10.1214/25-aos2604] Vecchia Gaussian processes: On probabilistic and statistical properties
+        Botond Szabó, Yichen Zhu; The Annals of Statistics; cited_by=1
+        ABS: Gaussian Processes (GPs) are widely used to model dependencies in spatial statistics and machine learning. However, exact inference is computationally intractable for GP regression, with a time complexity of O(n3). The Vecchia approximation scales up computation by introducing sparsity into the spat
+  2023 [W4376988489 https://doi.org/10.48550/arxiv.2305.08927] $L_2$-small ball asymptotics for Gaussian random functions: a survey
+        Alexander I. Nazarov, Yulia Petrova; arXiv (Cornell University); cited_by=0
+        ABS: This article is a survey of the results on asymptotic behavior of small ball probabilities in $L_2$-norm. Recent progress in this field is mainly based on the methods of spectral theory of differential and integral operators.
+  2021 [W3212482862 https://doi.org/10.3990/1.9789036552356] Two perspectives on high-dimensional estimation problems: posterior contraction and median-of-means
+        Gianluca Finocchio; -; cited_by=0
+        ABS: This thesis investigates Bayesian and frequentist procedures for challenging high-dimensional estimation problems. In a Gaussian sequence model, we study the Bayesian approach to estimate the common variance of the observations. A fraction of the means is known to be zero, whereas the non-zero means
+  2023 [W4387928767 https://doi.org/10.48550/arxiv.2310.14003] First-passage area distribution and optimal fluctuations of fractional Brownian motion
+        Alexander K. Hartmann, Baruch Meerson; arXiv (Cornell University); cited_by=0
+        ABS: We study the probability distribution $P(A)$ of the area $A=\int_0^T x(t) dt$ swept under fractional Brownian motion (fB\ m) $x(t)$ until its first passage time $T$ to the origin. The process starts at $t=0$ from a specified point $x=L$. We show that $P(A)$ obeys exact scaling relation $$ P(A) = \fr
+  2026 [W4415193045 https://doi.org/10.1088/1361-6420/ae6d2f] Consistency of variational inference for Besov priors in non-linear inverse problems
+        Shaokang Zu, Junxiong Jia, Zhiguo Wang; Inverse Problems; cited_by=0
+        ABS: Abstract This study investigates the variational posterior convergence rates of inverse problems for partial differential equations (PDEs) with parameters in Besov spaces <mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" overflow="scroll"> <mml:mrow> <mml:msubsup> <mml:mi>B</mml:mi> <mml:mrow
+  2012 [W2117452521 https://doi.org/10.6100/ir734660] Posterior contraction for conditionally Gaussian priors
+        de R René Jonge; Data Archiving and Networked Services (DANS); cited_by=0
+        ABS: The goal of statistics is to draw sensible conclusions from data. In mathematical statistics, observed data is assumed to be generated according to some unknown probability distribution. The aim is to find the unknown probability distribution using the available observations. In parametric statistic
+  2025 [W4414645092 https://doi.org/10.32920/30247573] Integration of Machine Learning and Optimization Models to Solve Supplier Selection and Order Allocation Problems
+        Samiul Islam; -; cited_by=0
+        ABS: &lt;p dir="ltr"&gt;Supplier Selection (SS) and Order Allocation (OA) are two major decision-making processes in supply chain management. Integration of SS and OA is crucial to have effective supply chain designs and efficient operations. In the real world, decision-making processes incorporate compl
+
+=== oaft: 'generalized Fabius function endpoint asymptotics' ===
+  1999 [W2011416738 https://doi.org/10.1111/1467-9868.00190] Bayesian Nonparametric Inference for Random Distributions and Related Functions
+        Stephen G. Walker, Paul Damien, Purushottam W. Laud; Journal of the Royal Statistical Society Series B (Statistical Methodology); cited_by=234
+        ABS: Summary In recent years, Bayesian nonparametric inference, both theoretical and computational, has witnessed considerable advances. However, these advances have not received a full critical and comparative analysis of their scope, impact and limitations in statistical modelling; many aspects of the 
+  2007 [W2145037371 https://doi.org/10.1214/07-ps094] A survey of random processes with reinforcement
+        Robin Pemantle; Probability Surveys; cited_by=587
+        ABS: The models surveyed include generalized Pólya urns, reinforced random walks, interacting urn models, and continuous reinforced processes. Emphasis is on methods and results, with sketches provided of some proofs. Applications are discussed in statistics, biology, economics and a number of other area
+  1975 [W1515444288 ] Sample path properties of stable processes
+        Joop Mijnheer; Data Archiving and Networked Services (DANS); cited_by=67
+  2021 [W3119562877 https://doi.org/10.1038/s41598-020-79957-w] The behavioural preview effect with faces is susceptible to statistical regularities: Evidence for predictive processing across the saccade
+        Christoph Huber‐Huber, David Melcher; Scientific Reports; cited_by=9
+        ABS: The world around us appears stable and continuous despite saccadic eye movements. This apparent visual stability is achieved by trans-saccadic perception leading at the behavioural level to preview effects: performance in processing a foveal stimulus is better if the stimulus remained unchanged (val
+  2011 [W2033182703 https://doi.org/10.1155/2011/605068] Nonconservative Diffusions on with Killing and Branching: Applications to Wright-Fisher Models with or without Selection
+        Thierry Huillet; International Journal of Stochastic Analysis; cited_by=2
+        ABS: We consider nonconservative diffusion processes on the unit interval, so with absorbing barriers. Using Doob-transformation techniques involving superharmonic functions, we modify the original process to form a new diffusion process presenting an additional killing rate part . We limit ourselves to 
+  2024 [W4404905141 https://doi.org/10.1016/j.cub.2024.10.057] Building egocentric models of local space from retinal input
+        Dylan M. Martins, Joy M Manda, Michael J. Goard; Current Biology; cited_by=7
+        ABS: Determining the location of objects relative to ourselves is essential for interacting with the world. Neural activity in the retina is used to form a vision-independent model of the local spatial environment relative to the body. For example, when an animal navigates through a forest, it rapidly sh
+  2026 [W7155654350 ] Efficient generation of expected-degree graphs via edge-arrivals
+        Gianlorenzo D’Angelo, Riccardo Michielan; arXiv (Cornell University); cited_by=0
+        ABS: We study the efficient generation of random graphs with a prescribed expected degree sequence, focusing on rank-1 inhomogeneous models in which vertices are assigned weights and edges are drawn independently with probabilities proportional to the product of endpoint weights. We adopt a temporal view
+  2026 [W7135429414 ] On the maximum number of tangencies among $1$-intersecting curves
+        Eyal Ackerman, Balázs Keszegh; arXiv (Cornell University); cited_by=0
+        ABS: According to a conjecture of Pach, there are $O(n)$ tangent pairs among any family of $n$ Jordan arcs in which every pair of arcs has precisely one common point and no three arcs share a common point. This conjecture was proved for two special cases, however, for the general case the currently best 
+  2014 [W22937206 ] Applications of Bayesian nonparametrics to reliability and survival data
+        Li Li; American Journal of Translational Research; cited_by=0
+        ABS: Morphological and clinical heterogeneity of advanced colorectal cancer is probably caused by genetic variability in putative cancer stem cell genes, including Lgr5. Here, we investigated 23 variants of the Lgr5 gene in normal tissue, primary tumors, lymph node metastases and distant metastases of st
+  2008 [W7530919 https://doi.org/10.1152/ajpheart.1995.268.1.h242] Effects of Agricultural Conservation Practices on Fish and Wildlife Volume 2
+        Stuart R. Gagnon, Joseph R. Makuch, Cassandra Y Harper; -; cited_by=0
+        ABS: Endothelium-derived nitric oxide (NO) has recently been reported to be a mediator of ischemic preconditioning in dog hearts. The aim of the present study was to determine the role of NO in ischemic preconditioning in isolated perfused rat hearts. Rat hearts were perfused at either constant pressure 
+  2020 [W3048660612 ] Gradient Flows, Metastability and Interacting Particle Systems
+        Kaveh Bashiri; bonndoc (University of Bonn); cited_by=0
+        ABS: Many stochastic models exhibit a phenomenon called metastability. The first goal of this thesis is to study this phenomenon for certain classes of interacting particle systems. The second goal of this thesis is the following. Many models that are expected to exhibit metastable behaviour consist of a
+
+=== oaft: 'Rvachev atomic up-function asymptotics' ===
+  2018 [W2899261988 https://doi.org/10.32620/reks.2018.3.01] ATOMIC FUNCTIONS AND THEIR GENERALIZATIONS IN DATA PRO-CESSING: FUNCTION THEORY APPROACH
+        Iryna Brysina, Віктор Макарічев; RADIOELECTRONIC AND COMPUTER SYSTEMS; cited_by=11
+        ABS: Theory of atomic functions, which are solutions with a compact support of the linear functional differential equations with a constant coefficients and linear transforms of the argument, was created in the 70's of the 20th century because of the necessity to solve different applied problems, in part
+  2018 [W2899382328 https://doi.org/10.32620/reks.2018.1.03] GENERALIZED ATOMIC WAVELETS
+        Iryna Brysina, Віктор Макарічев; RADIOELECTRONIC AND COMPUTER SYSTEMS; cited_by=9
+        ABS: The problem of big data sets processing is considered. Efficiency of algorithms depends mainly on the appropriate mathematical tools. Now there exists a wide variety of different constructive tools for information analysis. Atomic functions are one of them. Theory of atomic functions was developed b
+  1995 [W2487893106 https://doi.org/10.1007/978-3-0348-9078-6] Proceedings of the International Congress of Mathematicians
+        Work Of Louis Nirenberg, Yanyan Li; Birkhäuser Basel eBooks; cited_by=2059
+        ABS: Organization of the Congress poster sessions. There were also several informal seminars as well as a symposium organized on Thursday, August 4, by the Association for Women in Mathematics and the European Women in Mathematics.
+  2016 [W2103269579 https://doi.org/10.1137/15m1014814] The Role of Frolov's Cubature Formula for Functions with Bounded Mixed Derivative
+        Mario Ullrich, Tino Ullrich; SIAM Journal on Numerical Analysis; cited_by=42
+        ABS: We prove upper bounds on the order of convergence of Frolov's cubature formula for numerical integration in function spaces of dominating mixed smoothness on the unit cube with homogeneous boundary condition. More precisely, we study worst-case integration errors for Besov $\mathbf{B}^s_{p,\theta}$ 
+  2018 [W2909142319 https://doi.org/10.32620/reks.2018.4.02] DISCRETE ATOMIC COMPRESSION OF DIGITAL IMAGES
+        Iryna Brysina, Віктор Макарічев; RADIOELECTRONIC AND COMPUTER SYSTEMS; cited_by=8
+        ABS: The subject matter of this paper is the discrete atomic compression (DAC) of digital images, which is a lossy compression process based on the discrete atomic transform (DAT). The goal is to investigate the efficiency of the DAC algorithm. We solve the following tasks: to develop a general compressi
+  2022 [W4312734063 https://doi.org/10.1109/lgrs.2022.3213406] Spatial Complexity Reduction in Remote Sensing Image Compression by Atomic Functions
+        Віктор Макарічев, Vladimir Lukin, Iryna Brysina; IEEE Geoscience and Remote Sensing Letters; cited_by=4
+        ABS: Remote sensing (RS) digital images have a great variety of applications in solving real-world problems. Modern sensors provide this type of data of a very high resolution, which, in combination with a great number of acquired images, makes a problem of compressing RS-images of particular importance.
+  2012 [W96677780 https://doi.org/10.1007/978-3-642-33275-3_86] Quaternionic Analytic Signal Using Atomic Functions
+        E. Ulises Moya-Sánchez, Eduardo Bayro–Corrochano; Lecture notes in computer science; cited_by=2
+  2024 [W4402146007 https://doi.org/10.3390/computation12090176] On the Impact of Discrete Atomic Compression on Image Classification by Convolutional Neural Networks
+        Віктор Макарічев, Vladimir Lukin, Iryna Brysina; Computation; cited_by=1
+        ABS: Digital images play a particular role in a wide range of systems. Image processing, storing and transferring via networks require a lot of memory, time and traffic. Also, appropriate protection is required in the case of confidential data. Discrete atomic compression (DAC) is an approach providing i
+  2016 [W4390085705 https://doi.org/10.26565/2221-5646-2016-84-06] Approximation properties of generalized Fup-functions
+        І. В. Брисіна, Віктор Макарічев; V N Karazin Kharkiv National University Ser Mathematics Applied Mathematics and Mechanics; cited_by=1
+        ABS: Generalized Fup-functions are considered. Almost-trigonometric basis theorem is proved. Spaces of linear combinations of shifts of the generalized Fup-functions are constructed and an upper estimate of the best approximation of classes of periodic differentiable functions by these spaces in the norm
+  2007 [W1493500889 https://doi.org/10.1090/s1061-0022-07-00973-9] Some functional-difference equations solvable in finitary functions
+        Е. А. Горин; St Petersburg Mathematical Journal; cited_by=1
+        ABS: The following equation is considered: $q(-i\partial /\partial x)u(x)=(f*u)(Ax)$, where $q$ is a polynomial with complex coefficients, $f$ is a compactly supported distribution, and $A:\mathbb {R}^n\to \mathbb {R}^n$ is a linear operator whose complexification
+  1998 [W57993835 https://doi.org/10.4310/maa.1998.v5.n3.a5] Refinement differential equations and wavelets
+        Jianhong Shen; Methods and Applications of Analysis; cited_by=6
+        ABS: We study the following type of refinement differential equations (RDE):
+  2014 [W1470413913 ] Simulations of diffusion driven phase evolution in heterogenous solids
+        Subramanya Sadasiva; Purdue e-Pubs (Purdue University System); cited_by=2
+        ABS: With reduction in size, ever greater operational demands are placed on electronics components at all levels of the device, starting from the transistor level to the level of the package and the solder interconnects. Concurrently, there has been a move to more complicated materials systems in order t
+  2009 [W2338081801 ] Depth Information from Holographic Radar Scans
+        C. G. Windsor, Andrea Bulletti, Lorenzo Capineri; Florence Research (University of Florence); cited_by=3
+        ABS: Holographic radar has several potentially important advantages over conventional pulsed radar for buried object location and identi ̄cation. In particular the sensor can be lightweight, of low cost and provide images of the object with good resolution. This work reports that it can give some depth i
+  2020 [W3011169196 https://doi.org/10.32620/reks.2020.1.06] TOMIC FUNCTIONS AND LACUNARY INTERPOLATION SERIES IN BOUNDARY VALUE PROBLEMS FOR PARTIAL DERIVATIVES EQUATIONS AND IMAGE PROCESSING
+        Volodimir Olexijovych Rvachov, Tatiana Volodimirivna Rvachova, Evgenia Pavlovna Tomilova; RADIOELECTRONIC AND COMPUTER SYSTEMS; cited_by=0
+        ABS: In the paper we consider and solve the problem of construction of the so called tomic functions – the systems of infinitely differentiable functions which while retaining many important properties of the shifts of atomic function up(x) such as locality and representation of algebraic polynomials and
+  2010 [W142514575 https://doi.org/10.2172/1056354] Study of the (e,e'p) quasi-elastic reaction in complex nuclei: theory and experiment
+        Joaquín L. Herraiz; -; cited_by=2
+        ABS: Experimental coincidence cross section and transverse-longitudinal asymmetry ATL have been obtained for the quasielastic (e,e'p) reaction in 16O, 12C, and {sup 208}Pb in constant q-ω kinematics in the missing momentum range -350 < pmiss < 350 MeV/c. In these experiments, performed in experimental Ha
+  2021 [W3125383981 https://doi.org/10.25777/z7th-my96] Deeply Virtual Compton Scattering at Hall A, Jefferson Lab
+        H. Rashad; OSTI OAI (U.S. Department of Energy Office of Scientific and Technical Information); cited_by=0
+        ABS: The Standard Model of particle physics defines quarks and leptons as the basic building blocks of all matter. The interaction between them are mediated by force carrying gauge bosons. Quantum ChromoDynamics (QCD), the theory that explains the strong interaction is still not complete enough to derive
+  2022 [W4362576725 https://doi.org/10.22215/etd/2022-15431] A Theoretical Analysis of the COVID-19 Pandemic using a Public Database
+        Subhendu Paul; -; cited_by=0
+        ABS: This thesis investigates several issues (incubation and recovery periods, effect of lockdown, digital prognosis, prediction of new cases) of the pandemic COVID-19 based on mathematical models, computational methods and a publicly available database. Traditional compartment-based models have various 
+  1995 [W562535624 https://doi.org/10.1007/978-3-0348-9078-6] Proceedings of the International Congress of Mathematicians, August 3-11, 1994, Zürich, Switzerland
+        Srishti D. Chatterji; -; cited_by=0
+
+=== oaft: 'advanced pantograph equation flat solution asymptotics' ===
+  2023 [W4389513484 https://doi.org/10.1016/j.matdes.2023.112554] A 3D pantographic metamaterial behaving as a mechanical shield: Experimental and numerical evidence
+        Alessandro Ciallella, Ivan Giorgio, Emilio Barchiesi; Materials & Design; cited_by=38
+        ABS: Multilayer pantographic metamaterials, in short, pantographic blocks, have shown peculiar mechanical behavior, especially when their constitutive hinges are revolving (i.e., perfect) joints. The pantographic block, which is the subject of the present paper, has been printed using a Powder Bed Fusion
+  2019 [W2982036745 https://doi.org/10.1016/j.ijsolstr.2019.10.018] A Green operator-based elastic modeling for two-phase pantographic-inspired bi-continuous materials
+        Mario Spagnuolo, P. Franciosi, Francesco dell’Isola; International Journal of Solids and Structures; cited_by=41
+  2021 [W3135656561 https://doi.org/10.1007/s00161-021-00989-2] A numerical survey of nonlinear dynamical responses of discrete pantographic beams
+        Emilio Turco; Continuum Mechanics and Thermodynamics; cited_by=13
+        ABS: Abstract Materials and structures based on pantographic cells exhibit interesting mechanical peculiarities. They have been studied prevalently in the static case, both in linear and nonlinear regime. When the dynamical behavior is considered, available literature is scarce probably for the intrinsic
+  2020 [W3045345878 https://doi.org/10.3390/axioms9030083] Eigenfunction Families and Solution Bounds for Multiplicatively Advanced Differential Equations
+        David W. Pravica, Njinasoa Randriampiry, Michael J. Spurr; Axioms; cited_by=4
+        ABS: A family of Schwartz functions W ( t ) are interpreted as eigensolutions of MADEs in the sense that W ( δ ) ( t ) = E W ( q γ t ) where the eigenvalue E ∈ R is independent of the advancing parameter q &gt; 1 . The parameters δ , γ ∈ N are characteristics of the MADE. Some issues, which are related t
+  2024 [W4394859289 https://doi.org/10.1016/j.jmps.2024.105637] Asymptotic, second-order homogenization of linear elastic beam networks
+        Yuntao Ye, Basile Audoly, Claire Lestringant; Journal of the Mechanics and Physics of Solids; cited_by=11
+        ABS: We propose a general approach to the higher-order homogenization of discrete elastic networks made up of linear elastic beams or springs in dimension 2 or 3. The network may be nearly (rather than exactly) periodic: its elastic and geometric properties are allowed to vary slowly in space, in additio
+  2021 [W3184570096 https://doi.org/10.1002/zamm.202100023] Verification of strain gradient elasticity computation by analytical solutions
+        Hua Yang, D. V. Timofeev, Bilen Emek Abali; ZAMM ‐ Journal of Applied Mathematics and Mechanics / Zeitschrift für Angewandte Mathematik und Mechanik; cited_by=18
+        ABS: Abstract As there are different computational methods for simulating problems in generalized mechanics, we present simple applications and their closed‐form solutions for verifying a numerical implementation. For such a benchmark, we utilize these analytical solutions and examine three‐dimensional n
+  2024 [W4401324042 https://doi.org/10.1007/s00161-024-01314-3] A review of inverse problems for generalized elastic media: formulations, experiments, synthesis
+        Roberto Fedele, Luca Placidi, Francesco Fabbrocino; Continuum Mechanics and Thermodynamics; cited_by=58
+        ABS: Abstract Starting from the seminal works of Toupin, Mindlin and Germain, a wide class of generalized elastic models have been proposed via the principle of virtual work, by postulating expressions of the elastic energy enriched by additional kinematic descriptors or by higher gradients of the placem
+  2022 [W4225295097 https://doi.org/10.1007/s00161-022-01100-z] Approach à la Piola for the equilibrium problem of bodies with second gradient energies. Part II: Variational derivation of second gradient equations and their transport
+        Roberto Fedele; Continuum Mechanics and Thermodynamics; cited_by=40
+        ABS: Abstract After the wide premise of Part I, where the equations for Cauchy’s continuum were retrieved through the energy minimization and some differential geometric perspectives were specified, the present paper as Part II outlines the variational derivation of the equilibrium equations for second g
+  2018 [W2804444314 https://doi.org/10.1007/s00161-018-0684-0] Implementation of peridynamic beam and plate formulations in finite element framework
+        Zhenghao Yang, Erkan Oterkus, Cong Tien Nguyen; Continuum Mechanics and Thermodynamics; cited_by=60
+        ABS: Peridynamic (PD) theory is a new continuum mechanics formulation introduced to overcome the limitations of classical continuum mechanics such as predicting crack initiation and propagation, and capturing nonlocal effects. PD theory is based on integro-differential equations and these equations are g
+  2022 [W4285065952 https://doi.org/10.1109/access.2022.3179517] A Review of Wavelet Analysis and Its Applications: Challenges and Opportunities
+        Tiantian Guo, Tongpo Zhang, Eng Gee Lim; IEEE Access; cited_by=541
+        ABS: As a general and rigid mathematical tool, wavelet theory has found many applications and is constantly developing. This article reviews the development history of wavelet theory, from the construction method to the discussion of wavelet properties. Then it focuses on the design and expansion of wave
+  2023 [W4366811199 https://doi.org/10.3934/era.2023180] The exact solutions of the fractional-stochastic Fokas-Lenells equation in optical fiber communication
+        Sahar Albosaily, Wael W. Mohammed, Mahmoud El-Morshedy; Electronic Research Archive; cited_by=4
+        ABS: &lt;abstract&gt;&lt;p&gt;The fractional-stochastic Fokas-Lenells equation (FSFLE) in the Stratonovich sense is taken into account here. The modified mapping method is used to generate new trigonometric, hyperbolic, elliptic and rational stochastic fractional solutions. Because the Fokas-Lenells equa
+  2022 [W4307816896 https://doi.org/10.1016/j.engstruct.2022.115054] Analytical spectral design of mechanical metamaterials with inertia amplification
+        Valeria Settimi, Marco Lepidi, Andrea Bacigalupo; Engineering Structures; cited_by=17
+  2021 [W3160053094 https://doi.org/10.3390/ma14102556] Optimization of Manufacturing Parameters and Tensile Specimen Geometry for Fused Deposition Modeling (FDM) 3D-Printed PETG
+        Arda Özen, Dietmar Auhl, Christina Völlmecke; Materials; cited_by=86
+        ABS: Additive manufacturing provides high design flexibility, but its use is restricted by limited mechanical properties compared to conventional production methods. As technology is still emerging, several approaches exist in the literature for quantifying and improving mechanical properties. In this st
+  2018 [W2885349506 https://doi.org/10.1098/rspa.2018.0063] Wrinkling in engineering fabrics: a comparison between two different comprehensive modelling approaches
+        Ivan Giorgio, Philip G. Harrison, Francesco dell’Isola; Proceedings of the Royal Society A Mathematical Physical and Engineering Sciences; cited_by=88
+        ABS: We consider two 'comprehensive' modelling approaches for engineering fabrics. We distinguish the two approaches using the terms 'semi-discrete' and 'continuum', reflecting their natures. We demonstrate a fitting procedure, used to identify the constitutive parameters of the continuum model from pred
+  2022 [W4309200766 https://doi.org/10.1007/s00161-022-01169-6] Deformation patterns in a second-gradient lattice annular plate composed of “Spira mirabilis” fibers
+        Alessandro Ciallella, Francesco D’Annibale, Dionisio Del Vescovo; Continuum Mechanics and Thermodynamics; cited_by=64
+        ABS: Abstract In this paper, we aim to explore the mechanical potentialities of a material made of an orthogonal net of fibers arranged in logarithmic spirals. Therefore, an annular plate described with a second-gradient model is envisaged to evaluate the behavior of such material in a nonlinear elastic 
+  2021 [W3200531659 https://doi.org/10.3390/math9182316] A Massively Parallel Hybrid Finite Volume/Finite Element Scheme for Computational Fluid Dynamics
+        Laura Río-Martín, Saray Busto, Michael Dumbser; Mathematics; cited_by=20
+        ABS: In this paper, we propose a novel family of semi-implicit hybrid finite volume/finite element schemes for computational fluid dynamics (CFD), in particular for the approximate solution of the incompressible and compressible Navier-Stokes equations, as well as for the shallow water equations on stagg
+  2022 [W4296009072 https://doi.org/10.1016/j.ijmecsci.2022.107741] Systematic design of Cauchy symmetric structures through Bayesian optimization
+        Haris Moazam Sheikh, Timon Meier, Brian W. Blankenship; International Journal of Mechanical Sciences; cited_by=60
+  2022 [W4210481277 https://doi.org/10.1007/s11071-022-07199-8] Nonlinear wave propagation in locally dissipative metamaterials via Hamiltonian perturbation approach
+        Alessandro Fortunati, Andrea Bacigalupo, Marco Lepidi; Nonlinear Dynamics; cited_by=33
+  2016 [W2564651828 https://doi.org/10.1155/2016/9675604] On Finite Element Computations of Contact Problems in Micropolar Elasticity
+        Victor A. Eremeyev, Andrzej Skrzat, Feliks Stachowicz; Advances in Materials Science and Engineering; cited_by=17
+        ABS: Within the linear micropolar elasticity we discuss the development of new finite element and its implementation in commercial software. Here we implement the developed 8-node hybrid isoparametric element into ABAQUS and perform solutions of contact problems. We consider the contact of polymeric stam
+  2022 [W4285231519 https://doi.org/10.1109/tro.2022.3158194] Advanced Turning Maneuver of a Many-Legged Robot Using Pitchfork Bifurcation
+        Shinya Aoi, Ryoe Tomatsu, Yuki Yabuuchi; IEEE Transactions on Robotics; cited_by=5
+        ABS: Legged robots have excellent terrestrial mobility for traversing diverse environments and, thus, have the potential to be deployed in a wide variety of scenarios. However, they are susceptible to falling and leg malfunction during locomotion. Although the use of a large number of legs can overcome t
+
+=== oaft: 'Wirsching balls constrained urns Cantor-like sets' ===
+  1998 [W1979442699 https://doi.org/10.4171/zaa/863] Cantor Sets and Integral-Functional Equations
+        Lothar Berg, Manfred Krüppel; Zeitschrift für Analysis und ihre Anwendungen; cited_by=8
+        ABS: In this paper, we continue our considerations in [1] on a homogeneous integral-functional equation with a parameter a &gt; 1 . In the case of a &gt; 2 the solution \phi satisfies relations containing polynomials. By means of these polynomial relations the solution can explicitly be computed on a Can
+
+=== oaft: 'infinite generalized uniform sum distribution geometric coefficients' ===
+  1998 [W2112796928 https://doi.org/10.1109/5.726791] Gradient-based learning applied to document recognition
+        Yann LeCun, Léon Bottou, Yoshua Bengio; Proceedings of the IEEE; cited_by=58790
+        ABS: Multilayer neural networks trained with the back-propagation algorithm constitute the best example of a successful gradient based learning technique. Given an appropriate network architecture, gradient-based learning algorithms can be used to synthesize a complex decision surface that can classify h
+  2004 [W2063978378 https://doi.org/10.1214/009053604000000067] Least angle regression
+        Bradley Efron, Trevor Hastie, Iain M. Johnstone; The Annals of Statistics; cited_by=9518
+        ABS: The purpose of model selection algorithms such as All Subsets, Forward Selection and Backward Elimination is to choose a linear model on the basis of the same set of data to which the model will be applied. Typically we have available a large collection of possible covariates from which we hope to s
+  2001 [W1678356000 https://doi.org/10.1214/aos/1013203451] Greedy function approximation: A gradient boosting machine.
+        Jerome H. Friedman; The Annals of Statistics; cited_by=29500
+        ABS: Function estimation/approximation is viewed from the perspective of numerical optimization in function space, rather than parameter space. A connection is made between stagewise additive expansions and steepest-descent minimization. A general gradient descent “boosting” paradigm is developed for add
+  1997 [W2087309226 https://doi.org/10.1214/aop/1024404422] The two-parameter Poisson-Dirichlet distribution derived from a stable subordinator
+        Jim Pitman, Marc Yor; The Annals of Probability; cited_by=1259
+        ABS: The two-parameter Poisson-Dirichlet distribution, denoted $\mathsf{PD}(\alpha, \theta)$ is a probability distribution on the set of decreasing positive sequences with sum 1. The usual Poisson-Dirichlet distribution with a single parameter $\theta$, introduced by Kingman, is $\mathsf{PD}(0, \theta)$.
+  1999 [W1698081298 https://doi.org/10.1090/s0273-0979-99-00776-4] Analytic and geometric background of recurrence and non-explosion of the Brownian motion on Riemannian manifolds
+        Alexander Grigorʼyan; Bulletin of the American Mathematical Society; cited_by=871
+        ABS: We provide an overview of such properties of the Brownian motion on complete non-compact Riemannian manifolds as recurrence and non-explosion. It is shown that both properties have various analytic characterizations, in terms of the heat kernel, Green function, Liouville properties, etc. On the othe
+  2009 [W2132262459 https://doi.org/10.1002/jcc.21287] CHARMM: The biomolecular simulation program
+        Bernard R. Brooks, Charles L. Brooks, Alexander D. MacKerell; Journal of Computational Chemistry; cited_by=9204
+        ABS: CHARMM (Chemistry at HARvard Molecular Mechanics) is a highly versatile and widely used molecular simulation program. It has been developed over the last three decades with a primary focus on molecules of biological interest, including proteins, peptides, lipids, nucleic acids, carbohydrates, and sm
+  1978 [W3137404195 https://doi.org/10.2307/3574835] A Generalized Formulation of Dual Radiation Action
+        Albrecht M. Kellerer, Harald H. Rossi; Radiation Research; cited_by=389
+        ABS: Dual radiation action is a process in which cellular lesions are produced as a result of the interaction of pairs of sublesions that are molecular alterations produced by ionizing radiation.Previous formulations of this process have employed a number of simplifying assumptions that limit the accurac
+  1995 [W2047626766 https://doi.org/10.1090/s0002-9947-1995-1672406-7] Geometrical evolution of developed interfaces
+        P. de Mottoni, Michelle Schatzman; Transactions of the American Mathematical Society; cited_by=235
+        ABS: Consider the reaction-diffusion equation in <inline-formula content-type="math/mathml"> <mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" alttext="double-struck upper R Superscript upper N Baseline times double-struck upper R Superscript plus Baseline colon u Subscript t Baseline minus h squa
+  2016 [W4292875581 https://doi.org/10.1051/0004-6361/201525830] <i>Planck</i>2015 results
+        P. A. R. Ade, N. Aghanim, M. Arnaud; Astronomy and Astrophysics; cited_by=10705
+        ABS: We present results based on full-mission Planck observations of temperature and polarization anisotropies of the CMB. These data are consistent with the six-parameter inflationary LCDM cosmology. From the Planck temperature and lensing data, for this cosmology we find a Hubble constant, H0= (67.8 +/
+  2018 [W2605947465 https://doi.org/10.1214/17-ba1091] Using Stacking to Average Bayesian Predictive Distributions (with Discussion)
+        Yuling Yao, Aki Vehtari, Daniel Simpson; Bayesian Analysis; cited_by=488
+        ABS: Bayesian model averaging is flawed in the M-open setting in which the true data-generating process is not one of the candidate models being fit. We take the idea of stacking from the point estimation literature and generalize to the combination of predictive distributions. We extend the utility func
+  1996 [W1990420052 https://doi.org/10.1214/ss/1038425655] Flexible smoothing with B-splines and penalties
+        Paul H.C. Eilers, Brian D. Marx; Statistical Science; cited_by=3707
+        ABS: B-splines are attractive for nonparametric modelling, but choosing the optimal number and positions of knots is a complex task. Equidistant knots can be used, but their small and discrete number allows only limited control over smoothness and fit. We propose to use a relatively large number of knots
+  1999 [W2116604774 https://doi.org/10.1103/physrevd.60.014018] Harmonic sums and Mellin transforms up to two-loop order
+        J. Blümlein, Stefan Kurth; Physical review. D. Particles, fields, gravitation, and cosmology/Physical review. D. Particles and fields; cited_by=366
+        ABS: A systematic study is performed on the finite harmonic sums up to level four. These sums form the general basis for the Mellin transforms of all individual functions ${f}_{i}(x)$ of the momentum fraction x emerging in the quantities of massless QED and QCD up to two-loop order, as the unpolarized an
+  2011 [W1837874438 https://doi.org/10.1111/j.1467-9868.2011.00777.x] An Explicit Link between Gaussian Fields and Gaussian Markov Random Fields: The Stochastic Partial Differential Equation Approach
+        Finn Lindgren, Håvard Rue, Johan Lindström; Journal of the Royal Statistical Society Series B (Statistical Methodology); cited_by=2766
+        ABS: Summary Continuously indexed Gaussian fields (GFs) are the most important ingredient in spatial statistical modelling and geostatistics. The specification through the covariance function gives an intuitive interpretation of the field properties. On the computational side, GFs are hampered with the b
+  2017 [W2526510621 https://doi.org/10.1007/jhep05(2017)125] Local criticality, diffusion and chaos in generalized Sachdev-Ye-Kitaev models
+        Yingfei Gu, Xiao-Liang Qi, Douglas Stanford; Journal of High Energy Physics; cited_by=403
+        ABS: The Sachdev-Ye-Kitaev model is a (0 + 1)-dimensional model describing Majorana fermions or complex fermions with random interactions. This model has various interesting properties such as approximate local criticality (power law correlation in time), zero temperature entropy, and quantum chaos. In t
+  1991 [W2102201073 https://doi.org/10.1214/aos/1176347963] Multivariate Adaptive Regression Splines
+        Jerome H. Friedman; The Annals of Statistics; cited_by=8096
+        ABS: A new method is presented for flexible regression modeling of high dimensional data. The model takes the form of an expansion in product spline basis functions, where the number of basis functions as well as the parameters associated with each one (product degree and knot locations) are automaticall
+  1948 [W2041404167 https://doi.org/10.1002/j.1538-7305.1948.tb00917.x] A Mathematical Theory of Communication
+        Claude E. Shannon; Bell System Technical Journal; cited_by=9744
+        ABS: In this final installment of the paper we consider the case where the signals or the messages or both are continuously variable, in contrast with the discrete nature assumed until now. To a considerable extent the continuous case can be obtained through a limiting process from the discrete case by d
+  1962 [W1510184633 https://doi.org/10.1016/s0065-2156(08)70121-2] The Mathematical Theory of Equilibrium Cracks in Brittle Fracture
+        Г. И. Баренблатт; Advances in applied mechanics; cited_by=5172
+  1981 [W2035464912 https://doi.org/10.1090/s0273-0979-1981-14930-2] The determination of Gauss sums
+        Bruce C. Berndt, Ronald J. Evans; Bulletin of the American Mathematical Society; cited_by=205
+  2018 [W2902384106 https://doi.org/10.1186/s40488-018-0088-5] Analytical properties of generalized Gaussian distributions
+        Alex Dytso, Ronit Bustin, H. Vincent Poor; Journal of Statistical Distributions and Applications; cited_by=69
+        ABS: The family of Generalized Gaussian (GG) distributions has received considerable attention from the engineering community, due to the flexible parametric form of its probability density function, in modeling many physical phenomena. However, very little is known about the analytical properties of thi
+  1997 [W2092583264 https://doi.org/10.1103/revmodphys.69.731] Random-matrix theory of quantum transport
+        C. W. J. Beenakker; Reviews of Modern Physics; cited_by=2552
+        ABS: This is a review of the statistical properties of the scattering matrix of a mesoscopic system. Two geometries are contrasted: A quantum dot and a disordered wire. The quantum dot is a confined region with a chaotic classical dynamics, which is coupled to two electron reservoirs via point contacts. 
+

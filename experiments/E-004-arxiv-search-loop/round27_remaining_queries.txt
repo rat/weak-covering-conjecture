@@ -1,0 +1,7 @@
+digit restrictions residue classes Markov chain sofic shift
+Saavedra-Araya distribution integers digit restrictions Markov chains
+congruence transfer operator finite quotient semigroup counting
+Magee Oh Winter uniform congruence counting Schottky semigroups
+rational formal series discrete Fourier transform local limit theorem regular language
+weighted finite automaton ambiguity growth number accepting paths entropy
+saddle point method pattern statistics regular languages weighted automaton

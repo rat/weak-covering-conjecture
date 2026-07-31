@@ -1,0 +1,473 @@
+
+### QUERY 'small deviations series independent positive random variables weights close exponential'  total=8 new=8
+  [NEW] 1706.02163v2 (2017-06) Phase Transitions in Edge-Weighted Exponential Random Graphs: Near-Degeneracy and Universality
+        Conventionally used exponential random graphs cannot directly model weighted networks as the underlying probability space consists of simple graphs only. Since many substantively important networks are weighted, this limitation is especially problematic. We ex
+  [NEW] 1401.4577v2 (2014-01) Large Deviations for Weighted Sums of Stretched Exponential Random Variables
+        We consider the probability that a weighted sum of $n$ i.i.d. random variables $X_j$, $j = 1, . . ., n$, with stretched exponential tails is larger than its expectation and determine the rate of its decay, under suitable conditions on the weights. We show that
+  [NEW] 1907.07386v2 (2019-07) Large deviations for infinite weighted sums of stretched exponential random variables
+        We study the large deviation probabilities of infinite weighted sums of independent random variables that have stretched exponential tails. This generalizes Kiesel and Stadtmüller (2000), who study the same objects under the assumption of finite exponential mo
+  [NEW] 2311.05409v1 (2023-11) Moderate Deviations of Hitting Times for Trajectories of Sums of Independent and Identically Distributed Random Variables
+        In this paper we establish a moderate deviation principle of the hitting times for trajectories of sums of independent and identically distributed random variables. The main idea of proof is to convert the moderate deviations over a small time interval into th
+  [NEW] 1309.5603v4 (2013-09) Benford's Law and Continuous Dependent Random Variables
+        Many mathematical, man-made and natural systems exhibit a leading-digit bias, where a first digit (base 10) of 1 occurs not 11\% of the time, as one would expect if all digits were equally likely, but rather 30\%. This phenomenon is known as Benford's Law. Ana
+  [NEW] 1709.05771v3 (2017-09) Variational formulas, Busemann functions, and fluctuation exponents for the corner growth model with exponential weights
+        These lecture notes discuss several related features of the exactly solvable two-dimensional corner growth model with exponentially distributed weights. A key property of this model is the availability of a fairly explicit stationary version that possesses use
+  [NEW] cond-mat/0701343v2 (2007-01) Why is Random Close Packing Reproducible?
+        We link the thermodynamics of colloidal suspensions to the statistics of regular and random packings. Random close packing has defied a rigorous definition yet, in three dimensions, there is near universal agreement on the volume fraction at which it occurs. W
+  [NEW] 2209.05402v2 (2022-09) An Eisenstein series of rational weight
+        We study an Eisenstein series of weight $20/9$, level $11$ whose multiplier system is the same as $η^{44/9}(τ)η^{-4/9}(11τ)$. We prove that it is a modular form and obtain its Fourier expansion.
+
+### QUERY 'Borovkov Ruzankin small deviations exponential weights'  total=8 new=7
+  [NEW] 1708.09605v3 (2017-08) The exact asymptotics of the large deviation probabilities in the multivariate boundary crossing problem
+        For a multivariate random walk with i.i.d. jumps satisfying the Cramer moment condition and having a mean vector with at least one negative component, we derive the exact asymptotics of the probability of ever hitting the positive orthant that is being transla
+  [NEW] 1802.06577v2 (2018-02) The exact asymptotics for hitting probability of a remote orthant by a multivariate Lévy process: the Cramér case
+        For a multivariate Lévy process satisfying the Cramér moment condition and having a drift vector with at least one negative component, we derive the exact asymptotics of the probability of ever hitting the positive orthant that is being translated to infinity 
+  [NEW] 2302.11698v1 (2023-02) On extension of the Markov chain approximation method for computing Feynman--Kac type expectations
+        An efficient discrete time and space Markov chain approximation employing a Brownian bridge correction for computing curvilinear boundary crossing probabilities for general diffusion processes was recently proposed in Liang and Borovkov (2021). One of the adva
+  [NEW] 1503.02778v1 (2015-03) On approximation rates for boundary crossing probabilities for the multivariate Brownian motion process
+        Motivated by an approximation problem from mathematical finance, we analyse the stability of the boundary crossing probability for the multivariate Brownian motion process, with respect to small changes of the boundary. Under broad assumptions on the nature of
+  [old] 1706.02163v2 (2017-06) Phase Transitions in Edge-Weighted Exponential Random Graphs: Near-Degeneracy and Universality
+  [NEW] 1201.0836v3 (2012-01) Blackwell-type Theorems for Weighted Renewal Functions
+        For a numerical sequence ${a_n}$ satisfying broad assumptions on its "behaviour on average" and a random walk $S_n=ξ_1 +...+ξ_n$ with i.i.d. jumps $ξ_j$ with positive mean $μ$, we establish the asymptotic behaviour of the sums [\sum_{n\ge 1} a_n \pr (S_n\in[x,
+  [NEW] 1405.0578v4 (2014-05) Atomic decomposition for Bergman spaces with exponential type weights
+        We show that any function in a Bergman space with exponential type weights admits a representation in terms of an infinite series of kernel functions.
+  [NEW] 1006.3164v1 (2010-06) On an Extension of the Concept of Slowly Varying Function with Applications to Large Deviation Limit Theorems
+        Karamata's integral representation for slowly varying functions is extended to a broader class of the so-called $ψ$-locally constant functions, i.e. functions $f(x)>0$ having the property that, for a given non-decreasing function $ψ(x)$ and any fixed $v$, $f (
+
+### QUERY 'Rozovsky comparison theorems small deviations weighted series'  total=8 new=8
+  [NEW] 1010.3362v1 (2010-10) A pointwise ergodic theorem for Fuchsian groups
+        We use Series' Markovian coding for words in Fuchsian groups and the Bowen-Series coding of limit sets to prove an ergodic theorem for Cesaro averages of spherical averages in a Fuchsian group.
+  [NEW] 1211.2344v1 (2012-11) Comparison theorems for the small ball probabilities of Gaussian processes in weighted $L_2$-norms
+        We prove comparison theorems for small ball probabilities of the Green Gaussian processes in weighted $L_2$-norms. We find the sharp small ball asymptotics for many classical processes under quite general assumptions on the weight.
+  [NEW] 1409.6863v1 (2014-09) The diagonal slice of Schottky space
+        An irreducible representation of the free group on two generators X,Y into SL(2,C) is determined up to conjugation by the traces of X,Y and XY. We study the diagonal slice of representations for which X,Y and XY have equal trace. Using the three-fold symmetry 
+  [NEW] 1401.2256v2 (2014-01) Random walks on quasi one dimensional lattices: large deviations and fluctuation theorems
+        Several stochastic processes modeling molecular motors on a linear track are given by random walks (not necessarily Markovian) on quasi 1d lattices and share a common regenerative structure. Analyzing this abstract common structure, we derive information on th
+  [NEW] 0902.3241v1 (2009-02) The Penrose inequality in general relativity and volume comparison theorems involving scalar curvature (thesis)
+        In this thesis we describe how minimal surface techniques can be used to prove the Penrose inequality in general relativity for two classes of 3-manifolds. We also describe how a new volume comparison theorem involving scalar curvature for 3-manifolds follows 
+  [NEW] 1210.1206v2 (2012-10) Weighted convolution inequalities for radial functions
+        We obtain convolution inequalities in Lebesgue and Lorentz spaces with power weights when the functions involved are assumed to be radially symmetric. We also present applications of these results to inequalities for Riesz potentials of radial functions in wei
+  [NEW] 2007.00219v2 (2020-07) Comparison theorems on weighted Finsler manifolds and spacetimes with $ε$-range
+        We establish the Bonnet-Myers theorem, Laplacian comparison theorem, and Bishop-Gromov volume comparison theorem for weighted Finsler manifolds as well as weighted Finsler spacetimes, of weighted Ricci curvature bounded below by using the weight function. Thes
+  [NEW] 1102.4156v1 (2011-02) Applications of Toponogov's comparison theorems for open triangles
+        Recently we generalized Toponogov's comparison theorem to a complete Riemannian manifold with smooth convex boundary, where a geodesic triangle was replaced by an open (geodesic) triangle standing on the boundary of the manifold, and a model surface was replac
+
+### QUERY 'Rozovsky fast decreasing weights small deviations'  total=8 new=8
+  [NEW] 2304.11895v2 (2023-04) Performance of FAST with an Ultra-Wide Bandwidth Receiver at 500-3300 MHz
+        The Five-hundred-meter Aperture Spherical radio Telescope (FAST) has been running for several years. A new Ultra-Wide Bandwidth (UWB) receiver, simultaneously covering 500-3300 MHz, has been mounted in the FAST feed cabin and passed a series of observational t
+  [NEW] 2105.02783v1 (2021-04) A Pilot Study of Interplanetary Scintillation with FAST
+        Observations of Interplanetary Scintillation (IPS) are an efficient remote-sensing method to study the solar wind and inner heliosphere. From 2016 to 2018, some distinctive observations of IPS sources like 3C 286 and 3C 279 were accomplished with the Five-hund
+  [NEW] 1903.06364v1 (2019-03) Study of Three Rotating Radio Transients with FAST
+        Rotating radio transients (RRATs) are peculiar astronomical objects whose emission mechanism remains under investigation. In this paper, we present observations of three RRATs, J1538+2345, J1854+0306 and J1913+1330, observed with the Five-hundred-meter Apertur
+  [NEW] 2012.01683v1 (2020-12) Predictions for the FAST telescope's CRAFTS Extra-Galactic HI Survey
+        The Five-hundred-meter Aperture Spherical radio Telescope (FAST) has started the Commensal Radio Astronomy FasT Survey (CRAFTS). In this paper, we use the technical parameters of FAST derived from commissioning observations to simulate the completeness functio
+  [NEW] 2002.01786v1 (2020-02) The Fundamental Performance of FAST with 19-beam Receiver at L Band
+        The Five-hundred-meter Aperture Spherical radio Telescope (FAST) passed national acceptance and is taking pilot cycle of 'Shared-Risk' observations. The 19-beam receiver covering 1.05-1.45 GHz was used for most of these observations. The electronics gain fluct
+  [NEW] 2607.16033v1 (2026-07) Fast ungated five-dimensional cardiac MRI on a 1.5 T MR-linac for MRI-guided radiotherapy
+        Background: Stereotactic arrhythmia radio-ablation (STAR) for patients with ventricular tachycardia is currently limited by complex cardiorespiratory motion. Current 5D-MRI motion models require long acquisition and reconstruction times, limiting clinical viab
+  [NEW] 1903.06362v1 (2019-03) The Radiation Structure of PSR B2016$+$28 Observed with FAST
+        With the largest dish Five-hundred-meter Aperture Spherical radio Telescope (FAST), both the mean and single pulses of PSR B2016$+$28, especially including the single-pulse structure, are investigated in detail in this study. The mean pulse profiles at differe
+  [NEW] 1903.06318v1 (2019-03) The First Pulsar Discovered by FAST
+        To assist with the commissioning (Jiang et al. 2019) of the Five-hundred-meter Aperture Spherical radio Telescope (FAST), we performed a pulsar search, with the primary goal of developing and testing the pulsar data acquisition and processing pipelines. We tes
+
+### QUERY 'Aurzada small deviations exponentially decreasing weights'  total=8 new=7
+  [NEW] 0804.1883v2 (2008-04) Small deviations of stable processes and entropy of the associated random operators
+        We investigate the relation between the small deviation problem for a symmetric $α$-stable random vector in a Banach space and the metric entropy properties of the operator generating it. This generalizes former results due to Li and Linde and to Aurzada. It i
+  [NEW] 1009.5580v2 (2010-09) Small deviations for a family of smooth Gaussian processes
+        We study the small deviation probabilities of a family of very smooth self-similar Gaussian processes. The canonical process from the family has the same scaling property as standard Brownian motion and plays an important role in the study of zeros of random p
+  [NEW] 1810.09861v2 (2018-10) Persistence exponents via perturbation theory: AR(1)-processes
+        For AR(1)-processes $X_n=ρX_{n-1}+ξ_n$, $n\in\mathbb{N}$, where $ρ\in\mathbb{R}$ and $(ξ_i)_{i\in\mathbb{N}}$ is an i.i.d. sequence of random variables, we study the persistence probabilities $\mathbb{P}(X_0\ge 0,\dots, X_N\ge 0)$ for $N\to\infty$. For a wide 
+  [NEW] 0711.2576v2 (2007-11) A short note on small deviations of sequences of i.i.d. random variables with exponentially decreasing weights
+        We obtain some new results concerning the small deviation problem for $S=\sum_n q^n X_n$ and $M=\sup_n q^n X_n$, where $0<q<1$ and $(X_n)$ are i.i.d. non-negative random variables. In particular, the asymptotics is shown to be the same for $S$ and $M$ in some 
+  [old] 1907.07386v2 (2019-07) Large deviations for infinite weighted sums of stretched exponential random variables
+  [NEW] 0905.3358v1 (2009-05) Path regularity of Gaussian processes via small deviations
+        We study the a.s. sample path regularity of Gaussian processes. To this end we relate the path regularity directly to the theory of small deviations. In particular, we show that if the process is $n$-times differentiable then the exponential rate of decay of i
+  [NEW] 0805.1330v2 (2008-05) Small deviations of general Lévy processes
+        We study the small deviation problem $\log\mathbb{P}(\sup_{t\in[0,1]}|X_t|\leq\varepsilon)$, as $\varepsilon\to0$, for general Lévy processes $X$. The techniques enable us to determine the asymptotic rate for general real-valued Lévy processes, which we demons
+  [NEW] 0806.2559v1 (2008-06) On the Small Deviation Problem for Some Iterated Processes
+        We derive general results on the small deviation behavior for some classes of iterated processes. This allows us, in particular, to calculate the rate of the small deviations for $n$-iterated Brownian motions and, more generally, for the iteration of $n$ fract
+
+### QUERY 'generalized Fabius function base 3 endpoint asymptotics'  total=8 new=8
+  [NEW] 1702.06487v3 (2017-02) Arithmetic of the Fabius function
+        I solve here a question of Vladimir Reshetnikov in Mathoverflow (question 261649) about the values of Fabius function. Namely, I prove that the numbers $R_n:=2^{-\binom{n-1}{2}}(2n)! F(2^{-n})\prod_{m=1}^{\lfloor n/2\rfloor}(2^{2m}-1)$ are integers. We show al
+  [NEW] 1511.03021v1 (2015-11) Asymptotics of the convolution of the Airy function and a function of the power-like behavior
+        The asymptotic behavior of the convolution-integral of a special form of the Airy function and a function of the power-like behavior at infinity is obtained. The integral under consideration is the solution of the Cauchy problem for an evolutionary third-order
+  [NEW] 1609.07999v2 (2016-09) Evaluating the Fabius function
+        The Thue-Morse sequence (1, -1, -1, 1, -1, 1, 1, ...) can in a sense be naturally extended to a continuous function f called the Fabius function. It is shown how to determine the exact value of f(x) whenever x is the ratio between a positive integer and a powe
+  [NEW] 2107.12993v2 (2021-07) Endpoint Relations for Baryons
+        Following our earlier work we establish kinematic endpoint relations for baryon decays using the Wigner-Eckart theorem and apply them to $\frac{1}{2} \to \frac{1}{2}$ and $\frac{1}{2} \to \frac{3}{2}$ baryon transitions. We provide angular distributions at the
+  [NEW] 1303.4033v1 (2013-03) Two-dimensional magnetic interactions in LaFeAsO
+        Inelastic neutron scattering measurements demonstrate that the magnetic interactions in antiferromagnetic LaFeAsO are two-dimensional. Spin wave velocities within the Fe layer and the magnitude of the spin gap are similar to the \textit{A}Fe$_2$As$_2$ based ma
+  [NEW] 1510.09132v2 (2015-10) The Endpoint Perturbed Brascamp-Lieb Inequality with Examples
+        We prove the folklore endpoint multilinear $k_j$-plane conjecture originated from the paper \cite{bennett2006multilinear} of Bennett, Carbery and Tao. Along the way we prove a more general result, namely the endpoint multilinear $k_j$-variety theorem. Finally,
+  [NEW] 1703.01904v1 (2017-03) A recurrence relation for the odd order moments of the Fabius function
+        A simple recurrence relation for the even order moments of the Fabius function is proven. Also, a very similar formula for the odd order moments in terms of the even order moments is proved. The matrices corresponding to these formulas (and their inverses) are
+  [NEW] hep-ph/0511066v2 (2005-11) Deep inelastic scattering near the endpoint in soft-collinear effective theory
+        We apply the soft-collinear effective theory (SCET) to deep inelastic scattering near the endpoint region. The forward scattering amplitude, and the structure functions are shown to factorize as a convolution of the Wilson coefficients, the jet functions, the 
+
+### QUERY 'Rvachev atomic function up-function asymptotics infinite convolution'  total=8 new=7
+  [old] 1511.03021v1 (2015-11) Asymptotics of the convolution of the Airy function and a function of the power-like behavior
+  [NEW] 2505.24580v3 (2025-05) Surface Waves and Axoplasmic Pressure Waves in Action Potential Propagation: Fundamentally Different Physics or Two Sides of the Same Coin?
+        In this commentary, we argue that El Hady and Machta's "surface wave" model for mechanical waves accompanying action potential (AP) propagation describes the same underlying process as the "axoplasmic pressure wave" model introduced earlier by Rvachev. Both mo
+  [NEW] 1305.2313v2 (2013-05) Accelerated Thermalisation of 39K atoms in a Magnetic Trap with Superimposed Optical Potential
+        We report the rapid accelerated thermalisation of Potassium 39 K atoms loaded in a magnetic trap, in the presence of a single dipole trap beam. More than an order of magnitude reduction in the thermalisation time, to less than a second, is observed with the fo
+  [NEW] 1902.01595v1 (2019-02) Integral means inequalities, convolution, and univalent functions
+        We use the Baernstein star-function to investigate several questions about the integral means of the convolution of two analytic functions in the unit disc. The theory of univalent functions plays a basic role in our work.
+  [NEW] 2603.06890v1 (2026-03) Magic partition functions: Sign smoothing convolutions with Dirichlet invertible arithmetic functions
+        Sign changes in sums of arithmetic functions and their inverses are a subtle topic with room to grow new results. Suppose that $S_f(x) := \sum_{n \leq x} f(n)$ is the summatory function of some arithmetic function $f$ such that $f(1) \neq 1$. There are known l
+  [NEW] 2003.09703v1 (2020-03) Variance function of boolean additive convolution
+        Suppose Vν is the pseudo-variance function of the Cauchy-Stieltjes Kernel (CSK) family K+(ν) generated by a non degenerate probability measure ν with support bounded from above. We determine the formula for pseudo-variance function (or variance function Vν in 
+  [NEW] physics/9902072v1 (1999-02) Optical dipole traps for neutral atoms
+        The subject of this review are atom traps based on optical dipole forces in laser fields, along with their unique features as storage devices at ultralow energies. The basic physics of the dipole interaction is discussed, and the experimental background of dip
+  [NEW] 1603.00320v1 (2016-03) An example of the Rvachev function method
+        We present a Rvachev function method with the Chebysev collocation for the stability analysis of fluid flow. The strategy is to construct an approximate solution that satisfies all boundary conditions exactly. As an example, we consider the stability problem o
+
+### QUERY 'advanced pantograph equation flat solution asymptotics'  total=8 new=8
+  [NEW] 1605.01128v1 (2016-05) Long-time asymptotics of solutions of the heat equation
+        The long-time asymptotics of solutions of the Cauchy problem for the heat equation are constructed in the case when the initial function at infinity has power asymptotics.
+  [NEW] math/0703897v2 (2007-03) On bounded solutions of the balanced generalized pantograph equation
+        The question about the existence and characterization of bounded solutions to linear functional-differential equations with both advanced and delayed arguments was posed in early 1970s by T. Kato in connection with the analysis of the pantograph equation, y'(x
+  [NEW] 2410.16435v2 (2024-10) Characterisation of asymptotic behaviour of perturbed deterministic and stochastic pantograph equations
+        This paper considers the asymptotic behaviour of deterministically and stochastically forced linear pantograph equations. The asymptotic behaviour is studied in the case when all solutions of the pantograph equation without forcing tend to a trivial equilibriu
+  [NEW] 1607.00423v1 (2016-07) Sufficient Conditions for Polynomial Asymptotic Behaviour of the Stochastic Pantograph Equation
+        This paper studies the asymptotic growth and decay properties of solutions of the stochastic pantograph equation with multiplicative noise. We give sufficient conditions on the parameters for solutions to grow at a polynomial rate in $p$-th mean and in the alm
+  [NEW] 2108.01248v1 (2021-08) Stability of Numerical Solution to Pantograph Stochastic Functional Differential Equations
+        In this paper, we study the convergence of the Euler-Maruyama numerical solutions for pantograph stochastic functional differential equations which was proposed in [11]. We also show that the numerical solutions have the properties of almost surely polynomial 
+  [NEW] math/0703818v1 (2007-03) Stability and exact multiplicity of periodic solutions of Duffing equations with cubic nonlinearities
+        We study the stability and exact multiplicity of periodic solutions of the Duffing equation with cubic nonlinearities. We obtain sharp bounds for h such that the equation has exactly three ordered T-periodic solutions. Moreover, when h is within these bounds, 
+  [NEW] 1012.2246v2 (2010-12) A large class of non constant mean curvature solutions of the Einstein constraint equations on an asymptotically hyperbolic manifold
+        We construct solutions of the constraint equation with non constant mean curvature on an asymptotically hyperbolic manifold by the conformal method. Our approach consists in decreasing a certain exponent appearing in the equations, constructing solutions of th
+  [NEW] 2101.08173v2 (2021-01) Quasirandom Graphs and the Pantograph Equation
+        The pantograph differential equation and its solution, the deformed exponential function, are remarkable objects that appear in areas as diverse as combinatorics, number theory, statistical mechanics, and electrical engineering. In this article we describe a n
+
+### QUERY 'Derfel Grabner Tichy pantograph asymptotics zeros'  total=8 new=6
+  [NEW] 1612.06226v1 (2016-12) On the asymptotic behaviour of the zeros of solutions of one functional-differential equation with rescaling
+        We study the asymptotic behaviour of the solutions of a functional- differential equation with rescaling, the so-called pantograph equation. From this we derive asymptotic information about the zeros of these solutions.
+  [NEW] 0704.3952v2 (2007-04) Complex asymptotics of Poincaré functions and properties of Julia sets
+        The asymptotic behaviour of the solutions of Poincaré's functional equation $f(λz)=p(f(z))$ ($λ>1$) for $p$ a real polynomial of degree $\geq2$ is studied in angular regions of the complex plain. The constancy of an occurring periodic function is characterised
+  [NEW] 0704.0628v2 (2007-04) Black hole puncture initial data with realistic gravitational wave content
+        We present improved post-Newtonian-inspired initial data for non-spinning black-hole binaries, suitable for numerical evolution with punctures. We revisit the work of Tichy et al. [W. Tichy, B. Bruegmann, M. Campanelli, and P. Diener, Phys. Rev. D 67, 064008 (
+  [old] math/0703897v2 (2007-03) On bounded solutions of the balanced generalized pantograph equation
+  [NEW] 2502.14979v1 (2025-02) Error norm estimates for the block conjugate gradient algorithm
+        In the book [Meurant and Tichy, SIAM, 2024] we discussed the estimation of error norms in the conjugate gradient (CG) algorithm for solving linear systems $Ax=b$ with a symmetric positive definite matrix $A$, where $b$ and $x$ are vectors. In this paper, we ge
+  [NEW] math/0508315v2 (2005-08) The Zeta Function of the Laplacian on Certain Fractals
+        We prove that the zeta-function $ζ_Δ$ of the Laplacian $Δ$ on a self-similar fractals with spectral decimation admits a meromorphic continuation to the whole complex plane. We characterise the poles, compute their residues, and give expressions for some specia
+  [NEW] 1206.1211v1 (2012-06) Laplace Operators on Fractals and Related Functional Equations
+        We give an overview over the application of functional equations, namely the classical Poincaré and renewal equations, to the study of the spectrum of Laplace operators on self-similar fractals. We compare the techniques used to those used in the euclidean sit
+  [old] 1607.00423v1 (2016-07) Sufficient Conditions for Polynomial Asymptotic Behaviour of the Stochastic Pantograph Equation
+
+### QUERY 'Daubechies Lagarias two-scale difference equations'  total=8 new=8
+  [NEW] 1109.5967v1 (2011-09) Persistence for stochastic difference equations: A mini-review
+        Understanding under what conditions populations, whether they be plants, animals, or viral particles, persist is an issue of theoretical and practical importance in population biology. Both biotic interactions and environmental fluctuations are key factors tha
+  [NEW] 1009.6163v1 (2010-09) Bohl-Perron type stability theorems for linear difference equations with infinite delay
+        Relation between two properties of linear difference equations with infinite delay is investigated: (i) exponential stability, (ii) $ł^p$-input $ł^q$-state stability (sometimes is called Perron's property). The latter means that solutions of the non-homogeneou
+  [NEW] 2006.14391v3 (2020-06) Ladder operators and a second--order difference equation for general discrete Sobolev orthogonal polynomials
+        We consider a general discrete Sobolev inner product involving the Hahn difference operator, so this includes the well--known difference operators $\mathscr{D}_{q}$ and $Δ$ and, as a limit case, the derivative operator. The objective is twofold. On the one han
+  [NEW] 1301.2804v1 (2013-01) Semiconjugate Factorizations of Higher Order Linear Difference Equations in Rings
+        We study linear difference equations with variable coefficients in a ring using a new nonlinear method. In a ring with identity, if the homogeneous part of the linear equation has a solution in the unit group of the ring (i.e., a unitary solution) then we show
+  [NEW] 0906.3239v1 (2009-06) New Stability Conditions for Linear Difference Equations using Bohl-Perron Type Theorems
+        The Bohl-Perron result on exponential dichotomy for a linear difference equation $$ x(n+1)-x(n) + \sum_{l=1}^m a_l(n)x(h_l(n))=0, h_l(n)\leq n, $$ states (under some natural conditions) that if all solutions of the non-homogeneous equation with a bounded right
+  [NEW] 2310.00903v3 (2023-10) Symmetric Solutions to Symmetric Partial Difference Equations
+        This paper studies systems of linear difference equations on the lattice $\Z^n$ that are invariant under a finite group of symmetries, and shows that there exist solutions to such systems that are also invariant under this group of symmetries.
+  [NEW] 1501.02994v3 (2015-01) $q$-Borel-Laplace summation for $q$-difference equations with two slopes
+        In this paper, we consider linear $q$-difference systems with coefficients that are germs of meromorphic functions, with Newton polygon that has two slopes. Then, we explain how to compute similar meromorphic gauge transformations than those appearing in the w
+  [NEW] 1103.4681v2 (2011-03) Conformal Wasserstein Distance: II. Computational Aspects and Extensions
+        This paper is a companion paper to [Lipman and Daubechies 2011]. We provide numerical procedures and algorithms for computing the alignment of and distance between two disk type surfaces. We provide a convergence analysis of the discrete approximation to the a
+
+### QUERY 'Wirsching balls constrained urns Cantor-like sets'  total=8 new=8
+  [NEW] 1403.6554v1 (2014-03) On Cantor-like sets and Cantor-Lebesgue singular functions
+        In this paper we discuss several variations and generalizations of the Cantor set and study some of their properties. Also for each of those generalizations a Cantor-like function can be constructed from the set. We will discuss briefly the possible constructi
+  [NEW] 1411.7110v2 (2014-11) Excursions on Cantor-like Sets
+        The ternary Cantor set $C$, constructed by George Cantor in 1883, is probably the best known example of a perfect nowhere-dense set in the real line, but as we will see later, it is not the only one. The present article we will explore the richness, the peculi
+  [NEW] 1101.2786v6 (2011-01) Randomized Urn Models revisited using Stochastic Approximation
+        This paper presents the link between stochastic approximation and clinical trials based on randomized urn models investigated in Bai and Hu (1999,2005) and Bai, Hu and Shen (2002). We reformulate the dynamics of both the urn composition and the assigned treatm
+  [NEW] 0901.3493v1 (2009-01) Normal approximation for isolated balls in an urn allocation model
+        Consider throwing $n$ balls at random into $m$ urns, each ball landing in urn $i$ with probability $p_i$. Let $S$ be the resulting number of singletons, i.e., urns containing just one ball. We give an error bound for the Kolmogorov distance from $S$ to the nor
+  [NEW] 1404.4409v3 (2014-04) Assouad dimensions of Moran sets and Cantor-like sets
+        We obtain the Assouad dimensions of Moran sets under suitable condition. Using the homogeneous set, we also study the Assouad dimensions of Cantor-like sets.
+  [NEW] 1106.0526v2 (2011-06) Intrinsic Approximation on Cantor-like Sets, a Problem of Mahler
+        In 1984, Kurt Mahler posed the following fundamental question: How well can irrationals in the Cantor set be approximated by rationals in the Cantor set? Towards development of such a theory, we prove a Dirichlet-type theorem for this intrinsic diophantine app
+  [NEW] 2302.01644v3 (2023-02) On packing of Minkowski balls. II
+        This is the continuation of the author's ArXiv presentation "On packing of Minkowski balls. I". In section 2 we investigate lattice packings of Minkowski balls and domains. By results of the proof of Minkowski conjecture about the critical determinant we devid
+  [NEW] 2211.08664v1 (2022-11) An non-centered asymmetric Cantor-like Set
+        The ternary Cantor set $C$, constructed by George Cantor in 1883, is probably the best-known example of a perfect nowhere-dense set in the real line, but as we will see later, it is not the only one. The present article will delve into the richness and the pec
+
+### QUERY 'constrained urns asymptotically geometric capacities invariant density'  total=8 new=7
+  [old] 1101.2786v6 (2011-01) Randomized Urn Models revisited using Stochastic Approximation
+  [NEW] 1912.01035v1 (2019-12) Periodic Pólya Urns, the Density Method, and Asymptotics of Young Tableaux
+        Pólya urns are urns where at each unit of time a ball is drawn and replaced with some other balls according to its colour. We introduce a more general model: the replacement rule depends on the colour of the drawn ball and the value of the time ($\operatorname
+  [NEW] 1905.06663v1 (2019-05) Asymptotics of the overflow in urn models
+        Consider a number, finite or not, of urns each with fixed capacity $r$ and balls randomly distributed among them. An overflow is the number of balls that are assigned to urns that already contain $r$ balls. When $r=1$, using analytic methods, Hwang and Janson 
+  [NEW] math/0610752v1 (2006-10) An SL(2,C) Algebro-Geometric Invariant of Knots
+        In this paper, we define a new algebro-geometric invariant of 3-manifolds resulting from the Dehn surgery along a hyperbolic knot complement in S^3. We establish a Casson type invariant for these 3-manifolds. In the last section, we explicitly calculate the ch
+  [NEW] 2401.17245v3 (2024-01) Geometric universal Jones invariant from configurations on ovals in the disc
+        We construct geometrically a universal Jones invariant as a limit of invariants given by graded intersections in configuration spaces. For any fixed level $\mathscr N$, we define a new knot invariant, called ``$\mathscr N^{th}$ Unified Jones invariant'' global
+  [NEW] 1612.08930v3 (2016-12) Refined Asymptotics for the Composition of Cyclic Urns
+        A cyclic urn is an urn model for balls of types $0,\ldots,m-1$. The urn starts at time zero with an initial configuration. Then, in each time step, first a ball is drawn from the urn uniformly and independently from the past. If its type is $j$, it is then ret
+  [NEW] 1407.2879v2 (2014-07) Describing the asymptotic behaviour of multicolour Pólya urns via smoothing systems analysis
+        The present paper aims at describing in details the asymptotic composition of a class of d-colour Pólya urn: namely balanced, tenable and irreducible urns. We decompose the composition vector of such urns according to the Jordan decomposition of their replacem
+  [NEW] 1804.01458v1 (2018-04) Shape-Constrained Univariate Density Estimation
+        While the problem of estimating a probability density function (pdf) from its observations is classical, the estimation under additional shape constraints is both important and challenging. We introduce an efficient, geometric approach for estimating pdfs give
+
+### QUERY 'infinite generalized uniform sum distribution geometric coefficients'  total=8 new=8
+  [NEW] 2002.08190v1 (2020-02) On Hilbert's sum type inequalities
+        The main purpose of the present article is to give some new Hilbert's sum type inequalities, which in special cases yield the classical Hilbert's inequalities. Our results provide some new estimates to these types of inequalities.
+  [NEW] 1608.00628v2 (2016-08) Stationary Gap Distributions for Infinite Systems of Competing Brownian Particles
+        Consider the infinite Atlas model: a semi-infinite collection of particles driven by independent standard Brownian motions with zero drifts, except for the bottom-ranked particle which receives unit drift. We derive a continuum one-parameter family of product-
+  [NEW] 1004.0911v1 (2010-04) A New Generalized Kumaraswamy Distribution
+        A new five-parameter continuous distribution which generalizes the Kumaraswamy and the beta distributions as well as some other well-known distributions is proposed and studied. The model has as special cases new four- and three-parameter distributions on the 
+  [NEW] math/0311133v1 (2003-11) Renewal Theory and Geometric Infinite Divisibility
+        The role of geometrically infinitely divisible laws in renewal equations and superposition of renewal processes are explored here. Some examples are also discussed.
+  [NEW] math/0512288v1 (2005-12) Infinite Dimensional Ito Algebras of Quantum White Noise
+        A simple axiomatic characterization of the general (infinite dimensional, noncommutative) Ito algebra is given and a pseudo-Euclidean fundamental representation for such algebra is described. The notion of Ito B*-algebra, generalizing the C*-algebra is defined
+  [NEW] 1210.5579v6 (2012-10) The partition algebra and the Kronecker coefficients
+        We propose a new approach to study the Kronecker coefficients by using the Schur-Weyl duality between the symmetric group and the partition algebra. We explain the limiting behavior and associated bounds in the context of the partition algebra. Our analysis le
+  [NEW] 2112.03057v1 (2021-12) Thinking Beyond Distributions in Testing Machine Learned Models
+        Testing practices within the machine learning (ML) community have centered around assessing a learned model's predictive performance measured against a test dataset, often drawn from the same distribution as the training dataset. While recent work on robustnes
+  [NEW] 2403.13102v1 (2024-03) Geometric methods in quantum information and entanglement variational principle
+        Geometrical methods in quantum information are very promising for both providing technical tools and intuition into difficult control or optimization problems. Moreover, they are of fundamental importance in connecting pure geometrical theories, like GR, to qu
+
+### QUERY 'Chaganty Sethuraman large deviation local limit theorems arbitrary sequences'  total=8 new=8
+  [NEW] 1011.1199v1 (2010-11) Nonequilibrium fluctuations for a tagged particle in one-dimensional sublinear rate zero-range processes
+        Nonequilibrium fluctuations of a tagged, or distinguished particle in a class of one dimensional mean-zero zero-range systems with sublinear, increasing rates are derived. In Jara-Landim-Sethuraman (2009), processes with at least linear rates are considered. A
+  [NEW] 2209.04628v1 (2022-09) Moderate deviations and local limit theorems for the coefficients of random walks on the general linear group
+        Consider the random walk $G_n : = g_n \ldots g_1$, $n \geq 1$, where $(g_n)_{n\geq 1}$ is a sequence of independent and identically distributed random elements with law $μ$ on the general linear group ${\rm GL}(V)$ with $V=\mathbb R^d$. Under suitable conditio
+  [NEW] 2101.01682v3 (2021-01) Large deviation Local Limit Theorems and limits of biconditioned Trees and Maps
+        We first establish new local limit estimates for the probability that a nondecreasing integer-valued random walk lies at time $n$ at an arbitrary value, encompassing in particular large deviation regimes. This enables us to derive scaling limits of such random
+  [NEW] 1106.4614v2 (2011-06) Large deviation principle for Benedicks-Carleson quadratic maps
+        Since the pioneering works of Jakobson and Benedicks & Carleson and others, it has been known that a positive measure set of quadratic maps admit invariant probability measures absolutely continuous with respect to Lebesgue. These measures allow one to statist
+  [NEW] 1709.09322v3 (2017-09) Breakdown of the Finite-Time and -Population Scalings of the Large Deviation Function in the Large-Size Limit of a Contact Process
+        In a recent study, the finite-time ($t$) and -population size ($N_c$) scalings in the evaluation of a large deviation function (LDF) estimator were analyzed by means of the cloning algorithm. These scalings provide valuable information about the convergence of
+  [NEW] math/0404230v2 (2004-04) Large deviations for a class of nonhomogeneous Markov chains
+        Large deviation results are given for a class of perturbed nonhomogeneous Markov chains on finite state space which formally includes some stochastic optimization algorithms. Specifically, let {P_n} be a sequence of transition matrices on a finite state space 
+  [NEW] 2509.07729v2 (2025-09) Permuton and local limits for the Luce model
+        We investigate the asymptotic properties of permutations drawn from the Luce model, a natural probabilistic framework in which permutations are generated sequentially by sampling without replacement, with selection probabilities proportional to prescribed posi
+  [NEW] 1304.3946v2 (2013-04) Strategyproof and Consistent Rules for Bipartite Flow Problems
+        We continue the study of Bochet et al. and Moulin and Sethuraman on fair allocation in bipartite networks. In these models, there is a moneyless market, in which a non-storable, homogeneous commodity is reallocated between agents with single-peaked preferences
+
+### QUERY 'finite population L-statistic characteristic function sampling without replacement exponential weights'  total=8 new=8
+  [NEW] 2301.11718v1 (2023-01) Sampling without replacement from a high-dimensional finite population
+        It is well known that most of the existing theoretical results in statistics are based on the assumption that the sample is generated with replacement from an infinite population. However, in practice, available samples are almost always collected without repl
+  [NEW] 1603.06556v1 (2016-03) Weighted sampling without replacement
+        Comparing concentration properties of uniform sampling with and without replacement has a long history which can be traced back to the pioneer work of Hoeffding (1963). The goal of this short note is to extend this comparison to the case of non-uniform weights
+  [NEW] 1405.3591v1 (2014-04) Two-phase sampling in estimation of population mean in the presence of non-response
+        The present paper presents the detail discussion on estimation of population mean in simple random sampling in the presence of non-response. Motivated by Gupta and Shabbir (2008), we have suggested the class of estimators of population mean using an auxiliary 
+  [NEW] 1204.2109v1 (2012-04) On the asymptotic normality of finite population L-statistics
+        We give sufficient conditions for the asymptotic normality of linear combinations of order statistics (L-statistics) in the case of simple random samples without replacement. In the first case, restrictions are imposed on the weights of L-statistics. The secon
+  [NEW] 1506.01747v1 (2015-06) Weighted Sampling Without Replacement from Data Streams
+        Weighted sampling without replacement has proved to be a very important tool in designing new algorithms. Efraimidis and Spirakis (IPL 2006) presented an algorithm for weighted sampling without replacement from data streams. Their algorithm works under the ass
+  [NEW] 1606.01782v2 (2016-06) To replace or not to replace in finite population sampling
+        We revisit the classical result in finite population sampling which states that in equally-likely "simple" random sampling the sample mean is more reliable when we do not replace after each draw. In this paper we investigate if and when the same is true for sa
+  [NEW] 1808.09184v1 (2018-08) Exponential inequality for chaos based on sampling without replacement
+        We are interested in the behavior of particular functionals, in a framework where the only source of randomness is a sampling without replacement. More precisely the aim of this short note is to prove an exponential concentration inequality for special U-stati
+  [NEW] 1512.07211v1 (2015-12) Exponential laws for weighted function spaces and regularity of weighted mapping groups
+        Let $E$ be a locally convex space, $U\subseteq\mathbb{R}^n$ as well as $V\subseteq\mathbb{R}^m$ be open and $k,l\in\mathbb{N}_0\cup\left\{\infty\right\}$. Locally convex spaces $C^{k,l}(U\times V,E)$ of functions with different degrees of differentiability in 
+
+### QUERY 'Ciginas finite population L-statistics asymptotic normality'  total=8 new=7
+  [old] 1204.2109v1 (2012-04) On the asymptotic normality of finite population L-statistics
+  [NEW] 1103.4220v2 (2011-03) An Edgeworth expansion for finite population L-statistics
+        In this paper, we consider the one-term Edgeworth expansion for finite population L-statistics. We provide an explicit formula for the Edgeworth correction term and give sufficient conditions for the validity of the expansion which are expressed in terms of th
+  [NEW] 1109.4624v2 (2011-09) The number of flags in finite vector spaces: Asymptotic normality and Mahonian statistics
+        We study the generalized Galois numbers which count flags of length r in N-dimensional vector spaces over finite fields. We prove that the coefficients of those polynomials are asymptotically Gaussian normally distributed as N becomes large. Furthermore, we in
+  [NEW] 2402.07406v3 (2024-02) On the Asymptotic Normality of Trimmed and Winsorized L-statistics
+        There are several ways to establish the asymptotic normality of $L$-statistics, which depend on the choice of the weights-generating function and the cumulative distribution selection of the underlying model. In this study, we focus on stablishing computationa
+  [NEW] 1406.2275v1 (2014-06) Gini's mean difference and variance as measures of finite populations scales
+        We consider Gini's mean difference statistic as an alternative to the empirical variance in the settings of finite populations where simple random samples are drawn without replacement. In particular, we discuss specific (in the finite population context) esti
+  [NEW] q-bio/0606037v2 (2006-06) The propagation of a cultural or biological trait by neutral genetic drift in a subdivided population
+        We study fixation probabilities and times as a consequence of neutral genetic drift in subdivided populations, motivated by a model of the cultural evolutionary process of language change that is described by the same mathematics as the biological process. We 
+  [NEW] 2405.12883v2 (2024-05) Asymptotic analysis at any order of Helmholtz's problem in a corner with a thin layer: an algebraic approach
+        We consider the Helmholtz equation in an angular sector partially covered by a homogeneous layer of small thickness, denoted $\varepsilon$. We propose in this work an asymptotic expansion of the solution with respect to $\varepsilon$ at any order. This is done
+  [NEW] 1701.09060v6 (2017-01) Automatic Kolmogorov complexity, normality and finite state dimension revisited
+        It is well known that normality can be described as incompressibility via finite automata. Still the statement and the proof of this result as given by Becher and Heiber (2013) in terms of "lossless finite-state compressors" do not follow the standard scheme o
+
+### QUERY 'complex permanent characteristic function combinatorial central limit theorem'  total=8 new=8
+  [NEW] 2607.17697v1 (2026-07) A Functional Central Limit Theorem for Localized Partial Sums of Non-Stationary Time Series
+        A localized functional central limit theorem is established for kernel-weighted partial sum processes of piecewise locally stationary time series under geometric decay of the physical dependence measure. The localized process is shown to converge weakly to a c
+  [NEW] 1504.06999v2 (2015-04) Central limit theorems for a hypergeometric randomly reinforced urn
+        We consider a variant of the randomly reinforced urn where more balls can be simultaneously drawn out and balls of different colors can be simultaneously added. More precisely, at each time-step, the conditional distribution of the number of extracted balls of
+  [NEW] 1407.5954v2 (2014-07) Schrödinger's equation as a consequence of the central limit theorem without prior assumption of physical laws
+        The central limit theorem has been found to apply to random vectors in complex Hilbert space. This amounts to sufficient reason to study the complex valued Gaussian, looking for relevance to quantum mechanics. Here we show that the Gaussian, with all terms ful
+  [NEW] 0907.0347v1 (2009-07) A functional combinatorial central limit theorem
+        The paper establishes a functional version of the Hoeffding combinatorial central limit theorem. First, a pre-limiting Gaussian process approximation is defined, and is shown to be at a distance of the order of the Lyapounov ratio from the original random proc
+  [NEW] 1802.02987v1 (2018-02) A Generalization Method of Partitioned Activation Function for Complex Number
+        A method to convert real number partitioned activation function into complex number one is provided. The method has 4em variations; 1 has potential to get holomorphic activation, 2 has potential to conserve complex angle, and the last 1 guarantees interaction 
+  [NEW] 1804.09220v3 (2018-04) A Useful Version of the Central Limit Theorem for a General Class of Markov Chains
+        In the paper we propose certain conditions, relatively easy to verify, which ensure the central limit theorem for some general class of Markov chains. To justify the usefulness of our criterion, we further verify it for a particular discrete-time Markov dynami
+  [NEW] 1405.1670v1 (2014-05) Bounds of the remainder in a combinatorial central limit theorem
+        We derive new bounds of the remainder in a combinatorial central limit theorem without assumptions on independence and existence of moments of summands. For independent random variables our theorems imply Esseen and Berry-Esseen type inequalities, some other n
+  [NEW] 1505.03021v2 (2015-05) A central limit theorem and moderate deviations for 2-D Stochastic Navier-Stokes equations with jumps
+        We study the small noise asymptotics for two-dimensional Navier-Stokes equa- tions driven by Levy noise. Central limit theorem and moderate deviation are established under appropriate assumptions, which describes the exponen- tial rate of convergence of the st
+
+### QUERY 'Bero Roos accuracy combinatorial central limit theorem characteristic function'  total=8 new=4
+  [NEW] 2004.11739v1 (2020-04) On the accuracy in a combinatorial central limit theorem: the characteristic function method
+        The aim of this paper is to present a new proof of an explicit version of the Berry-Esséen type inequality of Bolthausen (Zeitschrift für Wahrscheinlichkeitstheorie und Verwandte Gebiete, 66, 379--386, 1984). The literature already provides several proofs of i
+  [NEW] math/0603522v2 (2006-03) A shorter proof of Kanter's Bessel function concentration bound
+        We give a shorter proof of Kanter's (1976) sharp Bessel function bound for concentrations of sums of independent symmetric random vectors. We provide sharp upper bounds for the sum of modified Bessel functions $I_0(x)+I_1(x)$, which might be of independent int
+  [NEW] 0811.0622v1 (2008-11) Closeness of convolutions of probability measures
+        We derive new explicit bounds for the total variation distance between two convolution products of $n$ probability distributions, one of which having identical convolution factors. Approximations by finite signed measures of arbitrary order are considered as w
+  [NEW] 1509.04167v2 (2015-09) Refined total variation bounds in the multivariate and compound Poisson approximation
+        We consider the approximation of a convolution of possibly different probability measures by (compound) Poisson distributions and also by related signed measures of higher order. We present new total variation bounds having a better structure than those from t
+  [old] 2607.17697v1 (2026-07) A Functional Central Limit Theorem for Localized Partial Sums of Non-Stationary Time Series
+  [old] 1504.06999v2 (2015-04) Central limit theorems for a hypergeometric randomly reinforced urn
+  [old] 0907.0347v1 (2009-07) A functional combinatorial central limit theorem
+  [old] 1804.09220v3 (2018-04) A Useful Version of the Central Limit Theorem for a General Class of Markov Chains
+
+### QUERY 'lacunary trigonometric products noncommuting matrix'  total=8 new=8
+  [NEW] 1902.10504v1 (2019-02) Convergence of lacunary SU(1,1)-valued trigonometric products
+        This note attempts to study lacunary trigonometric products with values in the matrix group SU(1,1) in analogy with lacunary trigonometric series. The central questions are the characterization of their convergence in an appropriately define $L^p$-metric and t
+  [NEW] 2502.20930v2 (2025-02) Moment generating functions and moderate deviation principles for lacunary trigonometric sums
+        In a recent paper, Aistleitner, Gantert, Kabluchko, Prochno and Ramanan studied large deviation principles (LDPs) for lacunary trigonometric sums $\sum_{n=1}^N \cos(2 πn_k x)$, where the sequence $(n_k)_{k \geq 1}$ satisfies the Hadamard gap condition $n_{k+1}
+  [NEW] 1704.02918v2 (2017-04) A sharp estimate for the Hilbert transform along finite order lacunary sets of directions
+        Let $D$ be a nonnegative integer and ${\mathbfΘ}\subset S^1$ be a lacunary set of directions of order $D$. We show that the $L^p$ norms, $1<p<\infty$, of the maximal directional Hilbert transform in the plane $$ H_{\mathbfΘ} f(x):= \sup_{v\in {\mathbfΘ}} \Big|
+  [NEW] 1502.06738v2 (2015-02) On parametric Thue-Morse Sequences and Lacunary Trigonometric Products
+        One of the fundamental theorems of uniform distribution theory states that the fractional parts of the sequence $(n α)_{n \geq 1}$ are uniformly distributed modulo one (u.d. mod 1) for every irrational number $α$. Another important result of Weyl states that f
+  [NEW] 2312.09137v1 (2023-12) Moderate deviation principles and Mod-Gaussian convergence for lacunary trigonometric sums
+        Classical works of Kac, Salem and Zygmund, and Erdős and Gál have shown that lacunary trigonometric sums despite their dependency structure behave in various ways like sums of independent and identically distributed random variables. For instance, they satisfy
+  [NEW] 2108.08978v3 (2021-08) Bound-states for generalized trigonometric and hyperbolic Pöschl-Teller potentials
+        We use the "tridiagonal representation approach" to solve the time-independent Schrödinger equation for the bound states of generalized versions of the trigonometric and hyperbolic Pöschl-Teller potentials. These new solvable potentials do not belong to the co
+  [NEW] 1501.06253v2 (2015-01) Scalar products in GL(3)-based models with trigonometric R-matrix. Determinant representation
+        We study quantum integrable GL(3)-based models with a trigonometric R-matrix solvable by the nested algebraic Bethe ansatz. We derive a determinant representation for a special case of scalar products of Bethe vectors. This representation allows one to find a 
+  [NEW] 1311.3500v1 (2013-11) Scalar products in models with GL(3) trigonometric R-matrix. Highest coefficient
+        We study quantum integrable models with GL(3) trigonometric R-matrix solvable by the nested algebraic Bethe ansatz. Scalar products of Bethe vectors in such models can be expressed in terms of a bilinear combination of the highest coefficients. We show that in
+
+### QUERY 'Rugh cones gauges complex spaces spectral gaps Perron-Frobenius'  total=8 new=8
+  [NEW] math/0610354v1 (2006-10) Cones and gauges in complex spaces : Spectral gaps and complex Perron-Frobenius theory
+        We introduce complex cones and associated projective gauges, generalizing a real Birkhoff cone and its Hilbert metric to complex vector spaces. We deduce a variety of spectral gap theorems in complex Banach spaces. We prove a dominated complex cone-contraction
+  [NEW] 1011.5171v1 (2010-11) Complexified cones. Spectral gaps and variational principles
+        We consider contractions of complexified real cones, as recently introduced by Rugh in [Rugh10]. Dubois [Dub09] gave optimal conditions to determine if a matrix contracts a canonical complex cone. First we generalize his results to the case of complex operator
+  [NEW] 1009.0997v3 (2010-09) Spectral asymptotics for Robin problems with a discontinuous coefficient
+        The spectral behavior of the difference between the resolvents of two realizations $\tilde A_1$ and $\tilde A_2$ of a second-order strongly elliptic symmetric differential operator $A$, defined by different Robin conditions $νu=b_1γ_0u$ and $νu=b_2γ_0u$, can i
+  [NEW] 1208.6015v1 (2012-08) The spectral function of a first order elliptic system
+        We consider an elliptic self-adjoint first order pseudodifferential operator acting on columns of complex-valued half-densities over a connected compact manifold without boundary. The eigenvalues of the principal symbol are assumed to be simple but no assumpti
+  [NEW] 2103.14334v4 (2021-03) Invariant subspaces of elliptic systems II: spectral theory
+        Consider an elliptic self-adjoint pseudodifferential operator $A$ acting on $m$-columns of half-densities on a closed manifold $M$, whose principal symbol is assumed to have simple eigenvalues. We show that the spectrum of $A$ decomposes, up to an error with s
+  [NEW] 2305.18971v2 (2023-05) The Quantum Perron-Frobenius Space
+        We introduce $\mathfrak{F}$-positive elements in planar algebras. We establish the Perron-Frobenius theorem for $\mathfrak{F}$-positive elements. We study the existence and uniqueness of the Perron-Frobenius eigenspace. When it is not one-dimensional, we chara
+  [NEW] 1607.03422v4 (2016-07) Exponential decay of the size of spectral gaps for quasiperiodic Schrödinger operators
+        In the following we are interested in the spectral gaps of discrete quasiperiodic Schrödinger operators when the frequency is Diophantine, the potential is analytic, and in the subcritical regime. The gap-labelling theorem asserts in this context that each gap
+  [NEW] 1104.2642v1 (2011-04) Achievable spectral radii of symplectic Perron-Frobenius matrices
+        A pseudo-Anosov surface automorphism $φ$ has associated to it an algebraic unit $λ_φ$ called the dilatation of $φ$. It is known that in many cases $λ_φ$ appears as the spectral radius of a Perron-Frobenius matrix preserving a symplectic form $L$. We investigat
+
+### QUERY 'Shparlinski distribution exponential functions modulo prime power'  total=8 new=8
+  [NEW] 2507.00325v2 (2025-06) On quantum ergodicity for higher dimensional cat maps modulo prime powers
+        A discrete model of quantum ergodicity of linear maps generated by symplectic matrices $A \in \mathrm{Sp}(2d,\mathbb{Z})$ modulo an integer $N\ge 1$, has been studied for $d=1$ and almost all $N$ by P. Kurlberg and Z. Rudnick (2001). Their result has been stre
+  [NEW] 2302.03964v1 (2023-02) Distribution of recursive matrix pseudorandom number generator modulo prime powers
+        Given a matrix $A\in \mathrm{GL}_d(\mathbb{Z})$. We study the pseudorandomness of vectors $\mathbf{u}_n$ generated by a linear recurrent relation of the form $$ \mathbf{u}_{n+1} \equiv A \mathbf{u}_n \pmod {p^t}, \qquad n = 0, 1, \ldots, $$ modulo $p^t$ with a
+  [NEW] 2410.08732v1 (2024-10) On the Waring problem with Dickson polynomials modulo a prime
+        We improve recent results of D. Gomez and A. Winterhof (2010) and of A. Ostafe and I. E. Shparlinski (2011) on the Waring problem with Dickson polynomials in the case of prime finite fields. Our approach is based on recent bounds of Kloosterman and Gauss sums 
+  [NEW] 2009.03460v1 (2020-09) On the distribution of modular square roots of primes
+        We use recent bounds on bilinear sums with modular square roots to study the distribution of solutions to congruences $x^2 \equiv p \pmod q$ with primes $p\le P$ and integers $q \le Q$. This can be considered as a combined scenario of Duke, Friedlander and Iwa
+  [NEW] 1301.0035v1 (2013-01) On the Product of Small Elkies Primes
+        Given an elliptic curve $E$ over a finite field $\F_q$ of $q$ elements, we say that an odd prime $\ell \nmid q$ is an Elkies prime for $E$ if $t_E^2 - 4q$ is a quadratic residue modulo $\ell$, where $t_E = q+1 - #E(\F_q)$ and $#E(\F_q)$ is the number of $\F_q$
+  [NEW] 1612.05905v1 (2016-12) Cancellations between Kloosterman sums modulo a prime power with prime arguments
+        We obtain a nontrivial bound for cancellations between the Kloosterman sums modulo a large prime power with a prime argument running over very short interval, which in turn is based on a new estimate on bilinear sums of Kloosterman sums. These results are anal
+  [NEW] 2006.05685v2 (2020-06) Noisy polynomial interpolation modulo prime powers
+        We consider the {\it noisy polynomial interpolation problem\/} of recovering an unknown $s$-sparse polynomial $f(X)$ over the ring $\mathbb Z_{p^k}$ of residues modulo $p^k$, where $p$ is a small prime and $k$ is a large integer parameter, from approximate val
+  [NEW] 2407.20464v1 (2024-07) On the frequency of primes preserving dynamical irreducibility of polynomials
+        Towards a well-known open question in arithmetic dynamics, L. Mérai, A. Ostafe and I. E. Shparlinski (2023), have shown, for a class of polynomials $f \in \mathbb Z[X]$, which in particular includes all quadratic polynomials, that, under some natural condition
+
+### QUERY 'Shparlinski Konyagin consecutive powers modulo prime powers'  total=8 new=6
+  [NEW] 1709.00625v2 (2017-09) Power index rankings in bicameral legislatures and the US legislative system
+        In this paper we study rankings induced by power indices of players in simple game models of bicameral legislatures. For a bicameral legislature where bills are passed with a simple majority vote in each house we give a condition involving the size of each cha
+  [old] 2507.00325v2 (2025-06) On quantum ergodicity for higher dimensional cat maps modulo prime powers
+  [NEW] 2011.03476v1 (2020-11) Towards Obfuscated Malware Detection for Low Powered IoT Devices
+        With the increased deployment of IoT and edge devices into commercial and user networks, these devices have become a new threat vector for malware authors. It is imperative to protect these devices as they become more prevalent in commercial and personal netwo
+  [NEW] 2005.05315v1 (2020-05) Polynomial Equations in Subgroups and Applications
+        We obtain a new bound for the number of solutions to polynomial equations in cosets of multiplicative subgroups in finite fields, which generalises previous results of P. Corvaja and U. Zannier (2013). We also obtain a conditional improvement of recent results
+  [NEW] 1909.01826v2 (2019-09) Status in flux: Unequal alliances can create power vacuums
+        Human groups show a variety of leadership structures from no leader, to changing leaders, to a single long-term leader. When a leader is deposed, the presence of a power vacuum can mean they are often quickly replaced. We lack an explanation of how such phenom
+  [NEW] 1211.4570v1 (2012-11) A congruence modulo $n^3$ involving two consecutive sums of powers and its applications
+        For various positive integers $k$, the sums of $k$th powers of the first $n$ positive integers, $S_k(n+1)=1^k+2^k+...+n^k$, have got to be some of the most popular sums in all of mathematics. In this note we prove that for each $k\ge 2 $$ 2S_{2k+1}(n)- (2k+1)n
+  [old] 2302.03964v1 (2023-02) Distribution of recursive matrix pseudorandom number generator modulo prime powers
+  [NEW] 2507.01238v1 (2025-07) Swinging, Fast and Slow: Interpreting variation in baseball swing tracking metrics
+        In 2024, Major League Baseball released new bat tracking data, reporting swing-by-swing bat speed and swing length measured at the point of contact. While exciting, the data present challenges for their interpretation. The timing of the batter's swing relative
+
+### QUERY 'positive diameter finite abelian group addition-only weighted generating set'  total=8 new=8
+  [NEW] 1405.2700v1 (2014-05) Zero Excess and Minimal Length in Finite Coxeter Groups
+        Let $\mathcal{W}$ be the set of strongly real elements of $W$, a Coxeter group. Then for $w \in \mathcal{W}$, $e(w)$, the excess of $w$, is defined by $e(w) = \min\{\ell(x) + \ell(y) - \ell(w) \; | \; w=xy, x^2 = y^2 = 1\}$. When $W$ is finite we may also defi
+  [NEW] hep-ph/0610012v1 (2006-10) Tevatron-for-LHC Report of the QCD Working Group
+        The experiments at Run 2 of the Tevatron have each accumulated over 1 inverse femtobarn of high-transverse momentum data. Such a dataset allows for the first precision (i.e. comparisons between theory and experiment at the few percent level) tests of QCD at a 
+  [NEW] math/0608534v2 (2006-08) On Automorphisms of Finite $p$-groups
+        Let $G$ be a finite $p$-group such that $x\Z(G) \subseteq x^G$ for all $x \in G- \Z(G)$, where $x^G$ denotes the conjugacy class of $x$ in $G$. Then $|G|$ divides $|\Aut(G)|$, where $\Aut(G)$ is the group of all automorphisms of $G$.
+  [NEW] math/0402145v2 (2004-02) Norm formulas for finite groups and induction from elementary abelian subgroups
+        It is known that the norm map N_G for a finite group G acting on a ring R is surjective if and only if for every elementary abelian subgroup E of G the norm map N_E for E is surjective. Equivalently, there exists an element x_G in R with N_G(x_G) = 1 if and on
+  [NEW] 1302.3882v1 (2013-02) Finite group algebras of nilpotent groups: a complete set of orthogonal primitive idempotents
+        We provide an explicit construction for a complete set of orthogonal primitive idempotents of finite group algebras over nilpotent groups. Furthermore, we give a complete set of matrix units in each simple epimorphic image of a finite group algebra of a nilpot
+  [NEW] 2212.01616v3 (2022-12) The non-commuting, non-generating graph of a finite simple group
+        Let $G$ be a group such that $G/Z(G)$ is finite and simple. The non-commuting, non-generating graph $Ξ(G)$ of $G$ has vertex set $G \setminus Z(G)$, with edges corresponding to pairs of elements that do not commute and do not generate $G$. Complementing our pr
+  [NEW] 1302.2272v2 (2013-02) On abelian subgroups of finitely generated metabelian groups
+        In this note we introduce the class of $\mathcal H$-groups (or Hall groups) related to the class of $\mathcal B$-groups defined by Ph. Hall in 1950's. Establishing some basic properties of Hall groups we use them to obtain results concerning embeddings of abel
+  [NEW] 1603.04573v2 (2016-03) Groups acting on spaces of non-positive curvature
+        In this survey article, we present some panorama of groups acting on metric spaces of non-positive curvature. We introduce the main examples and their rigidity properties , we show the links between algebraic or analytic properties of the group and geometric p
+
+### QUERY 'Klopsch Lev how long does it take to generate a group'  total=8 new=8
+  [NEW] 1411.4413v2 (2014-11) Observation of the rare $B^0_s\toμ^+μ^-$ decay from the combined analysis of CMS and LHCb data
+        A joint measurement is presented of the branching fractions $B^0_s\toμ^+μ^-$ and $B^0\toμ^+μ^-$ in proton-proton collisions at the LHC by the CMS and LHCb experiments. The data samples were collected in 2011 at a centre-of-mass energy of 7 TeV, and in 2012 at 
+  [NEW] 0901.0512v4 (2008-12) Expected Performance of the ATLAS Experiment - Detector, Trigger and Physics
+        A detailed study is presented of the expected performance of the ATLAS detector. The reconstruction of tracks, leptons, photons, missing energy and jets is investigated, together with the performance of b-tagging and the trigger. The physics potential for a va
+  [NEW] 2601.07595v3 (2026-01) Deep Search for Joint Sources of Gravitational Waves and High-Energy Neutrinos with IceCube During the Third Observing Run of LIGO and Virgo
+        The discovery of joint sources of high-energy neutrinos and gravitational waves has been a primary target for the LIGO, Virgo, KAGRA, and IceCube observatories. The joint detection of high-energy neutrinos and gravitational waves would provide insight into cos
+  [NEW] 1710.05839v2 (2017-10) Search for High-energy Neutrinos from Binary Neutron Star Merger GW170817 with ANTARES, IceCube, and the Pierre Auger Observatory
+        The Advanced LIGO and Advanced Virgo observatories recently discovered gravitational waves from a binary neutron star inspiral. A short gamma-ray burst (GRB) that followed the merger of this binary was also recorded by the Fermi Gamma-ray Burst Monitor (Fermi-
+  [NEW] 2508.18081v3 (2025-08) GWTC-4.0: Methods for Identifying and Characterizing Gravitational-wave Transients
+        The Gravitational-Wave Transient Catalog (GWTC) is a collection of candidate gravitational-wave transient signals identified and characterized by the LIGO-Virgo-KAGRA Collaboration. Producing the contents of the GWTC from detector data requires complex analysi
+  [NEW] 2607.19293v1 (2026-07) GWTC-5.0: Tests of General Relativity
+        The signals from the LIGO-Virgo-KAGRA network of gravitational-wave (GW) detectors allow us to perform sensitive tests of general relativity (GR) in the dynamical and strong-field regime of gravity. We present the results of seven tests of GR using the observe
+  [NEW] 2403.03004v1 (2024-03) Ultralight vector dark matter search using data from the KAGRA O3GK run
+        Among the various candidates for dark matter (DM), ultralight vector DM can be probed by laser interferometric gravitational wave detectors through the measurement of oscillating length changes in the arm cavities. In this context, KAGRA has a unique feature d
+  [NEW] 2407.12867v2 (2024-07) Swift-BAT GUANO follow-up of gravitational-wave triggers in the third LIGO-Virgo-KAGRA observing run
+        We present results from a search for X-ray/gamma-ray counterparts of gravitational-wave (GW) candidates from the third observing run (O3) of the LIGO-Virgo-KAGRA (LVK) network using the Swift Burst Alert Telescope (Swift-BAT). The search includes 636 GW candid
+
+### QUERY 'extremal basis finite cyclic group modular postage stamp prescribed generators'  total=8 new=7
+  [NEW] math/0509044v2 (2005-09) Decomposing symmetric powers of certain modular representations of cyclic groups
+        For a prime number p, we construct a generating set for the ring of invariants for the p+1 dimensional indecomposable modular representation of a cyclic group of order p^2. We then use the constructed invariants to describe the decomposition of the symmetric a
+  [NEW] 1310.7090v2 (2013-10) Addition Chains Meet Postage Stamps: Reducing the Number of Multiplications
+        We introduce stamp chains. A stamp chain is a finite integer sequence that is both an addition chain and an additive 2-basis, i.e., a solution to the postage stamp problem. We provide a simple method for converting known postage stamp solutions of length k int
+  [NEW] 1311.1024v1 (2013-11) The Postage Stamp Problem - Formulae and proof for the case of 3 denominations
+        A_k = {1, a_2, ..., a_k} is an h-basis for n if every positive integer not exceeding n can be expressed as the sum of no more than h values a_i; an extremal h-basis A_k is one for which n is as large as possible. Computing such extremal bases has become known 
+  [old] 1405.2700v1 (2014-05) Zero Excess and Minimal Length in Finite Coxeter Groups
+  [NEW] 2412.18507v1 (2024-12) An Empirical Analysis of Federated Learning Models Subject to Label-Flipping Adversarial Attack
+        In this paper, we empirically analyze adversarial attacks on selected federated learning models. The specific learning models considered are Multinominal Logistic Regression (MLR), Support Vector Classifier (SVC), Multilayer Perceptron (MLP), Convolution Neura
+  [NEW] 2005.06373v2 (2020-05) Counting Schur Rings over Cyclic Groups of Semi-prime Order
+        In this paper, we continue the enumeration of Schur rings over cyclic groups. Cyclic groups of semiprime order $pq$, where $p$ and $q$ are distinct primes, are considered. Additionally, cyclic groups of order $4p$ are considered.
+  [NEW] 2601.21423v1 (2026-01) Algorithms for the local and the global postage stamp problem
+        We consider stamps with different values (denominations) and same dimensions, and an envelope with a fixed maximum number of stamp positions. The local postage stamp problem is to find the smallest value that cannot be realized by the sum of the stamps on the 
+  [NEW] 2009.13970v2 (2020-09) On the Modular Isomorphism Problem for groups of class 3 and obelisks
+        We study the Modular Isomorphism Problem applying a combination of existing and new techniques. We make use of the small group algebra to give a positive answer for two classes of groups of nilpotency class 3. We also introduce a new approach to derive propert
+
+### QUERY 'progression bases finite cyclic groups'  total=8 new=7
+  [NEW] 1811.11554v3 (2018-11) On the Zassenhaus Conjecture for certain cyclic-by-nilpotent groups
+        Hans Zassenhaus conjectured that every torsion unit of the integral group ring of a finite group $G$ is conjugate within the rational group algebra to an element of the form $\pm g$ with $g\in G$. This conjecture has been disproved recently for metabelian grou
+  [old] 1405.2700v1 (2014-05) Zero Excess and Minimal Length in Finite Coxeter Groups
+  [NEW] 1201.0978v2 (2012-01) A sufficient condition for finite presentability of abelian-by-nilpotent groups
+        A recipe for obtaining finitely presented abelian-by-nilpotent groups is given. It relies on a geometric procedure that generalizes the construction of finitely presented metabelian groups introduced by R. Bieri and R. Strebel in 1980.
+  [NEW] math/0608647v7 (2006-08) Extensions of finite quantum groups by finite groups
+        We give a necessary and sufficient condition for two Hopf algebras presented as central extensions to be isomorphic, in a suitable setting. We then study the question of isomorphism between the Hopf algebras constructed in 0707.0070v1 as quantum subgroups of q
+  [NEW] 1509.06922v1 (2015-09) Classification of finite groups generated by reflections and rotations
+        We survey the existing parts of a classification of finite groups generated by orthogonal transformations in a finite-dimensional Euclidean space whose fixed point subspace has codimension one or two and extend it to a complete classification. These groups nat
+  [NEW] math/0609782v1 (2006-09) The tracial Rokhlin property for actions of finite groups on C*-algebras
+        We define "tracial" analogs of the Rokhlin property for actions of finite groups, approximate representability of actions of finite abelian groups, and of approximate innerness. We prove four analogs of related "nontracial" results. First, the crossed product 
+  [NEW] 1304.0420v1 (2013-04) Topics In Normal Bases Of Finite Fields
+        This is an introduction to the theory of normal bases of finite fields. The first few chapters cover a wide range of topics on the theory of normal bases of finite fields. Most standard definitions and results, including proofs are given. The last few chapters
+  [NEW] 2511.02410v2 (2025-11) Every finite group is represented by a finite incidence geometry
+        We investigate the relationship between finite groups and incidence geometries through their automorphism structures. Building upon classical results on the realizability of groups as automorphism groups of graphs, we develop a general framework to represent p
+
+### QUERY 'finite-state Markov additive process local limit theorem'  total=8 new=7
+  [NEW] 1306.5353v1 (2013-06) A local limit theorem for densities of the additive component of a finite Markov Additive Process
+        In this paper, we are concerned with centered Markov Additive Processes $\{(X_t,Y_t)\}_{t\in\T}$ where the driving Markov process $\{X_t\}_{t\in\T}$ has a finite state space. Under suitable conditions, we provide a local limit theorem for the density of the ab
+  [NEW] 2401.11495v3 (2024-01) Functional Limit Theorems for Hawkes Processes
+        We prove that the long-run behavior of Hawkes processes is fully determined by the average number and the dispersion of child events. For subcritical processes we provide FLLNs and FCLTs under minimal conditions on the kernel of the process with the precise fo
+  [old] 2607.17697v1 (2026-07) A Functional Central Limit Theorem for Localized Partial Sums of Non-Stationary Time Series
+  [NEW] 2008.04485v3 (2020-08) Grain refinement of stainless steel in ultrasound-assisted additive manufacturing
+        Metals and alloys fabricated by fusion-based additive manufacturing (AM), or 3D printing, undergo complex dynamics of melting and solidification, presenting challenges to the effective control of grain structure. Herein, we report on the use of high-intensity 
+  [NEW] 2507.23706v2 (2025-07) A Central Limit Theorem for the Winding Number of Low-Lying Closed Geodesics
+        We show that the winding of low-lying closed geodesics on the modular surface has a Gaussian limiting distribution when normalized by any standard notion of length, in contrast to the Cauchy distribution arising when allowing arbitrarily deep excursions into t
+  [NEW] 1305.5644v2 (2013-05) Additional material on local limit theorem for finite Additive Markov Processes [HL13]
+        This paper proposes additional material to the main statements of [HL13] which are are recalled in Section~2. In particular an application of [Theorem~2.2,HL13] to Renewal Markov Processes is provided in Section~4 and a detailed checking of the assumptions of 
+  [NEW] 2505.10956v1 (2025-05) The strong law of large numbers and a functional central limit theorem for general Markov additive processes
+        In this note we re-visit the fundamental question of the strong law of large numbers and central limit theorem for processes in continuous time with conditional stationary and independent increments. For convenience we refer to them as Markov additive processe
+  [NEW] cmp-lg/9705013v1 (1997-05) FASTUS: A Cascaded Finite-State Transducer for Extracting Information from Natural-Language Text
+        FASTUS is a system for extracting information from natural language text for entry into a database and for other applications. It works essentially as a cascaded, nondeterministic finite-state automaton. There are five stages in the operation of FASTUS. In Sta
+  [retry 1/5] error: HTTP Error 429: Unknown Error -- backing off 30s
+  [retry 2/5] error: HTTP Error 429: Unknown Error -- backing off 60s
+  [retry 3/5] error: HTTP Error 429: Unknown Error -- backing off 120s

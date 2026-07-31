@@ -1,0 +1,42 @@
+# GAP C (most promising per Codex's own assessment) - small deviations / invariant density
+small deviations series independent positive random variables weights close exponential
+Borovkov Ruzankin small deviations exponential weights
+Rozovsky comparison theorems small deviations weighted series
+Rozovsky fast decreasing weights small deviations
+Aurzada small deviations exponentially decreasing weights
+generalized Fabius function base 3 endpoint asymptotics
+Rvachev atomic function up-function asymptotics infinite convolution
+advanced pantograph equation flat solution asymptotics
+Derfel Grabner Tichy pantograph asymptotics zeros
+Daubechies Lagarias two-scale difference equations
+Wirsching balls constrained urns Cantor-like sets
+constrained urns asymptotically geometric capacities invariant density
+infinite generalized uniform sum distribution geometric coefficients
+Chaganty Sethuraman large deviation local limit theorems arbitrary sequences
+
+# GAP A - rank-coupled exponential sum / finite population L-statistic
+finite population L-statistic characteristic function sampling without replacement exponential weights
+Ciginas finite population L-statistics asymptotic normality
+complex permanent characteristic function combinatorial central limit theorem
+Bero Roos accuracy combinatorial central limit theorem characteristic function
+lacunary trigonometric products noncommuting matrix
+Rugh cones gauges complex spaces spectral gaps Perron-Frobenius
+Shparlinski distribution exponential functions modulo prime power
+Shparlinski Konyagin consecutive powers modulo prime powers
+
+# GAP B - maximum gap constrained phase orbit cyclic group
+positive diameter finite abelian group addition-only weighted generating set
+Klopsch Lev how long does it take to generate a group
+extremal basis finite cyclic group modular postage stamp prescribed generators
+progression bases finite cyclic groups
+finite-state Markov additive process local limit theorem
+Herve Ledoux local limit theorem additive component Markov additive process
+digit restrictions residue classes Markov chain sofic shift
+Saavedra-Araya distribution integers digit restrictions Markov chains
+congruence transfer operator finite quotient semigroup counting
+Magee Oh Winter uniform congruence counting Schottky semigroups
+
+# General/cross-cutting
+rational formal series discrete Fourier transform local limit theorem regular language
+weighted finite automaton ambiguity growth number accepting paths entropy
+saddle point method pattern statistics regular languages weighted automaton
