@@ -53,7 +53,7 @@ if __name__ == "__main__":
             print(f"{n:3d} {k:3d} {q:3d} {a:12.6f} {total:14d} {distinct:16d}")
 
     print("\nCentral point (n=2k) q=1 check: is alpha_{2k,k,1} = 1/Catalan(k) (Codex's round-7")
-    print("claim) or alpha_{2k,k,1} = 1/(n*(n-1)) (this project's own observed pattern)?")
+    print("claim, WRONG, see round 8) or alpha_{2k,k,1} = 1/(n*(n-1)) (correct, round-8)?")
     import math
     for n, k in [(8, 4), (10, 5), (12, 6), (14, 7)]:
         a, total, distinct = alpha(n, k, 1)
@@ -62,3 +62,11 @@ if __name__ == "__main__":
         print(f"n={n:3d} k={k}: measured 1/alpha={1/a:.1f}   "
               f"Catalan(k)={cat_k:6d} (match={abs(1/a-cat_k)<0.5})   "
               f"n(n-1)={n_n1:6d} (match={abs(1/a-n_n1)<0.5})")
+
+    print("\nGeneral (non-central, k != n/2) check of alpha_{n,k,1} = 1/(n*(n-1)),")
+    print("Codex's round-8 corrected + proven formula, for ALL 1<=k<n:")
+    for n, k in [(9, 3), (9, 4), (10, 3), (10, 4), (11, 4), (12, 4), (12, 5)]:
+        a, total, distinct = alpha(n, k, 1)
+        n_n1 = n * (n - 1)
+        print(f"n={n:3d} k={k}: measured 1/alpha={1/a:.2f}   n(n-1)={n_n1}   "
+              f"match={abs(1/a-n_n1)<0.5}")
