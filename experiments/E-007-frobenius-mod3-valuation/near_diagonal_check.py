@@ -51,3 +51,14 @@ if __name__ == "__main__":
         for q in range(1, min(k, n - k) + 1):
             a, total, distinct = alpha(n, k, q)
             print(f"{n:3d} {k:3d} {q:3d} {a:12.6f} {total:14d} {distinct:16d}")
+
+    print("\nCentral point (n=2k) q=1 check: is alpha_{2k,k,1} = 1/Catalan(k) (Codex's round-7")
+    print("claim) or alpha_{2k,k,1} = 1/(n*(n-1)) (this project's own observed pattern)?")
+    import math
+    for n, k in [(8, 4), (10, 5), (12, 6), (14, 7)]:
+        a, total, distinct = alpha(n, k, 1)
+        cat_k = math.comb(2 * k, k) // (k + 1)
+        n_n1 = n * (n - 1)
+        print(f"n={n:3d} k={k}: measured 1/alpha={1/a:.1f}   "
+              f"Catalan(k)={cat_k:6d} (match={abs(1/a-cat_k)<0.5})   "
+              f"n(n-1)={n_n1:6d} (match={abs(1/a-n_n1)<0.5})")
