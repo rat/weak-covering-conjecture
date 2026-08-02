@@ -1,2 +1,4 @@
 .claude/settings.local.json
 literature/papers/
+__pycache__/
+experiments/E-003-mpg-cylinder/certificate_k14.json
