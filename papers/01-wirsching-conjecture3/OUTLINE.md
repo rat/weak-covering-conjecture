@@ -48,7 +48,9 @@ citable proof.
 ## Status
 
 - [x] main.tex drafted (2026-08-04), compiles clean (pdflatex, no warnings, 9 pages)
-- [ ] reproducibility repo populated and every script verified to actually run
+- [x] reproducibility repo populated (2026-08-04): 5 self-contained scripts, one per section with
+      a numerical/certified claim, each verified to run clean from a fresh clone
+      (git@github.com:faculdade/wirsching-conjecture3-proof.git)
 - [ ] critique round complete, every finding fixed or rejected with reason
 - [ ] pt-BR version (main-pt.tex): deferred, only on the researcher's explicit request
 
