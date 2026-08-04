@@ -28,19 +28,25 @@
 \address{Universidade Federal de Goi\'as}
 \email{dr.renatotavares@gmail.com}
 
+\subjclass[2020]{11B83, 39B22, 30D05, 11M06}
+\keywords{Collatz map, predecessor density, invariant density, log-periodic asymptotics,
+Mellin transform, atomic function}
+
 \begin{document}
 
 \begin{abstract}
 Wirsching's 2003 argument for positive predecessor density under the $3n+1$ map reduces to three
 conjectures. Conjecture 3 concerns the near-zero asymptotics of an invariant density $\varphi$,
-compared against an explicit asymptotic $\varphi_0$ due to Berg and Kr\"uppel. We show that the
-exact log-Laplace transform of $\varphi$ decomposes as a smooth part plus a periodic correction
-$H$, with closed-form Fourier coefficients in $\Gamma$ and $\zeta$. This correction is exactly
-Berg and Kr\"uppel's own undetermined periodic factor from their 1998 saddlepoint asymptotic. On
-Wirsching's own comparison class, $H$ is constant, and Conjecture 3 holds, with an explicit limit.
-Off that class, $H$ genuinely oscillates: the stronger, unrestricted asymptotic $\varphi(t) \sim
-c\,\varphi_0(t)$ as $t \to 0^+$ is false. We verify directly that Wirsching's actual requirement,
-weaker than the literal statement of Conjecture 3, holds with a wide margin.
+compared against an explicit asymptotic $\varphi_0$ due to Berg and Kr\"uppel. The exact
+log-Laplace transform of $\varphi$ decomposes as a smooth part plus a periodic correction $H$. Berg
+and Kr\"uppel gave this correction, for this eigenfunction, as an infinite product in 1998, five
+years before Wirsching's conjecture; they did not ask whether it is constant. We give $H$ instead
+as a Fourier series with closed-form coefficients in $\Gamma$ and $\zeta$, and certify rigorously
+that it is not. Wirsching's own comparison class fixes a single phase of $H$; there, Conjecture 3
+holds, with an explicit limit. Away from that class the phase sweeps a full period, so the
+stronger, unrestricted asymptotic $\varphi(t) \sim c\,\varphi_0(t)$ as $t \to 0^+$ fails. Wirsching
+needs less than the literal statement of Conjecture 3; we check directly that his actual
+requirement holds with a wide margin.
 \end{abstract}
 
 \maketitle
@@ -48,22 +54,22 @@ weaker than the literal statement of Conjecture 3, holds with a wide margin.
 \section{Introduction}
 
 Let $T$ denote the $3n+1$ map on the positive integers, $T(n) = n/2$ for $n$ even and $T(n) =
-(3n+1)/2$ for $n$ odd. Wirsching \cite{wirsching2003} studies the density of predecessor sets
-under $T$ through an averaging construction on the $3$-adic integers: a family of operators
-$S_l$, built from path counts in the predecessor graph, converges in the strong operator topology
-to a limiting operator $S_\infty$ whose essential part is a Markov chain on $[0,1]$. That chain has
-a unique invariant density $\varphi$, and Wirsching's proof of positive predecessor density reduces
-to three conjectures about $\varphi$ and related quantities, stated as three unbridged gaps in the
-argument.
+(3n+1)/2$ for $n$ odd. Wirsching's monograph \cite{wirsching1998} develops the predecessor-set
+machinery this paper's argument descends from; \cite{wirsching2003} takes it further, studying the
+density of predecessor sets under $T$ through an averaging construction on the $3$-adic integers: a
+family of operators $S_l$, built from path counts in the predecessor graph, converges in the strong
+operator topology to a limiting operator $S_\infty$ whose essential part is a Markov chain on
+$[0,1]$. That chain has a unique invariant density $\varphi$, and Wirsching's proof of positive
+predecessor density reduces to three conjectures about $\varphi$ and related quantities, stated as
+three unbridged gaps in the argument.
 
 The load-bearing one is Conjecture 3. It concerns the behaviour of $\varphi$ as its argument tends
 to $0$, compared against an explicit comparison function $\varphi_0$. Berg and Kr\"uppel
 \cite{bergkruppel1998} had already produced $\varphi_0$ five years earlier, by Laplace transform
 and saddlepoint analysis, as the asymptotic solution of a truncated version of the functional
-equation $\varphi$ satisfies. They did not prove that $\varphi$ and $\varphi_0$ are asymptotically
-comparable; they only argued for it informally, and left the exact multiplicative constant, and
-even whether such a constant exists as a genuine limit, open. Wirsching considers the strongest
-possible reading of that gap directly:
+equation $\varphi$ satisfies. Their argument for the asymptotic comparability of $\varphi$ and
+$\varphi_0$ was informal, and left open both the exact multiplicative constant and whether the
+ratio converges at all. Wirsching considers the strongest possible reading of that gap directly:
 
 \begin{quote}
 ``That replacement would be possible, if, e.g., $\varphi \sim c\,\varphi_0$ for some constant
@@ -72,9 +78,9 @@ $c > 0$. It turns out that the following (slightly weaker) conjecture \dots suff
 
 He then states Conjecture 3: along a specific comparison class of sequences $(z_l)$ tending to $0$
 at the borderline rate $z_l \sim l \cdot 3^{-l}$, the ratio $\varphi(z_l)/\varphi_0(z_l)$ converges
-to a positive constant, uniformly on the class. This is weaker than the unrestricted asymptotic
-he first considers, precisely because the constant $c$ cancels out of the one inequality his own
-proof actually needs.
+to a positive constant, uniformly on the class. This is weaker than the unrestricted asymptotic he
+first considers. The constant cancels out of the one inequality his own proof actually needs, so a
+class-dependent limit is enough.
 
 Neither statement had been settled. This paper settles both, in opposite directions.
 
@@ -88,40 +94,34 @@ Kr\"uppel's own, equation~(9.6) of \cite{bergkruppel1998}.
 
 \begin{theorem}[Failure of the unrestricted asymptotic]
 \label{thm:unrestricted}
-The stronger asymptotic $\varphi(t) \sim c\,\varphi_0(t)$ as $t \to 0^+$, for any single constant
-$c$ and with no restriction to a comparison class, is false. The ratio $\varphi(t)/\varphi_0(t)$
-oscillates indefinitely as $t \to 0^+$, with period $\log 3$ in $\log(1/t)$ and amplitude bounded
-below by a positive, closed-form constant.
+The stronger asymptotic $\varphi(t) \sim \kappa\,\varphi_0(t)$ as $t \to 0^+$, for any single
+constant $\kappa$ and with no restriction to a comparison class, is false. The ratio
+$\varphi(t)/\varphi_0(t)$ oscillates indefinitely as $t \to 0^+$, with period $\log 3$ in
+$\log(1/t)$ and amplitude bounded below by a positive, certified constant.
 \end{theorem}
 
 The two theorems have a single common source. Write $t = e^{-\tau}$ and let $H(w)$ be the
 $\log 3$-periodic function appearing in the exact decomposition of $\log\varphi$'s log-Laplace
 transform (Theorem~\ref{thm:H}). Wirsching's comparison class fixes $\tau$'s phase modulo $\log 3$
-at a single value; every other class of comparison sequences sweeps through all phases. A
-convergent limit or a genuine oscillation is therefore not a property of $\varphi$ alone: it
-depends on which sequences one is allowed to compare along, and the two theorems above are the two
-readings of the same object at two different scopes.
+at a single value; every other class of comparison sequences sweeps through all phases. Whether the
+ratio converges or oscillates depends on which sequences one compares along, and the two theorems
+above read the same object at two different scopes.
 
 \begin{corollary}
 \label{cor:bk}
-$H$ is exactly Berg and Kr\"uppel's own undetermined periodic factor $Q$ from
-Proposition~9.3 of \cite{bergkruppel1998}, for the eigenfunction $\varphi$, given here in closed
-form for the first time.
+$H$ is Berg and Kr\"uppel's own periodic factor for the eigenfunction $\varphi$, from
+Proposition~9.3 of \cite{bergkruppel1998}, which they give as an infinite product. Its Fourier
+series, Proposition~\ref{prop:Hfourier} below, is new.
 \end{corollary}
 
-The remainder of the paper is organized as follows. Section~\ref{sec:prelim} fixes notation and
-recalls the exact functional equation $\varphi$ satisfies. Section~\ref{sec:periodic} constructs
-$H$ and proves its basic analytic properties, including a rigorous certificate that it is not
-constant. Section~\ref{sec:formulaA} proves a uniform saddlepoint approximation to $\varphi$
-(``formula (A)''), the technical heart of the paper. Section~\ref{sec:envelope} bridges that
-approximation, built from a smooth auxiliary system, back to $\varphi$ itself. Section~\ref{sec:bk}
-identifies the resulting smooth part exactly with Berg and Kr\"uppel's own saddlepoint expression,
-proving Corollary~\ref{cor:bk} and pinning down every constant in closed form.
-Section~\ref{sec:proofs} assembles the pieces into proofs of Theorems~\ref{thm:conj3} and
-\ref{thm:unrestricted}, and checks directly that Wirsching's actual requirement holds with a wide
-margin. Section~\ref{sec:discussion} states the scope of these results precisely: they resolve
-Conjecture 3 alone, one of Wirsching's three conjectures. Conjectures 1 and 2 are untouched, and
-the full positive-predecessor-density theorem is not established here.
+Section~\ref{sec:prelim} recalls the functional equation $\varphi$ satisfies and Berg and
+Kr\"uppel's comparison asymptotic. Section~\ref{sec:periodic} constructs $H$, proves
+Proposition~\ref{prop:Hfourier} and Corollary~\ref{cor:bk}, and certifies that $H$ is not constant.
+Sections~\ref{sec:formulaA} and~\ref{sec:envelope} transfer this from the log-Laplace transform to
+$\varphi$ itself, through a uniform saddlepoint approximation and an envelope estimate.
+Section~\ref{sec:bk} identifies the resulting smooth part with Berg and Kr\"uppel's saddlepoint
+expression and pins down every constant. Section~\ref{sec:proofs} proves both theorems and checks
+Wirsching's actual requirement directly. Section~\ref{sec:discussion} states what remains open.
 
 \section{The invariant density and its Laplace transform}
 \label{sec:prelim}
@@ -138,9 +138,10 @@ $X$, shows that the density $\varphi$ of $X$ satisfies
 \]
 equivalently $\varphi'(x) = \tfrac{9}{2}\varphi(3x)$ on $(0, \tfrac{2}{3})$: this is Wirsching's
 invariant density (up to the reflection $x \mapsto 1-x$ fixing the convention), a translate of
-Rvachev's atomic function $h_3$, and the $a=3$, $\lambda = 2/3$ case of Berg and Kr\"uppel's family
-$\lambda\, g'(t) = a\bigl(g(at) - g(at-a+1)\bigr)$. It is $C^\infty$, supported on $[0,1]$, and
-constant, equal to $3/2$, on the middle third $[1/3, 2/3]$.
+Rvachev's atomic function $h_3$ \cite{rvachev1990}, and the dilation-$3$, $\lambda=2/3$ member of
+Berg and Kr\"uppel's family of functional equations $\lambda\, g'(t) = 3\bigl(g(3t) -
+g(3t-2)\bigr)$. It is $C^\infty$, supported on $[0,1]$, and constant, equal to $3/2$, on the middle
+third $[1/3, 2/3]$.
 
 For $s > 0$ write
 \[
@@ -161,17 +162,17 @@ $e^{-sX}$. As $s$ ranges over $(0,\infty)$, $t(s)$ decreases strictly from $1/2$
 Lemma~\ref{lem:saddles} below), so studying $\varphi(t(s))$ as $s \to \infty$ is the same as
 studying $\varphi(t)$ as $t \to 0^+$.
 
-Berg and Kr\"uppel's comparison function solves the truncated equation $\lambda\, g'(t) = a\, g(at)$
+Berg and Kr\"uppel's comparison function solves the truncated equation $\lambda\, g'(t) = d\, g(dt)$
 by Laplace transform and saddlepoint analysis. In their normalization (their equation~(9.6), with
-$\alpha = \tfrac12 - \tfrac{\log 2}{\log 3}$, $\beta = \tfrac{1}{2\log 3}$, and $\gamma$, $\delta$,
-$\varepsilon$ determined by $\alpha$ and $\beta$ through their Proposition~9.1),
+$\alpha = \tfrac12 - \tfrac{\log 2}{\log 3}$, $\beta = \tfrac{1}{2\log 3}$, and $\gamma$,
+$\delta_{\mathrm{BK}}$, $\varepsilon$ determined by $\alpha$ and $\beta$ through their
+Proposition~9.1),
 \[
-\varphi_0(t) = \frac{(2\beta)^\varepsilon}{\sqrt{2\pi}}\; t^\gamma\,(-\log t)^\delta \,
-\exp\!\left(-\beta \log^2\!\frac{t}{-\log t}\right).
+\varphi_0(t) = \frac{(2\beta)^\varepsilon}{\sqrt{2\pi}}\; t^\gamma\,(-\log t)^{\delta_{\mathrm{BK}}}
+\, \exp\!\left(-\beta \log^2\!\frac{t}{-\log t}\right).
 \]
-We write $\varphi_{0,\mathrm{bare}}$ for the same expression without the leading constant
-$(2\beta)^\varepsilon/\sqrt{2\pi}$; this is the normalization used in this project's earlier
-numerical work, and the two differ only by that constant.
+Write $\varphi_{0,\mathrm{bare}}$ for the same expression without the leading constant
+$(2\beta)^\varepsilon/\sqrt{2\pi}$: the two differ only by that constant.
 
 \section{The periodic correction}
 \label{sec:periodic}
@@ -198,10 +199,10 @@ H(w) := L(w) - Q(w) + \sum_{k \ge 0} \log\bigl(1 - e^{-2\cdot 3^k e^w}\bigr).
 \end{equation}
 Then $H$ is exactly $c$-periodic, $H(w+c) = H(w)$ for every $w \in \R$, and
 \[
-L(w) = Q(w) + H(w) + E(w), \qquad E(w) = -\sum_{k\ge 0}\log\bigl(1-e^{-2\cdot3^k e^w}\bigr),
+L(w) = Q(w) + H(w) + \Delta(w), \qquad \Delta(w) = -\sum_{k\ge 0}\log\bigl(1-e^{-2\cdot3^k e^w}\bigr),
 \]
-with $E^{(j)}(w) = O_j\bigl(e^{jw - 2e^w}\bigr)$ for every $j \ge 0$: doubly exponentially small,
-together with all its derivatives, as $w \to +\infty$.
+with $\Delta^{(j)}(w) = O_j\bigl(e^{jw - 2e^w}\bigr)$ for every $j \ge 0$: doubly exponentially
+small, together with all its derivatives, as $w \to +\infty$.
 \end{theorem}
 
 \begin{proof}
@@ -216,16 +217,24 @@ D(w) + \sum_{k\ge0} d(w+kc) = D(w+c) - d(w) + \sum_{k\ge0}d(w+kc) = D(w+c) + \su
 \]
 so the right side of \eqref{eq:Hexact} is invariant under $w \mapsto w+c$, that is, $H$ is
 $c$-periodic. Convergence of the series and its termwise differentiability, together with the
-stated bound on $E^{(j)}$, follow from $d(w) = O(e^{-2e^w})$ and the corresponding bounds on its
-derivatives, since $2\cdot3^k e^w \ge 2 e^w$ for $k \ge 0$ makes the series dominated, uniformly for
-$w$ in any half-line bounded away from $-\infty$, by a geometric series in $3^{-k}$ inside the
+stated bound on $\Delta^{(j)}$, follow from $d(w) = O(e^{-2e^w})$ and the corresponding bounds on
+its derivatives, since $2\cdot3^k e^w \ge 2 e^w$ for $k \ge 0$ makes the series dominated, uniformly
+for $w$ in any half-line bounded away from $-\infty$, by a geometric series in $3^{-k}$ inside the
 exponent.
 \end{proof}
 
-The decomposition $L = Q+H+O(1)$ (in the limit sense; exactly $L=Q+H+E$ with $E$ negligible) is
-unique: any two periodic functions differing from $L-Q$ by an $o(1)$ term as $w\to\infty$ must be
-equal, being periodic functions that agree in the limit along every residue class of $w$ modulo
-$c$.
+The decomposition $L = Q+H+\Delta$, with $\Delta$ negligible as $w\to\infty$, is unique: any two
+periodic functions differing from $L-Q$ by an $o(1)$ term as $w\to\infty$ must be equal, being
+periodic functions that agree in the limit along every residue class of $w$ modulo $c$.
+
+\begin{remark}
+Berg and Kr\"uppel's own Proposition~9.3 (specialized to $a=3$, $b=3/2$ in their notation, exactly
+this eigenfunction) gives the equivalent identity $\exp(H(w)) = a^{\frac12 t^2 - \alpha t}
+\prod_{k\ge0}\frac{1-e^{-a^{t-k}/b}}{a^{t-k}/b}\prod_{l\ge1}\bigl(1-e^{-a^{t+l}/b}\bigr)$, $t=w/c$,
+as an infinite product, in their proof of that proposition. The Fourier series of
+Proposition~\ref{prop:Hfourier} below is what lets us certify non-constancy (Proposition
+\ref{prop:Hcert}), which their product form does not make transparent.
+\end{remark}
 
 \begin{proposition}
 \label{prop:Hfourier}
@@ -241,15 +250,30 @@ A = \frac{\pi^2}{12} - \frac{\gamma_E^2}{2} - \gamma_1,
 where $\gamma_E$ is the Euler--Mascheroni constant and $\gamma_1$ the first Stieltjes constant.
 \end{proposition}
 
-\begin{proof}[Sketch]
-The Mellin transform of $g$ on the strip $-1 < \operatorname{Re}\, z < 0$ is $g^*(z) = -2^{-z}
-\Gamma(z)\zeta(1+z)$, obtained by integrating by parts onto $g'$ and using the classical
-continuation $\int_0^\infty\bigl(\tfrac{1}{e^u-1}-\tfrac1u\bigr)u^{z-1}\,du = \Gamma(z)\zeta(z)$.
-Substituting the defining series for $K$ and summing the resulting geometric series in the Mellin
-variable gives the Mellin transform of $L$; shifting the inversion contour past the triple pole at
-the origin and past each simple pole at $z = i\omega_m$ reproduces $Q + \hat H(0)$ and the Fourier
-modes above, respectively.
+\begin{proof}[Sketch\footnote{Proofs marked ``Sketch'' give the complete argument at the level of
+a referee report; every numerical constant they produce is independently certified in the
+accompanying repository (Section~\ref{sec:code}), and full line-by-line derivations are on record
+in the underlying project's notes, cited there.}]
+The Mellin transform of $g$ on the strip $-1 < \operatorname{Re}\, z < 0$ is $g^*(z) =
+-\Gamma(z)\zeta(1+z)$, obtained by integrating by parts onto $g'(b) = 1/(e^b-1) - 1/b$ and using the
+classical continuation $\int_0^\infty\bigl(\tfrac{1}{e^u-1}-\tfrac1u\bigr)u^{z-1}\,du =
+\Gamma(z)\zeta(z)$. Since $K(s) = \sum_j g(2s/3^j)$, the Mellin transform of $s\mapsto K(s)$ picks
+up a factor $2^z\sum_j 3^{-jz} = 2^z/(3^z-1)$ from this harmonic sum; shifting the resulting
+inversion contour past the triple pole at the origin and past each simple pole at $z = i\omega_m$
+(where $3^z=1$) reproduces $Q + \hat H(0)$ and the Fourier modes above, respectively, the factor
+$2^{i\omega_m}$ coming from that same harmonic-sum step.
 \end{proof}
+
+\begin{remark}
+This is an instance of the de Bruijn--Mahler phenomenon: a base-change harmonic sum, Mellin
+transformed, picks up simple poles on a vertical line, and their residues assemble into an exactly
+periodic correction with Fourier coefficients in $\Gamma$ and $\zeta$. De Bruijn found the first
+case of this in Mahler's partition asymptotic \cite{debruijn1948}; Erd\H{o}s and Richmond named it
+\cite{erdosrichmond1976}; Kato and McLeod \cite{katomcleod1971} and Derfel \cite{derfel1995}
+established the log-squared decay rate of \eqref{eq:Hexact}'s companion asymptotic $\varphi_0$ as
+generic across this whole class of rescaled functional equations. Our contribution here is the
+closed form for the periodic correction itself, not the mechanism producing it.
+\end{remark}
 
 The series for $H'$ and $H''$ converge absolutely and uniformly, since $|\Gamma(-i\omega_m)| =
 \sqrt{\pi/(\omega_m \sinh \pi\omega_m)}$ decays exponentially in $m$ while $\zeta(1-i\omega_m)$
@@ -274,10 +298,11 @@ $\operatorname{osc}(H) \in [4.18744947692\times10^{-4},\, 4.18756644224\times10^
 Write $g(b) = -b + \log S(b)$, $S(b) = \sinh(b)/b = \sum_{n\ge0} b^{2n}/(2n+1)!$. Termwise
 domination of $6^n n! \le (2n+1)!$ gives $0 \le \log S(b) \le b^2/6$ for $b \ge 0$, hence an
 explicit, two-sided enclosure of the tail $\sum_{r>R} g(s/3^r)$ for any $R$ and $s > 0$; combined
-with a finite, rigorously evaluated head (interval arithmetic, ball arithmetic in $\Gamma$ and
-$\zeta$, or direct high-precision evaluation of \eqref{eq:Hexact}), this certifies the stated
-interval to arbitrary precision. The full oscillation is certified the same way, via the Lipschitz
-bound in \eqref{eq:Hbounds} and a fine grid search over one period.
+with a finite head evaluated in interval or ball arithmetic (via \eqref{eq:Hexact} directly, or
+independently via ball arithmetic in $\Gamma$ and $\zeta$ applied to Proposition
+\ref{prop:Hfourier}), this certifies the stated interval to arbitrary precision. The full
+oscillation is certified the same way, via the Lipschitz bound in \eqref{eq:Hbounds} and a fine
+grid search over one period.
 \end{proof}
 
 \section{A uniform saddlepoint approximation}
@@ -328,23 +353,27 @@ $\operatorname{Re}(w/2)=b/2>0$ never approaches $\pi i k$. This gives the sector
 Monotonicity of $e$ is immediate from the increasing power series of $\sinh(r)/r$; monotonicity of
 $f$ is Lazarevi\'c's inequality, $(\sinh r/r)^3 > \cosh r$, checked by comparing alternating
 truncated series near $r=0$ and by monotonicity of $\coth r - 1/r$ away from it. The local bounds
-at $|w|\le2$ follow from a Cauchy estimate on $|w|=2$ using $|B_{2k}| = 2(2k)!\,\zeta(2k)/(2\pi)^{2k}$
-and $\zeta(2k)\le\zeta(2)$, respectively $\zeta(4)$.
+at $|w|\le2$ follow by applying the maximum-modulus principle to $\kappa_2(w)/w^2$ and
+$\kappa_3(w)/w^4$ (analytic on $|w|<2\pi$ by the Bernoulli expansion): bound each on $|w|=2$ by the
+triangle inequality, using $|B_{2k}| = 2(2k)!\,\zeta(2k)/(2\pi)^{2k}$ and $\zeta(2k)\le\zeta(2)$,
+respectively $\zeta(4)$.
 \end{proof}
 
 \begin{lemma}[Variance]
 \label{lem:variance}
 For all $\rho\in[1,3)$, $N\ge1$, with $V := s^2K''(s) = \sum_j\kappa_2(b_j)$,
 \[
-N - A \le V \le N + 0.1283, \qquad A := \sum_{m\ge0} e(3^m/2) = 1.4269413069\ldots.
+N - A_V \le V \le N + 0.1283, \qquad A_V := \sum_{m\ge0} e(3^m/2) = 1.4269413069\ldots.
 \]
 \end{lemma}
 
 \begin{proof}
-$\kappa_2(b) = 1-e(b/2) \in (0,1)$. The lower bound drops the $N$ terms with $m\ge0$ (each $<1$,
-contributing at most $N$) below their true value and adds back the $m<0$ tail, maximal at $\rho=1$
-since $e$ decreases; the upper bound bounds the same tail via Lemma~\ref{lem:kappa}'s local
-estimate.
+Split $V = \sum_{m=0}^{N-1}\kappa_2(\rho3^m) + \sum_{m<0}\kappa_2(\rho3^m)$, using $\kappa_2(b) =
+1-e(b/2) \in (0,1)$. For the lower bound, drop the second (non-negative) sum and use $e(\rho3^m/2)
+\le e(3^m/2)$ ($e$ decreasing, $\rho\ge1$) in the first, giving $\sum_{m=0}^{N-1}\kappa_2(\rho3^m)
+\ge N - A_V$. For the upper bound, the first sum is $<N$ term by term, and the second sum, where
+$\rho3^m<1$, is bounded by Lemma~\ref{lem:kappa}'s local estimate: $\sum_{m<0}\kappa_2(\rho3^m) \le
+0.114\rho^2\sum_{m<0}9^m = 0.114\rho^2/8 \le 0.1283$ for $\rho<3$.
 \end{proof}
 
 \begin{lemma}[Tail bound and existence of the density]
@@ -381,17 +410,18 @@ for a complex-valued function of a real variable) gives
 \[
 h(y) = h(0)+h'(0)y+h''(0)\tfrac{y^2}{2} + \tfrac12\int_0^y (y-u)^2 h'''(u)\,du.
 \]
-Consequently, for $a\in(0,1]$,
+Consequently, for $\theta\in(0,1]$,
 \[
-S := \sum_j \sup_{|u|\le a}|h_j'''(u)| \le 2N + 3.7442,
+S := \sum_j \sup_{|u|\le \theta}|h_j'''(u)| \le 2N + 3.7442,
 \]
-and hence $|\Lambda(y) + Vy^2/2| \le B|y|^3$ for $|y|\le a$, with $B := S/6 \le (2N+3.7442)/6$.
+and hence $|\Lambda(y) + Vy^2/2| \le B|y|^3$ for $|y|\le \theta$, with $B := S/6 \le (2N+3.7442)/6$.
 \end{lemma}
 
 \begin{proof}
-The bound on $h_j'''$ follows from Lemma~\ref{lem:kappa} applied to $\kappa_3$, summed over the $N$
-indices with $b_j\ge1$ (via $f$'s monotonicity, worst case $\rho=1$) and the remaining geometric
-tail (via the local bound).
+Write $h_j(u) := g(b_j(1+iu))$ for each $j$, so $h_j'''(u) = \kappa_3(b_j(1+iu))/(1+iu)^3$ up to a
+sign. The bound on $h_j'''$ follows from Lemma~\ref{lem:kappa} applied to $\kappa_3$, summed over
+the $N$ indices with $b_j\ge1$ (via $f$'s monotonicity, worst case $\rho=1$) and the remaining
+geometric tail (via the local bound).
 \end{proof}
 
 \begin{theorem}[Formula (A)]
@@ -403,12 +433,13 @@ restriction on the sequence of $t$'s.
 \end{theorem}
 
 \begin{proof}
-Split \eqref{eq:R} at $|y|=a_N=N^{-1/3}$. On the central region, Lemma~\ref{lem:taylor} bounds the
-cubic remainder by a constant depending only on $N$, giving a Gaussian integral plus an explicit
-error of order $N^{-1/2}$ after using $\int_\R e^{-Vy^2/2}|y|^3\,dy = 4/V^2$ and
-Lemma~\ref{lem:variance}'s bound $V=N+O(1)$; the exponent $1/3$ is chosen so this error term is
-$o(1)$. On the tail region, Lemma~\ref{lem:tail}'s bound integrates to a term of order
-$N^{-1/6}e^{-N^{1/3}/2}$, which requires $a_N \gg N^{-1/2}$, again satisfied by $\tfrac13 < \tfrac12$.
+Split \eqref{eq:R} at $|y|=\theta_N=N^{-1/3}$. On the central region, Lemma~\ref{lem:taylor} bounds
+the cubic remainder $|\Lambda(y)+Vy^2/2|$ by $B\theta_N^3$, which stays bounded (not $o(1)$: this is
+exactly why the limit constant below carries a factor $e^{1/3}$) as $N\to\infty$, since $B=O(N)$ and
+$\theta_N^3=N^{-1}$; this suffices, via $\int_\R e^{-Vy^2/2}|y|^3\,dy = 4/V^2$ and
+Lemma~\ref{lem:variance}'s bound $V=N+O(1)$, to make the resulting error term $O(N^{-1/2})$. On the
+tail region, Lemma~\ref{lem:tail}'s bound integrates to a term of order $N^{-1/6}e^{-N^{1/3}/2}$,
+which requires $\theta_N \gg N^{-1/2}$, satisfied since $\tfrac13 < \tfrac12$.
 Every constant entering $E$ is a supremum over $b>0$ or a sum over one complete geometric orbit
 bounded using $\rho\ge1$, hence independent of $\rho$; a concrete choice gives $N_0=17$,
 $E(17)<1$, $E(N)\le 4.1\,N^{-1/2}$ for all $N\ge17$, with $\sqrt N\, E(N) \to \tfrac{4}{3}e^{1/3}
@@ -417,9 +448,12 @@ statement $\varphi(t)=\varphi_{\mathrm{sp}}(t)(1+o(1))$ as $t\to0^+$.
 \end{proof}
 
 \begin{remark}
-The rate is not sharp. Carrying the central expansion to fourth order and using the exact parities
-$V_3 = -2N+O(1)$, $V_4 = 6N+O(1)$ (the third and fourth cumulant sums, by the same argument as
-Lemma~\ref{lem:variance}) gives the Edgeworth correction $R(s) = 1 - \tfrac1{12N} + O(N^{-3/2})$,
+\label{rem:edgeworth}
+The rate is not sharp. Carrying the central expansion to fourth order, using that the odd cubic
+term integrates to zero against the Gaussian core, and using the limits $V_3 := \sum_j\kappa_3(b_j)
+= 2N+O(1)$, $V_4 := \sum_j\kappa_4(b_j) = 6N+O(1)$ (the third and fourth cumulant sums, by the same
+argument as Lemma~\ref{lem:variance}) gives the Edgeworth correction $R(s) = 1 - \tfrac1{12N} +
+O(N^{-3/2})$,
 matching the classical Stirling correction for a $\mathrm{Gamma}(N,1)$ law: after tilting, the
 $b_j\ge1$ summands behave asymptotically like independent $\mathrm{Exp}(1)$ variables, so $X$ under
 its tilt is asymptotically $\mathrm{Gamma}(N,1)$-distributed, and $\rho$ enters only through
@@ -432,19 +466,22 @@ Section~\ref{sec:proofs} uses.
 \label{sec:envelope}
 
 Theorem~\ref{thm:formulaA} compares $\varphi$ to $\varphi_{\mathrm{sp}}$, a quantity built from the
-full transform $K=Q+H+E$. It remains to compare $\varphi_{\mathrm{sp}}$ to a smooth auxiliary system
-built from $Q$ alone, so that the periodic part $H$ can be extracted explicitly. Write $t=e^{-\tau}$,
-$g_\tau(w) = L(w)+e^{w-\tau}$, $g_{0,\tau}(w) = Q(w)+e^{w-\tau}$, $B(w) = w/c - a$.
+full transform $K=Q+H+\Delta$. It remains to compare $\varphi_{\mathrm{sp}}$ to a smooth auxiliary
+system built from $Q$ alone, so that the periodic part $H$ can be extracted explicitly. Write
+$t=e^{-\tau}$, $g_\tau(w) = L(w)+e^{w-\tau}$, $g_{0,\tau}(w) = Q(w)+e^{w-\tau}$. The true and smooth
+systems each have their own analogue of $-K'$: write $B_{\mathrm{tr}}(w) := e^wt(e^w) = -L'(w)$ and
+$B_{\mathrm{sm}}(w) := -Q'(w) = w/c-a$.
 
 \begin{lemma}[True and smooth saddles]
 \label{lem:saddles}
 For each $\tau$, $g_\tau$ has a unique global minimizer $w^*(\tau)$, at which $g_\tau''(w^*) =
 V(r^*)>0$, $r^*=e^{w^*}$; and $g_{0,\tau}$ has a unique local minimizer $w_0(\tau)$ among solutions
-with $\beta := B(w_0) = e^{w_0-\tau} > 1/c$. Both are characterized by $\tau = \Phi(w^*) = \Phi_0(w_0)$
-for $\Phi(w) = w-\log B(w)$ (a strictly increasing bijection $\R\to(\log2,\infty)$, since $t(s)$ is
-strictly decreasing) and $\Phi_0(w)=w-\log B_0(w)$, and satisfy
+with $B_0 := B_{\mathrm{sm}}(w_0) = e^{w_0-\tau} > 1/c$. Both are characterized by $\tau =
+\Phi(w^*) = \Phi_0(w_0)$ for $\Phi(w) = w-\log B_{\mathrm{tr}}(w)$ (a strictly increasing bijection
+$\R\to(\log2,\infty)$, since $t(s)$ is strictly decreasing) and $\Phi_0(w)=w-\log B_{\mathrm{sm}}(w)$,
+and satisfy
 \[
-|w^*-w_0| = O(1/\beta), \qquad 0 \le g_\tau(w_0)-g_\tau(w^*) = O(1/\beta).
+|w^*-w_0| = O(1/B_0), \qquad 0 \le g_\tau(w_0)-g_\tau(w^*) = O(1/B_0).
 \]
 \end{lemma}
 
@@ -452,7 +489,7 @@ strictly decreasing) and $\Phi_0(w)=w-\log B_0(w)$, and satisfy
 Strict convexity of $K$ gives the global uniqueness of $w^*$. At $w_0$, $g_\tau'(w_0) = H'(w_0) +
 O(e^{-2e^{w_0}})$ by Theorem~\ref{thm:H}, bounded by \eqref{eq:Hbounds}; since $g_\tau''$ is bounded
 above and below by explicit constants on $[w_0-1,w_0+1]$ (again via \eqref{eq:Hbounds} and
-Lemma~\ref{lem:kappa}), a sign-change argument for $g_\tau'$ locates $w^*$ within $O(1/\beta)$ of
+Lemma~\ref{lem:kappa}), a sign-change argument for $g_\tau'$ locates $w^*$ within $O(1/B_0)$ of
 $w_0$, and Taylor's theorem about $w^*$ then bounds the resulting gap in $g_\tau$-values by the
 same order.
 \end{proof}
@@ -460,7 +497,7 @@ same order.
 \begin{proposition}[Envelope estimate]
 \label{prop:envelope}
 With $S(\tau) := \log\varphi_{\mathrm{sp}}(t) = g_\tau(w^*)+w^*-\tfrac12\log(2\pi V(r^*))$ and
-$P(\tau) := Q(w_0)+\beta+w_0-\tfrac12\log\bigl(2\pi(\beta-\tfrac1c)\bigr)$,
+$P(\tau) := Q(w_0)+B_0+w_0-\tfrac12\log\bigl(2\pi(B_0-\tfrac1c)\bigr)$,
 \[
 |S(\tau) - P(\tau) - H(w_0(\tau))| = O(1/\tau) \qquad (\tau\to\infty),
 \]
@@ -468,13 +505,13 @@ uniformly in the phase of $\tau$ modulo $c$.
 \end{proposition}
 
 \begin{proof}[Sketch]
-Expanding $S(\tau)-P(\tau)-H(w_0)$ exactly using $L=Q+H+E$ and Lemma~\ref{lem:saddles} produces
-four terms: the true envelope gap $g_{0,\tau}(w^*)-g_{0,\tau}(w_0)$, which is $O(\beta\,(w^*-w_0)^2)
-= O(1/\beta)$; the periodic-part difference $H(w^*)-H(w_0) = O(\eta\,|w^*-w_0|) = O(1/\beta)$ using
-\eqref{eq:Hbounds}; the saddle-location shift $w^*-w_0$ itself, $O(1/\beta)$; and a normalization
-term comparing $V(r^*)$ to $\beta - 1/c$, again $O(1/\beta)$ using \eqref{eq:Hbounds}'s bound on
-$H''$. Since $\tau = w_0 - \log\beta$, $\beta/\tau \to 1/c$, and all four terms are $O(1/\tau)$ with
-constants free of the phase of $\tau$.
+Expanding $S(\tau)-P(\tau)-H(w_0)$ exactly using $L=Q+H+\Delta$ and Lemma~\ref{lem:saddles}
+produces four terms: the true envelope gap $g_{0,\tau}(w^*)-g_{0,\tau}(w_0)$, which is
+$O(B_0\,(w^*-w_0)^2) = O(1/B_0)$; the periodic-part difference $H(w^*)-H(w_0) =
+O(\eta\,|w^*-w_0|) = O(1/B_0)$ using \eqref{eq:Hbounds}; the saddle-location shift $w^*-w_0$
+itself, $O(1/B_0)$; and a normalization term comparing $V(r^*)$ to $B_0 - 1/c$, again $O(1/B_0)$
+using \eqref{eq:Hbounds}'s bound on $H''$. Since $\tau = w_0 - \log B_0$, $B_0/\tau \to 1/c$, and
+all four terms are $O(1/\tau)$ with constants free of the phase of $\tau$.
 \end{proof}
 
 \section{The Berg--Kr\"uppel identity}
@@ -484,9 +521,9 @@ constants free of the phase of $\tau$.
 \label{prop:bkidentity}
 $P(\tau)$ is identically Berg and Kr\"uppel's own saddlepoint expression for $\log\varphi_0$: with
 $Y = cB_0$, $r = -ca-\log c$, the saddle equation for $\varphi_0$'s defining Laplace inversion is
-exactly $Y-\log Y = \tau+r$, and $P(\tau) = Q(w_0)+\beta+w_0-\tfrac12\log(2\pi(\beta-1/c))$
+exactly $Y-\log Y = \tau+r$, and $P(\tau) = Q(w_0)+B_0+w_0-\tfrac12\log(2\pi(B_0-1/c))$
 coincides term for term with Berg and Kr\"uppel's construction in their Proposition~9.1: $2\beta y -
-\alpha = B_0$, $2\beta y - 2\beta - \alpha = \beta - 1/c$, $\alpha y - \beta y^2 = Q(w_0)$ (in their
+\alpha = B_0$, $2\beta y - 2\beta - \alpha = B_0 - 1/c$, $\alpha y - \beta y^2 = Q(w_0)$ (in their
 notation, $y=w_0$).
 \end{proposition}
 
@@ -505,8 +542,8 @@ P(\tau) = -\frac{(\tau+\log\tau)^2}{2c} + \Bigl(1+\tfrac1c-\tfrac{r}{c}\Bigr)\ta
 C_P = -\frac{r^2}{2c}+r+ca+\frac{ca^2}{2}-\frac{\log2\pi}{2}+\frac{\log c}{2} =
 -0.9576743183133982760669122497855855\ldots.
 \]
-Matching the $\tau$ and $\log\tau$ coefficients against Berg and Kr\"uppel's $\gamma$, $\delta$
-(their equations following~(9.6)) reproduces both exactly, and
+Matching the $\tau$ and $\log\tau$ coefficients against Berg and Kr\"uppel's $\gamma$,
+$\delta_{\mathrm{BK}}$ (their equations following~(9.6)) reproduces both exactly, and
 \[
 C_P = \varepsilon\log(2\beta) - \tfrac12\log(2\pi) = \log\frac{(2\beta)^\varepsilon}{\sqrt{2\pi}},
 \]
@@ -517,10 +554,11 @@ prefactor-included saddlepoint expression, up to an $O(\tau^{-1}\log^2\tau)$ rem
 \begin{proof}[Proof of Corollary~\ref{cor:bk}]
 By Proposition~\ref{prop:envelope} and \ref{prop:bkidentity}, $S(\tau) = \log\varphi_0(e^{-\tau}) +
 H(w_0(\tau)) + O(\tau^{-1}\log^2\tau)$: the periodic factor multiplying Berg and Kr\"uppel's
-asymptotic solution, in the exact (not merely truncated) equation for $\varphi$, is $H$. This is
-exactly the arbitrary $c$-periodic factor $Q$ their Proposition~9.3 leaves undetermined for the
-general solution of the untruncated equation, restricted here to the specific eigenfunction
-$\varphi$ and given, via Proposition~\ref{prop:Hfourier}, in closed form.
+asymptotic solution, in equation~(9.7) for this eigenfunction, is $H$, matching the product formula
+their Proposition~9.3 supplies for it, as noted after Theorem~\ref{thm:H}. Proposition~
+\ref{prop:Hfourier}'s Fourier series is the new, closed form; Proposition~\ref{prop:Hcert}'s
+certificate is what neither their product formula nor their closing remark (that they only
+\emph{expect} $\varphi$ bounded and bounded away from zero relative to $\varphi_0$) settles.
 \end{proof}
 
 \section{Proofs of the main theorems}
@@ -553,17 +591,29 @@ $\limsup/\liminf \ge e^{\operatorname{osc}(H)} \ge 1.0004188$.
 \end{proof}
 
 \begin{proposition}[Wirsching's actual requirement]
-Wirsching's own use of Conjecture 3, via $\varphi'(x)=\tfrac92\varphi(3x)$ on $(0,\tfrac23)$ and
-Berg and Kr\"uppel's proven limit $\lim (2/3^{l+1})\varphi_0'(x_l^+)/\varphi_0(x_l^+) = 2/3$
-uniformly on the class (their equation~(7.13)), reduces to
+\label{prop:wirschingreq}
+Write $x_l^+$ for the upper endpoint of Wirsching's own covering interval at level $l$ (playing the
+same role as this paper's $z_l$). Wirsching's own use of Conjecture 3, via
+$\varphi'(x)=\tfrac92\varphi(3x)$ on $(0,\tfrac23)$ and his own calculation, his equation~(7.13),
+that $\lim_l (2/3^{l+1})\varphi_0'(x_l)/\varphi_0(x_l) = 2/3$ uniformly on the class, reduces to
 \[
 \limsup_l \Lambda_l < \tfrac32, \qquad
 \Lambda_l := \frac{\varphi(3x_l^+)/\varphi_0(3x_l^+)}{\varphi(x_l^+)/\varphi_0(x_l^+)}.
 \]
-This holds with a wide margin: $\Lambda_l \to 1$, since the phase shift under $t\mapsto3t$ is
-$w_0(\tau-c)-w_0(\tau)+c = O(1/\tau)$, phase-independent, so $H$ cancels in the ratio $\Lambda_l$ to
-the same order as Proposition~\ref{prop:envelope}'s error term.
+This holds with a wide margin: $\Lambda_l \to 1$.
 \end{proposition}
+
+\begin{proof}
+The phase shift under $t\mapsto3t$, i.e. $\tau\mapsto\tau-c$, is $w_0(\tau-c)-w_0(\tau)+c =
+O(1/\tau)$ by Lemma~\ref{lem:saddles}'s defining equation, independently of the phase of $\tau$.
+By Proposition~\ref{prop:envelope}, $\log\varphi(t)-\log\varphi_0(t) = H(w_0(\tau)) + O(1/\tau)$
+uniformly in phase, so
+\[
+\log\Lambda_l = H(w_0(\tau_l-c)) - H(w_0(\tau_l)) + O(1/\tau_l) = O(1/\tau_l) \to 0,
+\]
+using that $H$ is Lipschitz (\eqref{eq:Hbounds}) and the phase shift above is $O(1/\tau_l)$; hence
+$\Lambda_l \to 1$, well inside $\limsup \Lambda_l < 3/2$.
+\end{proof}
 
 \section{Discussion}
 \label{sec:discussion}
@@ -573,35 +623,36 @@ to three conjectures; Conjectures 1 and 2, concerning respectively a pointwise-v
 transfer for the Elka functions and a uniformity-near-a-singularity statement for the limiting
 operator $S_\infty$, are untouched here, and the full theorem is not established by this paper.
 
-The two theorems together explain, rather than merely report, why Wirsching stated the weaker
-Conjecture 3 instead of the stronger $\varphi\sim c\varphi_0$ he considers first: the stronger
-statement is false, genuinely and by a mechanism with a closed form, not through some correctable
-technical looseness. The class on which the weaker statement holds is not an arbitrary technical
-device either. It is exactly the one phase, among the continuum swept by $H$, at which the ratio
-converges, and that phase happens to sit close to $H$'s minimum: $H(0) - \min H = 5.25\times10^{-6}$
-against a total oscillation of $4.19\times10^{-4}$. We do not know whether this is coincidental.
+Wirsching stated the weaker Conjecture 3 instead of the stronger $\varphi\sim\kappa\varphi_0$ he
+considers first. Theorem~\ref{thm:unrestricted} shows why: the stronger statement fails by a
+mechanism with a certified, positive amplitude, not by some correctable technical looseness. The
+class on which the weaker statement holds is exactly the one phase, among the continuum swept by
+$H$, at which the ratio converges. That phase sits close to $H$'s minimum: $H(0) - \min H =
+5.25\times10^{-6}$ against a total oscillation of $4.19\times10^{-4}$. We do not know whether this
+is coincidental.
 
 The rate is not established beyond $o(1)$. The sharper Edgeworth correction of
-Remark following Theorem~\ref{thm:formulaA}, and the corresponding sharper form of the envelope and
-Berg--Kr\"uppel comparisons, would give an explicit polynomial rate throughout; nothing in this
-paper's two theorems requires it.
+Remark~\ref{rem:edgeworth}, and a correspondingly sharper form of the envelope and Berg--Kr\"uppel
+comparisons, would give an explicit polynomial rate throughout; neither theorem needs it.
 
 \section{Code and data availability}
+\label{sec:code}
 
-Every numerical claim in this paper, including the interval-arithmetic certificate behind
-Proposition~\ref{prop:Hcert}, the constants of Theorem~\ref{thm:formulaA}, and the identity of
-Proposition~\ref{prop:bkidentity}, is backed by a runnable script in the accompanying repository,
-\url{https://github.com/faculdade/wirsching-conjecture3-proof}, organized by section with a README
-per script stating what it verifies and how to run it.
+Every certified or numerically-checked claim in this paper is backed by a runnable script in the
+accompanying repository, \url{https://github.com/faculdade/wirsching-conjecture3-proof}, organized
+by section with a README per script stating what it verifies and how to run it. This includes the
+interval-arithmetic certificates behind Proposition~\ref{prop:Hcert} and the bounds
+\eqref{eq:Hbounds}, the constant chain behind Theorem~\ref{thm:formulaA}, and the identity of
+Proposition~\ref{prop:bkidentity}.
 
 \subsection*{Acknowledgments}
 AI assistance was used for textual review and translation.
 
-\begin{thebibliography}{9}
+\begin{thebibliography}{99}
 
 \bibitem{wirsching2003}
-G.~J. Wirsching, \emph{On positive predecessor density in $3n+1$ dynamics}, Discrete Contin. Dyn.
-Syst. \textbf{9} (2003), no.~3, 771--787.
+G.~J. Wirsching, \emph{On the problem of positive predecessor density in $3N+1$ dynamics},
+Discrete Contin. Dyn. Syst. \textbf{9} (2003), no.~3, 771--787.
 
 \bibitem{bergkruppel1998}
 L.~Berg and M.~Kr\"uppel, \emph{On the solution of an integral-functional equation with a
@@ -610,6 +661,26 @@ parameter}, Z. Anal. Anwendungen \textbf{17} (1998), no.~1, 159--181.
 \bibitem{wirsching1998}
 G.~J. Wirsching, \emph{The Dynamical System Generated by the $3n+1$ Function}, Lecture Notes in
 Mathematics, vol.~1681, Springer, Berlin, 1998.
+
+\bibitem{rvachev1990}
+V.~A. Rvachev, \emph{Compactly supported solutions of functional-differential equations and their
+applications}, Russian Math. Surveys \textbf{45} (1990), no.~1, 87--120.
+
+\bibitem{debruijn1948}
+N.~G. de Bruijn, \emph{On Mahler's partition problem}, Nederl. Akad. Wetensch., Proc.
+\textbf{51} (1948), 659--669 (also Indag. Math. \textbf{10}, 210--220).
+
+\bibitem{erdosrichmond1976}
+P.~Erd\H{o}s and L.~B. Richmond, \emph{Concerning periodicity in the asymptotic behaviour of
+partition functions}, J. Austral. Math. Soc. Ser.~A \textbf{21} (1976), 447--456.
+
+\bibitem{katomcleod1971}
+T.~Kato and J.~B. McLeod, \emph{The functional-differential equation $y'(x) = ay(\lambda x) +
+by(x)$}, Bull. Amer. Math. Soc. \textbf{77} (1971), no.~6, 891--937.
+
+\bibitem{derfel1995}
+G.~Derfel, \emph{Functional-differential and functional equations with rescaling}, in Operator
+Theory: Advances and Applications, vol.~80, Birkh\"auser, Basel, 1995, 100--111.
 
 \end{thebibliography}
 

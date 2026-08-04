@@ -51,7 +51,9 @@ citable proof.
 - [x] reproducibility repo populated (2026-08-04): 5 self-contained scripts, one per section with
       a numerical/certified claim, each verified to run clean from a fresh clone
       (git@github.com:faculdade/wirsching-conjecture3-proof.git)
-- [ ] critique round complete, every finding fixed or rejected with reason
+- [x] critique round complete (2026-08-04): 15 findings, 14 fixed (CRITIQUE.md), 1 left open
+      pending researcher action (making the reproducibility repo public -- currently 404s
+      anonymously)
 - [ ] pt-BR version (main-pt.tex): deferred, only on the researcher's explicit request
 
 ## Target venue

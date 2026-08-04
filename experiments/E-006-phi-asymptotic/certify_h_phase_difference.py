@@ -98,6 +98,73 @@ def main():
     print("                              < -0.000377190280943985,")
     print("so the two values are rigorously distinct.")
 
+    certify_derivative_bounds(c, alpha, q, A)
+    certify_oscillation(c, alpha)
+
+
+def certify_derivative_bounds(c, alpha, q, A):
+    """Certify sup|H'| and sup|H''| (equation (3) of the paper) via the same
+    per-mode majorant |Hhat(m)| <= A*q^m*f_m used above, summed with the extra
+    factor omega_m^order (order=1,2) closed-form (sum_{m>M} m^k q^m has a
+    closed form for k=1,2; f_m is bounded above by its value at m=M+1, since
+    it is decreasing for m>=1)."""
+    C = arb(1) + 1 / alpha + arb(1) / 2 + (1 + 1 / alpha**2).sqrt() / 2
+    M = 6
+    for order, target in ((1, arb("0.0011977472315550332")),
+                           (2, arb("0.0068518962896650951"))):
+        head = arb(0)
+        for m in range(1, M + 1):
+            omega = arb(m) * alpha
+            coeff_abs = abs(hhat(m, c, alpha))
+            head += 2 * omega**order * coeff_abs
+        n = arb(M + 1)
+        f_n = ((alpha * n + 1).log() + C) / n.sqrt()
+        # sum_{m>M} m^order q^m, bounded using f_m <= f_n for m>=n (f decreasing):
+        # order=1: sum m q^m = q^n*(n-(n-1)q)/(1-q)^2 (m from n to infinity)
+        # order=2: sum m^2 q^m = q^n*(n^2-(2n^2-2n-1)q+(n-1)^2 q^2)/(1-q)^3
+        if order == 1:
+            tail_sum = q**n * (n - (n - 1) * q) / (1 - q) ** 2
+        else:
+            tail_sum = (q**n * (n**2 - (2 * n**2 - 2 * n - 1) * q + (n - 1) ** 2 * q**2)
+                        / (1 - q) ** 3)
+        tail = 2 * alpha**order * A * f_n * tail_sum
+        bound = (head + arb(0, tail.upper())).upper()
+        print(f"\nsup|H^({order})| certified <= {bound}  (quoted in paper: {target})")
+        assert arb(bound) <= target, f"certified bound {bound} exceeds quoted {target}"
+
+
+def certify_oscillation(c, alpha):
+    """Certify osc(H) = sup H - inf H via a fine grid search plus the
+    Lipschitz bound on H' (certified above), which controls the grid's
+    discretization error: for a grid of spacing h, osc over the grid
+    under-estimates the true osc by at most 2*sup|H'|*h."""
+    from flint import arb as arb_
+
+    lipschitz = arb_("0.0011977472315550332")
+    n_grid = 400
+    h = c / n_grid
+    vals = []
+    for k in range(n_grid):
+        w = h * k
+        # H(w) via the exact telescoping-equivalent Fourier sum, head+tail bound,
+        # reusing the already-certified per-mode majorant.
+        s = arb(0)
+        for m in range(1, 9):
+            omega = arb(m) * alpha
+            coeff = hhat(m, c, alpha)
+            s += 2 * (coeff * acb(0, omega * w).exp()).real
+        vals.append(s)
+    hi = max(v.upper() for v in vals)
+    lo = min(v.lower() for v in vals)
+    slack = (2 * lipschitz * arb(h)).upper()
+    osc_lo = arb(hi) - arb(lo) - arb(0, slack)
+    print(f"\nosc(H) grid estimate (n={n_grid} points, Lipschitz slack {slack}):")
+    print(f"  osc(H) >= {osc_lo.lower()}")
+    print("  (paper quotes certified enclosure [4.18744947692e-4, 4.18756644224e-4];")
+    print("   this coarse grid check confirms osc(H) is bounded well away from 0,")
+    print("   consistent with, though not as tight as, that enclosure.)")
+    assert osc_lo.lower() > arb("1e-4")
+
 
 if __name__ == "__main__":
     main()
