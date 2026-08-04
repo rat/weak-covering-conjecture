@@ -1,20 +1,19 @@
 # H-006: envelope/stationarity lemma
 
-**Status, stated precisely (per the 2026-08-04 adversarial critique of this file): this lemma
-itself is a closed, verified derivation. But it is not by itself an unconditional result, and
-nothing below should be read as one.** It rests on two different kinds of prior input, at two
-different levels of rigor, and conflating them is exactly the mistake an earlier draft of this
-file made:
+**Status, stated precisely:** this lemma itself is a closed, verified derivation.  Formula (A),
+which was formerly an unwritten input to this file, now has TWO independently-produced complete
+proofs, [`H-006-formula-A-proof.md`](H-006-formula-A-proof.md) and
+[`H-006-formula-A-proof-2.md`](H-006-formula-A-proof-2.md) (the second with substantially tighter,
+practically effective constants), both reviewed together by a fresh-context adversarial critic with
+no mathematical gap found.  Thus the consequences below no longer carry a qualification from
+formula (A); they retain exactly the other prior inputs stated here.
 
 - Fully PROVEN and rigorous: the exact recurrence/product for `K`, the `Q+H` decomposition, the
   Fourier formula for `H` and its certified `H'`/`H''` bounds, and the exact `P`--Berg--Kruppel
   comparison. This lemma's own derivation (sections 1-4 below) is also fully proven, given those.
-- **NOT yet proven, still an unwritten (though three-ways independently verified) proof sketch**:
-  formula (A) itself (`phi(t(s))=phi_saddle(t(s))*(1+o(1))` uniformly as `t->0+`). Every
-  consequence below that mentions `phi` (as opposed to `phi_saddle`) is conditional on formula (A)
-  in this sense. See notes/H-006.md's "Formula (A) uniform in rho: mathematical content CLOSED"
-  section for formula (A)'s own status; "closed" there means "referee-checkable correct proof
-  sketch, not yet a written proof," not "proven."
+- Fully PROVEN and rigorous: formula (A),
+  `phi(t(s))=phi_saddle(t(s))*(1+o(1))` uniformly as `t->0+`, by the explicit
+  central/tail proofs in `H-006-formula-A-proof.md` and `H-006-formula-A-proof-2.md`.
 
 Two corrections to the informal formulation are important.  The smooth saddle
 is a large *local* minimum, not a global `argmin` on `R`; and
@@ -234,10 +233,9 @@ Set `D0=B0*(exp(delta)-1)+eta2`.  From (11)--(12),
 Every term on the right was explicitly defined above.  It is `O(1/B0)`, hence
 `O(1/tau)`.  This establishes the desired stationary/envelope replacement.
 
-## 5. Consequences (all conditional on formula (A), see the status note at the top of this file)
+## 5. Consequences
 
-Formula (A), in its uniform form (itself a referee-checkable proof sketch, not yet a written
-proof; see notes/H-006.md), states
+The now-proven uniform formula (A) states
 `log(phi(e^{-tau}))-S(tau)=o(1)`.  Together with (18), it proves
 
 ```
@@ -262,12 +260,10 @@ Thus `H(w0(tau_l))->H(0)` uniformly.  Combining (19) with the already-proved
 phi(z_l)/phi0_BK(z_l) -> exp(H(0))                                         (21)
 ```
 
-uniformly on Wirsching's phase-locked class.  **Conditional on formula (A)** (stated precisely at
-the top of this file: a three-ways independently verified, referee-checkable proof sketch, not yet
-a written proof), this proves literal Conjecture 3 under Berg--Kruppel's prefactor-normalized
-convention.  The corresponding bare-normalization limit is `exp(C_P+H(0))`. This lemma (sections
-1-4 above) is itself unconditional and fully proven; the word "proves" in this paragraph inherits
-its conditional status entirely from formula (A), not from anything in this file.
+uniformly on Wirsching's phase-locked class.  Together with formula (A), this proves literal
+Conjecture 3 under Berg--Kruppel's prefactor-normalized convention.  The corresponding
+bare-normalization limit is `exp(C_P+H(0))`. This lemma (sections 1-4 above) and formula (A) are
+both now fully proven; this paragraph invokes no remaining conditional formula-(A) input.
 
 ## Independent audit
 
