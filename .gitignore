@@ -2,3 +2,10 @@
 literature/papers/
 __pycache__/
 experiments/E-003-mpg-cylinder/certificate_k14.json
+*.aux
+*.log
+*.out
+*.toc
+*.fls
+*.fdb_latexmk
+*.synctex.gz
