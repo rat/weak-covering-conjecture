@@ -47,7 +47,8 @@ that it is not. Wirsching's own comparison class fixes a single phase of $H$; th
 holds, with an explicit limit. Away from that class the phase sweeps a full period, so the
 stronger, unrestricted asymptotic $\varphi(t) \sim \kappa\,\varphi_0(t)$ as $t \to 0^+$ fails. Wirsching
 needs less than the literal statement of Conjecture 3; we check directly that his actual
-requirement holds with a wide margin.
+requirement holds with a wide margin. This settles Conjecture 3 alone; Wirsching's other two
+conjectures, and positive predecessor density itself, remain open.
 \end{abstract}
 
 \maketitle
@@ -98,9 +99,8 @@ $z_l \sim l\cdot 3^{-l}$ (his equations~(1.5) and~(3.2), reproduced ahead of The
 proof): a sequence $(x_l)$ belongs to $\widetilde A_\delta$ exactly when $\lfloor 3^lx_l\rfloor =
 k_l$ for a sequence of integers $(k_l)$ with $|l-k_l|\le\delta\sqrt l$ for every $l$. This is weaker
 than the unrestricted asymptotic he first considers. The constant cancels out of the one inequality
-his own proof actually needs, so a class-dependent limit is enough.
-
-Neither statement had been settled. This paper settles both, in opposite directions.
+his own proof actually needs, so a class-dependent limit is enough. Neither statement had been
+settled before the following two theorems.
 
 \begin{theorem}[Conjecture 3]
 \label{thm:conj3}
@@ -125,7 +125,7 @@ $w_0(\tau+c)-w_0(\tau)$ tends to $c$
 (Lemma~\ref{lem:saddles}) even though $w_0(\tau)$ itself drifts away from $\tau$ without bound.
 \end{theorem}
 
-The two theorems have a single common source. Write $t = e^{-\tau}$ and let $H(w)$ be the
+A single computation underlies both theorems. Write $t = e^{-\tau}$ and let $H(w)$ be the
 $\log 3$-periodic function appearing in the exact decomposition of $\varphi$'s log-Laplace
 transform (Theorem~\ref{thm:H}); the saddlepoint bridge of Sections~\ref{sec:formulaA}
 and~\ref{sec:envelope} shows $\log\varphi(t)-\log\varphi_0(t) = H(w_0(\tau))+o(1)$, where the saddle
@@ -175,8 +175,7 @@ his invariant density, up to the reflection $x \mapsto 1-x$ fixing the conventio
 translate of Rvachev's atomic function $h_3$ \cite{rvachev1990}, and the dilation-$3$, $\lambda=2/3$
 member of
 Berg and Kr\"uppel's family of functional equations $\lambda\, \psi'(t) = 3\bigl(\psi(3t) -
-\psi(3t-2)\bigr)$ (their generic family member, distinct from this paper's own $g$ introduced
-below). The reflection is in fact vacuous, $\varphi(x)=\varphi(1-x)$ identically: $X$ and
+\psi(3t-2)\bigr)$. The reflection is in fact vacuous, $\varphi(x)=\varphi(1-x)$ identically: $X$ and
 $1-X=\sum_{j\ge1}\tfrac{2}{3^j}(1-U_j)$ are equidistributed, since $1-U_j\sim U_j$ independently
 for every $j$ and $\sum_{j\ge1}2\cdot3^{-j}=1$. It is $C^\infty$, supported on $[0,1]$, and
 constant, equal to $3/2$, on the middle third $[1/3, 2/3]$.
@@ -434,13 +433,28 @@ The series for $H'$ and $H''$ converge absolutely and uniformly, since
 \[
 |\Gamma(-i\omega_m)| = \sqrt{\pi/(\omega_m \sinh \pi\omega_m)}
 \]
-decays exponentially in $m$ while $\zeta(1-i\omega_m)$
-grows only polynomially. Precisely, with $\alpha_H := 2\pi/c$, $q := e^{-\pi\alpha_H/2}$, $A_H :=
-c^{-1}\sqrt{3\pi/\alpha_H}$ and $C_H := \tfrac32+\alpha_H^{-1}+\tfrac12\sqrt{1+\alpha_H^{-2}}$, the
-bound $|\Gamma(-i\omega_m)|\le\sqrt{3\pi/\omega_m}\,e^{-\pi\omega_m/2}$ (valid for $\omega_m\ge
-\alpha_H$, since $\sinh x\ge e^x/3$ there) and the Euler-Maclaurin bound
-$|\zeta(1-i\omega_m)|\le\log(\omega_m+1)+C_H$ (valid for $\omega_m\ge\alpha_H$) together give the
-majorant
+decays exponentially in $m$ while $\zeta(1-i\omega_m)$ grows only polynomially: for $\omega\ge
+\alpha_H := 2\pi/c$ and $N:=\lfloor\omega\rfloor\ge1$, the classical Euler-Maclaurin formula for
+$\zeta$, $\zeta(s) = \sum_{n=1}^N n^{-s} + \frac{N^{1-s}}{s-1} - s\int_N^\infty\{u\}\,u^{-s-1}\,du$
+(valid for $\operatorname{Re}s>0$, $s\ne1$, integer $N\ge1$, with $\{u\}:=u-\lfloor u\rfloor$), at
+$s=1+i\omega$ gives, bounding each term in modulus ($|N^{-i\omega}|=1$, $0\le\{u\}<1$),
+\[
+|\zeta(1+i\omega)| \;\le\; \sum_{n=1}^N\frac1n + \frac1\omega + \frac{\sqrt{1+\omega^2}}{N}
+\;\le\; 1+\log N + \frac1{\alpha_H} + \frac{\sqrt{1+\omega^2}}N,
+\]
+using $\sum_{n=1}^N 1/n\le1+\log N$ and $\omega\ge\alpha_H$ in the last term. Since $N\le\omega$,
+$\log N\le\log\omega$; since $N>\omega-1$ and $\omega\mapsto\omega/(\omega-1)$ is decreasing for
+$\omega>1$, $\sqrt{1+\omega^2}/N < \bigl(\omega/(\omega-1)\bigr)\sqrt{1+\omega^{-2}} \le
+\bigl(\alpha_H/(\alpha_H-1)\bigr)\sqrt{1+\alpha_H^{-2}}$. With
+\[
+C_H := 1+\alpha_H^{-1}+\frac{\alpha_H}{\alpha_H-1}\sqrt{1+\alpha_H^{-2}},
+\]
+this gives $|\zeta(1+i\omega)|\le\log\omega+C_H\le\log(\omega+1)+C_H$ for $\omega\ge\alpha_H$, and
+$\zeta(1-i\omega)=\overline{\zeta(1+i\omega)}$ has the same modulus, so
+$|\zeta(1-i\omega_m)|\le\log(\omega_m+1)+C_H$. Precisely, with $q := e^{-\pi\alpha_H/2}$, $A_H :=
+c^{-1}\sqrt{3\pi/\alpha_H}$, the bound $|\Gamma(-i\omega_m)|\le\sqrt{3\pi/\omega_m}\,e^{-\pi\omega_m/2}$
+(valid for $\omega_m\ge\alpha_H$, since $\sinh x\ge e^x/3$ there) together with the bound on
+$\zeta(1-i\omega_m)$ just proved give the majorant
 \begin{equation}
 \label{eq:Hmajorant}
 |\hat H(m)| \le A_H\,q^m\,m^{-1/2}\bigl(\log(\alpha_H m+1)+C_H\bigr), \qquad m\ge1.
@@ -460,9 +474,9 @@ $H$ is not constant. Rigorously,
 \[
 -0.000377190280943987 \;<\; H(0) - H(\log(3/2)) \;<\; -0.000377190280943985,
 \]
-and consequently $\operatorname{osc}(H) := \sup H - \inf H \ge 3.7719\times 10^{-4}$; a grid search
-with a Lipschitz enclosure (below) gives the certified bound
-$\operatorname{osc}(H) \in [4.1874494771\times10^{-4},\, 4.1874620262\times10^{-4}]$.
+and consequently $\operatorname{osc}(H) := \sup H - \inf H \ge 3.7719\times 10^{-4}$; evaluating $H$
+at two further, well-separated points certifies the stronger bound
+$\operatorname{osc}(H) \ge 4.1874494771\times10^{-4}$.
 \end{proposition}
 
 \begin{proof}
@@ -503,37 +517,32 @@ H(0) = -0.62713093305152597830\ldots, \qquad H\bigl(\log\tfrac32\bigr) = -0.6267
 \]
 whose difference is $-0.00037719028094398583\ldots$, inside the stated interval; this first route
 is floating-point (50 significant digits, accumulated rounding bounded as stated) rather than
-interval arithmetic. Independently, and rigorously in the sense of interval arithmetic, the Fourier
-series of Proposition~\ref{prop:Hfourier} gives the same difference in Arb ball arithmetic: the
-$m=0$ term cancels, four modes suffice, and the majorant \eqref{eq:Hmajorant} gives
-$\sum_{m>4}|\hat H(m)| \le 9.05\times10^{-20}$; the discarded modes therefore move the difference by
-less than $3.7\times10^{-19}$. The two routes agreeing to 18 digits is itself strong evidence the
-floating-point route's own error estimate is not being violated by an unmodeled effect.
+interval arithmetic. The Fourier series of Proposition~\ref{prop:Hfourier} gives the same
+difference in Arb ball arithmetic, rigorously: the $m=0$ term cancels, four modes suffice, and the
+majorant \eqref{eq:Hmajorant} gives $\sum_{m>4}|\hat H(m)| \le 9.41\times10^{-20}$, so the discarded
+modes move the difference by less than $3.8\times10^{-19}$; this route alone certifies the stated
+interval for $H(0)-H(\log(3/2))$.
 
-For the oscillation, let $w_i = ic/N$, $0\le i<N$, with $N = 2^{20}$, so $h := c/N =
-1.04772\times10^{-6}$. Every real $w$ lies within $h/2$ of some $w_i$ modulo $c$, so \eqref{eq:Hbounds}
-gives $|H(w)-H(w_i)| \le M_1h/2$ with $M_1 := 1.1977472315550332\times10^{-3}$, whence
+For the stronger bound, let $w_i = ic/N$, $0\le i<N$, with $N = 2^{20}$. A floating-point evaluation
+of the $N$ grid values from Proposition~\ref{prop:Hfourier}, truncated at $|m|\le10$ (the same
+majorant bounds the discarded modes by $2.80\times10^{-43}$), locates a candidate maximum at
+$i=486746$ and a candidate minimum at $i=1011118$; this search is only a heuristic for finding
+two well-separated points and is not itself part of the certificate below. Re-evaluating $H$ at
+exactly these two points to $40$ digits in Arb ball arithmetic, from \eqref{eq:Hcomputable} and
+from the Fourier series alike,
 \[
-\max_i H(w_i) \;\le\; \sup H \;\le\; \max_i H(w_i)+\frac{M_1h}{2}, \qquad
-\min_i H(w_i)-\frac{M_1h}{2} \;\le\; \inf H \;\le\; \min_i H(w_i),
+H(w_{486746}) = -0.6267174403736425786\ldots, \qquad H(w_{1011118}) = -0.6271361853213578093\ldots,
 \]
-and therefore $\operatorname{osc}(H) \in [D,\,D+M_1h]$ for $D := \max_iH(w_i)-\min_iH(w_i)$. The
-lower bound $D\le\operatorname{osc}(H)$ (the direction Theorem~\ref{thm:unrestricted} actually
-uses) follows from $\max_iH(w_i)\le\sup H$ for the true values $H(w_i)$; since the working
-precision below keeps floating-point evaluation error many orders below $M_1h\approx1.25\times
-10^{-9}$, this does not depend on which arithmetic evaluated the grid. The upper bound
-$D+M_1h\ge\operatorname{osc}(H)$, not used elsewhere in this paper, additionally requires the
-computed extrema not to be underestimates, which is not independently certified for the full sweep
-below (only the two located extremal points are re-confirmed in Arb ball arithmetic). Evaluating
-the $N$ grid values from Proposition~\ref{prop:Hfourier} truncated at $|m|\le10$ in floating point,
-where the same majorant bounds the discarded modes by $2.71\times10^{-43}$, locates the
-maximum at
-$i = 486746$ and the minimum at $i = 1011118$; re-evaluating $H$ there to $40$ digits, from
-\eqref{eq:Hcomputable} and from the Fourier series alike,
-\[
-H(w_{486746}) = -0.6267174403736425786\ldots, \qquad H(w_{1011118}) = -0.6271361853213578093\ldots .
-\]
-So $D = 4.187449477152\times10^{-4}$ and $M_1h = 1.2549\times10^{-9}$, which is the stated enclosure.
+so $D := H(w_{486746})-H(w_{1011118}) = 4.187449477152\times10^{-4}$. Since $w_{486746}$ and
+$w_{1011118}$ are two specific, fixed points of the domain, $H(w_{486746})\le\sup H$ and
+$H(w_{1011118})\ge\inf H$ hold trivially, giving $D\le\operatorname{osc}(H)$: this bound is
+unconditional, independent of whether the floating-point search above actually located the true
+argmax and argmin, since it uses only that the two chosen points lie in the domain. (With
+$h:=c/N=1.04772\times10^{-6}$ and $M_1 := 1.1977472315550332\times10^{-3}$ from
+\eqref{eq:Hbounds}, a Lipschitz argument over the full grid would give the matching upper bound
+$\operatorname{osc}(H)\le D+M_1h\approx D+1.2549\times10^{-9}$; this direction requires the
+floating-point search not to have missed a higher maximum or a lower minimum anywhere among the
+$N$ grid points, which is not independently certified for the full sweep, so it plays no role here.)
 \end{proof}
 
 \section{A uniform saddlepoint approximation}
@@ -573,8 +582,8 @@ For $w = b(1+iu)$, $b>0$, $|u|\le 1$, with $e(r) = r^2/\sinh^2 r$ and $f(r) = r^
 \[
 |\kappa_2(w)| \le 1 + 2e(b/2), \qquad |\kappa_3(w)| \le 2 + 2\cdot 2^{3/2} f(b/2).
 \]
-Both bounds are finite over the whole sector $|\operatorname{Im}w|\le\operatorname{Re}w$; $M_2 :=
-\sup |\kappa_2| \le 3$, $M_3 := \sup|\kappa_3| \le 2+2^{5/2} < 7.657$. In addition, for $|w|\le2$,
+Both bounds are finite over the whole sector $|\operatorname{Im}w|\le\operatorname{Re}w$:
+$\sup|\kappa_2|\le3$, $\sup|\kappa_3|\le2+2^{5/2}<7.657$. In addition, for $|w|\le2$,
 $|\kappa_2(w)| \le 0.114|w|^2$ and $|\kappa_3(w)|\le 0.0119|w|^4$.
 \end{lemma}
 
@@ -970,8 +979,9 @@ factor $3$, is a different quantity and is not written again below. Hence, writi
 \[
 f(p) = \alpha y-\beta y^2 = a y - \frac{y^2}{2c} = Q(y),
 \]
-the third of the three coincidences asserted in the proposition above. The other two are the
-chain rule:
+the first of the proposition's three claims. This is an identity in $y$, not merely a value match:
+the chain rule ($p\,d/dp = d/dy$) applied to $f$'s first and second derivatives confirms it also at
+the level of $Q'$ and $Q''$,
 \[
 -p\,f'(p) = -Q'(y) = B_{\mathrm{sm}}(y) = 2\beta y-\alpha, \qquad
 p^2f''(p) = Q''(y)-Q'(y) = B_{\mathrm{sm}}(y)-\frac1c = 2\beta y-2\beta-\alpha .
@@ -1128,7 +1138,8 @@ $\lim_l(2/3^{l+1})\varphi_0'(x_l)/\varphi_0(x_l)=2/3$ uniformly on the class,
 so the requirement $\limsup_l(9/3^{l+1})\varphi(3x_l^+)/\varphi(x_l^+)<1$ is exactly
 $\limsup_l\Lambda_l<3/2$.
 
-For the value of $\Lambda_l$: the phase shift under $t\mapsto3t$, i.e. $\tau\mapsto\tau-c$, is
+For the value of $\Lambda_l$: write $\tau_l := -\log x_l^+$, so $t=x_l^+$ corresponds to $\tau=\tau_l$
+and $t=3x_l^+$ to $\tau=\tau_l-c$. The phase shift under $t\mapsto3t$, i.e. $\tau\mapsto\tau-c$, is
 $w_0(\tau-c)-w_0(\tau)+c = O(1/\tau)$ by Lemma~\ref{lem:saddles}'s defining equation, independently
 of the phase of $\tau$. By Theorem~\ref{thm:formulaA}, Proposition~\ref{prop:envelope}, and
 Proposition~\ref{prop:bkidentity} together (the same chain used in the proof of
