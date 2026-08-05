@@ -187,8 +187,9 @@ Let
 \[
 Q(w) = -\frac{w^2}{2c} + \left(\frac12 - \frac{\log 2}{c}\right) w,
 \]
-chosen so that $Q(w+c) - Q(w) = -(w+a) + c/2$ with $a := \tfrac12 - \tfrac{\log 2}{c}$, matching the
-leading terms of \eqref{eq:recurrence} exactly.
+chosen so that $Q(w+c) - Q(w) = -w-\log2$, matching \eqref{eq:recurrence}'s non-periodic terms
+exactly. Write $a := \tfrac12 - \tfrac{\log 2}{c}$ for $Q$'s linear coefficient, used again from
+Section~\ref{sec:envelope} onward.
 
 \begin{theorem}
 \label{thm:H}
@@ -206,10 +207,11 @@ small, together with all its derivatives, as $w \to +\infty$.
 \end{theorem}
 
 \begin{proof}
-Write $d(w) = \log(1-e^{-2e^w})$, so \eqref{eq:recurrence} reads $L(w+c)-L(w) = d(w) - w - \log 2$,
-and $Q(w+c)-Q(w) = -(w+a) + c/2$. Since $-\log 2 = -a - c/2$ by the definition of $a$,
+Write $d(w) = \log(1-e^{-2e^w})$, so \eqref{eq:recurrence} reads $L(w+c)-L(w) = d(w) - w - \log 2$.
+Directly from the definition of $Q$ (expand $(w+c)^2 = w^2+2wc+c^2$ and collect terms),
+$Q(w+c)-Q(w) = -w-\log2$ as well, so the two non-periodic parts cancel exactly:
 \[
-(L-Q)(w+c) - (L-Q)(w) = d(w) - w - \log 2 + w + a - c/2 = d(w).
+(L-Q)(w+c) - (L-Q)(w) = \bigl[d(w)-w-\log2\bigr] - \bigl[-w-\log2\bigr] = d(w).
 \]
 The series in \eqref{eq:Hexact} telescopes this exactly: with $D(w) := (L-Q)(w)$,
 \[
@@ -426,25 +428,39 @@ geometric tail (via the local bound).
 
 \begin{theorem}[Formula (A)]
 \label{thm:formulaA}
-There is an absolute, phase-independent $N_0$ and an explicit, strictly decreasing function $E(N)
-= O(N^{-1/2})$ such that $|R(s)-1| \le E(N)$ for every $s$ with $N\ge N_0$, uniformly over $\rho \in
-[1,3)$. Consequently $\varphi(t) = \varphi_{\mathrm{sp}}(t)\,(1+o(1))$ as $t \to 0^+$, with no
-restriction on the sequence of $t$'s.
+For $N\ge17$, uniformly over $\rho\in[1,3)$, $|R(s)-1|\le E(N) := e_1(N)+e_2(N)+e_3(N)$, with
+$\theta_N := N^{-1/3}$, $V_{\mathrm{lo}} := N-A_V$, $V_{\mathrm{up}} := N+0.1283$,
+$B := (2N+3.7442)/6$,
+\begin{align}
+e_1(N) &:= \frac{4\,e^{B\theta_N^3}\,B}{\sqrt{2\pi}\,V_{\mathrm{up}}^{3/2}}, \qquad
+e_2(N) := \frac{2}{\sqrt{2\pi}}\cdot\frac{e^{-\theta_N^2V_{\mathrm{lo}}/2}}{\theta_N\sqrt{V_{\mathrm{lo}}}},
+\label{eq:Ebound}\\
+e_3(N) &:= 2\,e^{3/e}\sqrt{\frac{V_{\mathrm{up}}}{2\pi}}\cdot
+\frac{(1+\theta_N^2)^{-(N-2)/2}}{\theta_N(N-2)}. \notag
+\end{align}
+$E$ is strictly decreasing, $E(17)<1$, $E(N)\le4.1\,N^{-1/2}$ for all $N\ge17$, and $\sqrt N\,E(N)
+\to \tfrac43e^{1/3}(2\pi)^{-1/2} = 0.742358\ldots$. Consequently $\varphi(t) =
+\varphi_{\mathrm{sp}}(t)\,(1+o(1))$ as $t \to 0^+$, with no restriction on the sequence of $t$'s.
 \end{theorem}
 
 \begin{proof}
-Split \eqref{eq:R} at $|y|=\theta_N=N^{-1/3}$. On the central region, Lemma~\ref{lem:taylor} bounds
-the cubic remainder $|\Lambda(y)+Vy^2/2|$ by $B\theta_N^3$, which stays bounded (not $o(1)$: this is
-exactly why the limit constant below carries a factor $e^{1/3}$) as $N\to\infty$, since $B=O(N)$ and
-$\theta_N^3=N^{-1}$; this suffices, via $\int_\R e^{-Vy^2/2}|y|^3\,dy = 4/V^2$ and
-Lemma~\ref{lem:variance}'s bound $V=N+O(1)$, to make the resulting error term $O(N^{-1/2})$. On the
-tail region, Lemma~\ref{lem:tail}'s bound integrates to a term of order $N^{-1/6}e^{-N^{1/3}/2}$,
-which requires $\theta_N \gg N^{-1/2}$, satisfied since $\tfrac13 < \tfrac12$.
-Every constant entering $E$ is a supremum over $b>0$ or a sum over one complete geometric orbit
-bounded using $\rho\ge1$, hence independent of $\rho$; a concrete choice gives $N_0=17$,
-$E(17)<1$, $E(N)\le 4.1\,N^{-1/2}$ for all $N\ge17$, with $\sqrt N\, E(N) \to \tfrac{4}{3}e^{1/3}
-(2\pi)^{-1/2} = 0.742358\ldots$. Since $t(s)$ ranges bijectively over $(0,1/2)$, this is exactly the
-statement $\varphi(t)=\varphi_{\mathrm{sp}}(t)(1+o(1))$ as $t\to0^+$.
+Split \eqref{eq:R} at $|y|=\theta_N$. On $|y|\le\theta_N$, Lemma~\ref{lem:taylor} bounds the cubic
+remainder $|\Lambda(y)+Vy^2/2|$ by $B\theta_N^3$, which stays bounded (not $o(1)$: this is exactly
+why $e_1$ carries the factor $e^{B\theta_N^3}$ rather than vanishing) as $N\to\infty$, since $B=O(N)$
+and $\theta_N^3=N^{-1}$. Writing $C(y):=e^{\Lambda(y)}-e^{-Vy^2/2}$, $|e^z-1|\le|z|e^{|z|}$ gives
+$|C(y)|\le B|y|^3e^{B\theta_N^3}$ on this range, and $\int_\R e^{-Vy^2/2}|y|^3\,dy=4/V^2$ (using
+$V\ge V_{\mathrm{lo}}$, from Lemma~\ref{lem:variance}) gives the central Taylor-remainder
+contribution $e_1$. The truncated Gaussian tail $2\int_{\theta_N}^\infty
+\tfrac1{\sqrt{2\pi}}e^{-Vy^2/2}\,dy$, bounded via $\int_c^\infty e^{-v^2/2}\,dv\le e^{-c^2/2}/c$ at
+$c=\theta_N\sqrt{V_{\mathrm{lo}}}$, gives $e_2$. On $|y|>\theta_N$, Lemma~\ref{lem:tail}'s bound
+$|e^{\Lambda(y)}|\le e^{3/e}(1+y^2)^{-N/2}$ integrates, via $\int_a^\infty(1+y^2)^{-N/2}\,dy \le
+(1+a^2)^{-(N-2)/2}/(a(N-2))$ at $a=\theta_N$ (using $V\le V_{\mathrm{up}}$ for the leading
+$\sqrt{V/2\pi}$ factor in \eqref{eq:R}), to give $e_3$; this needs $\theta_N \gg N^{-1/2}$, satisfied
+since $\tfrac13<\tfrac12$. Every constant entering $E$ (via $A_V$, Lemma~\ref{lem:variance}, and the
+$3.0152\approx e^{3/e}$ of Lemma~\ref{lem:tail}) is a supremum over $b>0$ or a sum over one complete
+geometric orbit bounded using $\rho\ge1$, hence independent of $\rho$. Evaluating \eqref{eq:Ebound}
+numerically gives the stated $N_0=17$, monotonicity, and limit. Since $t(s)$ ranges bijectively over
+$(0,1/2)$, this is exactly the statement $\varphi(t)=\varphi_{\mathrm{sp}}(t)(1+o(1))$ as $t\to0^+$.
 \end{proof}
 
 \begin{remark}
@@ -519,12 +535,15 @@ all four terms are $O(1/\tau)$ with constants free of the phase of $\tau$.
 
 \begin{proposition}
 \label{prop:bkidentity}
-$P(\tau)$ is identically Berg and Kr\"uppel's own saddlepoint expression for $\log\varphi_0$: with
-$Y = cB_0$, $r = -ca-\log c$, the saddle equation for $\varphi_0$'s defining Laplace inversion is
+$P(\tau)$ is identical, as a function of $\tau$, to the exact saddlepoint expression Berg and
+Kr\"uppel construct in the proof of their Proposition~9.1 -- the pre-asymptotic quantity their own
+argument shows is asymptotic, as $t\to0^+$, to the explicit closed form $\varphi_0$ -- not merely
+asymptotic to it. With $Y = cB_0$, $r = -ca-\log c$, the saddle equation for that construction is
 exactly $Y-\log Y = \tau+r$, and $P(\tau) = Q(w_0)+B_0+w_0-\tfrac12\log(2\pi(B_0-1/c))$
-coincides term for term with Berg and Kr\"uppel's construction in their Proposition~9.1: $2\beta y -
-\alpha = B_0$, $2\beta y - 2\beta - \alpha = B_0 - 1/c$, $\alpha y - \beta y^2 = Q(w_0)$ (in their
-notation, $y=w_0$).
+coincides term for term with theirs: $2\beta y - \alpha = B_0$, $2\beta y - 2\beta - \alpha = B_0 -
+1/c$, $\alpha y - \beta y^2 = Q(w_0)$ (in their notation, $y=w_0$). Consequently $P(\tau) -
+\log\varphi_0(e^{-\tau}) \to 0$ (Section~\ref{sec:bk} below, following this proposition) is exactly
+their own Proposition~9.1 applied to this identity, not a separate asymptotic claim about $P$.
 \end{proposition}
 
 \begin{proof}[Sketch]
@@ -547,9 +566,11 @@ $\delta_{\mathrm{BK}}$ (their equations following~(9.6)) reproduces both exactly
 \[
 C_P = \varepsilon\log(2\beta) - \tfrac12\log(2\pi) = \log\frac{(2\beta)^\varepsilon}{\sqrt{2\pi}},
 \]
-so $P(\tau) - \log\varphi_{0,\mathrm{bare}}(e^{-\tau}) \to C_P$ and $P(\tau) -
-\log\varphi_0(e^{-\tau}) \to 0$: $P$ is the exact log of Berg and Kr\"uppel's normalized,
-prefactor-included saddlepoint expression, up to an $O(\tau^{-1}\log^2\tau)$ remainder.
+so $P(\tau) - \log\varphi_{0,\mathrm{bare}}(e^{-\tau}) \to C_P$ and, using the prefactor-included
+normalization, $P(\tau) - \log\varphi_0(e^{-\tau}) \to 0$ with rate $O(\tau^{-1}\log^2\tau)$: this
+is precisely Berg and Kr\"uppel's own Proposition~9.1 (asymptotic, by construction, not exact)
+applied to the identity of Proposition~\ref{prop:bkidentity}, not an independent asymptotic claim
+about $P$ itself.
 
 \begin{proof}[Proof of Corollary~\ref{cor:bk}]
 By Proposition~\ref{prop:envelope} and \ref{prop:bkidentity}, $S(\tau) = \log\varphi_0(e^{-\tau}) +

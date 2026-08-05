@@ -70,3 +70,58 @@ then re-check the URL anonymously (e.g. `curl -o /dev/null -w '%{http_code}' <ur
 2026-08-04 (later): all fixable findings resolved by the producer; re-read against the source PDF
 and re-verified numerically where a finding involved a specific number. Paper recompiles clean
 (pdflatex, zero warnings) after every fix.
+
+## Round 2: genuinely independent, different-vendor review (2026-08-04, later still)
+
+The researcher obtained a review from a different model/vendor (not this project's own Codex/Opus
+pair), the actual "different-vendor pre-publication check" Rule 11b calls for and Round 1's own
+closing note flagged as still outstanding. Full external text preserved in this session's
+conversation history. Findings, and how each was handled:
+
+| ID | Summary | Verdict | Status |
+|----|---------|---------|--------|
+| D-01 | Algebraic error in Theorem 4's proof: the identity `Q(w+c)-Q(w)=-(w+a)+c/2` and `-log2=-a-c/2` are both false as written | **confirmed, real** | fixed |
+| D-02 | Proposition 17 calls `P(tau)` "identically" Berg-Kruppel's expression for `log phi_0`, then states an asymptotic (not exact) relation to `phi_0` two paragraphs later -- apparent contradiction | **real ambiguity, not a logical error** | fixed (reworded) |
+| D-03 | Theorem 13's `E(N)` is asserted with specific numeric properties but never displayed as an explicit formula | **fair completeness gap** | fixed (formula now displayed and independently re-verified) |
+| D-04 | Lemmas 11, 12's constants (`3e^{-b_0}`, `2N+3.7442`) asserted without the full numeric summation shown | **fair completeness gap** | not fixed, see below |
+| D-05 | Sketch proofs (Propositions 6, 8, Lemma 15, Propositions 16, 17) are the essential novel results, not routine ones, and should be full proofs before real submission | **fair, already partially acknowledged** | not fixed, see below |
+| D-06 | Certificates depend on an external repository the reviewer could not access or audit | **valid, matches Round 1's C-01** | not independently fixable (repo visibility is the researcher's action) |
+| D-07 | AI-authorship stylometric estimate (~80%+/-15% of the text) | out of scope: a forensic guess about writing process, not a mathematical finding; Rule 5b already governs AI-disclosure policy for this project | not applicable |
+
+**D-01 verified independently before touching anything** (Rule 8c): recomputed `Q(w+c)-Q(w)`
+directly from the definition at a test point, confirming it equals `-w-log2` exactly (matching what
+the paper's own Theorem 4 statement needs) and that the intermediate rewriting
+`-(w+a)+c/2` does NOT equal this, nor does `-a-c/2` equal `-log2`. The reviewer is right: this was
+a real, if non-fatal, error in the specific algebraic passage (the theorem's actual conclusion
+survives via the direct computation, which is what the fixed proof now uses). This is exactly the
+kind of thing a second independent full derivation is for; this project's own two producer
+constructions (Codex, Opus) and its own critic round all reproduced the same erroneous intermediate
+step without catching it, since none of them recomputed `Q(w+c)-Q(w)` from scratch at this specific
+line rather than trusting the stated identity.
+
+**D-02**: checked whether "identically" and "asymptotic to" are actually in logical conflict.
+They are not: `P(tau)` is claimed identical to Berg-Kruppel's *exact, pre-asymptotic saddlepoint
+construction* (from the proof of their Proposition 9.1), and that construction is itself only
+asymptotic (by their own Proposition 9.1, not by any claim of this paper) to the explicit closed
+form `phi_0`. No contradiction, but the original wording did not make this three-way distinction
+clear enough to rule out the reviewer's reading. Reworded Proposition 17 and the paragraph after it
+to state the distinction explicitly.
+
+**D-04, D-05, D-06 not fixed, with reasons.** D-04 and D-05 restate, from an independent source,
+exactly what Round 1's own C-11 already found and the paper's Section 3 footnote already discloses:
+results are proven at the level of a referee-checkable sketch, with full line-by-line derivations
+on record in the parent project's notes and (for every numeric constant) independently reproducible
+in the dedicated repository, not fully spelled out in the nine-page PDF itself. This is a real,
+known, deliberate scope boundary for the paper's current state, not a newly discovered gap; a
+second independent reviewer reaching the same conclusion is a useful confirmation that this
+boundary is real and will be raised by any careful referee, not evidence that it needs to be
+resolved differently than already planned (full write-up before actual journal submission). D-06 is
+the same access problem as C-01: the repository is still private as of this round: the researcher's
+own action, already tracked, not something the producer can fix from inside a review response.
+
+**Net effect of this round**: strengthens confidence in the paper's mathematical content (every
+numerically-checkable claim the reviewer attempted independently matched this project's own
+numbers, including `H(0)`, `e^{H(0)}`, and the certified difference), catches one genuine algebra
+bug this project's own two-producer-plus-critic process missed, and reconfirms (rather than
+newly discovers) that the paper is not yet at full journal-submission completeness -- a status this
+project has stated consistently since Round 1, not a downgrade.
