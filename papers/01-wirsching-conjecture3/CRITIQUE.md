@@ -181,8 +181,8 @@ verdict: reject/major-revision, same as Round 3. Findings, each independently ve
 
 | ID | Summary | Verdict | Status |
 |----|---------|---------|--------|
-| H1 | Mellin multiplier in Prop 6's proof, `2^z\sum_j 3^{-jz}=2^z/(3^z-1)`, is wrong (diverges on its own stated strip); correct value `2^{-z}\sum_j 3^{jz}=-(3/2)^z/(3^z-1)` | **confirmed, real** (independently verified via direct numerical summation, matches to 40 digits) | fixed (see below) |
-| H2 | Propositions 6, 8, 16 proved only as "Sketch"; both reviewers rank this the top concern | **confirmed, real** | in progress, dispatched to a fresh Opus agent (full context, repo access) to convert to complete proofs |
+| H1 | Mellin multiplier in Prop 6's proof, `2^z\sum_j 3^{-jz}=2^z/(3^z-1)`, is wrong (diverges on its own stated strip); correct value `2^{-z}\sum_j 3^{jz}=-(3/2)^z/(3^z-1)` | **confirmed, real** (independently verified via direct numerical summation, matches to 40 digits) | fixed |
+| H2 | Propositions 6, 8, 16 proved only as "Sketch"; both reviewers rank this the top concern | **confirmed, real** | fixed: all three are now complete proofs, no "Sketch" label remains anywhere in the paper |
 | H3 | Introduction: "Wirsching's comparison class fixes tau's phase modulo log 3" is false; only the compensated `w_0(tau) mod c` is fixed, not tau itself | **confirmed, real** | fixed |
 | H4 | Theorem 2's "with period log 3" overstates exact periodicity; the paper's own Prop 18 only gives an `O(1/tau)`-vanishing phase drift | **confirmed, real** (also independently raised by Round-3's Opus as M8) | fixed |
 | H5 | Corollary 3 calls `H` "the periodic factor," but Remark 5 gives the product for `exp(H)`, not `H` | **confirmed, real** | fixed |
@@ -204,3 +204,36 @@ properly; no new footnote-rendering issue found this round.
 Not yet independently re-verified from Round 2's report (Opus, same phase as Round 3): items D-04
 through D-06 remain the same known, disclosed scope boundary as before (external repo access is the
 researcher's own pending action).
+
+**H1/H2 closure (2026-08-05, later same day).** A fresh Opus agent (full repo access, unlike the
+blind referees) fixed the multiplier and rewrote Propositions 6, 8, and 16 as complete proofs.
+Independently verified before accepting, per Rule 8c:
+
+- **Prop 6**: the corrected multiplier `(3/2)^z/(1-3^z)` is now derived from an explicit
+  substitution (`u=2s/3^j`), and the proof closes the remainder gap Round 3's referee flagged (a
+  naive Mellin shift only gives ordinary exponential smallness) by invoking the uniqueness remark
+  already proven right after Theorem 4, rather than re-deriving doubly-exponential decay for the
+  Mellin remainder itself. Spot-checked visually against the rendered PDF; the algebra (residue at
+  the triple pole reproducing `Q+Hhat(0)`, residues at `z=i*omega_m` reproducing `Hhat(m)`) reads
+  correctly.
+- **Prop 8**: now gives an explicit truncation (`R=30`, `M=4`), explicit tail bounds, 50-digit
+  working precision, and a spelled-out grid-plus-Lipschitz argument (`N=2^20`) for the oscillation.
+  This changed the printed oscillation enclosure from `[4.18744947692e-4, 4.18756644224e-4]`
+  (correct, per two independent prior checks, but the agent could not reconstruct its provenance
+  from a specific certificate) to `[4.1874494771e-4, 4.1874620262e-4]` (tighter, and now backed by
+  a certificate that's actually in the text). **Independently re-verified**: re-ran a from-scratch
+  `mpmath` grid search confirming the same ballpark, then upgraded
+  `experiments/E-006-phi-asymptotic/certify_h_phase_difference.py` (and its reproducibility-repo
+  copy) from a coarse `N=400` grid that only established `osc(H)>1e-4` to the same `N=2^20`
+  grid-plus-Lipschitz certificate the proof now uses, in Arb ball arithmetic. It reproduces the
+  paper's exact interval, down to the exact grid indices of the max and min (486746, 1011118).
+- **Prop 16**: the four-term expansion is now a genuine algebraic identity, not an assertion, and a
+  real fifth term (`Delta(w^*)`, from `L=Q+H+Delta`) was found and bounded (`<1e-182` once
+  `B_0>=5`) rather than silently dropped, matching a concern the very first blind-critique round
+  (Opus, F16) had raised and this project had not yet resolved.
+- Footnote 1 (the "Sketch" convention footnote both referees flagged as reading like an excuse) is
+  deleted; no "Sketch" label remains anywhere in the paper.
+
+Paper recompiles clean (pdflatex, exit 0, zero warnings, still only the same 8 pre-existing
+`Overfull \hbox` typesetting notices, cosmetic and untouched), now 15 pages (up from 12, reflecting
+the much more detailed proofs).

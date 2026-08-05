@@ -274,20 +274,118 @@ A = \frac{\pi^2}{12} - \frac{\gamma_E^2}{2} - \gamma_1,
 where $\gamma_E$ is the Euler--Mascheroni constant and $\gamma_1$ the first Stieltjes constant.
 \end{proposition}
 
-\begin{proof}[Sketch\footnotemark]
-The Mellin transform of $g$ on the strip $-1 < \operatorname{Re}\, z < 0$ is $g^*(z) =
--\Gamma(z)\zeta(1+z)$, obtained by integrating by parts onto $g'(b) = 1/(e^b-1) - 1/b$ and using the
-classical continuation $\int_0^\infty\bigl(\tfrac{1}{e^u-1}-\tfrac1u\bigr)u^{z-1}\,du =
-\Gamma(z)\zeta(z)$. Since $K(s) = \sum_j g(2s/3^j)$, the Mellin transform of $s\mapsto K(s)$ picks
-up a factor $2^z\sum_j 3^{-jz} = 2^z/(3^z-1)$ from this harmonic sum; shifting the resulting
-inversion contour past the triple pole at the origin and past each simple pole at $z = i\omega_m$
-(where $3^z=1$) reproduces $Q + \hat H(0)$ and the Fourier modes above, respectively, the factor
-$2^{i\omega_m}$ coming from that same harmonic-sum step.
+\begin{proof}
+Both $g$ and $K$ have Mellin transforms on the strip $-1<\operatorname{Re}z<0$. As $b\to0^+$,
+$g(b)=-b/2+O(b^2)$; as $b\to\infty$, $g(b)=-\log b+O(e^{-b})$. So $\int_0^\infty
+|g(b)|\,b^{\sigma-1}\,db<\infty$ for $-1<\sigma<0$, and the same two bounds applied termwise give
+$K(s)=O(s)$ as $s\to0^+$ and $K(s)=O(\log^2 s)$ as $s\to\infty$: the terms with $3^j\le2s$ number
+$O(\log s)$ and are each $O(\log s)$, and the terms with $3^j>2s$ sum to $O(1)$.
+
+Integrate by parts. With $g'(b)=1/(e^b-1)-1/b$, and both boundary terms vanishing on the strip
+($g(b)b^z\to0$ at $0$ because $\operatorname{Re}z>-1$, and at $\infty$ because
+$\operatorname{Re}z<0$),
+\[
+g^*(z) = \int_0^\infty g(b)\,b^{z-1}\,db = -\frac1z\int_0^\infty\Bigl(\frac{1}{e^b-1}-\frac1b\Bigr)b^z\,db
+= -\frac{\Gamma(z+1)\zeta(z+1)}{z} = -\Gamma(z)\,\zeta(1+z),
+\]
+the middle step being the classical continuation
+$\int_0^\infty\bigl(\tfrac{1}{e^u-1}-\tfrac1u\bigr)u^{v-1}\,du=\Gamma(v)\zeta(v)$, valid for
+$0<\operatorname{Re}v<1$, at $v=z+1$.
+
+Now the harmonic sum. In the $j$-th term substitute $u=2s/3^j$, so $s=3^ju/2$ and
+$s^{z-1}\,ds=(3^j/2)^z u^{z-1}\,du$:
+\[
+\int_0^\infty g\Bigl(\frac{2s}{3^j}\Bigr)s^{z-1}\,ds = \Bigl(\frac{3^j}{2}\Bigr)^{\!z}\int_0^\infty
+g(u)\,u^{z-1}\,du = \Bigl(\frac{3^j}{2}\Bigr)^{\!z} g^*(z).
+\]
+Summing over $j\ge1$ is legitimate termwise, since $\sum_{j\ge1}(3^j/2)^\sigma\int_0^\infty
+|g(u)|u^{\sigma-1}\,du$ converges for $-1<\sigma<0$. The multiplier that appears is therefore
+\[
+\sum_{j\ge1}\Bigl(\frac{3^j}{2}\Bigr)^{\!z} = 2^{-z}\sum_{j\ge1}3^{jz} = \frac{2^{-z}3^z}{1-3^z}
+= \frac{(3/2)^z}{1-3^z},
+\]
+a geometric series of ratio $3^z$, of modulus $3^{\operatorname{Re}z}<1$, convergent on
+$\operatorname{Re}z<0$ and nowhere else. Hence
+\begin{equation}
+\label{eq:Kstar}
+K^*(z) = \frac{(3/2)^z}{1-3^z}\cdot\bigl(-\Gamma(z)\zeta(1+z)\bigr)
+= \frac{(3/2)^z\,\Gamma(z)\,\zeta(1+z)}{3^z-1}, \qquad -1<\operatorname{Re}z<0.
+\end{equation}
+The dilations $\mu_j=2/3^j$ enter inverted, through $\mu_j^{-z}$, which is where the $2^{-z}$ comes
+from, and with it the $2^{i\omega_m}$ of the statement.
+
+In $\operatorname{Re}z>-1$ the right side of \eqref{eq:Kstar} is meromorphic, with a pole of order
+three at $z=0$ (each of $\Gamma(z)$, $\zeta(1+z)$ and $(3^z-1)^{-1}$ contributing one) and a simple
+pole at each remaining zero $z=i\omega_m$, $m\ne0$, of $3^z-1$. To the right of the imaginary axis
+it is analytic.
+
+Fix $\sigma\in(-1,0)$ and $\sigma'\in(0,1)$, and shift the inversion contour in
+$K(s)=(2\pi i)^{-1}\int_{(\sigma)}K^*(z)s^{-z}\,dz$ from $\sigma$ to $\sigma'$, using rectangles
+with horizontal sides at $\operatorname{Im}z=\pm T_M$, $T_M:=\pi(2M+1)/c$. On those sides
+$3^z=3^{\operatorname{Re}z}e^{i\pi(2M+1)}=-3^{\operatorname{Re}z}$, so $|3^z-1| =
+1+3^{\operatorname{Re}z}\ge1$; Stirling makes $|\Gamma(z)|$ decay like $e^{-\pi T_M/2}$ times a
+power of $T_M$, uniformly for $\sigma\le\operatorname{Re}z\le\sigma'$, and $\zeta(1+z)$ grows at
+most polynomially there. The horizontal contributions therefore vanish as $M\to\infty$, the sum of
+residues converges absolutely, and on the right vertical line $|3^z-1|\ge3^{\sigma'}-1>0$ makes
+$\int_{(\sigma')}|K^*(z)s^{-z}|\,|dz| = O(s^{-\sigma'})$. So
+\[
+K(s) = -\operatorname*{Res}_{z=0}\bigl[K^*(z)s^{-z}\bigr]
+-\sum_{m\ne0}\operatorname*{Res}_{z=i\omega_m}\bigl[K^*(z)s^{-z}\bigr]+O(s^{-\sigma'}).
+\]
+
+Take the simple poles first. At $z=i\omega_m$ one has $3^{i\omega_m}=e^{2\pi im}=1$, so
+$(3^z-1)'=3^z\log3$ equals $c$ there and $(3/2)^{i\omega_m}=3^{i\omega_m}2^{-i\omega_m}=
+2^{-i\omega_m}$. With $s=e^w$,
+\[
+-\operatorname*{Res}_{z=i\omega_m}\bigl[K^*(z)e^{-zw}\bigr]
+= -\frac{2^{-i\omega_m}}{c}\,\Gamma(i\omega_m)\,\zeta(1+i\omega_m)\,e^{-i\omega_m w},
+\]
+and replacing $m$ by $-m$ throughout the sum turns the whole family into $\hat H(m)e^{i\omega_m w}$
+with $\hat H(m)$ exactly as stated.
+
+At the origin, insert
+\[
+\Gamma(z) = \frac1z-\gamma_E+\Bigl(\frac{\gamma_E^2}{2}+\frac{\pi^2}{12}\Bigr)z+O(z^2), \qquad
+\zeta(1+z) = \frac1z+\gamma_E-\gamma_1 z+O(z^2).
+\]
+The two $1/z$ terms cancel against each other and
+\[
+\Gamma(z)\zeta(1+z) = \frac{1}{z^2}+A+O(z), \qquad A = \frac{\pi^2}{12}-\frac{\gamma_E^2}{2}-\gamma_1,
+\]
+which is where $A$ comes from. Also $(3^z-1)^{-1} = (cz)^{-1}-\tfrac12+cz/12+O(z^3)$, and
+$(3/2)^ze^{-zw}=e^{\theta z}$ with $\theta:=\log(3/2)-w$. Multiplying the three expansions and
+reading off the coefficient of $z^{-1}$,
+\[
+\operatorname*{Res}_{z=0}\bigl[K^*(z)e^{-zw}\bigr]
+= \frac1c\cdot\frac{\theta^2}{2}-\frac{\theta}{2}+\frac{c}{12}+\frac{A}{c}.
+\]
+Substitute $\theta=\log(3/2)-w$ and $\log(3/2)=c-\log2$. The $w$-dependent part of
+$-\operatorname{Res}$ is
+\[
+-\frac{w^2}{2c}+\Bigl(\frac{\log(3/2)}{c}-\frac12\Bigr)w
+= -\frac{w^2}{2c}+\Bigl(\frac12-\frac{\log2}{c}\Bigr)w = Q(w),
+\]
+and the constant part is
+$\tfrac12\log2-\tfrac{\log^22}{2c}-\tfrac{c}{12}-\tfrac Ac = \hat H(0)$.
+
+Collecting, with $s=e^w$,
+\[
+L(w) = Q(w)+\widetilde H(w)+O(e^{-\sigma' w}), \qquad
+\widetilde H(w) := \hat H(0)+\sum_{m\ne0}\hat H(m)e^{i\omega_m w}.
+\]
+That series converges absolutely and uniformly, because $|\Gamma(-i\omega_m)| =
+\sqrt{\pi/(\omega_m\sinh\pi\omega_m)}$ decays like $e^{-\pi\omega_m/2}$ while $\zeta(1-i\omega_m)$
+grows polynomially, so $\widetilde H$ is continuous and exactly $c$-periodic. It is real valued:
+$\Gamma$ and $\zeta$ are real on the real axis, so $\hat H(-m)$ is the complex conjugate of
+$\hat H(m)$.
+
+The remainder $O(e^{-\sigma'w})$ is only ordinarily exponentially small, weaker than the doubly
+exponential $\Delta$ of Theorem~\ref{thm:H}, and it is enough. Theorem~\ref{thm:H} gives
+$L-Q-H=\Delta=o(1)$ as $w\to+\infty$, so $\widetilde H-H = O(e^{-\sigma'w})+\Delta(w)\to0$. Both are
+$c$-periodic, and a $c$-periodic function tending to $0$ as $w\to+\infty$ vanishes identically, its
+value at any $w$ being its value at $w+kc$ for every $k$. Hence $\widetilde H=H$, and by uniform
+convergence the $\hat H(m)$ are the Fourier coefficients of $H$.
 \end{proof}
-\footnotetext{Proofs marked ``Sketch'' give the complete argument at the level of a referee
-report; every numerical constant they produce is independently certified in the accompanying
-repository (Section~\ref{sec:code}), and full line-by-line derivations are on record in the
-underlying project's notes, cited there.}
 
 \begin{remark}
 This is an instance of the de Bruijn--Mahler phenomenon: a base-change harmonic sum, Mellin
@@ -317,19 +415,68 @@ $H$ is not constant. Rigorously,
 \]
 and consequently $\operatorname{osc}(H) := \sup H - \inf H \ge 3.7719\times 10^{-4}$; a full
 optimization gives the certified enclosure
-$\operatorname{osc}(H) \in [4.18744947692\times10^{-4},\, 4.18756644224\times10^{-4}]$.
+$\operatorname{osc}(H) \in [4.1874494771\times10^{-4},\, 4.1874620262\times10^{-4}]$.
 \end{proposition}
 
-\begin{proof}[Sketch]
+\begin{proof}
 Write $g(b) = -b/2 + \log S(b/2)$, $S(x) = \sinh(x)/x = \sum_{n\ge0} x^{2n}/(2n+1)!$ (this is
 $g$'s defining formula rewritten around its removable singularity at $0$, since $e^{-b/2}(e^{b/2}
-- e^{-b/2}) = 1-e^{-b}$). Termwise domination of $6^n n! \le (2n+1)!$ gives $0 \le \log S(x) \le
-x^2/6$ for $x \ge 0$, hence, applied at $x=b/2$, an explicit, two-sided enclosure of the tail
-$\sum_{r>R} g(s/3^r)$ for any $R$ and $s > 0$; combined with a finite head evaluated in interval or
-ball arithmetic (via \eqref{eq:Hexact} directly, or independently via ball arithmetic in $\Gamma$
-and $\zeta$ applied to Proposition \ref{prop:Hfourier}), this certifies the stated interval to
-arbitrary precision. The full oscillation is certified the same way, via the Lipschitz bound in
-\eqref{eq:Hbounds} and a fine grid search over one period.
+- e^{-b/2}) = 1-e^{-b}$). Termwise domination of $6^n n! \le (2n+1)!$, which holds at $n=0$ and
+propagates because $(2n+3)(2n+2)\ge6(n+1)$, gives $1\le S(x)\le e^{x^2/6}$, that is
+\begin{equation}
+\label{eq:logSbound}
+0 \;\le\; \log S(x) \;\le\; \frac{x^2}{6}, \qquad x\ge0.
+\end{equation}
+Since $\sum_{j\ge1}3^{-j} = \tfrac12$, the $-b/2$ halves of the terms of $L$ sum in closed form, and
+\eqref{eq:Hexact} becomes, with $s = e^w$,
+\begin{equation}
+\label{eq:Hcomputable}
+H(w) = -\frac s2 + \sum_{j\ge1}\log S\!\left(\frac{s}{3^j}\right) - Q(w)
++ \sum_{k\ge0}\log\bigl(1-e^{-2\cdot3^k s}\bigr).
+\end{equation}
+Truncate the first series at $j=R$ and the second at $k=M$. By \eqref{eq:logSbound} the first tail
+satisfies
+\[
+0 \;\le\; \sum_{j>R}\log S\!\left(\frac{s}{3^j}\right) \;\le\; \frac{s^2}{6}\sum_{j>R}9^{-j}
+= \frac{s^2\,9^{-R}}{48},
+\]
+and, since $0\le-\log(1-y)\le y/(1-y)$ and $e^{-2\cdot3^ks} = \bigl(e^{-2\cdot3^{M+1}s}\bigr)^{3^{k-M-1}}$
+for $k>M$, the second tail satisfies
+\[
+0 \;\le\; -\sum_{k>M}\log\bigl(1-e^{-2\cdot3^ks}\bigr) \;\le\; \frac{y}{(1-y)^2} \;\le\; 4y,
+\qquad y:=e^{-2\cdot3^{M+1}s}\le\tfrac12 .
+\]
+Take $R=30$, $M=4$. For $s\le3/2$ the first tail is at most $1.106\times10^{-30}$, and for $s\ge1$
+the second is at most $4e^{-486}<10^{-210}$. The remaining $35$ terms are elementary functions of
+$s$; evaluated at $50$ significant decimal digits, where the accumulated rounding stays below
+$10^{-45}$, they give
+\[
+H(0) = -0.62713093305152597830\ldots, \qquad H\bigl(\log\tfrac32\bigr) = -0.62675374277058199247\ldots,
+\]
+whose difference is $-0.00037719028094398583\ldots$, inside the stated interval. Independently, the
+Fourier series of Proposition~\ref{prop:Hfourier} gives the same difference in Arb ball arithmetic:
+the $m=0$ term cancels, four modes suffice, and the majorant $|\hat H(m)| \le A q^m
+m^{-1/2}(\log(\alpha m+1)+C)$, with $\alpha = 2\pi/c$, $q = e^{-\pi\alpha/2}$, $A =
+c^{-1}\sqrt{3\pi/\alpha}$ and $C = \tfrac32+\alpha^{-1}+\tfrac12\sqrt{1+\alpha^{-2}}$, gives
+$\sum_{m>4}|\hat H(m)| \le 9.05\times10^{-20}$; the discarded modes therefore move the difference by
+less than $3.7\times10^{-19}$.
+
+For the oscillation, let $w_i = ic/N$, $0\le i<N$, with $N = 2^{20}$, so $h := c/N =
+1.04772\times10^{-6}$. Every real $w$ lies within $h/2$ of some $w_i$ modulo $c$, so \eqref{eq:Hbounds}
+gives $|H(w)-H(w_i)| \le M_1h/2$ with $M_1 := 1.1977472315550332\times10^{-3}$, whence
+\[
+\max_i H(w_i) \;\le\; \sup H \;\le\; \max_i H(w_i)+\frac{M_1h}{2}, \qquad
+\min_i H(w_i)-\frac{M_1h}{2} \;\le\; \inf H \;\le\; \min_i H(w_i),
+\]
+and therefore $\operatorname{osc}(H) \in [D,\,D+M_1h]$ for $D := \max_iH(w_i)-\min_iH(w_i)$.
+Evaluating the $N$ grid values from Proposition~\ref{prop:Hfourier} truncated at $|m|\le10$,
+where the same majorant bounds the discarded modes by $2.71\times10^{-43}$, locates the maximum at
+$i = 486746$ and the minimum at $i = 1011118$; re-evaluating $H$ there to $40$ digits, from
+\eqref{eq:Hcomputable} and from the Fourier series alike,
+\[
+H(w_{486746}) = -0.6267174403736425786\ldots, \qquad H(w_{1011118}) = -0.6271361853213578093\ldots .
+\]
+So $D = 4.187449477152\times10^{-4}$ and $M_1h = 1.2549\times10^{-9}$, which is the stated enclosure.
 \end{proof}
 
 \section{A uniform saddlepoint approximation}
@@ -631,22 +778,55 @@ $P(\tau) := Q(w_0)+B_0+w_0-\tfrac12\log\bigl(2\pi(B_0-\tfrac1c)\bigr)$,
 uniformly in the phase of $\tau$ modulo $c$.
 \end{proposition}
 
-\begin{proof}[Sketch]
-Expanding $S(\tau)-P(\tau)-H(w_0)$ exactly using $L=Q+H+\Delta$ and Lemma~\ref{lem:saddles}
-produces four terms. The true envelope gap $g_{0,\tau}(w^*)-g_{0,\tau}(w_0)$ is
-$O(B_0\,(w^*-w_0)^2) = O(1/B_0)$, by Taylor about $w_0$ (where $g_{0,\tau}'$ vanishes) together
-with $g_{0,\tau}'' \le B_0e$ and $|w^*-w_0| = O(1/B_0)$, both from Lemma~\ref{lem:saddles}. The
-periodic-part difference $H(w^*)-H(w_0) = O(|w^*-w_0|) = O(1/B_0)$ using \eqref{eq:Hbounds}. The
-saddle-location shift $w^*-w_0$ itself, $O(1/B_0)$. Last, a normalization term comparing $V(r^*)$
-to $B_0-1/c$: by the identity $V(r^*) = g_\tau''(w^*)$ and the expression for $g_\tau''$ used in
-Lemma~\ref{lem:saddles},
+\begin{proof}
+Start from the identity. Since $g_{0,\tau}(w_0) = Q(w_0)+e^{w_0-\tau} = Q(w_0)+B_0$, the definition
+of $P$ reads $P(\tau) = g_{0,\tau}(w_0)+w_0-\tfrac12\log\bigl(2\pi(B_0-\tfrac1c)\bigr)$, so
 \[
-V(r^*)-\Bigl(B_0-\frac1c\Bigr) = B_0\bigl(e^{w^*-w_0}-1\bigr)+H''(w^*)+\Delta''(w^*) = O(1),
+S(\tau)-P(\tau) = \bigl[g_\tau(w^*)-g_{0,\tau}(w_0)\bigr]+(w^*-w_0)
+-\frac12\log\frac{V(r^*)}{B_0-\tfrac1c}.
 \]
-since $B_0|w^*-w_0| = O(1)$ and $H''$, $\Delta''$ are bounded by \eqref{eq:Hbounds} and
-Theorem~\ref{thm:H}; dividing by $B_0-1/c$ and taking $\tfrac12\log(1+O(1/B_0))$ gives $O(1/B_0)$
-again. Since $\tau = w_0 - \log B_0$, $B_0/\tau \to 1/c$, and all four terms are $O(1/\tau)$ with
-constants free of the phase of $\tau$.
+Theorem~\ref{thm:H} gives $L = Q+H+\Delta$, hence $g_\tau = g_{0,\tau}+H+\Delta$ pointwise, and in
+particular $g_\tau(w^*) = g_{0,\tau}(w^*)+H(w^*)+\Delta(w^*)$. Substituting and subtracting
+$H(w_0)$,
+\begin{equation}
+\label{eq:envfive}
+\begin{split}
+S(\tau)-P(\tau)-H(w_0) = {}& \underbrace{\bigl[g_{0,\tau}(w^*)-g_{0,\tau}(w_0)\bigr]}_{T_1}
++\underbrace{\bigl[H(w^*)-H(w_0)\bigr]}_{T_2}
++\underbrace{(w^*-w_0)}_{T_3} \\[2pt]
+&{}\underbrace{-\;\frac12\log\frac{V(r^*)}{B_0-\tfrac1c}}_{T_4}
+\;+\;\underbrace{\Delta(w^*)}_{T_5}.
+\end{split}
+\end{equation}
+This is exact for every $\tau$ with $B_0\ge5$. The five terms are bounded in turn.
+
+$T_1$ is the envelope gap of the smooth system. Taylor about $w_0$, where $g_{0,\tau}'$ vanishes,
+with $g_{0,\tau}''(w) = e^{w-\tau}-1/c \le B_0e$ on $[w_0-1,w_0+1]$ and $|w^*-w_0| \le 0.00652/B_0$
+from Lemma~\ref{lem:saddles}, gives $0\le T_1 \le \tfrac12 B_0e\,(0.00652/B_0)^2 <
+5.78\times10^{-5}/B_0$.
+
+$T_2$ is the periodic-part difference: $|T_2| \le \sup|H'|\cdot|w^*-w_0| < 7.82\times10^{-6}/B_0$ by
+\eqref{eq:Hbounds}.
+
+$T_3$ is the saddle-location shift itself, $|T_3| \le 0.00652/B_0$, again from
+Lemma~\ref{lem:saddles}. This is the largest of the five.
+
+$T_4$ compares the two normalizations. By $V(r^*) = g_\tau''(w^*)$ and the expression for
+$g_\tau''$ used in Lemma~\ref{lem:saddles},
+\[
+V(r^*)-\Bigl(B_0-\frac1c\Bigr) = B_0\bigl(e^{w^*-w_0}-1\bigr)+H''(w^*)+\Delta''(w^*),
+\]
+whose modulus is at most $0.00652e^{0.00652/5}+\sup|H''|+10^{-60} < 0.0135$, since
+$B_0|e^{w^*-w_0}-1| \le B_0|w^*-w_0|e^{|w^*-w_0|}$. Dividing by $B_0-1/c$ and taking
+$\tfrac12\log(1+\cdot)$ gives $|T_4| \le 0.0068/(B_0-1/c)$.
+
+$T_5$ is the remainder of Theorem~\ref{thm:H}, evaluated at the true saddle rather than dropped.
+Here $B_0\ge5$ forces $w_0\ge5.3492$ and $w^*\ge w_0-0.0014$, so $e^{w^*}\ge210.1$ and
+$|T_5| \le \sum_{k\ge0}2e^{-2\cdot3^k\cdot210.1} < 10^{-182}$.
+
+Each bound is an absolute constant over $B_0$, or smaller. Finally $\tau = w_0-\log B_0$ and
+$w_0 = c(B_0+a)$ give $\tau = cB_0+ca-\log B_0$, so $B_0/\tau \to 1/c$, and $O(1/B_0) = O(1/\tau)$
+with constants free of the phase of $\tau$.
 \end{proof}
 
 \section{The Berg--Kr\"uppel identity}

@@ -134,36 +134,48 @@ def certify_derivative_bounds(c, alpha, q, A):
 
 
 def certify_oscillation(c, alpha):
-    """Certify osc(H) = sup H - inf H via a fine grid search plus the
-    Lipschitz bound on H' (certified above), which controls the grid's
-    discretization error: for a grid of spacing h, osc over the grid
-    under-estimates the true osc by at most 2*sup|H'|*h."""
-    from flint import arb as arb_
-
-    lipschitz = arb_("0.0011977472315550332")
-    n_grid = 400
+    """Certify osc(H) = sup H - inf H matching the paper's Proposition 8 proof
+    exactly: a grid of N=2^20 points, H evaluated via the Fourier series
+    truncated at |m|<=10 (discarded-mode error ~2.7e-43, negligible at the
+    precision used here), combined with the certified Lipschitz bound on H'
+    to turn the grid extrema into a rigorous two-sided enclosure of the true
+    sup/inf: for spacing h, every real w is within h/2 of a grid point, so
+    max_i H(w_i) <= sup H <= max_i H(w_i) + M1*h/2, and symmetrically for inf.
+    Hence osc(H) in [D, D+M1*h] with D := max_i H(w_i) - min_i H(w_i)."""
+    lipschitz = arb("0.0011977472315550332")
+    n_grid = 2**20
     h = c / n_grid
-    vals = []
+    modes = list(range(1, 11))
+    coeffs = [(m, arb(m) * alpha, hhat(m, c, alpha)) for m in modes]
+
+    hi = None
+    lo = None
+    hi_i = lo_i = None
     for k in range(n_grid):
         w = h * k
-        # H(w) via the exact telescoping-equivalent Fourier sum, head+tail bound,
-        # reusing the already-certified per-mode majorant.
         s = arb(0)
-        for m in range(1, 9):
-            omega = arb(m) * alpha
-            coeff = hhat(m, c, alpha)
+        for m, omega, coeff in coeffs:
             s += 2 * (coeff * acb(0, omega * w).exp()).real
-        vals.append(s)
-    hi = max(v.upper() for v in vals)
-    lo = min(v.lower() for v in vals)
-    slack = (2 * lipschitz * arb(h)).upper()
-    osc_lo = arb(hi) - arb(lo) - arb(0, slack)
-    print(f"\nosc(H) grid estimate (n={n_grid} points, Lipschitz slack {slack}):")
-    print(f"  osc(H) >= {osc_lo.lower()}")
-    print("  (paper quotes certified enclosure [4.18744947692e-4, 4.18756644224e-4];")
-    print("   this coarse grid check confirms osc(H) is bounded well away from 0,")
-    print("   consistent with, though not as tight as, that enclosure.)")
-    assert osc_lo.lower() > arb("1e-4")
+        v_hi, v_lo = s.upper(), s.lower()
+        if hi is None or v_hi > hi:
+            hi, hi_i = v_hi, k
+        if lo is None or v_lo < lo:
+            lo, lo_i = v_lo, k
+
+    D = arb(hi) - arb(lo)
+    pad = (lipschitz * arb(h)).upper()
+    osc_hi = (D + arb(0, pad)).upper()
+    osc_lo = D.lower()
+    print(f"\nosc(H) certified via N={n_grid} grid (h={h}), Fourier truncated at |m|<=10:")
+    print(f"  max at grid index {hi_i}, min at grid index {lo_i}")
+    print(f"  D = max-min = {D}")
+    print(f"  osc(H) in [{osc_lo}, {osc_hi}]")
+    print("  (paper's Proposition 8 quotes [4.1874494771e-4, 4.1874620262e-4])")
+    left = arb("4.1874494771e-4")
+    right = arb("4.1874620262e-4")
+    assert osc_lo > left.lower() - arb("1e-13"), (osc_lo, left)
+    assert osc_hi < right.upper() + arb("1e-13"), (osc_hi, right)
+    assert osc_lo > arb("1e-4")
 
 
 if __name__ == "__main__":
