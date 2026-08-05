@@ -11,6 +11,7 @@
 \newtheorem{proposition}[theorem]{Proposition}
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{corollary}[theorem]{Corollary}
+\newtheorem*{conjecture}{Wirsching's Conjecture 3}
 \theoremstyle{definition}
 \newtheorem{definition}[theorem]{Definition}
 \theoremstyle{remark}
@@ -76,17 +77,31 @@ ratio converges at all. Wirsching considers the strongest possible reading of th
 $c > 0$. It turns out that the following (slightly weaker) conjecture \dots suffices.''
 \end{quote}
 
-He then states Conjecture 3: along a specific comparison class of sequences $(z_l)$ tending to $0$
-at the borderline rate $z_l \sim l \cdot 3^{-l}$, the ratio $\varphi(z_l)/\varphi_0(z_l)$ converges
-to a positive constant, uniformly on the class. This is weaker than the unrestricted asymptotic he
-first considers. The constant cancels out of the one inequality his own proof actually needs, so a
-class-dependent limit is enough.
+He then states, verbatim (\cite{wirsching2003}, immediately after the quoted sentence; his own
+$\delta_5$ is written $\delta$ throughout this paper, since no other $\delta$-indexed class of his
+appears here):
+
+\begin{conjecture}
+There are positive real constants $c$ and $\delta$ such that
+\[
+\lim_{l\to\infty} \frac{\varphi(z_l)}{\varphi_0(z_l)} = c > 0 \qquad \text{uniformly for sequences
+} (z_l) \in \widetilde A_\delta.
+\]
+\end{conjecture}
+
+Here $\widetilde A_\delta$ is Wirsching's class of sequences tending to $0$ at the borderline rate
+$z_l \sim l\cdot 3^{-l}$ (his equations~(1.5) and~(3.2), reproduced ahead of Theorem~\ref{thm:conj3}'s
+proof): a sequence $(x_l)$ belongs to $\widetilde A_\delta$ exactly when $\lfloor 3^lx_l\rfloor =
+k_l$ for a sequence of integers $(k_l)$ with $|l-k_l|\le\delta\sqrt l$ for every $l$. This is weaker
+than the unrestricted asymptotic he first considers. The constant cancels out of the one inequality
+his own proof actually needs, so a class-dependent limit is enough.
 
 Neither statement had been settled. This paper settles both, in opposite directions.
 
 \begin{theorem}[Conjecture 3]
 \label{thm:conj3}
-Wirsching's Conjecture 3 is true. On his comparison class $\widetilde{A}_\delta$, the ratio
+Wirsching's Conjecture 3 (stated just above) is true. On his comparison class
+$\widetilde{A}_\delta$, the ratio
 $\varphi(z_l)/\varphi_0(z_l)$ converges uniformly to $e^{H(0)} = 0.534122\ldots$, where $H$ is the
 periodic function of Theorem~\ref{thm:H} below and the normalization of $\varphi_0$ is Berg and
 Kr\"uppel's own, equation~(9.6) of \cite{bergkruppel1998}.
@@ -96,22 +111,26 @@ Kr\"uppel's own, equation~(9.6) of \cite{bergkruppel1998}.
 \label{thm:unrestricted}
 The stronger asymptotic $\varphi(t) \sim \kappa\,\varphi_0(t)$ as $t \to 0^+$, for any single
 constant $\kappa$ and with no restriction to a comparison class, is false. The ratio
-$\varphi(t)/\varphi_0(t)$ oscillates indefinitely as $t \to 0^+$, with period $\log 3$ in
-$\log(1/t)$ and amplitude bounded below by a positive, certified constant.
+$\varphi(t)/\varphi_0(t)$ oscillates indefinitely as $t \to 0^+$, asymptotically $\log 3$-periodic
+in $\log(1/t)$ (periodic up to an $O(1/\tau)$-vanishing phase drift, Lemma~\ref{lem:saddles}) and
+with amplitude bounded below by a positive, certified constant.
 \end{theorem}
 
 The two theorems have a single common source. Write $t = e^{-\tau}$ and let $H(w)$ be the
 $\log 3$-periodic function appearing in the exact decomposition of $\log\varphi$'s log-Laplace
-transform (Theorem~\ref{thm:H}). Wirsching's comparison class fixes $\tau$'s phase modulo $\log 3$
-at a single value; every other class of comparison sequences sweeps through all phases. Whether the
-ratio converges or oscillates depends on which sequences one compares along, and the two theorems
-above read the same object at two different scopes.
+transform (Theorem~\ref{thm:H}); the saddlepoint bridge of Sections~\ref{sec:formulaA}
+and~\ref{sec:envelope} shows $\log\varphi(t)-\log\varphi_0(t) = H(w_0(\tau))+o(1)$ for a saddle
+location $w_0(\tau)$ that tracks $\tau$ up to a bounded shift. Wirsching's comparison class fixes
+$w_0(\tau)$'s phase modulo $\log 3$ at a single value, not $\tau$'s own phase, which the class does
+not control; every other class of comparison sequences sweeps $w_0(\tau)$'s phase through all
+values. Whether the ratio converges or oscillates depends on which sequences one compares along,
+and the two theorems above read the same object at two different scopes.
 
 \begin{corollary}
 \label{cor:bk}
-$H$ is Berg and Kr\"uppel's own periodic factor for the eigenfunction $\varphi$, from
-Proposition~9.3 of \cite{bergkruppel1998}, which they give as an infinite product. Its Fourier
-series, Proposition~\ref{prop:Hfourier} below, is new.
+$e^H$ is Berg and Kr\"uppel's own periodic factor for the eigenfunction $\varphi$, from
+Proposition~9.3 of \cite{bergkruppel1998}, which they give as an infinite product; $H$ itself is
+its logarithm. Its Fourier series, Proposition~\ref{prop:Hfourier} below, is new.
 \end{corollary}
 
 Section~\ref{sec:prelim} recalls the functional equation $\varphi$ satisfies and Berg and
@@ -158,15 +177,18 @@ derivative,
 t(s) := -K'(s), \qquad V(s) := s^2 K''(s) > 0,
 \]
 the second an exact positivity, $K''(s)$ being the variance of $X$ under its exponential tilt by
-$e^{-sX}$. As $s$ ranges over $(0,\infty)$, $t(s)$ decreases strictly from $1/2$ to $0$ (proved in
-Lemma~\ref{lem:saddles} below), so studying $\varphi(t(s))$ as $s \to \infty$ is the same as
-studying $\varphi(t)$ as $t \to 0^+$.
+$e^{-sX}$. Since $t'(s) = -K''(s) < 0$, $t$ is strictly decreasing on $(0,\infty)$; at the
+endpoints, $t(0^+) = \mathbb E[X] = \sum_{j\ge1} 2\cdot3^{-j}\cdot\tfrac12 = \tfrac12$, and
+$t(s)\to0$ as $s\to\infty$ because the exponential tilt concentrates on $\operatorname{ess\,inf}
+X=0$ (each factor $e^{-sX}$ suppresses any mass away from $0$ as $s\to\infty$, and $X\ge0$ a.s.).
+So $t(s)$ decreases strictly from $1/2$ to $0$, and studying $\varphi(t(s))$ as $s \to \infty$ is
+the same as studying $\varphi(t)$ as $t \to 0^+$.
 
 Berg and Kr\"uppel's comparison function solves the truncated equation $\lambda\, g'(t) = d\, g(dt)$
 by Laplace transform and saddlepoint analysis. In their normalization (their equation~(9.6), with
 $\alpha = \tfrac12 - \tfrac{\log 2}{\log 3}$, $\beta = \tfrac{1}{2\log 3}$, and $\gamma$,
 $\delta_{\mathrm{BK}}$, $\varepsilon$ determined by $\alpha$ and $\beta$ through their
-Proposition~9.1),
+Proposition~9.1, printed explicitly in Section~\ref{sec:bk}),
 \[
 \varphi_0(t) = \frac{(2\beta)^\varepsilon}{\sqrt{2\pi}}\; t^\gamma\,(-\log t)^{\delta_{\mathrm{BK}}}
 \, \exp\!\left(-\beta \log^2\!\frac{t}{-\log t}\right).
@@ -271,11 +293,12 @@ underlying project's notes, cited there.}
 This is an instance of the de Bruijn--Mahler phenomenon: a base-change harmonic sum, Mellin
 transformed, picks up simple poles on a vertical line, and their residues assemble into an exactly
 periodic correction with Fourier coefficients in $\Gamma$ and $\zeta$. De Bruijn found the first
-case of this in Mahler's partition asymptotic \cite{debruijn1948}; Erd\H{o}s and Richmond named it
-\cite{erdosrichmond1976}; Kato and McLeod \cite{katomcleod1971} and Derfel \cite{derfel1995}
-established the log-squared decay rate of \eqref{eq:Hexact}'s companion asymptotic $\varphi_0$ as
-generic across this whole class of rescaled functional equations. Our contribution here is the
-closed form for the periodic correction itself, not the mechanism producing it.
+case of this in Mahler's partition asymptotic \cite{debruijn1948}; Erd\H{o}s and Richmond name it
+on p.~448 of \cite{erdosrichmond1976}; Kato and McLeod \cite{katomcleod1971} and Derfel
+\cite{derfel1995} established the log-squared decay rate of \eqref{eq:Hexact}'s companion
+asymptotic $\varphi_0$ as generic across this whole class of rescaled functional equations. Our
+contribution here is the closed form for the periodic correction itself, not the mechanism
+producing it.
 \end{remark}
 
 The series for $H'$ and $H''$ converge absolutely and uniformly, since $|\Gamma(-i\omega_m)| =
@@ -356,8 +379,8 @@ $|\sinh z|^2 = \sinh^2(\operatorname{Re}z)+\sin^2(\operatorname{Im}z) \ge \sinh^
 and $|\cosh z|^2 \le \cosh^2(\operatorname{Re}z)$; the first excludes the poles of $\coth$, since
 $\operatorname{Re}(w/2)=b/2>0$ never approaches $\pi i k$. This gives the sector bounds directly.
 Monotonicity of $e$ is immediate from the increasing power series of $\sinh(r)/r$; monotonicity of
-$f$ is Lazarevi\'c's inequality, $(\sinh r/r)^3 > \cosh r$, checked by comparing alternating
-truncated series near $r=0$ and by monotonicity of $\coth r - 1/r$ away from it. The local bounds
+$f$ follows from $(\log f)'(r) = 3/r + \tanh r - 3\coth r < 0$ for $r>0$ (Lazarevi\'c's inequality,
+$(\sinh r/r)^3 > \cosh r$, gives $f<1$ but not this monotonicity by itself). The local bounds
 at $|w|\le2$ follow by applying the maximum-modulus principle to $\kappa_2(w)/w^2$ and
 $\kappa_3(w)/w^4$ (analytic on $|w|<2\pi$ by the Bernoulli expansion): bound each on $|w|=2$ by the
 triangle inequality, using $|B_{2k}| = 2(2k)!\,\zeta(2k)/(2\pi)^{2k}$ and $\zeta(2k)\le\zeta(2)$,
@@ -670,9 +693,13 @@ the third of the three coincidences asserted below. The other two are the chain 
 -p\,f'(p) = -Q'(y) = B_{\mathrm{sm}}(y) = 2\beta y-\alpha, \qquad
 p^2f''(p) = Q''(y)-Q'(y) = B_{\mathrm{sm}}(y)-\frac1c = 2\beta y-2\beta-\alpha .
 \]
-Berg and Kr\"uppel display the second of these with $+2\beta$ in place of $-2\beta$; differentiating
-$f$ twice gives $-2\beta$. Their Proposition~9.1 is unaffected, the term being of lower order there
-than $2\beta\log p$, but the exact expression used here is not.
+Berg and Kr\"uppel's own displayed formula for $f''(p)$, in the proof of their Proposition~9.1
+(the unnumbered display right after ``In view of''), reads $p^2f''(p)=2\beta\ln p+2\beta-\alpha$,
+with $+2\beta$ where direct differentiation of $f$ gives $-2\beta$: $f''(p) =
+\tfrac{1}{p^2}\bigl(2\beta\ln p - 2\beta - \alpha\bigr)$, since $f'(p)=\tfrac1p(\alpha-2\beta\ln p)$
+differentiates to $-\tfrac{2\beta}{p^2}-\tfrac{\alpha-2\beta\ln p}{p^2}$. Their Proposition~9.1 is
+unaffected, the term being of lower order there than $2\beta\log p$, but the exact expression used
+here is not.
 
 The saddle condition $t+f'(x)=0$ at $x=e^y$ now reads $e^{-\tau} = B_{\mathrm{sm}}(y)e^{-y}$, that
 is $\tau = y-\log B_{\mathrm{sm}}(y) = \Phi_0(y)$, whose unique solution on the branch
@@ -699,8 +726,14 @@ C_P = -\frac{r^2}{2c}+r+ca+\frac{ca^2}{2}-\frac{\log2\pi}{2}+\frac{\log c}{2} =
 -0.9576743183133982760669122497855855\ldots.
 \]
 Matching the $\tau$ and $\log\tau$ coefficients against Berg and Kr\"uppel's $\gamma$,
-$\delta_{\mathrm{BK}}$ (their equations following~(9.6)) reproduces both exactly, and
+$\delta_{\mathrm{BK}}$ (their equations following~(9.6)) reproduces both exactly:
 \[
+\gamma = -\Bigl(1+\tfrac1c-\tfrac rc\Bigr) = -1.8649154949\ldots, \qquad
+\delta_{\mathrm{BK}} = \tfrac12-\tfrac rc = 0.4546762683\ldots,
+\]
+and, solving $C_P=\varepsilon\log(2\beta)-\tfrac12\log(2\pi)$ for $\varepsilon$,
+\[
+\varepsilon = a+\tfrac12+\frac{\log c}{2c} = 0.4118732574\ldots, \qquad
 C_P = \varepsilon\log(2\beta) - \tfrac12\log(2\pi) = \log\frac{(2\beta)^\varepsilon}{\sqrt{2\pi}},
 \]
 so $P(\tau) - \log\varphi_{0,\mathrm{bare}}(e^{-\tau}) \to C_P$ and, using the prefactor-included
@@ -711,10 +744,11 @@ about $P$ itself.
 
 \begin{proof}[Proof of Corollary~\ref{cor:bk}]
 By Proposition~\ref{prop:envelope} and \ref{prop:bkidentity}, $S(\tau) = \log\varphi_0(e^{-\tau}) +
-H(w_0(\tau)) + O(\tau^{-1}\log^2\tau)$: the periodic factor multiplying Berg and Kr\"uppel's
-asymptotic solution, in equation~(9.7) for this eigenfunction, is $H$, matching the product formula
-their Proposition~9.3 supplies for it, as noted after Theorem~\ref{thm:H}. Proposition~
-\ref{prop:Hfourier}'s Fourier series is the new, closed form; Proposition~\ref{prop:Hcert}'s
+H(w_0(\tau)) + O(\tau^{-1}\log^2\tau)$, i.e.\ $\varphi_{\mathrm{sp}} = \varphi_0\cdot
+e^{H(w_0(\tau))}(1+o(1))$: the periodic factor multiplying Berg and Kr\"uppel's asymptotic
+solution, in equation~(9.7) for this eigenfunction, is $e^H$, matching the product formula their
+Proposition~9.3 supplies for it, as noted after Theorem~\ref{thm:H}. Proposition~
+\ref{prop:Hfourier}'s Fourier series for $H$ is the new, closed form; Proposition~\ref{prop:Hcert}'s
 certificate is what neither their product formula nor their closing remark (that they only
 \emph{expect} $\varphi$ bounded and bounded away from zero relative to $\varphi_0$) settles.
 \end{proof}
@@ -764,10 +798,27 @@ This holds with a wide margin: $\Lambda_l \to 1$.
 \end{proposition}
 
 \begin{proof}
-The phase shift under $t\mapsto3t$, i.e. $\tau\mapsto\tau-c$, is $w_0(\tau-c)-w_0(\tau)+c =
-O(1/\tau)$ by Lemma~\ref{lem:saddles}'s defining equation, independently of the phase of $\tau$.
-By Proposition~\ref{prop:envelope}, $\log\varphi(t)-\log\varphi_0(t) = H(w_0(\tau)) + O(1/\tau)$
-uniformly in phase, so
+First, the reduction itself. Wirsching's actual requirement (his inequality~(7.5)) is
+$\limsup_l (2/3^{l+1})\varphi'(x_l^+)/\varphi(x_l^+) < 1$; by $\varphi'=\tfrac92\varphi(3\cdot)$
+this is $\limsup_l (9/3^{l+1})\varphi(3x_l^+)/\varphi(x_l^+) < 1$. By definition of $\Lambda_l$,
+$\varphi(3x_l^+)/\varphi(x_l^+) = \Lambda_l\cdot\varphi_0(3x_l^+)/\varphi_0(x_l^+)$, and Berg and
+Kr\"uppel's $\varphi_0$ is an asymptotic solution of the same truncated equation (their
+equation~(7.12) in Wirsching's notation: $\varphi_0'(t)/\varphi_0(3t)\to9/2$ as $t\to0$), so
+$\varphi_0(3x_l^+)/\varphi_0(x_l^+) = \tfrac29\varphi_0'(x_l^+)/\varphi_0(x_l^+)\,(1+o(1))$.
+Substituting and using his equation~(7.13), $\lim_l(2/3^{l+1})\varphi_0'(x_l)/\varphi_0(x_l)=2/3$
+uniformly on the class,
+\[
+\frac{9}{3^{l+1}}\cdot\frac{\varphi(3x_l^+)}{\varphi(x_l^+)}
+= \Lambda_l\cdot\frac2{3^{l+1}}\cdot\frac{\varphi_0'(x_l^+)}{\varphi_0(x_l^+)}\,(1+o(1))
+\to \frac23\,\Lambda_l\cdot(1+o(1)),
+\]
+so the requirement $\limsup_l(9/3^{l+1})\varphi(3x_l^+)/\varphi(x_l^+)<1$ is exactly
+$\limsup_l\Lambda_l<3/2$.
+
+For the value of $\Lambda_l$: the phase shift under $t\mapsto3t$, i.e. $\tau\mapsto\tau-c$, is
+$w_0(\tau-c)-w_0(\tau)+c = O(1/\tau)$ by Lemma~\ref{lem:saddles}'s defining equation, independently
+of the phase of $\tau$. By Proposition~\ref{prop:envelope}, $\log\varphi(t)-\log\varphi_0(t) =
+H(w_0(\tau)) + O(1/\tau)$ uniformly in phase, so
 \[
 \log\Lambda_l = H(w_0(\tau_l-c)) - H(w_0(\tau_l)) + O(1/\tau_l) = O(1/\tau_l) \to 0,
 \]
