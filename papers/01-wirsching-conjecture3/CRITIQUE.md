@@ -416,3 +416,54 @@ marks are invisible to `pdftotext` and must be checked against the rendered page
 text, exactly as the loop's own prompt already instructs for margin truncation.
 
 Paper recompiles clean, 16 pages, unchanged overfull-hbox count (2, both cosmetic).
+
+## Round 8: sixth blind loop iteration (2026-08-05/06), Opus and Codex both complete
+
+Opus, PDF-only, max effort, on the Round 7 PDF (explicitly instructed to verify overline/conjugate
+identities and margin overruns against rendered page images, not extracted text, per Round 7's
+false-positive lesson). Verdict: **accept with minor revisions**, no mathematical error found
+anywhere it checked, including three independent end-to-end numerical confirmations (Proposition
+16's `O(1/tau)` rate; Theorem 13 reconfirmed by exact tilted-Fourier-inversion quadrature,
+bypassing the saddlepoint machinery entirely; Remark 14's Edgeworth rate `N(R-1) -> -1/12`).
+Findings, each independently verified before fixing (Rule 8c):
+
+| ID | Summary | Verdict | Status |
+|----|---------|---------|--------|
+| O1 | Two lines overrun the text margin (p. 6, ~5.4pt on an inline radical; p. 14, ~9pt on a displayed equation chain), confirmed by ink-bounding-box measurement, no content lost | **confirmed** | fixed: both converted to standalone displayed equations |
+| O2 | Theorem 2 is true only conditional on Proposition 8's certified bound, but nothing in the theorem statement says so | **confirmed, real** | fixed: added "Conditional on the certified bound of Proposition 8" to the theorem statement |
+| O3 | Theorem 1's value `e^{H(0)}=0.534122...` depends on a specific normalization of `phi_0`; Conjecture 3 itself only asserts existence of some constant, so the *value* (not the *truth*) is normalization-dependent, and nothing says so | **confirmed, real** | fixed: added a clarifying sentence to Theorem 1 |
+| O4 | Proposition 8's certificate is rigor-uneven: the primary computation (50-digit floating point) and the Fourier-series cross-check (Arb ball arithmetic) are both called "certified" with no distinction; unclear what arithmetic the `2^20`-point oscillation grid sweep itself used | **confirmed, real** | fixed: added explicit labels distinguishing the floating-point route from the interval-arithmetic route at each step, and clarified that only the two located extremal points (not the full sweep) were re-confirmed in ball arithmetic |
+| O5 | Two literature claims (the Berg-Kruppel p.179 sign discrepancy; Remark 7's "established... as generic across this whole class") flagged as unverifiable by a PDF-only reviewer without access to the cited sources | **already independently verified in Round 6/7 against the actual primary-source PDF** (the sign discrepancy; page number confirmed against the paper's own printed page number) | no action beyond what's already done; noted for completeness |
+| O6 (Theorem 2 fragment) | "...without bound; with amplitude bounded below by a positive, certified constant." is a dangling sentence fragment after the semicolon | **confirmed, real (minor)** | fixed as part of the O2 rewording |
+| O7 | Garbled parenthetical in Theorem 2's proof: "(since Phi_0 restricted to (ca+1,infty) is a bijection onto (tau_0,infty), and tau -> tau mod c composed with that inverse is onto one period once tau is large)" -- conclusion correct, wording doesn't parse cleanly | **confirmed, real (minor)** | fixed: rewritten using the standard fact that a continuous, strictly increasing, unbounded function hits every residue class mod c infinitely often |
+| O8 | Discussion's "every phase swept by H admits some sequence along which the ratio converges" (added in Round 7 to fix a different false claim) was itself asserted with no proof | **confirmed, real (minor)** | fixed: added the explicit one-line construction (`tau_l := Phi_0(theta+lc)`, giving `w_0(tau_l)=theta+lc` exactly), verified the construction is correct |
+| O9 | Proposition 16's closing "Each bound is an absolute constant over `B_0`, or smaller" is false for `T_4`, whose own displayed bound uses `B_0-1/c` in the denominator, not `B_0` (verified numerically: `T_4` bound exceeds `const/B_0` at every tested `B_0`) | **confirmed, real (minor)** | fixed: reworded to `O(1/B_0)` with an explicit note on why `T_4` still qualifies |
+| O10-O13 | Minor/editorial: "Corollary 3" mislabeled (should be Proposition/Remark); notation `x_l` vs `z_l`; Lemma 9's local constants looser than necessary; one remaining en dash used as punctuation rather than a name-compound | noted, judged editorial/cosmetic | not fixed (out of scope for an error-elimination pass; Corollary 3's relabeling in particular would touch many cross-references for a purely naming concern) |
+
+Codex, PDF-only, max effort, same PDF. **Verdict: Reject as submitted.** Unlike Opus, Codex did not
+converge with the accept verdict; its findings are, checked one by one, entirely a restatement of
+the repository-vs-inline certification question already settled across Rounds 3-8 (Rule 12's
+division of labor: the paper states the method and the provable analytic bounds, the
+reproducibility repository carries the actual interval-arithmetic computation) plus the same
+"archive the repo with a DOI" suggestion already logged (Round 7's M10) as a researcher action, not
+a text fix. Specifically: "certified bounds (5) are not proved in the manuscript", "Proposition 8
+is an assertion of a computation, not a proof", "Theorem 13 contains many unshown numerical
+inequalities", and "Section 9 does not cure the lack of proof" are four restatements of one
+objection already addressed by this project's standing position (stated explicitly in Round 3's
+D-04/D-05 entry and reaffirmed every round since: full line-by-line interval-arithmetic derivations
+live in the dedicated reproducibility repository per Rule 12, not spelled out inline in a
+16-page PDF). Codex's own "What I checked successfully" section independently reproduces `H(0)`,
+`H(log 3/2)`, the Mellin transform, the zero-mode residue, and every symbolic identity it attempted
+— finding, in its own words, "no decisive algebraic contradiction in the central analytic
+argument." No new confirmed mathematical or presentation finding beyond what Opus's pass and this
+table already cover; not reopened without new evidence, per Rule 8d.
+
+**Net effect of this round**: Opus, explicitly checking for the specific false-positive pattern
+that misled Codex in Round 7 (overline/conjugate marks lost in text extraction), found zero new
+mathematical errors and gave the loop's second consecutive "accept" verdict, after fixing ten
+genuine presentation/labeling findings. Codex's disagreement is a scope disagreement about where
+rigor should live (inline vs. repository), not a newly discovered defect, and repeats a question
+this project decided explicitly and consistently since Round 3.
+
+Paper recompiles clean (pdflatex, exit 0, zero warnings, zero overfull-hbox notices for the first
+time in this loop), 17 pages.

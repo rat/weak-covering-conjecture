@@ -108,18 +108,20 @@ Wirsching's Conjecture 3 (stated just above) is true. For every $\delta>0$, on h
 class $\widetilde{A}_\delta$, the ratio
 $\varphi(z_l)/\varphi_0(z_l)$ converges uniformly to $e^{H(0)} = 0.534122\ldots$, where $H$ is the
 periodic function of Theorem~\ref{thm:H} below and the normalization of $\varphi_0$ is Berg and
-Kr\"uppel's own, equation~(9.6) of \cite{bergkruppel1998}.
+Kr\"uppel's own, equation~(9.6) of \cite{bergkruppel1998}. Conjecture 3 itself only asserts the
+existence of some positive constant, independently of normalization; the specific value
+$e^{H(0)}$ is tied to this particular normalization of $\varphi_0$.
 \end{theorem}
 
 \begin{theorem}[Failure of the unrestricted asymptotic]
 \label{thm:unrestricted}
-The stronger asymptotic $\varphi(t) \sim \kappa\,\varphi_0(t)$ as $t \to 0^+$, for any single
-constant $\kappa$ and with no restriction to a comparison class, is false. The ratio
-$\varphi(t)/\varphi_0(t)$ oscillates indefinitely as $t \to 0^+$: it is governed by the exactly
-$c$-periodic function $H$ evaluated at the saddle location $w_0(\tau)$, $\tau=\log(1/t)$, whose
-successive-period increment $w_0(\tau+c)-w_0(\tau)$ tends to $c$ (Lemma~\ref{lem:saddles}) even
-though $w_0(\tau)$ itself drifts away from $\tau$ without bound; with amplitude bounded below by a
-positive, certified constant.
+Conditional on the certified bound of Proposition~\ref{prop:Hcert}: the stronger asymptotic
+$\varphi(t) \sim \kappa\,\varphi_0(t)$ as $t \to 0^+$, for any single constant $\kappa$ and with no
+restriction to a comparison class, is false. The ratio $\varphi(t)/\varphi_0(t)$ oscillates
+indefinitely as $t \to 0^+$, with amplitude bounded below by a positive, certified constant: it is
+governed by the exactly $c$-periodic function $H$ evaluated at the saddle location $w_0(\tau)$,
+$\tau=\log(1/t)$, whose successive-period increment $w_0(\tau+c)-w_0(\tau)$ tends to $c$
+(Lemma~\ref{lem:saddles}) even though $w_0(\tau)$ itself drifts away from $\tau$ without bound.
 \end{theorem}
 
 The two theorems have a single common source. Write $t = e^{-\tau}$ and let $H(w)$ be the
@@ -425,8 +427,11 @@ equations. Our contribution here is the closed form for the periodic correction 
 producing it.
 \end{remark}
 
-The series for $H'$ and $H''$ converge absolutely and uniformly, since $|\Gamma(-i\omega_m)| =
-\sqrt{\pi/(\omega_m \sinh \pi\omega_m)}$ decays exponentially in $m$ while $\zeta(1-i\omega_m)$
+The series for $H'$ and $H''$ converge absolutely and uniformly, since
+\[
+|\Gamma(-i\omega_m)| = \sqrt{\pi/(\omega_m \sinh \pi\omega_m)}
+\]
+decays exponentially in $m$ while $\zeta(1-i\omega_m)$
 grows only polynomially. Precisely, with $\alpha_H := 2\pi/c$, $q := e^{-\pi\alpha_H/2}$, $A_H :=
 c^{-1}\sqrt{3\pi/\alpha_H}$ and $C_H := \tfrac32+\alpha_H^{-1}+\tfrac12\sqrt{1+\alpha_H^{-2}}$, the
 bound $|\Gamma(-i\omega_m)|\le\sqrt{3\pi/\omega_m}\,e^{-\pi\omega_m/2}$ (valid for $\omega_m\ge
@@ -493,11 +498,14 @@ $10^{-45}$, they give
 \[
 H(0) = -0.62713093305152597830\ldots, \qquad H\bigl(\log\tfrac32\bigr) = -0.62675374277058199247\ldots,
 \]
-whose difference is $-0.00037719028094398583\ldots$, inside the stated interval. Independently, the
-Fourier series of Proposition~\ref{prop:Hfourier} gives the same difference in Arb ball arithmetic:
-the $m=0$ term cancels, four modes suffice, and the majorant \eqref{eq:Hmajorant} gives
+whose difference is $-0.00037719028094398583\ldots$, inside the stated interval; this first route
+is floating-point (50 significant digits, accumulated rounding bounded as stated) rather than
+interval arithmetic. Independently, and rigorously in the sense of interval arithmetic, the Fourier
+series of Proposition~\ref{prop:Hfourier} gives the same difference in Arb ball arithmetic: the
+$m=0$ term cancels, four modes suffice, and the majorant \eqref{eq:Hmajorant} gives
 $\sum_{m>4}|\hat H(m)| \le 9.05\times10^{-20}$; the discarded modes therefore move the difference by
-less than $3.7\times10^{-19}$.
+less than $3.7\times10^{-19}$. The two routes agreeing to 18 digits is itself strong evidence the
+floating-point route's own error estimate is not being violated by an unmodeled effect.
 
 For the oscillation, let $w_i = ic/N$, $0\le i<N$, with $N = 2^{20}$, so $h := c/N =
 1.04772\times10^{-6}$. Every real $w$ lies within $h/2$ of some $w_i$ modulo $c$, so \eqref{eq:Hbounds}
@@ -506,9 +514,13 @@ gives $|H(w)-H(w_i)| \le M_1h/2$ with $M_1 := 1.1977472315550332\times10^{-3}$, 
 \max_i H(w_i) \;\le\; \sup H \;\le\; \max_i H(w_i)+\frac{M_1h}{2}, \qquad
 \min_i H(w_i)-\frac{M_1h}{2} \;\le\; \inf H \;\le\; \min_i H(w_i),
 \]
-and therefore $\operatorname{osc}(H) \in [D,\,D+M_1h]$ for $D := \max_iH(w_i)-\min_iH(w_i)$.
-Evaluating the $N$ grid values from Proposition~\ref{prop:Hfourier} truncated at $|m|\le10$,
-where the same majorant bounds the discarded modes by $2.71\times10^{-43}$, locates the maximum at
+and therefore $\operatorname{osc}(H) \in [D,\,D+M_1h]$ for $D := \max_iH(w_i)-\min_iH(w_i)$; this
+step is rigorous regardless of how the grid values themselves are evaluated, since
+$\max_iH(w_i)\le\sup H$ holds for any finite subset. Evaluating the $N$ grid values from
+Proposition~\ref{prop:Hfourier} truncated at $|m|\le10$ in floating point (Arb ball arithmetic
+was used only to re-confirm the two located extremal points below, to 40 digits, not the full
+sweep), where the same majorant bounds the discarded modes by $2.71\times10^{-43}$, locates the
+maximum at
 $i = 486746$ and the minimum at $i = 1011118$; re-evaluating $H$ there to $40$ digits, from
 \eqref{eq:Hcomputable} and from the Fourier series alike,
 \[
@@ -899,7 +911,8 @@ $T_5$ is the remainder of Theorem~\ref{thm:H}, evaluated at the true saddle rath
 Here $B_0\ge5$ forces $w_0\ge5.3492$ and $w^*\ge w_0-0.0014$, so $e^{w^*}\ge210.1$ and
 $|T_5| \le \sum_{k\ge0}2e^{-2\cdot3^k\cdot210.1} < 10^{-182}$.
 
-Each bound is an absolute constant over $B_0$, or smaller. Finally $\tau = w_0-\log B_0$ and
+Each bound is $O(1/B_0)$ (for $T_4$, via $B_0-1/c\ge B_0-1$, comparable to $B_0$ once $B_0\ge5$).
+Finally $\tau = w_0-\log B_0$ and
 $w_0 = c(B_0+a)$ give $\tau = cB_0+ca-\log B_0$, so $B_0/\tau \to 1/c$, and $O(1/B_0) = O(1/\tau)$
 with constants free of the phase of $\tau$.
 \end{proof}
@@ -968,6 +981,8 @@ there $x^\sharp t = e^{w_0-\tau} = B_0$, $f(x^\sharp) = Q(w_0)$, $(x^\sharp)^2f'
 \[
 x^\sharp t+f(x^\sharp)-\tfrac12\log\bigl(2\pi f''(x^\sharp)\bigr)
 = B_0+Q(w_0)-\tfrac12\log\frac{2\pi(B_0-1/c)}{(x^\sharp)^2}
+\]
+\[
 = Q(w_0)+B_0+w_0-\tfrac12\log\Bigl(2\pi\bigl(B_0-\tfrac1c\bigr)\Bigr),
 \]
 which is $P(\tau)$. Finally $w_0 = c(B_0+a)$ and $\tau = w_0-\log B_0$ give $\tau = cB_0+ca-\log
@@ -1046,11 +1061,11 @@ is exactly Conjecture 3, with the constant given explicitly.
 \end{proof}
 
 \begin{proof}[Proof of Theorem~\ref{thm:unrestricted}]
-As $t=e^{-\tau}$ ranges over $(0,1/2)$ with no restriction, $\tau\to\infty$, and
-Lemma~\ref{lem:saddles} gives $w_0(\tau) \bmod c$ a full period (since $\Phi_0$ restricted to
-$(ca+1,\infty)$ is a bijection onto $(\tau_0,\infty)$, and $\tau\mapsto\tau \bmod c$ composed with
-that inverse is onto one period once $\tau$ is large), so by the same combination of results used
-above,
+As $t=e^{-\tau}$ ranges over $(0,1/2)$ with no restriction, $\tau\to\infty$. By
+Lemma~\ref{lem:saddles}, $w_0=\Phi_0^{-1}$ is continuous and strictly increasing and unbounded on
+$(\tau_0,\infty)$, so $w_0(\tau)\bmod c$ sweeps every value in $[0,c)$ infinitely often as
+$\tau\to\infty$ (a continuous, strictly increasing, unbounded function hits every residue class
+modulo $c$ infinitely often), so by the same combination of results used above,
 $\log\varphi(t)-\log\varphi_0(t) = H(w_0(\tau))+o(1)$ takes values arbitrarily close to both $\sup H$
 and $\inf H$ infinitely often. By Proposition~\ref{prop:Hcert}, $\operatorname{osc}(H) > 0$
 rigorously, so $\varphi(t)/\varphi_0(t)$ does not converge, and
@@ -1118,7 +1133,10 @@ operator $S_\infty$, are untouched here, and the full theorem is not established
 Wirsching stated the weaker Conjecture 3 instead of the stronger $\varphi\sim\kappa\varphi_0$ he
 considers first. Theorem~\ref{thm:unrestricted} shows why: the stronger statement fails by a
 mechanism with a certified, positive amplitude, not by some correctable technical looseness. Every
-phase swept by $H$ admits some sequence along which the ratio converges to $e^{H(\theta)}$; what is
+phase $\theta\in[0,c)$ swept by $H$ admits some sequence along which the ratio converges to
+$e^{H(\theta)}$: take $\tau_l := \Phi_0(\theta+lc)$, $z_l := e^{-\tau_l}$, so $w_0(\tau_l)=\theta+lc$
+exactly, and apply Theorem~\ref{thm:formulaA}, Proposition~\ref{prop:envelope}, and
+Proposition~\ref{prop:bkidentity} as in the proof of Theorem~\ref{thm:conj3}. What is
 special about phase $0$ is only that it is the one Wirsching's own class $\widetilde A_\delta$
 happens to fix. That phase sits close to $H$'s minimum: $H(0) - \min H = 5.25\times10^{-6}$ against
 a total oscillation of $4.19\times10^{-4}$. We do not know whether this is coincidental.
