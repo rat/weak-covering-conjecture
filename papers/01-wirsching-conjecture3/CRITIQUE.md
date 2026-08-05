@@ -319,3 +319,36 @@ if the researcher wants another blind pass; per the researcher's standing instru
 continues until a round returns with no further confirmed findings from either reviewer.
 
 Paper recompiles clean, 16 pages.
+
+## Round 6, continued: Opus's retry, deepest pass so far (2026-08-05, later)
+
+Opus's re-run completed a full pass: recomputed essentially every printed constant at 35-70
+digits, confirmed the end-to-end numerical chain (Proposition 6's Fourier series against the
+elementary formula (6), agreement to 50 digits; the Section 5-6 envelope/identification chain
+against direct numerical evaluation of phi at tau=10..80), and rendered every page at 400dpi to
+check for margin overruns after the previous round's lost-text bug. **Recommendation: accept
+after minor-to-moderate revision** -- explicitly found no error damaging either main theorem, and
+confirmed as correct essentially everything it checked (Theorem 4, Proposition 6, Lemmas 9-12,
+Proposition 17, Theorems 1-2, Proposition 18's reduction arithmetic, the bibliography). Findings,
+each independently verified before any fix:
+
+| ID | Summary | Verdict | Status |
+|----|---------|---------|--------|
+| L1 | Eq. (4) (`sup|H'|`, `sup|H''|`) stated as "certified" with zero proof, while Prop 8 three paragraphs later gives a fully explicit majorant for the same kind of sum -- an inconsistent rigor level, and (4) is used in 5 downstream places | **confirmed, real** | fixed: moved the majorant (previously derived only inside Prop 8's proof) to right after Remark 7, used it to prove (4) explicitly (exact head sum m=1..6 plus a certified geometric-polynomial tail bound), verified numerically (bound matches to all printed digits); Prop 8's proof simplified to cite the now-established majorant instead of re-deriving it |
+| L2 | The reflection `x -> 1-x` in "this is Wirsching's density up to the reflection..." is left genuinely ambiguous: a reader cannot tell from the manuscript whether the reflection is vacuous or actually changes which end of the support is analyzed near `t->0` | **confirmed, real** | fixed: added the one-line proof that the reflection is vacuous (`X` and `1-X` are equidistributed, since `1-U_j ~ U_j` and `sum 2*3^{-j}=1`), verified directly |
+| L3 | "This is the largest of the five" (Prop 16's `T_3`) is false against the paper's own printed bounds: `T_4`'s bound exceeds `T_3`'s at every `B_0`, confirmed both symbolically and by direct numerical evaluation of all four terms at several `tau` | **confirmed, real** | fixed: sentence deleted (nothing depends on the claim) |
+| L4 | The `e_2` derivation's displayed intermediate, "the truncated Gaussian tail `2*int (1/sqrt(2pi)) e^{-Vy^2/2} dy`", is missing the `sqrt(V)` prefactor; as literally written it would integrate to a different, wrong expression (`theta*V` in the denominator instead of `theta*sqrt(V)`) | **confirmed, real** | fixed: added the missing `sqrt(V/2pi)` prefactor and the explicit substitution step, re-verified the resulting expression matches the already-correct (8) |
+| L5 | Corollary 3's proof paragraph ("this is precisely Berg and Kruppel's own Proposition 9.1 ... not an independent asymptotic claim about `P` itself") mischaracterizes the paper's own argument: the coefficient-matching derivation just given IS an independent verification, using nothing from [2] beyond the printed `phi_0` formula | **confirmed, real** | fixed: reworded to state plainly that the coefficients of `P` reproduce `gamma`, `delta_BK`, `epsilon` exactly, removing the self-undermining disclaimer |
+| L6-L9 | Assorted notation/reference fixes: Section 2's Berg-Kruppel truncated equation used `d` for the dilation parameter where Section 6 uses `a` for the same object (inconsistent); Remark 5's `a`, `b`, `alpha` (Berg-Kruppel's own, `a=3, b=3/2`) were never disambiguated from this paper's identically-named objects, unlike the later, already-fixed collision note in Proposition 17; `N_0` used in Theorem 13's proof but never defined anywhere; Lemma 12's statement used `h_j` without defining it (only the proof did); Theorem 1 left `delta` unquantified; Remark 7 cited `\eqref{eq:Hexact}` (the definition of `H`) as `phi_0`'s "companion asymptotic", a stale/wrong cross-reference | **all confirmed, real (minor)** | fixed: Section 2 now uses `a` consistently with an upfront disambiguation note; Remark 5 gets an explicit "their `a,b,alpha` are unrelated to this paper's" parenthetical; `N_0` reference replaced with a direct statement of what `E(18)`, `E(19)` show; `h_j` now defined in Lemma 12's own statement; Theorem 1 now reads "For every `delta>0`"; Remark 7's cross-reference fixed to point at Section 2 |
+| L10 | Remark 14 says both "gives the Edgeworth correction ... `O(N^{-3/2})`" and, two sentences later, "we do not prove the remainder term here" -- a direct contradiction | **confirmed, real (minor)** | fixed: "gives" softened to "suggests", with an added opening clause that a sharper rate is plausible but not established |
+| L11 | The Introduction's account of what Berg-Kruppel's own paper leaves open ("left open both the exact multiplicative constant...") is imprecise relative to the abstract's separate, more accurate account (they give the periodic factor as an explicit product but never evaluate it) | **confirmed, real (minor)** | fixed: reworded to state both facts precisely and consistently with the abstract |
+| L12-margins | Six lines identified by rendering every page at 400dpi and measuring ink bounding boxes against the 539pt text-block edge; two were serious enough to look broken in print (Prop 17's statement, 41pt over; Lemma 11's statement, 30pt over), confirmed by direct visual inspection; **no content was actually lost in any of the six** (this round's specific ask, given Round 5's real lost-text bug) | **2 confirmed worth fixing, 4 cosmetic** | the 2 display-worthy overruns (Prop 17's integral, Lemma 11's sum bound) converted to displayed equations; the remaining 4 (including one still at 62pt per the recompiled log) visually confirmed to lose no content and left as is, matching Round 5's original judgment on this exact category of warning |
+
+Every fix independently verified before being made: L1's bound re-derived numerically and matched
+to all printed digits; L2's symmetry claim re-derived and checked; L3 and L4 checked by direct
+symbolic and numerical recomputation before touching the text. Visual re-inspection at 150-200dpi
+confirms every touched page renders cleanly with no truncation, including the two newly-displayed
+equations.
+
+Paper recompiles clean (pdflatex, exit 0, zero warnings), still 16 pages, overfull-hbox count down
+from 6 to 3, none losing content.
