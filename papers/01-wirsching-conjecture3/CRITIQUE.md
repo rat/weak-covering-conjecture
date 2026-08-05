@@ -237,3 +237,28 @@ Independently verified before accepting, per Rule 8c:
 Paper recompiles clean (pdflatex, exit 0, zero warnings, still only the same 8 pre-existing
 `Overfull \hbox` typesetting notices, cosmetic and untouched), now 15 pages (up from 12, reflecting
 the much more detailed proofs).
+
+## Round 5: third blind loop iteration (2026-08-05), Codex only (Opus hit a session limit mid-run)
+
+Codex, PDF-only, max effort, on the Round 4 PDF (post H1/H2 fixes). Verdict: not recommended for
+acceptance as submitted, but ranked no finding above "major," and explicitly found no algebraic
+contradiction anywhere it checked (density equation, recurrence, choice of `Q`, Theorem 4's
+telescoping, the Mellin multiplier, Proposition 6's residues, Theorem 13's Gaussian scaling, the
+five-term envelope decomposition, Proposition 17's differentiation). Two of the findings pointed at
+real errors this project itself introduced in Round 4's own fix (an object lesson in Rule 8c: a fix
+for one round's findings can introduce a new bug, and needs the same verification discipline as
+anything else). Each finding independently checked before any change.
+
+| ID | Summary | Verdict | Status |
+|----|---------|---------|--------|
+| I1 | Introduction claimed `w_0(tau)` "tracks tau up to a bounded shift"; this is false, `w_0(tau)-tau=log(B_0)`, unbounded (grows like `log(tau)`) | **confirmed, real** (this project's own Round 4 fix introduced this; verified numerically, `w0-tau` grows from 2.2 at `w0=10` to 9.8 at `w0=20000`, clearly unbounded) | fixed: reworded to the true, already-proven fact, `w_0(tau+c)-w_0(tau)=c+O(1/tau)` |
+| I2 | "every other class of comparison sequences sweeps `w_0(tau)`'s phase through all values" is false; Codex constructs an explicit counterexample class with fixed phase | **confirmed, real** (also this project's own Round 4 fix; verified the counterexample numerically, `w0(tau_l) mod c` stays exactly at a chosen fixed phase for a constructed sequence) | fixed: reworded to what Theorem 2 actually uses, the *unrestricted* range `tau->infinity` (not "every other class"), which does sweep every phase since `Phi_0` is a bijection |
+| I7 | Corollary 3's proof only reaches a statement about `phi_sp`, not `phi` itself; needs Theorem 13 invoked explicitly to close the gap | **confirmed, real** | fixed: one sentence added invoking Theorem 13 (`phi=phi_sp(1+o(1))`) before concluding about `phi` |
+| I4 | Theorem 13 claims `E` is strictly decreasing and `E(N)<=4.18*N^{-1/2}` "for all N>=19" backed only by "evaluating numerically," an infinite-range claim not actually proved | **confirmed, real gap** (the asymptotic rate `sqrt(N)E(N)->limit` IS analytically provable and wasn't; the strict-monotonicity/uniform-bound claims for literally all N are not, and are not needed downstream per Remark 14) | fixed: added a genuine analytic proof of the rate (termwise: `e_1=Theta(N^{-1/2})` dominates, `e_2,e_3` vanish faster than any power of `N`); downgraded the monotonicity/bound claims to what's actually true, numerically checked over `19<=N<=5000`, explicitly flagged as not needed below |
+| I5 | Proposition 18's `x_l^+` is described only in prose ("the upper endpoint of..."), no formula given, not self-contained | **confirmed, real (minor)** | fixed: added the explicit formula `x_l^+ := x_l+3^{-(l+1)}`, Wirsching's own eq. (7.14) |
+| I3, I6 | Proposition 8's certificate should print raw interval endpoints/directed-rounding data inline, and several small constants (0.114, 0.0119, `3e^{-b_0}`, etc.) should have longer inline derivations | **fair completeness preference, not a mathematical error** | not fixed: the paper already gives explicit truncation indices, tail bounds with derivations, working precision, and (for the oscillation) a fully spelled-out grid-plus-Lipschitz argument; per Rule 12 the full ball-arithmetic certificate is the reproducibility repository's job, and inlining raw 50-digit interval endpoints for every constant would work against Rule 5c's structural-asymmetry and non-padding guidance without adding verifiability beyond what a reader can already reproduce from the stated method |
+
+**Opus's round-5 pass failed early** (session limit) after only reading the PDF; no findings to
+reconcile from that side this round. Re-run pending.
+
+Paper recompiles clean (pdflatex, exit 0, zero warnings) after these fixes, still 15 pages.

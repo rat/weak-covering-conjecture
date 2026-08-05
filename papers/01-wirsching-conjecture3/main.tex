@@ -119,12 +119,14 @@ with amplitude bounded below by a positive, certified constant.
 The two theorems have a single common source. Write $t = e^{-\tau}$ and let $H(w)$ be the
 $\log 3$-periodic function appearing in the exact decomposition of $\log\varphi$'s log-Laplace
 transform (Theorem~\ref{thm:H}); the saddlepoint bridge of Sections~\ref{sec:formulaA}
-and~\ref{sec:envelope} shows $\log\varphi(t)-\log\varphi_0(t) = H(w_0(\tau))+o(1)$ for a saddle
-location $w_0(\tau)$ that tracks $\tau$ up to a bounded shift. Wirsching's comparison class fixes
-$w_0(\tau)$'s phase modulo $\log 3$ at a single value, not $\tau$'s own phase, which the class does
-not control; every other class of comparison sequences sweeps $w_0(\tau)$'s phase through all
-values. Whether the ratio converges or oscillates depends on which sequences one compares along,
-and the two theorems above read the same object at two different scopes.
+and~\ref{sec:envelope} shows $\log\varphi(t)-\log\varphi_0(t) = H(w_0(\tau))+o(1)$, where the saddle
+location $w_0(\tau)$ advances by $c$ per period of $\tau$, up to a vanishing correction:
+$w_0(\tau+c)-w_0(\tau) = c+O(1/\tau)$ (Lemma~\ref{lem:saddles}). Wirsching's comparison class
+constrains $w_0(\tau_l)$'s phase modulo $\log 3$ to converge to a single value as $l\to\infty$; the
+unrestricted range $\tau\to\infty$ with no class restriction instead sweeps that phase through
+every value, since $\Phi_0$ is a bijection (again Lemma~\ref{lem:saddles}). Whether the ratio
+converges or oscillates depends on which sequences one compares along, and the two theorems above
+read the same object at two different scopes.
 
 \begin{corollary}
 \label{cor:bk}
@@ -640,9 +642,12 @@ e_2(N) := \frac{2}{\sqrt{2\pi}}\cdot\frac{e^{-\theta_N^2V_{\mathrm{lo}}/2}}{\the
 e_3(N) &:= 2\,e^{3/e}\sqrt{\frac{V_{\mathrm{up}}}{2\pi}}\cdot
 \frac{(1+\theta_N^2)^{-(N-2)/2}}{\theta_N(N-2)}. \notag
 \end{align}
-$E$ is strictly decreasing, $E(19)<1$, $E(N)\le4.18\,N^{-1/2}$ for all $N\ge19$, and $\sqrt N\,E(N)
-\to \tfrac43e^{1/3}(2\pi)^{-1/2} = 0.742358\ldots$. Consequently $\varphi(t) =
-\varphi_{\mathrm{sp}}(t)\,(1+o(1))$ as $t \to 0^+$, with no restriction on the sequence of $t$'s.
+$E(19)<1$, and $\sqrt N\,E(N) \to \tfrac43e^{1/3}(2\pi)^{-1/2} = 0.742358\ldots$ as $N\to\infty$
+(proved below, from $e_1$ alone: $e_2$ and $e_3$ vanish faster than any power of $N$). Numerically,
+$E$ is also strictly decreasing and satisfies $E(N)\le4.18\,N^{-1/2}$ throughout $19\le N\le5000$
+(checked directly in the accompanying repository); neither fact is used below, where only $E(19)<1$
+and $E(N)\to0$ are needed. Consequently $\varphi(t) = \varphi_{\mathrm{sp}}(t)\,(1+o(1))$ as
+$t \to 0^+$, with no restriction on the sequence of $t$'s.
 \end{theorem}
 
 \begin{proof}
@@ -668,10 +673,23 @@ $|e^{\Lambda(y)}|\le e^{3/e}(1+y^2)^{-N/2}$ integrates, via $\int_a^\infty(1+y^2
 $\sqrt{V/2\pi}$ factor in \eqref{eq:R}), to give $e_3$; this needs $\theta_N \gg N^{-1/2}$, satisfied
 since $\tfrac13<\tfrac12$. Every constant entering $E$ (via $A_V$, Lemma~\ref{lem:variance}, and the
 $3.0152\approx e^{3/e}$ of Lemma~\ref{lem:tail}) is a supremum over $b>0$ or a sum over one complete
-geometric orbit bounded using $\rho\ge1$, hence independent of $\rho$. Evaluating \eqref{eq:Ebound}
-numerically gives the stated $N_0=19$, monotonicity, and limit; $E(18) = 1.00170\ldots$ and
-$E(19) = 0.95673\ldots$, and $\sqrt{19}\,E(19) = 4.1704\ldots$ with $\sqrt N E(N)$ decreasing. Since $t(s)$ ranges bijectively over
-$(0,1/2)$, this is exactly the statement $\varphi(t)=\varphi_{\mathrm{sp}}(t)(1+o(1))$ as $t\to0^+$.
+geometric orbit bounded using $\rho\ge1$, hence independent of $\rho$. Directly evaluating
+\eqref{eq:Ebound} gives $E(18) = 1.00170\ldots$ and $E(19) = 0.95673\ldots$, the stated $N_0=19$.
+
+For the asymptotic rate, $e_1$, $e_2$, $e_3$ separate on very different scales as $N\to\infty$.
+Since $\theta_N^3=1/N$, $B\theta_N^3\to1/3$ and $B/N\to1/3$, $V_{\mathrm{lo}}/N,\,V_{\mathrm{up}}/N
+\to1$, so
+\[
+\sqrt N\,e_1(N) = \frac{4e^{B\theta_N^3}}{\sqrt{2\pi}}\cdot\frac{\sqrt N\,B}{V_{\mathrm{lo}}^{3/2}}
+\longrightarrow \frac{4e^{1/3}}{\sqrt{2\pi}}\cdot\frac13 = \frac43e^{1/3}(2\pi)^{-1/2}.
+\]
+For $e_2$ and $e_3$, $\theta_N^2V_{\mathrm{lo}} \sim N^{1/3}\to\infty$, so both carry a factor
+$e^{-N^{1/3}/2}(1+o(1))$ (for $e_3$, via $(1+\theta_N^2)^{-(N-2)/2} =
+\exp(-\tfrac{N-2}2\theta_N^2(1+o(1)))$), against polynomial prefactors of order $N^{-1/6}$; a
+factor decaying like $e^{-N^{1/3}/2}$ beats every power of $N$, so $N^k e_2(N),\,N^k e_3(N)\to0$
+for every $k$. Hence $\sqrt N\,E(N) = \sqrt N\,e_1(N) + o(1) \to \tfrac43e^{1/3}(2\pi)^{-1/2}$, and
+in particular $E(N)\to0$. Since $t(s)$ ranges bijectively over $(0,1/2)$, this is exactly the
+statement $\varphi(t)=\varphi_{\mathrm{sp}}(t)(1+o(1))$ as $t\to0^+$.
 \end{proof}
 
 \begin{remark}
@@ -925,12 +943,14 @@ about $P$ itself.
 \begin{proof}[Proof of Corollary~\ref{cor:bk}]
 By Proposition~\ref{prop:envelope} and \ref{prop:bkidentity}, $S(\tau) = \log\varphi_0(e^{-\tau}) +
 H(w_0(\tau)) + O(\tau^{-1}\log^2\tau)$, i.e.\ $\varphi_{\mathrm{sp}} = \varphi_0\cdot
-e^{H(w_0(\tau))}(1+o(1))$: the periodic factor multiplying Berg and Kr\"uppel's asymptotic
-solution, in equation~(9.7) for this eigenfunction, is $e^H$, matching the product formula their
-Proposition~9.3 supplies for it, as noted after Theorem~\ref{thm:H}. Proposition~
-\ref{prop:Hfourier}'s Fourier series for $H$ is the new, closed form; Proposition~\ref{prop:Hcert}'s
-certificate is what neither their product formula nor their closing remark (that they only
-\emph{expect} $\varphi$ bounded and bounded away from zero relative to $\varphi_0$) settles.
+e^{H(w_0(\tau))}(1+o(1))$; by Theorem~\ref{thm:formulaA}, $\varphi=\varphi_{\mathrm{sp}}(1+o(1))$
+as well, so $\varphi = \varphi_0\cdot e^{H(w_0(\tau))}(1+o(1))$: the periodic factor multiplying
+Berg and Kr\"uppel's asymptotic solution, in equation~(9.7) for this eigenfunction, is $e^H$,
+matching the product formula their Proposition~9.3 supplies for it, as noted after
+Theorem~\ref{thm:H}. Proposition~\ref{prop:Hfourier}'s Fourier series for $H$ is the new, closed
+form; Proposition~\ref{prop:Hcert}'s certificate is what neither their product formula nor their
+closing remark (that they only \emph{expect} $\varphi$ bounded and bounded away from zero relative
+to $\varphi_0$) settles.
 \end{proof}
 
 \section{Proofs of the main theorems}
@@ -966,10 +986,11 @@ $\limsup/\liminf \ge e^{\operatorname{osc}(H)} \ge 1.0004188$.
 
 \begin{proposition}[Wirsching's actual requirement]
 \label{prop:wirschingreq}
-Write $x_l^+$ for the upper endpoint of Wirsching's own covering interval at level $l$ (playing the
-same role as this paper's $z_l$). Wirsching's own use of Conjecture 3, via
-$\varphi'(x)=\tfrac92\varphi(3x)$ on $(0,\tfrac23)$ and his own calculation, his equation~(7.13),
-that $\lim_l (2/3^{l+1})\varphi_0'(x_l)/\varphi_0(x_l) = 2/3$ uniformly on the class, reduces to
+For $(x_l)\in\widetilde A_\delta$, write $x_l^+ := x_l + 3^{-(l+1)}$ (his equation~(7.14); since
+$x_l\sim l\cdot3^{-l}$, $x_l^+$ is asymptotic to $x_l$ and plays the same role as this paper's
+$z_l$). Wirsching's own use of Conjecture 3, via $\varphi'(x)=\tfrac92\varphi(3x)$ on $(0,\tfrac23)$
+and his own calculation, his equation~(7.13), that $\lim_l (2/3^{l+1})\varphi_0'(x_l)/\varphi_0(x_l)
+= 2/3$ uniformly on the class, reduces to
 \[
 \limsup_l \Lambda_l < \tfrac32, \qquad
 \Lambda_l := \frac{\varphi(3x_l^+)/\varphi_0(3x_l^+)}{\varphi(x_l^+)/\varphi_0(x_l^+)}.
