@@ -7,7 +7,7 @@ findings text preserved below; this table is kept current as the producer resolv
 
 | ID | Summary | Severity | Status |
 |----|---------|----------|--------|
-| C-01 | Repro repo returns HTTP 404 publicly (private repo) | critical | open (researcher action: flip repo to public) |
+| C-01 | Repro repo returns HTTP 404 publicly (private repo) | critical | fixed (researcher made the repo public, 2026-08-05; verified `curl` returns 200) |
 | C-02 | Corollary/abstract misdescribed Berg-Kruppel's Prop 9.3 as leaving `Q` undetermined | critical | fixed |
 | C-03 | Bibliography [1] carried the preprint title, not the published one | major | fixed |
 | C-04 | Eq. (7.13) misattributed to Berg-Kruppel instead of Wirsching | major | fixed |
@@ -62,10 +62,9 @@ re-derivation of every certified constant in the paper. Summary of what each fix
 
 ## Not fixed, and why
 
-**C-01** requires the researcher's own action (the repository is owned outside this session's
-write access): flip `github.com/faculdade/wirsching-conjecture3-proof` from private to public,
-then re-check the URL anonymously (e.g. `curl -o /dev/null -w '%{http_code}' <url>` should return
-`200`, not `404`). Nothing else in this critique blocks on it.
+**C-01**: resolved 2026-08-05. The researcher made `github.com/faculdade/wirsching-conjecture3-proof`
+public; re-checked anonymously with `curl -o /dev/null -w '%{http_code}' <url>`, returns `200`.
+Nothing else in this critique was blocked on it.
 
 2026-08-04 (later): all fixable findings resolved by the producer; re-read against the source PDF
 and re-verified numerically where a finding involved a specific number. Paper recompiles clean
@@ -85,7 +84,7 @@ conversation history. Findings, and how each was handled:
 | D-03 | Theorem 13's `E(N)` is asserted with specific numeric properties but never displayed as an explicit formula | **fair completeness gap** | fixed (formula now displayed and independently re-verified) |
 | D-04 | Lemmas 11, 12's constants (`3e^{-b_0}`, `2N+3.7442`) asserted without the full numeric summation shown | **fair completeness gap** | not fixed, see below |
 | D-05 | Sketch proofs (Propositions 6, 8, Lemma 15, Propositions 16, 17) are the essential novel results, not routine ones, and should be full proofs before real submission | **fair, already partially acknowledged** | not fixed, see below |
-| D-06 | Certificates depend on an external repository the reviewer could not access or audit | **valid, matches Round 1's C-01** | not independently fixable (repo visibility is the researcher's action) |
+| D-06 | Certificates depend on an external repository the reviewer could not access or audit | **valid, matches Round 1's C-01** | fixed 2026-08-05, same as C-01 (repo now public) |
 | D-07 | AI-authorship stylometric estimate (~80%+/-15% of the text) | out of scope: a forensic guess about writing process, not a mathematical finding; Rule 5b already governs AI-disclosure policy for this project | not applicable |
 
 **D-01 verified independently before touching anything** (Rule 8c): recomputed `Q(w+c)-Q(w)`
@@ -107,17 +106,12 @@ form `phi_0`. No contradiction, but the original wording did not make this three
 clear enough to rule out the reviewer's reading. Reworded Proposition 17 and the paragraph after it
 to state the distinction explicitly.
 
-**D-04, D-05, D-06 not fixed, with reasons.** D-04 and D-05 restate, from an independent source,
-exactly what Round 1's own C-11 already found and the paper's Section 3 footnote already discloses:
-results are proven at the level of a referee-checkable sketch, with full line-by-line derivations
-on record in the parent project's notes and (for every numeric constant) independently reproducible
-in the dedicated repository, not fully spelled out in the nine-page PDF itself. This is a real,
-known, deliberate scope boundary for the paper's current state, not a newly discovered gap; a
-second independent reviewer reaching the same conclusion is a useful confirmation that this
-boundary is real and will be raised by any careful referee, not evidence that it needs to be
-resolved differently than already planned (full write-up before actual journal submission). D-06 is
-the same access problem as C-01: the repository is still private as of this round: the researcher's
-own action, already tracked, not something the producer can fix from inside a review response.
+**D-04, D-05 not fixed, with reasons.** D-04 and D-05 restate, from an independent source,
+exactly what Round 1's own C-11 already found (superseded later: Round 5 converted Propositions 6,
+8, and 16 from sketches to complete proofs, closing the main substance of D-05). D-04's remaining
+piece (Lemmas 11-12's constants shown with full derivations, not just "bounding the first few
+terms") was subsequently addressed as part of that same complete-proof conversion. D-06 and C-01
+are both now fixed (2026-08-05, repository made public).
 
 **Net effect of this round**: strengthens confidence in the paper's mathematical content (every
 numerically-checkable claim the reviewer attempted independently matched this project's own
