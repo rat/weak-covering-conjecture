@@ -77,10 +77,10 @@ ratio converges at all. Wirsching considers the strongest possible reading of th
 $c > 0$. It turns out that the following (slightly weaker) conjecture \dots suffices.''
 \end{quote}
 
-He then states, verbatim (\cite{wirsching2003}, immediately after the quoted sentence; his own
-$\delta_5$ is written $\delta$ throughout this paper, since no other $\delta$-indexed class of his
-appears here; his constant $c$, kept here for a verbatim quotation, is unrelated to
-$c:=\log3$ introduced in Section~\ref{sec:periodic}):
+He then states (\cite{wirsching2003}, immediately after the quoted sentence, with notation
+normalized: his own $\delta_5$ is written $\delta$ throughout this paper, since no other
+$\delta$-indexed class of his appears here, and his constant $c$, kept below for fidelity to his
+statement, is unrelated to $c:=\log3$ introduced in Section~\ref{sec:periodic}):
 
 \begin{conjecture}
 There are positive real constants $c$ and $\delta$ such that
@@ -772,8 +772,15 @@ it is of exact order $B_0$,
 \eta_0 := \frac1c+\sup|H''|+\sup_{[w_0-1,w_0+1]}|\Delta''|,
 \end{equation}
 the upper bound because $-1/c+\sup|H''|+\sup|\Delta''|<0$. Since $w_0 = c(B_0+a)$, $B_0\ge5$ forces
-$w_0\ge5.3492$ and so $w\ge4.3492$ on the interval, where Theorem~\ref{thm:H}'s bound on
-$\Delta^{(j)}$ gives $|\Delta'|,|\Delta''| \le 10^{-60}$. With \eqref{eq:Hbounds} this makes
+$w_0\ge5.3492$ and so $w\ge4.3492$ on the interval, where $|\Delta'|,|\Delta''|\le10^{-60}$: with
+$b:=2e^w\ge2e^{4.3492}>154$ and $x_k:=3^kb$, differentiating $\Delta(w)=-\sum_{k\ge0}\log(1-e^{-x_k})$
+termwise (justified as in the proof of Theorem~\ref{thm:H}) gives $\Delta'(w) =
+-\sum_{k\ge0}x_k/(e^{x_k}-1)$ and, applying $|d/dx[x/(e^x-1)]|\le8xe^{-x}$ for $x\ge1$ (elementary,
+since $e^x-1\ge e^x/2$ there) together with $dx_k/dw=x_k$, $\Delta''(w) = -\sum_{k\ge0}x_k\cdot
+\frac{d}{dx}\Bigl[\frac{x}{e^x-1}\Bigr]_{x=x_k}$, so $|\Delta''(w)|\le\sum_{k\ge0}8x_k^2e^{-x_k}$;
+bounding both sums by their dominant $k=0$ term via $x_k-b\ge2kb$ (from $3^k-1\ge2k$) gives
+$|\Delta'(w)|\le4be^{-b}$ and $|\Delta''(w)|\le16b^2e^{-b}$, both well under $10^{-60}$ at
+$b>154$. With \eqref{eq:Hbounds} this makes
 $\varepsilon_1 \le 0.0011978$ and $\eta_0 \le 0.9170912$, whence $2e\eta_0 = 4.9859\ldots \le 5 \le
 B_0$, that is $\eta_0 \le B_0/(2e)$, and \eqref{eq:g2scale} improves to $g_\tau''\ge B_0/(2e)>0$
 throughout the interval.
@@ -890,8 +897,8 @@ values
 \alpha = -\frac12-\frac{\log(2/3)}{\log3} = \frac12-\frac{\log2}{\log3} = a, \qquad
 \beta = \frac{1}{2\log3} = \frac{1}{2c},
 \]
-where the $a$ on the right is this paper's linear coefficient of $Q$; their $a$ is the dilation
-factor $3$, and the collision of letters is unavoidable. Hence, writing $y := \log p$,
+where the $a$ on the right is this paper's linear coefficient of $Q$; their $a$, the dilation
+factor $3$, is a different quantity and is not written again below. Hence, writing $y := \log p$,
 \[
 f(p) = \alpha y-\beta y^2 = a y - \frac{y^2}{2c} = Q(y),
 \]
@@ -901,8 +908,9 @@ chain rule:
 -p\,f'(p) = -Q'(y) = B_{\mathrm{sm}}(y) = 2\beta y-\alpha, \qquad
 p^2f''(p) = Q''(y)-Q'(y) = B_{\mathrm{sm}}(y)-\frac1c = 2\beta y-2\beta-\alpha .
 \]
-Berg and Kr\"uppel's own displayed formula for $f''(p)$, in the proof of their Proposition~9.1
-(the unnumbered display right after ``In view of''), reads $p^2f''(p)=2\beta\ln p+2\beta-\alpha$,
+Berg and Kr\"uppel's own displayed formula for $f''(p)$, on p.~179 of \cite{bergkruppel1998}, in
+the proof of their Proposition~9.1 (the unnumbered display right after ``In view of''), reads
+$p^2f''(p)=2\beta\ln p+2\beta-\alpha$,
 with $+2\beta$ where direct differentiation of $f$ gives $-2\beta$: $f''(p) =
 \tfrac{1}{p^2}\bigl(2\beta\ln p - 2\beta - \alpha\bigr)$, since $f'(p)=\tfrac1p(\alpha-2\beta\ln p)$
 differentiates to $-\tfrac{2\beta}{p^2}-\tfrac{\alpha-2\beta\ln p}{p^2}$. Their Proposition~9.1 is

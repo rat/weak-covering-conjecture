@@ -297,3 +297,31 @@ rather than assumed.
 Paper recompiles clean (pdflatex, exit 0, zero warnings, same cosmetic overfull-hbox count),
 16 pages (up from 15, reflecting the displayed-equation fix and the exhibited Berg-Kruppel
 formulas).
+
+## Round 6: fourth blind loop iteration (2026-08-05), Codex (Opus hit a session limit again)
+
+Codex, PDF-only, max effort, on the Round 5 PDF. Verdict: not recommended for acceptance as
+submitted, but again found no sign/algebra contradiction anywhere it checked (the recurrence,
+Mellin residues, saddlepoint integral, envelope decomposition, and final phase arguments all
+checked out). Most findings restated Round 3-5's already-settled "certification lives in the
+repository, per Rule 12" scope decision and were not reopened (Rule 8d: don't re-litigate settled
+material without new evidence). Two findings were new and real, independently verified before
+fixing:
+
+| ID | Summary | Verdict | Status |
+|----|---------|---------|--------|
+| K1 | Lemma 15 asserts `\|Delta'\|,\|Delta''\|<=1e-60` "from Theorem 4's bound on Delta^(j)", but Theorem 4 only states an `O_j(...)` asymptotic notation, which supplies no explicit constant or threshold; the numeric claim does not actually follow from what's cited | **confirmed, real** | fixed: derived explicit bounds directly from Delta's own definition (termwise differentiation, an elementary bound on `d/dx[x/(e^x-1)]`, geometric-tail domination), independently verified numerically at several points; **caught and fixed a sign error of my own in the first draft of this derivation before it reached the paper** (`Delta'(w)` is a sum of negative terms, not positive; verified against a direct numerical derivative before finalizing) |
+| K2 | The introduction calls Wirsching's Conjecture 3 quotation "verbatim" while admitting a notation substitution (`delta_5` to `delta`) two lines later, which is a contradiction in terms | **confirmed, real (minor)** | fixed: reworded to "with notation normalized", not "verbatim" |
+| K3 | (raised again) "the collision of letters is unavoidable" (Proposition 17) is false; renaming is straightforward | **confirmed, real (minor), already flagged in Round 5 as a suggestion, not fixed then** | fixed this round: reworded to state the two objects are different and BK's `a` is simply not reused, without the false "unavoidable" claim (a full rename of this paper's own long-standing `a` was judged out of proportion to the finding; the false claim itself is what's fixed) |
+| K4 | Proposition 17's Berg-Kruppel sign-discrepancy claim ("their own displayed formula... reads...") lacks a page number, a "serious bibliographic claim" per Codex | **confirmed, real (minor)**, already page-located in this project's own working notes | fixed: added "p. 179 of [2]", confirmed directly against the primary-source PDF's own printed page number (not the PDF-extraction page index, which differs) |
+| K-repo | Restates that "certified" bounds, Proposition 8's grid computation, and Theorem 13's unused monotonicity claim are not literally displayed in the 16-page PDF | **same finding as Round 3-5's repeated "repository vs. inline" scope question** | not reopened: Rule 12's division of labor (paper states the method and the provable analytic bounds; the reproducibility repository carries the actual interval-arithmetic computation) was already explicitly decided in Round 5's table; no new argument or evidence given this round to revisit it |
+| K-nonconst | Suggests proving `H` non-constant via `zeta(1+it)!=0` instead of numerically | **same suggestion as Round 5's J-H1line** | not applied, same reasoning: a genuine strengthening for a future revision, not an error, out of this round's scope |
+
+**Opus's round-6 pass failed again on a session limit** (this time partway through independently
+re-deriving Proposition 8's numbers, which it had already confirmed match before stopping). Its
+partial results (H(0), H(log 3/2), their difference, and `e^{H(0)}` all independently reproduced
+correctly) are consistent with, not contradictory to, everything fixed so far. Full re-run pending
+if the researcher wants another blind pass; per the researcher's standing instruction the loop
+continues until a round returns with no further confirmed findings from either reviewer.
+
+Paper recompiles clean, 16 pages.
