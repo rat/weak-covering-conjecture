@@ -262,3 +262,38 @@ anything else). Each finding independently checked before any change.
 reconcile from that side this round. Re-run pending.
 
 Paper recompiles clean (pdflatex, exit 0, zero warnings) after these fixes, still 15 pages.
+
+## Round 5, continued: Opus's retry, deep and dense, plus fixes (2026-08-05)
+
+Opus's re-run (previous attempt hit a session limit reading the PDF) completed a full pass: read
+all pages, re-derived essentially every displayed identity independently, and ran an end-to-end
+numerical reconstruction of `phi` by Fourier inversion, matching the paper's own chain to four
+significant digits at several `l`. Verdict: major revision, not reject; explicitly found the
+mathematics sound and no false statement or invalid inference anywhere it checked. Findings below,
+each independently verified before any fix (Rule 8c); one (J1) was checked and found to be a false
+positive, corrected on that basis rather than fixed.
+
+| ID | Summary | Verdict | Status |
+|----|---------|---------|--------|
+| J2 | An `\hbox` overfull by 99.8pt in Proposition 18's proof visibly truncates text mid-formula on the rendered page (`\varphi(x` then nothing, should continue `_l^+) < 1`) | **confirmed, real, serious** (verified by rendering the page at 200dpi and reading it directly: text is genuinely lost, not just a LaTeX box-width complaint) | fixed: the offending inline formula moved to a displayed equation |
+| J-alpha/A | Proposition 8's proof (added in Round 3's H2 fix) reuses `alpha` and `A` for local Fourier-tail-majorant constants that collide with Section 2's `alpha` (`=1/2-log2/c`) and Proposition 6's `A` (`=pi^2/12-gammaE^2/2-gamma1`) | **confirmed, real** (this project's own Round 3 fix introduced it) | fixed: renamed to `alpha_H`, `A_H`, `C_H`; also added the two-line origin of the majorant (the `Gamma` sector bound and an Euler-Maclaurin `zeta` bound), both independently re-verified numerically at several points, matching the derivation already used in the reproducibility repo's certification script |
+| J1 | Berg-Kruppel's `gamma`, `delta_BK`, `epsilon` match is asserted in the paper ("reproduces both exactly") but their own formulas are never shown, so a reader cannot check the claim | **checked and found TRUE, but unexhibited** (verified directly against the primary source's Proposition 9.1, read again from the PDF: `delta=1/2+alpha-2*beta*log(2*beta)`, `gamma=-2*beta-delta-1/2`, `epsilon=1/2+alpha-beta*log(2*beta)`; substituting `alpha=a`, `beta=1/(2c)` and simplifying reproduces this paper's `gamma`, `delta_BK`, `epsilon` to 40 digits, exactly) | fixed: printed Berg-Kruppel's own formulas explicitly and showed the substitution, so the match is now checkable from the paper alone, not just asserted |
+| J-rate | Proposition 18's proof claims `log(phi(t))-log(phi_0(t)) = H(w_0(tau)) + O(1/tau)` "by Proposition 16" — but Proposition 16 alone only reaches `phi_sp`, not `phi_0`, and the actual combined rate (via Theorem 13's `O(N^{-1/2})`) is slower than `O(1/tau)`, contradicting Section 8's own "rate not established beyond `o(1)`" | **confirmed, real** | fixed: corrected to the honest `o(1)` rate, chained through Theorem 13 + Proposition 16 + Proposition 17 explicitly; `Lambda_l -> 1` still follows |
+| J-cite | Theorem 1's proof cites Theorem 13 and Proposition 16 but not Proposition 17/Section 6, which is actually needed to reach `phi_0` (not just `P(tau)`) | **confirmed, real** | fixed: added the missing citation |
+| J-lem15 | `w_0(tau+c)-w_0(tau) = c+O(1/tau)` is used three times (introduction, Theorem 2, Proposition 18) attributed to Lemma 15, but never stated or derived there | **confirmed, real** | fixed: added as a clause to Lemma 15's statement, with a two-line proof (`dw_0/dtau = 1+O(1/B_0)` along the saddle curve, integrated over one period); independently verified numerically (`w_0(tau+c)-w_0(tau) -> c` as `tau -> infinity`, matching rate) |
+| J-corcite | Corollary 3's proof reached only a statement about `phi_sp`, not `phi` | **already fixed in the immediately preceding session pass**; re-confirmed still fixed | no action |
+| J-cletter | The letter `c` is reused for Wirsching's own constant in the verbatim-quoted Conjecture 3 display, colliding with `c := log 3`; the abstract uses `c` for the unrestricted-asymptotic constant where Theorem 2 uses `kappa` | **confirmed, real** | fixed: added a disambiguating parenthetical next to the verbatim quote (kept Wirsching's own letter, since changing it would misquote him); aligned the abstract to `kappa`, matching Theorem 2 |
+| J-parse | "the exact decomposition of `log phi`'s log-Laplace transform" parses as the log-Laplace transform of `log phi`, not of `phi` | **confirmed, real (minor)** | fixed |
+| J-below | "the third of the three coincidences asserted below" should say "above" (the coincidences are listed in the proposition statement, which precedes the proof) | **confirmed, real (minor)** | fixed |
+| J-M3 | "`M_3 := sup|kappa_3| <= 2+2^{5/2} = 7.657`" states a false equality (`2+2^{5/2}=7.6568...`, not `7.657`) where the intent is an upper bound | **confirmed, real (minor)** | fixed: `=` changed to `<` |
+| J-osc, J-H1line | Suggestions that `osc(H)`'s certificate could use 2 Fourier modes instead of a `2^20` grid, and that non-constancy of `H` follows in one line from `zeta(1+it) != 0` (Hadamard-de la Vallee Poussin), making Theorem 2 computation-free | **good suggestions, not errors** | not applied: both are real strengthenings worth considering for a future revision, but the current grid-based and interval-arithmetic certificates are correct as they stand and this round's scope (per the researcher's standing instruction) is eliminating errors, not restructuring already-correct arguments; noted here so they aren't lost |
+| J-repo | The reproducibility repository resolves (HTTP 200); Opus did not inspect contents | informational | no action needed (already tracked as researcher's own action for full public visibility) |
+
+**Overfull-hbox sweep**: checked the remaining 6 pre-existing `Overfull \hbox` notices (all under
+63pt) by rendering their pages at 200dpi and reading them directly; none drops visible text, unlike
+the 99.8pt one that did. Left as cosmetic, matching Round 3's original assessment, now confirmed
+rather than assumed.
+
+Paper recompiles clean (pdflatex, exit 0, zero warnings, same cosmetic overfull-hbox count),
+16 pages (up from 15, reflecting the displayed-equation fix and the exhibited Berg-Kruppel
+formulas).

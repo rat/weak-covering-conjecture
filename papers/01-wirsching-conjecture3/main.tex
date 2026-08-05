@@ -45,7 +45,7 @@ years before Wirsching's conjecture; they did not ask whether it is constant. We
 as a Fourier series with closed-form coefficients in $\Gamma$ and $\zeta$, and certify rigorously
 that it is not. Wirsching's own comparison class fixes a single phase of $H$; there, Conjecture 3
 holds, with an explicit limit. Away from that class the phase sweeps a full period, so the
-stronger, unrestricted asymptotic $\varphi(t) \sim c\,\varphi_0(t)$ as $t \to 0^+$ fails. Wirsching
+stronger, unrestricted asymptotic $\varphi(t) \sim \kappa\,\varphi_0(t)$ as $t \to 0^+$ fails. Wirsching
 needs less than the literal statement of Conjecture 3; we check directly that his actual
 requirement holds with a wide margin.
 \end{abstract}
@@ -79,7 +79,8 @@ $c > 0$. It turns out that the following (slightly weaker) conjecture \dots suff
 
 He then states, verbatim (\cite{wirsching2003}, immediately after the quoted sentence; his own
 $\delta_5$ is written $\delta$ throughout this paper, since no other $\delta$-indexed class of his
-appears here):
+appears here; his constant $c$, kept here for a verbatim quotation, is unrelated to
+$c:=\log3$ introduced in Section~\ref{sec:periodic}):
 
 \begin{conjecture}
 There are positive real constants $c$ and $\delta$ such that
@@ -117,7 +118,7 @@ with amplitude bounded below by a positive, certified constant.
 \end{theorem}
 
 The two theorems have a single common source. Write $t = e^{-\tau}$ and let $H(w)$ be the
-$\log 3$-periodic function appearing in the exact decomposition of $\log\varphi$'s log-Laplace
+$\log 3$-periodic function appearing in the exact decomposition of $\varphi$'s log-Laplace
 transform (Theorem~\ref{thm:H}); the saddlepoint bridge of Sections~\ref{sec:formulaA}
 and~\ref{sec:envelope} shows $\log\varphi(t)-\log\varphi_0(t) = H(w_0(\tau))+o(1)$, where the saddle
 location $w_0(\tau)$ advances by $c$ per period of $\tau$, up to a vanishing correction:
@@ -457,11 +458,13 @@ H(0) = -0.62713093305152597830\ldots, \qquad H\bigl(\log\tfrac32\bigr) = -0.6267
 \]
 whose difference is $-0.00037719028094398583\ldots$, inside the stated interval. Independently, the
 Fourier series of Proposition~\ref{prop:Hfourier} gives the same difference in Arb ball arithmetic:
-the $m=0$ term cancels, four modes suffice, and the majorant $|\hat H(m)| \le A q^m
-m^{-1/2}(\log(\alpha m+1)+C)$, with $\alpha = 2\pi/c$, $q = e^{-\pi\alpha/2}$, $A =
-c^{-1}\sqrt{3\pi/\alpha}$ and $C = \tfrac32+\alpha^{-1}+\tfrac12\sqrt{1+\alpha^{-2}}$, gives
-$\sum_{m>4}|\hat H(m)| \le 9.05\times10^{-20}$; the discarded modes therefore move the difference by
-less than $3.7\times10^{-19}$.
+the $m=0$ term cancels, four modes suffice, and the majorant $|\hat H(m)| \le A_H q^m
+m^{-1/2}(\log(\alpha_H m+1)+C_H)$, with $\alpha_H = 2\pi/c$, $q = e^{-\pi\alpha_H/2}$, $A_H =
+c^{-1}\sqrt{3\pi/\alpha_H}$ and $C_H = \tfrac32+\alpha_H^{-1}+\tfrac12\sqrt{1+\alpha_H^{-2}}$
+(from $|\Gamma(-i\omega_m)|=\sqrt{\pi/(\omega_m\sinh\pi\omega_m)} \le \sqrt{3\pi/\omega_m}\,e^{-\pi\omega_m/2}$
+for $\omega_m\ge\alpha_H$, and the Euler-Maclaurin bound $|\zeta(1-i\omega_m)|\le\log(\omega_m+1)+C_H$
+for $\omega_m\ge\alpha_H$), gives $\sum_{m>4}|\hat H(m)| \le 9.05\times10^{-20}$; the discarded modes
+therefore move the difference by less than $3.7\times10^{-19}$.
 
 For the oscillation, let $w_i = ic/N$, $0\le i<N$, with $N = 2^{20}$, so $h := c/N =
 1.04772\times10^{-6}$. Every real $w$ lies within $h/2$ of some $w_i$ modulo $c$, so \eqref{eq:Hbounds}
@@ -519,7 +522,7 @@ For $w = b(1+iu)$, $b>0$, $|u|\le 1$, with $e(r) = r^2/\sinh^2 r$ and $f(r) = r^
 |\kappa_2(w)| \le 1 + 2e(b/2), \qquad |\kappa_3(w)| \le 2 + 2\cdot 2^{3/2} f(b/2).
 \]
 Both bounds are finite over the whole sector $|\operatorname{Im}w|\le\operatorname{Re}w$; $M_2 :=
-\sup |\kappa_2| \le 3$, $M_3 := \sup|\kappa_3| \le 2+2^{5/2} = 7.657$. In addition, for $|w|\le2$,
+\sup |\kappa_2| \le 3$, $M_3 := \sup|\kappa_3| \le 2+2^{5/2} < 7.657$. In addition, for $|w|\le2$,
 $|\kappa_2(w)| \le 0.114|w|^2$ and $|\kappa_3(w)|\le 0.0119|w|^4$.
 \end{lemma}
 
@@ -735,6 +738,7 @@ Once $B_0\ge5$ (equivalently $\tau\ge3.73978\ldots$),
 |w^*-w_0| \le \frac{0.00652}{B_0}, \qquad
 0 \le g_\tau(w_0)-g_\tau(w^*) \le \frac{5.77\times10^{-5}}{B_0}.
 \]
+Moreover $w_0(\tau+c)-w_0(\tau) = c+O(1/\tau)$ as $\tau\to\infty$.
 \end{lemma}
 
 \begin{proof}
@@ -784,6 +788,11 @@ Finally $g_\tau(w_0)-g_\tau(w^*)\ge0$ because $w^*$ is the global minimizer, and
 about $w^*$, where $g_\tau'(w^*) = 0$, bounds it by $\tfrac12\bigl(\sup_{[w_0-1,w_0+1]}
 g_\tau''\bigr)(w_0-w^*)^2 \le \tfrac12 B_0e\,h_0^2 = 2e^3\varepsilon_1^2/B_0 \le
 5.77\times10^{-5}/B_0$.
+
+For the phase drift, $w_0=c(B_0+a)$ and $\tau=w_0-\log B_0$ give $dw_0/d\tau = (1-1/(cB_0))^{-1} =
+1+O(1/B_0)$ along the curve $\tau\mapsto w_0(\tau)$; since $B_0\to\infty$ as $\tau\to\infty$ (via
+$B_0\sim\tau/c$), integrating over one period gives $w_0(\tau+c)-w_0(\tau) =
+\int_\tau^{\tau+c}(1+O(1/B_0(u)))\,du = c+O(1/\tau)$.
 \end{proof}
 
 \begin{proposition}[Envelope estimate]
@@ -886,7 +895,8 @@ factor $3$, and the collision of letters is unavoidable. Hence, writing $y := \l
 \[
 f(p) = \alpha y-\beta y^2 = a y - \frac{y^2}{2c} = Q(y),
 \]
-the third of the three coincidences asserted below. The other two are the chain rule:
+the third of the three coincidences asserted in the proposition above. The other two are the
+chain rule:
 \[
 -p\,f'(p) = -Q'(y) = B_{\mathrm{sm}}(y) = 2\beta y-\alpha, \qquad
 p^2f''(p) = Q''(y)-Q'(y) = B_{\mathrm{sm}}(y)-\frac1c = 2\beta y-2\beta-\alpha .
@@ -923,18 +933,28 @@ P(\tau) = -\frac{(\tau+\log\tau)^2}{2c} + \Bigl(1+\tfrac1c-\tfrac{r}{c}\Bigr)\ta
 C_P = -\frac{r^2}{2c}+r+ca+\frac{ca^2}{2}-\frac{\log2\pi}{2}+\frac{\log c}{2} =
 -0.9576743183133982760669122497855855\ldots.
 \]
-Matching the $\tau$ and $\log\tau$ coefficients against Berg and Kr\"uppel's $\gamma$,
-$\delta_{\mathrm{BK}}$ (their equations following~(9.6)) reproduces both exactly:
+Berg and Kr\"uppel's own equations following~(9.6) give, in their notation,
+\[
+\delta_{\mathrm{BK}} = \tfrac12+\alpha-2\beta\log(2\beta), \qquad
+\gamma = -2\beta-\delta_{\mathrm{BK}}-\tfrac12, \qquad
+\varepsilon = \tfrac12+\alpha-\beta\log(2\beta),
+\]
+with $\alpha=a$, $\beta=1/(2c)$ as identified above. Substituting and simplifying (using
+$r=-ca-\log c$) gives, matching the $\tau$, $\log\tau$, and constant coefficients of $P$
+term for term,
 \[
 \gamma = -\Bigl(1+\tfrac1c-\tfrac rc\Bigr) = -1.8649154949\ldots, \qquad
 \delta_{\mathrm{BK}} = \tfrac12-\tfrac rc = 0.4546762683\ldots,
 \]
-and, solving $C_P=\varepsilon\log(2\beta)-\tfrac12\log(2\pi)$ for $\varepsilon$,
 \[
-\varepsilon = a+\tfrac12+\frac{\log c}{2c} = 0.4118732574\ldots, \qquad
-C_P = \varepsilon\log(2\beta) - \tfrac12\log(2\pi) = \log\frac{(2\beta)^\varepsilon}{\sqrt{2\pi}},
+\varepsilon = a+\tfrac12+\frac{\log c}{2c} = 0.4118732574\ldots,
 \]
-so $P(\tau) - \log\varphi_{0,\mathrm{bare}}(e^{-\tau}) \to C_P$ and, using the prefactor-included
+so that, in particular, $C_P=\varepsilon\log(2\beta)-\tfrac12\log(2\pi)$ holds identically (verified
+by substituting $\varepsilon$'s expression directly into $C_P$'s), giving
+\[
+C_P = \varepsilon\log(2\beta) - \tfrac12\log(2\pi) = \log\frac{(2\beta)^\varepsilon}{\sqrt{2\pi}}.
+\]
+Hence $P(\tau) - \log\varphi_{0,\mathrm{bare}}(e^{-\tau}) \to C_P$ and, using the prefactor-included
 normalization, $P(\tau) - \log\varphi_0(e^{-\tau}) \to 0$ with rate $O(\tau^{-1}\log^2\tau)$: this
 is precisely Berg and Kr\"uppel's own Proposition~9.1 (asymptotic, by construction, not exact)
 applied to the identity of Proposition~\ref{prop:bkidentity}, not an independent asymptotic claim
@@ -963,8 +983,9 @@ $\lambda_l := 3^lx_l/l \to 1$ uniformly at rate $O(\delta/\sqrt l)$ on the class
 \lambda_l\, l\, 3^{-l}$, $\tau_l = -\log z_l = lc - \log l - \log\lambda_l$, the saddle location
 satisfies $w_0(\tau_l) = lc - \log\lambda_l + O(1/l)$ by Lemma~\ref{lem:saddles}'s defining
 equation, so $w_0(\tau_l) \bmod c \to 0$ uniformly on the class, at rate $O(1/\sqrt l)$. By
-Theorem~\ref{thm:formulaA}, Proposition~\ref{prop:envelope}, and continuity of $H$ (indeed
-Lipschitz, by \eqref{eq:Hbounds}),
+Theorem~\ref{thm:formulaA}, Proposition~\ref{prop:envelope}, Proposition~\ref{prop:bkidentity}
+(which gives $P(\tau)-\log\varphi_0(e^{-\tau})\to0$, Section~\ref{sec:bk}), and continuity of $H$
+(indeed Lipschitz, by \eqref{eq:Hbounds}),
 \[
 \log\varphi(z_l) - \log\varphi_0(z_l) = H(w_0(\tau_l)) + o(1) \to H(0)
 \]
@@ -999,9 +1020,12 @@ This holds with a wide margin: $\Lambda_l \to 1$.
 \end{proposition}
 
 \begin{proof}
-First, the reduction itself. Wirsching's actual requirement (his inequality~(7.5)) is
-$\limsup_l (2/3^{l+1})\varphi'(x_l^+)/\varphi(x_l^+) < 1$; by $\varphi'=\tfrac92\varphi(3\cdot)$
-this is $\limsup_l (9/3^{l+1})\varphi(3x_l^+)/\varphi(x_l^+) < 1$. By definition of $\Lambda_l$,
+First, the reduction itself. Wirsching's actual requirement is his inequality~(7.5),
+\[
+\limsup_l \frac{2}{3^{l+1}}\cdot\frac{\varphi'(x_l^+)}{\varphi(x_l^+)} < 1;
+\]
+by $\varphi'=\tfrac92\varphi(3\cdot)$ this is $\limsup_l (9/3^{l+1})\varphi(3x_l^+)/\varphi(x_l^+) <
+1$. By definition of $\Lambda_l$,
 $\varphi(3x_l^+)/\varphi(x_l^+) = \Lambda_l\cdot\varphi_0(3x_l^+)/\varphi_0(x_l^+)$, and Berg and
 Kr\"uppel's $\varphi_0$ is an asymptotic solution of the same truncated equation (their
 equation~(7.12) in Wirsching's notation: $\varphi_0'(t)/\varphi_0(3t)\to9/2$ as $t\to0$), so
@@ -1018,10 +1042,12 @@ $\limsup_l\Lambda_l<3/2$.
 
 For the value of $\Lambda_l$: the phase shift under $t\mapsto3t$, i.e. $\tau\mapsto\tau-c$, is
 $w_0(\tau-c)-w_0(\tau)+c = O(1/\tau)$ by Lemma~\ref{lem:saddles}'s defining equation, independently
-of the phase of $\tau$. By Proposition~\ref{prop:envelope}, $\log\varphi(t)-\log\varphi_0(t) =
-H(w_0(\tau)) + O(1/\tau)$ uniformly in phase, so
+of the phase of $\tau$. By Theorem~\ref{thm:formulaA}, Proposition~\ref{prop:envelope}, and
+Proposition~\ref{prop:bkidentity} together (the same chain used in the proof of
+Theorem~\ref{thm:conj3}), $\log\varphi(t)-\log\varphi_0(t) = H(w_0(\tau)) + o(1)$ uniformly in
+phase, so
 \[
-\log\Lambda_l = H(w_0(\tau_l-c)) - H(w_0(\tau_l)) + O(1/\tau_l) = O(1/\tau_l) \to 0,
+\log\Lambda_l = H(w_0(\tau_l-c)) - H(w_0(\tau_l)) + o(1) = O(1/\tau_l) + o(1) \to 0,
 \]
 using that $H$ is Lipschitz (\eqref{eq:Hbounds}) and the phase shift above is $O(1/\tau_l)$; hence
 $\Lambda_l \to 1$, well inside $\limsup \Lambda_l < 3/2$.
