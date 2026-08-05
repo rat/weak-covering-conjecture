@@ -171,3 +171,36 @@ Paper recompiles clean (pdflatex, zero warnings, including the previously-known 
 **Next step per the researcher's explicit instruction**: launch a fresh PDF-only blind critique round
 (new Codex + new Opus, same protocol) against the now-recompiled PDF, and repeat until a round returns
 with no further real findings from either reviewer.
+
+## Round 4: second blind loop iteration (2026-08-05), fresh Codex and fresh Opus on the Round-3 PDF
+
+Both reviewers converged on the same top-severity finding, independently: a wrong Mellin-transform
+multiplier in Proposition 6's proof sketch, plus a related complaint (from both) that Propositions 6,
+8, and 16 are "Sketch"-only for load-bearing results, backed by a private/404 repository. Codex's
+verdict: reject/major-revision, same as Round 3. Findings, each independently verified before fixing:
+
+| ID | Summary | Verdict | Status |
+|----|---------|---------|--------|
+| H1 | Mellin multiplier in Prop 6's proof, `2^z\sum_j 3^{-jz}=2^z/(3^z-1)`, is wrong (diverges on its own stated strip); correct value `2^{-z}\sum_j 3^{jz}=-(3/2)^z/(3^z-1)` | **confirmed, real** (independently verified via direct numerical summation, matches to 40 digits) | fixed (see below) |
+| H2 | Propositions 6, 8, 16 proved only as "Sketch"; both reviewers rank this the top concern | **confirmed, real** | in progress, dispatched to a fresh Opus agent (full context, repo access) to convert to complete proofs |
+| H3 | Introduction: "Wirsching's comparison class fixes tau's phase modulo log 3" is false; only the compensated `w_0(tau) mod c` is fixed, not tau itself | **confirmed, real** | fixed |
+| H4 | Theorem 2's "with period log 3" overstates exact periodicity; the paper's own Prop 18 only gives an `O(1/tau)`-vanishing phase drift | **confirmed, real** (also independently raised by Round-3's Opus as M8) | fixed |
+| H5 | Corollary 3 calls `H` "the periodic factor," but Remark 5 gives the product for `exp(H)`, not `H` | **confirmed, real** | fixed |
+| H6 | Circular forward reference: Section 2 cites Lemma 15 for `t(s)`'s monotonicity, and Lemma 15's proof assumes the same fact | **confirmed, real** | fixed (proved directly in Section 2) |
+| H7 | Lemma 9 cites Lazarevic's inequality for `f`'s monotonicity; that inequality gives `f<1`, not monotonicity | **confirmed, real** | fixed (`(\log f)'(r)<0`, verified numerically) |
+| H8 | Proposition 18's stated reduction (Wirsching's actual requirement to `limsup Lambda_l<3/2`) is asserted, not derived | **confirmed, real** | fixed: re-derived from Wirsching 2003's own eqs. (7.5)-(7.14), read directly from the primary source (not paraphrased) |
+| H9 | Conjecture 3 and Berg-Kruppel's `gamma`, `delta_BK`, `epsilon` are never displayed, though Theorem 1 depends on them | **confirmed, real** | fixed: Conjecture 3 quoted verbatim from the primary source (unnumbered display, avoids double-numbering against this paper's own theorem counter); the three constants printed and verified numerically |
+| H10 | Erdos-Richmond naming attribution lacks a page number; the `+/-2*beta` Berg-Kruppel discrepancy claim (from an earlier round) lacks a precise pointer | fair completeness gap | fixed: page 448 added (already primary-source-verified in this project's own notes/H-006.md); the `f''(p)` discrepancy re-verified directly against a page-image render of the primary source (not OCR, which garbles this specific page) and pinned to "the unnumbered display right after 'In view of' in the proof of their Proposition 9.1" |
+
+**H1 fix note**: only the wrong multiplier was removed from the displayed proof text as an
+immediate stopgap; a full corrected re-derivation of Prop 6's proof (showing the fixed multiplier
+actually reaches the stated, already-independently-confirmed-correct Fourier coefficients) is part
+of the H2 dispatch, not yet landed as of this table update.
+
+**Self-correction (Rule 8c)**: this round's Opus referee also re-confirmed that footnote 1 (the
+"Sketch" convention footnote) is real content once rendered, closing out Round 3's G5 finding
+properly; no new footnote-rendering issue found this round.
+
+Not yet independently re-verified from Round 2's report (Opus, same phase as Round 3): items D-04
+through D-06 remain the same known, disclosed scope boundary as before (external repo access is the
+researcher's own pending action).
