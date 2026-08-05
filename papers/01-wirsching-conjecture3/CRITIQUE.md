@@ -125,3 +125,49 @@ numbers, including `H(0)`, `e^{H(0)}`, and the certified difference), catches on
 bug this project's own two-producer-plus-critic process missed, and reconfirms (rather than
 newly discovers) that the paper is not yet at full journal-submission completeness -- a status this
 project has stated consistently since Round 1, not a downgrade.
+
+## Round 3: PDF-only blind critique loop, Codex and Opus at max effort (2026-08-04/05)
+
+Per the researcher's explicit instruction, both reviewers were given only the compiled PDF (no
+repository access, no framing, no prior context) and asked to (a) understand the paper on its own
+terms, (b) hunt adversarially for mathematical errors by recomputing rather than trusting displayed
+equations, (c) give a calibrated accept/reject verdict, and (d) separately flag LLM-writing tells.
+Codex's verdict as submitted: **Reject**. Findings below, each independently verified (Rule 8c)
+before any fix.
+
+| ID | Summary | Verdict | Status |
+|----|---------|---------|--------|
+| F1 | `\hat H(0)`'s formula used `gamma_E/2` instead of `gamma_E^2/2` | **already fixed** (predates this round; re-confirmed correct as printed) | no action |
+| F3 | Eq. (5)'s `e_1(N)` used `V_up` in the denominator; proof text's own justification needs `V_lo` | **confirmed, real** | fixed |
+| F4 | Proposition 8's proof sketch: `g(b)=-b+log S(b)` is a factor-of-two error; correct identity is `g(b)=-b/2+log S(b/2)` | **confirmed, real** | fixed |
+| F5 | Claimed digit-level corruption of `C_P` | **false positive** (re-verified via `pdftotext` against the current PDF) | no action |
+| G1 | Lemma 12's constant `2N+3.7442` does not follow from Lemma 9's own bound; the two dominant terms alone already exceed `2N` by ~10.3 | **confirmed, real** (independently re-derived by hand before delegating the fix) | fixed: correct constant is `2N+10.559`, rigorously re-derived with an explicit tail bound |
+| G2 | Theorem 13's proof states `\|C(y)\|<=B\|y\|^3 e^{B theta^3}` with no Gaussian factor, then directly integrates against `e^{-Vy^2/2}\|y\|^3`, skipping a step | **confirmed, real gap in exposition** | fixed: the Gaussian factoring is now shown explicitly before integrating |
+| G3 | Lemma 15 claims a global minimizer for every `tau`, but `Phi: R -> (log2,infty)` only covers `tau>log2`; also claims `g_tau''` is bounded above/below by a `tau`-independent constant, which is false (it is of exact order `B_0`) | **confirmed, real** | fixed: domain restricted to `tau>log2` (true saddle) / `tau>tau_0=0.9502...` (smooth saddle), and the `O(1/B_0)` bounds re-derived from the correct `B_0`-scaled estimate on `g_tau''`, with explicit constants (`\|w^*-w_0\|<=0.00652/B_0` once `B_0>=5`) |
+| G4 | Proposition 17's proof was a one-line "direct substitution" with none of Berg-Kruppel's actual formulas reproduced, unverifiable from the manuscript alone | **confirmed, real** | fixed: Berg-Kruppel's primary source (`literature/papers`, L-097, `Z. Anal. Anwendungen` 17(1), 1998, Section 9) re-read directly; the proof now reproduces their eq. (9.2)-(9.5) and derives the three coincidences term by term. In the process, found and noted (not acted on further, does not affect their own Prop 9.1) an apparent sign discrepancy in Berg-Kruppel's own displayed formula for `p^2 f''(p)` (`+2beta` where direct differentiation gives `-2beta`) |
+| G5 | Footnote attached to Proposition 6's "Sketch" proof (marker "Sketch$^1$") never rendered anywhere in the compiled PDF, only the marker | **confirmed, real** (this project's own Round 1 note on this exact point, "renders fine on the page," was **wrong**; corrected per Rule 8c) | fixed: root cause was `\footnote` inside an `amsthm` optional argument silently dropping the footnote text; rewritten with `\footnotemark`/`\footnotetext` |
+| G6 | Theorem naming "Formula (A)" is never referenced anywhere else in the paper by that name | **confirmed, real (minor)** | fixed: renamed to "Uniform saddlepoint asymptotic" |
+| G7 | Proof of Theorem 2 asserted "`Phi_0` is a bijection" unqualified, which was true before G3's fix but is now imprecise (`Phi_0` is only a bijection on its restricted domain) | internal consistency fix following G3 | fixed |
+| D-04/D-05-style | Bibliography, citation numbering, and the paper's overall proof architecture: no issues found by Codex after a full adversarial pass | n/a | no action needed |
+
+**Not independently re-verified this round** (Opus's original round-1 blind-critique findings F6, F7,
+F9, F10, F14, F16, catalogued in this session's working notes but not the numbered list above): most
+appear resolved as a byproduct of the G3/G4 rewrites (in particular F11's "`Phi_0` bijection claim
+false in its domain" is exactly G3, and F13's dangling footnote is exactly G5), but this has not been
+checked point by point against the current PDF. Flagged for the next loop iteration.
+
+**Verification method for the harder findings (G1, G3, G4)**: numeric claims re-derived independently
+with `mpmath`/`python3` before accepting any fix (G1's excess-over-`2N` matched to 5 decimal places
+against an independent from-scratch computation; G3's `tau_0` and the `B_0=5` threshold's `tau`-value
+recomputed and matched exactly; Theorem 13's new threshold `N_0=19` and the values `E(18)=1.00171`,
+`E(19)=0.95673` recomputed independently and matched). The mathematical rewrites of Lemma 12, Theorem
+13, Lemma 15, Proposition 16, and Proposition 17 were produced by a fresh Opus agent at max reasoning
+effort with full repository access (not the blind critic), then spot-checked visually page by page
+against the recompiled PDF and numerically re-verified as above before being accepted.
+
+Paper recompiles clean (pdflatex, zero warnings, including the previously-known "benign" footnote
+`dest` warning, which is now also gone since G5 removed its cause) after every fix in this round.
+
+**Next step per the researcher's explicit instruction**: launch a fresh PDF-only blind critique round
+(new Codex + new Opus, same protocol) against the now-recompiled PDF, and repeat until a round returns
+with no further real findings from either reviewer.

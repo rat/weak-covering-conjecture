@@ -252,10 +252,7 @@ A = \frac{\pi^2}{12} - \frac{\gamma_E^2}{2} - \gamma_1,
 where $\gamma_E$ is the Euler--Mascheroni constant and $\gamma_1$ the first Stieltjes constant.
 \end{proposition}
 
-\begin{proof}[Sketch\footnote{Proofs marked ``Sketch'' give the complete argument at the level of
-a referee report; every numerical constant they produce is independently certified in the
-accompanying repository (Section~\ref{sec:code}), and full line-by-line derivations are on record
-in the underlying project's notes, cited there.}]
+\begin{proof}[Sketch\footnotemark]
 The Mellin transform of $g$ on the strip $-1 < \operatorname{Re}\, z < 0$ is $g^*(z) =
 -\Gamma(z)\zeta(1+z)$, obtained by integrating by parts onto $g'(b) = 1/(e^b-1) - 1/b$ and using the
 classical continuation $\int_0^\infty\bigl(\tfrac{1}{e^u-1}-\tfrac1u\bigr)u^{z-1}\,du =
@@ -265,6 +262,10 @@ inversion contour past the triple pole at the origin and past each simple pole a
 (where $3^z=1$) reproduces $Q + \hat H(0)$ and the Fourier modes above, respectively, the factor
 $2^{i\omega_m}$ coming from that same harmonic-sum step.
 \end{proof}
+\footnotetext{Proofs marked ``Sketch'' give the complete argument at the level of a referee
+report; every numerical constant they produce is independently certified in the accompanying
+repository (Section~\ref{sec:code}), and full line-by-line derivations are on record in the
+underlying project's notes, cited there.}
 
 \begin{remark}
 This is an instance of the de Bruijn--Mahler phenomenon: a base-change harmonic sum, Mellin
@@ -297,14 +298,15 @@ $\operatorname{osc}(H) \in [4.18744947692\times10^{-4},\, 4.18756644224\times10^
 \end{proposition}
 
 \begin{proof}[Sketch]
-Write $g(b) = -b + \log S(b)$, $S(b) = \sinh(b)/b = \sum_{n\ge0} b^{2n}/(2n+1)!$. Termwise
-domination of $6^n n! \le (2n+1)!$ gives $0 \le \log S(b) \le b^2/6$ for $b \ge 0$, hence an
-explicit, two-sided enclosure of the tail $\sum_{r>R} g(s/3^r)$ for any $R$ and $s > 0$; combined
-with a finite head evaluated in interval or ball arithmetic (via \eqref{eq:Hexact} directly, or
-independently via ball arithmetic in $\Gamma$ and $\zeta$ applied to Proposition
-\ref{prop:Hfourier}), this certifies the stated interval to arbitrary precision. The full
-oscillation is certified the same way, via the Lipschitz bound in \eqref{eq:Hbounds} and a fine
-grid search over one period.
+Write $g(b) = -b/2 + \log S(b/2)$, $S(x) = \sinh(x)/x = \sum_{n\ge0} x^{2n}/(2n+1)!$ (this is
+$g$'s defining formula rewritten around its removable singularity at $0$, since $e^{-b/2}(e^{b/2}
+- e^{-b/2}) = 1-e^{-b}$). Termwise domination of $6^n n! \le (2n+1)!$ gives $0 \le \log S(x) \le
+x^2/6$ for $x \ge 0$, hence, applied at $x=b/2$, an explicit, two-sided enclosure of the tail
+$\sum_{r>R} g(s/3^r)$ for any $R$ and $s > 0$; combined with a finite head evaluated in interval or
+ball arithmetic (via \eqref{eq:Hexact} directly, or independently via ball arithmetic in $\Gamma$
+and $\zeta$ applied to Proposition \ref{prop:Hfourier}), this certifies the stated interval to
+arbitrary precision. The full oscillation is certified the same way, via the Lipschitz bound in
+\eqref{eq:Hbounds} and a fine grid search over one period.
 \end{proof}
 
 \section{A uniform saddlepoint approximation}
@@ -333,9 +335,10 @@ and from the Bernoulli expansion $g(w)+w/2 = \sum_{k\ge1} B_{2k}w^{2k}/(2k(2k)!)
 so that $\kappa_n(w) = O(w^2)$ as $w \to 0$ for every $n \ge 2$.
 
 Write $s = \rho\cdot 3^N/2$ for the unique $N = \lfloor \log_3(2s)\rfloor \in \Z$ and $\rho \in
-[1,3)$, and $b_j = 2s/3^j$. Then $\{b_j : j \ge 1\} = \{\rho\cdot 3^m : m \le N-1\}$: exactly $N$ of
-these, the smallest being $\rho \ge 1$, are $\ge 1$; the rest form a geometric tail below $1$. This
-single structural fact is the source of every phase-independent constant below.
+[1,3)$, and $b_j = 2s/3^j$. Then $\{b_j : j \ge 1\} = \{\rho\cdot 3^m : m \le N-1\}$; for $N \ge 1$
+(the only range used from here on, corresponding to $s \ge 3/2$), exactly $N$ of these, the
+smallest being $\rho \ge 1$, are $\ge 1$, and the rest form a geometric tail below $1$. This single
+structural fact is the source of every phase-independent constant below.
 
 \begin{lemma}[Boundedness off the real axis]
 \label{lem:kappa}
@@ -414,31 +417,60 @@ h(y) = h(0)+h'(0)y+h''(0)\tfrac{y^2}{2} + \tfrac12\int_0^y (y-u)^2 h'''(u)\,du.
 \]
 Consequently, for $\theta\in(0,1]$,
 \[
-S := \sum_j \sup_{|u|\le \theta}|h_j'''(u)| \le 2N + 3.7442,
+S := \sum_j \sup_{|u|\le \theta}|h_j'''(u)| \le 2N + 10.559,
 \]
-and hence $|\Lambda(y) + Vy^2/2| \le B|y|^3$ for $|y|\le \theta$, with $B := S/6 \le (2N+3.7442)/6$.
+and hence $|\Lambda(y) + Vy^2/2| \le B|y|^3$ for $|y|\le \theta$, with $B := S/6 \le (2N+10.559)/6$.
 \end{lemma}
 
 \begin{proof}
-Write $h_j(u) := g(b_j(1+iu))$ for each $j$, so $h_j'''(u) = \kappa_3(b_j(1+iu))/(1+iu)^3$ up to a
-sign. The bound on $h_j'''$ follows from Lemma~\ref{lem:kappa} applied to $\kappa_3$, summed over
-the $N$ indices with $b_j\ge1$ (via $f$'s monotonicity, worst case $\rho=1$) and the remaining
-geometric tail (via the local bound).
+Write $h_j(u) := g(b_j(1+iu))$ and $w_j := b_j(1+iu)$. The chain rule and the definition of
+$\kappa_3$ give $h_j'''(u) = i\,\kappa_3(w_j)/(1+iu)^3$, so
+\[
+|h_j'''(u)| = \frac{|\kappa_3(w_j)|}{(1+u^2)^{3/2}}.
+\]
+Split the index set as in Section~\ref{sec:formulaA}. For the $N$ indices with $b_j = \rho3^m \ge
+1$, $0\le m\le N-1$, drop the denominator and use Lemma~\ref{lem:kappa}'s sector bound, legitimate
+since $|u|\le\theta\le1$:
+\[
+|h_j'''(u)| \le |\kappa_3(w_j)| \le 2 + 2^{5/2} f(b_j/2) \le 2 + 2^{5/2} f(3^m/2),
+\]
+the last step by monotonicity of $f$ and $\rho\ge1$. Summing over $m\ge0$ bounds this block by
+$2N + 2^{5/2}\Sigma$, $\Sigma := \sum_{m\ge0} f(3^m/2)$. The first three terms of $\Sigma$ are
+$0.99614738\ldots$, $0.82241066\ldots$, $0.04500508\ldots$; for $r\ge13$ one has $f(r) \le
+4.001\,r^3e^{-2r}$, so the remaining terms sum to less than $2\times10^{-8}$, and $2^{5/2}\Sigma <
+10.541906$.
+
+For the remaining indices $b_j = \rho 3^{-n}$, $n\ge1$, one has $b_j<1$ and $|w_j| =
+b_j\sqrt{1+u^2} \le b_j\sqrt2 < 2$, so Lemma~\ref{lem:kappa}'s local bound applies and, keeping
+the denominator this time,
+\[
+|h_j'''(u)| \le \frac{0.0119\,|w_j|^4}{(1+u^2)^{3/2}} = 0.0119\,b_j^4\,(1+u^2)^{1/2} \le
+0.0119\sqrt2\,b_j^4 .
+\]
+Summing, $\sum_{n\ge1}(\rho3^{-n})^4 = \rho^4/80 < 81/80$, so this block is below
+$0.0119\sqrt2\cdot81/80 < 0.01704$. Together, $S < 2N + 10.541906 + 0.01704 < 2N + 10.559$.
+
+For the remainder bound, $\sum_j h_j(y) = K(s(1+iy))$, $\sum_j h_j'(0) = isK'(s) = -is\,t(s)$ and
+$\sum_j h_j''(0) = -s^2K''(s) = -V$, so summing the integral-form Taylor expansion over $j$ gives
+\[
+\Lambda(y) + \frac{Vy^2}{2} = \sum_j \frac12\int_0^y (y-u)^2 h_j'''(u)\,du,
+\]
+whose modulus is at most $S|y|^3/6 = B|y|^3$ for $|y|\le\theta$.
 \end{proof}
 
-\begin{theorem}[Formula (A)]
+\begin{theorem}[Uniform saddlepoint asymptotic]
 \label{thm:formulaA}
-For $N\ge17$, uniformly over $\rho\in[1,3)$, $|R(s)-1|\le E(N) := e_1(N)+e_2(N)+e_3(N)$, with
+For $N\ge19$, uniformly over $\rho\in[1,3)$, $|R(s)-1|\le E(N) := e_1(N)+e_2(N)+e_3(N)$, with
 $\theta_N := N^{-1/3}$, $V_{\mathrm{lo}} := N-A_V$, $V_{\mathrm{up}} := N+0.1283$,
-$B := (2N+3.7442)/6$,
+$B := (2N+10.559)/6$,
 \begin{align}
-e_1(N) &:= \frac{4\,e^{B\theta_N^3}\,B}{\sqrt{2\pi}\,V_{\mathrm{up}}^{3/2}}, \qquad
+e_1(N) &:= \frac{4\,e^{B\theta_N^3}\,B}{\sqrt{2\pi}\,V_{\mathrm{lo}}^{3/2}}, \qquad
 e_2(N) := \frac{2}{\sqrt{2\pi}}\cdot\frac{e^{-\theta_N^2V_{\mathrm{lo}}/2}}{\theta_N\sqrt{V_{\mathrm{lo}}}},
 \label{eq:Ebound}\\
 e_3(N) &:= 2\,e^{3/e}\sqrt{\frac{V_{\mathrm{up}}}{2\pi}}\cdot
 \frac{(1+\theta_N^2)^{-(N-2)/2}}{\theta_N(N-2)}. \notag
 \end{align}
-$E$ is strictly decreasing, $E(17)<1$, $E(N)\le4.1\,N^{-1/2}$ for all $N\ge17$, and $\sqrt N\,E(N)
+$E$ is strictly decreasing, $E(19)<1$, $E(N)\le4.18\,N^{-1/2}$ for all $N\ge19$, and $\sqrt N\,E(N)
 \to \tfrac43e^{1/3}(2\pi)^{-1/2} = 0.742358\ldots$. Consequently $\varphi(t) =
 \varphi_{\mathrm{sp}}(t)\,(1+o(1))$ as $t \to 0^+$, with no restriction on the sequence of $t$'s.
 \end{theorem}
@@ -447,10 +479,18 @@ $E$ is strictly decreasing, $E(17)<1$, $E(N)\le4.1\,N^{-1/2}$ for all $N\ge17$, 
 Split \eqref{eq:R} at $|y|=\theta_N$. On $|y|\le\theta_N$, Lemma~\ref{lem:taylor} bounds the cubic
 remainder $|\Lambda(y)+Vy^2/2|$ by $B\theta_N^3$, which stays bounded (not $o(1)$: this is exactly
 why $e_1$ carries the factor $e^{B\theta_N^3}$ rather than vanishing) as $N\to\infty$, since $B=O(N)$
-and $\theta_N^3=N^{-1}$. Writing $C(y):=e^{\Lambda(y)}-e^{-Vy^2/2}$, $|e^z-1|\le|z|e^{|z|}$ gives
-$|C(y)|\le B|y|^3e^{B\theta_N^3}$ on this range, and $\int_\R e^{-Vy^2/2}|y|^3\,dy=4/V^2$ (using
-$V\ge V_{\mathrm{lo}}$, from Lemma~\ref{lem:variance}) gives the central Taylor-remainder
-contribution $e_1$. The truncated Gaussian tail $2\int_{\theta_N}^\infty
+and $\theta_N^3=N^{-1}$. Write $C(y):=e^{\Lambda(y)}-e^{-Vy^2/2}$ and factor the Gaussian out
+before estimating, $e^{\Lambda(y)} = e^{-Vy^2/2}\,e^{z(y)}$ with $z(y) := \Lambda(y)+Vy^2/2$, so
+that $C(y) = e^{-Vy^2/2}\bigl(e^{z(y)}-1\bigr)$. Since $|z(y)|\le B|y|^3 \le B\theta_N^3$ on
+$|y|\le\theta_N$, the elementary $|e^z-1|\le|z|e^{|z|}$ gives
+\[
+|C(y)| \;\le\; e^{-Vy^2/2}\,B|y|^3\,e^{B\theta_N^3} \qquad (|y|\le\theta_N),
+\]
+the Gaussian factor retained. Integrating that inequality, $\int_\R e^{-Vy^2/2}|y|^3\,dy=4/V^2$,
+so $\sqrt{V/2\pi}\int_{|y|\le\theta_N}|C(y)|\,dy \le 4Be^{B\theta_N^3}/(\sqrt{2\pi}\,V^{3/2})$,
+which is decreasing in $V$; using $V\ge V_{\mathrm{lo}}$ from Lemma~\ref{lem:variance} gives the
+central Taylor-remainder contribution $e_1$. Since $\sqrt{V/2\pi}\int_\R e^{-Vy^2/2}\,dy = 1$, the
+same splitting leaves exactly two further terms. The truncated Gaussian tail $2\int_{\theta_N}^\infty
 \tfrac1{\sqrt{2\pi}}e^{-Vy^2/2}\,dy$, bounded via $\int_c^\infty e^{-v^2/2}\,dv\le e^{-c^2/2}/c$ at
 $c=\theta_N\sqrt{V_{\mathrm{lo}}}$, gives $e_2$. On $|y|>\theta_N$, Lemma~\ref{lem:tail}'s bound
 $|e^{\Lambda(y)}|\le e^{3/e}(1+y^2)^{-N/2}$ integrates, via $\int_a^\infty(1+y^2)^{-N/2}\,dy \le
@@ -459,7 +499,8 @@ $\sqrt{V/2\pi}$ factor in \eqref{eq:R}), to give $e_3$; this needs $\theta_N \gg
 since $\tfrac13<\tfrac12$. Every constant entering $E$ (via $A_V$, Lemma~\ref{lem:variance}, and the
 $3.0152\approx e^{3/e}$ of Lemma~\ref{lem:tail}) is a supremum over $b>0$ or a sum over one complete
 geometric orbit bounded using $\rho\ge1$, hence independent of $\rho$. Evaluating \eqref{eq:Ebound}
-numerically gives the stated $N_0=17$, monotonicity, and limit. Since $t(s)$ ranges bijectively over
+numerically gives the stated $N_0=19$, monotonicity, and limit; $E(18) = 1.00170\ldots$ and
+$E(19) = 0.95673\ldots$, and $\sqrt{19}\,E(19) = 4.1704\ldots$ with $\sqrt N E(N)$ decreasing. Since $t(s)$ ranges bijectively over
 $(0,1/2)$, this is exactly the statement $\varphi(t)=\varphi_{\mathrm{sp}}(t)(1+o(1))$ as $t\to0^+$.
 \end{proof}
 
@@ -490,24 +531,71 @@ $B_{\mathrm{sm}}(w) := -Q'(w) = w/c-a$.
 
 \begin{lemma}[True and smooth saddles]
 \label{lem:saddles}
-For each $\tau$, $g_\tau$ has a unique global minimizer $w^*(\tau)$, at which $g_\tau''(w^*) =
-V(r^*)>0$, $r^*=e^{w^*}$; and $g_{0,\tau}$ has a unique local minimizer $w_0(\tau)$ among solutions
-with $B_0 := B_{\mathrm{sm}}(w_0) = e^{w_0-\tau} > 1/c$. Both are characterized by $\tau =
-\Phi(w^*) = \Phi_0(w_0)$ for $\Phi(w) = w-\log B_{\mathrm{tr}}(w)$ (a strictly increasing bijection
-$\R\to(\log2,\infty)$, since $t(s)$ is strictly decreasing) and $\Phi_0(w)=w-\log B_{\mathrm{sm}}(w)$,
-and satisfy
+Let $\Phi(w) = w-\log B_{\mathrm{tr}}(w)$ and $\Phi_0(w) = w-\log B_{\mathrm{sm}}(w)$, and set
+$\tau_0 := 1+ca+\log c = 0.9502067913\ldots$, so $\tau_0 > \log 2$.
+
+For $\tau>\log 2$, $g_\tau$ has a unique global minimizer $w^*(\tau)$, at which $g_\tau''(w^*) =
+V(r^*)>0$, $r^*=e^{w^*}$; it is characterized by $\tau = \Phi(w^*)$, and $\Phi$ is a strictly
+increasing bijection $\R\to(\log 2,\infty)$. For $\tau\le\log 2$ there is no critical point at
+all. For $\tau>\tau_0$, $g_{0,\tau}$ has a unique local minimizer $w_0(\tau)$, characterized by
+$\tau=\Phi_0(w_0)$ together with $B_0 := B_{\mathrm{sm}}(w_0) = e^{w_0-\tau} > 1/c$; $\Phi_0$
+restricted to $(ca+1,\infty)$ is a strictly increasing bijection onto $(\tau_0,\infty)$, and $B_0$
+increases from $1/c$ to $\infty$ along it. For $\tau\le\tau_0$ there is no such minimizer.
+
+Once $B_0\ge5$ (equivalently $\tau\ge3.73978\ldots$),
 \[
-|w^*-w_0| = O(1/B_0), \qquad 0 \le g_\tau(w_0)-g_\tau(w^*) = O(1/B_0).
+|w^*-w_0| \le \frac{0.00652}{B_0}, \qquad
+0 \le g_\tau(w_0)-g_\tau(w^*) \le \frac{5.77\times10^{-5}}{B_0}.
 \]
 \end{lemma}
 
-\begin{proof}[Sketch]
-Strict convexity of $K$ gives the global uniqueness of $w^*$. At $w_0$, $g_\tau'(w_0) = H'(w_0) +
-O(e^{-2e^{w_0}})$ by Theorem~\ref{thm:H}, bounded by \eqref{eq:Hbounds}; since $g_\tau''$ is bounded
-above and below by explicit constants on $[w_0-1,w_0+1]$ (again via \eqref{eq:Hbounds} and
-Lemma~\ref{lem:kappa}), a sign-change argument for $g_\tau'$ locates $w^*$ within $O(1/B_0)$ of
-$w_0$, and Taylor's theorem about $w^*$ then bounds the resulting gap in $g_\tau$-values by the
-same order.
+\begin{proof}
+Substituting $s=e^w$ and $t=e^{-\tau}$ turns $g_\tau$ into $K(s)+st$, strictly convex in $s>0$
+because $K''>0$, with derivative $K'(s)+t$ vanishing exactly where $t = t(s)$. As $t(\cdot)$
+decreases strictly from $1/2$ to $0$, that happens for exactly one $s$ when $t\in(0,1/2)$, that
+is when $\tau>\log2$, and for no $s$ when $t\ge1/2$. Since $w\mapsto e^w$ is a bijection
+$\R\to(0,\infty)$, $w^* = \log s$ is the unique global minimizer of $g_\tau$, and $\Phi$ inverts
+$\tau\mapsto w^*$. Differentiating twice, $g_\tau''(w) = e^w\bigl(K'(e^w)+t\bigr)+e^{2w}K''(e^w)$,
+whose first term vanishes at $w^*$, leaving $g_\tau''(w^*) = V(r^*)>0$.
+
+For the smooth system, $g_{0,\tau}'(w) = e^{w-\tau}-B_{\mathrm{sm}}(w)$ and $g_{0,\tau}''(w) =
+e^{w-\tau}-1/c$, so a critical point is a local minimizer exactly when $B_0 > 1/c$. Also
+$\Phi_0'(w) = 1-1/(c\,B_{\mathrm{sm}}(w))$, positive exactly where $B_{\mathrm{sm}}(w)>1/c$, that
+is on $w>ca+1$; there $\Phi_0$ increases from $\Phi_0(ca+1) = ca+1+\log c = \tau_0$ to $\infty$.
+This gives the stated existence, uniqueness and range.
+
+Now take $B_0\ge5$. The decomposition $L = Q+H+\Delta$ evaluates the true gradient at the smooth
+saddle exactly: $Q'(w_0) = -B_0 = -e^{w_0-\tau}$, so the leading terms cancel and
+\begin{equation}
+\label{eq:gradatw0}
+g_\tau'(w_0) = L'(w_0)+e^{w_0-\tau} = H'(w_0)+\Delta'(w_0), \qquad
+|g_\tau'(w_0)| \le \varepsilon_1 := \sup|H'|+\sup_{[w_0-1,w_0+1]}|\Delta'| .
+\end{equation}
+On $[w_0-1,w_0+1]$ write $g_\tau''(w) = e^{w-\tau}-1/c+H''(w)+\Delta''(w)$. Here $e^{w-\tau} =
+B_0e^{w-w_0}$ ranges over $[B_0/e,\,B_0e]$, so $g_\tau''$ admits no bound independent of $\tau$;
+it is of exact order $B_0$,
+\begin{equation}
+\label{eq:g2scale}
+\frac{B_0}{e}-\eta_0 \;\le\; g_\tau''(w) \;\le\; B_0e, \qquad
+\eta_0 := \frac1c+\sup|H''|+\sup_{[w_0-1,w_0+1]}|\Delta''|,
+\end{equation}
+the upper bound because $-1/c+\sup|H''|+\sup|\Delta''|<0$. Since $w_0 = c(B_0+a)$, $B_0\ge5$ forces
+$w_0\ge5.3492$ and so $w\ge4.3492$ on the interval, where Theorem~\ref{thm:H}'s bound on
+$\Delta^{(j)}$ gives $|\Delta'|,|\Delta''| \le 10^{-60}$. With \eqref{eq:Hbounds} this makes
+$\varepsilon_1 \le 0.0011978$ and $\eta_0 \le 0.9170912$, whence $2e\eta_0 = 4.9859\ldots \le 5 \le
+B_0$, that is $\eta_0 \le B_0/(2e)$, and \eqref{eq:g2scale} improves to $g_\tau''\ge B_0/(2e)>0$
+throughout the interval.
+
+Put $h_0 := 2e\varepsilon_1/B_0 \le 2e\cdot0.0011978/5 < 0.0014$. For $h\in(h_0,1]$ the mean value
+theorem applied on $[w_0-1,w_0+1]$ gives $g_\tau'(w_0+h) \ge g_\tau'(w_0)+hB_0/(2e) \ge
+-\varepsilon_1 + hB_0/(2e) > 0$ and, symmetrically, $g_\tau'(w_0-h) \le \varepsilon_1-hB_0/(2e) <
+0$. As $w^*$ is the only zero of $g_\tau'$, it lies in $(w_0-h,w_0+h)$ for every such $h$, so
+$|w^*-w_0| \le h_0 = 2e\varepsilon_1/B_0 \le 0.00652/B_0$.
+
+Finally $g_\tau(w_0)-g_\tau(w^*)\ge0$ because $w^*$ is the global minimizer, and Taylor's theorem
+about $w^*$, where $g_\tau'(w^*) = 0$, bounds it by $\tfrac12\bigl(\sup_{[w_0-1,w_0+1]}
+g_\tau''\bigr)(w_0-w^*)^2 \le \tfrac12 B_0e\,h_0^2 = 2e^3\varepsilon_1^2/B_0 \le
+5.77\times10^{-5}/B_0$.
 \end{proof}
 
 \begin{proposition}[Envelope estimate]
@@ -522,12 +610,20 @@ uniformly in the phase of $\tau$ modulo $c$.
 
 \begin{proof}[Sketch]
 Expanding $S(\tau)-P(\tau)-H(w_0)$ exactly using $L=Q+H+\Delta$ and Lemma~\ref{lem:saddles}
-produces four terms: the true envelope gap $g_{0,\tau}(w^*)-g_{0,\tau}(w_0)$, which is
-$O(B_0\,(w^*-w_0)^2) = O(1/B_0)$; the periodic-part difference $H(w^*)-H(w_0) =
-O(\eta\,|w^*-w_0|) = O(1/B_0)$ using \eqref{eq:Hbounds}; the saddle-location shift $w^*-w_0$
-itself, $O(1/B_0)$; and a normalization term comparing $V(r^*)$ to $B_0 - 1/c$, again $O(1/B_0)$
-using \eqref{eq:Hbounds}'s bound on $H''$. Since $\tau = w_0 - \log B_0$, $B_0/\tau \to 1/c$, and
-all four terms are $O(1/\tau)$ with constants free of the phase of $\tau$.
+produces four terms. The true envelope gap $g_{0,\tau}(w^*)-g_{0,\tau}(w_0)$ is
+$O(B_0\,(w^*-w_0)^2) = O(1/B_0)$, by Taylor about $w_0$ (where $g_{0,\tau}'$ vanishes) together
+with $g_{0,\tau}'' \le B_0e$ and $|w^*-w_0| = O(1/B_0)$, both from Lemma~\ref{lem:saddles}. The
+periodic-part difference $H(w^*)-H(w_0) = O(|w^*-w_0|) = O(1/B_0)$ using \eqref{eq:Hbounds}. The
+saddle-location shift $w^*-w_0$ itself, $O(1/B_0)$. Last, a normalization term comparing $V(r^*)$
+to $B_0-1/c$: by the identity $V(r^*) = g_\tau''(w^*)$ and the expression for $g_\tau''$ used in
+Lemma~\ref{lem:saddles},
+\[
+V(r^*)-\Bigl(B_0-\frac1c\Bigr) = B_0\bigl(e^{w^*-w_0}-1\bigr)+H''(w^*)+\Delta''(w^*) = O(1),
+\]
+since $B_0|w^*-w_0| = O(1)$ and $H''$, $\Delta''$ are bounded by \eqref{eq:Hbounds} and
+Theorem~\ref{thm:H}; dividing by $B_0-1/c$ and taking $\tfrac12\log(1+O(1/B_0))$ gives $O(1/B_0)$
+again. Since $\tau = w_0 - \log B_0$, $B_0/\tau \to 1/c$, and all four terms are $O(1/\tau)$ with
+constants free of the phase of $\tau$.
 \end{proof}
 
 \section{The Berg--Kr\"uppel identity}
@@ -535,20 +631,61 @@ all four terms are $O(1/\tau)$ with constants free of the phase of $\tau$.
 
 \begin{proposition}
 \label{prop:bkidentity}
-$P(\tau)$ is identical, as a function of $\tau$, to the exact saddlepoint expression Berg and
-Kr\"uppel construct in the proof of their Proposition~9.1 -- the pre-asymptotic quantity their own
-argument shows is asymptotic, as $t\to0^+$, to the explicit closed form $\varphi_0$ -- not merely
-asymptotic to it. With $Y = cB_0$, $r = -ca-\log c$, the saddle equation for that construction is
-exactly $Y-\log Y = \tau+r$, and $P(\tau) = Q(w_0)+B_0+w_0-\tfrac12\log(2\pi(B_0-1/c))$
-coincides term for term with theirs: $2\beta y - \alpha = B_0$, $2\beta y - 2\beta - \alpha = B_0 -
-1/c$, $\alpha y - \beta y^2 = Q(w_0)$ (in their notation, $y=w_0$). Consequently $P(\tau) -
-\log\varphi_0(e^{-\tau}) \to 0$ (Section~\ref{sec:bk} below, following this proposition) is exactly
-their own Proposition~9.1 applied to this identity, not a separate asymptotic claim about $P$.
+Write $f(p) = \alpha\log p-\beta\log^2 p$, so that Berg and Kr\"uppel's transform $G_0(p) =
+p^\alpha\exp(-\beta\log^2 p)$ of their equation~(9.3) is $e^{f(p)}$ and their equation~(9.5) reads
+$g_0(t) = (2\pi i)^{-1}\int_{\sigma-i\infty}^{\sigma+i\infty}\exp[pt+f(p)]\,dp$, $\sigma>0$. Take
+$\alpha$, $\beta$ from their equation~(9.4) at $a=3$, $\lambda=2/3$. Then $f(p) = Q(\log p)$
+identically; the exact saddle of that integral, $t+f'(x)=0$ with $t = e^{-\tau}$, is $x^\sharp =
+e^{w_0(\tau)}$; and
+\[
+P(\tau) \;=\; x^\sharp t + f(x^\sharp) - \tfrac12\log\bigl(2\pi f''(x^\sharp)\bigr),
+\]
+the saddlepoint expression invoked in the proof of their Proposition~9.1, evaluated at that exact
+saddle. In the variable $Y := cB_0$, with $r = -ca-\log c$, the saddle equation is $Y-\log Y =
+\tau+r$.
 \end{proposition}
 
-\begin{proof}[Sketch]
-Direct substitution, using $\alpha = a$, $\beta = 1/(2c)$ from their equation~(9.4) applied to
-$a=3$, $\lambda=2/3$.
+\begin{proof}
+Their truncated equation~(9.2) is $\lambda g'(t) = a\,g(at)$ for $a>1$, $\lambda>0$; Laplace
+transforming gives $\lambda p\,G(p) = G(p/a)$, whose general solution~(9.3) is $G_0$ times an
+arbitrary $1$-periodic function of $\log p/\log a$, with
+\[
+\alpha = -\frac12-\frac{\log\lambda}{\log a}, \qquad \beta = \frac{1}{2\log a}
+\]
+their equation~(9.4). Section~\ref{sec:prelim} placed $\varphi$ in that family at $a=3$,
+$\lambda=2/3$: their untruncated~(9.1) reads $\tfrac23\varphi'(t) = 3\bigl(\varphi(3t) -
+\varphi(3t-2)\bigr)$, which on $(0,\tfrac23)$ is $\varphi'(t) = \tfrac92\varphi(3t)$. At those
+values
+\[
+\alpha = -\frac12-\frac{\log(2/3)}{\log3} = \frac12-\frac{\log2}{\log3} = a, \qquad
+\beta = \frac{1}{2\log3} = \frac{1}{2c},
+\]
+where the $a$ on the right is this paper's linear coefficient of $Q$; their $a$ is the dilation
+factor $3$, and the collision of letters is unavoidable. Hence, writing $y := \log p$,
+\[
+f(p) = \alpha y-\beta y^2 = a y - \frac{y^2}{2c} = Q(y),
+\]
+the third of the three coincidences asserted below. The other two are the chain rule:
+\[
+-p\,f'(p) = -Q'(y) = B_{\mathrm{sm}}(y) = 2\beta y-\alpha, \qquad
+p^2f''(p) = Q''(y)-Q'(y) = B_{\mathrm{sm}}(y)-\frac1c = 2\beta y-2\beta-\alpha .
+\]
+Berg and Kr\"uppel display the second of these with $+2\beta$ in place of $-2\beta$; differentiating
+$f$ twice gives $-2\beta$. Their Proposition~9.1 is unaffected, the term being of lower order there
+than $2\beta\log p$, but the exact expression used here is not.
+
+The saddle condition $t+f'(x)=0$ at $x=e^y$ now reads $e^{-\tau} = B_{\mathrm{sm}}(y)e^{-y}$, that
+is $\tau = y-\log B_{\mathrm{sm}}(y) = \Phi_0(y)$, whose unique solution on the branch
+$B_{\mathrm{sm}}>1/c$ is $y = w_0(\tau)$ by Lemma~\ref{lem:saddles}. So $x^\sharp = e^{w_0}$, and
+there $x^\sharp t = e^{w_0-\tau} = B_0$, $f(x^\sharp) = Q(w_0)$, $(x^\sharp)^2f''(x^\sharp) = B_0 -
+1/c>0$. Substituting,
+\[
+x^\sharp t+f(x^\sharp)-\tfrac12\log\bigl(2\pi f''(x^\sharp)\bigr)
+= B_0+Q(w_0)-\tfrac12\log\frac{2\pi(B_0-1/c)}{(x^\sharp)^2}
+= Q(w_0)+B_0+w_0-\tfrac12\log\Bigl(2\pi\bigl(B_0-\tfrac1c\bigr)\Bigr),
+\]
+which is $P(\tau)$. Finally $w_0 = c(B_0+a)$ and $\tau = w_0-\log B_0$ give $\tau = cB_0+ca-\log
+B_0 = Y-\log Y+ca+\log c = Y-\log Y-r$.
 \end{proof}
 
 Series-reverting $Y - \log Y = \tau + r$ to second order, $Y = \tau + \log\tau + r +
@@ -602,9 +739,11 @@ is exactly Conjecture 3, with the constant given explicitly.
 \end{proof}
 
 \begin{proof}[Proof of Theorem~\ref{thm:unrestricted}]
-As $t=e^{-\tau}$ ranges over $(0,1/2)$ with no restriction, $w_0(\tau) \bmod c$ ranges over a full
-period (since $\Phi_0$ is a bijection and $\tau\mapsto\tau \bmod c$ composed with $\Phi_0^{-1}$ is
-onto one period as $\tau\to\infty$), so by the same combination of results used above,
+As $t=e^{-\tau}$ ranges over $(0,1/2)$ with no restriction, $\tau\to\infty$, and
+Lemma~\ref{lem:saddles} gives $w_0(\tau) \bmod c$ a full period (since $\Phi_0$ restricted to
+$(ca+1,\infty)$ is a bijection onto $(\tau_0,\infty)$, and $\tau\mapsto\tau \bmod c$ composed with
+that inverse is onto one period once $\tau$ is large), so by the same combination of results used
+above,
 $\log\varphi(t)-\log\varphi_0(t) = H(w_0(\tau))+o(1)$ takes values arbitrarily close to both $\sup H$
 and $\inf H$ infinitely often. By Proposition~\ref{prop:Hcert}, $\operatorname{osc}(H) > 0$
 rigorously, so $\varphi(t)/\varphi_0(t)$ does not converge, and

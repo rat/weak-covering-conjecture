@@ -51,9 +51,19 @@ citable proof.
 - [x] reproducibility repo populated (2026-08-04): 5 self-contained scripts, one per section with
       a numerical/certified claim, each verified to run clean from a fresh clone
       (git@github.com:faculdade/wirsching-conjecture3-proof.git)
-- [x] critique round complete (2026-08-04): 15 findings, 14 fixed (CRITIQUE.md), 1 left open
+- [x] critique round 1 complete (2026-08-04): 15 findings, 14 fixed (CRITIQUE.md), 1 left open
       pending researcher action (making the reproducibility repo public -- currently 404s
       anonymously)
+- [x] critique round 2 complete (2026-08-04): independent different-vendor review, 7 findings, 1
+      real algebra bug fixed, 2 completeness gaps acknowledged as known scope, repo-access gap same
+      as round 1
+- [x] critique round 3 complete (2026-08-04/05): PDF-only blind loop, Codex+Opus at max effort,
+      Codex's initial verdict was Reject; 7 confirmed real findings fixed (Lemma 12's constant was
+      wrong by ~3x and is now rigorously re-derived, Lemma 15's domain and its `g_tau''` bound were
+      wrong and are now a full proof with explicit constants, Proposition 17's proof is now a full
+      derivation against Berg-Kruppel's primary source instead of "direct substitution", plus a
+      real LaTeX footnote-rendering bug and two minor naming/wording issues); paper recompiles
+      clean, 12 pages. Next blind round pending (loop continues until a round finds nothing new).
 - [ ] pt-BR version (main-pt.tex): deferred, only on the researcher's explicit request
 
 ## Target venue
