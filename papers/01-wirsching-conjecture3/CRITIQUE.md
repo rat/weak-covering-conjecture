@@ -392,3 +392,27 @@ Codex's parallel round-7 report received; findings pending review (see next entr
 a subsequent commit, once processed).
 
 Paper recompiles clean, 16 pages, overfull-hbox count down from 3 to 2.
+
+## Round 7, continued: Codex's report processed (2026-08-05, later)
+
+Codex, PDF-only, max effort, on the same Round 6 PDF Opus reviewed above. Verdict: reject
+("not yet a rigorous, self-contained proof"), primarily restating the repository-vs-inline
+certification question already settled across Rounds 3-7 (Rule 12) and the citation-locator
+concern already fixed this round via Opus's M1/M3. One finding was new and required direct
+verification (Rule 8c) before any action, and turned out to be a false positive:
+
+| ID | Summary | Verdict | Status |
+|----|---------|---------|--------|
+| N1 | "a real quantity, since `Lambda(-y) = Lambda(y)`" -- claimed to be mathematically false (the correct identity is `Lambda(-y) = conjugate(Lambda(y))`) | **FALSE POSITIVE**, confirmed by direct inspection: rendering the actual PDF page at 250dpi shows the identity is printed with a visible overline, `Lambda(-y) = \overline{Lambda(y)}`, exactly the correct statement. Codex's own tool use (`pdftotext`) strips overline diacritics, so its extracted text read "Lambda(-y) = Lambda(y)" with no indication a bar was ever there -- a text-extraction artifact, not a paper defect. Independently re-derived the correct identity from the definition of `Lambda` and confirmed it numerically (`Lambda(-0.7) = conj(Lambda(0.7))`, matches to 30 digits; `Lambda(-0.7) != Lambda(0.7)`, confirmed different) | no action; recorded per Rule 8c as a reviewed-and-discarded finding |
+| N2 | "Full optimization" (Proposition 8) mischaracterizes the actual method, a grid search plus a Lipschitz enclosure | **confirmed, real (minor, also independently raised by Round 6's M6-adjacent language)** | fixed: reworded to "a grid search with a Lipschitz enclosure" |
+| N3-N7 | Restatements of: certification living in the repository rather than inline (Rule 12, settled); the Wirsching/Berg-Kruppel identification needing a locator (fixed this round via Opus's M1, M3, M5 before Codex's report was read); Lemma 9's monotonicity "asserted"; Lemma 11's tail bound "not displayed"; Theorem 13's `E(N)` monotonicity claim | no new confirmed findings beyond what Opus's pass already fixed or what Rounds 3-7 already settled as out of scope | no action |
+
+This is the first round where a critique-loop finding was checked and found to be a pure
+text-extraction artifact rather than either a real defect or a misreading of real content (compare
+Round 3's F5, which was a false positive about digit corruption, not about a rendering-vs-extraction
+mismatch). Recorded here per Rule 8c's instruction to keep a plain record of mistaken critiques,
+not just correct ones -- a lesson worth carrying into any future PDF-only review: overline/diacritic
+marks are invisible to `pdftotext` and must be checked against the rendered page, not the extracted
+text, exactly as the loop's own prompt already instructs for margin truncation.
+
+Paper recompiles clean, 16 pages, unchanged overfull-hbox count (2, both cosmetic).
