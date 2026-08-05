@@ -467,3 +467,31 @@ this project decided explicitly and consistently since Round 3.
 
 Paper recompiles clean (pdflatex, exit 0, zero warnings, zero overfull-hbox notices for the first
 time in this loop), 17 pages.
+
+## Round 9: seventh blind loop iteration (2026-08-06), Opus complete; Codex pending
+
+Opus, PDF-only, max effort, on the Round 8 PDF (the shared prompt file was updated after Round 8
+with explicit overline/margin-checking instructions, which this run confirms working as intended:
+Opus explicitly re-tested the prior round's false-positive pattern and found `pdftotext` was *also*
+silently transposing digits in fractions on this PDF, e.g. rendering `9/2` as `29` -- caught before
+it became a false finding). Verdict: **essentially a rigorous proof, one labeling contradiction
+must be resolved**; found no new mathematical error, confirmed with an independent end-to-end
+saddlepoint test and two nontrivial identity checks (Remark 5's Berg-Kruppel product matching
+`exp(H)` term for term; Wirsching's own eq. (7.13) reproduced from this paper's `phi_0`). Findings,
+each independently verified before fixing (Rule 8c):
+
+| ID | Summary | Verdict | Status |
+|----|---------|---------|--------|
+| P1 | Theorem 2's "Conditional on the certified bound of Proposition 8" (added in Round 8 to address a different reviewer's concern) now contradicts the abstract's "certify rigorously", Proposition 8's own "Rigorously,", and Section 8's "a certified, positive amplitude" -- four places asserting or implying unconditional rigor, one asserting conditionality | **confirmed, real, self-inflicted in Round 8** | fixed: removed "Conditional on..."; Proposition 8's non-constancy claim genuinely is proved unconditionally (via Arb ball arithmetic on the two-point difference alone), so Theorem 2 now cites it as such |
+| P2 | Proposition 8's sentence "this step is rigorous regardless of how the grid values themselves are evaluated" is true only for the *lower* bound of the `osc(H)` enclosure; the *upper* bound additionally requires the computed grid extrema not to be underestimates, which is not independently certified for the full `2^20`-point sweep (only the two located extremal points are Arb-verified) | **confirmed, real**; also independently noted that the enclosure's upper endpoint is never used anywhere else in the paper | fixed: rewrote to scope the "regardless of arithmetic" claim correctly to the lower-bound direction (the one Theorem 2 actually uses), and stated plainly that the upper bound isn't independently certified for the full sweep |
+| P3 | Symbol collision: `g` denotes both this paper's own log-kernel `g(b)=log((1-e^{-b})/b)` (used throughout) and, in three separate places, Berg-Kruppel's generic family-member solution to their functional equation -- once on the very same page as the paper's own `g` is defined | **confirmed, real**, the worst of several flagged collisions (`S`, `theta`, `h` also collide 3-4 ways each, but renaming all of them was judged out of proportion to an error-elimination pass; `g` was fixed as the one on directly adjacent text to the paper's own definition) | fixed: renamed Berg-Kruppel's generic family-member function to `psi` in all three occurrences (Section 2, twice, and Proposition 17's proof) |
+| P4 | Proposition 17's proof, "Laplace transforming gives `lambda*p*G(p) = G(p/a)`", drops the boundary term from `L[psi'](p) = p*G(p) - psi(0)` without comment | **confirmed, real (minor)** | fixed: added a parenthetical noting the boundary term vanishes since the relevant solutions are supported on `[0,infinity)` with `psi(0)=0` |
+| P5 | Section 4's "uniformly over every phase of `s` modulo `3^Z`" does not parse as written | **confirmed, real (minor)** | fixed: replaced with the actual object used, `rho := 2s/3^N in [1,3)` |
+| P6 | Two unused numerical claims sit inside Theorem 13's *statement* rather than a remark (`E` strictly decreasing on `[19,5000]`, and `E(19)<1` itself, both explicitly flagged in the same sentence as "not used below") | fair presentation observation | not fixed this round (moving theorem-statement content to a remark is a larger structural edit than the scope of this pass; logged for a future pass) |
+| P7 | Introduced a stray `--` (en dash) parenthetical aside while fixing P2, against this project's Rule 3/5c no-dash convention; the only such instance in the 17-page document | **self-caught before commit** (Rule 8c: verify one's own fix, not just the referee's original finding) | fixed: replaced with parentheses, matching the paper's own established style |
+| G (literature, unverifiable from the PDF alone) | The claimed erratum in Berg-Kruppel [2] p. 179; the term "Elka functions" attributed to Wirsching | **erratum already independently verified against the actual primary-source PDF in Round 6/7**; "Elka functions" not reconfirmed this round | no action needed for the erratum (already done); "Elka functions" terminology flagged for a future literature-verification pass, not blocking |
+
+Codex's parallel round-9 report was launched alongside Opus's but not yet read/processed as of
+this table update; to be added in a subsequent entry once reviewed.
+
+Paper recompiles clean (pdflatex, exit 0, zero warnings, zero overfull-hbox notices), 17 pages.

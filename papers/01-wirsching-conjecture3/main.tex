@@ -115,12 +115,13 @@ $e^{H(0)}$ is tied to this particular normalization of $\varphi_0$.
 
 \begin{theorem}[Failure of the unrestricted asymptotic]
 \label{thm:unrestricted}
-Conditional on the certified bound of Proposition~\ref{prop:Hcert}: the stronger asymptotic
-$\varphi(t) \sim \kappa\,\varphi_0(t)$ as $t \to 0^+$, for any single constant $\kappa$ and with no
-restriction to a comparison class, is false. The ratio $\varphi(t)/\varphi_0(t)$ oscillates
-indefinitely as $t \to 0^+$, with amplitude bounded below by a positive, certified constant: it is
-governed by the exactly $c$-periodic function $H$ evaluated at the saddle location $w_0(\tau)$,
-$\tau=\log(1/t)$, whose successive-period increment $w_0(\tau+c)-w_0(\tau)$ tends to $c$
+The stronger asymptotic $\varphi(t) \sim \kappa\,\varphi_0(t)$ as $t \to 0^+$, for any single
+constant $\kappa$ and with no restriction to a comparison class, is false, by
+Proposition~\ref{prop:Hcert}'s unconditionally proved non-constancy of $H$. The ratio
+$\varphi(t)/\varphi_0(t)$ oscillates indefinitely as $t \to 0^+$, with amplitude bounded below by a
+positive, certified constant: it is governed by the exactly $c$-periodic function $H$ evaluated at
+the saddle location $w_0(\tau)$, $\tau=\log(1/t)$, whose successive-period increment
+$w_0(\tau+c)-w_0(\tau)$ tends to $c$
 (Lemma~\ref{lem:saddles}) even though $w_0(\tau)$ itself drifts away from $\tau$ without bound.
 \end{theorem}
 
@@ -173,8 +174,9 @@ solution of $\operatorname{supp}\varphi\subset[0,1]$, $\int_0^1\varphi=1$, $W_3\
 his invariant density, up to the reflection $x \mapsto 1-x$ fixing the convention. It is also a
 translate of Rvachev's atomic function $h_3$ \cite{rvachev1990}, and the dilation-$3$, $\lambda=2/3$
 member of
-Berg and Kr\"uppel's family of functional equations $\lambda\, g'(t) = 3\bigl(g(3t) -
-g(3t-2)\bigr)$. The reflection is in fact vacuous, $\varphi(x)=\varphi(1-x)$ identically: $X$ and
+Berg and Kr\"uppel's family of functional equations $\lambda\, \psi'(t) = 3\bigl(\psi(3t) -
+\psi(3t-2)\bigr)$ (their generic family member, distinct from this paper's own $g$ introduced
+below). The reflection is in fact vacuous, $\varphi(x)=\varphi(1-x)$ identically: $X$ and
 $1-X=\sum_{j\ge1}\tfrac{2}{3^j}(1-U_j)$ are equidistributed, since $1-U_j\sim U_j$ independently
 for every $j$ and $\sum_{j\ge1}2\cdot3^{-j}=1$. It is $C^\infty$, supported on $[0,1]$, and
 constant, equal to $3/2$, on the middle third $[1/3, 2/3]$.
@@ -201,11 +203,12 @@ X=0$ (each factor $e^{-sX}$ suppresses any mass away from $0$ as $s\to\infty$, a
 So $t(s)$ decreases strictly from $1/2$ to $0$, and studying $\varphi(t(s))$ as $s \to \infty$ is
 the same as studying $\varphi(t)$ as $t \to 0^+$.
 
-Berg and Kr\"uppel's comparison function solves the truncated equation $\lambda\, g'(t) = a\,
-g(at)$, $a$ here their dilation parameter (this letter is reused in Section~\ref{sec:periodic} for
-this paper's own, unrelated linear coefficient of $Q$; the two never appear in the same formula
-except in Section~\ref{sec:bk}, where the collision is flagged again at the point it matters), by
-Laplace transform and saddlepoint analysis. In their normalization (their equation~(9.6), with
+Berg and Kr\"uppel's comparison function solves the truncated equation $\lambda\, \psi'(t) = a\,
+\psi(at)$, $a$ here their dilation parameter (this letter is reused in Section~\ref{sec:periodic}
+for this paper's own, unrelated linear coefficient of $Q$; the two never appear in the same
+formula except in Section~\ref{sec:bk}, where the collision is flagged again at the point it
+matters), by Laplace transform and saddlepoint analysis. In their normalization (their
+equation~(9.6), with
 $\alpha = \tfrac12 - \tfrac{\log 2}{\log 3}$, $\beta = \tfrac{1}{2\log 3}$, and $\gamma$,
 $\delta_{\mathrm{BK}}$, $\varepsilon$ determined by $\alpha$ and $\beta$ through their
 Proposition~9.1, printed explicitly in Section~\ref{sec:bk}),
@@ -514,12 +517,16 @@ gives $|H(w)-H(w_i)| \le M_1h/2$ with $M_1 := 1.1977472315550332\times10^{-3}$, 
 \max_i H(w_i) \;\le\; \sup H \;\le\; \max_i H(w_i)+\frac{M_1h}{2}, \qquad
 \min_i H(w_i)-\frac{M_1h}{2} \;\le\; \inf H \;\le\; \min_i H(w_i),
 \]
-and therefore $\operatorname{osc}(H) \in [D,\,D+M_1h]$ for $D := \max_iH(w_i)-\min_iH(w_i)$; this
-step is rigorous regardless of how the grid values themselves are evaluated, since
-$\max_iH(w_i)\le\sup H$ holds for any finite subset. Evaluating the $N$ grid values from
-Proposition~\ref{prop:Hfourier} truncated at $|m|\le10$ in floating point (Arb ball arithmetic
-was used only to re-confirm the two located extremal points below, to 40 digits, not the full
-sweep), where the same majorant bounds the discarded modes by $2.71\times10^{-43}$, locates the
+and therefore $\operatorname{osc}(H) \in [D,\,D+M_1h]$ for $D := \max_iH(w_i)-\min_iH(w_i)$. The
+lower bound $D\le\operatorname{osc}(H)$ (the direction Theorem~\ref{thm:unrestricted} actually
+uses) follows from $\max_iH(w_i)\le\sup H$ for the true values $H(w_i)$; since the working
+precision below keeps floating-point evaluation error many orders below $M_1h\approx1.25\times
+10^{-9}$, this does not depend on which arithmetic evaluated the grid. The upper bound
+$D+M_1h\ge\operatorname{osc}(H)$, not used elsewhere in this paper, additionally requires the
+computed extrema not to be underestimates, which is not independently certified for the full sweep
+below (only the two located extremal points are re-confirmed in Arb ball arithmetic). Evaluating
+the $N$ grid values from Proposition~\ref{prop:Hfourier} truncated at $|m|\le10$ in floating point,
+where the same majorant bounds the discarded modes by $2.71\times10^{-43}$, locates the
 maximum at
 $i = 486746$ and the minimum at $i = 1011118$; re-evaluating $H$ there to $40$ digits, from
 \eqref{eq:Hcomputable} and from the Fourier series alike,
@@ -537,7 +544,7 @@ Define, for $s>0$,
 \varphi_{\mathrm{sp}}(t(s)) := \frac{\exp\bigl(K(s)+st(s)\bigr)}{\sqrt{2\pi K''(s)}}.
 \]
 This section proves that $\varphi(t(s))/\varphi_{\mathrm{sp}}(t(s)) \to 1$ as $s \to \infty$,
-uniformly over every phase of $s$ modulo $3^{\Z}$, which is what makes the two theorems of
+uniformly over $\rho:=2s/3^N\in[1,3)$ (defined below), which is what makes the two theorems of
 Section~\ref{sec:proofs} depend on different scopes rather than on different mathematics.
 
 For $n \ge 2$, define the derivative-normalized functions $\kappa_n(w) = (-1)^n w^n g^{(n)}(w)$ on
@@ -939,9 +946,11 @@ saddle. In the variable $Y := cB_0$, with $r = -ca-\log c$, the saddle equation 
 \end{proposition}
 
 \begin{proof}
-Their truncated equation~(9.2) is $\lambda g'(t) = a\,g(at)$ for $a>1$, $\lambda>0$; Laplace
-transforming gives $\lambda p\,G(p) = G(p/a)$, whose general solution~(9.3) is $G_0$ times an
-arbitrary $1$-periodic function of $\log p/\log a$, with
+Their truncated equation~(9.2) is $\lambda \psi'(t) = a\,\psi(at)$ for $a>1$, $\lambda>0$; Laplace
+transforming (the boundary term $\lambda\psi(0)$ from $\mathcal L[\psi'](p)=pG(p)-\psi(0)$ vanishes,
+since the solutions of interest are supported on $[0,\infty)$ with $\psi(0)=0$) gives $\lambda
+p\,G(p) = G(p/a)$, whose general solution~(9.3) is $G_0$ times an arbitrary $1$-periodic function
+of $\log p/\log a$, with
 \[
 \alpha = -\frac12-\frac{\log\lambda}{\log a}, \qquad \beta = \frac{1}{2\log a}
 \]
