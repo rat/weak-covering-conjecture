@@ -352,3 +352,43 @@ equations.
 
 Paper recompiles clean (pdflatex, exit 0, zero warnings), still 16 pages, overfull-hbox count down
 from 6 to 3, none losing content.
+
+## Round 7: fifth blind loop iteration (2026-08-05), Opus first pass complete
+
+Opus, PDF-only, max effort, on the Round 6 PDF. **Verdict: Accept after minor-to-moderate
+revision** -- the strongest verdict yet in this loop, and explicitly found no mathematical error
+anywhere it checked (an extensive list: Theorem 4, Proposition 6 including the full residue
+computation, Lemmas 9-12, the derivation of e1/e2/e3, Lemma 15, Proposition 16's five-term
+decomposition, Proposition 17, the series reversion, Proposition 18's reduction). Ran an
+independent end-to-end numerical check (direct Fourier inversion of phi, no saddlepoint, compared
+against the paper's own chain) confirming the full constant chain reproduces the true density.
+Findings, each independently verified before fixing (Rule 8c):
+
+| ID | Summary | Verdict | Status |
+|----|---------|---------|--------|
+| M1 | The identification of `phi` with Wirsching's invariant density is asserted with no citation locator, while every other citation in the paper is pinpointed to an equation or page number | **confirmed, real, most severe finding of this round** | fixed: located the exact primary-source match (re-read `[1]`'s Section 6 directly) -- Wirsching's own equation (6.1) defines `(W_3 f)(x) := (3/2)*int_{3x-2}^{3x} f`, identical to this paper's displayed integral equation, and his Corollary 7 characterizes `phi` as the unique `L^1_loc` solution with `supp subset [0,1]`, `int=1`, `W_3 phi = phi` -- both now cited explicitly by equation/corollary number |
+| M2 | Proposition 8's stated truncation-tail range (`s<=3/2`) does not cover the two oscillation-grid evaluation points actually used later in the same proof (`s approx 1.665` and `s approx 2.885`) | **confirmed, real** (verified numerically: both grid points exceed 3/2) | fixed: extended the range to `s<=3` (covers both points), recomputed the tail bound (`4.43e-30`, still negligible) |
+| M3 | Remark 5 claims the Fourier series "is what lets us certify non-constancy," but Proposition 8's actual primary computation uses the elementary formula (7), which is algebraically the same object as Berg-Kruppel's product (verified: `exp(H)=e^{-Q}e^L e^{-Delta}` matches Remark 5's own product identity term for term) -- an overclaim the paper's own proof contradicts | **confirmed, real** | fixed: reworded Remark 5 to state accurately what the Fourier series contributes instead (the derivative bounds (5)), and noted explicitly that Prop 8's primary computation is, in substance, an evaluation of Berg-Kruppel's own product |
+| M4 | Discussion's "the class on which the weaker statement holds is exactly the one phase... at which the ratio converges" is false: every phase admits some sequence along which the ratio converges to `e^{H(theta)}`, not just phase 0 | **confirmed, real** | fixed: reworded to state what's actually special about phase 0 (it's the one Wirsching's own class happens to fix) |
+| M5 | Remark 5's disclaimer "their `a,b,alpha` are unrelated to this paper's identically-named objects" is wrong for `alpha`: Section 2 imports Berg-Kruppel's `alpha` verbatim, and Proposition 17 proves it equals this paper's `a` -- the disclaimer tells the reader the opposite of what's needed to verify the display | **confirmed, real** | fixed: corrected the disclaimer to except `alpha` explicitly, with a forward pointer to Proposition 17's identification |
+| M6 | "Certified"/"rigorously" language for Proposition 8 doesn't distinguish which specific computations are ball arithmetic vs. floating point | fair completeness observation, matches Round 5's D-04/D-05-style finding | not fixed, same reasoning as before (Rule 12 division of labor) |
+| M7 | Theorem 2's "periodic up to an `O(1/tau)`-vanishing phase drift" invites a wrong reading: the *per-period* drift vanishes, but the *cumulative* drift `w_0(tau)-tau` grows like `log(tau)`, unbounded | **confirmed, real** | fixed: reworded to state precisely that `H` is periodic in the saddle variable `w_0(tau)`, whose successive-period increment tends to `c` even though `w_0(tau)` itself drifts unboundedly from `tau` |
+| M8 | Two issues in Theorem 13: (a) "confirming N>=19 is where the stated bound first takes hold" should say "first becomes non-vacuous"; (b) "neither fact is used below, where only `E(19)<1` and `E(N)->0` are needed" -- `E(19)<1` itself is not actually used anywhere downstream, only `E(N)->0` | **both confirmed, real (minor)** | fixed |
+| M9 | Proposition 18 quotes Wirsching's (7.13) at `x_l` but applies it at `x_l^+ = x_l + 3^{-(l+1)}`, with no justification that the substitution is valid | **confirmed, real (minor)** | fixed: added the one-line justification (`x_l^+/x_l -> 1`, `phi_0'/phi_0` slowly varying near `x_l`) |
+| M10 | The reproducibility repository is unverifiable at review time (a referee cannot confirm contents); suggests an archived DOI snapshot | fair suggestion, out of scope for text fixes | not fixed (repo-archival is a researcher action, not a text fix) |
+| M11 | The Introduction's roadmap says "Section 3... proves Proposition 6 and Corollary 3", but Corollary 3 is proved in Section 6, not Section 3 | **confirmed, real (minor)** | fixed |
+| T1 | Severe margin overrun on page 10 (61pt, within 11pt of the physical page edge) -- confirmed by direct ink-bounding-box measurement, no content lost but looks broken in print | **confirmed** | fixed: converted the offending inline chain to a displayed equation |
+| T2, T3 | Two smaller overruns (page 13, 8.6pt; page 6, 4.8pt), neither losing content | **confirmed, cosmetic** | not fixed, same judgment as Round 5/6's remaining cosmetic overfull-hbox cases |
+
+**Independent numerical verification highlights this round**: `hat H(0)` agrees to 30 digits with
+the numerically-integrated period-mean of `H`; Proposition 6's Fourier series agrees with the
+elementary formula (7) to 40 digits at four points; the `2^20`-grid argmax/argmin indices
+(486746, 1011118) independently reproduced by a fresh sweep; and, most substantively, an
+end-to-end check computing `phi` by direct numerical Fourier inversion (bypassing the saddlepoint
+machinery entirely) for `N=6..14`, `rho=1,2`, confirming the full Section 4-6 constant chain
+(including the `O(tau^{-1}log^2 tau)` rate of Section 6) reproduces the true density.
+
+Codex's parallel round-7 report received; findings pending review (see next entry in this file, or
+a subsequent commit, once processed).
+
+Paper recompiles clean, 16 pages, overfull-hbox count down from 3 to 2.

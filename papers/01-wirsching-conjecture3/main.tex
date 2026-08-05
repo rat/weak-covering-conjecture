@@ -115,9 +115,11 @@ Kr\"uppel's own, equation~(9.6) of \cite{bergkruppel1998}.
 \label{thm:unrestricted}
 The stronger asymptotic $\varphi(t) \sim \kappa\,\varphi_0(t)$ as $t \to 0^+$, for any single
 constant $\kappa$ and with no restriction to a comparison class, is false. The ratio
-$\varphi(t)/\varphi_0(t)$ oscillates indefinitely as $t \to 0^+$, asymptotically $\log 3$-periodic
-in $\log(1/t)$ (periodic up to an $O(1/\tau)$-vanishing phase drift, Lemma~\ref{lem:saddles}) and
-with amplitude bounded below by a positive, certified constant.
+$\varphi(t)/\varphi_0(t)$ oscillates indefinitely as $t \to 0^+$: it is governed by the exactly
+$c$-periodic function $H$ evaluated at the saddle location $w_0(\tau)$, $\tau=\log(1/t)$, whose
+successive-period increment $w_0(\tau+c)-w_0(\tau)$ tends to $c$ (Lemma~\ref{lem:saddles}) even
+though $w_0(\tau)$ itself drifts away from $\tau$ without bound; with amplitude bounded below by a
+positive, certified constant.
 \end{theorem}
 
 The two theorems have a single common source. Write $t = e^{-\tau}$ and let $H(w)$ be the
@@ -141,12 +143,13 @@ its logarithm. Its Fourier series, Proposition~\ref{prop:Hfourier} below, is new
 
 Section~\ref{sec:prelim} recalls the functional equation $\varphi$ satisfies and Berg and
 Kr\"uppel's comparison asymptotic. Section~\ref{sec:periodic} constructs $H$, proves
-Proposition~\ref{prop:Hfourier} and Corollary~\ref{cor:bk}, and certifies that $H$ is not constant.
+Proposition~\ref{prop:Hfourier}, and certifies that $H$ is not constant.
 Sections~\ref{sec:formulaA} and~\ref{sec:envelope} transfer this from the log-Laplace transform to
 $\varphi$ itself, through a uniform saddlepoint approximation and an envelope estimate.
 Section~\ref{sec:bk} identifies the resulting smooth part with Berg and Kr\"uppel's saddlepoint
-expression and pins down every constant. Section~\ref{sec:proofs} proves both theorems and checks
-Wirsching's actual requirement directly. Section~\ref{sec:discussion} states what remains open.
+expression, pins down every constant, and proves Corollary~\ref{cor:bk}. Section~\ref{sec:proofs}
+proves both theorems and checks Wirsching's actual requirement directly.
+Section~\ref{sec:discussion} states what remains open.
 
 \section{The invariant density and its Laplace transform}
 \label{sec:prelim}
@@ -161,9 +164,13 @@ $X$, shows that the density $\varphi$ of $X$ satisfies
 \[
 \varphi(x) = \frac{3}{2}\int_{3x-2}^{3x} \varphi,
 \]
-equivalently $\varphi'(x) = \tfrac{9}{2}\varphi(3x)$ on $(0, \tfrac{2}{3})$: this is Wirsching's
-invariant density up to the reflection $x \mapsto 1-x$ fixing the convention, a translate of
-Rvachev's atomic function $h_3$ \cite{rvachev1990}, and the dilation-$3$, $\lambda=2/3$ member of
+equivalently $\varphi'(x) = \tfrac{9}{2}\varphi(3x)$ on $(0, \tfrac{2}{3})$: the displayed integral
+equation is exactly \cite{wirsching2003}'s equation~(6.1), $(W_3f)(x) := \tfrac32\int_{3x-2}^{3x}
+f$, and $\varphi$ is exactly the function his Corollary~7 constructs as the unique $L^1_{\rm loc}$
+solution of $\operatorname{supp}\varphi\subset[0,1]$, $\int_0^1\varphi=1$, $W_3\varphi=\varphi$ --
+his invariant density, up to the reflection $x \mapsto 1-x$ fixing the convention. It is also a
+translate of Rvachev's atomic function $h_3$ \cite{rvachev1990}, and the dilation-$3$, $\lambda=2/3$
+member of
 Berg and Kr\"uppel's family of functional equations $\lambda\, g'(t) = 3\bigl(g(3t) -
 g(3t-2)\bigr)$. The reflection is in fact vacuous, $\varphi(x)=\varphi(1-x)$ identically: $X$ and
 $1-X=\sum_{j\ge1}\tfrac{2}{3^j}(1-U_j)$ are equidistributed, since $1-U_j\sim U_j$ independently
@@ -264,14 +271,19 @@ periodic functions that agree in the limit along every residue class of $w$ modu
 
 \begin{remark}
 Berg and Kr\"uppel's own Proposition~9.3, in their own notation throughout this remark only
-(their $a$, $b$, $\alpha$ are unrelated to this paper's identically-named objects, and are not
-used again outside this remark; Section~\ref{sec:bk} below reuses $a$ for their dilation parameter
-in a way disambiguated there), specialized to $a=3$, $b=3/2$ (exactly this eigenfunction), gives
+(their $a$, $b$ are unrelated to this paper's identically-named objects and are not used again
+outside this remark, Section~\ref{sec:bk} below reusing $a$ for their dilation parameter in a way
+disambiguated there; their $\alpha$, by contrast, is exactly Section~\ref{sec:prelim}'s imported
+$\alpha$, which Proposition~\ref{prop:bkidentity} below identifies with this paper's own $a$),
+specialized to $a=3$, $b=3/2$ (exactly this eigenfunction), gives
 the equivalent identity $\exp(H(w)) = a^{\frac12 t^2 - \alpha t}
 \prod_{k\ge0}\frac{1-e^{-a^{t-k}/b}}{a^{t-k}/b}\prod_{l\ge1}\bigl(1-e^{-a^{t+l}/b}\bigr)$, $t=w/c$,
-as an infinite product, in their proof of that proposition. The Fourier series of
-Proposition~\ref{prop:Hfourier} below is what lets us certify non-constancy (Proposition
-\ref{prop:Hcert}), which their product form does not make transparent.
+as an infinite product, in their proof of that proposition: this is the same object as $Q$, $L$,
+and $\Delta$ recombine into via $\exp(H)=e^{-Q}e^Le^{-\Delta}$, so Proposition~\ref{prop:Hcert}'s
+primary computation from \eqref{eq:Hcomputable} below is, in substance, an evaluation of this
+product. What Proposition~\ref{prop:Hfourier}'s Fourier series supplies instead, and their product
+form does not, are the derivative bounds \eqref{eq:Hbounds}, on which the rest of the paper's
+saddlepoint estimates depend.
 \end{remark}
 
 \begin{proposition}
@@ -473,7 +485,8 @@ for $k>M$, the second tail satisfies
 0 \;\le\; -\sum_{k>M}\log\bigl(1-e^{-2\cdot3^ks}\bigr) \;\le\; \frac{y}{(1-y)^2} \;\le\; 4y,
 \qquad y:=e^{-2\cdot3^{M+1}s}\le\tfrac12 .
 \]
-Take $R=30$, $M=4$. For $s\le3/2$ the first tail is at most $1.106\times10^{-30}$, and for $s\ge1$
+Take $R=30$, $M=4$. For $s\le3$ (which covers every evaluation point used below, including the
+oscillation grid) the first tail is at most $4.43\times10^{-30}$, and for $s\ge1$
 the second is at most $4e^{-486}<10^{-210}$. The remaining $35$ terms are elementary functions of
 $s$; evaluated at $50$ significant decimal digits, where the accumulated rounding stays below
 $10^{-45}$, they give
@@ -671,9 +684,9 @@ e_3(N) &:= 2\,e^{3/e}\sqrt{\frac{V_{\mathrm{up}}}{2\pi}}\cdot
 $E(19)<1$, and $\sqrt N\,E(N) \to \tfrac43e^{1/3}(2\pi)^{-1/2} = 0.742358\ldots$ as $N\to\infty$
 (proved below, from $e_1$ alone: $e_2$ and $e_3$ vanish faster than any power of $N$). Numerically,
 $E$ is also strictly decreasing and satisfies $E(N)\le4.18\,N^{-1/2}$ throughout $19\le N\le5000$
-(checked directly in the accompanying repository); neither fact is used below, where only $E(19)<1$
-and $E(N)\to0$ are needed. Consequently $\varphi(t) = \varphi_{\mathrm{sp}}(t)\,(1+o(1))$ as
-$t \to 0^+$, with no restriction on the sequence of $t$'s.
+(checked directly in the accompanying repository); neither fact, nor $E(19)<1$ itself, is used
+below, where only $E(N)\to0$ as $N\to\infty$ is needed. Consequently $\varphi(t) =
+\varphi_{\mathrm{sp}}(t)\,(1+o(1))$ as $t \to 0^+$, with no restriction on the sequence of $t$'s.
 \end{theorem}
 
 \begin{proof}
@@ -687,8 +700,10 @@ $|y|\le\theta_N$, the elementary $|e^z-1|\le|z|e^{|z|}$ gives
 \[
 |C(y)| \;\le\; e^{-Vy^2/2}\,B|y|^3\,e^{B\theta_N^3} \qquad (|y|\le\theta_N),
 \]
-the Gaussian factor retained. Integrating that inequality, $\int_\R e^{-Vy^2/2}|y|^3\,dy=4/V^2$,
-so $\sqrt{V/2\pi}\int_{|y|\le\theta_N}|C(y)|\,dy \le 4Be^{B\theta_N^3}/(\sqrt{2\pi}\,V^{3/2})$,
+the Gaussian factor retained. Integrating that inequality, $\int_\R e^{-Vy^2/2}|y|^3\,dy=4/V^2$, so
+\[
+\sqrt{V/2\pi}\int_{|y|\le\theta_N}|C(y)|\,dy \;\le\; \frac{4Be^{B\theta_N^3}}{\sqrt{2\pi}\,V^{3/2}},
+\]
 which is decreasing in $V$; using $V\ge V_{\mathrm{lo}}$ from Lemma~\ref{lem:variance} gives the
 central Taylor-remainder contribution $e_1$. Since $\sqrt{V/2\pi}\int_\R e^{-Vy^2/2}\,dy = 1$, the
 same splitting leaves exactly two further terms. The truncated Gaussian tail
@@ -703,7 +718,7 @@ since $\tfrac13<\tfrac12$. Every constant entering $E$ (via $A_V$, Lemma~\ref{le
 $3.0152\approx e^{3/e}$ of Lemma~\ref{lem:tail}) is a supremum over $b>0$ or a sum over one complete
 geometric orbit bounded using $\rho\ge1$, hence independent of $\rho$. Directly evaluating
 \eqref{eq:Ebound} gives $E(18) = 1.00170\ldots \ge 1$ and $E(19) = 0.95673\ldots < 1$, confirming
-that $N\ge19$ is where the stated bound first takes hold.
+that $N\ge19$ is where the stated bound $E(N)<1$ first becomes non-vacuous.
 
 For the asymptotic rate, $e_1$, $e_2$, $e_3$ separate on very different scales as $N\to\infty$.
 Since $\theta_N^3=1/N$, $B\theta_N^3\to1/3$ and $B/N\to1/3$, $V_{\mathrm{lo}}/N,\,V_{\mathrm{up}}/N
@@ -1067,8 +1082,10 @@ $\varphi(3x_l^+)/\varphi(x_l^+) = \Lambda_l\cdot\varphi_0(3x_l^+)/\varphi_0(x_l^
 Kr\"uppel's $\varphi_0$ is an asymptotic solution of the same truncated equation (their
 equation~(7.12) in Wirsching's notation: $\varphi_0'(t)/\varphi_0(3t)\to9/2$ as $t\to0$), so
 $\varphi_0(3x_l^+)/\varphi_0(x_l^+) = \tfrac29\varphi_0'(x_l^+)/\varphi_0(x_l^+)\,(1+o(1))$.
-Substituting and using his equation~(7.13), $\lim_l(2/3^{l+1})\varphi_0'(x_l)/\varphi_0(x_l)=2/3$
-uniformly on the class,
+Since $x_l^+/x_l = 1+3^{-(l+1)}/x_l \to 1$ (as $x_l\sim l\cdot3^{-l}$) and $\varphi_0'/\varphi_0$
+is, from its explicit form, continuous and slowly varying near $x_l$, (7.13) transfers from $x_l$
+to $x_l^+$ with an $o(1)$ correction; substituting and using his equation~(7.13),
+$\lim_l(2/3^{l+1})\varphi_0'(x_l)/\varphi_0(x_l)=2/3$ uniformly on the class,
 \[
 \frac{9}{3^{l+1}}\cdot\frac{\varphi(3x_l^+)}{\varphi(x_l^+)}
 = \Lambda_l\cdot\frac2{3^{l+1}}\cdot\frac{\varphi_0'(x_l^+)}{\varphi_0(x_l^+)}\,(1+o(1))
@@ -1100,11 +1117,11 @@ operator $S_\infty$, are untouched here, and the full theorem is not established
 
 Wirsching stated the weaker Conjecture 3 instead of the stronger $\varphi\sim\kappa\varphi_0$ he
 considers first. Theorem~\ref{thm:unrestricted} shows why: the stronger statement fails by a
-mechanism with a certified, positive amplitude, not by some correctable technical looseness. The
-class on which the weaker statement holds is exactly the one phase, among the continuum swept by
-$H$, at which the ratio converges. That phase sits close to $H$'s minimum: $H(0) - \min H =
-5.25\times10^{-6}$ against a total oscillation of $4.19\times10^{-4}$. We do not know whether this
-is coincidental.
+mechanism with a certified, positive amplitude, not by some correctable technical looseness. Every
+phase swept by $H$ admits some sequence along which the ratio converges to $e^{H(\theta)}$; what is
+special about phase $0$ is only that it is the one Wirsching's own class $\widetilde A_\delta$
+happens to fix. That phase sits close to $H$'s minimum: $H(0) - \min H = 5.25\times10^{-6}$ against
+a total oscillation of $4.19\times10^{-4}$. We do not know whether this is coincidental.
 
 The rate is not established beyond $o(1)$. The sharper Edgeworth correction of
 Remark~\ref{rem:edgeworth}, and a correspondingly sharper form of the envelope and Berg--Kr\"uppel
