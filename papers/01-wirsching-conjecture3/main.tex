@@ -582,9 +582,12 @@ $|\kappa_2(w)| \le 0.114|w|^2$ and $|\kappa_3(w)|\le 0.0119|w|^4$.
 $|\sinh z|^2 = \sinh^2(\operatorname{Re}z)+\sin^2(\operatorname{Im}z) \ge \sinh^2(\operatorname{Re}z)$
 and $|\cosh z|^2 \le \cosh^2(\operatorname{Re}z)$; the first excludes the poles of $\coth$, since
 $\operatorname{Re}(w/2)=b/2>0$ never approaches $\pi i k$. This gives the sector bounds directly.
-Monotonicity of $e$ is immediate from the increasing power series of $\sinh(r)/r$; monotonicity of
-$f$ follows from $(\log f)'(r) = 3/r + \tanh r - 3\coth r < 0$ for $r>0$ (Lazarevi\'c's inequality,
-$(\sinh r/r)^3 > \cosh r$, gives $f<1$ but not this monotonicity by itself). The local bounds
+Monotonicity of $e$ is immediate from the increasing power series of $\sinh(r)/r$. For $f$, set
+$u=2r$; a direct computation gives $2r\sinh(r)\cosh(r)\,(\log f)'(r) = F(u)$ with
+$F(u):=3\sinh u - u\cosh u - 2u$, so $(\log f)'(r)$ has the sign of $F(2r)$. Since
+$F(0)=F'(0)=F''(0)=0$ and $F'''(u)=-u\sinh u<0$ for $u>0$, integrating three times from $0$ gives
+$F(u)<0$ for all $u>0$, hence $(\log f)'(r)<0$ for $r>0$ and $f$ is strictly decreasing.
+(Lazarevi\'c's inequality, $(\sinh r/r)^3 > \cosh r$, separately gives $f<1$.) The local bounds
 at $|w|\le2$ follow by applying the maximum-modulus principle to $\kappa_2(w)/w^2$ and
 $\kappa_3(w)/w^4$ (analytic on $|w|<2\pi$ by the Bernoulli expansion): bound each on $|w|=2$ by the
 triangle inequality, using $|B_{2k}| = 2(2k)!\,\zeta(2k)/(2\pi)^{2k}$ and $\zeta(2k)\le\zeta(2)$,
@@ -1106,9 +1109,16 @@ $\varphi(3x_l^+)/\varphi(x_l^+) = \Lambda_l\cdot\varphi_0(3x_l^+)/\varphi_0(x_l^
 Kr\"uppel's $\varphi_0$ is an asymptotic solution of the same truncated equation (their
 equation~(7.12) in Wirsching's notation: $\varphi_0'(t)/\varphi_0(3t)\to9/2$ as $t\to0$), so
 $\varphi_0(3x_l^+)/\varphi_0(x_l^+) = \tfrac29\varphi_0'(x_l^+)/\varphi_0(x_l^+)\,(1+o(1))$.
-Since $x_l^+/x_l = 1+3^{-(l+1)}/x_l \to 1$ (as $x_l\sim l\cdot3^{-l}$) and $\varphi_0'/\varphi_0$
-is, from its explicit form, continuous and slowly varying near $x_l$, (7.13) transfers from $x_l$
-to $x_l^+$ with an $o(1)$ correction; substituting and using his equation~(7.13),
+To see that (7.13) transfers from $x_l$ to $x_l^+$ with an $o(1)$ correction, write $v=\log t$; the
+explicit form of $\varphi_0$ above gives $\varphi_0'(t)/\varphi_0(t) = B(v)/t$ with
+$B(v) = \gamma+\delta_{\mathrm{BK}}/v-2\beta(v-\log(-v))(1-1/v)$, and, as $v\to-\infty$,
+$B(v)\sim-2\beta v$ while $B'(v)\to-2\beta$, so $(\log B)'(v)=B'(v)/B(v)\to0$ and
+$(\log[\varphi_0'/\varphi_0])'(v) = (\log B)'(v)-1 \to -1$, bounded. Since $x_l^+/x_l = 1+3^{-(l+1)}/x_l
+\to 1$ (as $x_l\sim l\cdot3^{-l}$, in fact $3^{-(l+1)}/x_l=O(1/l)$), $v(x_l^+)-v(x_l)=\log(x_l^+/x_l)
+=O(1/l)$, and the mean value theorem gives
+$\log[\varphi_0'/\varphi_0(x_l^+)]-\log[\varphi_0'/\varphi_0(x_l)]=O(1/l)$, i.e.
+$\varphi_0'(x_l^+)/\varphi_0(x_l^+)=\varphi_0'(x_l)/\varphi_0(x_l)\cdot(1+O(1/l))$. Substituting and
+using his equation~(7.13),
 $\lim_l(2/3^{l+1})\varphi_0'(x_l)/\varphi_0(x_l)=2/3$ uniformly on the class,
 \[
 \frac{9}{3^{l+1}}\cdot\frac{\varphi(3x_l^+)}{\varphi(x_l^+)}

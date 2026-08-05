@@ -468,7 +468,7 @@ this project decided explicitly and consistently since Round 3.
 Paper recompiles clean (pdflatex, exit 0, zero warnings, zero overfull-hbox notices for the first
 time in this loop), 17 pages.
 
-## Round 9: seventh blind loop iteration (2026-08-06), Opus complete; Codex pending
+## Round 9: seventh blind loop iteration (2026-08-06), Opus and Codex both complete
 
 Opus, PDF-only, max effort, on the Round 8 PDF (the shared prompt file was updated after Round 8
 with explicit overline/margin-checking instructions, which this run confirms working as intended:
@@ -491,7 +491,26 @@ each independently verified before fixing (Rule 8c):
 | P7 | Introduced a stray `--` (en dash) parenthetical aside while fixing P2, against this project's Rule 3/5c no-dash convention; the only such instance in the 17-page document | **self-caught before commit** (Rule 8c: verify one's own fix, not just the referee's original finding) | fixed: replaced with parentheses, matching the paper's own established style |
 | G (literature, unverifiable from the PDF alone) | The claimed erratum in Berg-Kruppel [2] p. 179; the term "Elka functions" attributed to Wirsching | **erratum already independently verified against the actual primary-source PDF in Round 6/7**; "Elka functions" not reconfirmed this round | no action needed for the erratum (already done); "Elka functions" terminology flagged for a future literature-verification pass, not blocking |
 
-Codex's parallel round-9 report was launched alongside Opus's but not yet read/processed as of
-this table update; to be added in a subsequent entry once reviewed.
+Codex, PDF-only, max effort, launched in parallel against the same Round 8 PDF (before P1-P7 above
+were applied). Explicitly re-confirmed page 9's `Lambda(-y)=overline{Lambda(y)}` is correctly
+printed with the bar visible, and confirmed no inline formula runs off the margin on any of the 17
+pages -- both items 5-6 of the shared prompt working as intended for Codex as well as Opus. Verdict:
+**Reject**. Five findings, each independently verified before acting (Rule 8c):
+
+| ID | Summary | Verdict | Status |
+|----|---------|---------|--------|
+| Q1 | Proposition 8's grid-rigor claim overclaims for the upper-bound direction of the `osc(H)` enclosure | same finding as P2 above | already fixed by P2; re-checked against the post-fix text, confirmed resolved |
+| Q2a | Theorem 2's "Conditional on..." contradicts the paper's unconditional-rigor claims elsewhere | same finding as P1 above | already fixed by P1; re-checked against the post-fix text, confirmed resolved |
+| Q2b | Restates the repository-vs-inline certification scope question | not a new defect | no action (Rule 8d): this scope question was settled explicitly in Round 3 and re-affirmed in Round 8; nothing in Codex's Round 9 report gives new evidence against that decision |
+| Q3 | Lemma 9's proof asserts `(log f)'(r) = 3/r + tanh(r) - 3coth(r) < 0` for `r>0` without proof (the parenthetical about Lazarevic's inequality explicitly notes it gives `f<1` but "not this monotonicity by itself") | **confirmed, real**; independently re-derived: substituting `u=2r` gives `2r sinh(r) cosh(r) (log f)'(r) = F(u) := 3 sinh(u) - u cosh(u) - 2u`, and `F(0)=F'(0)=F''(0)=0` while `F'''(u) = -u sinh(u) < 0` for `u>0`, so three successive integrations from `0` give `F(u)<0` for all `u>0`; checked numerically against direct evaluation of `(log f)'(r)` from `r=10^{-10}` to `r=10^5`, sign matches throughout | fixed: replaced the bare assertion with the full elementary proof (the `u`-substitution identity and the triple-integration argument) |
+| Q4 | Proposition 18's proof asserts `phi_0'/phi_0` is "continuous and slowly varying near `x_l`" to justify transferring eq. (7.13) from `x_l` to `x_l^+` with an `o(1)` correction, without an actual rate calculation, as suggested by the reviewer (`x_l^+/x_l = 1+O(1/l)` combined with a bound on `(phi_0'/phi_0)(x_l^+)/(phi_0'/phi_0)(x_l)`) | **confirmed, real**; independently derived from `phi_0`'s explicit closed form (Section 2): writing `v=log t`, `phi_0'(t)/phi_0(t) = B(v)/t` with `B(v)=gamma+delta_BK/v-2*beta*(v-log(-v))*(1-1/v)`; as `v -> -infinity`, `B(v) ~ -2*beta*v` while `B'(v) -> -2*beta`, so `(log B)'(v) -> 0` and `(log[phi_0'/phi_0])'(v) -> -1`, bounded; since `v(x_l^+)-v(x_l) = O(1/l)`, the mean value theorem gives the needed `phi_0'(x_l^+)/phi_0(x_l^+) = phi_0'(x_l)/phi_0(x_l)*(1+O(1/l))` directly; checked numerically with the paper's own certified constants (`gamma=-1.8649...`, `delta_BK=0.4547...`, `beta=1/(2 log 3)`) for `l` up to 320, confirming the relative change decays like `1/(3l)` as predicted | fixed: replaced "continuous and slowly varying" with the full derivation (the `B(v)` closed form, its asymptotics, and the mean-value-theorem transfer) |
+| Q5 | Restates already-verified Berg-Kruppel identification concerns | same finding as G above | no action needed (already resolved in Round 6/7) |
 
 Paper recompiles clean (pdflatex, exit 0, zero warnings, zero overfull-hbox notices), 17 pages.
+Both new proofs (Lemma 9, page 8; Proposition 18, page 16) visually spot-checked via rendered PNG:
+no truncation, no margin overflow.
+
+**Net effect of this round**: two genuinely new mathematical gaps found and closed with complete
+elementary proofs (Q3, Q4), both independently re-derived and numerically checked before writing
+into the paper; the remaining three Codex findings were either already resolved by this round's
+Opus-driven fixes or restate settled ground. No open findings remain from Round 9.
