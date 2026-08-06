@@ -131,8 +131,9 @@ $w_0(\tau+c)-w_0(\tau)$ tends to $c$
 
 A single computation underlies both theorems. Write $t = e^{-\tau}$ and let $H(w)$ be the
 $\log 3$-periodic function appearing in the exact decomposition of $\varphi$'s log-Laplace
-transform (Theorem~\ref{thm:H}); the saddlepoint bridge of Sections~\ref{sec:formulaA}
-and~\ref{sec:envelope} shows $\log\varphi(t)-\log\varphi_0(t) = H(w_0(\tau))+o(1)$, where the saddle
+transform (Theorem~\ref{thm:H}); the saddlepoint bridge of Sections~\ref{sec:formulaA},
+\ref{sec:envelope}, and~\ref{sec:bk} shows $\log\varphi(t)-\log\varphi_0(t) = H(w_0(\tau))+o(1)$,
+where the saddle
 location $w_0(\tau)$ advances by $c$ per period of $\tau$, up to a vanishing correction:
 $w_0(\tau+c)-w_0(\tau) = c+O(1/\tau)$ (Lemma~\ref{lem:saddles}). Wirsching's comparison class
 constrains $w_0(\tau_l)$'s phase modulo $\log 3$ to converge to a single value as $l\to\infty$; the
@@ -145,7 +146,13 @@ read the same object at two different scopes.
 \label{cor:bk}
 $e^H$ is Berg and Kr\"uppel's own periodic factor for the eigenfunction $\varphi$, from
 Proposition~9.3 of \cite{bergkruppel1998}, which they give as an infinite product; $H$ itself is
-its logarithm. Its Fourier series, Proposition~\ref{prop:Hfourier} below, is new.
+its logarithm. Its Fourier series, Proposition~\ref{prop:Hfourier} below, is new. This corollary
+has two parts of different depth: that $e^H$ agrees with their product \emph{as a function},
+proved in Remark~\ref{rem:bkproduct} below by pure algebra ($e^H=e^{-Q}e^Le^{-\Delta}$ recombining
+Theorem~\ref{thm:H}'s own pieces), and that this function is genuinely the periodic factor
+multiplying $\varphi$'s own asymptotic, which needs the full saddlepoint chain of
+Theorem~\ref{thm:formulaA} and Propositions~\ref{prop:envelope}--\ref{prop:bkidentity}, proved
+below.
 \end{corollary}
 
 Section~\ref{sec:prelim} recalls the functional equation $\varphi$ satisfies and Berg and
@@ -273,11 +280,12 @@ for $w$ in any half-line bounded away from $-\infty$, by a geometric series in $
 exponent.
 \end{proof}
 
-The decomposition $L = Q+H+\Delta$, with $\Delta$ negligible as $w\to\infty$, is unique: any two
-periodic functions differing from $L-Q$ by an $o(1)$ term as $w\to\infty$ must be equal, being
+Given $Q$, $H$ is uniquely determined by the requirement that $L-Q-H$ be $o(1)$ as $w\to\infty$: any
+two periodic functions differing from $L-Q$ by an $o(1)$ term as $w\to\infty$ must be equal, being
 periodic functions that agree in the limit along every residue class of $w$ modulo $c$.
 
 \begin{remark}
+\label{rem:bkproduct}
 Berg and Kr\"uppel's own Proposition~9.3, in their own notation throughout this remark only
 (their $a$, $b$ are unrelated to this paper's identically-named objects and are not used again
 outside this remark, Section~\ref{sec:bk} below reusing $a$ for their dilation parameter in a way
@@ -717,16 +725,19 @@ e_2(N) := \frac{2}{\sqrt{2\pi}}\cdot\frac{e^{-\theta_N^2V_{\mathrm{lo}}/2}}{\the
 e_3(N) &:= 2\,e^{3/e}\sqrt{\frac{V_{\mathrm{up}}}{2\pi}}\cdot
 \frac{(1+\theta_N^2)^{-(N-2)/2}}{\theta_N(N-2)}. \notag
 \end{align}
-$E(19)<1$, and $\sqrt N\,E(N) \to \tfrac43e^{1/3}(2\pi)^{-1/2} = 0.742358\ldots$ as $N\to\infty$
+$\sqrt N\,E(N) \to \tfrac43e^{1/3}(2\pi)^{-1/2} = 0.742358\ldots$ as $N\to\infty$
 (proved below, from $e_1$ alone: $e_2$ and $e_3$ vanish faster than any power of $N$).
 Consequently $\varphi(t) = \varphi_{\mathrm{sp}}(t)\,(1+o(1))$ as $t \to 0^+$, with no restriction
 on the sequence of $t$'s.
 \end{theorem}
 
 \begin{remark}
-Numerically, $E$ is also strictly decreasing and satisfies $E(N)\le4.18\,N^{-1/2}$ throughout
-$19\le N\le5000$ (checked directly in the accompanying repository); neither fact, nor $E(19)<1$
-itself, is used anywhere in this paper, where only $E(N)\to0$ as $N\to\infty$ is needed.
+The estimate $|R(s)-1|\le E(N)$ is only informative once $E(N)<1$, which first happens at
+$N=19$ (see the proof: $E(18)=1.00170\ldots\ge1$, $E(19)=0.95673\ldots<1$); this is why $N\ge19$
+is kept as the theorem's hypothesis, though nothing in the proof strictly requires it. Numerically,
+$E$ is also strictly decreasing and satisfies $E(N)\le4.18\,N^{-1/2}$ throughout $19\le N\le5000$
+(checked directly in the accompanying repository); neither this fact, nor $E(19)<1$ itself, is
+used anywhere in this paper, where only $E(N)\to0$ as $N\to\infty$ is needed.
 \end{remark}
 
 \begin{proof}
@@ -752,8 +763,8 @@ $(2/\sqrt{2\pi})\int_{c_0}^\infty e^{-v^2/2}\,dv$, $c_0=\theta_N\sqrt V$ (a loca
 from $c:=\log3$), and bounding via $\int_{c_0}^\infty e^{-v^2/2}\,dv\le e^{-c_0^2/2}/c_0$ at
 $V=V_{\mathrm{lo}}$, gives $e_2$. On
 $|y|>\theta_N$, Lemma~\ref{lem:tail}'s bound
-$|e^{\Lambda(y)}|\le e^{3/e}(1+y^2)^{-N/2}$ integrates, via $\int_a^\infty(1+y^2)^{-N/2}\,dy \le
-(1+a^2)^{-(N-2)/2}/(a(N-2))$ at $a=\theta_N$ (using $V\le V_{\mathrm{up}}$ for the leading
+$|e^{\Lambda(y)}|\le e^{3/e}(1+y^2)^{-N/2}$ integrates, via $\int_u^\infty(1+y^2)^{-N/2}\,dy \le
+(1+u^2)^{-(N-2)/2}/(u(N-2))$ at $u=\theta_N$ (using $V\le V_{\mathrm{up}}$ for the leading
 $\sqrt{V/2\pi}$ factor in \eqref{eq:R}), to give $e_3$; this needs $\theta_N \gg N^{-1/2}$, satisfied
 since $\tfrac13<\tfrac12$. Every constant entering $E$ (via $A_V$, Lemma~\ref{lem:variance}, and the
 $3.0152\approx e^{3/e}$ of Lemma~\ref{lem:tail}) is a supremum over $b>0$ or a sum over one complete
@@ -1012,8 +1023,13 @@ which is $P(\tau)$. Finally $w_0 = c(B_0+a)$ and $\tau = w_0-\log B_0$ give $\ta
 B_0 = Y-\log Y+ca+\log c = Y-\log Y-r$.
 \end{proof}
 
-Series-reverting $Y - \log Y = \tau + r$ to second order, $Y = \tau + \log\tau + r +
-(\log\tau+r)/\tau + O(\tau^{-2}\log^2\tau)$, and substituting into $P$ gives
+Series-reverting $Y-\log Y=\tau+r$ to second order: writing $W:=\tau+r$, one iteration of
+$Y=W+\log Y$ gives $Y=W+\log W+O(\log^2W/W)$, and $\log W=\log\tau+O(1/\tau)$ then gives
+$Y = \tau + \log\tau + r + (\log\tau+r)/\tau + O(\tau^{-2}\log^2\tau)$. Since $w_0=Y+ca$ and
+$Q(w_0)=-Y^2/(2c)+ca^2/2$ (substituting $w_0=Y+ca$ into $Q$'s definition and simplifying), $P$'s
+leading term in $Y$ is $-Y^2/(2c)$, so $\partial P/\partial Y=-Y/c+O(1)$ turns the
+$O(\tau^{-2}\log^2\tau)$ error in $Y$ above into the $O(\tau^{-1}\log^2\tau)$ error in $P$ below.
+Substituting into $P$ gives
 \[
 P(\tau) = -\frac{(\tau+\log\tau)^2}{2c} + \Bigl(1+\tfrac1c-\tfrac{r}{c}\Bigr)\tau +
 \Bigl(\tfrac12-\tfrac{r}{c}\Bigr)\log\tau + C_P + O\!\left(\frac{\log^2\tau}{\tau}\right),
@@ -1170,7 +1186,7 @@ $e^{H(\theta)}$: take $\tau_l := \Phi_0(\theta+lc)$, $z_l := e^{-\tau_l}$, so $w
 exactly, and apply Theorem~\ref{thm:formulaA}, Proposition~\ref{prop:envelope}, and
 Proposition~\ref{prop:bkidentity} as in the proof of Theorem~\ref{thm:conj3}. What is
 special about phase $0$ is only that it is the one Wirsching's own class $\widetilde A_\delta$
-happens to fix. That phase sits close to the smallest of the two values of $H$ certified in
+happens to fix. That phase sits close to the smaller of the two values of $H$ certified in
 Proposition~\ref{prop:Hcert}: $H(0) - H(w_{1011118}) = 5.25\times10^{-6}$, against a certified
 oscillation of at least $4.18\times10^{-4}$. (Whether $w_{1011118}$ is where $H$ attains its true
 minimum is not certified, per Proposition~\ref{prop:Hcert}'s own caveat on the grid search.) We do
