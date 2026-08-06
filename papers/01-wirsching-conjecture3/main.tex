@@ -39,7 +39,8 @@ Mellin transform, atomic function}
 Wirsching's 2003 argument for positive predecessor density under the $3n+1$ map reduces to three
 conjectures. Conjecture 3 concerns the near-zero asymptotics of an invariant density $\varphi$,
 compared against an explicit asymptotic $\varphi_0$ due to Berg and Kr\"uppel. The exact
-log-Laplace transform of $\varphi$ decomposes as a smooth part plus a periodic correction $H$. Berg
+log-Laplace transform of $\varphi$ decomposes as a smooth part, a periodic correction $H$, and a
+doubly exponentially small remainder. Berg
 and Kr\"uppel gave this correction, for this eigenfunction, as an infinite product in 1998, five
 years before Wirsching's conjecture; they did not ask whether it is constant. We give $H$ instead
 as a Fourier series with closed-form coefficients in $\Gamma$ and $\zeta$, and certify rigorously
@@ -66,11 +67,14 @@ predecessor density reduces to three conjectures about $\varphi$ and related qua
 three unbridged gaps in the argument.
 
 The load-bearing one is Conjecture 3. It concerns the behaviour of $\varphi$ as its argument tends
-to $0$, compared against an explicit comparison function $\varphi_0$. Berg and Kr\"uppel
-\cite{bergkruppel1998} had already produced $\varphi_0$ five years earlier, by Laplace transform
-and saddlepoint analysis, as the asymptotic solution of a truncated version of the functional
-equation $\varphi$ satisfies. Their argument for the asymptotic comparability of $\varphi$ and
-$\varphi_0$ was informal: they give the periodic correction relating the two as an explicit
+to $0$, compared against an explicit comparison function $\varphi_0$: Wirsching's own
+equation~(7.11) defines $\varphi_0$ to be exactly Berg and Kr\"uppel's asymptotic solution, citing
+\cite{bergkruppel1998} by name at that point, so the identification is Wirsching's own choice, not
+a substitution made here. Berg and Kr\"uppel had produced $\varphi_0$ five years earlier, by
+Laplace transform and saddlepoint analysis, as the asymptotic solution of a truncated version of
+the functional equation $\varphi$ satisfies. Their argument for the asymptotic comparability of
+$\varphi$ and $\varphi_0$ was informal: they give the periodic correction relating the two as an
+explicit
 infinite product (Corollary~\ref{cor:bk} below) but never evaluate it, so whether a single
 constant relates $\varphi$ to $\varphi_0$ across every sequence, and whether the ratio converges at
 all along an arbitrary one, are both left open. Wirsching considers the strongest possible reading
@@ -714,12 +718,16 @@ e_3(N) &:= 2\,e^{3/e}\sqrt{\frac{V_{\mathrm{up}}}{2\pi}}\cdot
 \frac{(1+\theta_N^2)^{-(N-2)/2}}{\theta_N(N-2)}. \notag
 \end{align}
 $E(19)<1$, and $\sqrt N\,E(N) \to \tfrac43e^{1/3}(2\pi)^{-1/2} = 0.742358\ldots$ as $N\to\infty$
-(proved below, from $e_1$ alone: $e_2$ and $e_3$ vanish faster than any power of $N$). Numerically,
-$E$ is also strictly decreasing and satisfies $E(N)\le4.18\,N^{-1/2}$ throughout $19\le N\le5000$
-(checked directly in the accompanying repository); neither fact, nor $E(19)<1$ itself, is used
-below, where only $E(N)\to0$ as $N\to\infty$ is needed. Consequently $\varphi(t) =
-\varphi_{\mathrm{sp}}(t)\,(1+o(1))$ as $t \to 0^+$, with no restriction on the sequence of $t$'s.
+(proved below, from $e_1$ alone: $e_2$ and $e_3$ vanish faster than any power of $N$).
+Consequently $\varphi(t) = \varphi_{\mathrm{sp}}(t)\,(1+o(1))$ as $t \to 0^+$, with no restriction
+on the sequence of $t$'s.
 \end{theorem}
+
+\begin{remark}
+Numerically, $E$ is also strictly decreasing and satisfies $E(N)\le4.18\,N^{-1/2}$ throughout
+$19\le N\le5000$ (checked directly in the accompanying repository); neither fact, nor $E(19)<1$
+itself, is used anywhere in this paper, where only $E(N)\to0$ as $N\to\infty$ is needed.
+\end{remark}
 
 \begin{proof}
 Split \eqref{eq:R} at $|y|=\theta_N$. On $|y|\le\theta_N$, Lemma~\ref{lem:taylor} bounds the cubic
@@ -740,8 +748,9 @@ which is decreasing in $V$; using $V\ge V_{\mathrm{lo}}$ from Lemma~\ref{lem:var
 central Taylor-remainder contribution $e_1$. Since $\sqrt{V/2\pi}\int_\R e^{-Vy^2/2}\,dy = 1$, the
 same splitting leaves exactly two further terms. The truncated Gaussian tail
 $\sqrt{V/2\pi}\cdot2\int_{\theta_N}^\infty e^{-Vy^2/2}\,dy$, substituting $v=y\sqrt V$ to get
-$(2/\sqrt{2\pi})\int_c^\infty e^{-v^2/2}\,dv$, $c=\theta_N\sqrt V$, and bounding via
-$\int_c^\infty e^{-v^2/2}\,dv\le e^{-c^2/2}/c$ at $V=V_{\mathrm{lo}}$, gives $e_2$. On
+$(2/\sqrt{2\pi})\int_{c_0}^\infty e^{-v^2/2}\,dv$, $c_0=\theta_N\sqrt V$ (a local constant, distinct
+from $c:=\log3$), and bounding via $\int_{c_0}^\infty e^{-v^2/2}\,dv\le e^{-c_0^2/2}/c_0$ at
+$V=V_{\mathrm{lo}}$, gives $e_2$. On
 $|y|>\theta_N$, Lemma~\ref{lem:tail}'s bound
 $|e^{\Lambda(y)}|\le e^{3/e}(1+y^2)^{-N/2}$ integrates, via $\int_a^\infty(1+y^2)^{-N/2}\,dy \le
 (1+a^2)^{-(N-2)/2}/(a(N-2))$ at $a=\theta_N$ (using $V\le V_{\mathrm{up}}$ for the leading

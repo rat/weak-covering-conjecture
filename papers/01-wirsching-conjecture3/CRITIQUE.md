@@ -625,3 +625,38 @@ caught and corrected (U1), along with two small cosmetic issues (U2, U3). Both r
 found no error in the paper's mathematical core after extensive independent re-derivation. Per the
 researcher's explicit instruction, Round 13 is not launched automatically; the loop pauses here
 pending authorization.
+
+## Round 13: eleventh blind loop iteration (2026-08-06), Opus and Codex both complete
+
+Both launched in parallel, PDF-only, max effort, against the Round 12 PDF. Opus verdict: **accept
+after minor-to-moderate revision**, again reporting no mathematical error after re-deriving every
+identity by hand, recomputing ~25 constants to 40-80 digits, reproducing Proposition 8's grid
+search exactly, confirming Berg-Kruppel's product identity to 60 digits, and validating the whole
+transform-to-density chain end-to-end via independent numerical Fourier inversion. Codex verdict:
+**major revision, not rigorous as a standalone submission**, entirely on the repository/certificate
+reproducibility question already settled since Round 3 (Rule 8d, no action) plus one convergent
+point with Opus. Findings, each independently verified before acting (Rule 8c):
+
+| ID | Summary | Verdict | Status |
+|----|---------|---------|--------|
+| V1 (Opus F1, MAJOR, new) | The identification `varphi_0 = ` Berg-Kruppel's (9.6) is used throughout but never cited to the specific place in Wirsching [1] where he makes that identification himself; every other imported fact from [1] is pinned to an equation number, making this omission conspicuous. Without it, Theorem 1 proves a true statement about *a* comparison function, not necessarily Wirsching's Conjecture 3 as he stated it | **confirmed as a real citation gap, but the underlying identification is correct**: checked directly against the primary source (Wirsching 2003, cached at `/tmp/posden.txt` from earlier primary-source verification work in this project), his own equation (7.11) defines `varphi_0 := g_0`'s asymptotic form and explicitly cites Berg-Kruppel [1 in his numbering] by name at exactly that point, matching this paper's own eq. (9.6) reproduction of Berg-Kruppel's formula term for term | fixed: added an explicit citation to Wirsching's equation (7.11) at the point `varphi_0` is first introduced in the Introduction, stating plainly that the identification is Wirsching's own choice, not a substitution made in this paper |
+| V2 (Opus F6, Codex #3, both independently, convergent) | The abstract says the log-Laplace transform "decomposes as a smooth part plus a periodic correction H", but the actual exact decomposition (Theorem 4) is three terms, `L = Q + H + Delta`, with `Delta` doubly exponentially small but not zero | **confirmed, real**: two independent reviewers converged on the same abstract sentence | fixed: abstract now says "decomposes as a smooth part, a periodic correction H, and a doubly exponentially small remainder" |
+| V3 (Opus F5 in Round 12, repeated as F5 in Round 13) | Theorem 13's *statement* contains an unproved, explicitly-unused numerical range claim ("E is also strictly decreasing and satisfies E(N)<=4.18*N^(-1/2) throughout 19<=N<=5000 (checked directly in the accompanying repository); neither fact...is used below") -- flagged once in Round 12 and deferred, flagged again by the same reviewer type in Round 13 | **confirmed, real, and now flagged twice across two rounds**, past the threshold this project uses for acting on a deferred item | fixed: moved the sentence out of the theorem environment into its own remark immediately following, consistent with how Theorem 2's proof-mechanism content was already kept out of theorem statements elsewhere |
+| V4 (Opus F3, new, minor) | Theorem 13's proof locally defines `c := theta_N*sqrt(V)` on p. 11, colliding with the globally fixed `c := log 3` used throughout the rest of the paper and on the same page | **confirmed, real**: an actual, if harmless, symbol collision reusing a globally-fixed letter, notable because the paper otherwise flags every other collision explicitly | fixed: renamed the local constant to `c_0`, with an explicit note that it is distinct from `c:=log3` |
+| Opus F2 (MAJOR), Codex #1/#2 (restates settled ground) | Repository/certificate reproducibility: the Arb ball arithmetic certificates behind Proposition 8, eq. (5), and Theorem 13's constant chain are not shown inline or archived with a DOI, only linked via a mutable GitHub URL | not a new defect | no action (Rule 8d): this is the same repository-vs-inline certification scope question settled explicitly in Round 3 and reaffirmed in Rounds 8, 10, 11, and 12; both reviewers independently reproduced every one of the certified numbers themselves and reported no doubt about their correctness |
+| Opus F4, F7-F12 (minor/deferred) | Theorem 1 doesn't explicitly state uniformity of its o(1) error terms over the class (true but implicit from the rate bounds already given); Theorem statements (2, 17, 18) cite their own proof mechanism inline; Proposition 17 miscounts its own claims as "three" when a fourth (the Y-log Y saddle equation) is also asserted; one punctuational dash; Corollary 3 and Remark 5 state the same fact twice; "de Bruijn-Mahler phenomenon" may not be an established term; the oscillation of Theorem 2 is asymptotically real but numerically unreachable at any computable t | none confirmed as requiring a text fix this round | not acted on: logged here in case a future round converges on the same points, consistent with this project's practice of prioritizing convergent/repeated findings over first-time minor ones |
+| Codex #4 (minor, not acted on) | The integral display `varphi(x) = (3/2)*int_{3x-2}^{3x} varphi` omits the dummy variable and differential | not confirmed as an error; standard shorthand also used in Wirsching's own primary source for the same kind of display | no action: stylistic preference, not incorrect as printed |
+
+Paper recompiles clean (pdflatex, exit 0, zero warnings, zero overfull-hbox notices), still 17
+pages. All four edited passages (abstract/introduction p.1, Theorem 13/new Remark 14 p.11, the
+`c_0` rename p.11) visually spot-checked via rendered PNG: no truncation, no margin overflow.
+
+**Net effect of this round**: the most substantive fix was closing a genuine citation gap (V1)
+flagged by Opus as the paper's single most severe finding; verifying it required going back to the
+primary source (Wirsching 2003) rather than trusting the reviewer's framing, which confirmed the
+underlying mathematics was already correct (this project's own literature notes, `L-002.md`, had
+already located and read the exact passage, Wirsching's eq. 7.11) and that the fix was purely a
+missing citation, not a hidden error. Two reviewers converged independently on the abstract's
+`Delta`-dropping overclaim (V2), and one item deferred once in Round 12 was flagged again and
+finally fixed (V3). Per the researcher's explicit instruction, Round 14 is not launched
+automatically; the loop pauses here pending authorization.
