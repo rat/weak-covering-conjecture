@@ -555,3 +555,38 @@ cross-reference, a stale notation parenthetical), plus two Rule 5c writing-tell 
 flagged by both reviewers. One item (the broader symbol-collision cleanup) is deliberately deferred
 to a future round rather than rushed. Per the researcher's explicit instruction, Round 11 is not
 launched automatically; the loop pauses here pending authorization.
+
+## Round 11: ninth blind loop iteration (2026-08-06), Opus and Codex both complete
+
+Both launched in parallel, PDF-only, max effort, against the Round 10 PDF. Opus verdict: **accept
+after minor revision**, reporting no substantive mathematical error after recomputing essentially
+every constant in the paper (including a 40-digit cross-check of Berg-Kruppel's `C_P` two
+independent ways) and confirming the abstract, both theorem statements, Corollary 3, and Section 8
+agree with each other clause by clause. Codex verdict: **would not recommend acceptance as
+submitted**, centered on the same repository/certificate-reproducibility scope question raised in
+prior rounds (Rule 8d: already settled, no new action), plus one specific overclaim both reviewers
+independently converged on. Findings, each independently verified before acting (Rule 8c):
+
+| ID | Summary | Verdict | Status |
+|----|---------|---------|--------|
+| S1 (Opus F1, Codex #2, both independently) | Section 8's Discussion stated as fact "`H(0) - min H = 5.25e-6` against a total oscillation of `4.19e-4`", but Proposition 8 explicitly disclaims certifying the grid search's located extrema ("this search is only a heuristic... not itself part of the certificate"); the Discussion quietly used the uncertified `min H` as if proven | **confirmed, real**: two independent reviewers converged on the exact same sentence in the exact same section, the strongest possible signal under Rule 8/15; the underlying number itself is correct (verified: `H(0) - H(w_1011118) = 5.2523e-6` from the two Arb-certified point values already in Proposition 8's proof), only the label "min H" and "total oscillation" overclaimed | fixed: reworded to "the smallest of the two values of H certified in Proposition 8: `H(0) - H(w_1011118) = 5.25e-6`, against a certified oscillation of at least `4.19e-4`", with an explicit parenthetical that whether `w_1011118` is the true minimizer is not certified |
+| S2 (Opus F2, new) | Lemma 15's proof states `2e*eta_0 = 4.9859...` as an approximate equality; recomputing `2*e*0.9170912` (the paper's own stated bound on `eta_0`) gives `4.98582...`, so the printed digit is wrong (should round to `4.9858`, not `4.9859`) | **confirmed, real, minor**: independently recomputed, `2*e*eta_0 = 4.985824...`, printed value's 4th decimal digit is off by one | fixed: changed the false equality `= 4.9859...` to the true, still-sufficient inequality `<= 4.9859` (the argument only ever needed `2*e*eta_0 <= 5`, so the weaker true statement costs nothing) |
+| S3 (Opus F3, new) | Proposition 8's proof states the `\|m\|<=10` truncation's discarded modes are bounded by `2.80e-43`, but this is the one-sided majorant tail (`m>10` only); the actual pointwise truncation error also includes the `-m` modes, so should be `2x2.80e-43` -- inconsistent with the adjacent `\|m\|<=4` computation two paragraphs earlier, which correctly doubles for both signs | **confirmed, real, minor**: the search this bounds is explicitly "only a heuristic... not part of the certificate," so nothing downstream depended on the stale number, but the internal inconsistency between two adjacent computations was real | fixed: `2.80e-43` -> `2x2.80e-43 = 5.60e-43`, with a clause naming why (`m` and `-m` combined) |
+| S4 (Opus F4, new) | `tau_l` is defined with two different meanings in two different proofs (Theorem 1's proof: `tau_l = -log z_l`; Proposition 18's proof, added in Round 10: `tau_l := -log x_l^+`) -- harmless since each proof is self-contained, but notable given how obsessively this paper otherwise flags every other symbol collision | **confirmed, real, cosmetic**: consistent with the paper's own established convention of flagging collisions rather than silently allowing them | fixed: added "(locally to this proof only, distinct from the `tau_l` of Theorem 1's proof)" at the point of Proposition 18's definition |
+| S5 (Opus F6, new) | Lemma 9's proof: "the first excludes the poles of `coth`, since `Re(w/2)=b/2>0` never approaches `pi*i*k`" compares a real quantity (`b/2`) to a purely imaginary one (`pi*i*k`), a category mismatch in the prose even though the underlying point is correct | **confirmed, real, cosmetic** | fixed: reworded to state the actual inequality being used, `\|sinh(w/2)\| >= sinh(b/2) > 0`, excluding the poles, before noting `Re(w/2)=b/2>0` |
+| S6 (Codex #1, restates settled ground) | Repeats that the reproducibility repository is "not a proof artifact contained in the submission" and asks for a version-pinned archived supplement with exact interval outputs, library versions, and commit hashes, rather than a mutable GitHub URL | not a new defect | no action (Rule 8d): this is the same repository-vs-inline certification scope question settled explicitly in Round 3 and re-affirmed in Rounds 8 and 10 |
+| S7 (Codex #3, restates settled ground) | Lists several "direct evaluation" claims (Theorem 13's `E(19)<1`, Lemmas 9-12's constants, Lemma 15's numerical estimates) as proof gaps without reproducible interval data shown inline | same underlying scope question as S6 | no separate action; covered by S6's disposition |
+| Opus F5, F7, F8, F9 (minor/out of scope) | F5: Theorem 13's `N>=19` hypothesis and Lemma 11's `N>=3` claim are both stronger than what their proofs actually use. F7: the reproducibility repo's org name ("faculdade") reads like a placeholder to a blind reviewer with no repo access. F8: pointers into Wirsching 2003 and Berg-Kruppel 1998 cannot be checked from the PDF alone by a blind reviewer (already independently re-verified against the primary sources in Round 6/7, per this project's own records, which a PDF-only reviewer cannot see). F9: the abstract leads with the certification result rather than naming the saddlepoint transfer of Sections 4-6, which Remark 5/Corollary 3 concede is the more novel contribution | none confirmed as defects requiring a text fix this round | not acted on: F5 is true but harmless (weakening one's own hypothesis costs nothing but isn't an error); F7 is a repo-naming question outside this critique loop's scope; F8 is already resolved (Round 6/7) but invisible to a blind PDF-only reviewer by design; F9 is a framing preference, not a correctness issue -- logged here in case a future round converges on the same point |
+
+Paper recompiles clean (pdflatex, exit 0, zero warnings, zero overfull-hbox notices), 17 pages.
+All four edited passages (Lemma 9 p.9, Lemma 15 p.12, Proposition 8 p.8, Proposition 18 p.16,
+Discussion p.17) visually spot-checked via rendered PNG: no truncation, no margin overflow.
+
+**Net effect of this round**: the one substantive finding (S1) was independently reached by both
+reviewers reading the same sentence in the same section, the clearest possible instance of the
+convergent-signal pattern Rule 8/15 exists to catch; both Opus and Codex explicitly stated they
+found no error in the paper's mathematical core after extensive independent recomputation. The
+remaining fixes are small (a wrong digit, a doubling inconsistency, a harmless notation collision,
+an imprecise sentence), and two reviewer requests restate the already-settled repository-scope
+question from Round 3. Per the researcher's explicit instruction, Round 12 is not launched
+automatically; the loop pauses here pending authorization.

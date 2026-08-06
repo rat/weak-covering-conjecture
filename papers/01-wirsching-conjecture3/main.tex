@@ -525,7 +525,8 @@ interval for $H(0)-H(\log(3/2))$.
 
 For the stronger bound, let $w_i = ic/N$, $0\le i<N$, with $N = 2^{20}$. A floating-point evaluation
 of the $N$ grid values from Proposition~\ref{prop:Hfourier}, truncated at $|m|\le10$ (the same
-majorant bounds the discarded modes by $2.80\times10^{-43}$), locates a candidate maximum at
+majorant bounds each pointwise truncation error by $2\times2.80\times10^{-43}=5.60\times10^{-43}$,
+combining the discarded modes $m$ and $-m$), locates a candidate maximum at
 $i=486746$ and a candidate minimum at $i=1011118$; this search is only a heuristic for finding
 two well-separated points and is not itself part of the certificate below. Re-evaluating $H$ at
 exactly these two points to $40$ digits in Arb ball arithmetic, from \eqref{eq:Hcomputable} and
@@ -589,8 +590,8 @@ $|\kappa_2(w)| \le 0.114|w|^2$ and $|\kappa_3(w)|\le 0.0119|w|^4$.
 
 \begin{proof}
 $|\sinh z|^2 = \sinh^2(\operatorname{Re}z)+\sin^2(\operatorname{Im}z) \ge \sinh^2(\operatorname{Re}z)$
-and $|\cosh z|^2 \le \cosh^2(\operatorname{Re}z)$; the first excludes the poles of $\coth$, since
-$\operatorname{Re}(w/2)=b/2>0$ never approaches $\pi i k$. This gives the sector bounds directly.
+and $|\cosh z|^2 \le \cosh^2(\operatorname{Re}z)$; the first gives $|\sinh(w/2)|\ge\sinh(b/2)>0$,
+excluding the poles of $\coth$, since $\operatorname{Re}(w/2)=b/2>0$. This gives the sector bounds directly.
 Monotonicity of $e$ is immediate from the increasing power series of $\sinh(r)/r$. For $f$, set
 $u=2r$; a direct computation gives $2r\sinh(r)\cosh(r)\,(\log f)'(r) = F(u)$ with
 $F(u):=3\sinh u - u\cosh u - 2u$, so $(\log f)'(r)$ has the sign of $F(2r)$. Since
@@ -853,7 +854,7 @@ since $e^x-1\ge e^x/2$ there) together with $dx_k/dw=x_k$, $\Delta''(w) = -\sum_
 bounding both sums by their dominant $k=0$ term via $x_k-b\ge2kb$ (from $3^k-1\ge2k$) gives
 $|\Delta'(w)|\le4be^{-b}$ and $|\Delta''(w)|\le16b^2e^{-b}$, both well under $10^{-60}$ at
 $b>154$. With \eqref{eq:Hbounds} this makes
-$\varepsilon_1 \le 0.0011978$ and $\eta_0 \le 0.9170912$, whence $2e\eta_0 = 4.9859\ldots \le 5 \le
+$\varepsilon_1 \le 0.0011978$ and $\eta_0 \le 0.9170912$, whence $2e\eta_0 \le 4.9859 \le 5 \le
 B_0$, that is $\eta_0 \le B_0/(2e)$, and \eqref{eq:g2scale} improves to $g_\tau''\ge B_0/(2e)>0$
 throughout the interval.
 
@@ -1138,7 +1139,8 @@ $\lim_l(2/3^{l+1})\varphi_0'(x_l)/\varphi_0(x_l)=2/3$ uniformly on the class,
 so the requirement $\limsup_l(9/3^{l+1})\varphi(3x_l^+)/\varphi(x_l^+)<1$ is exactly
 $\limsup_l\Lambda_l<3/2$.
 
-For the value of $\Lambda_l$: write $\tau_l := -\log x_l^+$, so $t=x_l^+$ corresponds to $\tau=\tau_l$
+For the value of $\Lambda_l$: write $\tau_l := -\log x_l^+$ (locally to this proof only, distinct
+from the $\tau_l$ of Theorem~\ref{thm:conj3}'s proof), so $t=x_l^+$ corresponds to $\tau=\tau_l$
 and $t=3x_l^+$ to $\tau=\tau_l-c$. The phase shift under $t\mapsto3t$, i.e. $\tau\mapsto\tau-c$, is
 $w_0(\tau-c)-w_0(\tau)+c = O(1/\tau)$ by Lemma~\ref{lem:saddles}'s defining equation, independently
 of the phase of $\tau$. By Theorem~\ref{thm:formulaA}, Proposition~\ref{prop:envelope}, and
@@ -1168,8 +1170,11 @@ $e^{H(\theta)}$: take $\tau_l := \Phi_0(\theta+lc)$, $z_l := e^{-\tau_l}$, so $w
 exactly, and apply Theorem~\ref{thm:formulaA}, Proposition~\ref{prop:envelope}, and
 Proposition~\ref{prop:bkidentity} as in the proof of Theorem~\ref{thm:conj3}. What is
 special about phase $0$ is only that it is the one Wirsching's own class $\widetilde A_\delta$
-happens to fix. That phase sits close to $H$'s minimum: $H(0) - \min H = 5.25\times10^{-6}$ against
-a total oscillation of $4.19\times10^{-4}$. We do not know whether this is coincidental.
+happens to fix. That phase sits close to the smallest of the two values of $H$ certified in
+Proposition~\ref{prop:Hcert}: $H(0) - H(w_{1011118}) = 5.25\times10^{-6}$, against a certified
+oscillation of at least $4.19\times10^{-4}$. (Whether $w_{1011118}$ is where $H$ attains its true
+minimum is not certified, per Proposition~\ref{prop:Hcert}'s own caveat on the grid search.) We do
+not know whether the near-match with phase $0$ is coincidental.
 
 The rate is not established beyond $o(1)$. The sharper Edgeworth correction of
 Remark~\ref{rem:edgeworth}, and a correspondingly sharper form of the envelope and Berg--Kr\"uppel
