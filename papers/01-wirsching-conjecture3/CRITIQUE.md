@@ -764,5 +764,40 @@ exposed that an item this project logged as "fixed" in an early round had in fac
 the dash was still in the source. One reviewer request (Codex's header-spacing complaint) was
 checked and confirmed to be a text-extraction artifact, not a real defect. The repository/certificate
 question was raised again but not re-litigated, since it was already substantively addressed earlier
-in this same session per the researcher's direction. Per the researcher's explicit instruction,
-Round 16 is not launched automatically; the loop pauses here pending authorization.
+in this same session per the researcher's direction.
+
+## Round 16: fourteenth blind loop iteration (2026-08-06), Opus and Codex both complete
+
+Both launched in parallel, PDF-only, max effort, against the Round 15 PDF. Opus verdict: **accept
+after minor revision**, headlined "I found no mathematical error" after extensive independent
+re-derivation (every printed constant reproduced, including two tight inequalities checked to
+high precision; the two-route agreement on `H` to ~10^-35). Codex verdict: **major revision**,
+again centered on the repository/certificate scope question (Rule 8d, no new action), plus one
+genuinely new finding. Findings, each independently verified before acting:
+
+| ID | Summary | Verdict | Status |
+|----|---------|---------|--------|
+| Y1 (Codex finding #2, MODERATE, new, real) | Corollary 3 claims `e^H` agrees with Berg-Kruppel's infinite product "as proved in Remark 5 below by pure algebra", but Remark 5 only asserts the conclusion (`this is the same object as Q, L, and Delta recombine into`) without showing the term-by-term index correspondence between the two products and `e^L`, `e^{-Delta}` | **confirmed as a real exposition gap, and independently re-derived the missing algebra from scratch before writing anything**: with `s=e^w=a^t`, `a^{t-k}/b = 2s/3^{k+1}` (reindex `j:=k+1`) reproduces `K`'s defining series exactly as `e^{L(w)}`; `a^{t+l}/b = 2s*3^{l-1}` (reindex `k:=l-1`) reproduces `e^{-Delta(w)}` exactly via eq. (2); and `-Q(w) = c(t^2/2 - a*t)` with `e^c=a=3` reproduces the prefactor `a^{t^2/2-alpha*t}` exactly once `alpha=a`. All three match precisely -- the identity is correct, only the derivation was missing | fixed: added the three-part index-matching computation inline in Remark 5, in the paper's existing dense style |
+| Y2 (Opus finding M2, minor, real) | Theorem 2's statement invoked "whose successive-period increment `w_0(tau+c)-w_0(tau)` tends to `c` (Lemma 16) even though `w_0(tau)` itself drifts away from `tau` without bound" as part of the mechanism, but the actual proof (checked directly) uses only that `w_0` is continuous, strictly increasing, and unbounded -- the increment-tends-to-`c` fact plays no role in this particular proof | **confirmed, real**: read Theorem 2's proof line by line; it never invokes the increment fact, only monotonicity+continuity+unboundedness | fixed: replaced the misattributed clause with what the proof actually uses ("whose phase modulo `c` sweeps every value infinitely often") |
+| Y3 (Opus finding M3, minor, real) | Proposition 18's proof says "the first of the proposition's three claims", but the proposition's statement contains four assertions (`f(p)=Q(log p)`, the saddle location, the `P(tau)` formula, and the `Y-log Y=tau+r` reformulation), and the proof does establish the fourth one too | **confirmed, real**: counted the proposition's own statement, four distinct assertions, all proved | fixed: "three claims" -> "four claims" |
+| Y4 (Opus finding M6, minor, real) | Section 2 asserts `phi` is `C^infty` with no proof anywhere in the paper and no downstream use; the property the paper actually proves and uses is continuity (Lemma 11) | **confirmed, real**: grepped the full document, `C^infty` appears exactly once, unused and unproved | fixed: removed the unproved `C^infty` claim, replaced with "continuous (by Lemma 11 below)", forward-referencing the lemma that actually proves it |
+| Codex finding #4 / Opus finding M7 (both, convergent) | The claimed Berg-Kruppel `f''(p)` sign discrepancy (`+2beta` in their printed source vs. `-2beta` from direct differentiation) needs verification against the actual 1998 page; Opus explicitly said "I cannot check what Berg-Kruppel printed" | **verified fresh this round, going beyond what either reviewer could do**: rendered p.179 of `literature/papers/bergkruppel1998.pdf` (archived earlier this session) at 300dpi and read the display directly: "f(p) = alpha ln p - beta ln^2 p, f'(p) = (1/p)(alpha-2beta ln p), f''(p) = (1/p^2)(2beta ln p + 2beta - alpha)" -- confirms the paper's quotation character-for-character, and independently re-differentiated `f` by hand to confirm the paper's own computation (`2beta ln p - 2beta - alpha`) is correct, so the sign discrepancy is real | no text change needed: the citation was already accurate and precisely located (page, proposition, "the unnumbered display right after 'In view of'"); this closes the verification gap both reviewers flagged without altering the paper |
+| Opus finding M1 (MAJOR) + Codex finding #1 (MAJOR), both reviewers, again | Repository/certificate scope question, again | not a new defect | no action (Rule 8d): already substantively addressed earlier this same session (the four `Hhat(m)` enclosures were added per the researcher's explicit direction); further action remains the researcher's choice |
+| Codex finding #3, restates settled ground | Lemma 9/10/11/16's numerical constants asserted without displayed derivation | not a new defect | no action: same repository/rigor-level scope question, Rule 12 |
+| Opus findings M4, M5 (minor/deferred) | (M4) eq. (5)'s tail-bound derivation cites Proposition 8's proof for a shared closed-form sum while Proposition 8 also cites eq. (5), reading like circularity though none exists; (M5) Lemma 11 states integrability for `N>=3` when `N>=2` would already suffice | neither confirmed as requiring a fix this round | not acted on: M4 is a presentational forward/backward-reference concern with no actual circularity (both derive from eq. (4) independently); M5 is a harmless over-conservative statement, logged in case a future round converges on either |
+
+Paper recompiles clean (pdflatex, exit 0, zero warnings, zero overfull-hbox notices), 18 pages
+(unchanged). All edited passages (Theorem 2's statement p.2, the `C^infty`/continuity fix p.3,
+Remark 5's new algebra p.4, Proposition 18's "four claims" p.14) visually spot-checked via rendered
+PNG: no truncation, no margin overflow.
+
+**Net effect of this round**: both reviewers again reported no mathematical error in the paper's
+core after extensive independent re-derivation -- a second consecutive round with that outcome, a
+meaningful signal the loop is converging. The one new, genuine finding (Y1) was a real exposition
+gap in a passage this project's own earlier rounds had accepted at face value; the missing algebra
+was independently re-derived from scratch and confirmed correct before being written into the text.
+A second genuine gap (Codex/Opus's shared concern about the unverifiable Berg-Kruppel citation) was
+closed for good this round by rendering the actual 1998 source page directly, something no prior
+round had the archived PDF to do. Three further minor real findings (Y2-Y4) were fixed. Per the
+researcher's explicit instruction, Round 17 is not launched automatically; the loop pauses here
+pending authorization.
