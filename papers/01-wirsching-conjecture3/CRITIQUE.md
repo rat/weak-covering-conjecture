@@ -680,7 +680,7 @@ repository/certificate scope question. Findings, each independently verified bef
 | W6 (Opus finding 7, minor, real x3) | (a) "the decomposition ... is unique" overstates what's proved (only `H`, given `Q`, is uniquely determined); (b) "the smallest of the two values" is a grammar error for a comparison of two things; (c) "the saddlepoint bridge of Sections 4 and 5" omits Section 6, which is where `log(phi_0)` actually enters | all three **confirmed, real, minor** | fixed: (a) reworded to "Given Q, H is uniquely determined by..."; (b) "smallest" -> "smaller"; (c) added Section 6 to the cross-reference |
 | Opus finding 7 (Lagrange parenthetical) | Flagged "(the Lagrange form is invalid for a complex-valued function of a real variable)" in Lemma 12 as over-explaining a trivial fact to a specialist audience | **considered, disagreed with the finding**: this is not a textbook-trivia aside but a specific, easy-to-get-wrong technical justification for why the proof uses the integral form of Taylor's theorem rather than the more familiar Lagrange form; cutting it would remove real content, not padding | not fixed: kept as is, with reasoning recorded per Rule 8c (a critique finding can be wrong, and this one, on reflection, is) |
 | Opus finding 6 (abstract "in 1998") | Suggested the abstract's "gave this correction... as an infinite product in 1998" should specify "in the proof of their Proposition 9.3" | **considered, not applied**: Corollary 3 and Remark 5 already give this precise locator; adding it to the abstract as well would be the kind of over-qualification Rule 5c's checklist warns against in the highest-risk section of the paper | not fixed |
-| Opus finding 2 (MAJOR) + Codex finding 1 (MAJOR), both reviewers, again | Print the actual Arb ball enclosures behind Proposition 8 and eq. (5) inline (Opus specifically: the four enclosures for `Hhat(1)..Hhat(4)`), replace "exactly" with "with rigorous enclosures", archive the repository with a DOI instead of a mutable URL | not a new defect | no action (Rule 8d): this is the same repository-vs-inline certification scope question, explicitly decided by this project's own Rule 12 (paper states the method and analytic bounds; the repository carries the actual interval-arithmetic computation), settled in Round 3 and reaffirmed in nearly every round since (5, 8, 9, 10, 11, 12, 13). **Flagged explicitly to the researcher this round** (see chat) since this is now the reviewers' top-ranked concern for the sixth-plus consecutive round, well past the point where silent re-deferral under Rule 8d should go unremarked; a decision to act on it or continue deferring it is the researcher's to make, not mine to keep making unilaterally |
+| Opus finding 2 (MAJOR) + Codex finding 1 (MAJOR), both reviewers, again | Print the actual Arb ball enclosures behind Proposition 8 and eq. (5) inline (Opus specifically: the four enclosures for `Hhat(1)..Hhat(4)`), replace "exactly" with "with rigorous enclosures", archive the repository with a DOI instead of a mutable URL | not a new defect, but the concrete sub-ask was genuine and actionable | **partially fixed, researcher-directed** (see post-round addendum below): the four `Hhat(m)` enclosures are now printed inline with a full recombination showing they reproduce the already-certified interval, and "exactly" was corrected. The DOI-archiving half of the ask is explicitly left open by the researcher's own choice, not deferred under Rule 8d this time; this is no longer a "no action" row |
 | Codex finding 2 (MODERATE, restates settled ground) | Lemma 9, 11, 12's numerical constants (0.114, 0.0119, the `Sigma` tail bound, etc.) are asserted rather than shown as full derivations | not a new defect | no action: this is a milder restatement of the same repository/rigor-level scope question as above; the derivations that exist in the paper (truncation + tail bound + numerical evaluation) are the level of detail this project's papers use throughout, consistent with Rule 12 |
 
 Paper recompiles clean (pdflatex, exit 0, zero warnings, zero overfull-hbox notices), still 17
@@ -693,8 +693,35 @@ source and verifying the paper's paraphrase directly, closing it more strongly t
 would have; two more (W2, the series reversion; W3/W4, convergent findings from both reviewers)
 were genuine gaps, now fixed. One finding (the Lagrange parenthetical) was considered and rejected
 as wrong after independent judgment, per Rule 8c cutting both ways. The repository/certificate
-question remains the single most persistent unresolved item across this entire loop; it is
-deliberately not acted on again this round, but flagged explicitly rather than silently deferred,
-since Rule 8d's "no new evidence" justification is wearing thin at six-plus rounds. Per the
-researcher's explicit instruction, Round 15 is not launched automatically; the loop pauses here
-pending authorization.
+question was raised again, and this time, per the researcher's explicit direction, partially acted
+on (see below) rather than deferred again.
+
+**Post-round addendum (researcher-directed, same session)**: the researcher was shown a plain-language
+explanation of the repository/certificate disagreement and chose the middle option: act on Opus's
+specific, concrete sub-ask (print the four Arb ball enclosures behind Proposition 8's Fourier-series
+route) without the larger infrastructure change (DOI-archiving the repository). Computed
+$\hat H(1),\ldots,\hat H(4)$ independently in `python-flint` (Arb bindings) at 250-bit working
+precision; cross-checked all four against the earlier, lower-precision values an Opus subagent had
+independently computed in Round 12 (agreement to the ~10 digits that round's numbers were given to);
+verified the four enclosures reproduce the already-printed $H(0)-H(\log(3/2))$ interval directly
+(summing them gives $-0.0003771902809439858148\ldots$, matching the paper's floating-point value to
+19 digits, with ball radius $<10^{-70}$). Inserted the four enclosures inline in Proposition 8's
+proof, plus one clause explaining the direct recombination; also fixed the imprecise "summing the
+first six terms exactly" (Opus's finding 2(a) from Round 14's report, not previously tabled) to "with
+rigorous ball enclosures". Recompiled clean (zero warnings), paper grew from 17 to 18 pages (expected,
+given the added content, not a defect). This closes the single most concrete, repeatedly-actionable
+piece of the repository/certificate finding; the larger DOI-archiving ask remains open, by the
+researcher's own choice, not a lapse in follow-through.
+
+Per Rule 12, also mirrored this into the public reproducibility repository (cloned to a scratch
+directory, since it wasn't checked out locally): `certify_H_nonconstancy.py` (which already computed
+and summed these same four coefficients, previously without printing the raw complex values) now
+prints `Hhat(1)..Hhat(4)` explicitly at 100-decimal precision, immediately reproducing all digits
+printed in the paper; re-ran the script end to end and confirmed the pre-existing summed-difference
+certificate (`D_4 = -0.0003771902809439858148...`) matches this session's independent computation
+to every printed digit, a strong cross-check from a script written in an earlier, unrelated session.
+README updated to describe the new output. Committed and pushed to
+`github.com/faculdade/wirsching-conjecture3-proof` (confirmed public, HTTP 200, after push).
+
+Per the researcher's explicit instruction, Round 15 is not launched automatically; the loop pauses
+here pending authorization.

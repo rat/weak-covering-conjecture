@@ -472,7 +472,8 @@ $\zeta(1-i\omega_m)$ just proved give the majorant
 |\hat H(m)| \le A_H\,q^m\,m^{-1/2}\bigl(\log(\alpha_H m+1)+C_H\bigr), \qquad m\ge1.
 \end{equation}
 Since $\sup_w|H^{(k)}(w)| \le \sum_{m\ne0}|\omega_m|^k|\hat H(m)| = 2\sum_{m\ge1}\omega_m^k|\hat
-H(m)|$, summing the first six terms exactly and bounding the tail $m>6$ by \eqref{eq:Hmajorant}
+H(m)|$, summing the first six terms with rigorous ball enclosures and bounding the tail $m>6$ by
+\eqref{eq:Hmajorant}
 (the same closed-form geometric-times-polynomial tail sum used in the proof of
 Proposition~\ref{prop:Hcert} below) gives explicit, certified bounds:
 \begin{equation}
@@ -530,9 +531,22 @@ H(0) = -0.62713093305152597830\ldots, \qquad H\bigl(\log\tfrac32\bigr) = -0.6267
 whose difference is $-0.00037719028094398583\ldots$, inside the stated interval; this first route
 is floating-point (50 significant digits, accumulated rounding bounded as stated) rather than
 interval arithmetic. The Fourier series of Proposition~\ref{prop:Hfourier} gives the same
-difference in Arb ball arithmetic, rigorously: the $m=0$ term cancels, four modes suffice, and the
-majorant \eqref{eq:Hmajorant} gives $\sum_{m>4}|\hat H(m)| \le 9.41\times10^{-20}$, so the discarded
-modes move the difference by less than $3.8\times10^{-19}$; this route alone certifies the stated
+difference in Arb ball arithmetic, rigorously: the $m=0$ term cancels, and at $250$-bit working
+precision (ball radius $<10^{-70}$ throughout) the four nonzero modes needed are
+\begin{align*}
+\hat H(1) &= -1.020544273068431785\times10^{-4} - 2.332597606471452884\times10^{-5}\,i,\\
+\hat H(2) &= -6.523276079851823231\times10^{-9} + 1.156720838500605667\times10^{-8}\,i,\\
+\hat H(3) &= -1.799881020474424677\times10^{-12} + 6.648927223521397737\times10^{-13}\,i,\\
+\hat H(4) &= -9.219524659678388767\times10^{-17} + 9.444517590655925766\times10^{-17}\,i,
+\end{align*}
+and summing
+\[
+2\operatorname{Re}\sum_{m=1}^4\hat H(m)\bigl(1-e^{i\omega_m\log(3/2)}\bigr)
+\]
+reproduces $H(0)-H(\log\tfrac32) = -0.0003771902809439858148\ldots$ directly (ball radius
+$<10^{-70}$), matching the floating-point value above to 19 digits. The majorant
+\eqref{eq:Hmajorant} gives $\sum_{m>4}|\hat H(m)| \le 9.41\times10^{-20}$, so the discarded
+modes move this by less than $3.8\times10^{-19}$; this route alone certifies the stated
 interval for $H(0)-H(\log(3/2))$.
 
 For the stronger bound, let $w_i = ic/N$, $0\le i<N$, with $N = 2^{20}$. A floating-point evaluation
