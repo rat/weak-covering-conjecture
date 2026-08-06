@@ -590,3 +590,38 @@ remaining fixes are small (a wrong digit, a doubling inconsistency, a harmless n
 an imprecise sentence), and two reviewer requests restate the already-settled repository-scope
 question from Round 3. Per the researcher's explicit instruction, Round 12 is not launched
 automatically; the loop pauses here pending authorization.
+
+## Round 12: tenth blind loop iteration (2026-08-06), Opus and Codex both complete
+
+Both launched in parallel, PDF-only, max effort, against the Round 11 PDF. Opus verdict: **accept
+after minor revision**, again reporting no substantive mathematical error after re-deriving
+Proposition 6's Mellin residues from scratch and independently confirming every one of 40+ numeric
+bounds. Codex verdict: **would not recommend acceptance**, citing two claimed mathematical errors
+as "major"/"moderate" findings. **Both of Codex's central findings turned out to be false
+positives**, caught and discarded per Rule 8c before any text was touched; see below. Genuine
+findings, each independently verified before acting:
+
+| ID | Summary | Verdict | Status |
+|----|---------|---------|--------|
+| T1 (Codex #1, FALSE POSITIVE) | Claimed the printed bound `\|Gamma(-i*omega)\| <= 3*pi/omega * e^{-pi*omega/2}` (p. 7) does not follow from `\|Gamma(-i*omega)\|=sqrt(pi/(omega*sinh(pi*omega)))` and `sinh(x)>=e^x/3`, and is false for large omega, since the correct bound has a square root: `sqrt(3*pi/omega)`. | **FALSE POSITIVE, confirmed by direct inspection**: rendered p. 7 at 200dpi shows the bound printed exactly as `\|Gamma(-i*omega_m)\| <= sqrt(3*pi/omega_m) * e^{-pi*omega_m/2}`, with the square root radical clearly visible. `main.tex` itself has always had `\sqrt{3\pi/\omega_m}` at this location. `pdftotext` silently drops the radical sign (a new extraction-artifact pattern, distinct from the overline-dropping one found in earlier rounds), producing flat text that reads as the false, radical-free version Codex quoted | no action on the paper; **the shared review prompt was updated** (new item 7) so future rounds check for this specific pattern before reporting it |
+| T2 (Codex #3, FALSE POSITIVE) | Claimed Proposition 16's `T4` estimate on p. 13 prints `0.00652*e^{0.00652}/5` (dividing the whole exponential term by 5), which does not follow from `\|w*-w_0\|<=0.00652/B_0` at `B_0>=5`; the correct substitution would keep the `/5` inside the exponent | **FALSE POSITIVE, confirmed by direct inspection**: rendered p. 13 at 200dpi shows `0.00652 e^{0.00652/5}`, with `0.00652/5` clearly inside the exponent's superscript, exactly the correct substitution (using the worst case `B_0=5` inside `e^{0.00652/B_0}`). Verified numerically too: `0.00652*e^(0.00652/5) = 0.0065285...`, which combined with `sup\|H''\|` gives `0.01338 < 0.0135` exactly as the paper concludes; Codex's misreading (`0.0013125...`) would not even have been inconsistent with `<0.0135`, so the "error" was purely a misreading, not a math check that failed | no action on the paper; **the shared review prompt was updated** (new item 8) covering this "fraction flattened out of a superscript" pattern |
+| U1 (Opus F1, new, real, self-inflicted) | The Discussion (added in Round 11) says "against a certified oscillation of at least `4.19e-4`", but the only proven fact is `osc(H) >= 4.1874494771e-4`, which is *less than* `4.19e-4`; rounding a proven lower bound *up* makes the claim unjustified (need `osc(H)>=4.19e-4` to be proven, and it isn't) | **confirmed, real, and my own error**: introduced in my own Round 11 rewrite of this sentence, caught by a fresh Opus reviewer one round later | fixed: `4.19e-4` -> `4.18e-4` (verified `4.18e-4 <= 4.1874494771e-4`, so this direction is safe) |
+| U2 (Opus F3, new, real, minor) | Proposition 18's proof (p. 16) uses `\to` (a limit arrow) to introduce `(2/3)*Lambda_l*(1+o(1))`, but the right-hand side still depends on `l` through `Lambda_l`, so it isn't a limit in the usual sense; an equality is the accurate statement | **confirmed, real, cosmetic** | fixed: `\to` replaced with `=` |
+| U3 (Opus F2, new, real, minor) | Lemma 15 states and proves `0 <= g_tau(w_0)-g_tau(w*) <= 5.77e-5/B_0`, a claim never used anywhere else in the paper; its numeric proximity to Proposition 16's *different* `T1` bound (`5.78e-5/B_0`, for the smooth system, not the true one) one page later reads like a typo of the same quantity when it is not | **confirmed, real**: grepped the whole document, `g_tau(w_0)-g_tau(w*)` appears only in Lemma 15's own statement and proof, never cited downstream (Proposition 16's `T1` is bounded independently, from `g_{0,tau}`, not this clause) | fixed: deleted the unused clause from Lemma 15's statement and the corresponding paragraph from its proof, consistent with how unused `M_2, M_3` were handled in Round 10 |
+| Opus F5, F6, F7, F8, F9, F10, F12, F13, F14 (minor/deferred) | Further symbol collisions (12 more listed); undefined "Elka functions" term; p.1 quote lacks a page locus; two different loci given for the same Berg-Kruppel constants; abstract's "smooth part plus H" elides the doubly-exponential remainder `Delta`; one overclaimed "exactly"; an unsupported priority claim ("neither statement had been settled"); a theorem statement that names its own proof mechanism inline; and a genuine strengthening opportunity (Proposition 18's argument doesn't actually need Conjecture 3 at all, only the phase-independent shift estimate) | none confirmed as requiring a text fix this round | not acted on: F5 restates the already-deferred (Round 10/11) symbol-collision cleanup; F6-F10, F12, F13 are minor presentation points logged here in case a future round converges on the same ones; F14 is a real, interesting observation but is a suggested strengthening, not a defect, and changing what a proof claims to establish is a bigger edit than this pass's scope |
+| Codex #2, #4, #5 (restates settled ground) | Repeats the repository-vs-inline certification scope question (#2, #4) and asks for documentary support for the claimed Berg-Kruppel sign-error correction (#5) | not new defects | no action (Rule 8d): #2/#4 restate the scope question settled since Round 3; #5 restates a concern already addressed (the paper's own differentiation was independently re-verified as correct in this round's checking too, by both reviewers) |
+
+Paper recompiles clean (pdflatex, exit 0, zero warnings, zero overfull-hbox notices), still 17
+pages (U3's deletion reflowed the Discussion from p.17 onto p.16, with no change in page count).
+All three edited passages (Lemma 15 p.12, Proposition 18 p.16, Discussion p.16) visually
+spot-checked via rendered PNG: no truncation, no margin overflow.
+
+**Net effect of this round**: the most valuable outcome was catching two independent false
+positives before touching the paper at all, both traced to genuine new `pdftotext` extraction
+failure modes (dropped square-root radicals, flattened exponent fractions) rather than to real
+defects; the shared review prompt was updated so future rounds check for both before reporting.
+Separately, a real rounding-direction error introduced in this project's own Round 11 fix was
+caught and corrected (U1), along with two small cosmetic issues (U2, U3). Both reviewers again
+found no error in the paper's mathematical core after extensive independent re-derivation. Per the
+researcher's explicit instruction, Round 13 is not launched automatically; the loop pauses here
+pending authorization.

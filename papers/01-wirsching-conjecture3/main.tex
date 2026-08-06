@@ -806,12 +806,8 @@ $\tau=\Phi_0(w_0)$ together with $B_0 := B_{\mathrm{sm}}(w_0) = e^{w_0-\tau} > 1
 restricted to $(ca+1,\infty)$ is a strictly increasing bijection onto $(\tau_0,\infty)$, and $B_0$
 increases from $1/c$ to $\infty$ along it. For $\tau\le\tau_0$ there is no such minimizer.
 
-Once $B_0\ge5$ (equivalently $\tau\ge3.73978\ldots$),
-\[
-|w^*-w_0| \le \frac{0.00652}{B_0}, \qquad
-0 \le g_\tau(w_0)-g_\tau(w^*) \le \frac{5.77\times10^{-5}}{B_0}.
-\]
-Moreover $w_0(\tau+c)-w_0(\tau) = c+O(1/\tau)$ as $\tau\to\infty$.
+Once $B_0\ge5$ (equivalently $\tau\ge3.73978\ldots$), $|w^*-w_0| \le 0.00652/B_0$. Moreover
+$w_0(\tau+c)-w_0(\tau) = c+O(1/\tau)$ as $\tau\to\infty$.
 \end{lemma}
 
 \begin{proof}
@@ -863,11 +859,6 @@ theorem applied on $[w_0-1,w_0+1]$ gives $g_\tau'(w_0+h) \ge g_\tau'(w_0)+hB_0/(
 -\varepsilon_1 + hB_0/(2e) > 0$ and, symmetrically, $g_\tau'(w_0-h) \le \varepsilon_1-hB_0/(2e) <
 0$. As $w^*$ is the only zero of $g_\tau'$, it lies in $(w_0-h,w_0+h)$ for every such $h$, so
 $|w^*-w_0| \le h_0 = 2e\varepsilon_1/B_0 \le 0.00652/B_0$.
-
-Finally $g_\tau(w_0)-g_\tau(w^*)\ge0$ because $w^*$ is the global minimizer, and Taylor's theorem
-about $w^*$, where $g_\tau'(w^*) = 0$, bounds it by $\tfrac12\bigl(\sup_{[w_0-1,w_0+1]}
-g_\tau''\bigr)(w_0-w^*)^2 \le \tfrac12 B_0e\,h_0^2 = 2e^3\varepsilon_1^2/B_0 \le
-5.77\times10^{-5}/B_0$.
 
 For the phase drift, $w_0=c(B_0+a)$ and $\tau=w_0-\log B_0$ give $dw_0/d\tau = (1-1/(cB_0))^{-1} =
 1+O(1/B_0)$ along the curve $\tau\mapsto w_0(\tau)$; since $B_0\to\infty$ as $\tau\to\infty$ (via
@@ -1134,7 +1125,7 @@ $\lim_l(2/3^{l+1})\varphi_0'(x_l)/\varphi_0(x_l)=2/3$ uniformly on the class,
 \[
 \frac{9}{3^{l+1}}\cdot\frac{\varphi(3x_l^+)}{\varphi(x_l^+)}
 = \Lambda_l\cdot\frac2{3^{l+1}}\cdot\frac{\varphi_0'(x_l^+)}{\varphi_0(x_l^+)}\,(1+o(1))
-\to \frac23\,\Lambda_l\cdot(1+o(1)),
+= \frac23\,\Lambda_l\cdot(1+o(1)),
 \]
 so the requirement $\limsup_l(9/3^{l+1})\varphi(3x_l^+)/\varphi(x_l^+)<1$ is exactly
 $\limsup_l\Lambda_l<3/2$.
@@ -1172,7 +1163,7 @@ Proposition~\ref{prop:bkidentity} as in the proof of Theorem~\ref{thm:conj3}. Wh
 special about phase $0$ is only that it is the one Wirsching's own class $\widetilde A_\delta$
 happens to fix. That phase sits close to the smallest of the two values of $H$ certified in
 Proposition~\ref{prop:Hcert}: $H(0) - H(w_{1011118}) = 5.25\times10^{-6}$, against a certified
-oscillation of at least $4.19\times10^{-4}$. (Whether $w_{1011118}$ is where $H$ attains its true
+oscillation of at least $4.18\times10^{-4}$. (Whether $w_{1011118}$ is where $H$ attains its true
 minimum is not certified, per Proposition~\ref{prop:Hcert}'s own caveat on the grid search.) We do
 not know whether the near-match with phase $0$ is coincidental.
 
