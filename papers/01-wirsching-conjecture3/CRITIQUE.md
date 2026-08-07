@@ -872,3 +872,24 @@ of the manual `\begin{center}` block's own default top skip. Added `\vspace{-2.5
 `\maketitle` and the `\begin{center}` block to remove the reserved gap. Recompiled clean, visually
 confirmed the name, institution, email, and ORCID now sit close together with normal single-block
 spacing.
+
+Same session, immediately after: the researcher asked whether the keywords and MSC codes actually
+match the paper's content. Checked the keywords by grepping each term against the body text (all
+five are genuinely used, not decorative: "atomic function" against Rvachev's `h_3` at line 190,
+"Mellin transform" against Section 6's residue-calculus derivation, etc.). Checked the four MSC
+codes against the primary source (the official MSC2020 PDF, `msc2020.org/MSC_2020.pdf`, fetched and
+`pdftotext`-extracted rather than trusted from memory, per Rule 11), not just the paper's own
+citation: `11B83` "Special sequences and polynomials" (confirmed, by web search, as the conventional
+code used across arXiv for Collatz/3x+1 papers despite the literal title not naming the problem),
+`39B22` "Functional equations for real functions" (correct, matches `phi`'s and Berg-Kruppel's
+real-valued functional equations), `11M06` "$\zeta(s)$ and $L(s,\chi)$" (correct, `zeta(1+z)` is
+load-bearing in `H`'s closed-form Fourier coefficients) all checked out. `30D05` "Functional
+equations in the complex plane, iteration and composition of analytic functions of one complex
+variable" did not: this is a complex-dynamics code (Schroder/Bottcher-type iteration equations), and
+grepping the paper for "iterat"/"composition of" found no such content anywhere. Replaced with two
+codes that actually match the paper's two central analytic techniques: `44A15` (Mellin transform,
+already one of the paper's own keywords, matching Section 6's meromorphic-continuation-and-residues
+argument) and `41A60` (asymptotic approximations/steepest descent, matching Section 4's uniform
+saddlepoint approximation, which explicitly bounds cumulant functions off the real axis via the
+maximum-modulus principle). Recompiled clean, confirmed via `pdftotext` the five codes now print
+correctly on page 1.
