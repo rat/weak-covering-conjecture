@@ -128,9 +128,11 @@ $e^{H(0)}$ is tied to this particular normalization of $\varphi_0$.
 The stronger asymptotic $\varphi(t) \sim \kappa\,\varphi_0(t)$ as $t \to 0^+$, for any single
 constant $\kappa$ and with no restriction to a comparison class, is false. The ratio
 $\varphi(t)/\varphi_0(t)$ oscillates indefinitely as $t \to 0^+$, with amplitude bounded below by a
-positive, certified constant: it is governed by the exactly $c$-periodic function $H$ evaluated at
+positive constant: it is governed by the exactly $c$-periodic function $H$ evaluated at
 the saddle location $w_0(\tau)$, $\tau=\log(1/t)$, whose phase modulo $c$ sweeps every value
-infinitely often as $\tau\to\infty$ (Lemma~\ref{lem:saddles}).
+infinitely often as $\tau\to\infty$ (Lemma~\ref{lem:saddles}). The positivity of that amplitude is
+a computer-assisted result, a rigorous interval-arithmetic certificate (Proposition~\ref{prop:Hcert}),
+not a hand proof.
 \end{theorem}
 
 A single computation underlies both theorems. Write $t = e^{-\tau}$ and let $H(w)$ be the
@@ -274,9 +276,10 @@ D(w) + \sum_{k\ge0} d(w+kc) = D(w+c) - d(w) + \sum_{k\ge0}d(w+kc) = D(w+c) + \su
 so the right side of \eqref{eq:Hexact} is invariant under $w \mapsto w+c$, that is, $H$ is
 $c$-periodic. Convergence of the series and its termwise differentiability, together with the
 stated bound on $\Delta^{(j)}$, follow from $d(w) = O(e^{-2e^w})$ and the corresponding bounds on
-its derivatives, since $2\cdot3^k e^w \ge 2 e^w$ for $k \ge 0$ makes the series dominated, uniformly
-for $w$ in any half-line bounded away from $-\infty$, by a geometric series in $3^{-k}$ inside the
-exponent.
+its derivatives, since $2\cdot3^k e^w$ grows like $3^k$ for $k\ge0$: the terms $d(w+kc)$ decay
+doubly exponentially in $k$, hence faster than any fixed geometric rate, which gives uniform,
+dominated convergence of the series and its derivatives for $w$ in any half-line bounded away from
+$-\infty$.
 \end{proof}
 
 Given $Q$, $H$ is uniquely determined by the requirement that $L-Q-H$ be $o(1)$ as $w\to\infty$: any
@@ -298,8 +301,12 @@ term: writing $s=e^w=a^t$, $a^{t-k}/b = 2s/3^{k+1}$, so reindexing $j:=k+1\ge1$ 
 product into $\prod_{j\ge1}\frac{1-e^{-2s/3^j}}{2s/3^j}$, exactly $e^{L(w)}$ from $K$'s defining
 series; $a^{t+l}/b = 2s\cdot3^{l-1}$, so reindexing $k:=l-1\ge0$ turns the second into
 $\prod_{k\ge0}\bigl(1-e^{-2s\cdot3^k}\bigr)$, exactly $e^{-\Delta(w)}$ by \eqref{eq:Hexact}; and,
-since $w=ct$ and $e^c=a=3$, $-Q(w) = \frac{w^2}{2c}-aw = c\bigl(\tfrac12t^2-at\bigr)$ gives
-$a^{\frac12t^2-\alpha t} = e^{-Q(w)}$ once $\alpha=a$ (Proposition~\ref{prop:bkidentity} identifies
+since $w=ct$ and $e^c=a=3$,
+\[
+-Q(w) = \frac{w^2}{2c}-aw = c\bigl(\tfrac12t^2-at\bigr), \qquad\text{so}\qquad
+a^{\frac12t^2-\alpha t} = e^{-Q(w)}
+\]
+once $\alpha=a$ (Proposition~\ref{prop:bkidentity} identifies
 Berg and Kr\"uppel's $\alpha$ with this paper's own linear coefficient of $Q$, also called $a$).
 So Proposition~\ref{prop:Hcert}'s primary computation from \eqref{eq:Hcomputable} below is, in
 substance, an evaluation of this product. What Proposition~\ref{prop:Hfourier}'s Fourier series
@@ -570,8 +577,10 @@ from the Fourier series alike,
 \[
 H(w_{486746}) = -0.6267174403736425786\ldots, \qquad H(w_{1011118}) = -0.6271361853213578093\ldots,
 \]
-so $D := H(w_{486746})-H(w_{1011118}) = 4.187449477152\times10^{-4}$ (ball radius $<10^{-70}$, same
-$250$-bit precision and $R=30$, $M=4$ truncation as above). Since $w_{486746}$ and
+so $D := H(w_{486746})-H(w_{1011118}) = 4.187449477152\times10^{-4}$, rigorously enclosed to radius
+$<1.2\times10^{-42}$: the Arb ball rounding at this precision is itself far smaller
+($<10^{-70}$ per evaluation), so the stated radius is the combined Fourier truncation error just
+above, $2\times5.60\times10^{-43}$, one term for each of the two points. Since $w_{486746}$ and
 $w_{1011118}$ are two specific, fixed points of the domain, $H(w_{486746})\le\sup H$ and
 $H(w_{1011118})\ge\inf H$ hold trivially, giving $D\le\operatorname{osc}(H)$: this bound is
 unconditional, independent of whether the floating-point search above actually located the true
@@ -1119,16 +1128,17 @@ to $\varphi_0$) settles.
 Wirsching's class $\widetilde{A}_\delta$ (his equations~(1.5) and~(3.2)) consists of sequences
 $(x_l)$ with $\lfloor 3^l x_l\rfloor = k_l$ satisfying $|l-k_l|\le\delta\sqrt l$ for every $l$; since
 $|3^lx_l-k_l|<1$ as well, $|3^lx_l-l|<1+\delta\sqrt l$, hence $\lambda_l := 3^lx_l/l \to 1$
-uniformly at rate $O(1/l)+O(\delta/\sqrt l)$ on the class. Writing $z_l =
-\lambda_l\, l\, 3^{-l}$, $\tau_l = -\log z_l = lc - \log l - \log\lambda_l$, the saddle location
+uniformly at rate $O(1/l)+O(\delta/\sqrt l)$ on the class. Writing $z_l :=
+\lambda_l\, l\, 3^{-l} = x_l$ (Wirsching's own $z_l$ from the conjecture statement and his $x_l$
+from the class definition coincide, by definition of $\lambda_l$), $\tau_l = -\log z_l = lc - \log
+l - \log\lambda_l$, the saddle location
 satisfies $w_0(\tau_l) = lc - \log\lambda_l + O(1/l)$: Section~\ref{sec:bk}'s reversion of
 $Y-\log Y=\tau+r$ gives $w_0(\tau) = \tau+\log(\tau/c)+(\log\tau+r)/\tau+O(\tau^{-2}\log^2\tau)$,
 and the naive one-term truncation $w_0(\tau)\approx\tau+\log(\tau/c)$ alone is only accurate to
 $O(\log\tau/\tau)$, one order too coarse; substituting $\tau=\tau_l$ into the full two-term formula,
 the $O(\log l/l)$ pieces from expanding $\log(\tau_l/c)$ against $\tau_l = lc-\log l-\log\lambda_l$
-cancel exactly against the reversion's own $(\log\tau_l+r)/\tau_l$ term, leaving the stated $O(1/l)$
-(the same cancellation mechanism as the series reversion above, verified independently by direct
-numerical solution of $\tau_l=w_0-\log(w_0/c-a)$ at $l$ up to $10^{12}$). So
+cancel exactly against the reversion's own $(\log\tau_l+r)/\tau_l$ term, leaving the stated $O(1/l)$,
+the same cancellation mechanism as the series reversion above. So
 $\operatorname{dist}(w_0(\tau_l), c\Z) \to 0$ uniformly on the class, at rate
 $O(1/\sqrt l)$: writing $w_0(\tau_l) = lc + \varepsilon_l$ with $\varepsilon_l = -\log\lambda_l +
 O(1/l) \to 0$, the nearest multiple of $c$ is $lc$ itself once $|\varepsilon_l|<c/2$, so $H(w_0(\tau_l))
@@ -1142,6 +1152,13 @@ Theorem~\ref{thm:formulaA}, Proposition~\ref{prop:envelope}, Proposition~\ref{pr
 uniformly on $\widetilde{A}_\delta$, i.e. $\varphi(z_l)/\varphi_0(z_l) \to e^{H(0)}$ uniformly. This
 is exactly Conjecture 3, with the constant given explicitly.
 \end{proof}
+
+\begin{remark}
+The proof above uses only $\lambda_l\to1$, equivalently $|l-k_l|=o(l)$; Wirsching's specific
+$O(\sqrt l)$ bound in $\widetilde{A}_\delta$ plays no role beyond forcing this weaker condition. The
+same conclusion, and the same limit $e^{H(0)}$, holds for the broader class of sequences satisfying
+only $|l-k_l|=o(l)$.
+\end{remark}
 
 \begin{proof}[Proof of Theorem~\ref{thm:unrestricted}]
 As $t=e^{-\tau}$ ranges over $(0,1/2)$ with no restriction, $\tau\to\infty$. By
