@@ -72,7 +72,7 @@ $[0,1]$. That chain has a unique invariant density $\varphi$, and Wirsching's pr
 predecessor density reduces to three conjectures about $\varphi$ and related quantities, stated as
 three unbridged gaps in the argument.
 
-The rest of the argument depends on Conjecture 3. It concerns the behaviour of $\varphi$ as its argument tends
+Of these three, this paper settles Conjecture 3. It concerns the behaviour of $\varphi$ as its argument tends
 to $0$, compared against an explicit comparison function $\varphi_0$: Wirsching's own
 equation~(7.11) defines $\varphi_0$ to be exactly Berg and Kr\"uppel's asymptotic solution, citing
 \cite{bergkruppel1998} by name at that point, so the identification is Wirsching's own choice, not
@@ -116,7 +116,11 @@ settled before the following two theorems.
 \label{thm:conj3}
 Wirsching's Conjecture 3 (stated just above) is true. For every $\delta>0$, on his comparison
 class $\widetilde{A}_\delta$, the ratio
-$\varphi(z_l)/\varphi_0(z_l)$ converges uniformly to $e^{H(0)} = 0.534122\ldots$, where $H$ is the
+$\varphi(z_l)/\varphi_0(z_l)$ converges uniformly to $e^{H(0)}$, a well-defined real number by
+Theorem~\ref{thm:H} regardless of its decimal expansion, evaluated here as $e^{H(0)} =
+0.534122\ldots$ (a floating-point evaluation; Proposition~\ref{prop:Hcert}'s proof certifies the
+nearby difference $H(0)-H(\log\tfrac32)$ rigorously, but not $H(0)$ itself in isolation), where $H$
+is the
 periodic function of Theorem~\ref{thm:H} below and the normalization of $\varphi_0$ is Berg and
 Kr\"uppel's own, equation~(9.6) of \cite{bergkruppel1998}. Conjecture 3 itself only asserts the
 existence of some positive constant, independently of normalization; the specific value
@@ -131,8 +135,8 @@ $\varphi(t)/\varphi_0(t)$ oscillates indefinitely as $t \to 0^+$, with amplitude
 positive constant: it is governed by the exactly $c$-periodic function $H$ evaluated at
 the saddle location $w_0(\tau)$, $\tau=\log(1/t)$, whose phase modulo $c$ sweeps every value
 infinitely often as $\tau\to\infty$ (Lemma~\ref{lem:saddles}). The positivity of that amplitude is
-a computer-assisted result, a rigorous interval-arithmetic certificate (Proposition~\ref{prop:Hcert}),
-not a hand proof.
+a computer-assisted result: a rigorous interval-arithmetic certificate
+(Proposition~\ref{prop:Hcert}).
 \end{theorem}
 
 A single computation underlies both theorems. Write $t = e^{-\tau}$ and let $H(w)$ be the
@@ -501,7 +505,11 @@ $H$ is not constant. Rigorously,
 \]
 and consequently $\operatorname{osc}(H) := \sup H - \inf H \ge 3.7719\times 10^{-4}$; evaluating $H$
 at two further, well-separated points certifies the stronger bound
-$\operatorname{osc}(H) \ge 4.1874494771\times10^{-4}$.
+$\operatorname{osc}(H) \ge 4.1874494771\times10^{-4}$, and the leading Fourier mode alone certifies
+a matching upper bound, together giving
+\[
+4.1874494771\times10^{-4} \;\le\; \operatorname{osc}(H) \;\le\; 4.187981\times10^{-4}.
+\]
 \end{proposition}
 
 \begin{proof}
@@ -572,24 +580,36 @@ majorant bounds each pointwise truncation error by $2\times2.80\times10^{-43}=5.
 combining the discarded modes $m$ and $-m$), locates a candidate maximum at
 $i=486746$ and a candidate minimum at $i=1011118$; this search is only a heuristic for finding
 two well-separated points and is not itself part of the certificate below. Re-evaluating $H$ at
-exactly these two points to $40$ digits in Arb ball arithmetic, from \eqref{eq:Hcomputable} and
-from the Fourier series alike,
+exactly these two points at $250$-bit working precision in Arb ball arithmetic, independently from
+\eqref{eq:Hcomputable} and from the Fourier series (the two routes agree to about $30$ digits,
+consistent with \eqref{eq:Hcomputable}'s own $R=30$ truncation tail bound above; a cross-check, not
+part of the certificate),
 \[
 H(w_{486746}) = -0.6267174403736425786\ldots, \qquad H(w_{1011118}) = -0.6271361853213578093\ldots,
 \]
-so $D := H(w_{486746})-H(w_{1011118}) = 4.187449477152\times10^{-4}$, rigorously enclosed to radius
-$<1.2\times10^{-42}$: the Arb ball rounding at this precision is itself far smaller
-($<10^{-70}$ per evaluation), so the stated radius is the combined Fourier truncation error just
-above, $2\times5.60\times10^{-43}$, one term for each of the two points. Since $w_{486746}$ and
+so $D := H(w_{486746})-H(w_{1011118}) = 4.187449477152\times10^{-4}$. The certified enclosure uses
+only the Fourier route: the Arb ball rounding at $250$-bit precision is $<10^{-70}$ per evaluation,
+negligible next to the majorant truncation error already bounded above, $5.60\times10^{-43}$ per
+point, giving $D$ to radius $<1.2\times10^{-42}$ (twice that per-point bound). Since $w_{486746}$ and
 $w_{1011118}$ are two specific, fixed points of the domain, $H(w_{486746})\le\sup H$ and
 $H(w_{1011118})\ge\inf H$ hold trivially, giving $D\le\operatorname{osc}(H)$: this bound is
 unconditional, independent of whether the floating-point search above actually located the true
-argmax and argmin, since it uses only that the two chosen points lie in the domain. (With
-$h:=c/N=1.04772\times10^{-6}$ and $M_1 := 1.1977472315550332\times10^{-3}$ from
-\eqref{eq:Hbounds}, a Lipschitz argument over the full grid would give the matching upper bound
-$\operatorname{osc}(H)\le D+M_1h\approx D+1.2549\times10^{-9}$; this direction requires the
-floating-point search not to have missed a higher maximum or a lower minimum anywhere among the
-$N$ grid points, which is not independently certified for the full sweep, so it plays no role here.)
+argmax and argmin, since it uses only that the two chosen points lie in the domain.
+
+For the matching upper bound, no search is needed. Write $H = \hat H(0) + 2\operatorname{Re}\bigl(
+\hat H(1)e^{i\omega_1 w}\bigr) + \Xi(w)$, $\Xi(w) := 2\sum_{m\ge2}\operatorname{Re}\bigl(\hat H(m)
+e^{i\omega_m w}\bigr)$, so $|\Xi(w)|\le2\sum_{m\ge2}|\hat H(m)|$ for every $w$. The one-mode term
+$2\operatorname{Re}(\hat H(1)e^{i\omega_1w})$ ranges, as $w$ varies, over an interval of width
+exactly $4|\hat H(1)|$, so $\operatorname{osc}(H) \le 4|\hat H(1)| + 4\sum_{m\ge2}|\hat H(m)|$.
+Using the already-certified $\hat H(2)$, $\hat H(3)$, $\hat H(4)$ from above and the majorant tail
+$\sum_{m>4}|\hat H(m)|\le9.41\times10^{-20}$,
+\[
+\sum_{m\ge2}|\hat H(m)| \le |\hat H(2)|+|\hat H(3)|+|\hat H(4)|+9.41\times10^{-20} \le
+1.3282\times10^{-8},
+\]
+and $4|\hat H(1)| = 4.187449303\times10^{-4}$, giving $\operatorname{osc}(H) \le
+4.187981\times10^{-4}$, rigorously and unconditionally: this bound uses only the already-certified
+Fourier coefficients, not the grid search.
 \end{proof}
 
 \section{A uniform saddlepoint approximation}
@@ -768,9 +788,11 @@ on the sequence of $t$'s.
 \end{theorem}
 
 \begin{remark}
-The estimate $|R(s)-1|\le E(N)$ becomes informative, $E(N)<1$, exactly at $N=19$ (see the proof:
-$E(18)=1.00170\ldots\ge1$, $E(19)=0.95673\ldots<1$), the threshold kept as the theorem's hypothesis.
-$E$ is also strictly decreasing and satisfies $E(N)\le4.18\,N^{-1/2}$ throughout $19\le N\le5000$
+The estimate $|R(s)-1|\le E(N)$ becomes informative once $E(N)<1$, which holds at $N=19$ (see the
+proof: $E(18)=1.00170\ldots\ge1$, $E(19)=0.95673\ldots<1$); this is the threshold kept as the
+theorem's hypothesis (whether some smaller $N$ also gives $E(N)<1$ is immaterial to what follows and
+is not checked). $E$ is also strictly decreasing and satisfies $E(N)\le4.18\,N^{-1/2}$ throughout
+$19\le N\le5000$
 (checked directly in the accompanying repository), though only $E(N)\to0$ as $N\to\infty$ is used
 below.
 \end{remark}
@@ -804,9 +826,8 @@ $\sqrt{V/2\pi}$ factor in \eqref{eq:R}), to give $e_3$; this needs $\theta_N \gg
 since $\tfrac13<\tfrac12$. Every constant entering $E$ (via $A_V$, Lemma~\ref{lem:variance}, and the
 $3.0152\ge e^{3/e}$ of Lemma~\ref{lem:tail}) is a supremum over $b>0$ or a sum over one complete
 geometric orbit bounded using $\rho\ge1$, hence independent of $\rho$. Directly evaluating
-\eqref{eq:Ebound} gives $E(18) = 1.00170\ldots \ge 1$ and $E(19) = 0.95673\ldots < 1$, so the bound
-$E(N)<1$ is non-vacuous at $N=19$ (whether some smaller $N$ also gives $E(N)<1$ is immaterial to
-what follows and is not checked).
+\eqref{eq:Ebound} gives $E(18) = 1.00170\ldots \ge 1$ and $E(19) = 0.95673\ldots < 1$, matching the
+remark above.
 
 For the asymptotic rate, $e_1$, $e_2$, $e_3$ separate on very different scales as $N\to\infty$.
 Since $\theta_N^3=1/N$, $B\theta_N^3\to1/3$ and $B/N\to1/3$, $V_{\mathrm{lo}}/N,\,V_{\mathrm{up}}/N
@@ -1169,7 +1190,10 @@ modulo $c$ infinitely often), so by the same combination of results used above,
 $\log\varphi(t)-\log\varphi_0(t) = H(w_0(\tau))+o(1)$ takes values arbitrarily close to both $\sup H$
 and $\inf H$ infinitely often. By Proposition~\ref{prop:Hcert}, $\operatorname{osc}(H) > 0$
 rigorously, so $\varphi(t)/\varphi_0(t)$ does not converge, and
-$\limsup/\liminf \ge e^{\operatorname{osc}(H)} \ge 1.0004188$.
+$\limsup/\liminf \ge e^{\operatorname{osc}(H)} \ge 1.0004188$: the ratio swings by at least
+$0.042\%$, small enough that no direct numerical evaluation of $\varphi$ at any computationally
+reachable $t$ could have found it without the exact Fourier series of
+Proposition~\ref{prop:Hfourier}.
 \end{proof}
 
 \begin{proposition}[Wirsching's actual requirement]
@@ -1247,11 +1271,12 @@ $e^{H(\theta)}$: take $\tau_l := \Phi_0(\theta+lc)$, $z_l := e^{-\tau_l}$, so $w
 exactly, and apply Theorem~\ref{thm:formulaA}, Proposition~\ref{prop:envelope}, and
 Proposition~\ref{prop:bkidentity} as in the proof of Theorem~\ref{thm:conj3}. What is
 special about phase $0$ is only that it is the one Wirsching's own class $\widetilde A_\delta$
-happens to fix. That phase sits close to the smaller of the two values of $H$ certified in
-Proposition~\ref{prop:Hcert}: $H(0) - H(w_{1011118}) = 5.25\times10^{-6}$, against a certified
-oscillation of at least $4.18\times10^{-4}$. (Whether $w_{1011118}$ is where $H$ attains its true
-minimum is not certified, per Proposition~\ref{prop:Hcert}'s own caveat on the grid search.) We do
-not know whether the near-match with phase $0$ is coincidental.
+happens to fix. That phase sits close to the smaller of the two values of $H$ printed in
+Proposition~\ref{prop:Hcert}'s proof: combining them gives $H(0) - H(w_{1011118}) =
+5.25\times10^{-6}$, a floating-point computation (not itself a certified enclosure), against a
+certified oscillation of at least $4.18\times10^{-4}$. (Whether $w_{1011118}$ is where $H$ attains
+its true minimum is not certified, per Proposition~\ref{prop:Hcert}'s own caveat on the grid
+search.) We do not know whether the near-match with phase $0$ is coincidental.
 
 The rate is not established beyond $o(1)$. The sharper Edgeworth correction of
 Remark~\ref{rem:edgeworth}, and a correspondingly sharper form of the envelope and Berg--Kr\"uppel
