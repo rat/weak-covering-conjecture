@@ -1040,3 +1040,29 @@ of these four are self-inflicted, all introduced while fixing something else -- 
 demonstration of why Rule 8b's re-check discipline matters even within, not just across, rounds. Per
 the researcher's standing instruction, the next round is not launched automatically; the loop pauses
 here pending authorization.
+
+## Round 21: nineteenth blind loop iteration (2026-08-07), Codex only, researcher's explicit request
+
+The researcher asked for a Codex-only round this time (same protocol, max effort), to see what a
+single reviewer alone still finds, before deciding whether to continue with both models. Verdict:
+major revision, not acceptance. No new mathematical error found ("I do not find an outright
+algebraic disproof... I recomputed the main recurrence, Mellin transform, residue calculation,
+saddle equations, series reversion, phase-locking argument, and the transfer to phi/phi_0"), for the
+fifth round running (Round 17 onward). Findings:
+
+| ID | Summary | Verdict | Status |
+|----|---------|---------|--------|
+| Codex writing-tells | Flags this project's own Round-20 addition to Theorem 2's proof ("small enough that no direct numerical evaluation of phi at any computationally reachable t could have found it") as "an unproved, theatrical computational claim" | **confirmed, real**: the paper never actually establishes how large `tau` needs to be for the effect to become numerically visible, or that this pushes `t` below any standard floating-point range; the clause asserted a plausible-sounding but unproven claim | fixed: deleted the clause, kept the verified relative-size fact (`0.042%`) that motivated adding it |
+| Major (restates settled ground) | Repository/certificate not self-contained, same as every round since Round 3 | not new | not reopened, Rule 8d |
+| Medium (restates settled ground) | Several constants (Lemma 9's `0.114`/`0.0119`, Lemma 11's `3e^{-b_0}`, Lemma 12's numeric tail, Remark 14's `E(18)`/`E(19)`) "announced, not derived" | same repository-vs-inline scope question raised in nearly every round since Round 3-5 | not reopened, Rule 8d |
+| Minor | Novelty/priority claims ("neither statement had been settled before", "Fourier series is new") need a literature argument, not just assertion | same category as Round 20's Opus M1/m7 | not applied this round, same reasoning already logged |
+| **Recurring across three separate rounds now (5-6, and again this round): analytic, non-numerical proof of `H`'s non-constancy** | `Hhat(1) = -(2^{i*omega_1}/c) * Gamma(-i*omega_1) * zeta(1-i*omega_1)`; `Gamma` has no zeros, and by the classical zero-free theorem for `zeta` on `Re(s)=1`, `zeta(1-i*omega_1) != 0`, so `Hhat(1) != 0` unconditionally, no computation needed, which alone proves `H` non-constant (only the *quantitative* oscillation bound would still need Proposition 8's numerics) | plausible and mathematically clean, but not implemented or independently verified this round | **flagged directly to the researcher this round** rather than silently deferred again, since three independent fresh reviewers proposing the same strengthening is a stronger signal than Rule 8e's usual bar for a first look |
+
+Paper recompiles clean (pdflatex, exit 0, zero `Overfull \hbox` warnings), still 19 pages.
+
+**Net effect of this round**: consistent with the pattern since Round 16, a single reviewer alone
+still returns zero new mathematical errors, still returns the same recurring repository/certificate
+scope complaint, and this time also caught a real problem in this project's own immediately
+preceding edit (an unproven "theatrical" claim added in Round 20, now removed). Per the researcher's
+explicit instruction, Opus was not run this round; the loop pauses here, and the researcher will say
+when to resume with both reviewers.
