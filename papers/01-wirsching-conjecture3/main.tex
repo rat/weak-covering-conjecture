@@ -211,7 +211,8 @@ X=0$ (each factor $e^{-sX}$ suppresses any mass away from $0$ as $s\to\infty$, a
 So $t(s)$ decreases strictly from $1/2$ to $0$, and studying $\varphi(t(s))$ as $s \to \infty$ is
 the same as studying $\varphi(t)$ as $t \to 0^+$.
 
-Berg and Kr\"uppel's comparison function solves the truncated equation $\lambda\, \psi'(t) = a\,
+Berg and Kr\"uppel's comparison function is the asymptotic solution of the truncated equation
+$\lambda\, \psi'(t) = a\,
 \psi(at)$, $a$ here their dilation parameter (this letter is reused in Section~\ref{sec:periodic}
 for this paper's own, unrelated linear coefficient of $Q$; the two never appear in the same
 formula except in Section~\ref{sec:bk}, where the collision is flagged again at the point it
@@ -543,15 +544,17 @@ precision (ball radius $<10^{-70}$ throughout) the four nonzero modes needed are
 \hat H(3) &= -1.799881020474424677\times10^{-12} + 6.648927223521397737\times10^{-13}\,i,\\
 \hat H(4) &= -9.219524659678388767\times10^{-17} + 9.444517590655925766\times10^{-17}\,i,
 \end{align*}
-and summing
+the four-mode sum
 \[
 2\operatorname{Re}\sum_{m=1}^4\hat H(m)\bigl(1-e^{i\omega_m\log(3/2)}\bigr)
+= -0.0003771902809439858148\ldots
 \]
-reproduces $H(0)-H(\log\tfrac32) = -0.0003771902809439858148\ldots$ directly (ball radius
-$<10^{-70}$), matching the floating-point value above to 19 digits. The majorant
-\eqref{eq:Hmajorant} gives $\sum_{m>4}|\hat H(m)| \le 9.41\times10^{-20}$, so the discarded
-modes move this by less than $3.8\times10^{-19}$; this route alone certifies the stated
-interval for $H(0)-H(\log(3/2))$.
+(ball radius $<10^{-70}$), matching the floating-point value above to 19 digits. The majorant
+\eqref{eq:Hmajorant} gives
+$\sum_{m>4}|\hat H(m)| \le 9.41\times10^{-20}$, so the discarded modes move the four-mode sum by
+less than $3.8\times10^{-19}$, giving $H(0)-H(\log\tfrac32)\in[-0.0003771902809439861948,
+-0.0003771902809439854348]$; this route alone certifies the stated interval for
+$H(0)-H(\log(3/2))$.
 
 For the stronger bound, let $w_i = ic/N$, $0\le i<N$, with $N = 2^{20}$. A floating-point evaluation
 of the $N$ grid values from Proposition~\ref{prop:Hfourier}, truncated at $|m|\le10$ (the same
@@ -787,8 +790,9 @@ $\sqrt{V/2\pi}$ factor in \eqref{eq:R}), to give $e_3$; this needs $\theta_N \gg
 since $\tfrac13<\tfrac12$. Every constant entering $E$ (via $A_V$, Lemma~\ref{lem:variance}, and the
 $3.0152\approx e^{3/e}$ of Lemma~\ref{lem:tail}) is a supremum over $b>0$ or a sum over one complete
 geometric orbit bounded using $\rho\ge1$, hence independent of $\rho$. Directly evaluating
-\eqref{eq:Ebound} gives $E(18) = 1.00170\ldots \ge 1$ and $E(19) = 0.95673\ldots < 1$, confirming
-that $N\ge19$ is where the stated bound $E(N)<1$ first becomes non-vacuous.
+\eqref{eq:Ebound} gives $E(18) = 1.00170\ldots \ge 1$ and $E(19) = 0.95673\ldots < 1$, so the bound
+$E(N)<1$ is non-vacuous at $N=19$ (whether some smaller $N$ also gives $E(N)<1$ is immaterial to
+what follows and is not checked).
 
 For the asymptotic rate, $e_1$, $e_2$, $e_3$ separate on very different scales as $N\to\infty$.
 Since $\theta_N^3=1/N$, $B\theta_N^3\to1/3$ and $B/N\to1/3$, $V_{\mathrm{lo}}/N,\,V_{\mathrm{up}}/N

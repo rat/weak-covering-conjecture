@@ -798,6 +798,38 @@ gap in a passage this project's own earlier rounds had accepted at face value; t
 was independently re-derived from scratch and confirmed correct before being written into the text.
 A second genuine gap (Codex/Opus's shared concern about the unverifiable Berg-Kruppel citation) was
 closed for good this round by rendering the actual 1998 source page directly, something no prior
-round had the archived PDF to do. Three further minor real findings (Y2-Y4) were fixed. Per the
-researcher's explicit instruction, Round 17 is not launched automatically; the loop pauses here
-pending authorization.
+round had the archived PDF to do. Three further minor real findings (Y2-Y4) were fixed.
+
+## Round 17: fifteenth blind loop iteration (2026-08-06), Opus and Codex both complete
+
+Both launched in parallel, PDF-only, max effort, against the Round 16 PDF. The Opus subagent
+failed once mid-round on a monthly spend limit (an account-level constraint, not a loop decision);
+relaunched successfully on the researcher's explicit direction to retry. Opus verdict: **accept
+after minor revision**, again "no mathematical errors" after re-deriving everything and an
+end-to-end Fourier-inversion test confirming Proposition 17's `O(1/tau)` and Proposition 18's
+`O(tau^-1*log^2(tau))` rates numerically. Codex verdict: **reject**, again centered on the
+repository/certificate scope question (Rule 8d, no new action), plus two genuinely new findings
+this time, both independently verified before acting.
+
+| ID | Summary | Verdict | Status |
+|----|---------|---------|--------|
+| Z1 (Opus finding F3, MODERATE, new, real) | Proposition 8's proof (p.8) writes "the four-mode sum ... reproduces `H(0)-H(log(3/2)) = -0.0003771902809439858148...` directly", but this equality is false as stated: the printed 19+ digits belong to the *four-mode partial sum*, not to the true difference, which only agrees with the partial sum to about 19 significant digits before diverging (confirmed independently: true value via 200-mode sum is `...985834733...` vs. the printed `...985814833...`, differing at the 20th digit) | **confirmed, real, and independently re-verified with a fresh Arb computation at 300-bit precision** before touching the text (matches Opus's own independently-computed digits exactly) | fixed: reworded so the displayed equality is honestly between the four-mode sum and its own value (`the four-mode sum ... = -0.000377...8148...`), then derived the correct enclosure `H(0)-H(log(3/2)) in [-0.0003771902809439861948, -0.0003771902809439854348]` from the four-mode sum plus the already-stated tail bound, computed with Python's `Decimal` (not by hand, to avoid exactly the kind of digit-arithmetic slip this finding itself was about) and cross-checked to be correctly nested inside the paper's already-published outer interval before being written in |
+| Z2 (Codex finding #5, moderate, new, real) | Section 2 (p.3) says Berg-Kruppel's comparison function "solves the truncated equation", implying an exact solution, while every other place in the paper (introduction p.1, Proposition 19's proof p.16) correctly calls it "the asymptotic solution" -- an internal inconsistency in how the paper describes the same object | **confirmed, real**: grepped all four occurrences of "asymptotic solution" vs. the one "solves"; three of four already use the careful phrasing, this was the outlier | fixed: "solves the truncated equation" -> "is the asymptotic solution of the truncated equation", matching the paper's own established (and correct) usage elsewhere |
+| Z3 (Codex finding #4, moderate, new, real) | Remark 14 (now the E(N) remark, p.11-12) says checking `E(18)>=1` and `E(19)<1` "confirms N>=19 is where the bound first becomes non-vacuous" -- but two data points don't establish monotonicity for all `N<19`, so "first" is an overclaim from the stated justification alone | **confirmed as a real logical gap, though the underlying claim happens to be true**: independently computed `E(N)` for `N=3..25` from the paper's own formula (9) before touching the text, confirmed strictly decreasing throughout (so "first" is factually correct), but the paper's stated justification (checking only two points) doesn't establish this without an unstated monotonicity argument for `N<19` | fixed: softened to "the bound `E(N)<1` is non-vacuous at `N=19` (whether some smaller `N` also gives `E(N)<1` is immaterial to what follows and is not checked)", removing the overclaimed "first" without needing to prove monotonicity on `[3,19)` (which is unused anywhere in the paper) |
+| Opus finding F1 (MAJOR) + Codex finding #? (restates settled ground, repository/certificate scope) | Same scope question as every recent round: print full ball enclosures inline / archive with DOI | not a new defect | no action beyond what was already done in Round 14 (Rule 8d) |
+| Codex findings #1, #2, #3, #6 (restates settled ground) | Proposition 8 and eq. (5) "outsourced to unshown computation"; Lemma 11's tail bound "does not prove its headline bound"; general "numerical precision asserted without derivation" | not new defects | no action: same repository/rigor-level scope question, Rule 12; Codex's own suggested repair for Lemma 11 was read and is a reasonable elementary argument, but adding it is exactly the kind of inline-certification expansion this project's Rule 12 has repeatedly declined for this class of finding |
+
+Paper recompiles clean (pdflatex, exit 0, zero warnings -- one benign underfull-vbox notice on p.13
+from a shifted page break, visually confirmed harmless), 18 pages (unchanged). All edited passages
+(Proposition 8's four-mode-sum wording p.8, `phi_0`'s "asymptotic solution" wording p.3, the `E(19)`
+remark p.12) visually spot-checked via rendered PNG: no truncation, no margin overflow.
+
+**Net effect of this round**: the most substantive finding (Z1) was a genuine mathematical
+imprecision -- an equality sign asserting something false at the 20th decimal digit -- caught by a
+fresh Opus reviewer and independently re-verified with a fresh high-precision computation before
+any text was touched; correcting it required deriving a new enclosure interval, done with exact
+decimal arithmetic rather than by hand specifically to avoid introducing a new digit-transcription
+error while fixing an old one. Both of Codex's new findings (Z2, Z3) were real, if smaller: one
+wording inconsistency and one overclaimed "first" that happened to be true but wasn't justified by
+what the text actually checked. Per the researcher's explicit instruction, Round 18 is not launched
+automatically; the loop pauses here pending authorization.
