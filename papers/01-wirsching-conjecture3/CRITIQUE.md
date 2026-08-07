@@ -853,3 +853,14 @@ precedes it) -- the working fix was moving the `\begin{abstract}...\end{abstract
 should precede \maketitle"), not an error, and renders identically. Recompiled clean, verified the
 institution/email/ORCID block appears exactly once (page 1 only, no duplicate at the end) and in the
 requested order, visually spot-checked via rendered PNG.
+
+Same session, immediately after: the researcher noticed the keywords and MSC classification were
+still rendering in `amsart`'s default location, a small-print footnote at the bottom of page 1, and
+asked for the arXiv convention instead (both directly below the abstract, in the body text, not a
+footnote). Removed the `\subjclass`/`\keywords` preamble macros (their footnote is generated
+automatically by `amsart`'s `\maketitle`, with no supported option to relocate it) and replaced them
+with two plain `\noindent\textbf{...}` lines placed right after `\end{abstract}`: "Keywords:" and
+"2020 Mathematics Subject Classification:", each followed by the same content as before. Recompiled
+clean (pdflatex, exit 0, one benign advisory only), confirmed via `pdftotext` that both lines now
+appear exactly once, in normal body text directly under the abstract, with no leftover footnote
+anywhere in the document, and visually spot-checked via rendered PNG.
