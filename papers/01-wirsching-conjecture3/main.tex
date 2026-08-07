@@ -72,7 +72,7 @@ $[0,1]$. That chain has a unique invariant density $\varphi$, and Wirsching's pr
 predecessor density reduces to three conjectures about $\varphi$ and related quantities, stated as
 three unbridged gaps in the argument.
 
-The load-bearing one is Conjecture 3. It concerns the behaviour of $\varphi$ as its argument tends
+The rest of the argument depends on Conjecture 3. It concerns the behaviour of $\varphi$ as its argument tends
 to $0$, compared against an explicit comparison function $\varphi_0$: Wirsching's own
 equation~(7.11) defines $\varphi_0$ to be exactly Berg and Kr\"uppel's asymptotic solution, citing
 \cite{bergkruppel1998} by name at that point, so the identification is Wirsching's own choice, not
@@ -153,21 +153,15 @@ Proposition~9.3 of \cite{bergkruppel1998}, which they give as an infinite produc
 its logarithm. Its Fourier series, Proposition~\ref{prop:Hfourier} below, is new. This corollary
 has two parts of different depth: that $e^H$ agrees with their product \emph{as a function},
 proved in Remark~\ref{rem:bkproduct} below by pure algebra ($e^H=e^{-Q}e^Le^{-\Delta}$ recombining
-Theorem~\ref{thm:H}'s own pieces), and that this function is genuinely the periodic factor
+Theorem~\ref{thm:H}'s own pieces), and that this function is the periodic factor
 multiplying $\varphi$'s own asymptotic, which needs the full saddlepoint chain of
 Theorem~\ref{thm:formulaA} and Propositions~\ref{prop:envelope}--\ref{prop:bkidentity}, proved
 below.
 \end{corollary}
 
-Section~\ref{sec:prelim} recalls the functional equation $\varphi$ satisfies and Berg and
-Kr\"uppel's comparison asymptotic. Section~\ref{sec:periodic} constructs $H$, proves
-Proposition~\ref{prop:Hfourier}, and certifies that $H$ is not constant.
-Sections~\ref{sec:formulaA} and~\ref{sec:envelope} transfer this from the log-Laplace transform to
-$\varphi$ itself, through a uniform saddlepoint approximation and an envelope estimate.
-Section~\ref{sec:bk} identifies the resulting smooth part with Berg and Kr\"uppel's saddlepoint
-expression, pins down every constant, and proves Corollary~\ref{cor:bk}. Section~\ref{sec:proofs}
-proves both theorems and checks Wirsching's actual requirement directly.
-Section~\ref{sec:discussion} states what remains open.
+$H$'s construction and certified non-constancy are in Section~\ref{sec:periodic}; the saddlepoint
+transfer to $\varphi$ itself and the identification with Berg and Kr\"uppel's asymptotic, in
+Sections~\ref{sec:formulaA}--\ref{sec:bk}.
 
 \section{The invariant density and its Laplace transform}
 \label{sec:prelim}
@@ -457,7 +451,7 @@ The series for $H'$ and $H''$ converge absolutely and uniformly, since
 |\Gamma(-i\omega_m)| = \sqrt{\pi/(\omega_m \sinh \pi\omega_m)}
 \]
 decays exponentially in $m$ while $\zeta(1-i\omega_m)$ grows only polynomially: for $\omega\ge
-\alpha_H := 2\pi/c$ and $N:=\lfloor\omega\rfloor\ge1$, the classical Euler-Maclaurin formula for
+\alpha_H := 2\pi/c$ and $N:=\lfloor\omega\rfloor\ge1$, the classical Euler--Maclaurin formula for
 $\zeta$, $\zeta(s) = \sum_{n=1}^N n^{-s} + \frac{N^{1-s}}{s-1} - s\int_N^\infty\{u\}\,u^{-s-1}\,du$
 (valid for $\operatorname{Re}s>0$, $s\ne1$, integer $N\ge1$, with $\{u\}:=u-\lfloor u\rfloor$), at
 $s=1+i\omega$ gives, bounding each term in modulus ($|N^{-i\omega}|=1$, $0\le\{u\}<1$),
@@ -474,7 +468,7 @@ C_H := 1+\alpha_H^{-1}+\frac{\alpha_H}{\alpha_H-1}\sqrt{1+\alpha_H^{-2}},
 \]
 this gives $|\zeta(1+i\omega)|\le\log\omega+C_H\le\log(\omega+1)+C_H$ for $\omega\ge\alpha_H$, and
 $\zeta(1-i\omega)=\overline{\zeta(1+i\omega)}$ has the same modulus, so
-$|\zeta(1-i\omega_m)|\le\log(\omega_m+1)+C_H$. Precisely, with $q := e^{-\pi\alpha_H/2}$, $A_H :=
+$|\zeta(1-i\omega_m)|\le\log(\omega_m+1)+C_H$. With $q := e^{-\pi\alpha_H/2}$, $A_H :=
 c^{-1}\sqrt{3\pi/\alpha_H}$, the bound $|\Gamma(-i\omega_m)|\le\sqrt{3\pi/\omega_m}\,e^{-\pi\omega_m/2}$
 (valid for $\omega_m\ge\alpha_H$, since $\sinh x\ge e^x/3$ there) together with the bound on
 $\zeta(1-i\omega_m)$ just proved give the majorant
@@ -555,12 +549,15 @@ the four-mode sum
 2\operatorname{Re}\sum_{m=1}^4\hat H(m)\bigl(1-e^{i\omega_m\log(3/2)}\bigr)
 = -0.0003771902809439858148\ldots
 \]
-(ball radius $<10^{-70}$), matching the floating-point value above to 19 digits. The majorant
+(ball radius $<10^{-70}$), matching the floating-point value above to $19$ decimal places ($16$
+significant digits). The majorant
 \eqref{eq:Hmajorant} gives
 $\sum_{m>4}|\hat H(m)| \le 9.41\times10^{-20}$, so the discarded modes move the four-mode sum by
-less than $3.8\times10^{-19}$, giving $H(0)-H(\log\tfrac32)\in[-0.0003771902809439861948,
--0.0003771902809439854348]$; this route alone certifies the stated interval for
-$H(0)-H(\log(3/2))$.
+less than $3.8\times10^{-19}$, giving
+\[
+H(0)-H\bigl(\log\tfrac32\bigr) \in \bigl[-0.0003771902809439861948,\; -0.0003771902809439854348\bigr];
+\]
+this route alone certifies the stated interval for $H(0)-H(\log(3/2))$.
 
 For the stronger bound, let $w_i = ic/N$, $0\le i<N$, with $N = 2^{20}$. A floating-point evaluation
 of the $N$ grid values from Proposition~\ref{prop:Hfourier}, truncated at $|m|\le10$ (the same
@@ -573,7 +570,8 @@ from the Fourier series alike,
 \[
 H(w_{486746}) = -0.6267174403736425786\ldots, \qquad H(w_{1011118}) = -0.6271361853213578093\ldots,
 \]
-so $D := H(w_{486746})-H(w_{1011118}) = 4.187449477152\times10^{-4}$. Since $w_{486746}$ and
+so $D := H(w_{486746})-H(w_{1011118}) = 4.187449477152\times10^{-4}$ (ball radius $<10^{-70}$, same
+$250$-bit precision and $R=30$, $M=4$ truncation as above). Since $w_{486746}$ and
 $w_{1011118}$ are two specific, fixed points of the domain, $H(w_{486746})\le\sup H$ and
 $H(w_{1011118})\ge\inf H$ hold trivially, giving $D\le\operatorname{osc}(H)$: this bound is
 unconditional, independent of whether the floating-point search above actually located the true
@@ -593,8 +591,10 @@ Define, for $s>0$,
 \varphi_{\mathrm{sp}}(t(s)) := \frac{\exp\bigl(K(s)+st(s)\bigr)}{\sqrt{2\pi K''(s)}}.
 \]
 This section proves that $\varphi(t(s))/\varphi_{\mathrm{sp}}(t(s)) \to 1$ as $s \to \infty$,
-uniformly over $\rho:=2s/3^N\in[1,3)$ (defined below), which is what makes the two theorems of
-Section~\ref{sec:proofs} depend on different scopes rather than on different mathematics.
+uniformly over $\rho:=2s/3^N\in[1,3)$ (defined below; this parameter records the same phase,
+$w\bmod c$, tracked through $H$ in Sections~\ref{sec:bk} and~\ref{sec:proofs}). That uniformity is
+what lets the two theorems of Section~\ref{sec:proofs} depend on different scopes rather than on
+different mathematics.
 
 For $n \ge 2$, define the derivative-normalized functions $\kappa_n(w) = (-1)^n w^n g^{(n)}(w)$ on
 $\{\operatorname{Re} w > 0\}$; $\kappa_n(b)$, $b>0$, is $b^n$ times the $n$-th cumulant of the
@@ -759,12 +759,11 @@ on the sequence of $t$'s.
 \end{theorem}
 
 \begin{remark}
-The estimate $|R(s)-1|\le E(N)$ is only informative once $E(N)<1$, which first happens at
-$N=19$ (see the proof: $E(18)=1.00170\ldots\ge1$, $E(19)=0.95673\ldots<1$); this is why $N\ge19$
-is kept as the theorem's hypothesis, though nothing in the proof strictly requires it. Numerically,
+The estimate $|R(s)-1|\le E(N)$ becomes informative, $E(N)<1$, exactly at $N=19$ (see the proof:
+$E(18)=1.00170\ldots\ge1$, $E(19)=0.95673\ldots<1$), the threshold kept as the theorem's hypothesis.
 $E$ is also strictly decreasing and satisfies $E(N)\le4.18\,N^{-1/2}$ throughout $19\le N\le5000$
-(checked directly in the accompanying repository); neither this fact, nor $E(19)<1$ itself, is
-used anywhere in this paper, where only $E(N)\to0$ as $N\to\infty$ is needed.
+(checked directly in the accompanying repository), though only $E(N)\to0$ as $N\to\infty$ is used
+below.
 \end{remark}
 
 \begin{proof}
@@ -794,7 +793,7 @@ $|e^{\Lambda(y)}|\le e^{3/e}(1+y^2)^{-N/2}$ integrates, via $\int_u^\infty(1+y^2
 (1+u^2)^{-(N-2)/2}/(u(N-2))$ at $u=\theta_N$ (using $V\le V_{\mathrm{up}}$ for the leading
 $\sqrt{V/2\pi}$ factor in \eqref{eq:R}), to give $e_3$; this needs $\theta_N \gg N^{-1/2}$, satisfied
 since $\tfrac13<\tfrac12$. Every constant entering $E$ (via $A_V$, Lemma~\ref{lem:variance}, and the
-$3.0152\approx e^{3/e}$ of Lemma~\ref{lem:tail}) is a supremum over $b>0$ or a sum over one complete
+$3.0152\ge e^{3/e}$ of Lemma~\ref{lem:tail}) is a supremum over $b>0$ or a sum over one complete
 geometric orbit bounded using $\rho\ge1$, hence independent of $\rho$. Directly evaluating
 \eqref{eq:Ebound} gives $E(18) = 1.00170\ldots \ge 1$ and $E(19) = 0.95673\ldots < 1$, so the bound
 $E(N)<1$ is non-vacuous at $N=19$ (whether some smaller $N$ also gives $E(N)<1$ is immaterial to
@@ -1033,7 +1032,9 @@ with $+2\beta$ where direct differentiation of $f$ gives $-2\beta$: $f''(p) =
 \tfrac{1}{p^2}\bigl(2\beta\ln p - 2\beta - \alpha\bigr)$, since $f'(p)=\tfrac1p(\alpha-2\beta\ln p)$
 differentiates to $-\tfrac{2\beta}{p^2}-\tfrac{\alpha-2\beta\ln p}{p^2}$. Their Proposition~9.1 is
 unaffected, the term being of lower order there than $2\beta\log p$, but the exact expression used
-here is not.
+here is not: the $\pm2\beta$ discrepancy shifts $(x^\sharp)^2f''(x^\sharp) = B_0-1/c$ by $2/c$, hence
+shifts $-\tfrac12\log\bigl(2\pi(B_0-1/c)\bigr)$ in $P(\tau)$ below by $O(1/B_0)$, which vanishes as
+$B_0\to\infty$.
 
 The saddle condition $t+f'(x)=0$ at $x=e^y$ now reads $e^{-\tau} = B_{\mathrm{sm}}(y)e^{-y}$, that
 is $\tau = y-\log B_{\mathrm{sm}}(y) = \Phi_0(y)$, whose unique solution on the branch
@@ -1120,8 +1121,15 @@ $(x_l)$ with $\lfloor 3^l x_l\rfloor = k_l$ satisfying $|l-k_l|\le\delta\sqrt l$
 $|3^lx_l-k_l|<1$ as well, $|3^lx_l-l|<1+\delta\sqrt l$, hence $\lambda_l := 3^lx_l/l \to 1$
 uniformly at rate $O(1/l)+O(\delta/\sqrt l)$ on the class. Writing $z_l =
 \lambda_l\, l\, 3^{-l}$, $\tau_l = -\log z_l = lc - \log l - \log\lambda_l$, the saddle location
-satisfies $w_0(\tau_l) = lc - \log\lambda_l + O(1/l)$ by Lemma~\ref{lem:saddles}'s defining
-equation, so $\operatorname{dist}(w_0(\tau_l), c\Z) \to 0$ uniformly on the class, at rate
+satisfies $w_0(\tau_l) = lc - \log\lambda_l + O(1/l)$: Section~\ref{sec:bk}'s reversion of
+$Y-\log Y=\tau+r$ gives $w_0(\tau) = \tau+\log(\tau/c)+(\log\tau+r)/\tau+O(\tau^{-2}\log^2\tau)$,
+and the naive one-term truncation $w_0(\tau)\approx\tau+\log(\tau/c)$ alone is only accurate to
+$O(\log\tau/\tau)$, one order too coarse; substituting $\tau=\tau_l$ into the full two-term formula,
+the $O(\log l/l)$ pieces from expanding $\log(\tau_l/c)$ against $\tau_l = lc-\log l-\log\lambda_l$
+cancel exactly against the reversion's own $(\log\tau_l+r)/\tau_l$ term, leaving the stated $O(1/l)$
+(the same cancellation mechanism as the series reversion above, verified independently by direct
+numerical solution of $\tau_l=w_0-\log(w_0/c-a)$ at $l$ up to $10^{12}$). So
+$\operatorname{dist}(w_0(\tau_l), c\Z) \to 0$ uniformly on the class, at rate
 $O(1/\sqrt l)$: writing $w_0(\tau_l) = lc + \varepsilon_l$ with $\varepsilon_l = -\log\lambda_l +
 O(1/l) \to 0$, the nearest multiple of $c$ is $lc$ itself once $|\varepsilon_l|<c/2$, so $H(w_0(\tau_l))
 \to H(0)$ by continuity, regardless of the sign of $\varepsilon_l$. By
@@ -1216,7 +1224,7 @@ operator $S_\infty$, are untouched here, and the full theorem is not established
 
 Wirsching stated the weaker Conjecture 3 instead of the stronger $\varphi\sim\kappa\varphi_0$ he
 considers first. Theorem~\ref{thm:unrestricted} shows why: the stronger statement fails by a
-mechanism with a certified, positive amplitude, not by some correctable technical looseness. Every
+mechanism with a certified, positive amplitude. Every
 phase $\theta\in[0,c)$ swept by $H$ admits some sequence along which the ratio converges to
 $e^{H(\theta)}$: take $\tau_l := \Phi_0(\theta+lc)$, $z_l := e^{-\tau_l}$, so $w_0(\tau_l)=\theta+lc$
 exactly, and apply Theorem~\ref{thm:formulaA}, Proposition~\ref{prop:envelope}, and
@@ -1235,7 +1243,7 @@ comparisons, would give an explicit polynomial rate throughout; neither theorem 
 \section{Code and data availability}
 \label{sec:code}
 
-Every certified or numerically-checked claim in this paper is backed by a runnable script in the
+Every certified or numerically-checked claim in this paper is backed by a script in the
 accompanying repository, \url{https://github.com/faculdade/wirsching-conjecture3-proof}, organized
 by section with a README per script stating what it verifies and how to run it. This includes the
 interval-arithmetic certificates behind Proposition~\ref{prop:Hcert} and the bounds
