@@ -864,3 +864,11 @@ with two plain `\noindent\textbf{...}` lines placed right after `\end{abstract}`
 clean (pdflatex, exit 0, one benign advisory only), confirmed via `pdftotext` that both lines now
 appear exactly once, in normal body text directly under the abstract, with no leftover footnote
 anywhere in the document, and visually spot-checked via rendered PNG.
+
+Same session, immediately after: the researcher noticed a large vertical gap between the author
+name and the institution/email/ORCID block on page 1. Cause: `amsart`'s `\maketitle` reserves
+vertical space for a `\date` field (empty here, but the space is still inserted), stacked on top
+of the manual `\begin{center}` block's own default top skip. Added `\vspace{-2.5em}` between
+`\maketitle` and the `\begin{center}` block to remove the reserved gap. Recompiled clean, visually
+confirmed the name, institution, email, and ORCID now sit close together with normal single-block
+spacing.
