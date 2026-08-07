@@ -165,7 +165,8 @@ explicit decision (see Rule 1), not something to re-trigger casually.
 > not yet decided; revisit once results are in hand).
 >
 > Author(s): Renato Augusto Tavares, Universidade Federal de Goias,
-> ORCID https://orcid.org/0009-0002-0196-3311, contact dr.renatotavares@gmail.com.
+> ORCID https://orcid.org/0009-0002-0196-3311, contact rat@discente.ufg.br (updated 2026-08-06,
+> researcher's explicit request; was dr.renatotavares@gmail.com).
 >
 > Working language: Portuguese for day-to-day conversation with Claude. Papers remain
 > bilingual per Rule 5 (English submission version + Portuguese review version).

@@ -833,3 +833,23 @@ error while fixing an old one. Both of Codex's new findings (Z2, Z3) were real, 
 wording inconsistency and one overclaimed "first" that happened to be true but wasn't justified by
 what the text actually checked. Per the researcher's explicit instruction, Round 18 is not launched
 automatically; the loop pauses here pending authorization.
+
+## Post-Round-17 addendum: front-matter formatting (researcher-directed, outside the critique loop)
+
+Not a critique-loop finding; a formatting request from the researcher, who asked specifically for
+the standard arXiv preprint front-matter order: title, author, institution/email/ORCID, abstract,
+then body. Contact email changed from `dr.renatotavares@gmail.com` to `rat@discente.ufg.br` per the
+researcher's explicit instruction (also updated in `CLAUDE.md`'s Section 1). Institution, email, and
+ORCID (previously absent from the paper entirely) now appear on page 1, between the author name and
+the abstract, rather than only at the very end of the document (`amsart`'s default placement for
+`\address`/`\email`). Two dead ends along the way, recorded for future reference: (1) embedding line
+breaks and formatting commands directly inside `\author{...}` caused a fatal `TeX capacity exceeded`
+compile error, because `amsart` reuses `\author`'s content verbatim in the running head -- the
+working fix was a separate `\begin{center}` block, using `\par` rather than `\\` for line breaks;
+(2) placing that block right after `\maketitle` puts it after the abstract (since `amsart`'s
+`\maketitle` bundles title+author+abstract as one atomic unit when the abstract environment
+precedes it) -- the working fix was moving the `\begin{abstract}...\end{abstract}` environment to
+*after* `\maketitle` instead, which `amsart` accepts with only a benign advisory warning ("Abstract
+should precede \maketitle"), not an error, and renders identically. Recompiled clean, verified the
+institution/email/ORCID block appears exactly once (page 1 only, no duplicate at the end) and in the
+requested order, visually spot-checked via rendered PNG.
