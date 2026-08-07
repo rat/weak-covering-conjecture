@@ -46,8 +46,9 @@ log-Laplace transform of $\varphi$ decomposes as a smooth part, a periodic corre
 doubly exponentially small remainder. Berg
 and Kr\"uppel gave this correction, for this eigenfunction, as an infinite product in 1998, five
 years before Wirsching's conjecture; they did not ask whether it is constant. We give $H$ instead
-as a Fourier series with closed-form coefficients in $\Gamma$ and $\zeta$, and certify rigorously
-that it is not. Wirsching's own comparison class fixes a single phase of $H$; there, Conjecture 3
+as a Fourier series with closed-form coefficients in $\Gamma$ and $\zeta$: a classical zero-free
+theorem for $\zeta$ shows directly that it is not constant, and we certify its exact oscillation
+rigorously. Wirsching's own comparison class fixes a single phase of $H$; there, Conjecture 3
 holds, with an explicit limit. Away from that class the phase sweeps a full period, so the
 stronger, unrestricted asymptotic $\varphi(t) \sim \kappa\,\varphi_0(t)$ as $t \to 0^+$ fails. Wirsching
 needs less than the literal statement of Conjecture 3; we check directly that his actual
@@ -134,8 +135,9 @@ constant $\kappa$ and with no restriction to a comparison class, is false. The r
 $\varphi(t)/\varphi_0(t)$ oscillates indefinitely as $t \to 0^+$, with amplitude bounded below by a
 positive constant: it is governed by the exactly $c$-periodic function $H$ evaluated at
 the saddle location $w_0(\tau)$, $\tau=\log(1/t)$, whose phase modulo $c$ sweeps every value
-infinitely often as $\tau\to\infty$ (Lemma~\ref{lem:saddles}). The positivity of that amplitude is
-a computer-assisted result: a rigorous interval-arithmetic certificate
+infinitely often as $\tau\to\infty$ (Lemma~\ref{lem:saddles}). That the amplitude is positive
+follows from a classical theorem, with no computation; its explicit numeric size is a
+computer-assisted result, a rigorous interval-arithmetic certificate
 (Proposition~\ref{prop:Hcert}).
 \end{theorem}
 
@@ -499,7 +501,9 @@ Proposition~\ref{prop:Hcert} below) gives explicit, certified bounds:
 
 \begin{proposition}[Certified non-constancy]
 \label{prop:Hcert}
-$H$ is not constant. Rigorously,
+$H$ is not constant: $\hat H(1)\ne0$ follows from the classical zero-free theorem for $\zeta$ on
+$\operatorname{Re}s=1$ alone, with no computation. The oscillation is quantified rigorously by an
+explicit interval-arithmetic certificate:
 \[
 -0.000377190280943987 \;<\; H(0) - H(\log(3/2)) \;<\; -0.000377190280943985,
 \]
@@ -513,7 +517,18 @@ a matching upper bound, together giving
 \end{proposition}
 
 \begin{proof}
-Write $g(b) = -b/2 + \log S(b/2)$, $S(x) = \sinh(x)/x = \sum_{n\ge0} x^{2n}/(2n+1)!$ (this is
+Non-constancy first, unconditionally. By Proposition~\ref{prop:Hfourier},
+$\hat H(1) = -\frac{2^{i\omega_1}}{c}\Gamma(-i\omega_1)\zeta(1-i\omega_1)$, $\omega_1 = 2\pi/c$, a
+product of three factors, each nonzero: $2^{i\omega_1}\ne0$ trivially; $\Gamma$ has no zeros
+anywhere, and $-i\omega_1$ is not one of its poles ($\omega_1\ne0$ is real, and $\Gamma$'s poles are
+only at the non-positive integers), so $\Gamma(-i\omega_1)\ne0$; and $1-i\omega_1$ lies on the line
+$\operatorname{Re}s=1$ with $\omega_1\ne0$, where $\zeta(1+it)\ne0$ for every real $t\ne0$ by the
+classical zero-free theorem of Hadamard and de la Vall\'ee Poussin \cite{titchmarsh1986}, so
+$\zeta(1-i\omega_1)\ne0$. Hence $\hat H(1)\ne0$, and a periodic function with a nonzero Fourier
+coefficient at $m\ne0$ cannot be constant.
+
+For the quantitative bound, write $g(b) = -b/2 + \log S(b/2)$, $S(x) = \sinh(x)/x = \sum_{n\ge0}
+x^{2n}/(2n+1)!$ (this is
 $g$'s defining formula rewritten around its removable singularity at $0$, since $e^{-b/2}(e^{b/2}
 - e^{-b/2}) = 1-e^{-b}$). Termwise domination of $6^n n! \le (2n+1)!$, which holds at $n=0$ and
 propagates because $(2n+3)(2n+2)\ge6(n+1)$, gives $1\le S(x)\le e^{x^2/6}$, that is
@@ -1326,6 +1341,10 @@ by(x)$}, Bull. Amer. Math. Soc. \textbf{77} (1971), no.~6, 891--937.
 \bibitem{derfel1995}
 G.~Derfel, \emph{Functional-differential and functional equations with rescaling}, in Operator
 Theory: Advances and Applications, vol.~80, Birkh\"auser, Basel, 1995, 100--111.
+
+\bibitem{titchmarsh1986}
+E.~C. Titchmarsh, \emph{The Theory of the Riemann Zeta-Function}, 2nd ed., revised by D.~R.
+Heath-Brown, Oxford University Press, 1986, Theorem 3.8.
 
 \end{thebibliography}
 

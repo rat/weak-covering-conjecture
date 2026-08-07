@@ -1066,3 +1066,37 @@ scope complaint, and this time also caught a real problem in this project's own 
 preceding edit (an unproven "theatrical" claim added in Round 20, now removed). Per the researcher's
 explicit instruction, Opus was not run this round; the loop pauses here, and the researcher will say
 when to resume with both reviewers.
+
+## Post-Round-21 addendum: analytic (non-numerical) proof of H's non-constancy
+
+Researcher-directed implementation, not a critique-loop finding on its own: the researcher asked to
+implement the recurring suggestion flagged at the end of Round 21 (also raised independently in
+Rounds 5 and 6), that `H`'s non-constancy follows unconditionally from the classical zero-free
+theorem for `zeta` on `Re(s)=1`, with no computer-assisted computation needed at all for the
+qualitative claim.
+
+Verified before writing anything into the paper: `Hhat(1) = -(2^{i*omega_1}/c) * Gamma(-i*omega_1)
+* zeta(1-i*omega_1)` is a product of three factors, each individually nonzero (`2^{i*omega_1}` on
+the unit circle; `Gamma` has no zeros anywhere and `-i*omega_1` is not one of its poles since
+`omega_1 != 0` is real; `1-i*omega_1` lies on `Re(s)=1` with `omega_1 != 0`, where the classical
+Hadamard-de la Vallee Poussin zero-free theorem gives `zeta(1-i*omega_1) != 0`), so `Hhat(1) != 0`
+unconditionally, and a periodic function with one nonzero Fourier coefficient at `m != 0` cannot be
+constant. The primary-source citation was verified before use, per Rule 11 (not taken from memory):
+fetched Titchmarsh's *The Theory of the Riemann Zeta-Function* (2nd ed., revised D. R. Heath-Brown,
+Oxford University Press, 1986) directly and located the exact statement as Theorem 3.8 ("There is a
+constant `A` such that `zeta(s)` is not zero for `sigma >= 1 - A/log(t)`, `t > t_0`"), the classical
+zero-free region whose boundary case `sigma=1` is exactly the fact needed.
+
+Added as a new opening paragraph of Proposition 8's proof ("Non-constancy first, unconditionally"),
+before the existing numerical certificate, which now serves only to establish `H`'s *quantitative*
+oscillation size (still genuinely computer-assisted, unaffected). Updated, per Rule 8b's discipline
+applied proactively this time rather than after a later round catches it: the abstract (now states
+non-constancy follows from the zero-free theorem directly, with only the exact oscillation size
+certified), Proposition 8's own statement (states the two claims, analytic and computational,
+separately), and Theorem 2's closing sentence (the amplitude's *positivity* is now attributed to the
+classical theorem; only its *explicit numeric size* remains labeled computer-assisted). Added
+Titchmarsh 1986 as a new bibliography entry, `[9]`.
+
+Recompiled clean (pdflatex, exit 0, zero `Overfull \hbox`, no undefined-citation warning), 19 pages
+(unchanged from Round 20). Visually spot-checked the new proof paragraph, the updated abstract, and
+the updated Theorem 2 statement via rendered PNG.
