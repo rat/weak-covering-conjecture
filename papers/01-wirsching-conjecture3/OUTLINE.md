@@ -69,10 +69,25 @@ citable proof.
       Propositions 6/8/16 converted from sketches to complete proofs, a lost-text LaTeX
       overfull-hbox bug, an unjustified O-notation-to-numeric-bound leap in Lemma 15, assorted
       wording/citation-precision fixes); paper now 16 pages, zero warnings. Reproducibility repo
-      made public 2026-08-05. Loop continues until a round returns with no further real findings.
+      made public 2026-08-05.
+- [x] critique rounds 7-24 complete (2026-08-05/08): loop continued (Opus, then Fable as the
+      second reviewer per the researcher's instruction; Codex switched to `gpt-5.6-sol` from
+      Round 24), converging at Rounds 23-24 (zero new mathematical errors across two independent
+      reviewer passes each). Non-constancy of `H` upgraded from computational to analytic (classical
+      zeta zero-free theorem). Every load-bearing citation to Wirsching 2003 and Berg-Kruppel 1998
+      verified directly against the primary sources (two real miscitations found and fixed).
+      Reproducibility repo DOI-archived via Zenodo (`doi:10.5281/zenodo.21854549`, commit `f8248c3`)
+      and cited in Section 9. Paper 19 pages.
+- [x] critique rounds 25-27 complete (2026-08-08): two further confirming rounds at both
+      reviewers' strongest configuration, plus a dedicated regression check (Round 27) confirming
+      Rounds 25-26's own fixes introduced no new error. Full detail in CRITIQUE.md.
+- [x] **paper declared final by the researcher, 2026-08-08.** See CRITIQUE.md's closing note and
+      papers/INDEX.md.
+- [ ] researcher's own read: still pending, the one item no critique round can substitute for
 - [ ] pt-BR version (main-pt.tex): deferred, only on the researcher's explicit request
 
 ## Target venue
 
-arXiv preprint (math.NT or math.DS) first; journal not yet decided (per this project's CLAUDE.md
-Section 1). English only for now, per researcher's explicit instruction (2026-08-04).
+**Decided (2026-08-08):** arXiv preprint, category `math.NT`, license CC BY 4.0. No target journal
+for now; revisit once the preprint is out. English only as of this decision, per the researcher's
+standing instruction; the pt-BR version (Rule 5) remains deferred until requested.
