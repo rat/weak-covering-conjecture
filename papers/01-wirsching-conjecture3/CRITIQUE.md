@@ -1140,3 +1140,36 @@ recent rounds while fixing something else, continuing the pattern flagged in Rou
 researcher's new standing instruction, the loop continues automatically to the next round rather
 than pausing for authorization; starting next round, the second reviewer slot switches from Opus to
 Fable per the researcher's explicit instruction.
+
+## Round 23: twenty-first blind loop iteration (2026-08-08), Codex and Fable both complete -- the
+## loop's convergence signal
+
+First round with Fable (Claude Fable 5) as the second reviewer, replacing Opus per the researcher's
+instruction. **Both reviewers found zero new mathematical errors and reached essentially
+acceptance-level verdicts.** Codex: "I do not recommend rejection on mathematical grounds: I found
+no fatal proof error... I would recommend acceptance after [the] reproducibility repair." Fable,
+independently: "As submitted, this is a rigorous proof of what it claims... Nothing else. I found no
+mathematical error to fix."
+
+| ID | Summary | Verdict | Status |
+|----|---------|---------|--------|
+| Codex #1, #2 (restates settled ground) | Repository/certificate not self-contained; several constants (Lemma 9, Lemma 11, Remark 14) "announced, not shown" | same scope question as every round since Round 3 | not reopened, Rule 8d |
+| Fable #1 (restates settled ground) | Load-bearing external quotations from [1]/[2] need independent verification against the physical sources, particularly the self-flagged Berg-Kruppel sign discrepancy | same as Round 20/21/22's Opus F5, F1 | not reopened this round; still logged as a genuine future task, not dropped |
+| Fable #2 (cosmetic, considered) | `e^{H(0)}=0.534122...` embedded directly in Theorem 1's statement; suggests moving the numeral to a remark, keeping the theorem's boxed text free of any uncertified decimal | fair stylistic preference, not an error (Fable's own words: "the caveat is honest and correctly worded") | not applied: restructuring where a value lives (statement vs. remark) this late, for a labeling choice that's already honestly caveated, was judged not worth the risk of a fresh edit for a purely cosmetic gain |
+| Fable #3 (cosmetic, considered) | `Lambda` reused for two unrelated objects (Lemma 11's `Lambda(y)` remainder function, Proposition 20's `Lambda_l` ratio sequence) | fair catalogue entry, but Fable's own assessment: "context... makes them unambiguous" | not applied, same renaming-risk judgment as every prior round's parallel notation findings |
+| Codex, Fable (both, LLM-writing review) | Recurring "X, not Y" antithesis density (~10 instances each independently counted), pseudo-heading proof-transition phrases ("Non-constancy first, unconditionally," "For the quantitative bound," etc.) | accurate catalogues, no new items beyond what's already been weighed in Rounds 18-22 | not applied further; both reviewers explicitly noted the paper is otherwise unusually clean by the project's own Rule 5c checklist (zero em dashes, zero stock transitions, genuine sentence-length variance, asymmetric section lengths) |
+
+Paper unchanged this round -- no edits were made. Both reviewers' full numerical-reproduction tables
+(each independently recomputing 15-20+ constants to matching precision, including the Round 22
+fixes) are preserved in this session's conversation history; every value checked out.
+
+**This round is the loop's convergence signal.** Per the standing protocol (this file's own opening
+paragraphs, "continue until a round returns with no further real findings from either reviewer"):
+two independent reviewers, on two different model families neither of which had seen any prior
+round's report, both converged on (a) zero new mathematical findings, (b) the same single
+recurring, already-settled scope question (repository archival, Rule 8d), and (c) only cosmetic,
+optional style notes explicitly labeled as such by the reviewers themselves. Both gave
+acceptance-level verdicts unconditionally on the mathematics. Recommendation: pause the loop here
+and report convergence to the researcher, rather than continuing to spend further rounds
+re-surfacing the same repository-archival request the project has declined on the same grounds
+(Rule 12's division of labor) in every round since Round 3.
