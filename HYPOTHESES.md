@@ -13,7 +13,12 @@ limiting law) that Codex itself flagged as not decisive for GAP A. Round 30: Cod
 was to stop rather than continue mining the same neighborhood or reopen the exhausted Fourier line,
 since "other strata can in principle fill precisely the observed holes" and nothing found supplies
 cross-stratum containment or a non-repair principle. No new bound on `j*(l)`; session paused for
-the researcher's decision on next direction. H-001's l=24 was paused (`SIGSTOP`, fully reversible)
+the researcher's decision on next direction. **l=24 died again, 2026-08-07 ~15:25** (watchdog log
+stops abruptly mid-run, no clean "process no longer running" line, memory available was
+chronically near-zero, 67-320MB, in the preceding hour, consistent with an OOM kill, though no
+`dmesg`/`journalctl` OOM entry survived to confirm it directly). Not investigated further and
+**not relaunched, per the researcher's explicit instruction (2026-08-08)**; H-001 deferred
+indefinitely pending a decision on next direction. H-001's l=24 was paused (`SIGSTOP`, fully reversible)
 for this cycle's memory needs.)
 
 | ID | Title | Status | Impact | One-line summary | Detail | Opened | Closed |
