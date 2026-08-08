@@ -1,0 +1,1394 @@
+\documentclass[11pt]{amsart}
+
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[margin=1in]{geometry}
+\usepackage[hyphens]{url}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Teorema}
+\newtheorem{proposition}[theorem]{Proposição}
+\newtheorem{lemma}[theorem]{Lema}
+\newtheorem{corollary}[theorem]{Corolário}
+\newtheorem*{conjecture}{Conjectura 3 de Wirsching}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definição}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Observação}
+\renewcommand{\proofname}{Demonstração}
+\renewcommand{\refname}{Referências}
+
+\DeclareMathOperator{\artanh}{artanh}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+
+\title[Conjectura 3 de Wirsching]{A Conjectura 3 de Wirsching, e a correção periódica à assintótica de densidade de Berg--Kr\"uppel}
+
+\author{Renato Augusto Tavares}
+
+\begin{document}
+
+\maketitle
+
+\vspace{-2.5em}
+\begin{center}
+\normalsize Universidade Federal de Goi\'as \par
+\texttt{rat@discente.ufg.br} \par
+ORCID: \url{https://orcid.org/0009-0002-0196-3311}
+\end{center}
+
+\begin{abstract}
+O argumento de Wirsching de 2003 para densidade positiva de predecessores sob o mapa $3n+1$ se
+reduz a três conjecturas. A Conjectura 3 trata da assintótica de $\varphi$, uma densidade
+invariante, próximo de zero, comparada a uma assintótica explícita $\varphi_0$ devida a Berg e
+Kr\"uppel. A transformada log-Laplace exata de $\varphi$ se decompõe como uma parte suave, uma
+correção periódica $H$, e um resto duplamente exponencialmente pequeno. Berg e Kr\"uppel deram essa
+correção, para esta autofunção, como um produto infinito em 1998, cinco anos antes da conjectura de
+Wirsching; eles não perguntaram se ela é constante. Nós damos $H$, em vez disso, como uma série de
+Fourier com coeficientes em forma fechada em $\Gamma$ e $\zeta$: um teorema clássico de não-anulação
+de $\zeta$ mostra diretamente que ela não é constante, e nós envolvemos rigorosamente sua oscilação.
+A própria classe de comparação de Wirsching fixa uma única fase de $H$; ali, a Conjectura 3 vale,
+com um limite explícito. Fora dessa classe a fase varre um período completo, de modo que a
+assintótica mais forte e irrestrita $\varphi(t) \sim \kappa\,\varphi_0(t)$ quando $t \to 0^+$ falha.
+Wirsching precisa de menos do que o enunciado literal da Conjectura 3; nós verificamos diretamente
+que sua exigência real vale com ampla margem. Isso resolve apenas a Conjectura 3; as outras duas
+conjecturas de Wirsching, e a própria densidade positiva de predecessores, permanecem em aberto.
+\end{abstract}
+
+\noindent\textbf{Palavras-chave:} mapa de Collatz, densidade de predecessores, densidade invariante,
+assintótica log-periódica, transformada de Mellin, função atômica.
+
+\noindent\textbf{Classificação de Assuntos Matemáticos 2020:} 11B83, 39B22, 44A15, 41A60, 11M06.
+
+\section{Introdução}
+
+Seja $T$ o mapa $3n+1$ nos inteiros positivos, $T(n) = n/2$ para $n$ par e $T(n) = (3n+1)/2$ para
+$n$ ímpar. A monografia de Wirsching \cite{wirsching1998} desenvolve a maquinaria de conjuntos de
+predecessores da qual descende o argumento deste artigo; \cite{wirsching2003} a leva adiante,
+estudando a densidade de conjuntos de predecessores sob $T$ por meio de uma construção de
+médias sobre os inteiros $3$-ádicos: uma família de operadores $S_l$, construída a partir de
+contagens de caminhos no grafo de predecessores, converge na topologia de operadores fortes a um
+operador limite $S_\infty$ cuja parte essencial é uma cadeia de Markov em $[0,1]$. Essa cadeia tem
+uma única densidade invariante $\varphi$, e a prova de Wirsching de densidade positiva de
+predecessores se reduz a três conjecturas sobre $\varphi$ e quantidades relacionadas, enunciadas
+como três lacunas não fechadas no argumento.
+
+Dessas três, este artigo resolve a Conjectura 3. Ela trata do comportamento de $\varphi$ quando seu
+argumento tende a $0$, comparado a uma função de comparação explícita $\varphi_0$: a própria
+equação~(7.11) de Wirsching define $\varphi_0$ como sendo exatamente a solução assintótica de Berg e
+Kr\"uppel, nomeando \cite{bergkruppel1998} na frase que a introduz, de modo que a identificação é
+escolha do próprio Wirsching, não uma substituição feita aqui. Berg e Kr\"uppel haviam produzido
+$\varphi_0$ cinco anos antes, por transformada de Laplace e análise de ponto de sela, como a solução
+assintótica de uma versão truncada da equação funcional que $\varphi$ satisfaz. O argumento deles
+para a comparabilidade assintótica entre $\varphi$ e $\varphi_0$ era informal: eles dão a correção
+periódica que relaciona as duas como um produto infinito explícito (Corolário~\ref{cor:bk} abaixo)
+mas nunca o avaliam, de modo que tanto se uma única constante relaciona $\varphi$ a $\varphi_0$ ao
+longo de toda sequência, quanto se a razão sequer converge ao longo de uma sequência arbitrária,
+ficam em aberto. Wirsching considera diretamente a leitura mais forte possível dessa lacuna:
+
+\begin{quote}
+``Essa substituição seria possível se, por exemplo, $\varphi \sim c\,\varphi_0$ para alguma
+constante $c > 0$. Acontece que a seguinte conjectura (ligeiramente mais fraca) \dots basta.''
+\end{quote}
+
+Ele então enuncia (\cite{wirsching2003}, imediatamente após a frase citada, com notação
+normalizada: seu próprio $\delta_5$ é escrito $\delta$ ao longo deste artigo, já que nenhuma outra
+classe indexada por $\delta$ dele aparece aqui, e sua constante $c$, mantida abaixo por fidelidade
+ao seu enunciado, não tem relação com $c:=\log3$ introduzido na Seção~\ref{sec:periodic}):
+
+\begin{conjecture}
+Existem constantes reais positivas $c$ e $\delta$ tais que
+\[
+\lim_{l\to\infty} \frac{\varphi(z_l)}{\varphi_0(z_l)} = c > 0 \qquad \text{uniformemente para
+sequências } (z_l) \in \widetilde A_\delta.
+\]
+\end{conjecture}
+
+Aqui $\widetilde A_\delta$ é a classe de Wirsching de sequências que tendem a $0$ na taxa limítrofe
+$z_l \sim l\cdot 3^{-l}$ (suas equações~(1.5) e~(3.2), reproduzidas antes da prova do
+Teorema~\ref{thm:conj3}): uma sequência $(x_l)$ pertence a $\widetilde A_\delta$ exatamente quando
+$\lfloor 3^lx_l\rfloor = k_l$ para uma sequência de inteiros $(k_l)$ com $|l-k_l|\le\delta\sqrt l$
+para todo $l$. Isso é mais fraco do que a assintótica irrestrita que ele considera primeiro. A
+constante se cancela na única desigualdade de que sua prova de fato precisa, de modo que um limite
+dependente da classe já basta. Nenhum dos dois enunciados havia sido resolvido antes dos dois
+teoremas a seguir.
+
+\begin{theorem}[Conjectura 3]
+\label{thm:conj3}
+A Conjectura 3 de Wirsching (enunciada acima) é verdadeira. Para todo $\delta>0$, na sua classe de
+comparação $\widetilde{A}_\delta$, a razão $\varphi(z_l)/\varphi_0(z_l)$ converge uniformemente para
+$e^{H(0)}$, um número real bem definido pelo Teorema~\ref{thm:H} independentemente de sua expansão
+decimal, avaliado aqui como $e^{H(0)} = 0.534122\ldots$ (uma avaliação em ponto flutuante; a prova
+da Proposição~\ref{prop:Hcert} certifica rigorosamente a diferença próxima
+$H(0)-H(\log\tfrac32)$, mas não $H(0)$ isoladamente), onde $H$ é a função periódica do
+Teorema~\ref{thm:H} abaixo e a normalização de $\varphi_0$ é a própria de Berg e Kr\"uppel,
+equação~(9.6) de \cite{bergkruppel1998}. A própria Conjectura 3 só afirma a existência de alguma
+constante positiva, independentemente de normalização; o valor específico $e^{H(0)}$ está ligado a
+esta normalização particular de $\varphi_0$.
+\end{theorem}
+
+\begin{theorem}[Falha da assintótica irrestrita]
+\label{thm:unrestricted}
+A assintótica mais forte $\varphi(t) \sim \kappa\,\varphi_0(t)$ quando $t \to 0^+$, para qualquer
+constante única $\kappa$ e sem restrição a uma classe de comparação, é falsa. A razão
+$\varphi(t)/\varphi_0(t)$ oscila indefinidamente quando $t \to 0^+$, com amplitude limitada
+inferiormente por uma constante positiva: ela é governada pela função exatamente $c$-periódica $H$
+avaliada na localização de sela $w_0(\tau)$, $\tau=\log(1/t)$, cuja fase módulo $c$ varre todo valor
+infinitas vezes quando $\tau\to\infty$ (Lema~\ref{lem:saddles}). Que a amplitude seja positiva segue
+de um teorema clássico, sem nenhum cálculo; seu tamanho numérico explícito é um resultado assistido
+por computador, um certificado rigoroso de aritmética de intervalos (Proposição~\ref{prop:Hcert}).
+\end{theorem}
+
+Um único cálculo fundamenta os dois teoremas. Escreva $t = e^{-\tau}$ e seja $H(w)$ a função
+$\log 3$-periódica que aparece na decomposição exata da transformada log-Laplace de $\varphi$
+(Teorema~\ref{thm:H}); a ponte de ponto de sela das Seções~\ref{sec:formulaA}, \ref{sec:envelope} e
+\ref{sec:bk} mostra $\log\varphi(t)-\log\varphi_0(t) = H(w_0(\tau))+o(1)$, onde a localização de
+sela $w_0(\tau)$ avança por $c$ a cada período de $\tau$, a menos de uma correção que se anula:
+$w_0(\tau+c)-w_0(\tau) = c+O(1/\tau)$ (Lema~\ref{lem:saddles}). A classe de comparação de Wirsching
+restringe a fase de $w_0(\tau_l)$ módulo $\log 3$ a convergir para um único valor quando
+$l\to\infty$; o intervalo irrestrito $\tau\to\infty$ sem restrição de classe, em vez disso, varre
+essa fase por todo valor, já que $\Phi_0$ é uma bijeção (novamente Lema~\ref{lem:saddles}). Se a
+razão converge ou oscila depende de ao longo de quais sequências se compara, e os dois teoremas
+acima leem o mesmo objeto em dois escopos diferentes.
+
+\begin{corollary}
+\label{cor:bk}
+$e^H$ é o próprio fator periódico de Berg e Kr\"uppel para a autofunção $\varphi$, da
+Proposição~9.3 de \cite{bergkruppel1998}, que eles dão como um produto infinito; $H$ em si é seu
+logaritmo. Sua série de Fourier, Proposição~\ref{prop:Hfourier} abaixo, é nova\footnote{Uma busca na
+literatura por trabalhos sobre esta família de equações de diferença de duas escalas publicados
+após \cite{bergkruppel1998}, incluindo artigos posteriores de seus próprios autores, não encontrou
+nenhum que dê uma expansão de Fourier fechada para o fator periódico.}. Este corolário tem duas
+partes de profundidade diferente: que $e^H$ coincide com o produto deles \emph{como função},
+provado na Observação~\ref{rem:bkproduct} abaixo por álgebra pura ($e^H=e^{-Q}e^Le^{-\Delta}$
+recombinando as próprias peças do Teorema~\ref{thm:H}), e que essa função é o fator periódico que
+multiplica a própria assintótica de $\varphi$, o que precisa da cadeia completa de ponto de sela do
+Teorema~\ref{thm:formulaA} e das Proposições~\ref{prop:envelope}--\ref{prop:bkidentity}, provadas
+abaixo.
+\end{corollary}
+
+A construção de $H$, sua não-constância, e sua oscilação certificada estão na
+Seção~\ref{sec:periodic}; a transferência de ponto de sela para $\varphi$ em si e a identificação
+com a assintótica de Berg e Kr\"uppel, nas Seções~\ref{sec:formulaA}--\ref{sec:bk}.
+
+\section{A densidade invariante e sua transformada de Laplace}
+\label{sec:prelim}
+
+Sejam $U_1, U_2, \dots$ variáveis aleatórias uniformes independentes e identicamente distribuídas
+em $[0,1]$, e defina
+\[
+X = \sum_{j \ge 1} \frac{2}{3^j} U_j \in [0,1].
+\]
+A identidade autossimilar $X = \tfrac{2}{3}U_1 + \tfrac{1}{3}X'$, com $X'$ uma cópia independente de
+$X$, mostra que a densidade $\varphi$ de $X$ satisfaz
+\[
+\varphi(x) = \frac{3}{2}\int_{3x-2}^{3x} \varphi,
+\]
+equivalentemente $\varphi'(x) = \tfrac{9}{2}\varphi(3x)$ em $(0, \tfrac{2}{3})$: a equação integral
+exibida é exatamente a equação~(6.1) de \cite{wirsching2003}, $(W_3f)(x) := \tfrac32\int_{3x-2}^{3x}
+f$, e $\varphi$ é exatamente a função que seu Corolário~7 constrói como a única solução
+$L^1_{\rm loc}$ de $\operatorname{supp}\varphi\subset[0,1]$, $\int_0^1\varphi=1$, $W_3\varphi=\varphi$,
+sua densidade invariante, a menos da reflexão $x \mapsto 1-x$ que fixa a convenção. É também uma
+translação da função atômica $h_3$ de Rvachev \cite{rvachev1990}, e, em parâmetro de dilatação
+$a=3$ e $\lambda=2/3$, uma instância da família de equações funcionais de Berg e Kr\"uppel
+$\lambda\, \psi'(t) = a\bigl(\psi(at) - \psi(at-2)\bigr)$. A reflexão é de fato vazia,
+$\varphi(x)=\varphi(1-x)$ identicamente: $X$ e $1-X=\sum_{j\ge1}\tfrac{2}{3^j}(1-U_j)$ são
+equidistribuídas, já que $1-U_j\sim U_j$ independentemente para todo $j$ e
+$\sum_{j\ge1}2\cdot3^{-j}=1$. Ela é suportada em $[0,1]$, contínua (pelo Lema~\ref{lem:tail}
+abaixo), e constante, igual a $3/2$, no terço médio $[1/3, 2/3]$: ali, $3x-2\le0\le1\le3x$, de modo
+que $\operatorname{supp}\varphi\subset[0,1]$ colapsa a integral da equação funcional a
+$\int_0^1\varphi=1$, dando $\varphi(x)=\tfrac32\cdot1=\tfrac32$.
+
+Para $s > 0$ escreva
+\[
+K(s) = \log \mathbb{E}\bigl[e^{-sX}\bigr] = \sum_{j \ge 1} g\!\left(\frac{2s}{3^j}\right), \qquad
+g(b) = \log\frac{1-e^{-b}}{b}.
+\]
+O ramo de $g$ é o que é analítico em $\{\operatorname{Re} w > 0\}$ e real em $(0,\infty)$; já que
+$(1-e^{-w})/w$ é analítica e não se anula ali (seus zeros estão em $2\pi i \Z \setminus \{0\}$, e
+$w=0$ é uma singularidade removível de valor $1$), e o semiplano é simplesmente conexo, $g$ existe e
+é única. Derivando termo a termo, justificado porque $g(w) = -w/2 + O(w^2)$ quando $w \to 0$ de modo
+que a cauda da série é normalmente convergente junto com toda derivada,
+\[
+t(s) := -K'(s), \qquad V(s) := s^2 K''(s) > 0,
+\]
+a segunda uma positividade exata, sendo $K''(s)$ a variância de $X$ sob sua inclinação exponencial
+por $e^{-sX}$. Como $t'(s) = -K''(s) < 0$, $t$ é estritamente decrescente em $(0,\infty)$; nos
+extremos, $t(0^+) = \mathbb E[X] = \sum_{j\ge1} 2\cdot3^{-j}\cdot\tfrac12 = \tfrac12$, e $t(s)\to0$
+quando $s\to\infty$ porque a inclinação exponencial se concentra em $\operatorname{ess\,inf} X=0$
+(cada fator $e^{-sX}$ suprime qualquer massa longe de $0$ quando $s\to\infty$, e $X\ge0$ q.c.).
+Assim $t(s)$ decresce estritamente de $1/2$ a $0$, e estudar $\varphi(t(s))$ quando $s \to \infty$ é
+o mesmo que estudar $\varphi(t)$ quando $t \to 0^+$.
+
+A função de comparação de Berg e Kr\"uppel é a solução assintótica da equação truncada
+$\lambda\, \psi'(t) = a\, \psi(at)$, sendo $a$ aqui o parâmetro de dilatação deles (esta letra é
+reutilizada na Seção~\ref{sec:periodic} para o coeficiente linear de $Q$, próprio deste artigo e
+sem relação com aquele; os dois nunca aparecem na mesma fórmula exceto na Seção~\ref{sec:bk}, onde
+a colisão é sinalizada de novo no ponto em que importa), por transformada de Laplace e análise de
+ponto de sela. Na normalização deles (sua equação~(9.6), com
+$\alpha = \tfrac12 - \tfrac{\log 2}{\log 3}$, $\beta = \tfrac{1}{2\log 3}$, e $\gamma$,
+$\delta_{\mathrm{BK}}$, $\varepsilon$ determinados por $\alpha$ e $\beta$ através de suas próprias
+equações, dadas explicitamente na Seção~\ref{sec:bk}),
+\[
+\varphi_0(t) = \frac{(2\beta)^\varepsilon}{\sqrt{2\pi}}\; t^\gamma\,(-\log t)^{\delta_{\mathrm{BK}}}
+\, \exp\!\left(-\beta \log^2\!\frac{t}{-\log t}\right).
+\]
+Escreva $\varphi_{0,\mathrm{bare}}$ para a mesma expressão sem a constante inicial
+$(2\beta)^\varepsilon/\sqrt{2\pi}$: as duas diferem apenas por essa constante.
+
+\section{A correção periódica}
+\label{sec:periodic}
+
+Defina $c = \log 3$ e escreva $w = \log s$, $L(w) = K(e^w)$. Substituindo na série que define $K$ e
+separando o termo $j=1$ do resto reproduz a recorrência
+\begin{equation}
+\label{eq:recurrence}
+L(w+c) - L(w) = \log\bigl(1 - e^{-2e^w}\bigr) - w - \log 2.
+\end{equation}
+Seja
+\[
+Q(w) = -\frac{w^2}{2c} + \left(\frac12 - \frac{\log 2}{c}\right) w,
+\]
+escolhida de modo que $Q(w+c) - Q(w) = -w-\log2$, coincidindo exatamente com os termos
+não-periódicos de \eqref{eq:recurrence}. Escreva $a := \tfrac12 - \tfrac{\log 2}{c}$ para o
+coeficiente linear de $Q$, usado de novo a partir da Seção~\ref{sec:envelope}.
+
+\begin{theorem}
+\label{thm:H}
+Defina
+\begin{equation}
+\label{eq:Hexact}
+H(w) := L(w) - Q(w) + \sum_{k \ge 0} \log\bigl(1 - e^{-2\cdot 3^k e^w}\bigr).
+\end{equation}
+Então $H$ é exatamente $c$-periódica, $H(w+c) = H(w)$ para todo $w \in \R$, e
+\[
+L(w) = Q(w) + H(w) + \Delta(w), \qquad \Delta(w) = -\sum_{k\ge 0}\log\bigl(1-e^{-2\cdot3^k e^w}\bigr),
+\]
+com $\Delta^{(j)}(w) = O_j\bigl(e^{jw - 2e^w}\bigr)$ para todo $j \ge 0$: duplamente
+exponencialmente pequeno, junto com todas as suas derivadas, quando $w \to +\infty$.
+\end{theorem}
+
+\begin{proof}
+Escreva $d(w) = \log(1-e^{-2e^w})$, de modo que \eqref{eq:recurrence} se lê $L(w+c)-L(w) = d(w) - w
+- \log 2$. Diretamente da definição de $Q$ (expanda $(w+c)^2 = w^2+2wc+c^2$ e agrupe os termos),
+$Q(w+c)-Q(w) = -w-\log2$ também, de modo que as duas partes não-periódicas se cancelam exatamente:
+\[
+(L-Q)(w+c) - (L-Q)(w) = \bigl[d(w)-w-\log2\bigr] - \bigl[-w-\log2\bigr] = d(w).
+\]
+A série em \eqref{eq:Hexact} telescopia isso exatamente: com $D(w) := (L-Q)(w)$,
+\[
+D(w) + \sum_{k\ge0} d(w+kc) = D(w+c) - d(w) + \sum_{k\ge0}d(w+kc) = D(w+c) + \sum_{k\ge0}d(w+(k+1)c),
+\]
+de modo que o lado direito de \eqref{eq:Hexact} é invariante sob $w \mapsto w+c$, isto é, $H$ é
+$c$-periódica. A convergência da série e sua diferenciabilidade termo a termo, junto com a cota
+enunciada em $\Delta^{(j)}$, seguem de $d(w) = O(e^{-2e^w})$ e das cotas correspondentes de suas
+derivadas, já que $2\cdot3^k e^w$ cresce como $3^k$ para $k\ge0$: os termos $d(w+kc)$ decaem
+duplamente exponencialmente em $k$, portanto mais rápido do que qualquer taxa geométrica fixa, o
+que dá convergência uniforme e dominada da série e de suas derivadas para $w$ em qualquer semirreta
+limitada longe de $-\infty$.
+\end{proof}
+
+Dado $Q$, $H$ é unicamente determinada pela exigência de que $L-Q-H$ seja $o(1)$ quando $w\to\infty$:
+duas funções periódicas quaisquer que diferem de $L-Q$ por um termo $o(1)$ quando $w\to\infty$ devem
+ser iguais, sendo funções periódicas que coincidem no limite ao longo de toda classe residual de $w$
+módulo $c$.
+
+\begin{remark}
+\label{rem:bkproduct}
+A própria Proposição~9.3 de Berg e Kr\"uppel, especializada ao parâmetro de dilatação deles $3$ e
+ao seu $b=3/2$ (exatamente esta autofunção; o $\alpha$ deles, mantido como símbolo aqui, é
+exatamente o $\alpha$ importado da Seção~\ref{sec:prelim}, que a Proposição~\ref{prop:bkidentity}
+abaixo identifica com o próprio $a$ deste artigo), dá a identidade equivalente
+$\exp(H(w)) = 3^{\frac12 t^2 - \alpha t} \prod_{k\ge0}\frac{1-e^{-3^{t-k}/b}}{3^{t-k}/b}
+\prod_{l\ge1}\bigl(1-e^{-3^{t+l}/b}\bigr)$, $t=w/c$, como um produto infinito, na prova daquela
+proposição. Isto é $e^{-Q}e^Le^{-\Delta}$ termo a termo: escrevendo $s=e^w=3^t$, $3^{t-k}/b =
+2s/3^{k+1}$, de modo que reindexar $j:=k+1\ge1$ transforma o primeiro produto em
+$\prod_{j\ge1}\frac{1-e^{-2s/3^j}}{2s/3^j}$, exatamente $e^{L(w)}$ da série que define $K$;
+$3^{t+l}/b = 2s\cdot3^{l-1}$, de modo que reindexar $k:=l-1\ge0$ transforma o segundo em
+$\prod_{k\ge0}\bigl(1-e^{-2s\cdot3^k}\bigr)$, exatamente $e^{-\Delta(w)}$ por \eqref{eq:Hexact}; e,
+já que $w=ct$ e $e^c=3$,
+\[
+-Q(w) = \frac{w^2}{2c}-aw = c\bigl(\tfrac12t^2-at\bigr), \qquad\text{de modo que}\qquad
+3^{\frac12t^2-\alpha t} = e^{-Q(w)}
+\]
+uma vez que $\alpha=a$ (a Proposição~\ref{prop:bkidentity} identifica o $\alpha$ de Berg e
+Kr\"uppel com o coeficiente linear de $Q$ deste artigo, também chamado $a$). Assim, o cálculo
+primário da Proposição~\ref{prop:Hcert} a partir de \eqref{eq:Hcomputable} abaixo é, em essência,
+uma avaliação desse produto. O que a série de Fourier da Proposição~\ref{prop:Hfourier} fornece, e
+a forma de produto deles não, são as cotas de derivada \eqref{eq:Hbounds}, das quais dependem as
+demais estimativas de ponto de sela do artigo.
+\end{remark}
+
+\begin{proposition}
+\label{prop:Hfourier}
+$H$ tem a expansão de Fourier $H(w) = \sum_{m\in\Z} \hat H(m) e^{i\omega_m w}$, $\omega_m =
+2\pi m/c$, com
+\[
+\hat H(0) = \frac{\log 2}{2} - \frac{\log^2 2}{2c} - \frac{c}{12} - \frac{A}{c}, \qquad
+A = \frac{\pi^2}{12} - \frac{\gamma_E^2}{2} - \gamma_1,
+\]
+\[
+\hat H(m) = -\frac{2^{i\omega_m}}{c}\, \Gamma(-i\omega_m)\, \zeta(1-i\omega_m), \qquad m \ne 0,
+\]
+onde $\gamma_E$ é a constante de Euler--Mascheroni e $\gamma_1$ a primeira constante de Stieltjes.
+\end{proposition}
+
+\begin{proof}
+Tanto $g$ quanto $K$ têm transformadas de Mellin na faixa $-1<\operatorname{Re}z<0$. Quando
+$b\to0^+$, $g(b)=-b/2+O(b^2)$; quando $b\to\infty$, $g(b)=-\log b+O(e^{-b})$. Logo $\int_0^\infty
+|g(b)|\,b^{\sigma-1}\,db<\infty$ para $-1<\sigma<0$, e as mesmas duas cotas aplicadas termo a termo
+dão $K(s)=O(s)$ quando $s\to0^+$ e $K(s)=O(\log^2 s)$ quando $s\to\infty$: os termos com $3^j\le2s$
+são em número $O(\log s)$ e cada um é $O(\log s)$, e os termos com $3^j>2s$ somam $O(1)$.
+
+Integre por partes. Com $g'(b)=1/(e^b-1)-1/b$, e ambos os termos de contorno se anulando na faixa
+($g(b)b^z\to0$ em $0$ porque $\operatorname{Re}z>-1$, e em $\infty$ porque $\operatorname{Re}z<0$),
+\[
+g^*(z) = \int_0^\infty g(b)\,b^{z-1}\,db = -\frac1z\int_0^\infty\Bigl(\frac{1}{e^b-1}-\frac1b\Bigr)b^z\,db
+= -\frac{\Gamma(z+1)\zeta(z+1)}{z} = -\Gamma(z)\,\zeta(1+z),
+\]
+sendo o passo intermediário a continuação clássica
+$\int_0^\infty\bigl(\tfrac{1}{e^u-1}-\tfrac1u\bigr)u^{v-1}\,du=\Gamma(v)\zeta(v)$, válida para
+$0<\operatorname{Re}v<1$, em $v=z+1$.
+
+Agora a soma harmônica. No $j$-ésimo termo substitua $u=2s/3^j$, de modo que $s=3^ju/2$ e
+$s^{z-1}\,ds=(3^j/2)^z u^{z-1}\,du$:
+\[
+\int_0^\infty g\Bigl(\frac{2s}{3^j}\Bigr)s^{z-1}\,ds = \Bigl(\frac{3^j}{2}\Bigr)^{\!z}\int_0^\infty
+g(u)\,u^{z-1}\,du = \Bigl(\frac{3^j}{2}\Bigr)^{\!z} g^*(z).
+\]
+Somar sobre $j\ge1$ é legítimo termo a termo, já que $\sum_{j\ge1}(3^j/2)^\sigma\int_0^\infty
+|g(u)|u^{\sigma-1}\,du$ converge para $-1<\sigma<0$. O multiplicador que aparece é, portanto,
+\[
+\sum_{j\ge1}\Bigl(\frac{3^j}{2}\Bigr)^{\!z} = 2^{-z}\sum_{j\ge1}3^{jz} = \frac{2^{-z}3^z}{1-3^z}
+= \frac{(3/2)^z}{1-3^z},
+\]
+uma série geométrica de razão $3^z$, de módulo $3^{\operatorname{Re}z}<1$, convergente em
+$\operatorname{Re}z<0$ e em nenhum outro lugar. Logo
+\begin{equation}
+\label{eq:Kstar}
+K^*(z) = \frac{(3/2)^z}{1-3^z}\cdot\bigl(-\Gamma(z)\zeta(1+z)\bigr)
+= \frac{(3/2)^z\,\Gamma(z)\,\zeta(1+z)}{3^z-1}, \qquad -1<\operatorname{Re}z<0.
+\end{equation}
+As dilatações $\mu_j=2/3^j$ entram invertidas, através de $\mu_j^{-z}$, de onde vem o $2^{-z}$, e
+com ele o $2^{i\omega_m}$ do enunciado.
+
+Em $\operatorname{Re}z>-1$ o lado direito de \eqref{eq:Kstar} é meromorfo, com um polo de ordem
+três em $z=0$ (cada um de $\Gamma(z)$, $\zeta(1+z)$ e $(3^z-1)^{-1}$ contribuindo um) e um polo
+simples em cada zero restante $z=i\omega_m$, $m\ne0$, de $3^z-1$. À direita do eixo imaginário ela
+é analítica.
+
+Fixe $\sigma\in(-1,0)$ e $\sigma'\in(0,1)$, e desloque o contorno de inversão em
+$K(s)=(2\pi i)^{-1}\int_{(\sigma)}K^*(z)s^{-z}\,dz$ de $\sigma$ para $\sigma'$, usando retângulos com
+lados horizontais em $\operatorname{Im}z=\pm T_M$, $T_M:=\pi(2M+1)/c$. Nesses lados
+$3^z=3^{\operatorname{Re}z}e^{i\pi(2M+1)}=-3^{\operatorname{Re}z}$, de modo que $|3^z-1| =
+1+3^{\operatorname{Re}z}\ge1$; Stirling faz $|\Gamma(z)|$ decair como $e^{-\pi T_M/2}$ vezes uma
+potência de $T_M$, uniformemente para $\sigma\le\operatorname{Re}z\le\sigma'$, e $\zeta(1+z)$ cresce
+no máximo polinomialmente ali. As contribuições horizontais, portanto, se anulam quando
+$M\to\infty$, a soma dos resíduos converge absolutamente, e na linha vertical direita
+$|3^z-1|\ge3^{\sigma'}-1>0$ faz $\int_{(\sigma')}|K^*(z)s^{-z}|\,|dz| = O(s^{-\sigma'})$. Assim
+\[
+K(s) = -\operatorname*{Res}_{z=0}\bigl[K^*(z)s^{-z}\bigr]
+-\sum_{m\ne0}\operatorname*{Res}_{z=i\omega_m}\bigl[K^*(z)s^{-z}\bigr]+O(s^{-\sigma'}).
+\]
+
+Tome primeiro os polos simples. Em $z=i\omega_m$ tem-se $3^{i\omega_m}=e^{2\pi im}=1$, de modo que
+$(3^z-1)'=3^z\log3$ é igual a $c$ ali e $(3/2)^{i\omega_m}=3^{i\omega_m}2^{-i\omega_m}=
+2^{-i\omega_m}$. Com $s=e^w$,
+\[
+-\operatorname*{Res}_{z=i\omega_m}\bigl[K^*(z)e^{-zw}\bigr]
+= -\frac{2^{-i\omega_m}}{c}\,\Gamma(i\omega_m)\,\zeta(1+i\omega_m)\,e^{-i\omega_m w},
+\]
+e substituir $m$ por $-m$ em toda a soma transforma a família inteira em $\hat H(m)e^{i\omega_m w}$
+com $\hat H(m)$ exatamente como enunciado.
+
+Na origem, insira
+\[
+\Gamma(z) = \frac1z-\gamma_E+\Bigl(\frac{\gamma_E^2}{2}+\frac{\pi^2}{12}\Bigr)z+O(z^2), \qquad
+\zeta(1+z) = \frac1z+\gamma_E-\gamma_1 z+O(z^2).
+\]
+Os dois termos $1/z$ se cancelam entre si e
+\[
+\Gamma(z)\zeta(1+z) = \frac{1}{z^2}+A+O(z), \qquad A = \frac{\pi^2}{12}-\frac{\gamma_E^2}{2}-\gamma_1,
+\]
+de onde vem $A$. Também $(3^z-1)^{-1} = (cz)^{-1}-\tfrac12+cz/12+O(z^3)$, e
+$(3/2)^ze^{-zw}=e^{\theta z}$ com $\theta:=\log(3/2)-w$. Multiplicando as três expansões e lendo o
+coeficiente de $z^{-1}$,
+\[
+\operatorname*{Res}_{z=0}\bigl[K^*(z)e^{-zw}\bigr]
+= \frac1c\cdot\frac{\theta^2}{2}-\frac{\theta}{2}+\frac{c}{12}+\frac{A}{c}.
+\]
+Substitua $\theta=\log(3/2)-w$ e $\log(3/2)=c-\log2$. A parte de $-\operatorname{Res}$ que depende
+de $w$ é
+\[
+-\frac{w^2}{2c}+\Bigl(\frac{\log(3/2)}{c}-\frac12\Bigr)w
+= -\frac{w^2}{2c}+\Bigl(\frac12-\frac{\log2}{c}\Bigr)w = Q(w),
+\]
+e a parte constante é
+$\tfrac12\log2-\tfrac{\log^22}{2c}-\tfrac{c}{12}-\tfrac Ac = \hat H(0)$.
+
+Reunindo, com $s=e^w$,
+\[
+L(w) = Q(w)+\widetilde H(w)+O(e^{-\sigma' w}), \qquad
+\widetilde H(w) := \hat H(0)+\sum_{m\ne0}\hat H(m)e^{i\omega_m w}.
+\]
+Essa série converge absoluta e uniformemente, porque $|\Gamma(-i\omega_m)| =
+\sqrt{\pi/(\omega_m\sinh\pi\omega_m)}$ decai como $e^{-\pi\omega_m/2}$ enquanto $\zeta(1-i\omega_m)$
+cresce polinomialmente, de modo que $\widetilde H$ é contínua e exatamente $c$-periódica. Ela é
+real: $\Gamma$ e $\zeta$ são reais no eixo real, de modo que $\hat H(-m)$ é o conjugado complexo de
+$\hat H(m)$.
+
+O resto $O(e^{-\sigma'w})$ é apenas exponencialmente pequeno de forma ordinária, mais fraco do que
+o duplamente exponencial $\Delta$ do Teorema~\ref{thm:H}, e isso já basta. O Teorema~\ref{thm:H} dá
+$L-Q-H=\Delta=o(1)$ quando $w\to+\infty$, de modo que $\widetilde H-H = O(e^{-\sigma'w})+\Delta(w)\to0$.
+Ambas são $c$-periódicas, e uma função $c$-periódica que tende a $0$ quando $w\to+\infty$ se anula
+identicamente, sendo seu valor em qualquer $w$ igual ao seu valor em $w+kc$ para todo $k$. Logo
+$\widetilde H=H$, e por convergência uniforme os $\hat H(m)$ são os coeficientes de Fourier de $H$.
+\end{proof}
+
+\begin{remark}
+Isto é uma instância do fenômeno de de Bruijn--Mahler: uma soma harmônica de mudança de base,
+transformada por Mellin, adquire polos simples numa linha vertical, e seus resíduos se reúnem numa
+correção exatamente periódica com coeficientes de Fourier em $\Gamma$ e $\zeta$. De Bruijn encontrou
+o primeiro caso disso na assintótica de partição de Mahler \cite{debruijn1948}; Erd\H{o}s e
+Richmond o nomeiam na p.~448 de \cite{erdosrichmond1976}; Kato e McLeod \cite{katomcleod1971} e
+Derfel \cite{derfel1995} estabeleceram a taxa de decaimento em log ao quadrado da assintótica de
+comparação $\varphi_0$ da Seção~\ref{sec:prelim} como genérica em toda esta classe de equações
+funcionais reescaladas. Nossa contribuição aqui é a forma fechada da própria correção periódica, não
+o mecanismo que a produz.
+\end{remark}
+
+As séries de $H'$ e $H''$ convergem absoluta e uniformemente, já que
+\[
+|\Gamma(-i\omega_m)| = \sqrt{\pi/(\omega_m \sinh \pi\omega_m)}
+\]
+decai exponencialmente em $m$ enquanto $\zeta(1-i\omega_m)$ cresce apenas polinomialmente: para
+$\omega\ge \alpha_H := 2\pi/c$ e $N:=\lfloor\omega\rfloor\ge1$, a fórmula clássica de
+Euler--Maclaurin para $\zeta$, $\zeta(s) = \sum_{n=1}^N n^{-s} + \frac{N^{1-s}}{s-1} -
+s\int_N^\infty\{u\}\,u^{-s-1}\,du$ (válida para $\operatorname{Re}s>0$, $s\ne1$, inteiro $N\ge1$,
+com $\{u\}:=u-\lfloor u\rfloor$), em $s=1+i\omega$ dá, limitando cada termo em módulo
+($|N^{-i\omega}|=1$, $0\le\{u\}<1$),
+\[
+|\zeta(1+i\omega)| \;\le\; \sum_{n=1}^N\frac1n + \frac1\omega + \frac{\sqrt{1+\omega^2}}{N}
+\;\le\; 1+\log N + \frac1{\alpha_H} + \frac{\sqrt{1+\omega^2}}N,
+\]
+usando $\sum_{n=1}^N 1/n\le1+\log N$ e $\omega\ge\alpha_H$ no último termo. Como $N\le\omega$,
+$\log N\le\log\omega$; como $N>\omega-1$ e $\omega\mapsto\omega/(\omega-1)$ é decrescente para
+$\omega>1$, $\sqrt{1+\omega^2}/N < \bigl(\omega/(\omega-1)\bigr)\sqrt{1+\omega^{-2}} \le
+\bigl(\alpha_H/(\alpha_H-1)\bigr)\sqrt{1+\alpha_H^{-2}}$. Com
+\[
+C_H := 1+\alpha_H^{-1}+\frac{\alpha_H}{\alpha_H-1}\sqrt{1+\alpha_H^{-2}},
+\]
+isso dá $|\zeta(1+i\omega)|\le\log\omega+C_H\le\log(\omega+1)+C_H$ para $\omega\ge\alpha_H$, e
+$\zeta(1-i\omega)=\overline{\zeta(1+i\omega)}$ tem o mesmo módulo, de modo que
+$|\zeta(1-i\omega_m)|\le\log(\omega_m+1)+C_H$. Com $q := e^{-\pi\alpha_H/2}$, $A_H :=
+c^{-1}\sqrt{3\pi/\alpha_H}$, a cota $|\Gamma(-i\omega_m)|\le\sqrt{3\pi/\omega_m}\,e^{-\pi\omega_m/2}$
+(válida para $\omega_m\ge\alpha_H$, já que $\sinh x\ge e^x/3$ ali) junto com a cota de
+$\zeta(1-i\omega_m)$ recém-provada dão o majorante
+\begin{equation}
+\label{eq:Hmajorant}
+|\hat H(m)| \le A_H\,q^m\,m^{-1/2}\bigl(\log(\alpha_H m+1)+C_H\bigr), \qquad m\ge1.
+\end{equation}
+Como $\sup_w|H^{(k)}(w)| \le \sum_{m\ne0}|\omega_m|^k|\hat H(m)| = 2\sum_{m\ge1}\omega_m^k|\hat
+H(m)|$, somar os primeiros seis termos com envolvimentos rigorosos em bolas e limitar a cauda $m>6$
+por \eqref{eq:Hmajorant} (a mesma soma de cauda geométrica-vezes-polinomial em forma fechada usada
+na prova da Proposição~\ref{prop:Hcert} abaixo) dá cotas explícitas e certificadas:
+\begin{equation}
+\label{eq:Hbounds}
+\sup_w |H'(w)| \le 0.0011977472315550332, \qquad \sup_w |H''(w)| \le 0.0068518962896650951.
+\end{equation}
+
+\begin{proposition}[Não-constância e oscilação certificada]
+\label{prop:Hcert}
+$H$ não é constante: $\hat H(1)\ne0$ segue do teorema clássico de não-anulação de $\zeta$ em
+$\operatorname{Re}s=1$ sozinho, sem nenhum cálculo. A oscilação é quantificada rigorosamente por um
+certificado explícito de aritmética de intervalos:
+\[
+-0.000377190280943987 \;<\; H(0) - H(\log(3/2)) \;<\; -0.000377190280943985,
+\]
+e consequentemente $\operatorname{osc}(H) := \sup H - \inf H \ge 3.7719\times 10^{-4}$; avaliar $H$
+em dois pontos adicionais, bem separados, certifica a cota mais forte
+$\operatorname{osc}(H) \ge 4.1874494771\times10^{-4}$, e o modo de Fourier líder sozinho certifica
+uma cota superior correspondente, dando juntas
+\[
+4.1874494771\times10^{-4} \;\le\; \operatorname{osc}(H) \;\le\; 4.187981\times10^{-4}.
+\]
+\end{proposition}
+
+\begin{proof}
+Primeiro a não-constância, incondicionalmente. Pela Proposição~\ref{prop:Hfourier},
+$\hat H(1) = -\frac{2^{i\omega_1}}{c}\Gamma(-i\omega_1)\zeta(1-i\omega_1)$, $\omega_1 = 2\pi/c$, um
+produto de três fatores, cada um não-nulo: $2^{i\omega_1}\ne0$ trivialmente; $\Gamma$ não tem zeros
+em lugar nenhum, e $-i\omega_1$ não é um de seus polos ($\omega_1\ne0$ é real, e os polos de
+$\Gamma$ estão apenas nos inteiros não-positivos), de modo que $\Gamma(-i\omega_1)\ne0$; e
+$1-i\omega_1$ está na reta $\operatorname{Re}s=1$ com $\omega_1\ne0$, onde $\zeta(1+it)\ne0$ para
+todo real $t\ne0$ pelo teorema clássico de não-anulação de Hadamard e de la Vall\'ee Poussin
+\cite{titchmarsh1986}, de modo que $\zeta(1-i\omega_1)\ne0$. Logo $\hat H(1)\ne0$, e uma função
+periódica com um coeficiente de Fourier não-nulo em $m\ne0$ não pode ser constante.
+
+Para a cota quantitativa, escreva $g(b) = -b/2 + \log S(b/2)$, $S(x) = \sinh(x)/x = \sum_{n\ge0}
+x^{2n}/(2n+1)!$ (esta é a fórmula que define $g$, reescrita em torno de sua singularidade removível
+em $0$, já que $e^{-b/2}(e^{b/2} - e^{-b/2}) = 1-e^{-b}$). A dominação termo a termo $6^n n! \le
+(2n+1)!$, que vale em $n=0$ e se propaga porque $(2n+3)(2n+2)\ge6(n+1)$, dá $1\le S(x)\le e^{x^2/6}$,
+isto é
+\begin{equation}
+\label{eq:logSbound}
+0 \;\le\; \log S(x) \;\le\; \frac{x^2}{6}, \qquad x\ge0.
+\end{equation}
+Como $\sum_{j\ge1}3^{-j} = \tfrac12$, as metades $-b/2$ dos termos de $L$ somam em forma fechada, e
+\eqref{eq:Hexact} se torna, com $s = e^w$,
+\begin{equation}
+\label{eq:Hcomputable}
+H(w) = -\frac s2 + \sum_{j\ge1}\log S\!\left(\frac{s}{3^j}\right) - Q(w)
++ \sum_{k\ge0}\log\bigl(1-e^{-2\cdot3^k s}\bigr).
+\end{equation}
+Trunque a primeira série em $j=R$ e a segunda em $k=M$. Por \eqref{eq:logSbound} a primeira cauda
+satisfaz
+\[
+0 \;\le\; \sum_{j>R}\log S\!\left(\frac{s}{3^j}\right) \;\le\; \frac{s^2}{6}\sum_{j>R}9^{-j}
+= \frac{s^2\,9^{-R}}{48},
+\]
+e, como $0\le-\log(1-y)\le y/(1-y)$ e $e^{-2\cdot3^ks} =
+\bigl(e^{-2\cdot3^{M+1}s}\bigr)^{3^{k-M-1}}$ para $k>M$, a segunda cauda satisfaz
+\[
+0 \;\le\; -\sum_{k>M}\log\bigl(1-e^{-2\cdot3^ks}\bigr) \;\le\; \frac{y}{(1-y)^2} \;\le\; 4y,
+\qquad y:=e^{-2\cdot3^{M+1}s}\le\tfrac12 .
+\]
+Tome $R=30$, $M=4$. Para $s\le3$ (o que cobre todo ponto de avaliação usado abaixo, incluindo a
+grade de oscilação) a primeira cauda é no máximo $4.43\times10^{-30}$, e para $s\ge1$ a segunda é
+no máximo $4e^{-486}<10^{-210}$. Os $35$ termos restantes são funções elementares de $s$; avaliados
+com $50$ dígitos decimais significativos, onde o arredondamento acumulado permanece abaixo de
+$10^{-45}$, eles dão
+\[
+H(0) = -0.62713093305152597830\ldots, \qquad H\bigl(\log\tfrac32\bigr) = -0.62675374277058199247\ldots,
+\]
+cuja diferença é $-0.00037719028094398583\ldots$, dentro do intervalo enunciado; esta primeira rota
+é em ponto flutuante ($50$ dígitos significativos, arredondamento acumulado limitado como
+enunciado) em vez de aritmética de intervalos. A série de Fourier da Proposição~\ref{prop:Hfourier}
+dá a mesma diferença em aritmética de bolas de Arb, rigorosamente: o termo $m=0$ se cancela, e em
+precisão de trabalho de $250$ bits (raio de bola $<10^{-70}$ ao longo de todo o cálculo) os quatro
+modos não-nulos necessários são
+\begin{align*}
+\hat H(1) &= -1.020544273068431785\times10^{-4} - 2.332597606471452884\times10^{-5}\,i,\\
+\hat H(2) &= -6.523276079851823231\times10^{-9} + 1.156720838500605667\times10^{-8}\,i,\\
+\hat H(3) &= -1.799881020474424677\times10^{-12} + 6.648927223521397737\times10^{-13}\,i,\\
+\hat H(4) &= -9.219524659678388767\times10^{-17} + 9.444517590655925766\times10^{-17}\,i,
+\end{align*}
+a soma dos quatro modos
+\[
+2\operatorname{Re}\sum_{m=1}^4\hat H(m)\bigl(1-e^{i\omega_m\log(3/2)}\bigr)
+= -0.0003771902809439858148\ldots
+\]
+(raio de bola $<10^{-70}$), coincidindo com o valor em ponto flutuante acima em $19$ casas decimais
+($16$ dígitos significativos). O majorante \eqref{eq:Hmajorant} dá
+$\sum_{m>4}|\hat H(m)| \le 9.41\times10^{-20}$, de modo que os modos descartados deslocam a soma dos
+quatro modos por menos de $3.8\times10^{-19}$, dando
+\[
+H(0)-H\bigl(\log\tfrac32\bigr) \in \bigl[-0.0003771902809439861948,\; -0.0003771902809439854348\bigr];
+\]
+esta rota sozinha certifica o intervalo enunciado para $H(0)-H(\log(3/2))$.
+
+Para a cota mais forte, seja $w_i = ic/N$, $0\le i<N$, com $N = 2^{20}$. Uma avaliação em ponto
+flutuante dos $N$ valores da grade a partir da Proposição~\ref{prop:Hfourier}, truncada em
+$|m|\le10$ (o mesmo majorante limita o erro de truncamento pontual em cada ponto por
+$2\times2.80\times10^{-43}=5.60\times10^{-43}$, combinando os modos descartados $m$ e $-m$), localiza
+um candidato a máximo em $i=486746$ e um candidato a mínimo em $i=1011118$; esta busca é apenas uma
+heurística para encontrar dois pontos bem separados e não faz parte, ela mesma, do certificado
+abaixo. Reavaliando $H$ exatamente nesses dois pontos com precisão de trabalho de $250$ bits em
+aritmética de bolas de Arb, independentemente, a partir de \eqref{eq:Hcomputable} e da série de
+Fourier (as duas rotas coincidem a cerca de $30$ dígitos, consistente com a própria cota de cauda de
+truncamento $R=30$ de \eqref{eq:Hcomputable} acima; uma verificação cruzada, não parte do
+certificado),
+\[
+H(w_{486746}) = -0.6267174403736425786\ldots, \qquad H(w_{1011118}) = -0.6271361853213578093\ldots,
+\]
+de modo que $D := H(w_{486746})-H(w_{1011118}) = 4.187449477152\times10^{-4}$. O envolvimento
+certificado usa apenas a rota de Fourier: o arredondamento de bola de Arb em precisão de $250$
+bits é $<10^{-70}$ por avaliação, desprezível diante do erro de truncamento do majorante já
+limitado acima, $5.60\times10^{-43}$ por ponto, dando $D$ com raio $<1.2\times10^{-42}$ (o dobro
+dessa cota por ponto). Já que $w_{486746}$ e $w_{1011118}$ são dois pontos específicos e fixos do
+domínio, $H(w_{486746})\le\sup H$ e $H(w_{1011118})\ge\inf H$ valem trivialmente, dando
+$D\le\operatorname{osc}(H)$: essa cota é incondicional, independente de a busca em ponto flutuante
+acima ter de fato localizado o verdadeiro argmax e argmin, já que ela usa apenas que os dois pontos
+escolhidos estão no domínio.
+
+Para a cota superior correspondente, nenhuma busca é necessária. Escreva $H = \hat H(0) +
+2\operatorname{Re}\bigl(\hat H(1)e^{i\omega_1 w}\bigr) + \Xi(w)$, $\Xi(w) :=
+2\sum_{m\ge2}\operatorname{Re}\bigl(\hat H(m) e^{i\omega_m w}\bigr)$, de modo que
+$|\Xi(w)|\le2\sum_{m\ge2}|\hat H(m)|$ para todo $w$. O termo de um modo
+$2\operatorname{Re}(\hat H(1)e^{i\omega_1w})$ varia, quando $w$ varia, sobre um intervalo de
+largura exatamente $4|\hat H(1)|$, de modo que $\operatorname{osc}(H) \le 4|\hat H(1)| +
+4\sum_{m\ge2}|\hat H(m)|$. Usando os já certificados $\hat H(2)$, $\hat H(3)$, $\hat H(4)$ de acima
+e a cauda do majorante $\sum_{m>4}|\hat H(m)|\le9.41\times10^{-20}$,
+\[
+\sum_{m\ge2}|\hat H(m)| \le |\hat H(2)|+|\hat H(3)|+|\hat H(4)|+9.41\times10^{-20} \le
+1.3282\times10^{-8},
+\]
+e $4|\hat H(1)| \le 4.187449304\times10^{-4}$, dando $\operatorname{osc}(H) \le
+4.187981\times10^{-4}$, rigorosa e incondicionalmente: esta cota usa apenas os coeficientes de
+Fourier já certificados, não a busca em grade.
+\end{proof}
+
+\section{Uma assintótica uniforme de ponto de sela}
+\label{sec:formulaA}
+
+Defina, para $s>0$,
+\[
+\varphi_{\mathrm{sp}}(t(s)) := \frac{\exp\bigl(K(s)+st(s)\bigr)}{\sqrt{2\pi K''(s)}}.
+\]
+Esta seção prova que $\varphi(t(s))/\varphi_{\mathrm{sp}}(t(s)) \to 1$ quando $s \to \infty$,
+uniformemente sobre $\rho:=2s/3^N\in[1,3)$ (definido abaixo; este parâmetro registra a mesma fase,
+$w\bmod c$, rastreada através de $H$ nas Seções~\ref{sec:bk} e~\ref{sec:proofs}). É essa uniformidade
+que permite que os dois teoremas da Seção~\ref{sec:proofs} dependam de escopos diferentes em vez de
+matemática diferente.
+
+Para $n \ge 2$, defina as funções normalizadas por derivada $\kappa_n(w) = (-1)^n w^n g^{(n)}(w)$ em
+$\{\operatorname{Re} w > 0\}$; $\kappa_n(b)$, $b>0$, é $b^n$ vezes o $n$-ésimo cumulante da variável
+aleatória com densidade $b\,e^{-bv}/(1-e^{-b})$ em $[0,1]$. Escrevendo $x=w/2$,
+\[
+\kappa_2(w) = 1 - \frac{x^2}{\sinh^2 x}, \qquad
+\kappa_3(w) = 2 - \frac{2x^3\cosh x}{\sinh^3 x}, \qquad
+\kappa_4(w) = 6 + \frac{2x^4(1-3\coth^2 x)}{\sinh^2 x},
+\]
+e a partir da expansão de Bernoulli $g(w)+w/2 = \sum_{k\ge1} B_{2k}w^{2k}/(2k(2k)!)$ em $|w|<2\pi$,
+\[
+\kappa_n(w) = (-1)^n\!\!\sum_{k\ge\lceil n/2\rceil}\!\! \frac{B_{2k}\,w^{2k}}{2k\,(2k-n)!}, \qquad n\ge2,
+\]
+de modo que $\kappa_n(w) = O(w^2)$ quando $w \to 0$ para todo $n \ge 2$.
+
+Escreva $s = \rho\cdot 3^N/2$ para o único $N = \lfloor \log_3(2s)\rfloor \in \Z$ e $\rho \in
+[1,3)$, e $b_j = 2s/3^j$. Então $\{b_j : j \ge 1\} = \{\rho\cdot 3^m : m \le N-1\}$; para $N \ge 1$
+(o único intervalo usado a partir daqui, correspondendo a $s \ge 3/2$), exatamente $N$ desses, o
+menor sendo $\rho \ge 1$, são $\ge 1$, e o resto forma uma cauda geométrica abaixo de $1$. Este único
+fato estrutural é a origem de toda constante independente de fase abaixo.
+
+\begin{lemma}[Limitação fora do eixo real]
+\label{lem:kappa}
+Para $w = b(1+iu)$, $b>0$, $|u|\le 1$, com $e(r) = r^2/\sinh^2 r$ e $f(r) = r^3\cosh r/\sinh^3 r$,
+\[
+|\kappa_2(w)| \le 1 + 2e(b/2), \qquad |\kappa_3(w)| \le 2 + 2\cdot 2^{3/2} f(b/2).
+\]
+Ambas as cotas são finitas em todo o setor $|\operatorname{Im}w|\le\operatorname{Re}w$:
+$\sup|\kappa_2|\le3$, $\sup|\kappa_3|\le2+2^{5/2}<7.657$. Além disso, para $|w|\le2$,
+$|\kappa_2(w)| \le 0.114|w|^2$ e $|\kappa_3(w)|\le 0.0119|w|^4$.
+\end{lemma}
+
+\begin{proof}
+$|\sinh z|^2 = \sinh^2(\operatorname{Re}z)+\sin^2(\operatorname{Im}z) \ge \sinh^2(\operatorname{Re}z)$
+e $|\cosh z|^2 \le \cosh^2(\operatorname{Re}z)$; a primeira dá $|\sinh(w/2)|\ge\sinh(b/2)>0$,
+excluindo os polos de $\coth$, já que $\operatorname{Re}(w/2)=b/2>0$. Isso dá as cotas de setor
+diretamente. A monotonicidade de $e$ é imediata da série de potências crescente de $\sinh(r)/r$.
+Para $f$, ponha $u=2r$; um cálculo direto dá $2r\sinh(r)\cosh(r)\,(\log f)'(r) = F(u)$ com
+$F(u):=3\sinh u - u\cosh u - 2u$, de modo que $(\log f)'(r)$ tem o sinal de $F(2r)$. Como
+$F(0)=F'(0)=F''(0)=0$ e $F'''(u)=-u\sinh u<0$ para $u>0$, integrar três vezes a partir de $0$ dá
+$F(u)<0$ para todo $u>0$, logo $(\log f)'(r)<0$ para $r>0$ e $f$ é estritamente decrescente.
+(A desigualdade de Lazarevi\'c, $(\sinh r/r)^3 > \cosh r$, dá separadamente $f<1$.) As cotas locais
+em $|w|\le2$ seguem aplicando o princípio do módulo máximo a $\kappa_2(w)/w^2$ e $\kappa_3(w)/w^4$
+(analíticas em $|w|<2\pi$ pela expansão de Bernoulli): limitando cada uma em $|w|=2$ pela
+desigualdade triangular, usando $|B_{2k}| = 2(2k)!\,\zeta(2k)/(2\pi)^{2k}$ e $\zeta(2k)\le\zeta(2)$,
+respectivamente $\zeta(4)$.
+\end{proof}
+
+\begin{lemma}[Variância]
+\label{lem:variance}
+Para todo $\rho\in[1,3)$, $N\ge1$, com $V := s^2K''(s) = \sum_j\kappa_2(b_j)$,
+\[
+N - A_V \le V \le N + 0.1283, \qquad A_V := \sum_{m\ge0} e(3^m/2) = 1.4269413069\ldots.
+\]
+\end{lemma}
+
+\begin{proof}
+Separe $V = \sum_{m=0}^{N-1}\kappa_2(\rho3^m) + \sum_{m<0}\kappa_2(\rho3^m)$, usando $\kappa_2(b) =
+1-e(b/2) \in (0,1)$. Para a cota inferior, descarte a segunda soma (não-negativa) e use
+$e(\rho3^m/2) \le e(3^m/2)$ ($e$ decrescente, $\rho\ge1$) na primeira, dando
+$\sum_{m=0}^{N-1}\kappa_2(\rho3^m) \ge N - A_V$. Para a cota superior, a primeira soma é $<N$ termo
+a termo, e a segunda soma, onde $\rho3^m<1$, é limitada pela estimativa local do Lema~\ref{lem:kappa}:
+$\sum_{m<0}\kappa_2(\rho3^m) \le 0.114\rho^2\sum_{m<0}9^m = 0.114\rho^2/8 \le 0.1283$ para $\rho<3$.
+\end{proof}
+
+\begin{lemma}[Cota de cauda e existência da densidade]
+\label{lem:tail}
+Se $b_0\ge1$ e $b_k=3^kb_0$, então
+\[
+\sum_{k\ge0}\log\coth(b_k/2) \le 3e^{-b_0}.
+\]
+Consequentemente, com $\Lambda(y) := K(s(1+iy)) - K(s) + isy\,t(s)$,
+\[
+|e^{\Lambda(y)}| \le e^{3/e}(1+y^2)^{-N/2} \le 3.0152\,(1+y^2)^{-N/2}
+\]
+para todo real $y$. Em particular $X$ tem densidade contínua, a função característica inclinada é
+integrável para $N\ge3$, e a inversão de Fourier em $x=t(s)$ dá
+\begin{equation}
+\label{eq:R}
+R(s) := \frac{\varphi(t(s))}{\varphi_{\mathrm{sp}}(t(s))} = \sqrt{\frac{V}{2\pi}}\int_\R e^{\Lambda(y)}\,dy,
+\end{equation}
+uma quantidade real, já que $\Lambda(-y) = \overline{\Lambda(y)}$.
+\end{lemma}
+
+\begin{proof}
+$\log\coth(x/2) = 2\artanh(e^{-x}) \le 2e^{-x}/(1-e^{-2x})$. Escreva $q:=e^{-b_0}\in(0,e^{-1}]$, de
+modo que $e^{-b_k}=q^{3^k}$ e a cota se lê $\log\coth(b_k/2) \le 2q^{3^k}/(1-q^{2\cdot3^k})$. Como
+$3^k\ge1$ para $k\ge0$, $q^{2\cdot3^k}\le q^2$ termo a termo, de modo que o denominador é limitado
+inferiormente por $1-q^2$ uniformemente em $k$:
+\[
+\sum_{k\ge0}\log\coth(b_k/2) \le \frac{2}{1-q^2}\sum_{k\ge0}q^{3^k}.
+\]
+Como $3^k\ge2k+1$ para todo $k\ge0$ e $0<q<1$, $q^{3^k}\le q^{2k+1}$, de modo que
+$\sum_{k\ge0}q^{3^k} \le q\sum_{k\ge0}q^{2k} = q/(1-q^2)$, dando
+$\sum_{k\ge0}\log\coth(b_k/2) \le 2q/(1-q^2)^2$. Para $b_0\ge1$, $q\le e^{-1}<0.4283$, de modo que
+$(1-q^2)^2>2/3$ e $2q/(1-q^2)^2<3q=3e^{-b_0}$.
+A densidade de $X$ é contínua porque a soma dos dois primeiros termos já tem densidade contínua e
+de suporte compacto e a convolução preserva continuidade. Para $\Lambda$: $t(s) = -K'(s)$ cancela
+exatamente o termo linear da transformada inclinada, e cada fator restante
+$e^{g(b_j(1+iy))-g(b_j)}$ tem módulo no máximo $1$ (uma função característica inclinada), com módulo
+no máximo $\coth(b_j/2)/\sqrt{1+y^2}$ nos $N$ índices onde $b_j\ge1$; a estimativa de cauda se aplica
+exatamente a esse conjunto geométrico, com $b_0=\rho\ge1$.
+\end{proof}
+
+\begin{lemma}[Expansão central]
+\label{lem:taylor}
+Com $h(u) = g(b(1+iu))$, o teorema de Taylor na forma \emph{integral} (a forma de Lagrange é
+inválida para uma função de valor complexo de uma variável real) dá
+\[
+h(y) = h(0)+h'(0)y+h''(0)\tfrac{y^2}{2} + \tfrac12\int_0^y (y-u)^2 h'''(u)\,du.
+\]
+Consequentemente, escrevendo $h_j(u) := g(b_j(1+iu))$ para cada $j\ge1$, para $\theta\in(0,1]$,
+\[
+S := \sum_j \sup_{|u|\le \theta}|h_j'''(u)| \le 2N + 10.559,
+\]
+e portanto $|\Lambda(y) + Vy^2/2| \le B|y|^3$ para $|y|\le \theta$, com $B := S/6 \le (2N+10.559)/6$.
+\end{lemma}
+
+\begin{proof}
+Escreva $w_j := b_j(1+iu)$. A regra da cadeia e a definição de $\kappa_3$ dão $h_j'''(u) = i\,
+\kappa_3(w_j)/(1+iu)^3$, de modo que
+\[
+|h_j'''(u)| = \frac{|\kappa_3(w_j)|}{(1+u^2)^{3/2}}.
+\]
+Separe o conjunto de índices como na Seção~\ref{sec:formulaA}. Para os $N$ índices com
+$b_j = \rho3^m \ge 1$, $0\le m\le N-1$, descarte o denominador e use a cota de setor do
+Lema~\ref{lem:kappa}, legítima já que $|u|\le\theta\le1$:
+\[
+|h_j'''(u)| \le |\kappa_3(w_j)| \le 2 + 2^{5/2} f(b_j/2) \le 2 + 2^{5/2} f(3^m/2),
+\]
+o último passo pela monotonicidade de $f$ e $\rho\ge1$. Somando sobre $m\ge0$ limita esse bloco por
+$2N + 2^{5/2}\Sigma$, $\Sigma := \sum_{m\ge0} f(3^m/2)$. Os três primeiros termos de $\Sigma$ são
+$0.99614738\ldots$, $0.82241066\ldots$, $0.04500508\ldots$; para $r\ge13$ tem-se $f(r) \le
+4.001\,r^3e^{-2r}$, de modo que os termos restantes somam menos que $2\times10^{-8}$, e
+$2^{5/2}\Sigma < 10.541906$.
+
+Para os índices restantes $b_j = \rho 3^{-n}$, $n\ge1$, tem-se $b_j<1$ e $|w_j| =
+b_j\sqrt{1+u^2} \le b_j\sqrt2 < 2$, de modo que a cota local do Lema~\ref{lem:kappa} se aplica e,
+mantendo o denominador desta vez,
+\[
+|h_j'''(u)| \le \frac{0.0119\,|w_j|^4}{(1+u^2)^{3/2}} = 0.0119\,b_j^4\,(1+u^2)^{1/2} \le
+0.0119\sqrt2\,b_j^4 .
+\]
+Somando, $\sum_{n\ge1}(\rho3^{-n})^4 = \rho^4/80 < 81/80$, de modo que esse bloco fica abaixo de
+$0.0119\sqrt2\cdot81/80 < 0.01704$. Juntando, $S < 2N + 10.541906 + 0.01704 < 2N + 10.559$.
+
+Para a cota do resto, $\sum_j h_j(y) = K(s(1+iy))$, $\sum_j h_j'(0) = isK'(s) = -is\,t(s)$ e
+$\sum_j h_j''(0) = -s^2K''(s) = -V$, de modo que somar a expansão de Taylor em forma integral sobre
+$j$ dá
+\[
+\Lambda(y) + \frac{Vy^2}{2} = \sum_j \frac12\int_0^y (y-u)^2 h_j'''(u)\,du,
+\]
+cujo módulo é no máximo $S|y|^3/6 = B|y|^3$ para $|y|\le\theta$.
+\end{proof}
+
+\begin{theorem}[Assintótica uniforme de ponto de sela]
+\label{thm:formulaA}
+Para $N\ge19$, uniformemente sobre $\rho\in[1,3)$, $|R(s)-1|\le E(N) := e_1(N)+e_2(N)+e_3(N)$, com
+$\theta_N := N^{-1/3}$, $V_{\mathrm{lo}} := N-A_V$, $V_{\mathrm{up}} := N+0.1283$,
+$B := (2N+10.559)/6$,
+\begin{align}
+e_1(N) &:= \frac{4\,e^{B\theta_N^3}\,B}{\sqrt{2\pi}\,V_{\mathrm{lo}}^{3/2}}, \qquad
+e_2(N) := \frac{2}{\sqrt{2\pi}}\cdot\frac{e^{-\theta_N^2V_{\mathrm{lo}}/2}}{\theta_N\sqrt{V_{\mathrm{lo}}}},
+\label{eq:Ebound}\\
+e_3(N) &:= 2\,e^{3/e}\sqrt{\frac{V_{\mathrm{up}}}{2\pi}}\cdot
+\frac{(1+\theta_N^2)^{-(N-2)/2}}{\theta_N(N-2)}. \notag
+\end{align}
+$\sqrt N\,E(N) \to \tfrac43e^{1/3}(2\pi)^{-1/2} = 0.742358\ldots$ quando $N\to\infty$
+(provado abaixo, a partir de $e_1$ sozinho: $e_2$ e $e_3$ se anulam mais rápido do que qualquer
+potência de $N$). Consequentemente $\varphi(t) = \varphi_{\mathrm{sp}}(t)\,(1+o(1))$ quando
+$t \to 0^+$, sem nenhuma restrição sobre a sequência de $t$'s.
+\end{theorem}
+
+\begin{remark}
+A estimativa $|R(s)-1|\le E(N)$ se torna informativa uma vez que $E(N)<1$, o que vale em $N=19$
+(veja a prova: $E(18)=1.00170\ldots\ge1$, $E(19)=0.95673\ldots<1$); esse é o limiar mantido como
+hipótese do teorema (se algum $N$ menor também dá $E(N)<1$ é irrelevante para o que segue e não é
+verificado). $E$ também é estritamente decrescente e satisfaz $E(N)\le4.18\,N^{-1/2}$ ao longo de
+$19\le N\le5000$ (verificado diretamente no repositório que acompanha o artigo), embora apenas
+$E(N)\to0$ quando $N\to\infty$ seja usado abaixo.
+\end{remark}
+
+\begin{proof}
+Separe \eqref{eq:R} em $|y|=\theta_N$. Em $|y|\le\theta_N$, o Lema~\ref{lem:taylor} limita o resto
+cúbico $|\Lambda(y)+Vy^2/2|$ por $B\theta_N^3$, que permanece limitado (não $o(1)$: é exatamente por
+isso que $e_1$ carrega o fator $e^{B\theta_N^3}$ em vez de se anular) quando $N\to\infty$, já que
+$B=O(N)$ e $\theta_N^3=N^{-1}$. Escreva $C(y):=e^{\Lambda(y)}-e^{-Vy^2/2}$ e fatore a gaussiana antes
+de estimar, $e^{\Lambda(y)} = e^{-Vy^2/2}\,e^{z(y)}$ com $z(y) := \Lambda(y)+Vy^2/2$, de modo que
+$C(y) = e^{-Vy^2/2}\bigl(e^{z(y)}-1\bigr)$. Como $|z(y)|\le B|y|^3 \le B\theta_N^3$ em
+$|y|\le\theta_N$, a desigualdade elementar $|e^z-1|\le|z|e^{|z|}$ dá
+\[
+|C(y)| \;\le\; e^{-Vy^2/2}\,B|y|^3\,e^{B\theta_N^3} \qquad (|y|\le\theta_N),
+\]
+mantendo o fator gaussiano. Integrando essa desigualdade, $\int_\R e^{-Vy^2/2}|y|^3\,dy=4/V^2$, de
+modo que
+\[
+\sqrt{V/2\pi}\int_{|y|\le\theta_N}|C(y)|\,dy \;\le\; \frac{4Be^{B\theta_N^3}}{\sqrt{2\pi}\,V^{3/2}},
+\]
+que é decrescente em $V$; usar $V\ge V_{\mathrm{lo}}$ do Lema~\ref{lem:variance} dá a contribuição
+central do resto de Taylor $e_1$. Como $\sqrt{V/2\pi}\int_\R e^{-Vy^2/2}\,dy = 1$, essa mesma divisão
+deixa exatamente dois termos a mais. A cauda gaussiana truncada
+$\sqrt{V/2\pi}\cdot2\int_{\theta_N}^\infty e^{-Vy^2/2}\,dy$, substituindo $v=y\sqrt V$ para obter
+$(2/\sqrt{2\pi})\int_{c_0}^\infty e^{-v^2/2}\,dv$, $c_0=\theta_N\sqrt V$ (uma constante local,
+distinta de $c:=\log3$), e limitando via $\int_{c_0}^\infty e^{-v^2/2}\,dv\le e^{-c_0^2/2}/c_0$ em
+$V=V_{\mathrm{lo}}$, dá $e_2$. Em $|y|>\theta_N$, a cota do Lema~\ref{lem:tail}
+$|e^{\Lambda(y)}|\le e^{3/e}(1+y^2)^{-N/2}$ se integra, via $\int_u^\infty(1+y^2)^{-N/2}\,dy \le
+(1+u^2)^{-(N-2)/2}/(u(N-2))$ em $u=\theta_N$ (usando $V\le V_{\mathrm{up}}$ para o fator principal
+$\sqrt{V/2\pi}$ em \eqref{eq:R}), para dar $e_3$; isso precisa de $\theta_N \gg N^{-1/2}$, satisfeito
+já que $\tfrac13<\tfrac12$. Toda constante que entra em $E$ (via $A_V$, Lema~\ref{lem:variance}, e o
+$3.0152\ge e^{3/e}$ do Lema~\ref{lem:tail}) é um supremo sobre $b>0$ ou uma soma sobre uma órbita
+geométrica completa limitada usando $\rho\ge1$, portanto independente de $\rho$. Avaliar
+diretamente \eqref{eq:Ebound} dá $E(18) = 1.00170\ldots \ge 1$ e $E(19) = 0.95673\ldots < 1$,
+coincidindo com a observação acima.
+
+Para a taxa assintótica, $e_1$, $e_2$, $e_3$ se separam em escalas muito diferentes quando
+$N\to\infty$. Como $\theta_N^3=1/N$, $B\theta_N^3\to1/3$ e $B/N\to1/3$,
+$V_{\mathrm{lo}}/N,\,V_{\mathrm{up}}/N \to1$, de modo que
+\[
+\sqrt N\,e_1(N) = \frac{4e^{B\theta_N^3}}{\sqrt{2\pi}}\cdot\frac{\sqrt N\,B}{V_{\mathrm{lo}}^{3/2}}
+\longrightarrow \frac{4e^{1/3}}{\sqrt{2\pi}}\cdot\frac13 = \frac43e^{1/3}(2\pi)^{-1/2}.
+\]
+Para $e_2$ e $e_3$, $\theta_N^2V_{\mathrm{lo}} \sim N^{1/3}\to\infty$, de modo que ambos carregam um
+fator $e^{-N^{1/3}/2}(1+o(1))$ (para $e_3$, via $(1+\theta_N^2)^{-(N-2)/2} =
+\exp(-\tfrac{N-2}2\theta_N^2(1+o(1)))$), contra prefatores polinomiais de ordem $N^{-1/6}$; um fator
+que decai como $e^{-N^{1/3}/2}$ vence toda potência de $N$, de modo que $N^k e_2(N),\,N^k
+e_3(N)\to0$ para todo $k$. Logo $\sqrt N\,E(N) = \sqrt N\,e_1(N) + o(1) \to
+\tfrac43e^{1/3}(2\pi)^{-1/2}$, e em particular $E(N)\to0$. Como $t(s)$ percorre bijetivamente
+$(0,1/2)$, isso é exatamente o enunciado $\varphi(t)=\varphi_{\mathrm{sp}}(t)(1+o(1))$ quando
+$t\to0^+$.
+\end{proof}
+
+\begin{remark}
+\label{rem:edgeworth}
+A taxa não é ótima, e uma mais fina é plausível mas não é estabelecida aqui. Levar a expansão
+central à quarta ordem, usando que o termo cúbico ímpar se integra a zero contra o núcleo
+gaussiano, e usando os limites $V_3 := \sum_j\kappa_3(b_j) = 2N+O(1)$, $V_4 :=
+\sum_j\kappa_4(b_j) = 6N+O(1)$ (as somas do terceiro e quarto cumulantes, pelo mesmo argumento do
+Lema~\ref{lem:variance}) sugere a correção de Edgeworth $R(s) = 1 - \tfrac1{12N} + O(N^{-3/2})$,
+coincidindo com o termo principal da correção clássica de Stirling para uma lei
+$\mathrm{Gamma}(N,1)$: após a inclinação, os termos com $b_j\ge1$ de $sX=\sum_jb_jU_j$ se comportam
+assintoticamente como variáveis $\mathrm{Exp}(1)$ independentes, de modo que $sX$ sob sua inclinação
+é assintoticamente distribuída como $\mathrm{Gamma}(N,1)$, e $\rho$ entra apenas através de
+deslocamentos $O(1)$ dos cumulantes, em ordem $N^{-2}$. Não precisamos dessa taxa mais fina e não
+provamos o termo do resto aqui; o $o(1)$ qualitativo do Teorema~\ref{thm:formulaA} é tudo que a
+Seção~\ref{sec:proofs} usa.
+\end{remark}
+
+\section{O lema do envelope}
+\label{sec:envelope}
+
+O Teorema~\ref{thm:formulaA} compara $\varphi$ a $\varphi_{\mathrm{sp}}$, uma quantidade construída
+a partir da transformada completa $K=Q+H+\Delta$. Resta comparar $\varphi_{\mathrm{sp}}$ a um
+sistema auxiliar suave construído apenas a partir de $Q$, de modo que a parte periódica $H$ possa
+ser extraída explicitamente. Escreva $t=e^{-\tau}$, $g_\tau(w) = L(w)+e^{w-\tau}$, $g_{0,\tau}(w) =
+Q(w)+e^{w-\tau}$. Os sistemas verdadeiro e suave têm, cada um, seu próprio análogo de $-K'$:
+escreva $B_{\mathrm{tr}}(w) := e^wt(e^w) = -L'(w)$ e $B_{\mathrm{sm}}(w) := -Q'(w) = w/c-a$.
+
+\begin{lemma}[Selas verdadeira e suave]
+\label{lem:saddles}
+Sejam $\Phi(w) = w-\log B_{\mathrm{tr}}(w)$ e $\Phi_0(w) = w-\log B_{\mathrm{sm}}(w)$, esta última
+definida para $w>ca$ onde $B_{\mathrm{sm}}(w)>0$, e defina
+$\tau_0 := 1+ca+\log c = 0.9502067913\ldots$, de modo que $\tau_0 > \log 2$.
+
+Para $\tau>\log 2$, $g_\tau$ tem um único minimizador global $w^*(\tau)$, no qual $g_\tau''(w^*) =
+V(r^*)>0$, $r^*=e^{w^*}$; ele é caracterizado por $\tau = \Phi(w^*)$, e $\Phi$ é uma bijeção
+estritamente crescente $\R\to(\log 2,\infty)$. Para $\tau\le\log 2$ não há ponto crítico algum. Para
+$\tau>\tau_0$, $g_{0,\tau}$ tem um único minimizador local $w_0(\tau)$, caracterizado por
+$\tau=\Phi_0(w_0)$ junto com $B_0 := B_{\mathrm{sm}}(w_0) = e^{w_0-\tau} > 1/c$; $\Phi_0$ restrita a
+$(ca+1,\infty)$ é uma bijeção estritamente crescente sobre $(\tau_0,\infty)$, e $B_0$ cresce de
+$1/c$ a $\infty$ ao longo dela. Para $\tau\le\tau_0$ não há tal minimizador.
+
+Uma vez que $B_0\ge5$ (equivalentemente $\tau\ge3.73978\ldots$), $|w^*-w_0| \le 0.00652/B_0$.
+Também $w_0(\tau+c)-w_0(\tau) = c+O(1/\tau)$ quando $\tau\to\infty$.
+\end{lemma}
+
+\begin{proof}
+Substituir $s=e^w$ e $t=e^{-\tau}$ transforma $g_\tau$ em $K(s)+st$, estritamente convexa em $s>0$
+porque $K''>0$, com derivada $K'(s)+t$ se anulando exatamente onde $t = t(s)$. Como $t(\cdot)$
+decresce estritamente de $1/2$ a $0$, isso acontece para exatamente um $s$ quando $t\in(0,1/2)$,
+isto é, quando $\tau>\log2$, e para nenhum $s$ quando $t\ge1/2$. Como $w\mapsto e^w$ é uma bijeção
+$\R\to(0,\infty)$, $w^* = \log s$ é o único minimizador global de $g_\tau$, e $\Phi$ inverte
+$\tau\mapsto w^*$. Derivando duas vezes, $g_\tau''(w) = e^w\bigl(K'(e^w)+t\bigr)+e^{2w}K''(e^w)$,
+cujo primeiro termo se anula em $w^*$, deixando $g_\tau''(w^*) = V(r^*)>0$.
+
+Para o sistema suave, $g_{0,\tau}'(w) = e^{w-\tau}-B_{\mathrm{sm}}(w)$ e $g_{0,\tau}''(w) =
+e^{w-\tau}-1/c$, de modo que um ponto crítico é um minimizador local exatamente quando $B_0 > 1/c$.
+Também $\Phi_0'(w) = 1-1/(c\,B_{\mathrm{sm}}(w))$, positiva exatamente onde
+$B_{\mathrm{sm}}(w)>1/c$, isto é, em $w>ca+1$; ali $\Phi_0$ cresce de $\Phi_0(ca+1) = ca+1+\log c =
+\tau_0$ a $\infty$. Isso dá a existência, unicidade e intervalo enunciados.
+
+Agora tome $B_0\ge5$. A decomposição $L = Q+H+\Delta$ avalia o gradiente verdadeiro exatamente na
+sela suave: $Q'(w_0) = -B_0 = -e^{w_0-\tau}$, de modo que os termos principais se cancelam e
+\begin{equation}
+\label{eq:gradatw0}
+g_\tau'(w_0) = L'(w_0)+e^{w_0-\tau} = H'(w_0)+\Delta'(w_0), \qquad
+|g_\tau'(w_0)| \le \varepsilon_1 := \sup|H'|+\sup_{[w_0-1,w_0+1]}|\Delta'| .
+\end{equation}
+Em $[w_0-1,w_0+1]$ escreva $g_\tau''(w) = e^{w-\tau}-1/c+H''(w)+\Delta''(w)$. Aqui $e^{w-\tau} =
+B_0e^{w-w_0}$ varia sobre $[B_0/e,\,B_0e]$, de modo que $g_\tau''$ não admite cota independente de
+$\tau$; ela é de ordem exata $B_0$,
+\begin{equation}
+\label{eq:g2scale}
+\frac{B_0}{e}-\eta_0 \;\le\; g_\tau''(w) \;\le\; B_0e, \qquad
+\eta_0 := \frac1c+\sup|H''|+\sup_{[w_0-1,w_0+1]}|\Delta''|,
+\end{equation}
+a cota superior porque $-1/c+\sup|H''|+\sup|\Delta''|<0$. Como $w_0 = c(B_0+a)$, $B_0\ge5$ força
+$w_0\ge5.3492$ e portanto $w\ge4.3492$ no intervalo, onde $|\Delta'|,|\Delta''|\le10^{-60}$: com
+$b:=2e^w\ge2e^{4.3492}>154$ e $x_k:=3^kb$, derivar $\Delta(w)=-\sum_{k\ge0}\log(1-e^{-x_k})$ termo
+a termo (justificado como na prova do Teorema~\ref{thm:H}) dá $\Delta'(w) =
+-\sum_{k\ge0}x_k/(e^{x_k}-1)$ e, aplicando $|d/dx[x/(e^x-1)]|\le8xe^{-x}$ para $x\ge1$ (elementar,
+já que $e^x-1\ge e^x/2$ ali) junto com $dx_k/dw=x_k$, $\Delta''(w) = -\sum_{k\ge0}x_k\cdot
+\frac{d}{dx}\Bigl[\frac{x}{e^x-1}\Bigr]_{x=x_k}$, de modo que
+$|\Delta''(w)|\le\sum_{k\ge0}8x_k^2e^{-x_k}$; limitando ambas as somas pelo termo dominante $k=0$
+via $x_k-b\ge2kb$ (de $3^k-1\ge2k$) dá $|\Delta'(w)|\le4be^{-b}$ e $|\Delta''(w)|\le16b^2e^{-b}$,
+ambos bem abaixo de $10^{-60}$ em $b>154$. Com \eqref{eq:Hbounds} isso torna
+$\varepsilon_1 \le 0.0011978$ e $\eta_0 \le 0.9170912$, donde $2e\eta_0 \le 4.9859 \le 5 \le B_0$,
+isto é, $\eta_0 \le B_0/(2e)$, e \eqref{eq:g2scale} melhora para $g_\tau''\ge B_0/(2e)>0$ ao longo
+de todo o intervalo.
+
+Ponha $h_0 := 2e\varepsilon_1/B_0 \le 2e\cdot0.0011978/5 < 0.0014$. Para $h\in(h_0,1]$ o teorema do
+valor médio aplicado a $[w_0-1,w_0+1]$ dá $g_\tau'(w_0+h) \ge g_\tau'(w_0)+hB_0/(2e) \ge
+-\varepsilon_1 + hB_0/(2e) > 0$ e, simetricamente, $g_\tau'(w_0-h) \le \varepsilon_1-hB_0/(2e) < 0$.
+Como $w^*$ é o único zero de $g_\tau'$, ele está em $(w_0-h,w_0+h)$ para todo $h$ desse tipo, de
+modo que $|w^*-w_0| \le h_0 = 2e\varepsilon_1/B_0 \le 0.00652/B_0$.
+
+Para a deriva de fase, $w_0=c(B_0+a)$ e $\tau=w_0-\log B_0$ dão $dw_0/d\tau = (1-1/(cB_0))^{-1} =
+1+O(1/B_0)$ ao longo da curva $\tau\mapsto w_0(\tau)$; como $B_0\to\infty$ quando $\tau\to\infty$
+(via $B_0\sim\tau/c$), integrar sobre um período dá $w_0(\tau+c)-w_0(\tau) =
+\int_\tau^{\tau+c}(1+O(1/B_0(u)))\,du = c+O(1/\tau)$.
+\end{proof}
+
+\begin{proposition}[Estimativa do envelope]
+\label{prop:envelope}
+Com $S(\tau) := \log\varphi_{\mathrm{sp}}(t) = g_\tau(w^*)+w^*-\tfrac12\log(2\pi V(r^*))$ e
+$P(\tau) := Q(w_0)+B_0+w_0-\tfrac12\log\bigl(2\pi(B_0-\tfrac1c)\bigr)$,
+\[
+|S(\tau) - P(\tau) - H(w_0(\tau))| = O(1/\tau) \qquad (\tau\to\infty),
+\]
+uniformemente na fase de $\tau$ módulo $c$.
+\end{proposition}
+
+\begin{proof}
+Comece pela identidade. Como $g_{0,\tau}(w_0) = Q(w_0)+e^{w_0-\tau} = Q(w_0)+B_0$, a definição de
+$P$ se lê $P(\tau) = g_{0,\tau}(w_0)+w_0-\tfrac12\log\bigl(2\pi(B_0-\tfrac1c)\bigr)$, de modo que
+\[
+S(\tau)-P(\tau) = \bigl[g_\tau(w^*)-g_{0,\tau}(w_0)\bigr]+(w^*-w_0)
+-\frac12\log\frac{V(r^*)}{B_0-\tfrac1c}.
+\]
+O Teorema~\ref{thm:H} dá $L = Q+H+\Delta$, logo $g_\tau = g_{0,\tau}+H+\Delta$ pontualmente, e em
+particular $g_\tau(w^*) = g_{0,\tau}(w^*)+H(w^*)+\Delta(w^*)$. Substituindo e subtraindo $H(w_0)$,
+\begin{equation}
+\label{eq:envfive}
+\begin{split}
+S(\tau)-P(\tau)-H(w_0) = {}& \underbrace{\bigl[g_{0,\tau}(w^*)-g_{0,\tau}(w_0)\bigr]}_{T_1}
++\underbrace{\bigl[H(w^*)-H(w_0)\bigr]}_{T_2}
++\underbrace{(w^*-w_0)}_{T_3} \\[2pt]
+&{}\underbrace{-\;\frac12\log\frac{V(r^*)}{B_0-\tfrac1c}}_{T_4}
+\;+\;\underbrace{\Delta(w^*)}_{T_5}.
+\end{split}
+\end{equation}
+Isto é exato para todo $\tau$ com $B_0\ge5$. Os cinco termos são limitados um a um.
+
+$T_1$ é o gap de envelope do sistema suave. Taylor em torno de $w_0$, onde $g_{0,\tau}'$ se anula,
+com $g_{0,\tau}''(w) = e^{w-\tau}-1/c \le B_0e$ em $[w_0-1,w_0+1]$ e $|w^*-w_0| \le 0.00652/B_0$
+pelo Lema~\ref{lem:saddles}, dá $0\le T_1 \le \tfrac12 B_0e\,(0.00652/B_0)^2 < 5.78\times10^{-5}/B_0$.
+
+$T_2$ é a diferença da parte periódica: $|T_2| \le \sup|H'|\cdot|w^*-w_0| < 7.82\times10^{-6}/B_0$
+por \eqref{eq:Hbounds}.
+
+$T_3$ é o próprio deslocamento da localização de sela, $|T_3| \le 0.00652/B_0$, novamente pelo
+Lema~\ref{lem:saddles}.
+
+$T_4$ compara as duas normalizações. Por $V(r^*) = g_\tau''(w^*)$ e a expressão para $g_\tau''$
+usada no Lema~\ref{lem:saddles},
+\[
+V(r^*)-\Bigl(B_0-\frac1c\Bigr) = B_0\bigl(e^{w^*-w_0}-1\bigr)+H''(w^*)+\Delta''(w^*),
+\]
+cujo módulo é no máximo $0.00652e^{0.00652/5}+\sup|H''|+10^{-60} < 0.0135$, já que
+$B_0|e^{w^*-w_0}-1| \le B_0|w^*-w_0|e^{|w^*-w_0|}$. Dividindo por $B_0-1/c$ e tomando
+$\tfrac12\log(1+\cdot)$ dá $|T_4| \le 0.0068/(B_0-1/c)$.
+
+$T_5$ é o resto do Teorema~\ref{thm:H}, avaliado na sela verdadeira em vez de descartado. Aqui
+$B_0\ge5$ força $w_0\ge5.3492$ e $w^*\ge w_0-0.0014$, de modo que $e^{w^*}\ge210.1$ e
+$|T_5| \le \sum_{k\ge0}2e^{-2\cdot3^k\cdot210.1} < 10^{-182}$.
+
+Cada cota é $O(1/B_0)$ (para $T_4$, via $B_0-1/c\ge B_0-1$, comparável a $B_0$ uma vez que
+$B_0\ge5$). Finalmente $\tau = w_0-\log B_0$ e $w_0 = c(B_0+a)$ dão $\tau = cB_0+ca-\log B_0$, de
+modo que $B_0/\tau \to 1/c$, e $O(1/B_0) = O(1/\tau)$ com constantes livres da fase de $\tau$.
+\end{proof}
+
+\section{A identidade de Berg--Kr\"uppel}
+\label{sec:bk}
+
+\begin{proposition}
+\label{prop:bkidentity}
+Escreva $f(p) = \alpha\log p-\beta\log^2 p$, de modo que a transformada $G_0(p) =
+p^\alpha\exp(-\beta\log^2 p)$ de Berg e Kr\"uppel, de sua equação~(9.3), é $e^{f(p)}$ e sua
+equação~(9.5) se lê
+\[
+g_0(t) = \frac{1}{2\pi i}\int_{\sigma-i\infty}^{\sigma+i\infty}\exp[pt+f(p)]\,dp, \qquad \sigma>0.
+\]
+Tome $\alpha$, $\beta$ de sua equação~(9.4) em $a=3$, $\lambda=2/3$. Então $f(p) = Q(\log p)$
+identicamente; a sela exata dessa integral, $t+f'(x)=0$ com $t = e^{-\tau}$, é $x^\sharp =
+e^{w_0(\tau)}$; e
+\[
+P(\tau) \;=\; x^\sharp t + f(x^\sharp) - \tfrac12\log\bigl(2\pi f''(x^\sharp)\bigr),
+\]
+a expressão de ponto de sela invocada na prova de sua Proposição~9.1, avaliada nessa sela exata. Na
+variável $Y := cB_0$, com $r = -ca-\log c$, a equação de sela é $Y-\log Y = \tau+r$.
+\end{proposition}
+
+\begin{proof}
+A equação truncada deles~(9.2) é $\lambda \psi'(t) = a\,\psi(at)$ para $a>1$, $\lambda>0$;
+transformando por Laplace (o termo de contorno $\lambda\psi(0)$ de $\mathcal L[\psi'](p)=pG(p)-\psi(0)$
+se anula, já que as soluções de interesse são suportadas em $[0,\infty)$ com $\psi(0)=0$) dá $\lambda
+p\,G(p) = G(p/a)$, cuja solução geral~(9.3) é $G_0$ vezes uma função $1$-periódica arbitrária de
+$\log p/\log a$, com
+\[
+\alpha = -\frac12-\frac{\log\lambda}{\log a}, \qquad \beta = \frac{1}{2\log a}
+\]
+sua equação~(9.4). A Seção~\ref{sec:prelim} colocou $\varphi$ nessa família em $a=3$, $\lambda=2/3$:
+a equação~(9.1) não-truncada deles se lê $\tfrac23\varphi'(t) = 3\bigl(\varphi(3t) -
+\varphi(3t-2)\bigr)$, que em $(0,\tfrac23)$ é $\varphi'(t) = \tfrac92\varphi(3t)$. Nesses valores
+\[
+\alpha = -\frac12-\frac{\log(2/3)}{\log3} = \frac12-\frac{\log2}{\log3} = a, \qquad
+\beta = \frac{1}{2\log3} = \frac{1}{2c},
+\]
+onde o $a$ à direita é o coeficiente linear de $Q$ deste artigo; o $a$ deles, o fator de dilatação
+$3$, é uma quantidade diferente e não é escrito novamente abaixo. Logo, escrevendo $y := \log p$,
+\[
+f(p) = \alpha y-\beta y^2 = a y - \frac{y^2}{2c} = Q(y),
+\]
+a primeira das quatro afirmações da proposição. Esta é uma identidade em $y$, não apenas uma
+coincidência de valor: a regra da cadeia ($p\,d/dp = d/dy$) aplicada às primeira e segunda
+derivadas de $f$ confirma isso também no nível de $Q'$ e $Q''$,
+\[
+-p\,f'(p) = -Q'(y) = B_{\mathrm{sm}}(y) = 2\beta y-\alpha, \qquad
+p^2f''(p) = Q''(y)-Q'(y) = B_{\mathrm{sm}}(y)-\frac1c = 2\beta y-2\beta-\alpha .
+\]
+A própria fórmula de Berg e Kr\"uppel para $f''(p)$, exibida na p.~179 de \cite{bergkruppel1998},
+na prova de sua Proposição~9.1 (a exibição não numerada logo após ``In view of''), se lê
+$p^2f''(p)=2\beta\ln p+2\beta-\alpha$, com $+2\beta$ onde a diferenciação direta de $f$ dá $-2\beta$:
+$f''(p) = \tfrac{1}{p^2}\bigl(2\beta\ln p - 2\beta - \alpha\bigr)$, já que
+$f'(p)=\tfrac1p(\alpha-2\beta\ln p)$ se deriva para $-\tfrac{2\beta}{p^2}-\tfrac{\alpha-2\beta\ln
+p}{p^2}$. A Proposição~9.1 deles não é afetada, sendo o termo de ordem menor ali do que
+$2\beta\log p$, mas a expressão exata usada aqui é afetada: a discrepância $\pm2\beta$ desloca
+$(x^\sharp)^2f''(x^\sharp) = B_0-1/c$ por $2/c$, portanto desloca $-\tfrac12\log\bigl(2\pi
+(B_0-1/c)\bigr)$ em $P(\tau)$ abaixo por $O(1/B_0)$, que se anula quando $B_0\to\infty$.
+
+A condição de sela $t+f'(x)=0$ em $x=e^y$ agora se lê $e^{-\tau} = B_{\mathrm{sm}}(y)e^{-y}$, isto
+é, $\tau = y-\log B_{\mathrm{sm}}(y) = \Phi_0(y)$, cuja única solução no ramo $B_{\mathrm{sm}}>1/c$
+é $y = w_0(\tau)$ pelo Lema~\ref{lem:saddles}. Assim $x^\sharp = e^{w_0}$, e ali $x^\sharp t =
+e^{w_0-\tau} = B_0$, $f(x^\sharp) = Q(w_0)$, $(x^\sharp)^2f''(x^\sharp) = B_0 - 1/c>0$. Substituindo,
+\[
+x^\sharp t+f(x^\sharp)-\tfrac12\log\bigl(2\pi f''(x^\sharp)\bigr)
+= B_0+Q(w_0)-\tfrac12\log\frac{2\pi(B_0-1/c)}{(x^\sharp)^2}
+\]
+\[
+= Q(w_0)+B_0+w_0-\tfrac12\log\Bigl(2\pi\bigl(B_0-\tfrac1c\bigr)\Bigr),
+\]
+que é $P(\tau)$. Finalmente $w_0 = c(B_0+a)$ e $\tau = w_0-\log B_0$ dão $\tau = cB_0+ca-\log
+B_0 = Y-\log Y+ca+\log c = Y-\log Y-r$.
+\end{proof}
+
+Revertendo em série $Y-\log Y=\tau+r$ até segunda ordem: escrevendo $W:=\tau+r$, uma primeira
+substituição $Y=W+\log W+\delta$ em $Y-\log Y=W$ dá, já que $\log(1+u)=u+O(u^2)$ com
+$u=(\log W+\delta)/W$, $\delta = (\log W+\delta)/W + O(\log^2W/W^2)$, de modo que
+$\delta=\log(W)/W+O(\log^2W/W^2)$ (o termo único $Y=W+\log W$ sozinho só é preciso a
+$O(\log W/W)$, uma ordem grosseira demais; este segundo termo é necessário). Logo
+$Y=W+\log W+\log(W)/W+O(\log^2W/W^2)$, e $\log W=\log\tau+r/\tau+O(1/\tau^2)$ então dá
+$Y = \tau + \log\tau + r + (\log\tau+r)/\tau + O(\tau^{-2}\log^2\tau)$. Como $w_0=Y+ca$ e
+$Q(w_0)=-Y^2/(2c)+ca^2/2$ (substituindo $w_0=Y+ca$ na definição de $Q$ e simplificando), o termo
+principal de $P$ em $Y$ é $-Y^2/(2c)$, de modo que $\partial P/\partial Y=-Y/c+O(1)$ transforma o
+erro $O(\tau^{-2}\log^2\tau)$ em $Y$ acima no erro $O(\tau^{-1}\log^2\tau)$ em $P$ abaixo.
+Substituindo em $P$ dá
+\[
+P(\tau) = -\frac{(\tau+\log\tau)^2}{2c} + \Bigl(1+\tfrac1c-\tfrac{r}{c}\Bigr)\tau +
+\Bigl(\tfrac12-\tfrac{r}{c}\Bigr)\log\tau + C_P + O\!\left(\frac{\log^2\tau}{\tau}\right),
+\]
+\[
+C_P = -\frac{r^2}{2c}+r+ca+\frac{ca^2}{2}-\frac{\log2\pi}{2}+\frac{\log c}{2} =
+-0.9576743183133982760669122497855855\ldots.
+\]
+As próprias equações de Berg e Kr\"uppel, seguintes à~(9.6), dão, na notação deles,
+\[
+\delta_{\mathrm{BK}} = \tfrac12+\alpha-2\beta\log(2\beta), \qquad
+\gamma = -2\beta-\delta_{\mathrm{BK}}-\tfrac12, \qquad
+\varepsilon = \tfrac12+\alpha-\beta\log(2\beta),
+\]
+com $\alpha=a$, $\beta=1/(2c)$ como identificado acima. Substituindo e simplificando (usando
+$r=-ca-\log c$) dá, coincidindo os coeficientes de $\tau$, $\log\tau$ e a constante de $P$ termo a
+termo,
+\[
+\gamma = -\Bigl(1+\tfrac1c-\tfrac rc\Bigr) = -1.8649154949\ldots, \qquad
+\delta_{\mathrm{BK}} = \tfrac12-\tfrac rc = 0.4546762683\ldots,
+\]
+\[
+\varepsilon = a+\tfrac12+\frac{\log c}{2c} = 0.4118732574\ldots,
+\]
+de modo que, em particular, $C_P=\varepsilon\log(2\beta)-\tfrac12\log(2\pi)$ vale identicamente
+(verificado substituindo a expressão de $\varepsilon$ diretamente na de $C_P$), dando
+\[
+C_P = \varepsilon\log(2\beta) - \tfrac12\log(2\pi) = \log\frac{(2\beta)^\varepsilon}{\sqrt{2\pi}}.
+\]
+Logo $P(\tau) - \log\varphi_{0,\mathrm{bare}}(e^{-\tau}) \to C_P$ e, usando a normalização com o
+prefator incluído, $P(\tau) - \log\varphi_0(e^{-\tau}) \to 0$ com taxa $O(\tau^{-1}\log^2\tau)$: os
+coeficientes de $\tau$, $\log\tau$, e o termo constante de $P$ reproduzem $\gamma$,
+$\delta_{\mathrm{BK}}$, $\varepsilon$ exatamente, de modo que essa convergência é consequência
+direta da identidade da Proposição~\ref{prop:bkidentity} junto com a reversão de série acima, não um
+apelo à própria análise assintótica de Berg e Kr\"uppel para $\varphi_0$.
+
+\begin{proof}[Prova do Corolário~\ref{cor:bk}]
+Pelas Proposições~\ref{prop:envelope} e~\ref{prop:bkidentity}, $S(\tau) = \log\varphi_0(e^{-\tau}) +
+H(w_0(\tau)) + O(\tau^{-1}\log^2\tau)$, isto é, $\varphi_{\mathrm{sp}} = \varphi_0\cdot
+e^{H(w_0(\tau))}(1+o(1))$; pelo Teorema~\ref{thm:formulaA}, $\varphi=\varphi_{\mathrm{sp}}(1+o(1))$
+também, de modo que $\varphi = \varphi_0\cdot e^{H(w_0(\tau))}(1+o(1))$: o fator periódico que
+multiplica a solução assintótica de Berg e Kr\"uppel, na equação~(9.7) para esta autofunção, é
+$e^H$, coincidindo com a fórmula de produto que sua Proposição~9.3 fornece para ele, como observado
+após o Teorema~\ref{thm:H}. A série de Fourier de $H$ da Proposição~\ref{prop:Hfourier} é a forma
+fechada nova; o certificado da Proposição~\ref{prop:Hcert} é o que nem a fórmula de produto deles
+nem sua observação final (de que eles apenas \emph{esperam} que $\varphi$ seja limitada e limitada
+longe de zero relativamente a $\varphi_0$) resolvem.
+\end{proof}
+
+\section{Provas dos teoremas principais}
+\label{sec:proofs}
+
+Ao longo desta seção, o parâmetro $N$ do Teorema~\ref{thm:formulaA} e o parâmetro $\tau$ das
+Seções~\ref{sec:envelope}--\ref{sec:bk} são combinados livremente num único $o(1)$: já que
+$s=e^{w^*}$ e, pelo Lema~\ref{lem:saddles}, $w^*=w_0(\tau)+O(1/B_0)$ com $w_0(\tau)=c(B_0+a)$,
+$N=\lfloor\log_3(2s)\rfloor \sim w^*/c \sim \tau/c$ quando $\tau\to\infty$, de modo que
+$N\to\infty$ exatamente quando $\tau\to\infty$. Em $\widetilde{A}_\delta$ abaixo, $\tau_l\to\infty$
+uniformemente, a uma taxa que depende apenas de $l$ e $\delta$, não da sequência particular
+escolhida.
+
+\begin{proof}[Prova do Teorema~\ref{thm:conj3}]
+A classe $\widetilde{A}_\delta$ de Wirsching (suas equações~(1.5) e~(3.2)) consiste de sequências
+$(x_l)$ com $\lfloor 3^l x_l\rfloor = k_l$ satisfazendo $|l-k_l|\le\delta\sqrt l$ para todo $l$; já
+que $|3^lx_l-k_l|<1$ também, $|3^lx_l-l|<1+\delta\sqrt l$, logo $\lambda_l := 3^lx_l/l \to 1$
+uniformemente a taxa $O(1/l)+O(\delta/\sqrt l)$ na classe. Escrevendo $z_l :=
+\lambda_l\, l\, 3^{-l} = x_l$ (o próprio $z_l$ de Wirsching, do enunciado da conjectura, e seu
+$x_l$, da definição da classe, coincidem, por definição de $\lambda_l$), $\tau_l = -\log z_l = lc -
+\log l - \log\lambda_l$, a localização de sela satisfaz $w_0(\tau_l) = lc - \log\lambda_l + O(1/l)$:
+a reversão de $Y-\log Y=\tau+r$ da Seção~\ref{sec:bk} dá
+$w_0(\tau) = \tau+\log(\tau/c)+(\log\tau+r)/\tau+O(\tau^{-2}\log^2\tau)$, e o truncamento ingênuo de
+um único termo $w_0(\tau)\approx\tau+\log(\tau/c)$ sozinho só é preciso a $O(\log\tau/\tau)$, uma
+ordem grosseira demais; substituindo $\tau=\tau_l$ na fórmula completa de dois termos, as partes
+$O(\log l/l)$ ao expandir $\log(\tau_l/c)$ contra $\tau_l = lc-\log l-\log\lambda_l$ se cancelam
+exatamente contra o próprio termo $(\log\tau_l+r)/\tau_l$ da reversão, deixando o $O(1/l)$
+enunciado, o mesmo mecanismo de cancelamento da reversão de série acima. Assim
+$\operatorname{dist}(w_0(\tau_l), c\Z) \to 0$ uniformemente na classe, a taxa $O(1/\sqrt l)$:
+escrevendo $w_0(\tau_l) = lc + \varepsilon_l$ com $\varepsilon_l = -\log\lambda_l + O(1/l) \to 0$, o
+múltiplo mais próximo de $c$ é o próprio $lc$ uma vez que $|\varepsilon_l|<c/2$, de modo que
+$H(w_0(\tau_l)) \to H(0)$ por continuidade, independentemente do sinal de $\varepsilon_l$. Pelo
+Teorema~\ref{thm:formulaA}, Proposição~\ref{prop:envelope}, Proposição~\ref{prop:bkidentity} (que
+dá $P(\tau)-\log\varphi_0(e^{-\tau})\to0$, Seção~\ref{sec:bk}), e continuidade de $H$ (de fato
+Lipschitz, por \eqref{eq:Hbounds}),
+\[
+\log\varphi(z_l) - \log\varphi_0(z_l) = H(w_0(\tau_l)) + o(1) \to H(0)
+\]
+uniformemente em $\widetilde{A}_\delta$, isto é, $\varphi(z_l)/\varphi_0(z_l) \to e^{H(0)}$
+uniformemente. Isso é exatamente a Conjectura 3, com a constante dada explicitamente.
+\end{proof}
+
+\begin{remark}
+A prova acima usa apenas $\lambda_l\to1$, equivalentemente $|l-k_l|=o(l)$; a cota específica
+$O(\sqrt l)$ de Wirsching em $\widetilde{A}_\delta$ não desempenha papel algum além de forçar essa
+condição mais fraca. A mesma conclusão, e o mesmo limite $e^{H(0)}$, valem para a classe mais ampla
+de sequências satisfazendo apenas $|l-k_l|=o(l)$.
+\end{remark}
+
+\begin{proof}[Prova do Teorema~\ref{thm:unrestricted}]
+Como $t=e^{-\tau}$ percorre $(0,1/2)$ sem restrição, $\tau\to\infty$. Pelo Lema~\ref{lem:saddles},
+$w_0=\Phi_0^{-1}$ é contínua, estritamente crescente e ilimitada em $(\tau_0,\infty)$, de modo que
+$w_0(\tau)\bmod c$ varre todo valor em $[0,c)$ infinitas vezes quando $\tau\to\infty$ (uma função
+contínua, estritamente crescente e ilimitada atinge toda classe residual módulo $c$ infinitas
+vezes), de modo que pela mesma combinação de resultados usada acima,
+$\log\varphi(t)-\log\varphi_0(t) = H(w_0(\tau))+o(1)$ assume valores arbitrariamente próximos tanto
+de $\sup H$ quanto de $\inf H$ infinitas vezes. Pela Proposição~\ref{prop:Hcert},
+$\operatorname{osc}(H) > 0$ rigorosamente, de modo que $\varphi(t)/\varphi_0(t)$ não converge, e,
+escrevendo $\Psi(t) := \varphi(t)/\varphi_0(t)$,
+\[
+\frac{\limsup_{t\to0^+}\Psi(t)}{\liminf_{t\to0^+}\Psi(t)} \ge e^{\operatorname{osc}(H)} \ge 1.0004188:
+\]
+o limsup da razão excede seu liminf por um fator de pelo menos $1.0004188$, isto é, por pelo menos
+$0.0418\%$.
+\end{proof}
+
+\begin{proposition}[A exigência real de Wirsching]
+\label{prop:wirschingreq}
+Para $(x_l)\in\widetilde A_\delta$, escreva $x_l^+ := x_l + 3^{-(l+1)}$ (sua própria definição,
+prosa não numerada na p.~16 de \cite{wirsching2003}, imediatamente antes de sua equação~(7.14);
+como $x_l\sim l\cdot3^{-l}$, $x_l^+$ é assintótico a $x_l$ e desempenha o mesmo papel que o $z_l$
+deste artigo). O próprio uso de Wirsching da Conjectura 3, via $\varphi'(x)=\tfrac92\varphi(3x)$ em
+$(0,\tfrac23)$ e seu próprio cálculo, sua equação~(7.13), de que
+$\lim_l (2/3^{l+1})\varphi_0'(x_l)/\varphi_0(x_l) = 2/3$ uniformemente na classe, se reduz a
+\[
+\limsup_l \Lambda_l < \tfrac32, \qquad
+\Lambda_l := \frac{\varphi(3x_l^+)/\varphi_0(3x_l^+)}{\varphi(x_l^+)/\varphi_0(x_l^+)}.
+\]
+Isso vale com ampla margem: $\Lambda_l \to 1$.
+\end{proposition}
+
+\begin{proof}
+Primeiro, a redução em si. A exigência real de Wirsching é sua desigualdade~(7.5),
+\[
+\limsup_l \frac{2}{3^{l+1}}\cdot\frac{\varphi'(x_l^+)}{\varphi(x_l^+)} < 1;
+\]
+por $\varphi'=\tfrac92\varphi(3\cdot)$ isso é $\limsup_l (9/3^{l+1})\varphi(3x_l^+)/\varphi(x_l^+) <
+1$. Pela definição de $\Lambda_l$,
+$\varphi(3x_l^+)/\varphi(x_l^+) = \Lambda_l\cdot\varphi_0(3x_l^+)/\varphi_0(x_l^+)$, e o $\varphi_0$
+de Berg e Kr\"uppel é uma solução assintótica da mesma equação truncada (a equação~(7.12) deles, na
+notação de Wirsching: $\varphi_0'(t)/\varphi_0(3t)\to9/2$ quando $t\to0$), de modo que
+$\varphi_0(3x_l^+)/\varphi_0(x_l^+) = \tfrac29\varphi_0'(x_l^+)/\varphi_0(x_l^+)\,(1+o(1))$.
+Para ver que (7.13) se transfere de $x_l$ para $x_l^+$ com uma correção $o(1)$, escreva $v=\log t$;
+a forma explícita de $\varphi_0$ acima dá $\varphi_0'(t)/\varphi_0(t) = B(v)/t$ com
+$B(v) = \gamma+\delta_{\mathrm{BK}}/v-2\beta(v-\log(-v))(1-1/v)$, e, quando $v\to-\infty$,
+$B(v)\sim-2\beta v$ enquanto $B'(v)\to-2\beta$, de modo que $(\log B)'(v)=B'(v)/B(v)\to0$ e
+$(\log[\varphi_0'/\varphi_0])'(v) = (\log B)'(v)-1 \to -1$, limitado. Como
+$x_l^+/x_l = 1+3^{-(l+1)}/x_l \to 1$ (já que $x_l\sim l\cdot3^{-l}$, de fato
+$3^{-(l+1)}/x_l=O(1/l)$), $v(x_l^+)-v(x_l)=\log(x_l^+/x_l)=O(1/l)$, e o teorema do valor médio dá
+$\log[\varphi_0'/\varphi_0(x_l^+)]-\log[\varphi_0'/\varphi_0(x_l)]=O(1/l)$, isto é,
+$\varphi_0'(x_l^+)/\varphi_0(x_l^+)=\varphi_0'(x_l)/\varphi_0(x_l)\cdot(1+O(1/l))$. Substituindo e
+usando sua equação~(7.13), $\lim_l(2/3^{l+1})\varphi_0'(x_l)/\varphi_0(x_l)=2/3$ uniformemente na
+classe,
+\[
+\frac{9}{3^{l+1}}\cdot\frac{\varphi(3x_l^+)}{\varphi(x_l^+)}
+= \Lambda_l\cdot\frac2{3^{l+1}}\cdot\frac{\varphi_0'(x_l^+)}{\varphi_0(x_l^+)}\,(1+o(1))
+= \frac23\,\Lambda_l\cdot(1+o(1)),
+\]
+de modo que a exigência $\limsup_l(9/3^{l+1})\varphi(3x_l^+)/\varphi(x_l^+)<1$ é exatamente
+$\limsup_l\Lambda_l<3/2$.
+
+Para o valor de $\Lambda_l$: escreva $\tau_l := -\log x_l^+$ (localmente a esta prova apenas,
+distinto do $\tau_l$ da prova do Teorema~\ref{thm:conj3}), de modo que $t=x_l^+$ corresponde a
+$\tau=\tau_l$ e $t=3x_l^+$ a $\tau=\tau_l-c$. O deslocamento de fase sob $t\mapsto3t$, isto é,
+$\tau\mapsto\tau-c$, é $w_0(\tau-c)-w_0(\tau)+c = O(1/\tau)$ pela equação que define o
+Lema~\ref{lem:saddles}, independentemente da fase de $\tau$; como $H$ é $c$-periódica,
+$H(w_0(\tau-c)) = H(w_0(\tau-c)+c) = H(w_0(\tau)+O(1/\tau))$, e $H$ Lipschitz (por
+\eqref{eq:Hbounds}) transforma isso em $H(w_0(\tau-c)) = H(w_0(\tau)) + O(1/\tau)$. Pelo
+Teorema~\ref{thm:formulaA}, Proposição~\ref{prop:envelope}, e Proposição~\ref{prop:bkidentity}
+juntas (a mesma cadeia usada na prova do Teorema~\ref{thm:conj3}),
+$\log\varphi(t)-\log\varphi_0(t) = H(w_0(\tau)) + o(1)$ uniformemente em fase, de modo que
+\[
+\log\Lambda_l = H(w_0(\tau_l-c)) - H(w_0(\tau_l)) + o(1) = O(1/\tau_l) + o(1) \to 0,
+\]
+usando que $H$ é Lipschitz (\eqref{eq:Hbounds}) e o deslocamento de fase acima é $O(1/\tau_l)$;
+logo $\Lambda_l \to 1$, bem dentro de $\limsup \Lambda_l < 3/2$.
+\end{proof}
+
+\section{Discussão}
+\label{sec:discussion}
+
+Estes resultados resolvem apenas a Conjectura 3. O argumento de densidade positiva de predecessores
+de Wirsching se reduz a três conjecturas; as Conjecturas 1 e 2, tratando respectivamente de uma
+transferência pontual-versus-média entre os geradores $g_l(k,a)$ e sua média de Haar $3$-ádica
+(substituídos pelas próprias funções Elka, definidas em \cite{wirsching1998}, Seção II.4, para
+tornar a normalização possível) e de uma cota inferior positiva uniforme numa razão de iterados de
+$W_3$ ao longo de $\widetilde A_\delta$, permanecem intocadas aqui, e o teorema completo não é
+estabelecido por este artigo.
+
+Wirsching enunciou a Conjectura 3, mais fraca, em vez da mais forte $\varphi\sim\kappa\varphi_0$
+que ele considera primeiro. O Teorema~\ref{thm:unrestricted} mostra o porquê: o enunciado mais
+forte falha por um mecanismo com amplitude certificada e positiva. Toda fase $\theta\in[0,c)$
+varrida por $H$ admite alguma sequência ao longo da qual a razão converge para $e^{H(\theta)}$:
+tome $\tau_l := \Phi_0(\theta+lc)$, $z_l := e^{-\tau_l}$, de modo que $w_0(\tau_l)=\theta+lc$
+exatamente, e aplique o Teorema~\ref{thm:formulaA}, a Proposição~\ref{prop:envelope}, e a
+Proposição~\ref{prop:bkidentity} como na prova do Teorema~\ref{thm:conj3}. O que é especial na
+fase $0$ é apenas que ela é a que a própria classe $\widetilde A_\delta$ de Wirsching acaba
+fixando. Essa fase está próxima de $w_{1011118}$, um dos quatro pontos onde $H$ é impresso na prova
+da Proposição~\ref{prop:Hcert}: combinando esse valor com $H(0)$ dá
+$H(0) - H(w_{1011118}) = 5.25\times10^{-6}$, um cálculo em ponto flutuante (não, em si, um
+envolvimento certificado), contra uma oscilação certificada de pelo menos $4.18\times10^{-4}$.
+(Se $w_{1011118}$ é onde $H$ atinge seu verdadeiro mínimo não é certificado, pela própria ressalva
+da Proposição~\ref{prop:Hcert} sobre a busca em grade.) Não sabemos se essa quase-coincidência com
+a fase $0$ é acidental.
+
+A taxa não é estabelecida além de $o(1)$. A correção de Edgeworth mais fina da
+Observação~\ref{rem:edgeworth}, e uma forma correspondentemente mais fina das comparações de
+envelope e de Berg--Kr\"uppel, dariam uma taxa polinomial explícita ao longo de tudo; nenhum dos
+dois teoremas precisa disso.
+
+\section{Disponibilidade de código e dados}
+\label{sec:code}
+
+Toda afirmação certificada ou numericamente verificada neste artigo é sustentada por um script no
+repositório que o acompanha, \url{https://github.com/faculdade/wirsching-conjecture3-proof},
+organizado por seção com um README por script informando o que ele verifica e como executá-lo.
+Isso inclui os certificados de aritmética de intervalos por trás da Proposição~\ref{prop:Hcert} e
+das cotas \eqref{eq:Hbounds}, a cadeia de constantes por trás do Teorema~\ref{thm:formulaA}, e a
+identidade da Proposição~\ref{prop:bkidentity}. Os scripts de aritmética de intervalos usam
+aritmética de bolas de Arb via \texttt{python-flint}, com precisão de trabalho de $90$ a $100$
+dígitos decimais (aproximadamente $300$ a $332$ bits, indicada exatamente no topo de cada script),
+estritamente maior que os $250$ bits de precisão citados no texto na prova da
+Proposição~\ref{prop:Hcert} para os valores ali impressos: os scripts arquivados são uma
+reprodução independente e de maior precisão do mesmo certificado, não uma aproximação de precisão
+menor. A precisão de trabalho é escolhida com margem bem além do raio final de cada certificado;
+todo script desse tipo imprime suas bolas de entrada e seu envolvimento final, de modo que a saída
+impressa da execução é o próprio certificado. A versão do repositório referenciada ao longo do
+artigo está arquivada, independentemente de quaisquer mudanças futuras no ramo padrão do
+repositório, em \href{https://doi.org/10.5281/zenodo.21854549}{doi:10.5281/zenodo.21854549}
+(commit \texttt{f8248c3}).
+
+\subsection*{Agradecimentos}
+Foi usada assistência de IA para revisão textual e tradução.
+
+\begin{thebibliography}{99}
+
+\bibitem{wirsching2003}
+G.~J. Wirsching, \emph{On the problem of positive predecessor density in $3N+1$ dynamics},
+Discrete Contin. Dyn. Syst. \textbf{9} (2003), no.~3, 771--787, doi:10.3934/dcds.2003.9.771.
+
+\bibitem{bergkruppel1998}
+L.~Berg and M.~Kr\"uppel, \emph{On the solution of an integral-functional equation with a
+parameter}, Z. Anal. Anwendungen \textbf{17} (1998), no.~1, 159--181.
+
+\bibitem{wirsching1998}
+G.~J. Wirsching, \emph{The Dynamical System Generated by the $3n+1$ Function}, Lecture Notes in
+Mathematics, vol.~1681, Springer, Berlin, 1998.
+
+\bibitem{rvachev1990}
+V.~A. Rvachev, \emph{Compactly supported solutions of functional-differential equations and their
+applications}, Russian Math. Surveys \textbf{45} (1990), no.~1, 87--120.
+
+\bibitem{debruijn1948}
+N.~G. de Bruijn, \emph{On Mahler's partition problem}, Nederl. Akad. Wetensch., Proc.
+\textbf{51} (1948), 659--669 (also Indag. Math. \textbf{10}, 210--220).
+
+\bibitem{erdosrichmond1976}
+P.~Erd\H{o}s and L.~B. Richmond, \emph{Concerning periodicity in the asymptotic behaviour of
+partition functions}, J. Austral. Math. Soc. Ser.~A \textbf{21} (1976), 447--456.
+
+\bibitem{katomcleod1971}
+T.~Kato and J.~B. McLeod, \emph{The functional-differential equation $y'(x) = ay(\lambda x) +
+by(x)$}, Bull. Amer. Math. Soc. \textbf{77} (1971), no.~6, 891--937.
+
+\bibitem{derfel1995}
+G.~Derfel, \emph{Functional-differential and functional equations with rescaling}, in Operator
+Theory: Advances and Applications, vol.~80, Birkh\"auser, Basel, 1995, 100--111.
+
+\bibitem{titchmarsh1986}
+E.~C. Titchmarsh, \emph{The Theory of the Riemann Zeta-Function}, 2nd ed., revised by D.~R.
+Heath-Brown, Oxford University Press, 1986, Chapter III, \S3.1--3.3 (the non-vanishing of $\zeta$
+on $\operatorname{Re}s=1$; not the quantitative zero-free region of Theorem 3.8, a stronger and
+unnecessary statement for this paper's purposes).
+
+\end{thebibliography}
+
+\end{document}
