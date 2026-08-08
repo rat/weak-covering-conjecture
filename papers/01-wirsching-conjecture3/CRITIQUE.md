@@ -1440,3 +1440,24 @@ loop's own self-correction mechanism is working as designed, catching an introdu
 round rather than letting it accumulate silently. The recurring repository-documentation-depth
 question remains the only item unresolved across all 27 rounds; every other finding across the
 entire loop has been either fixed or checked and rejected with a recorded reason.
+
+## Loop closed: the researcher declared the paper final (2026-08-08)
+
+After Round 27's regression check confirmed no new error, the researcher explicitly declared the
+current `main.tex`/`main.pdf` the final version. This is the loop's formal close: per this file's
+own opening protocol ("continue until a round returns with no further real findings from either
+reviewer"), that condition was first met at Round 23, held through five further reviewer passes
+(Rounds 24-27), and none introduced a fatal finding. The status table at the top of this file has no
+entry left `open`; every finding across all 27 rounds reads `fixed`, `not applied` (with a recorded
+reason), or `no action needed`.
+
+Two items remain explicitly disclosed, not resolved, and not blocking this declaration: the
+repository-vs-inline documentation-depth preference raised in nearly every round since Round 3
+(judged repeatedly, on the same reasoning each time, not to require inline duplication of what the
+DOI-archived repository already provides), and the unconfirmed equation-numbering match between the
+preprint and the published DCDS version of Wirsching 2003 (the DOI is now verified and cited; the
+PDF itself was not obtainable). Both are recorded in `papers/INDEX.md`.
+
+No further blind-critique rounds are planned against this text. Any future change to `main.tex`
+(a translation, a response to actual journal review, or a researcher-found issue) restarts this
+file's protocol from a fresh round, not from this closing note.
