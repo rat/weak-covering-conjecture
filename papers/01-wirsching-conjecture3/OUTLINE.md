@@ -83,8 +83,12 @@ citable proof.
       Rounds 25-26's own fixes introduced no new error. Full detail in CRITIQUE.md.
 - [x] **paper declared final by the researcher, 2026-08-08.** See CRITIQUE.md's closing note and
       papers/INDEX.md.
+- [x] pt-BR version (main-pt.tex) written 2026-08-08, on the researcher's explicit request: full
+      translation of every prose passage, every equation/label/cross-reference/numeric
+      literal/bibliography entry kept identical to main.tex (verified: labels and bibliography keys
+      match exactly, every long decimal literal byte-identical); compiles clean, 20 pages, zero
+      errors, zero em dashes
 - [ ] researcher's own read: still pending, the one item no critique round can substitute for
-- [ ] pt-BR version (main-pt.tex): deferred, only on the researcher's explicit request
 
 ## Target venue
 
