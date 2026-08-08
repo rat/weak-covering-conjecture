@@ -1293,3 +1293,61 @@ actions plus this session's tooling work:
 This closes the repository-archival item in full: the reproducibility repository is now
 independently, permanently archived, correctly attributed, and cited by DOI in the paper itself, not
 just by a mutable GitHub URL or an unlinked commit hash.
+
+## Round 25: twenty-third blind loop iteration (2026-08-08), Codex on `gpt-5.6-sol` and Fable both
+## complete, requested by the researcher as a confirming round after the DOI/citation work landed
+
+Researcher's explicit ask: one more round with both reviewers at their strongest configuration
+(`gpt-5.6-sol`, Fable), specifically also checking whether the Post-Round-24 addendum's fixes (the
+Titchmarsh citation, the DOI-cited repository) read sensibly to a fresh reviewer. **Neither reviewer
+found a mathematical error.** Fable: "As submitted, this reads as a rigorous, complete proof of
+Theorem 1, Theorem 2, and Proposition 20," after independently re-deriving nearly every identity in
+the paper (Theorem 4's recurrence and telescoping, Proposition 6's full Mellin derivation and residue
+computations, the analytic non-constancy argument, Proposition 18's algebra including the
+Berg-Kruppel sign-discrepancy bookkeeping, the delta_BK/gamma/epsilon series-reversion
+identification, Lemmas 9-12's local bounds, and the oscillation certificate arithmetic), and
+explicitly confirmed the Titchmarsh fix "reads sensibly and is used consistently with how the text
+describes it." Codex (`sol`): "I found no mathematical reason to reject the two principal
+theorems... the analytic core is sound," after an independent full-paper re-derivation covering the
+same ground plus a direct rendered-page check for clipped formulas (none found: text-block edges
+measured at 540.002-540.006pt against a 612pt page width, roughly 70pt of clearance everywhere) and
+independent numerical recomputation of every constant it checked (all matched, including the
+tail-sum values, the Fourier-mode sums, `H(0)-H(log(3/2))`, `H(w_486746)-H(w_1011118)`, and
+`E(18)`, `E(19)`).
+
+| ID | Summary | Verdict | Status |
+|----|---------|---------|--------|
+| Fable-1 (real, minor completeness gap) | Page 3 asserts phi is "constant, equal to 3/2, on the middle third [1/3,2/3]" with no proof or citation (continuity is separately attributed to Lemma 11, but constancy itself was bare) | **confirmed, real**: a two-line consequence of the already-stated functional equation, support, and normalization, independently re-derived before writing anything (for `x in [1/3,2/3]`, `3x-2<=0` and `3x>=1`, so with `supp phi subset [0,1]` the functional equation's integral collapses to `int_0^1 phi=1`, giving `phi(x)=3/2`) | fixed: the two-line derivation added inline |
+| Fable-2 (LLM-writing tell, real) | Lemma 16's statement uses "Moreover", the paper's one surviving stock transition word | **confirmed** | fixed: "Moreover" -> "Also" |
+| Codex-sol #1 (fair, real rigor gap, same category as prior rounds' repository-scope findings but with a specific, fixable target) | Lemma 11's proof says "bounding the resulting series by its first few terms gives the stated constant," which is not actually a proof of a bound uniform in every `b_0>=1`; Codex supplied a specific, checkable derivation | **confirmed, real**: independently re-verified Codex's own derivation before using it (`q:=e^{-b_0}`, denominator bounded below by `1-q^2` uniformly using `q^{2*3^k}<=q^2`; numerator bounded via `3^k>=2k+1` giving `sum q^{3^k}<=q/(1-q^2)`; combining and using `q<=e^{-1}` for the final numeric inequality) -- checks out at every step | fixed: Lemma 11's proof rewritten with the full explicit derivation, replacing the "first few terms" hand-wave |
+| Codex-sol #2 (fair, minor, real) | `Phi_0(w)=w-log(B_sm(w))` is introduced without stating it needs `B_sm(w)>0`, i.e. `w>ca`; later uses are all safely on `w>ca+1`, so nothing breaks, but the domain should be given where the function is defined | **confirmed, real (minor)** | fixed: added "the latter defined for `w>ca` where `B_sm(w)>0`" at the definition |
+| Codex-sol #3 (fair, addressable) | The paper's novelty claim ("is new") for Proposition 6's Fourier series is a literature claim, not something the displayed mathematics proves by itself; asks for either a literature comparison or a softened claim | **fair**; checked against this project's own prior literature work (`notes/H-006.md`, `HYPOTHESES.md` H-002 cross-link, 2026-07-31: "no post-2003 Berg-Kruppel paper resolving the relevant near-0 phi-asymptotic was found") before deciding how to phrase this, per Rule 11 -- a real search was done and found nothing giving a closed Fourier form, so the claim is verified, not invented, but was previously unstated in the paper itself | fixed: added one footnote (not scattered hedging, per Rule 5c's "concentrate the uncertainty") at the first "is new," stating the search was performed and what it covered |
+| Codex-sol #4 (fair, addressable) | Section 9 describes the certificates as "certified" without specifying the software, precision, or that the printed run output is the certificate; asks for this to be made explicit rather than left implicit in the linked repository | **fair**, and cheap to state accurately: checked the actual precision settings used in the repository's own scripts (`ctx.dps=100` in `certify_H_nonconstancy.py`, `ctx.dps=90` in `verify_envelope_lemma.py`) before writing a number, rather than guessing one | fixed: one sentence added to Section 9 naming `python-flint`/Arb, the 90-100 decimal digit working precision, and that each script prints its input balls and final enclosure |
+| Codex-sol #5 (restates settled ground, formalize-the-repo-as-supplementary-material) | Recommends the archived repository be made "formally part of the submission" (e.g. journal supplementary material) rather than just linked and DOI-cited | already substantively addressed (DOI-archived, immutable, cited by commit and DOI in Section 9, Post-Round-24 addendum) | not further changed: whether a specific journal requires supplementary-material submission (as opposed to a cited, permanent DOI) is a venue-specific submission-mechanics question for when a venue is chosen, not a paper-content gap |
+| Codex-sol #6 (restates settled ground) | Several numerical inequalities (Lemma 9's local bounds, Remark 14's `E(N)` monotonicity/bound over `19<=N<=5000`, the `<1e-45` rounding-accumulation claim on p.8) are asserted with the derivation or check pointed at the repository rather than shown inline | same "repository vs. inline" scope question raised and settled in Rounds 3-24 (most recently Round 5's I3/I6, Round 6's K-repo) | not reopened, Rule 8d: no new argument given this round beyond what was already weighed; the one item from this same family that WAS a genuine gap (Lemma 11, not a numeric assertion but a missing uniform-tail argument) is fixed above as Codex-sol #1 |
+| Codex-sol, Fable (both, LLM-writing review) | Recurring "X, not Y" antithesis and defensive-parenthetical density, "Wirsching's own"/"their own" repeated attribution phrasing, aphoristic structural-insight sentences ("This single structural fact is the source of every phase-independent constant below") | accurate catalogues, same style family already weighed in Rounds 18-23 | not applied further this round: the specific new item found (Fable-2's "Moreover") is fixed above; the recurring "own" attribution phrasing is a deliberate, repeated choice to keep every borrowed object's origin unambiguous in a paper that borrows heavily from two external sources, not an accidental tic, and was judged not worth another rewrite pass for a cosmetic style preference already logged |
+
+**Verification method**: every finding acted on this round was independently re-derived or
+re-checked before touching the text, per Rule 8c -- Codex-sol #1's tail-bound algebra recomputed
+step by step (the `q^{2\cdot3^k}\le q^2` bound, the `3^k\ge2k+1` bound, and the final `q\le e^{-1}`
+numeric threshold all checked directly); Codex-sol #3's novelty claim checked against this project's
+own prior, dated literature-search record rather than assumed; Codex-sol #4's precision numbers
+pulled from the actual repository scripts rather than estimated. Fable-1's derivation re-derived from
+the already-stated functional equation before being added to the text.
+
+Recompiled clean (pdflatex, exit 0, zero `Overfull \hbox`, no undefined-citation warnings), still 19
+pages, zero em dashes. All five edited passages (the footnote on Corollary 3, Lemma 11's proof, Lemma
+16's statement, Lemma 16's domain clause, Section 9) visually spot-checked via rendered PNG at
+150dpi.
+
+**Net effect of this round**: two independent reviewers, both at their strongest available
+configuration, found zero mathematical errors after a full adversarial re-derivation of the paper's
+entire analytic core, and both explicitly confirmed the Post-Round-24 citation and archival fixes
+read correctly to a fresh reader. One real (if minor) completeness gap was closed (Lemma 11's tail
+bound now has an actual uniform proof instead of a hand-wave), one genuine LLM-writing tell was
+removed, and two small, cheap rigor/transparency additions were made (Phi_0's domain, Section 9's
+precision statement, the novelty footnote). Every remaining open item across all 25 rounds is the
+same repository-vs-inline documentation-depth question, raised and settled the same way since Round
+3. This is the strongest convergence signal yet: the two most capable configurations available in
+this loop (Codex on its top model, Fable) both independently reached essentially the same verdict as
+every reviewer since Round 22, with no new severity-escalating finding.

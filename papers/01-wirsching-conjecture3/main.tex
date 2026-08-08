@@ -158,7 +158,10 @@ read the same object at two different scopes.
 \label{cor:bk}
 $e^H$ is Berg and Kr\"uppel's own periodic factor for the eigenfunction $\varphi$, from
 Proposition~9.3 of \cite{bergkruppel1998}, which they give as an infinite product; $H$ itself is
-its logarithm. Its Fourier series, Proposition~\ref{prop:Hfourier} below, is new. This corollary
+its logarithm. Its Fourier series, Proposition~\ref{prop:Hfourier} below, is new\footnote{A
+literature search for work on this two-scale-difference-equation family published after
+\cite{bergkruppel1998}, including later papers by its own authors, found none giving a closed
+Fourier expansion for the periodic factor.}. This corollary
 has two parts of different depth: that $e^H$ agrees with their product \emph{as a function},
 proved in Remark~\ref{rem:bkproduct} below by pure algebra ($e^H=e^{-Q}e^Le^{-\Delta}$ recombining
 Theorem~\ref{thm:H}'s own pieces), and that this function is the periodic factor
@@ -195,7 +198,9 @@ Berg and Kr\"uppel's family of functional equations $\lambda\, \psi'(t) = a\bigl
 \psi(at-2)\bigr)$. The reflection is in fact vacuous, $\varphi(x)=\varphi(1-x)$ identically: $X$ and
 $1-X=\sum_{j\ge1}\tfrac{2}{3^j}(1-U_j)$ are equidistributed, since $1-U_j\sim U_j$ independently
 for every $j$ and $\sum_{j\ge1}2\cdot3^{-j}=1$. It is supported on $[0,1]$, continuous (by
-Lemma~\ref{lem:tail} below), and constant, equal to $3/2$, on the middle third $[1/3, 2/3]$.
+Lemma~\ref{lem:tail} below), and constant, equal to $3/2$, on the middle third $[1/3, 2/3]$: there,
+$3x-2\le0\le1\le3x$, so $\operatorname{supp}\varphi\subset[0,1]$ collapses the functional equation's
+integral to $\int_0^1\varphi=1$, giving $\varphi(x)=\tfrac32\cdot1=\tfrac32$.
 
 For $s > 0$ write
 \[
@@ -722,8 +727,17 @@ a real quantity, since $\Lambda(-y) = \overline{\Lambda(y)}$.
 \end{lemma}
 
 \begin{proof}
-$\log\coth(x/2) = 2\artanh(e^{-x}) \le 2e^{-x}/(1-e^{-2x})$; summing over the geometric orbit
-$b_k=3^kb_0$ and bounding the resulting series by its first few terms gives the stated constant.
+$\log\coth(x/2) = 2\artanh(e^{-x}) \le 2e^{-x}/(1-e^{-2x})$. Write $q:=e^{-b_0}\in(0,e^{-1}]$, so
+$e^{-b_k}=q^{3^k}$ and the bound reads $\log\coth(b_k/2) \le 2q^{3^k}/(1-q^{2\cdot3^k})$. Since
+$3^k\ge1$ for $k\ge0$, $q^{2\cdot3^k}\le q^2$ term by term, so the denominator is bounded below by
+$1-q^2$ uniformly in $k$:
+\[
+\sum_{k\ge0}\log\coth(b_k/2) \le \frac{2}{1-q^2}\sum_{k\ge0}q^{3^k}.
+\]
+Since $3^k\ge2k+1$ for every $k\ge0$ and $0<q<1$, $q^{3^k}\le q^{2k+1}$, so
+$\sum_{k\ge0}q^{3^k} \le q\sum_{k\ge0}q^{2k} = q/(1-q^2)$, giving
+$\sum_{k\ge0}\log\coth(b_k/2) \le 2q/(1-q^2)^2$. For $b_0\ge1$, $q\le e^{-1}<0.4283$, so
+$(1-q^2)^2>2/3$ and $2q/(1-q^2)^2<3q=3e^{-b_0}$.
 $X$'s density is continuous because the sum of the first two summands already has a continuous,
 compactly supported density and convolution preserves continuity. For $\Lambda$: $t(s) =
 -K'(s)$ cancels the linear term of the tilted transform exactly, and each remaining factor
@@ -885,7 +899,8 @@ $B_{\mathrm{sm}}(w) := -Q'(w) = w/c-a$.
 
 \begin{lemma}[True and smooth saddles]
 \label{lem:saddles}
-Let $\Phi(w) = w-\log B_{\mathrm{tr}}(w)$ and $\Phi_0(w) = w-\log B_{\mathrm{sm}}(w)$, and set
+Let $\Phi(w) = w-\log B_{\mathrm{tr}}(w)$ and $\Phi_0(w) = w-\log B_{\mathrm{sm}}(w)$, the latter
+defined for $w>ca$ where $B_{\mathrm{sm}}(w)>0$, and set
 $\tau_0 := 1+ca+\log c = 0.9502067913\ldots$, so $\tau_0 > \log 2$.
 
 For $\tau>\log 2$, $g_\tau$ has a unique global minimizer $w^*(\tau)$, at which $g_\tau''(w^*) =
@@ -896,7 +911,7 @@ $\tau=\Phi_0(w_0)$ together with $B_0 := B_{\mathrm{sm}}(w_0) = e^{w_0-\tau} > 1
 restricted to $(ca+1,\infty)$ is a strictly increasing bijection onto $(\tau_0,\infty)$, and $B_0$
 increases from $1/c$ to $\infty$ along it. For $\tau\le\tau_0$ there is no such minimizer.
 
-Once $B_0\ge5$ (equivalently $\tau\ge3.73978\ldots$), $|w^*-w_0| \le 0.00652/B_0$. Moreover
+Once $B_0\ge5$ (equivalently $\tau\ge3.73978\ldots$), $|w^*-w_0| \le 0.00652/B_0$. Also
 $w_0(\tau+c)-w_0(\tau) = c+O(1/\tau)$ as $\tau\to\infty$.
 \end{lemma}
 
@@ -1314,7 +1329,11 @@ accompanying repository, \url{https://github.com/faculdade/wirsching-conjecture3
 by section with a README per script stating what it verifies and how to run it. This includes the
 interval-arithmetic certificates behind Proposition~\ref{prop:Hcert} and the bounds
 \eqref{eq:Hbounds}, the constant chain behind Theorem~\ref{thm:formulaA}, and the identity of
-Proposition~\ref{prop:bkidentity}. The version of the repository referenced throughout is archived,
+Proposition~\ref{prop:bkidentity}. The interval-arithmetic scripts use Arb ball arithmetic via
+\texttt{python-flint}, at a working precision (90 to 100 decimal digits, stated at the top of each
+script) chosen with margin well past the certificate's own final radius; every such script prints
+its input balls and its final enclosure, so the printed run output is the certificate. The version
+of the repository referenced throughout is archived,
 independently of any later changes at the repository's default branch, at
 \href{https://doi.org/10.5281/zenodo.21854549}{doi:10.5281/zenodo.21854549} (commit
 \texttt{f8248c3}).
