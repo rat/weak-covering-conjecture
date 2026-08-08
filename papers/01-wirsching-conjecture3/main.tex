@@ -1262,10 +1262,12 @@ For the value of $\Lambda_l$: write $\tau_l := -\log x_l^+$ (locally to this pro
 from the $\tau_l$ of Theorem~\ref{thm:conj3}'s proof), so $t=x_l^+$ corresponds to $\tau=\tau_l$
 and $t=3x_l^+$ to $\tau=\tau_l-c$. The phase shift under $t\mapsto3t$, i.e. $\tau\mapsto\tau-c$, is
 $w_0(\tau-c)-w_0(\tau)+c = O(1/\tau)$ by Lemma~\ref{lem:saddles}'s defining equation, independently
-of the phase of $\tau$. By Theorem~\ref{thm:formulaA}, Proposition~\ref{prop:envelope}, and
-Proposition~\ref{prop:bkidentity} together (the same chain used in the proof of
-Theorem~\ref{thm:conj3}), $\log\varphi(t)-\log\varphi_0(t) = H(w_0(\tau)) + o(1)$ uniformly in
-phase, so
+of the phase of $\tau$; since $H$ is $c$-periodic, $H(w_0(\tau-c)) = H(w_0(\tau-c)+c) =
+H(w_0(\tau)+O(1/\tau))$, and $H$ Lipschitz (by \eqref{eq:Hbounds}) turns this into
+$H(w_0(\tau-c)) = H(w_0(\tau)) + O(1/\tau)$. By Theorem~\ref{thm:formulaA},
+Proposition~\ref{prop:envelope}, and Proposition~\ref{prop:bkidentity} together (the same chain used
+in the proof of Theorem~\ref{thm:conj3}), $\log\varphi(t)-\log\varphi_0(t) = H(w_0(\tau)) + o(1)$
+uniformly in phase, so
 \[
 \log\Lambda_l = H(w_0(\tau_l-c)) - H(w_0(\tau_l)) + o(1) = O(1/\tau_l) + o(1) \to 0,
 \]

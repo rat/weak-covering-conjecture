@@ -1173,3 +1173,36 @@ acceptance-level verdicts unconditionally on the mathematics. Recommendation: pa
 and report convergence to the researcher, rather than continuing to spend further rounds
 re-surfacing the same repository-archival request the project has declined on the same grounds
 (Rule 12's division of labor) in every round since Round 3.
+
+## Round 24: twenty-second blind loop iteration (2026-08-08), one more round "to be sure", Codex on
+## `gpt-5.6-sol` and Fable both complete
+
+Researcher's explicit request after Round 23's convergence report: one more round to confirm,
+this time with Codex switched to a specific, stronger model (`gpt-5.6-sol`, via `-m gpt-5.6-sol`,
+replacing the CLI's `gpt-5.6-terra` default; confirmed working with a throwaway test call first).
+**Fable: another zero-findings, essentially-accept verdict**, including a self-caught false
+positive (a fraction/exponent-grouping misread in Theorem 13's `e_3(N)` formula, caught and
+corrected before reporting, exactly the kind of extraction pitfall the shared prompt warns about).
+**Codex (`sol`): "no fatal mathematical error... recommend revision, not rejection"**, same
+repository/certificate scope question as every round, plus one new, genuinely real completeness
+gap.
+
+| ID | Summary | Verdict | Status |
+|----|---------|---------|--------|
+| Codex-sol #5 (real gap, confirmed) | Proposition 20's proof states `H(w_0(tau-c))-H(w_0(tau))=O(1/tau)` immediately after establishing only `w_0(tau-c)-w_0(tau)+c=O(1/tau)` -- i.e. `w_0(tau-c)` and `w_0(tau)` themselves differ by roughly `-c`, not by something small, so applying `H`'s Lipschitz bound directly (without first using `H`'s own periodicity to shift the argument back by `c`) would give the wrong conclusion | **confirmed, real**: independently re-derived the missing step (`H(w_0(tau-c))=H(w_0(tau-c)+c)` by periodicity, then Lipschitz continuity applies since `w_0(tau-c)+c=w_0(tau)+O(1/tau)`) before touching the text; without this intermediate step the displayed conclusion does not follow from what precedes it | fixed: inserted the periodicity step explicitly into the proof, matching the analogous already-explicit pattern used elsewhere in the paper |
+| Codex-sol #4 (fair, not applied) | The Section 6 series reversion's error term is asserted before the quantity it bounds (`delta`) is shown to be controlled; suggests a monotonicity estimate to make it fully rigorous rather than "merely formal" | same category as Round 18/19/20's repeated "show more of the arithmetic" requests | not applied, Rule 8d: the underlying algebra was independently re-verified correct by three separate reviewers across rounds 20-24; this is a presentation-depth preference, not an identified gap |
+| Codex-sol #6 (restates settled ground) | `e^{H(0)}=0.534122...` in Theorem 1 should be enclosed or moved to a remark | same as Round 22's Fable-independent finding #2, already considered and left as-is (already honestly caveated in the statement) | not reopened |
+| Codex-sol #1-3, Fable (restates settled ground) | Repository/certificate archival, Lemma 11/Remark 14 arithmetic not shown, external-quotation verification | same scope questions as every round since Round 3 | not reopened this round -- **but see below: the researcher has asked to resolve the repository-archival and citation-verification items directly, once this round's findings were processed** |
+
+Paper recompiles clean (pdflatex, exit 0, zero `Overfull \hbox`), still 19 pages. The edited passage
+(Proposition 20's proof, p.18) visually spot-checked via rendered PNG.
+
+**Net effect of this round**: confirms Round 23's convergence signal rather than overturning it --
+one genuine, narrow completeness gap found and fixed (the missing periodicity step), everything
+else recurring or already-settled. Two different Codex models (`terra` in Round 23, `sol` in this
+round) and Fable across two consecutive rounds have now all independently reached essentially the
+same verdict: no mathematical errors, only the same standing repository/citation-verification
+items. The researcher has now asked to resolve those two remaining items directly (repository
+archival with an immutable identifier, and verification of the load-bearing Wirsching/Berg-Kruppel
+quotations against primary sources) rather than continuing to run further blind-critique rounds
+against them, since neither is a finding a PDF-only reviewer can actually resolve.
