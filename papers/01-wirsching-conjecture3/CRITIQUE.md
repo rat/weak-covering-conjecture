@@ -1259,3 +1259,37 @@ correct at the page-image level, not just re-derived from this project's own alg
 miscitations were found and fixed, including one (the Titchmarsh reference) that this project's own
 earlier verification pass (Round 21, working from OCR-extracted text rather than rendered page
 images) had gotten wrong itself -- recorded here per Rule 8c rather than left uncorrected.
+
+## Post-Round-24 addendum, continued: DOI archival completed
+
+Full resolution of the repository-archival item, completed with the researcher's own account
+actions plus this session's tooling work:
+
+- Installed and authenticated the `gh` CLI (researcher's own GitHub token, confirmed `push`/`admin`
+  scope on the `faculdade` org's repository).
+- Created a first GitHub Release (`v1.0`, commit `f8248c3`); checked via the GitHub API afterward
+  that no Zenodo webhook existed on the repository yet (`hooks` endpoint returned `[]`), meaning the
+  Zenodo-GitHub link exists at the account level but had not yet been toggled on for this specific,
+  organization-owned repository -- exactly the gap Zenodo's classic GitHub integration requires the
+  researcher to close manually, one repository at a time, at `zenodo.org/account/settings/github/`.
+- Researcher toggled the repository on; a webhook then appeared (confirmed via the API: `active:
+  true`, `events: ["release"]`, pointed at Zenodo's receiver endpoint). Created a second release
+  (`v1.0.1`, same commit) to trigger archival, since Zenodo only catches releases created after the
+  toggle, not retroactively.
+- Confirmed the resulting Zenodo record directly via its public API:
+  `doi:10.5281/zenodo.21854549` (concept DOI `10.5281/zenodo.21854548`), title matching the
+  repository and release, `access_right: open`.
+- **Caught and fixed a metadata problem before citing the DOI**: the record's author field initially
+  read "Renato Tavares, Meta Prime Sistemas" (pulled from the researcher's Zenodo account profile
+  default), not matching the paper's actual affiliation (Universidade Federal de Goias) or its
+  ORCID. Flagged to the researcher before using the DOI anywhere; researcher corrected it on
+  Zenodo's side; **re-verified via the API afterward** (not just taken on the researcher's word) --
+  the record now reads `Tavares, Renato Augusto / Universidade Federal de Goias /
+  0009-0002-0196-3311`, matching the paper's own front matter exactly.
+- Updated the paper's Section 9 to cite the DOI (replacing the earlier commit-pin-only citation),
+  and `DATA_REPO.md` to record both the commit and the DOI. Recompiled clean, visually confirmed the
+  DOI renders as a live link on the References page.
+
+This closes the repository-archival item in full: the reproducibility repository is now
+independently, permanently archived, correctly attributed, and cited by DOI in the paper itself, not
+just by a mutable GitHub URL or an unlinked commit hash.
