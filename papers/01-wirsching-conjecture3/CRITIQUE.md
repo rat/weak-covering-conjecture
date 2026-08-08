@@ -1403,3 +1403,40 @@ and "rigorous proof of what it claims" (Fable), matching every round since Round
 findings (Fable-2's misquoted abstract sentence, Fable-3's already-settled sign-discrepancy request)
 checked out as not requiring any change. The recurring repository-documentation-depth question is the
 only item that has now survived unchanged across every one of 26 rounds since Round 3.
+
+## Round 27: regression check on Rounds 25-26's own fixes (2026-08-08), Fable only, researcher's
+## explicit request
+
+The researcher's explicit worry after Round 26 caught a bug in Round 25's own fix (Codex-sol #1,
+the precision-documentation inconsistency): could this loop's own corrections keep introducing new
+errors without end. Rather than spot-checking only the four passages touched in Rounds 25-26, this
+round ran the full standard blind protocol again (fresh Fable, PDF-only, no diff or prior-round
+context given, so as not to bias the check toward only the recently-touched text), with one added
+instruction: pay particular attention to scaling relationships between a variable and its tilted/
+transformed version (the exact shape of Round 26's `X`-vs-`sX` bug), stated working precisions, and
+limsup/liminf statements (the exact shapes of Round 26's other two fixes).
+
+**Result: zero mathematical errors found**, including in every passage touched by Rounds 25 and 26.
+Fable independently recomputed, at 40-80 digits, every identity and numeric value in the paper
+(Theorem 4's telescoping, Proposition 6's full Mellin/residue derivation, Proposition 8's certified
+interval and both oscillation bounds, Lemma 10, Theorem 13's constants, Lemma 16's `tau_0`,
+Proposition 18's full `alpha,beta,gamma,delta_BK,epsilon,C_P` chain) and every value matched. It also
+re-confirmed the repository and Zenodo DOI in Section 9 resolve and match what the paper describes,
+and re-checked page margins on all 19 pages (no truncation). The only item flagged was a request to
+re-verify the Berg-Kruppel `p^2f''(p)` sign discrepancy against the primary source, which the
+Post-Round-24 addendum already did directly at 900dpi against a rendered page image of [2] p.179;
+no new information, already-settled ground, not reopened. One soft style note ("X, not Y" density
+slightly over this project's own two-per-document budget) was explicitly judged by the reviewer
+itself as legitimate disambiguation work, not filler, and left as is.
+
+No paper changes made this round. Paper unchanged, still 19 pages, zero em dashes.
+
+**This directly answers the researcher's question**: Rounds 25-26's fixes did not introduce a new
+error. The `X`-to-`sX` correction, the precision reconciliation, the explicit limsup/liminf
+notation, and the Elka citation all independently re-verified as correct by a reviewer given no
+knowledge of what had changed. Combined with Round 26 itself (which is what caught Round 25's bug
+in the first place, one round after it was introduced), this is direct, repeated evidence that the
+loop's own self-correction mechanism is working as designed, catching an introduced error within one
+round rather than letting it accumulate silently. The recurring repository-documentation-depth
+question remains the only item unresolved across all 27 rounds; every other finding across the
+entire loop has been either fixed or checked and rejected with a recorded reason.
