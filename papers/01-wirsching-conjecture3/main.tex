@@ -880,8 +880,8 @@ Gaussian core, and using the limits $V_3 := \sum_j\kappa_3(b_j) = 2N+O(1)$, $V_4
 \sum_j\kappa_4(b_j) = 6N+O(1)$ (the third and fourth cumulant sums, by the same argument as
 Lemma~\ref{lem:variance}) suggests the Edgeworth correction $R(s) = 1 - \tfrac1{12N} +
 O(N^{-3/2})$, matching the leading term of the classical Stirling correction for a
-$\mathrm{Gamma}(N,1)$ law: after tilting, the $b_j\ge1$ summands behave asymptotically like
-independent $\mathrm{Exp}(1)$ variables, so $X$ under its tilt is asymptotically
+$\mathrm{Gamma}(N,1)$ law: after tilting, the $b_j\ge1$ summands of $sX=\sum_jb_jU_j$ behave
+asymptotically like independent $\mathrm{Exp}(1)$ variables, so $sX$ under its tilt is asymptotically
 $\mathrm{Gamma}(N,1)$-distributed, and $\rho$ enters only through $O(1)$ shifts of the cumulants,
 at order $N^{-2}$. We do not need this sharper rate and do not prove the remainder term here;
 Theorem~\ref{thm:formulaA}'s qualitative $o(1)$ is all that Section~\ref{sec:proofs} uses.
@@ -1224,8 +1224,12 @@ $\tau\to\infty$ (a continuous, strictly increasing, unbounded function hits ever
 modulo $c$ infinitely often), so by the same combination of results used above,
 $\log\varphi(t)-\log\varphi_0(t) = H(w_0(\tau))+o(1)$ takes values arbitrarily close to both $\sup H$
 and $\inf H$ infinitely often. By Proposition~\ref{prop:Hcert}, $\operatorname{osc}(H) > 0$
-rigorously, so $\varphi(t)/\varphi_0(t)$ does not converge, and
-$\limsup/\liminf \ge e^{\operatorname{osc}(H)} \ge 1.0004188$: the ratio swings by at least
+rigorously, so $\varphi(t)/\varphi_0(t)$ does not converge, and, writing $\Psi(t) :=
+\varphi(t)/\varphi_0(t)$,
+\[
+\frac{\limsup_{t\to0^+}\Psi(t)}{\liminf_{t\to0^+}\Psi(t)} \ge e^{\operatorname{osc}(H)} \ge 1.0004188:
+\]
+the ratio's limsup exceeds its liminf by a factor of at least $1.0004188$, i.e. by at least
 $0.0418\%$.
 \end{proof}
 
@@ -1297,7 +1301,8 @@ $\Lambda_l \to 1$, well inside $\limsup \Lambda_l < 3/2$.
 These results settle Conjecture 3 alone. Wirsching's positive-predecessor-density argument reduces
 to three conjectures; Conjectures 1 and 2, concerning respectively a pointwise-versus-average
 transfer between the generators $g_l(k,a)$ and their 3-adic Haar average (substituted for the Elka
-functions themselves to make normalization possible) and a uniform positive lower bound on a ratio
+functions themselves, defined in \cite{wirsching1998}, Section II.4, to make normalization
+possible) and a uniform positive lower bound on a ratio
 of $W_3$-iterates along $\widetilde A_\delta$, are untouched here, and the full theorem is not
 established by this paper.
 
@@ -1330,10 +1335,13 @@ by section with a README per script stating what it verifies and how to run it. 
 interval-arithmetic certificates behind Proposition~\ref{prop:Hcert} and the bounds
 \eqref{eq:Hbounds}, the constant chain behind Theorem~\ref{thm:formulaA}, and the identity of
 Proposition~\ref{prop:bkidentity}. The interval-arithmetic scripts use Arb ball arithmetic via
-\texttt{python-flint}, at a working precision (90 to 100 decimal digits, stated at the top of each
-script) chosen with margin well past the certificate's own final radius; every such script prints
-its input balls and its final enclosure, so the printed run output is the certificate. The version
-of the repository referenced throughout is archived,
+\texttt{python-flint}, at a working precision of 90 to 100 decimal digits (roughly 300 to 332 bits,
+stated exactly at the top of each script), strictly higher than the $250$-bit precision quoted
+inline in Proposition~\ref{prop:Hcert}'s proof for the values printed there: the archived scripts
+are an independent, higher-precision reproduction of the same certificate, not a lower-precision
+approximation of it. Working precision is chosen with margin well past each certificate's own final
+radius; every such script prints its input balls and its final enclosure, so the printed run output
+is the certificate. The version of the repository referenced throughout is archived,
 independently of any later changes at the repository's default branch, at
 \href{https://doi.org/10.5281/zenodo.21854549}{doi:10.5281/zenodo.21854549} (commit
 \texttt{f8248c3}).

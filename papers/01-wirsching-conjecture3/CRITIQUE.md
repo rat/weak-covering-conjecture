@@ -1351,3 +1351,55 @@ same repository-vs-inline documentation-depth question, raised and settled the s
 3. This is the strongest convergence signal yet: the two most capable configurations available in
 this loop (Codex on its top model, Fable) both independently reached essentially the same verdict as
 every reviewer since Round 22, with no new severity-escalating finding.
+
+## Round 26: twenty-fourth blind loop iteration (2026-08-08), Codex on `gpt-5.6-sol` and Fable both
+## complete, one more confirming round at the researcher's request
+
+Researcher's explicit ask after Round 25: "one more round just to be sure." Both reviewers again
+found zero fatal mathematical errors after a full independent re-derivation of the paper's analytic
+core (Fable: "I found no computational or logical error in the machinery underpinning Theorems 1 and
+2," after re-deriving Proposition 6's Mellin/residue computation from scratch and independently
+testing the Theorem 13 + Proposition 17 + Proposition 18 chain numerically out to tau~433; Codex-sol:
+"I found no gap in the Mellin analysis, the saddle-point transfer, the uniformity argument, or the
+phase analysis," recommending "revise, then accept subject to verification of the archived interval
+computations and the quotations from [1] and [2]"). This round produced this loop's first genuine,
+if minor, mathematical slip caught in the paper's own already-displayed prose (not just an exposition
+gap), a real self-inflicted precision-documentation inconsistency from Round 25's own fix, and two
+findings that checked out as false or already-resolved rather than real.
+
+| ID | Summary | Verdict | Status |
+|----|---------|---------|--------|
+| Codex-sol #2 (real, minor mathematical error, new) | Remark 15 (Edgeworth heuristic) says "the `b_j>=1` summands behave asymptotically like independent `Exp(1)` variables, so `X` under its tilt is asymptotically `Gamma(N,1)`-distributed" -- but it is `sX = sum_j b_jU_j` that approaches `Gamma(N,1)`, not `X` itself | **confirmed, real**: checked by dimensional analysis against Lemma 10 before touching the text (`Var(X)` under the tilt is `K''(s)=V/s^2~N/s^2`, matching `Gamma(N,1)`'s variance `N` only after scaling by `s`, i.e. for `sX`, not for `X` unless `s=1`) | fixed: "the `b_j>=1` summands of `sX=sum_j b_jU_j`... so `sX` under its tilt is asymptotically `Gamma(N,1)`-distributed" |
+| Codex-sol #1 (moderate, real, self-inflicted by this project's own Round 25 fix) | Section 9 (added last round) states the repository's scripts run at "90 to 100 decimal digits," while Proposition 8's own proof (pre-existing text) twice states "`250`-bit working precision" for the same certified values; `250` bits is about `75` decimal digits, not `90`-`100`, an internal inconsistency between two places both claiming to describe the same computation's precision | **confirmed, real, introduced by this project's own Round 25 addition**: checked which is actually higher before writing a fix (`100` decimal digits `~332` bits `> 250` bits), so the archived repository is a strictly higher-precision independent reproduction, not a weaker one, but nothing in the paper said so | fixed: Section 9 now states the repository's precision in both digits and bits, and explicitly says it exceeds the `250`-bit figure quoted in Proposition 8's proof, reconciling the two rather than leaving them looking contradictory |
+| Codex-sol #3 (minor, real, cheap) | The end of Theorem 2's proof writes `limsup/liminf >= e^{osc(H)} >= 1.0004188` with the limiting variable and the ratio's operand left implicit | **confirmed, real (minor)** | fixed: introduced `Psi(t):=phi(t)/phi_0(t)` and wrote `limsup_{t->0+}Psi(t) / liminf_{t->0+}Psi(t) >= e^{osc(H)}` explicitly, with a clause spelling out what the inequality means |
+| Codex-sol #4 (restates settled ground) | Remark 14's `E(N)` monotonicity/bound claim over `19<=N<=5000` is "checked directly in the accompanying repository" rather than proved or given as a machine-verified interval; suggests removing it, proving it, or stating an exact certified interval | same scope question raised and settled in Rounds 3-25 (most recently Round 25's own Codex-sol #6) | not reopened, Rule 8d: the claim is already honestly labeled as unproved and explicitly flagged as unused ("though only `E(N)->0`... is used"), no new argument given |
+| Fable-1 (checked, found already correct, not a real defect) | Discussion's "Elka functions" (`substituted for the Elka functions themselves`) is unfamiliar, undefined terminology with no citation pointer; recommends confirming it against Wirsching's own text or glossing it | **checked against this project's own prior primary-source read** (`literature/notes/L-002.md`, Wirsching 1998's own book, read in full: "Elka functions" is his own term, `e_l(k,a)`, defined in Section II.4) -- genuine terminology, not a transcription slip, but the paper gave no citation pointer for it | fixed anyway, cheaply: added "`, defined in [3], Section II.4,`" at the term's only occurrence, closing the gap Fable correctly identified even though the term itself was already right |
+| Fable-2 (checked, false positive) | Quotes the abstract as reading "a classical zero-free theorem for zeta shows H directly that it is not constant," flagging garbled word order | **checked directly against the compiled PDF and the source**: the actual text reads "...shows directly that it is not constant" (no "H" before "directly"); Fable's quotation does not match the manuscript | not changed: the text was already correct, this is a misquotation by the reviewer, not a defect, recorded per Rule 8c rather than silently discarded |
+| Fable-3 (already resolved, re-confirmed) | Recommends re-confirming the Berg-Kruppel `+2beta`/`-2beta` sign discrepancy directly against the primary source before publication | **already done**: Post-Round-24 addendum confirmed this directly at 900dpi against a rendered page image of [2] p.179 | no action needed, already-verified ground |
+| Codex-sol, Fable (both, LLM-writing review) | Recurring "own"/"exactly" density (Codex-sol counts ~29/~35 occurrences), meta-commentary sentences describing the proof's own architecture, "not X but Y" contrasts, page 19's "the constant chain behind Theorem 13" reading as software-workflow language | accurate catalogues, same style family weighed repeatedly since Round 18; Codex-sol explicitly separates this from the mathematics ("the mathematical core looks as though it has been repeatedly checked and repaired") | not applied further: no specific new instance was flagged as a concrete, isolated tell the way Round 25's "Moreover" was; the repeated "own" attribution phrasing remains a deliberate choice (see Round 25's own reasoning) and the general density complaint is noted, not actioned, absent a specific sentence to fix |
+
+**Verification method**: Codex-sol #2 checked by an independent dimensional argument (`Var(X)` under the
+tilt versus `Gamma(N,1)`'s variance) before editing; Codex-sol #1 checked by converting both stated
+precisions to a common unit (bits) before writing the reconciling sentence, confirming the repository
+is the higher-precision side rather than assuming it; Fable-1 checked against this project's own
+already-completed primary-source read of Wirsching's 1998 book (not re-read from scratch, since
+`literature/notes/L-002.md` already recorded a full read with the exact section number); Fable-2
+checked by direct comparison against the compiled PDF's actual text before declining to change
+anything, per Rule 8c.
+
+Recompiled clean (pdflatex, exit 0, zero `Overfull \hbox`, no undefined-citation warnings), still 19
+pages, zero em dashes. All four edited passages (the Elka citation in Section 8, Remark 15's `sX`
+fix, Theorem 2's proof, Section 9's precision reconciliation) visually spot-checked via rendered PNG
+at 150dpi.
+
+**Net effect of this round**: the first round to catch a real error in the paper's own prior-round
+output rather than only in long-standing text (Codex-sol #1, a precision-documentation inconsistency
+this project introduced in Round 25 while fixing something else, the same self-correcting pattern
+flagged in Rounds 20 and 22), plus one genuine minor mathematical slip in an explicitly
+non-load-bearing heuristic remark (Codex-sol #2, `X` vs `sX` in the Gamma-law analogy). Neither
+finding touches Theorem 1, Theorem 2, or Proposition 20's actual proofs. Both reviewers' overall
+verdicts remain at "no fatal error, revise for documentation/citation-verification reasons" (Codex-sol)
+and "rigorous proof of what it claims" (Fable), matching every round since Round 22. Two reviewer
+findings (Fable-2's misquoted abstract sentence, Fable-3's already-settled sign-discrepancy request)
+checked out as not requiring any change. The recurring repository-documentation-depth question is the
+only item that has now survived unchanged across every one of 26 rounds since Round 3.
