@@ -47,8 +47,8 @@ doubly exponentially small remainder. Berg
 and Kr\"uppel gave this correction, for this eigenfunction, as an infinite product in 1998, five
 years before Wirsching's conjecture; they did not ask whether it is constant. We give $H$ instead
 as a Fourier series with closed-form coefficients in $\Gamma$ and $\zeta$: a classical zero-free
-theorem for $\zeta$ shows directly that it is not constant, and we certify its exact oscillation
-rigorously. Wirsching's own comparison class fixes a single phase of $H$; there, Conjecture 3
+theorem for $\zeta$ shows directly that it is not constant, and we rigorously enclose its
+oscillation. Wirsching's own comparison class fixes a single phase of $H$; there, Conjecture 3
 holds, with an explicit limit. Away from that class the phase sweeps a full period, so the
 stronger, unrestricted asymptotic $\varphi(t) \sim \kappa\,\varphi_0(t)$ as $t \to 0^+$ fails. Wirsching
 needs less than the literal statement of Conjecture 3; we check directly that his actual
@@ -167,7 +167,7 @@ Theorem~\ref{thm:formulaA} and Propositions~\ref{prop:envelope}--\ref{prop:bkide
 below.
 \end{corollary}
 
-$H$'s construction and certified non-constancy are in Section~\ref{sec:periodic}; the saddlepoint
+$H$'s construction, non-constancy, and certified oscillation are in Section~\ref{sec:periodic}; the saddlepoint
 transfer to $\varphi$ itself and the identification with Berg and Kr\"uppel's asymptotic, in
 Sections~\ref{sec:formulaA}--\ref{sec:bk}.
 
@@ -227,8 +227,8 @@ formula except in Section~\ref{sec:bk}, where the collision is flagged again at 
 matters), by Laplace transform and saddlepoint analysis. In their normalization (their
 equation~(9.6), with
 $\alpha = \tfrac12 - \tfrac{\log 2}{\log 3}$, $\beta = \tfrac{1}{2\log 3}$, and $\gamma$,
-$\delta_{\mathrm{BK}}$, $\varepsilon$ determined by $\alpha$ and $\beta$ through their
-Proposition~9.1, printed explicitly in Section~\ref{sec:bk}),
+$\delta_{\mathrm{BK}}$, $\varepsilon$ determined by $\alpha$ and $\beta$ through their own
+equations, given explicitly in Section~\ref{sec:bk}),
 \[
 \varphi_0(t) = \frac{(2\beta)^\varepsilon}{\sqrt{2\pi}}\; t^\gamma\,(-\log t)^{\delta_{\mathrm{BK}}}
 \, \exp\!\left(-\beta \log^2\!\frac{t}{-\log t}\right).
@@ -294,23 +294,21 @@ periodic functions that agree in the limit along every residue class of $w$ modu
 
 \begin{remark}
 \label{rem:bkproduct}
-Berg and Kr\"uppel's own Proposition~9.3, in their own notation throughout this remark only
-(their $a$, $b$ are unrelated to this paper's identically-named objects and are not used again
-outside this remark, Section~\ref{sec:bk} below reusing $a$ for their dilation parameter in a way
-disambiguated there; their $\alpha$, by contrast, is exactly Section~\ref{sec:prelim}'s imported
-$\alpha$, which Proposition~\ref{prop:bkidentity} below identifies with this paper's own $a$),
-specialized to $a=3$, $b=3/2$ (exactly this eigenfunction), gives
-the equivalent identity $\exp(H(w)) = a^{\frac12 t^2 - \alpha t}
-\prod_{k\ge0}\frac{1-e^{-a^{t-k}/b}}{a^{t-k}/b}\prod_{l\ge1}\bigl(1-e^{-a^{t+l}/b}\bigr)$, $t=w/c$,
+Berg and Kr\"uppel's own Proposition~9.3, specialized to their dilation parameter $3$ and their
+$b=3/2$ (exactly this eigenfunction; their $\alpha$, kept as a symbol here, is exactly
+Section~\ref{sec:prelim}'s imported $\alpha$, which Proposition~\ref{prop:bkidentity} below
+identifies with this paper's own $a$), gives
+the equivalent identity $\exp(H(w)) = 3^{\frac12 t^2 - \alpha t}
+\prod_{k\ge0}\frac{1-e^{-3^{t-k}/b}}{3^{t-k}/b}\prod_{l\ge1}\bigl(1-e^{-3^{t+l}/b}\bigr)$, $t=w/c$,
 as an infinite product, in their proof of that proposition. This is $e^{-Q}e^Le^{-\Delta}$ term for
-term: writing $s=e^w=a^t$, $a^{t-k}/b = 2s/3^{k+1}$, so reindexing $j:=k+1\ge1$ turns the first
+term: writing $s=e^w=3^t$, $3^{t-k}/b = 2s/3^{k+1}$, so reindexing $j:=k+1\ge1$ turns the first
 product into $\prod_{j\ge1}\frac{1-e^{-2s/3^j}}{2s/3^j}$, exactly $e^{L(w)}$ from $K$'s defining
-series; $a^{t+l}/b = 2s\cdot3^{l-1}$, so reindexing $k:=l-1\ge0$ turns the second into
+series; $3^{t+l}/b = 2s\cdot3^{l-1}$, so reindexing $k:=l-1\ge0$ turns the second into
 $\prod_{k\ge0}\bigl(1-e^{-2s\cdot3^k}\bigr)$, exactly $e^{-\Delta(w)}$ by \eqref{eq:Hexact}; and,
-since $w=ct$ and $e^c=a=3$,
+since $w=ct$ and $e^c=3$,
 \[
 -Q(w) = \frac{w^2}{2c}-aw = c\bigl(\tfrac12t^2-at\bigr), \qquad\text{so}\qquad
-a^{\frac12t^2-\alpha t} = e^{-Q(w)}
+3^{\frac12t^2-\alpha t} = e^{-Q(w)}
 \]
 once $\alpha=a$ (Proposition~\ref{prop:bkidentity} identifies
 Berg and Kr\"uppel's $\alpha$ with this paper's own linear coefficient of $Q$, also called $a$).
@@ -499,7 +497,7 @@ Proposition~\ref{prop:Hcert} below) gives explicit, certified bounds:
 \sup_w |H'(w)| \le 0.0011977472315550332, \qquad \sup_w |H''(w)| \le 0.0068518962896650951.
 \end{equation}
 
-\begin{proposition}[Certified non-constancy]
+\begin{proposition}[Non-constancy and certified oscillation]
 \label{prop:Hcert}
 $H$ is not constant: $\hat H(1)\ne0$ follows from the classical zero-free theorem for $\zeta$ on
 $\operatorname{Re}s=1$ alone, with no computation. The oscillation is quantified rigorously by an
@@ -595,7 +593,7 @@ majorant bounds each pointwise truncation error by $2\times2.80\times10^{-43}=5.
 combining the discarded modes $m$ and $-m$), locates a candidate maximum at
 $i=486746$ and a candidate minimum at $i=1011118$; this search is only a heuristic for finding
 two well-separated points and is not itself part of the certificate below. Re-evaluating $H$ at
-exactly these two points at $250$-bit working precision in Arb ball arithmetic, independently from
+exactly these two points at $250$-bit working precision in Arb ball arithmetic, independently, from
 \eqref{eq:Hcomputable} and from the Fourier series (the two routes agree to about $30$ digits,
 consistent with \eqref{eq:Hcomputable}'s own $R=30$ truncation tail bound above; a cross-check, not
 part of the certificate),
@@ -622,7 +620,7 @@ $\sum_{m>4}|\hat H(m)|\le9.41\times10^{-20}$,
 \sum_{m\ge2}|\hat H(m)| \le |\hat H(2)|+|\hat H(3)|+|\hat H(4)|+9.41\times10^{-20} \le
 1.3282\times10^{-8},
 \]
-and $4|\hat H(1)| = 4.187449303\times10^{-4}$, giving $\operatorname{osc}(H) \le
+and $4|\hat H(1)| \le 4.187449304\times10^{-4}$, giving $\operatorname{osc}(H) \le
 4.187981\times10^{-4}$, rigorously and unconditionally: this bound uses only the already-certified
 Fourier coefficients, not the grid search.
 \end{proof}
@@ -1160,6 +1158,13 @@ to $\varphi_0$) settles.
 \section{Proofs of the main theorems}
 \label{sec:proofs}
 
+Throughout this section, Theorem~\ref{thm:formulaA}'s parameter $N$ and
+Sections~\ref{sec:envelope}--\ref{sec:bk}'s parameter $\tau$ are combined freely into one $o(1)$:
+since $s=e^{w^*}$ and, by Lemma~\ref{lem:saddles}, $w^*=w_0(\tau)+O(1/B_0)$ with
+$w_0(\tau)=c(B_0+a)$, $N=\lfloor\log_3(2s)\rfloor \sim w^*/c \sim \tau/c$ as $\tau\to\infty$, so
+$N\to\infty$ exactly when $\tau\to\infty$. On $\widetilde{A}_\delta$ below, $\tau_l\to\infty$
+uniformly, at a rate depending only on $l$ and $\delta$, not on the particular sequence chosen.
+
 \begin{proof}[Proof of Theorem~\ref{thm:conj3}]
 Wirsching's class $\widetilde{A}_\delta$ (his equations~(1.5) and~(3.2)) consists of sequences
 $(x_l)$ with $\lfloor 3^l x_l\rfloor = k_l$ satisfying $|l-k_l|\le\delta\sqrt l$ for every $l$; since
@@ -1206,7 +1211,7 @@ $\log\varphi(t)-\log\varphi_0(t) = H(w_0(\tau))+o(1)$ takes values arbitrarily c
 and $\inf H$ infinitely often. By Proposition~\ref{prop:Hcert}, $\operatorname{osc}(H) > 0$
 rigorously, so $\varphi(t)/\varphi_0(t)$ does not converge, and
 $\limsup/\liminf \ge e^{\operatorname{osc}(H)} \ge 1.0004188$: the ratio swings by at least
-$0.042\%$.
+$0.0418\%$.
 \end{proof}
 
 \begin{proposition}[Wirsching's actual requirement]
@@ -1284,9 +1289,10 @@ $e^{H(\theta)}$: take $\tau_l := \Phi_0(\theta+lc)$, $z_l := e^{-\tau_l}$, so $w
 exactly, and apply Theorem~\ref{thm:formulaA}, Proposition~\ref{prop:envelope}, and
 Proposition~\ref{prop:bkidentity} as in the proof of Theorem~\ref{thm:conj3}. What is
 special about phase $0$ is only that it is the one Wirsching's own class $\widetilde A_\delta$
-happens to fix. That phase sits close to the smaller of the two values of $H$ printed in
-Proposition~\ref{prop:Hcert}'s proof: combining them gives $H(0) - H(w_{1011118}) =
-5.25\times10^{-6}$, a floating-point computation (not itself a certified enclosure), against a
+happens to fix. That phase sits close to $w_{1011118}$, one of four points where $H$ is printed in
+Proposition~\ref{prop:Hcert}'s proof: combining that value with $H(0)$ gives
+$H(0) - H(w_{1011118}) = 5.25\times10^{-6}$, a floating-point computation (not itself a certified
+enclosure), against a
 certified oscillation of at least $4.18\times10^{-4}$. (Whether $w_{1011118}$ is where $H$ attains
 its true minimum is not certified, per Proposition~\ref{prop:Hcert}'s own caveat on the grid
 search.) We do not know whether the near-match with phase $0$ is coincidental.

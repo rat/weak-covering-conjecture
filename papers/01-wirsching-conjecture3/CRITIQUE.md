@@ -1100,3 +1100,43 @@ Titchmarsh 1986 as a new bibliography entry, `[9]`.
 Recompiled clean (pdflatex, exit 0, zero `Overfull \hbox`, no undefined-citation warning), 19 pages
 (unchanged from Round 20). Visually spot-checked the new proof paragraph, the updated abstract, and
 the updated Theorem 2 statement via rendered PNG.
+
+## Round 22: twentieth blind loop iteration (2026-08-08), Opus and Codex both complete
+
+Researcher's instruction this round: loop continuously until convergence, no more per-round pauses.
+
+The researcher explicitly switched the loop from per-round authorization to continuous: run Codex
+and Opus (max effort, same protocol) repeatedly, without pausing for a go-ahead each time, until the
+review converges. This round's prompt also added an explicit item 8 asking both reviewers to check
+the new zero-free-theorem argument from the post-Round-21 addendum. Both verdicts moved further
+toward acceptance: **Codex: not yet acceptable, but "the mathematical core... deserving serious
+consideration"** (verdict unchanged in substance from prior rounds, still centered on the
+repository/certificate question); **Opus: accept after minor revision**, explicitly confirming the
+zero-free-theorem argument is correct, and for the first time finding and fixing two genuinely new,
+independently-verified errors (not just presentation gaps) in addition to a substantial style pass.
+
+| ID | Summary | Verdict | Status |
+|----|---------|---------|--------|
+| Codex (moderate, new) | Abstract's "we certify its exact oscillation rigorously" overclaims: Proposition 8 gives a two-sided *enclosure*, not the exact value, and the paper's own grid search only finds candidate extrema | **confirmed, real overclaim**; this was the researcher-directed Post-Round-21 addendum's own new wording, not older text | fixed: "certify its exact oscillation rigorously" -> "rigorously enclose its oscillation" |
+| Opus F1 (must-fix, real numerical error) | "the ratio swings by at least 0.042%" (Round 20's own addition) is false: `e^{osc(H)}-1 >= e^{4.1874494771e-4}-1 = 0.0418833...%`, which is **less than** 0.042%, not at least it -- a lower bound rounded the wrong way | **confirmed, real; independently recomputed before fixing** (`math.exp(4.1874494771e-4)-1 = 0.00041883...`, confirming `0.042%` is not implied) | fixed: `0.042%` -> `0.0418%`, safely below the true value |
+| Opus F2 (must-fix, real notational contradiction) | Section 2 promises "the two [meanings of] `a` never appear in the same formula except in Section 6" -- but Remark 5 (Section 3) prints `-Q(w) = w^2/(2c) - aw = c(t^2/2-at)` (this paper's own `a`) directly alongside `a^{t^2/2-alpha*t}` (Berg-Kruppel's `a=3`) in the same display, breaking the promise inside the one section it's supposed to hold | **confirmed, real**: independently re-derived both expansions by hand before touching anything; the equation is mathematically correct once the two `a`'s are correctly disambiguated, but the notation genuinely violates the paper's own stated convention, exactly where a careless reader would get confused | fixed: replaced Berg-Kruppel's dilation-parameter symbol with the literal number `3` throughout Remark 5 (it was already specialized to that value in this exact remark), eliminating the collision entirely rather than adding a fourth disclaimer; Section 2's original promise is now literally true again, no longer needing its own edit |
+| Opus F3 (moderate) | Same "exact oscillation" overclaim, independently found; also flags Proposition 8's title "Certified non-constancy" as stale now that non-constancy is proved analytically, not certified | same as Codex's finding above (already fixed) for the first half | fixed: retitled the proposition "Non-constancy and certified oscillation"; also updated a forward-reference in the front-matter roadmap that used the same stale phrasing |
+| Opus F4 (real exposition gap) | Theorem 13's parameter `N` and Sections 5-6's parameter `tau` are combined into one `o(1)` in every downstream proof without ever stating that `N -> infinity` exactly when `tau -> infinity` (in fact `N ~ tau/c`), or that `tau_l -> infinity` uniformly on the comparison class | **confirmed, real, correct once verified**: derived `N ~ w*/c ~ tau/c` from already-established facts (`s=e^{w*}`, Lemma 16's `w*=w_0+O(1/B_0)`, `w_0=c(B_0+a)`) before writing anything | fixed: added one linking paragraph at the start of Section 7, stated once rather than repeated in each of the four proofs that need it |
+| Opus F6 (checked, no change needed) | Questions whether the zero-free-theorem citation should be Titchmarsh's Theorem 3.1 rather than 3.8 | **re-verified against the primary source (re-fetched, since the earlier local copy was gone) and found the original citation correct**: paragraph 3.1 is unnumbered historical prose introducing the 1896 Hadamard-de la Vallee Poussin result; the first formally numbered theorem in the chapter is 3.5, and Theorem 3.8 is the actual quantitative zero-free region theorem that implies the fact used. Theorem 3.8 is the more precise, appropriate citation | not changed; Opus's doubt was a plausible but, on inspection, mistaken recollection -- recorded per Rule 8c |
+| Opus F8 (five minor items, all confirmed real) | (a) "independently from (7) and from the Fourier series" parses as independent of both, contradicting the next clause; (b) `4\|Hhat(1)\| = 4.187449303e-4` is a truncation of the true value (`4.1874493033e-4`), not a valid upper bound, though the final rounding absorbs the gap; (c) `gamma, delta_BK, epsilon` attributed to "their Proposition 9.1" in Section 2 but to "equations following (9.6)" in Section 6; (d) Section 8 says "the two values of H" where Proposition 8's proof prints four | all independently checked before fixing (the truncation direction for (b) confirmed via `Decimal` arithmetic) | fixed: (a) added a comma; (b) rounded up to `4.187449304e-4`, a verified safe upper bound; (c) Section 2 no longer names a specific proposition number it can't independently confirm matches; (d) reworded to name the specific point (`w_1011118`) as one of four |
+| Codex, Opus (restates settled ground) | Repository/certificate not self-contained, load-bearing external quotations from [1]/[2] need verbatim reproduction, org name `faculdade` still reads as a placeholder | same as every round since Round 3 | not reopened, Rule 8d; the verbatim-quotation appendix (Opus F5) remains logged from Round 20/21 as a good, not-yet-actioned suggestion |
+| Opus's item 8 check (researcher-requested) | Verify the new zero-free-theorem non-constancy argument | **explicitly confirmed correct**: "The move to an analytic proof of `Hhat(1)!=0` was the right one... the argument (three factors, each nonzero, the third by Hadamard-de la Vallee Poussin...) is correct" | no action needed, independent confirmation recorded |
+
+Paper recompiles clean (pdflatex, exit 0, zero `Overfull \hbox`), still 19 pages. All edited passages
+(Remark 5 p.5, Section 7's opening p.16-17, Theorem 2's proof p.17, Section 8 p.18) visually
+spot-checked via rendered PNG.
+
+**Net effect of this round**: the first round where a reviewer's overall verdict reached "accept
+after minor revision" without conditioning it on unimplemented items (Opus), and the first round to
+independently confirm the previous round's own new mathematical content (the zero-free-theorem
+argument) rather than just not objecting to it. Two real, if narrow, errors were caught and fixed
+(F1's rounding direction, F2's notational contradiction), both introduced in this project's own
+recent rounds while fixing something else, continuing the pattern flagged in Round 20. Per the
+researcher's new standing instruction, the loop continues automatically to the next round rather
+than pausing for authorization; starting next round, the second reviewer slot switches from Opus to
+Fable per the researcher's explicit instruction.
