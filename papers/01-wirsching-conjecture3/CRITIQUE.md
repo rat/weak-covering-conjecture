@@ -1206,3 +1206,56 @@ items. The researcher has now asked to resolve those two remaining items directl
 archival with an immutable identifier, and verification of the load-bearing Wirsching/Berg-Kruppel
 quotations against primary sources) rather than continuing to run further blind-critique rounds
 against them, since neither is a finding a PDF-only reviewer can actually resolve.
+
+## Post-Round-24 addendum: primary-source citation verification and repository archival
+
+Researcher-directed follow-up to Round 24's convergence report, resolving the two items no
+PDF-only reviewer could check (Rule 8e: these were surfaced repeatedly across many rounds --
+Opus's Round 20 M1, Round 22 F5, Fable's Round 23 finding #1 -- but never actually resolved).
+
+**Repository sync and pinning.** The reproducibility repository (`github.com/faculdade/
+wirsching-conjecture3-proof`) had drifted out of sync with the paper across many rounds of
+revision: stale theorem/proposition numbers throughout every README (`Theorem 3`->13,
+`Proposition 6/8/9`->8/17/18, `Corollary 2`->3, etc.), and `section3-periodic-correction`'s
+oscillation certificate still used the pre-Round-20 grid-plus-Lipschitz upper-bound method rather
+than the paper's current, fully-rigorous leading-Fourier-mode method. Fixed: every README updated
+to the current numbering; `certify_H_nonconstancy.py`'s `certify_oscillation` function rewritten to
+match Proposition 8's current proof exactly (kept the grid-search lower bound `D=4.187449477152e-4`,
+replaced the upper-bound method with `4|Hhat(1)|+4*sum_{m>=2}|Hhat(m)|`, giving `osc(H)<=4.187981e-4`).
+Every script in the repository re-run and its output independently re-verified against the current
+paper before committing (commit `f8248c3`, pushed). The paper's own citation of the repository
+(Section 9) is now pinned to that exact commit, so the reference cannot silently drift again if the
+repository's default branch changes later. Full DOI archival via Zenodo's GitHub integration is in
+progress, pending the researcher creating an actual GitHub Release (the Zenodo webhook fires on
+release creation, not on a bare tag push); confirmed via the GitHub API that no release currently
+exists.
+
+**Primary-source citation verification**, delegated to a dedicated agent with both primary sources
+already local (`literature/papers/wirsching2003-posden.pdf`, `bergkruppel1998.pdf`) and a specific
+checklist of every load-bearing equation number, quotation, and the claimed Berg-Kruppel sign
+erratum. Full findings:
+
+| ID | Summary | Verdict | Status |
+|----|---------|---------|--------|
+| **The Berg-Kruppel sign discrepancy** | The paper's Proposition 18 proof claims BK's own p.179 display for `p^2*f''(p)` reads `+2*beta` where direct differentiation gives `-2*beta` | **CONFIRMED, read at 900dpi from the actual page image, unambiguous** ("the sign before the second `2*beta` is unambiguously a plus, full cross stroke"). Corroborated by an independent second slip found on BK's own next page (a `/a` that should read `/ln(a)` in their own eq. (9.4) specialization) | no paper change needed -- the existing erratum claim was already correct, now independently confirmed against the primary source rather than resting on this project's own re-derivation alone |
+| Conjecture 3's exact statement, the verbatim quotation, equations (1.5), (3.2), (6.1), (7.11), (7.12), (7.13), Corollary 7, the `delta_5` notation | All checked directly against Wirsching 2003 | **all confirmed exact matches** (one is a legitimate paraphrase, (7.5), rendered as `<1` instead of the source's `<=1-mu<1`; mathematically equivalent, not a transcription) | no changes needed |
+| Berg-Kruppel's (9.1)-(9.7), Proposition 9.1's three constant formulas, Proposition 9.3's infinite product, their closing "expect...bounded" remark | All checked directly against Berg-Kruppel 1998, read from page images (OCR scan) | **all confirmed exact matches**, several also independently re-verified numerically to 34+ digits | no changes needed |
+| **Citation error, real**: `x_l^+ := x_l + 3^{-(l+1)}` attributed to Wirsching's "equation (7.14)" | (7.14) is actually a different statement (about auxiliary sequences `x-hat_l`, `y-hat_l`); the actual definition is unnumbered prose on his p.16, immediately before (7.14) | **confirmed real miscitation**, value itself correct, only the equation-number attribution wrong | fixed: reworded to cite "his own definition, unnumbered prose on p.16... immediately before his equation (7.14)" |
+| **Citation error, real, most consequential**: the Titchmarsh citation for the zeta zero-free-theorem non-constancy proof pointed to "Theorem 3.8" | Theorem 3.8 is the *quantitative zero-free region* (`sigma>=1-A/log(t)`, `t>t0`, an unspecified threshold), not literally the `Re(s)=1` non-vanishing the paper needs at the specific point `t=omega_1`; the actual result is unnumbered material in Chapter III, section 3.1-3.3 | **confirmed real miscitation, this project's own Round-21 OCR-based re-verification of this exact citation was wrong** -- it concluded 3.8 was correct because it's "the actual numbered theorem," without recognizing 3.8 is a strictly stronger, different statement than what's cited it for | fixed: citation changed to "Chapter III, sections 3.1-3.3," with a clause distinguishing it from Theorem 3.8 explicitly, so a future reader isn't misled the same way this project's own earlier check was |
+| **Wording, real**: Discussion mischaracterizes Wirsching's Conjectures 1 and 2 ("pointwise-versus-average transfer for the Elka functions", "uniformity-near-a-singularity... for S_infinity") | Conjecture 1 is about the *generators* `g_l(k,a)` vs. their Haar average (substituted for the Elka functions specifically to enable normalization), not the Elka functions themselves; Conjecture 2 is a uniform lower bound on a ratio of `W_3`-iterates along the comparison class, not a "near-a-singularity" statement | **confirmed real, both since these two conjectures were never Wirsching-verified against the primary source in any earlier round** | fixed: reworded both descriptions to match the primary source |
+| Residual gap, disclosed rather than resolved | All Wirsching equation numbers were verified against the Bielefeld preprint (`wirsching2003-posden.pdf`, headed "preliminary version"); the bibliographic details match the published DCDS 9(3):771-787 article via Lagarias's annotated bibliography, but the published article itself is paywalled and no open copy was found, so a numbering shift between preprint and published version cannot be fully ruled out | genuine, disclosed limitation | not resolved this round; the researcher may have institutional journal access to check the published version directly, which neither this project's agents nor its literature folder currently have |
+| Four minor wording nits (unmarked quotation elision, "their equation (7.12)" for a Wirsching-numbered equation, Corollary 3 saying "from Proposition 9.3" where the product is in that proposition's proof) | all confirmed accurate as fair nits, explicitly not requiring correction per the verifying agent's own assessment | one applied anyway (cheap): "citing [2] by name at that point" -> "naming [2] in the sentence introducing it," since the by-name mention is one sentence earlier, not literally at that point | three left as-is, matching the verifying agent's own "no correction strictly required" judgment |
+
+Recompiled clean (pdflatex, exit 0, zero `Overfull \hbox`, no undefined-citation warnings), still 19
+pages. All four textual fixes (Titchmarsh citation, (7.14) miscitation, Discussion's Conjecture 1/2
+wording, the repository commit-pin) visually spot-checked via rendered PNG and `pdftotext`.
+
+**Net effect**: this closes the single largest category of finding this critique loop's own PDF-only
+methodology could never resolve on its own (Rule 8e: every one of these had been surfaced and
+flagged across at least three separate earlier rounds without ever being checked against a primary
+source). The paper's most consequential external claim -- the Berg-Kruppel sign erratum, an
+accusation against a published, cited, living author's paper -- is now independently confirmed
+correct at the page-image level, not just re-derived from this project's own algebra. Two real
+miscitations were found and fixed, including one (the Titchmarsh reference) that this project's own
+earlier verification pass (Round 21, working from OCR-extracted text rather than rendered page
+images) had gotten wrong itself -- recorded here per Rule 8c rather than left uncorrected.
