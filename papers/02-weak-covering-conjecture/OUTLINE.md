@@ -135,8 +135,16 @@ A push), notes/H-013.md, notes/GAP-A-round4.md, notes/GAP-A-round5*.md.
       confirmed to exist 2026-08-09 (`curl` 200, `gh repo view` succeeds). Not yet populated -- no
       code committed there yet; do this before section 8 claims anything is "available" in it.
 - [x] arXiv category confirmed: math.NT, 2026-08-09.
-- [ ] Author/venue/language: same as paper 01 unless told otherwise (Renato Augusto Tavares, UFG),
-      English-first, pt-BR to follow only on request (Rule 5). Not yet explicitly reconfirmed for
-      this specific paper.
-- [ ] Prose not yet started (Rule 5: outline before prose, and even this outline needs the two open
-      items above resolved first).
+- [x] Author/venue/language: same as paper 01 (Renato Augusto Tavares, UFG), English-first
+      (main.tex written 2026-08-09, researcher's explicit request); pt-BR deferred to a future
+      explicit request (Rule 5).
+- [x] Prose drafted, 2026-08-09: main.tex written in full (9 sections + bibliography), compiles
+      clean (8 pages, 0 errors, 0 overfull-hbox, 0 undefined refs, 0 em-dashes), all 8 pages
+      visually verified page-by-page. Fixed one Rule 12 overclaim found during visual QA: Section 9
+      originally stated every computational claim is backed by a script in the repo; corrected to
+      state the repo is reserved and will be populated before submission, since it is not yet
+      populated (DATA_REPO.md).
+- [ ] PDF-only blind critique loop (Codex+Fable, same protocol as paper 01), researcher's explicit
+      request 2026-08-09: round 1 complete and fixed (18 findings, 3 critical, substantial
+      rewrites to Sections 1/3/4/5/6/7; also caught rho_14=9/8 > paper's stated bound, now fixed),
+      see CRITIQUE.md. Round 2 in progress.
