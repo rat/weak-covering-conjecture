@@ -45,15 +45,18 @@ enough set $R_{j-1,j} \subset \Z_3^*$, built from strictly decreasing exponent t
 cover every unit residue modulo $3^l$. We extend the exact computation of $j^*(l)$, the smallest
 such covering budget, from $l=20$ to $l=23$, and compare four growth models for
 $e(l) := j^*(l) - l\log_4 3$ against the extended table: a constant model is unconditionally
-impossible (we prove $e(l)\ge\tfrac14\log_2l-O(1)$) and disfavored at every statistic checked among
-the growing alternatives, which remain statistically indistinguishable from one another. We give
-the best bound known to us, $j^*(l) \le \tfrac98 l + O(1)$, via a mean-payoff-game relaxation of the
+impossible (we prove $e(l)\ge\tfrac14\log_2l-O(1)$) and disfavored at every statistic checked; the
+growing alternatives are not distinguished from one another by these criteria. We give
+the best bound known to us, $j^*(l) \le \tfrac98 l + \tfrac{33}2$, via a mean-payoff-game relaxation
+of the
 covering budget whose proof rests on one computationally verified, not generally proven,
-correspondence. We then examine the natural Fourier approach to a tighter bound: a uniform
-square-root-cancellation argument cannot beat a threshold worse than this bound, and in fact no
-constant achieving even that threshold can exist, since one explicit frequency family already
-violates the needed estimate; separately, a direct computation at one accessible level finds the
-bulk of the primitive-frequency mass sitting outside any sparse exceptional set. The residues
+correspondence. We then examine the natural Fourier approach to a tighter bound: the natural
+full-spectrum positivity criterion is provably unreachable at every budget, since no element of
+$R_{j,k}$ is divisible by $3$; granting the criterion regardless, a
+uniform square-root-cancellation argument still could not beat a threshold worse than the
+mean-payoff bound. Separately, a direct computation at one accessible level finds the bulk of the
+primitive-frequency mass sitting outside the sparse exceptional set a fixed magnitude threshold
+defines. The residues
 that actually fail to be covered sit in
 cells of local hit-density well below the global mean; a phase-randomization experiment at a
 different, more tractable pair of
@@ -61,8 +64,9 @@ parameters points the same way, toward phase structure that magnitude alone does
 prove a theorem on the uncovered residues themselves, for budgets $j\ge l$: the set left uncovered
 at a budget is contained in both twice and four times the set left uncovered at the previous budget,
 giving an explicit recursive upper bound on $j^*(l)$ that we prove exact at most budgets, given one
-further combinatorial property verified at every level checked; at the one remaining budget, this
-holds at four small levels checked directly and is otherwise only empirically exact. We
+further combinatorial property verified for $l=3,\dots,13$ against a table running to $l=23$; at the
+one remaining budget, this holds at four small levels checked directly and is otherwise only
+empirically exact. We
 falsify the natural cost-$1$ form of a local repair rule this theorem might suggest, with explicit
 witness-level exhaustive counts, prove that every last-uncovered residue is $\equiv1\pmod3$ whenever
 $j^*(l)\ge l+1$ (every computed level but one), prove a two-class containment
@@ -157,6 +161,32 @@ independently written implementation is this paper's evidence that the search it
 is carried forward by inference for $l=21,22,23$, without a separate cross-check at those levels.
 The values for $l=21,22,23$ are new.
 
+The search above only tries budgets $j\ge l$ at level $l$, so on its own it certifies $j^*(l)$ only
+against smaller candidates within that range.
+
+\begin{lemma}[No smaller budget covers]
+\label{lem:nosmaller}
+For $l=2,\dots,23$, no $j<l$ has $R_{j-1,j}$ covering $(\Z/3^l\Z)^*$, so $j^*(l)\ge l$ holds outright,
+not only relative to the range the search above tries.
+\end{lemma}
+
+\begin{proof}
+If $R_{j-1,j}$ covers $(\Z/3^L\Z)^*$ for some $L\ge j$, it covers $(\Z/3^j\Z)^*$ too: reduction
+modulo $3^j$ factors through reduction modulo $3^L$, and the ring homomorphism
+$\Z/3^L\Z\to\Z/3^j\Z$ restricts to a surjection of unit groups (every unit modulo $3^j$ lifts to a
+unit modulo $3^L$), so the image of a full set of units modulo $3^L$ is a full set of units modulo
+$3^j$.
+
+$R_{0,1}=\{1,2\}$ has $2$ elements, short of $|(\Z/3^l\Z)^*|=2\cdot3^{l-1}\ge6$ for $l\ge2$, so
+$j=1$ never covers at $l\ge2$: $j^*(l)\ge2$ for $l\ge2$.
+
+Fix $l$ with $2\le l\le23$ and suppose, for contradiction, some $j_0$ with $2\le j_0<l$ has
+$R_{j_0-1,j_0}$ covering $(\Z/3^l\Z)^*$. The reduction above, with $L=l$, gives $R_{j_0-1,j_0}$
+covering $(\Z/3^{j_0}\Z)^*$ too, i.e.\ $j^*(j_0)\le j_0$. But $j_0<l\le23$, so $j_0$ is itself a
+level the search above already ran, at budgets starting from $j_0$ itself; Table~\ref{tab:jstar}
+reports $j^*(j_0)>j_0$ strictly there. Contradiction. So no $j_0<l$ covers, giving $j^*(l)\ge l$.
+\end{proof}
+
 \begin{table}[h]
 \centering
 \begin{tabular}{c|c|c||c|c|c||c|c|c}
@@ -178,20 +208,22 @@ The single plateau in the table, $j^*(15)=j^*(16)=20$, is not an error: $l=15\to
 step among the $22$ from $l=1$ to $l=23$ at which the covering budget does not increase, and it is
 exactly the event Section~\ref{sec:growth}'s plateau-frequency test measures. The integer difference
 $j^*(l)-l$, a coarser cousin of $e(l)$, is $0,2,3,3,4,4,4,4,4,5,5,5,5,5,5,4,4,4,4,4,4,4,4$ for
-$l=1,\dots,23$: it never grows past $5$ over the computed range, but Proposition~\ref{prop:lowerbound}
-already rules out any bounded ceiling in general, so this flatness is a fact about the range checked,
-not a proven bound.
+$l=1,\dots,23$: it never grows past $5$ over the computed range, and nothing proven here rules out
+that ceiling persisting; Proposition~\ref{prop:lowerbound}'s logarithmic bound on $e(l)$ does not
+touch it, since a bounded $j^*(l)-l$ makes $e(l)=(j^*(l)-l)+l(1-\log_43)$ grow linearly, comfortably
+above a logarithmic floor. If the ceiling did persist, $j^*(l)=l+O(1)$ would make $e(l)$ linear, and,
+by the identity noted after \eqref{eq:el}, would (subject to the persistence proviso stated there)
+make $K(l)$ exponential and falsify the conjecture. This flatness is a fact about the range checked,
+not a proven bound either way.
 
 $l=21$ fits in physical RAM once a memory-wasteful parallelization step in the original
 implementation was corrected. $l=22$ needs approximately $84\,\mathrm{GiB}$ of state, above the
 machine's $62\,\mathrm{GiB}$ of physical RAM, so a $500\,\mathrm{GiB}$ swap file was added to the
-machine specifically for this computation (a generous round figure, chosen ahead of measuring the
-actual requirement); the run took approximately $10{,}749\,\mathrm{s}$ ($\sim\!3$ hours) with swap I/O as
+machine specifically for this computation; the run took approximately $10{,}749\,\mathrm{s}$
+($\sim\!3$ hours) with swap I/O as
 the dominant cost, against $748\,\mathrm{s}$ for $l=21$ without swap. $l=23$ required approximately
 $263\,\mathrm{GiB}$ of state, comfortably within the same swap budget, and $375{,}615\,\mathrm{s}$
-($\sim\!104$ hours). A checkpoint/resume mechanism was added after an earlier, unrelated
-policy-triggered kill of an interrupted $l=23$ attempt; the eventually successful run had no
-interruption, so that mechanism was never exercised on it. Three attempts at $l=24$, made over the
+($\sim\!104$ hours). Three attempts at $l=24$, made over the
 course of this project on the same
 machine, each failed before completion (two to memory-policy kills, one to an apparent out-of-memory
 condition with no surviving kernel log confirming it directly); $l=24$ is not attempted further, and
@@ -226,7 +258,7 @@ model (slow-linear).}
 
 A constant model is disfavored sharply and consistently: $\Delta\mathrm{AIC}=16.09$,
 $\Delta\mathrm{BIC}=15.45$, both growing at every $l$ added since $l=21$. The three growth models
-remain statistically indistinguishable from one another by the conventional $\Delta\mathrm{AIC}>2$
+are not distinguished from one another by the conventional $\Delta\mathrm{AIC}>2$
 rule of thumb, with slow-linear taking a narrow lead on both AIC and leave-one-out cross-validation;
 the three candidate regressors ($\log l$, $\sqrt l$, $l$) are themselves highly correlated over this
 range (pairwise correlation $\ge0.993$), so this ranking mainly reflects how thin the current margin
@@ -249,15 +281,16 @@ plateau count over the full range tests nothing about that model. Restricted to 
 actually in $\{0,1\}$, consistent with the model's own prediction), exactly one is zero (the
 $l=15\to16$ plateau noted above); the constant-rounding model predicts a plateau at a fixed fraction
 $1-\log_43\approx0.2075$ of increments (the fraction of the real line, in the limit, that rounds down
-rather than up under a linear-plus-constant quantity with irrational slope $\log_43$), giving $19
-\times(1-\log_43)\approx3.9$ expected plateaus among the earlier manuscript's own $19$ increments,
-$l\le20$; testing the observed count against $\mathrm{Bin}(13,3.9/19)$, one-sided, gives
-$p\approx0.22$. $e(l)$ is an exact, deterministic
+rather than up under a linear-plus-constant quantity with irrational slope $\log_43$); testing the
+observed count of $1$ against $\mathrm{Bin}(13,1-\log_43)$, one-sided, gives $p\approx0.214$. $e(l)$
+is an exact, deterministic
 sequence, so this carries no sampling interpretation; it is best read descriptively, as ``how well
-does a constant-$e(l)$ source fit the observed tail increment pattern.'' Under the constant model,
-$e(l+1)-e(l)$ can only be $1-\log_43\approx0.2075$ or $-\log_43\approx-0.7925$, so ``which growth
-model best fits $e(l)$'' and ``how often does $j^*(l)$ plateau'' are the same question about the
-same $14$-point tail, asked in different words.
+does a constant-$e(l)$ source fit the observed tail increment pattern.'' Under the constant-rounding
+model, $e(l+1)-e(l)$ can only be $1-\log_43\approx0.2075$ or $-\log_43\approx-0.7925$; the plateau
+count above and Section~\ref{sec:growth}'s OLS comparison are both functions of the same
+$14$-point increment sequence, so they are not independent checks, though the plateau test bears
+specifically on the constant-rounding model, a different object from the free-intercept constant
+regression $e(l)=c$ that Table~\ref{tab:aic} fits.
 
 A constant $e(l)$ is disfavored descriptively by every measure above. It is also, unconditionally,
 impossible.
@@ -383,7 +416,8 @@ edges, the adversary's three choices of $\epsilon$ as the maximizer's edges, and
 average of the move costs $d$. The classical theory of such games, initiated by Ehrenfeucht and
 Mycielski~\cite{ehrenfeuchtmycielski1979}, guarantees a value and an optimal positional policy in
 general; Theorem~\ref{thm:mpg} below needs none of that generality, only the twelve specific
-policies actually exhibited and directly checked in Table~\ref{tab:mpg}.
+policies whose resulting $(\rho_k,C_k)$ are reported in Table~\ref{tab:mpg}, each independently
+checked as described in Section~\ref{sec:code}.
 
 A window-$k$ policy, run against the actual digit sequence, gives a legal full-precision play at any
 $z$ modulo $3^l$: at step $i$, the true remaining state is $z_i$ modulo $3^{l-i}$, so the policy
@@ -415,8 +449,7 @@ digit over the finite action set established above, against
 d_{\sigma_k}(s) + h_k(s'(\epsilon)) \le \rho_k + h_k(s)
 \]
 at every state $s$ and every adversary digit $\epsilon$, where $s'(\epsilon)$ is the successor under
-$\sigma_k$'s chosen move; the matching adversary lower bound extracted from the same run certifies
-$\rho_k$ exactly. Summing the inequality along any $l$-step play $s_0,\dots,s_l$ telescopes to
+$\sigma_k$'s chosen move. Summing the inequality along any $l$-step play $s_0,\dots,s_l$ telescopes to
 \[
 \sum_{i=0}^{l-1} d_{\sigma_k}(s_i) \le l\rho_k + h_k(s_0) - h_k(s_l) \le l\rho_k + \bigl(\max h_k -
 \min h_k\bigr) =: l\rho_k + C_k,
@@ -428,10 +461,19 @@ from $z$ is therefore also at most $l\rho_k+C_k$. Taking the worst-case $z$ and 
 Result~\ref{er:soundness} gives $j^*(l) \le \rho_k l + C_k$.
 \end{proof}
 
-$\rho_k$ and $C_k$ are computed exactly, as rationals, by a nested Howard strategy-improvement
-solver, self-certified at every $k$ via a matching adversary lower bound extracted from the same
-run (upper bound equals lower bound, so the computed rational equals $\rho_k$ exactly), and
-cross-validated by an independent value-iteration solver and, at $k=4$ and
+$\sigma_k$, $h_k$ and $\rho_k$ are computed as rationals by a nested Howard strategy-improvement
+solver, which searches actions $d$ up to a fixed cap of $40$ (well above the largest $d$ any
+certified policy below actually uses at any $k=3,\dots,14$, which is $11$). The potential inequality
+above is checked, state by state and digit by digit, against the full legal, safe action set at that
+state, so the resulting upper bound $j^*(l)\le\rho_kl+C_k$ does not depend on the cap. The solver
+also extracts a matching adversary lower bound from the same run, but that computation ranges only
+over the same capped action set: ``upper bound equals lower bound'' certifies $\rho_k$ exactly as the
+value of the mean-payoff game restricted to $d\le40$, not, without further argument, as the value of
+the unrestricted game on the full action set $\{0,\dots,2\cdot3^k-1\}$ described above, since a move
+with $d>40$ could in principle let the adversary force a lower true value. Table~\ref{tab:mpg}
+reports $\rho_k$, $C_k$ under this understanding: certified rates of an exhibited, verified policy,
+which is all Theorem~\ref{thm:mpg} needs, not a proven-exact value of the full window-$k$ game.
+$\sigma_k$ and $\rho_k$ are cross-validated by an independent value-iteration solver and, at $k=4$ and
 $k=7$, by running the resulting policy against the actual finite covering DP for every unit residue
 modulo $3^l$, $l$ up to $14$, with zero illegal or unsafe moves encountered.
 Table~\ref{tab:mpg} gives the values computed for $k=3,\dots,14$.
@@ -453,7 +495,7 @@ At $k=14$, $\rho_{14} = 9/8 = 1.125$ and $C_{14}=33/2$, giving:
 
 \begin{corollary}[Conditional on Empirical Result~\ref{er:soundness}]
 \label{cor:mpgbound}
-$j^*(l) \le \tfrac98 l + O(1)$.
+$j^*(l) \le \tfrac98 l + \tfrac{33}2$.
 \end{corollary}
 
 This is, to our knowledge, the best bound on $j^*(l)$'s growth rate currently available, conditional
@@ -473,8 +515,7 @@ still well above the conjectured true rate $\log_4 3 = 0.7925\ldots$; the fit is
 range used (all of $k=3,\dots,14$ gives $L\approx0.904$) and is not evidence of any specific limit.
 Only the direction $j^*(l)\le\rho_k l + C_k$, proven above, is established. The reverse inequality,
 $\inf_k \rho_k \le \limsup_l j^*(l)/l$, which would be needed to conclude anything about where
-$\rho_k$ is heading, is not established, and there is evidence in the course of this work that the
-window relaxation may carry an irreducible gap above the true rate.
+$\rho_k$ is heading, is not established.
 \end{remark}
 
 \section{The exponential sum, and why it resists a direct attack}
@@ -490,45 +531,59 @@ residue class $z$ is
 N(z) = \frac1{3^l}\sum_{t=0}^{3^l-1} S(t)\,e\!\left(-\frac{tz}{3^l}\right), \qquad
 S(t) := \sum_{j+k\ge a_0>\cdots>a_j\ge0} e\!\left(\frac{t}{3^l}\sum_{i=0}^j 2^{a_i}3^i\right),
 \end{equation}
-and, since $S(0)=|R_{j,k}|=:T$, the triangle inequality gives $N(z)>0$ for every $z$ as soon as
-$\sum_{t\ne0}|S(t)| < T$; a uniform bound $|S(t)| = o(T/3^l)$ at every nonzero $t$ would suffice,
-at a rate controlled directly by the exponent in the bound. This approach does not work, for three
-separate and mutually reinforcing reasons.
+and $S(0)=|R_{j,k}|=:T$. The natural route to positivity is the triangle inequality: $N(z)>0$ for
+every $z$ as soon as $\sum_{t\ne0}|S(t)| < T$. This route is closed before it opens.
+Proposition~\ref{prop:sqrtceiling} below shows the sum on the left is never below $T$, for any
+$l$, $j$, $k$: the criterion cannot be reached at all, for any budget. The remainder
+of this section studies what is left once the full-spectrum route is abandoned: a primitive-frequency
+version of the same idea (\S5.3), and why it too resists the reasons below.
 
 \subsection{A hard ceiling on uniform cancellation}
 
-\begin{proposition}
+\begin{proposition}[The full-spectrum criterion is unreachable]
 \label{prop:sqrtceiling}
-Any proof of covering via a uniform bound $|S(t)| \le C\sqrt{T}$ for a fixed constant $C$
-(square-root cancellation), applied via the triangle inequality across all $3^l-1$ nonzero
-frequencies, requires $j \ge 2\log_4(3)\,l - O(1) \approx 1.585\,l - O(1)$.
+For every $l\ge1$ and every $R_{j,k}$ with $T:=|R_{j,k}|>0$, $\sum_{t\ne0}|S(t)| \ge T$; in
+particular $|S(3^{l-1})|\ge T/2$. Consequently the criterion $\sum_{t\ne0}|S(t)|<T$ is never
+satisfied, for any $l$, $j$, $k$, and neither is the uniform bound $|S(t)|=o(T/3^l)$ at every
+nonzero $t$, since that would force $\sum_{t\ne0}|S(t)|=o(T)$.
 \end{proposition}
 
 \begin{proof}
-From here on, $S(t)$ and $T$ specialize \eqref{eq:Nz}'s general $R_{j,k}$ to the family
-$R_{j-1,j}$ this paper's covering question actually concerns ($j$ terms, not $j+1$): write
-$T := |R_{j-1,j}| = \binom{2j}{j}$. Positivity of $N(z)$ for every $z$ via
-$\sum_{t\ne0}|S(t)| < T$ combined with the uniform estimate $|S(t)| \le C\sqrt{T}$ over the
-$3^l-1$ nonzero frequencies forces $(3^l-1)C\sqrt{T} < T$, so $T > ((3^l-1)C)^2$, i.e.\
-$4^j/\sqrt{3j+1} \ge T > ((3^l-1)C)^2$ (using the explicit bound from Proposition~\ref{prop:lowerbound}'s
-proof), which gives $j \ge 2\log_4(3)\,l - O(1)$.
+Every element of $R_{j,k}$ reduces to $2^{a_0}\bmod3$ (all other terms carry a positive power of
+$3$), so it is $\equiv1$ or $2\pmod3$: no element is divisible by $3$. Hence $N(z)=0$ for every $z$
+divisible by $3$, in particular $N(0)=0$, so $\sum_{t=0}^{3^l-1}S(t)=3^lN(0)=0$ and
+$\sum_{t\ne0}S(t)=-S(0)=-T$; the triangle inequality gives $\sum_{t\ne0}|S(t)|\ge\bigl|\sum_{t\ne0}
+S(t)\bigr|=T$.
+
+The same collapse localizes: summing the inversion formula over the $3^{l-1}$ residues divisible by
+$3$ leaves only the three frequencies $t\in\{0,3^{l-1},2\cdot3^{l-1}\}$ in the inner sum (every other
+character is nonconstant on that coset of the index-$3$ subgroup and averages to $0$), giving
+$S(3^{l-1})+S(2\cdot3^{l-1})=-T$ exactly, at every $l$, $j$, $k$. Since $S(3^l-t)=\overline{S(t)}$,
+the two terms are conjugate, so $\mathrm{Re}\,S(3^{l-1})=-T/2$ exactly and $|S(3^{l-1})|\ge T/2$: a
+single conjugate pair already forces the bound, before the rest of the spectrum is added in.
 \end{proof}
 
-Proposition~\ref{prop:sqrtceiling}'s threshold is \emph{worse} than Corollary~\ref{cor:mpgbound}'s
-bound: any approach that only delivers generic square-root cancellation across every
-frequency cannot even match what is already conditionally known by other means, let alone improve
-on it. This
-rules out the naive version of the Fourier approach cleanly, and directs attention to whether a
-finer, frequency-dependent treatment (a major/minor-arc split, in the language of the circle method)
-can do better.
+Proposition~\ref{prop:sqrtceiling} closes the naive route outright, at every $j$: there is no
+threshold past which it starts to work. Even granting the unreachable premise for
+comparison, specializing $S(t)$, $T$ to the family $R_{j-1,j}$ this paper's covering question
+concerns ($T=\binom{2j}{j}$) and asking what $j$ a uniform bound $|S(t)|\le C\sqrt{T}$
+(square-root cancellation), applied via the triangle inequality across all $3^l-1$ nonzero
+frequencies, would force gives $(3^l-1)C\sqrt{T} < T$, so $T > ((3^l-1)C)^2$, i.e.\
+$4^j/\sqrt{3j+1} \ge T > ((3^l-1)C)^2$ (the explicit bound from Proposition~\ref{prop:lowerbound}'s
+proof), hence $j \ge 2\log_4(3)\,l - O(1) \approx 1.585\,l - O(1)$: already \emph{worse} than
+Corollary~\ref{cor:mpgbound}'s $1.125\,l$, on top of resting on a premise
+Proposition~\ref{prop:sqrtceiling} rules out at every $j$. Both facts together rule out the naive
+version of the Fourier approach, and direct attention to whether a finer, frequency-dependent
+treatment (a major/minor-arc split, in the language of the circle method) can do better.
 
 \subsection{A computation: the exceptional mass does not stay small}
 
 Numerically, $|S(t)|$ is far from uniform: the frequencies of largest magnitude sit close to dyadic
-rationals of small denominator, $t/3^l \approx p/2^r$ for small $r$. The natural repair for
-Proposition~\ref{prop:sqrtceiling}'s ceiling is to excise these major-arc resonances and control the
-remainder by an averaged bound; whether that remainder stays sparse enough at the scale that
-matters is a question this section answers computationally, for the family $R_{j-1,j}$ at $l=18$,
+rationals of small denominator, $t/3^l \approx p/2^r$ for small $r$, matching exactly the conjugate
+pair Proposition~\ref{prop:sqrtceiling} exhibits at $t=3^{l-1},2\cdot3^{l-1}$ ($r=0$). The natural
+repair is to restrict to primitive frequencies, excising this pair along with the rest of the
+non-primitive spectrum, and control the remainder by an averaged bound; whether that remainder stays
+sparse enough at the scale that matters is a question this section answers computationally, for the family $R_{j-1,j}$ at $l=18$,
 $j=16$ (the first-order cardinality threshold, $T:=\binom{32}{16}$, six budgets below the actual
 covering threshold $j^*(18)=22$: coverage necessarily fails here already, and this level sits below
 the $j\ge l$ range Sections~\ref{sec:holdouts}--\ref{sec:further} otherwise work in), with a negative
@@ -571,8 +626,10 @@ below). A \emph{non-homogeneous Poisson model} fit to that intensity assigns $z$
 $e^{-\lambda_c(z)}$. Computed directly from the exact histogram for $l=10,\dots,15$, every one of the
 eleven holdouts across these six levels has $\lambda_c$ well below the global mean at every depth
 $c=8,9,10$ with $c<l$ (at $l=10$, only $c=8,9$; $\lambda_c$ from $2.0$ to $108.4$, hole probability
-from $e^{-2}$ to $e^{-108}$): holdouts sit systematically in low-intensity cells, with how far below
-the mean varying widely by depth and level; no single exponent characterizes it. A separate
+from $e^{-2}$ to $e^{-108}$). Assigning probability $e^{-108}$ to an event that occurred falsifies the
+non-homogeneous Poisson model outright; what survives is the weaker, descriptive claim underneath it:
+holdouts sit systematically in low-intensity cells, with how far below the mean varying widely by
+depth and level. A separate
 diagnostic at a smaller, more tractable
 pair, $(l,m)=(14,16)$, for the family $R_{m-1,m}$ (mean hit count $188.5$, a budget below the
 covering threshold $j^*(14)=19$), holds every $|S(t)|$ fixed and randomizes the phases of
@@ -592,8 +649,7 @@ low moments of $S(t)$) do not see.
 
 \begin{proposition}
 \label{prop:1547}
-$|S(3^{l-1})|/\binom{2m}{m} \to 1/\sqrt3$ as $m\to\infty$, for the family $R_{m-1,m}$, for every
-fixed $l\ge1$.
+$|S(3^{l-1})|/\binom{2m}{m} \to 1/\sqrt3$ as $m\to\infty$, for the family $R_{m-1,m}$.
 \end{proposition}
 
 \begin{proof}[Proof sketch]
@@ -605,14 +661,12 @@ $\{0,\dots,2m-1\}$ is geometric with parameter $1/2$, giving $\Pr[a_0\text{ even
 mixture equals $-\tfrac12 - \tfrac{i\sqrt3}6$, of modulus $1/\sqrt3$.
 \end{proof}
 
-Uniform decay across every nonzero frequency, the premise a naive statement of the Fourier approach
-might suggest, is false at this explicit family of frequencies: $t/3^l=1/3$ exactly, so $l$ drops out
-of $S(3^{l-1})$ entirely (only $V\bmod3$ matters), and the limit above holds at every scale $m$,
-including along the covering-relevant diagonal $m\sim l\log_4(3)$. This is stronger than a failure of
-the naive premise in passing: since $|S(3^{l-1})|\sim T/\sqrt3$, no fixed constant $C$ can satisfy
-Proposition~\ref{prop:sqrtceiling}'s hypothesis $|S(t)|\le C\sqrt T$ at this frequency for large $m$,
-so that proposition's uniform-cancellation approach is built on a premise this frequency family
-refutes outright, beyond simply being outperformed by Corollary~\ref{cor:mpgbound}'s bound.
+$t/3^l=1/3$ exactly, so $l$ drops out of $S(3^{l-1})$ entirely (only $V\bmod3$ matters), and the
+limit above holds at every scale $m$, including along the covering-relevant diagonal $m\sim
+l\log_4(3)$. It sharpens Proposition~\ref{prop:sqrtceiling}'s exact bound $|S(3^{l-1})|\ge T/2$ to
+the precise asymptotic ratio $1/\sqrt3\approx0.577$, and confirms that the mass Proposition
+\ref{prop:sqrtceiling} forces concentrates, at this one frequency at least, exactly where the
+numerics of \S5.2 place it: at the dyadic rational $t/3^l=1/3$, $r=0$.
 
 \section{A theorem on the residues that resist coverage}
 \label{sec:holdouts}
@@ -621,9 +675,10 @@ Write $H(l,j)$ for the set of units modulo $3^l$ \emph{not} covered by $R_{j-1,j
 $j^*(l)$ as the least covering budget, $H(l,j^*(l))=\emptyset$ and $H(l,j)\ne\emptyset$ for every
 $j<j^*(l)$; whether this extends to ``$j\ge j^*(l)$ exactly when $H(l,j)=\emptyset$'' needs emptiness
 to persist at every larger budget too, which is not automatic from the definition alone. Every result
-in this section needs $j\ge l$; at every computed level $j^*(l) \ge l$, with equality only at $l=1$
-(Table~\ref{tab:jstar}), but the conjectured rate $\log_4 3 < 1$ would eventually put $j^*(l)$ below
-$l$, outside this section's reach. Within this range, persistence does hold: Theorem~\ref{thm:doubling}
+in this section needs $j\ge l$; $j^*(l) \ge l$ holds outright for $l=1,\dots,23$ (equality only at $l=1$),
+by Lemma~\ref{lem:nosmaller} above, but the conjectured rate $\log_4 3 < 1$ would eventually put
+$j^*(l)$ below $l$, outside this section's reach. Within this range, persistence does hold:
+Theorem~\ref{thm:doubling}
 below gives $H(l,j)=\emptyset\Rightarrow H(l,j+1)\subseteq2\emptyset\cap4\emptyset=\emptyset$, so
 ``$H(l,j)=\emptyset$ exactly when $j\ge j^*(l)$'' is established for every $j\ge l$. We make no claim
 about $j<l$.
@@ -800,7 +855,7 @@ Section~\ref{sec:mpg}'s mean-payoff-game argument then bound far more tightly.
 
 By Lemma~\ref{lem:UW}, which itself needs $j\ge l$, the smallest $j\ge l$ with
 $U(l,j+l-1)=(\Z/3^l\Z)^*$ is the smallest $j\ge l$ at which $R_{j-1,j}$ covers; since $j^*(l)\ge l$
-at every computed level (Table~\ref{tab:jstar}), with equality only at $l=1$, this coincides with
+for $l=1,\dots,23$, with equality only at $l=1$ (Lemma~\ref{lem:nosmaller}), this coincides with
 $j^*(l)$ itself throughout the range this paper works in, though nothing here rules out coverage at
 some unchecked $j<l$ for a level not yet computed. Writing $W^*(l):=j^*(l)+l-2$ for the width one
 step before that,
@@ -888,8 +943,8 @@ $y\bmod9\in\{4^J,4^{J+1}\}$.
 
 \begin{empresult}[Exclusion of the lower class]
 \label{er:mod9}
-The class actually occupied is $4^{J+1}$, never $4^J$, at every level checked, $l=2,\dots,16$
-(extending the previous computational range, $l=3,\dots,9$). Excluding $4^J$ in general is the
+The class actually occupied is $4^{J+1}$, never $4^J$, at every level checked, $l=2,\dots,16$.
+Excluding $4^J$ in general is the
 sharpest concrete open question this part of the investigation produced: Proposition~\ref{prop:mod9}
 places no constraint on $\beta_1$ itself, only on the parity-dependent outcome, so ruling out one of
 the two parities needs a different argument.
@@ -950,8 +1005,9 @@ at each level), $\mathrm{Corner}(l,W+1)$ contributes nothing new: every corner w
 already covered without it. Call this the \emph{corner-redundancy} property at width $W$; whether it
 holds at every width $W\ge2l+1$ in general, beyond the levels checked, is open. It also holds,
 checked directly, at the one smaller width $W=2l$ itself for $l=3,4,5,6$; from $l=7$ through $13$ it
-is checked to fail there, and at every narrower width from $l-1$ up to $2l$ as well: this is settled
-at those levels, by direct computation, at every $l=3,\dots,13$. $W=2l$ is exactly $j=l+1$,
+is checked to fail there. The same exhaustive check also covers every width strictly below $2l$, down
+to $W=l-1$, at every $l=3,\dots,13$, though no result in this paper depends on that wider range.
+$W=2l$ is exactly $j=l+1$,
 Proposition~\ref{prop:h014}'s own
 case; corner-redundancy at that width is known, one way or the other, at every level $l=3,\dots,13$,
 holding only for $l=3,4,5,6$. What remains open is Proposition~\ref{prop:h014}'s own converse itself:

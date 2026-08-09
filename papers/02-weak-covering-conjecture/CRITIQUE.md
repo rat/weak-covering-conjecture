@@ -21,7 +21,7 @@ entry.
 | C-07 | 1 | Theorems 12/13/15 (Section 7) are asserted with only an informal paragraph, not a proof; the paragraph's own central claim ("coverage depends on (l,j) only through W=j+l-1") is false as stated (falsified by (l,j)=(2,4) vs (3,3), same W=5, different coverage) | major | fixed: replaced with the correct `U(l,W)` formalism carrying the `2^{j-l}` scaling factor (verified computationally, l=2..5), which resolves the (2,4)-vs-(3,3) counterexample; Theorem 12 given a full, independently-derived proof from this formalism, verified by hand and by computation; Theorems 13/15 downgraded to Empirical Results since their full derivations were not reconstructed here |
 | C-08 | 1 | Corollary 14 (x4-only inheritance) uses Theorem 7 across two different moduli (level l+1 vs level l) without ever defining the cross-level reduction it depends on | major | fixed: downgraded to Empirical Result, with an explicit statement that no proof is currently in hand for the cross-level relation |
 | C-09 | 1 | Proposition 6: the stated limit `S(3^{l-1})/C(2m,m) -> 1/sqrt(3)` is a real number, but the actual limit is complex (`-1/2 - i*sqrt(3)/6`); only the magnitude is `1/sqrt(3)`. Also the stated hypothesis "as l/m grows" is unused; the limit depends only on `m -> infinity` | major | fixed: added `|.|`, corrected the limiting regime to `m -> infinity` for fixed `l`, proof rewritten with the exact complex value and its derivation (geometric limiting gap distribution) |
-| C-10 | 1 | Repository is empty; every "exact"/"verified" numeric claim in the paper (Table 1 l=21-23, rho_k table, Fourier statistics, holdout counts) is currently unauditable by a reader | major | open (Rule 12); Section 9's text was already corrected in an earlier pass to not overclaim; actual population of the repo is still pending, tracked separately |
+| C-10 | 1 | Repository is empty; every "exact"/"verified" numeric claim in the paper (Table 1 l=21-23, rho_k table, Fourier statistics, holdout counts) is currently unauditable by a reader | major | fixed: repository populated between Round 2 and Round 9 (see the dated narrative below), every section has a script and a README; status corrected here since this row had gone stale |
 | C-11 | 1 | Abstract overclaims relative to the body: "proven" bound (no proof given, see C-02), "cannot work" (only one method ruled out, see C-14), "explicit witness-level counterexample" (no witness printed) | major | fixed: abstract rewritten to match the corrected body claim by claim (Rule 8b pass) |
 | C-12 | 1 | Section 5's impossibility claims overstated: the `o(T)` vs `o(T/3^l)` rate needed isn't stated near eq. (3); Prop 5's `beta` is undefined; the base-3/base-2 approximation-rate discussion oversells what one computation at l=18 shows; "invisible to any method" is an unsupported universal claim | major | fixed: rate corrected near eq. (3), undefined `beta` dropped from Prop 5's statement, the transcendence-theory "signature" claim removed (kept only the accurate dyadic-clustering observation and the Tao connection), the universal claim scoped down to what the phase-randomization experiment actually shows |
 | C-13 | 1 | Proposition 1: cardinality argument omits the injectivity step (why distinct tuples give distinct sums); the asymptotic `~` is inverted into an inequality without a rigorous bound | moderate | fixed: injectivity argument added (2-adic valuation), asymptotic inversion replaced with the explicit bound `C(2n,n)<=4^n/sqrt(3n+1)` combined with the already-proven `j=O(l)` from Corollary 3 |
@@ -156,8 +156,26 @@ entry.
 | C-136 | 8 | (Opus) Two tricolons in immediate succession in the Discussion's adjacent-areas paragraph, a rhythm marker even though each list's three items are individually real, not padded | minor | fixed: restructured the second list into separate sentences, keeping all three findings |
 | C-137 | 8 | (Opus) Proposition 8 sits in subsection 5.3 though its content belongs with 5.1/5.2 | minor | deferred: same reasoning as Round 7's C-117, organizational only |
 | C-138 | 8 | (Opus) The corner-redundancy open question is posed at exactly W>=2l+1, precisely where the checked failures stop, with no structural reason given and nothing ruling out failure resuming at larger W for l>13 | minor | reviewed: an honest description of what was actually checked, not a hidden methodological choice; the paper already states the range is "checked exhaustively for l=3,...,13" without claiming any special significance to the boundary beyond that; no change made |
-| C-139 | 8 | (Opus) The checkpoint/resume mechanism sentence (Section 2) narrates process with no bearing on any claim, distinct from the l=24 attempts narration the researcher already ruled to keep (that ruling covered the l=24 paragraph specifically, not this one) | minor | deferred: a real Rule 5c point, low value relative to the risk of re-touching a heavily-reviewed paragraph this late; left as a carried item |
+| C-139 | 8 | (Opus) The checkpoint/resume mechanism sentence (Section 2) narrates process with no bearing on any claim, distinct from the l=24 attempts narration the researcher already ruled to keep (that ruling covered the l=24 paragraph specifically, not this one) | minor | fixed in Round 9: the checkpoint/resume sentence and the "generous round figure" aside cut (Opus's Round 9 finding #12 flagged the same paragraph independently); the l=24 paragraph itself is untouched |
 | C-140 | 8 | (Opus) The abstract is one long, low-variance block (~450 words) | minor | deferred: a real Rule 5c point (sentence-length variance), but rewriting the abstract's rhythm risks disturbing content already checked claim-by-claim across 8 rounds; left as a carried item for a dedicated abstract pass |
+| C-141 | 9 | (Opus) The full-spectrum positivity criterion `sum_{t!=0}|S(t)| < T` that Section 5 opens with is not merely hard to reach, it is unsatisfiable for every l, j, k: since every element of R_{j,k} is a unit mod 3, N(0)=0, so `sum_{t!=0} S(t) = -T` exactly, forcing `sum_{t!=0}|S(t)| >= T` by the triangle inequality | major | fixed: Proposition 7 (label kept, no renumbering ripple beyond the one below) restated as the impossibility itself, with the sharper localized identity `S(3^{l-1})+S(2*3^{l-1})=-T` proven in the same short proof; the old 1.585l threshold computation kept as an a-fortiori remark, not a numbered result; verified independently by the producer both algebraically and by direct computation (six (l,j,k) cases) before writing the fix, per Rule 8c; new script `section5-exponential-sum/unreachable_criterion.py` in the repro repo |
+| C-142 | 9 | (Codex) Table 3/Theorem 5's "self-certified ... exactly" language for rho_k rests on an adversary lower-bound computation (`adversary_lower_bound()` in `mpg4.py`) that, like the policy search, is restricted to actions `d<=dcap=40`, not the full period `d<2*3^k` (9,565,938 at k=14); "upper bound equals lower bound" only certifies rho_k exactly for the capped game | major | fixed: reworded to state plainly that the upper bound (all Corollary 6 needs) does not depend on the cap, while the "exact game value" framing is scoped to d<=40; verified independently against the actual solver source (`mpg3.py`'s `build_actions`, `mpg4.py`'s `solve`) and every stored certificate's actual max `d` used (11 at k=14, well under 40) before writing the fix, per Rule 8c; repro repo's section4 README updated with the same scoping |
+| C-143 | 9 | (Codex) Section 2's own Round-8-vintage sentence claimed Proposition 2 (unboundedness, `e(l)>=log_2(l)/4-O(1)`) "already rules out any bounded ceiling in general" for `j*(l)-l`; false, since a bounded ceiling makes `e(l)` grow linearly, which a logarithmic lower bound does not touch | moderate | fixed: corrected to state nothing here rules out the ceiling persisting, and spelled out what persistence would actually imply (linear e(l), exponential K(l), falsifying the conjecture under the persistence proviso) |
+| C-144 | 9 | (Codex) Round 8's own strengthening of C-60 to "which growth model best fits e(l)" and "how often does j*(l) plateau" being "the same question... asked in different words" overshot: the free-intercept OLS constant model and the constant-rounding model are different objects | moderate | fixed: reverted to "not independent checks" (the original, weaker claim), with the two models explicitly distinguished; also corrected the plateau test's binomial parameter, which had used a rounded `3.9/19` instead of the exact `1-log_4(3)`, changing the reported p-value from 0.22 to the correct 0.214 |
+| C-145 | 9 | (Codex) Table 1's "certifies coverage and its absence internally, by construction" does not cover budgets `j<l`: the production search clamps `j_start.max(ell)` (verified against `src/main.rs`), so it never tries smaller j; nothing in the paper ruled out some `j<l` also covering | moderate | fixed as an upgrade, not just a caveat: new Lemma 1 ("No smaller budget covers") proves `j*(l)>=l` outright for `l=2,...,23` from a reduction argument (coverage mod `3^L` at budget `j` implies coverage mod `3^j` for `j<=L`) plus Table 1's own already-computed strict rows; new script `section2-jstar-computation/no_smaller_budget.py`, independent direct enumeration, l=2..13 |
+| C-146 | 9 | (Codex + Opus) "Statistically indistinguishable" and similar language applied to Table 2's AIC/BIC/LOOCV comparison overstates the inferential basis for a deterministic, exact integer sequence with no sampling model | moderate | fixed: reworded to "not distinguished... by these criteria" in the abstract and in Section 3, matching the paper's own existing "no sampling interpretation" caveat elsewhere |
+| C-147 | 9 | (Codex + Opus) Abstract's "outside any sparse exceptional set" overclaims relative to Section 5.2, which checks one fixed magnitude threshold at one accessible level, not every possible threshold | moderate | fixed: reworded to "the sparse exceptional set a fixed magnitude threshold defines" |
+| C-148 | 9 | (Opus) Remark (the rho_k=L+A/k fit) states the fit "is not evidence of any specific limit," then closes by claiming "there is evidence in the course of this work that the window relaxation may carry an irreducible gap above the true rate" — self-contradictory, and no such evidence appears anywhere else in the paper | moderate | fixed: the unsupported closing clause cut; verified first that no such evidence exists elsewhere in the paper (Rule 11), so the claim could not be relocated, only removed |
+| C-149 | 9 | (Opus) Section 5.3 assigns hole probabilities down to `e^{-108}` to holdout residues that actually occurred, then reports this as "no single exponent characterizes it" rather than stating the non-homogeneous Poisson model is flatly falsified | moderate | fixed: reworded to state the falsification outright, keeping the surviving descriptive claim (holdouts sit in low-intensity cells) separate from the failed probabilistic model |
+| C-150 | 9 | (Opus) Abstract's "one further combinatorial property verified at every level checked" does not tell a reader that "checked" stops at l=13 against a table running to l=23 | moderate | fixed: reworded to name the range explicitly, `l=3,...,13` against a table to `l=23` |
+| C-151 | 9 | (Opus) Proposition 9 (formerly 8, the `1/sqrt(3)` limit) is stated "for every fixed l>=1" though its own proof shows `l` drops out entirely (only `V mod 3` matters) | minor | fixed: parameter dropped from the statement; the post-proof paragraph restructured to show the proposition sharpening Proposition 7's new exact bound `|S(3^{l-1})|>=T/2` to the precise ratio `1/sqrt(3)`, instead of re-deriving a refutation Proposition 7 now already gives |
+| C-152 | 9 | (Opus) Empirical Result 21 (mod-9 exclusion) references "extending the previous computational range, l=3,...,9," but no such range is established anywhere else in the paper | minor | fixed: dangling parenthetical cut |
+| C-153 | 9 | (Opus) §4's "the twelve specific policies actually exhibited... in Table 3" overstates what the table shows (rho_k, C_k only, not the policies themselves, which are thousands of state-to-move entries stored in the repro repo) | minor | fixed: reworded to "whose resulting (rho_k,C_k) are reported in Table 3, each independently checked as described in Section 9" |
+| C-154 | 9 | (Opus) The corner-redundancy paragraph's "narrower width from l-1 up to 2l" is self-contradictory (2l is not narrower than 2l) and leaves unclear what the l=3..6 boundary check actually covers | minor | fixed: reworded to state the sub-`2l` range and its non-dependence on any proof in the paper explicitly |
+| C-155 | 9 | (Opus) Corollary 6 states `j*(l) <= (9/8)l + O(1)` though the exact constant `C_14=33/2` is already in Table 3 two lines above | minor | fixed: corollary now states the explicit `+33/2` |
+| C-156 | 9 | (Opus) Bibliography check for [6] (Meyerovitch-Young, arXiv:2603.21449): title, authors, and topic (covering radius, rationality/computability, sofic shifts) confirmed against the arXiv abstract page directly | minor | verified correct, no change needed; recorded per Rule 8c since the critique raised a factual claim (possible citation error) that turned out not to hold |
+| C-157 | 9 | (Opus) Notation collisions on several load-bearing symbols: `e(x)` (character) vs `e(l)` (excess), `S(t)`/`\|\|S\|\|_1` vs exponent sets `S`, `S'`, `J` as total play cost (Section 4) vs `J:=j*(l)` (Propositions 18, 20), `m` as `3^k` (Section 4) vs family index `R_{m-1,m}` (Proposition 9) vs `J-1-l+beta_1` (Proposition 20) | minor | deferred: real, but a full symbol audit risks touching load-bearing proof text this late in the loop; `e(x)`/`e(l)` is already flagged in-text (line "unrelated to the sequence e(l)"); left as a carried item |
+| — | 9 | (Opus, independent finding, distinct model from Codex) Sections 4, 6 and 7's proofs re-derived and checked line by line, including every numeric claim reachable by direct enumeration (Table 1, the 1547 counterexample, maxrun values, corner-redundancy at every checked l); no error found | — | confirms the loop is catching real things in Sections 2, 3 and 5's framing while the combinatorial core (Sections 4, 6, 7) continues to hold up under independent re-derivation |
 
 ## Full findings
 
@@ -692,3 +710,102 @@ this late risks disturbing content already checked claim by claim across eight r
 Recompiled clean (16 pages, 0 errors, 0 em-dashes, parenthesis balance verified, cite/bibitem check
 clean) and visually re-verified. Full findings list above, C-121 through C-140, resolved (fixed,
 verified-no-change, partly addressed, or deferred with a stated reason). Proceeding to Round 9.
+
+### Round 9 (Codex on `gpt-5.6-sol` + Opus 5 max effort, 2026-08-09)
+
+Both reports read only the compiled `main.pdf`. Opus's report includes an explicit statement that
+it re-derived and checked, line by line, every proof in Sections 4, 6 and 7, plus every numeric
+claim reachable by direct enumeration; nothing there was found wrong. Both major findings this
+round sit in Section 5's Fourier framing and Section 4's certification language, not in the
+combinatorial core.
+
+Codex's major finding: Table 3 and Theorem 5's proof describe rho_k as "self-certified... exactly"
+via a matching adversary lower bound, but that lower-bound computation, like the policy search
+itself, is restricted to actions `d<=40` (`mpg4.py`'s default `dcap`), not the full period `d<2*3^k`
+the paper's own action-set derivation establishes (9,565,938 representatives at k=14). Restricting
+the minimizer's options in a lower-bound computation can only inflate the value found, so "upper
+bound equals lower bound" within the capped game does not, by itself, certify rho_k as the value of
+the unrestricted game. Verified against the actual solver source before writing anything: `mpg3.py`'s
+`build_actions` does cap at `d<=dcap`, and every stored certificate's policy stays far under the cap
+regardless (max `d` used is 11 at k=14, against a cap of 40), which is suggestive but not a proof
+that the cap is harmless. What the paper actually needs, Corollary 6's `j*(l)<=(9/8)l+33/2`, only
+needs one certified legal, safe policy to exist, which a capped-search policy still is when read as
+a policy in the full game that happens never to choose a move past `d=40`; that direction was never
+at risk. Fixed by rewording the framing to state the upper bound's independence from the cap
+explicitly and scoping the "exact" claim to the capped game, in both the paper and the repro repo's
+section 4 README. A rigorous route to closing the gap for good exists (any move with `d` past
+`rho+range(h)` is automatically safe for the lower bound too, so only a bounded prefix of the full
+action set needs checking) but needs one solver change the stored certificates do not currently
+support; logged as a follow-up rather than attempted this round.
+
+Opus's major finding, independent of Codex's and caught by a different mechanism entirely: Section
+5's opening motivation offers `sum_{t!=0}|S(t)| < T` as the natural sufficient condition for
+covering, then spends three subsections on why it is hard to reach. It is not hard to reach. It is
+impossible, for every `l`, `j`, `k`, and the four-line reason was sitting one page away the whole
+time: every element of `R_{j,k}` reduces to `2^{a_0} mod 3`, so none of them is divisible by 3,
+so `N(0)=0`, so `sum_t S(t)=0`, so `sum_{t!=0}S(t)=-T` exactly, so `sum_{t!=0}|S(t)|>=T` by the
+triangle inequality, always. Verified independently before touching the proof: computed `S(t)` and
+`N(0)` directly for six small `(l,j,k)` and confirmed the exact identity to machine precision, then
+found the sharper, localized form of the same fact (`S(3^{l-1})+S(2*3^{l-1})=-T` exactly, so
+`Re S(3^{l-1})=-T/2` exactly) and verified that too before writing it into the paper. Proposition 7
+now states the impossibility and its sharper form directly; the old 1.585l threshold survives as an
+a-fortiori remark (already worse than Corollary 6's bound, on top of resting on an unreachable
+premise), not as a numbered claim in its own right, so nothing downstream renumbers. Proposition 9
+(the `1/sqrt(3)` limit, formerly 8) is now framed as sharpening Proposition 7's exact bound to a
+precise ratio, rather than independently re-deriving a refutation Proposition 7 already gives; its
+statement also dropped an unused parameter `l` Opus flagged separately.
+
+A third item does not originate with either reviewer's report but follows directly from Codex's
+observation that the covering search's own `j_start.max(ell)` clamp (`src/main.rs`) never tries
+`j<l`: nothing in the paper had actually ruled out some smaller budget covering at a given level,
+only observed that none had been found to. Closed with a genuinely new result, not a caveat: a
+reduction argument (coverage modulo `3^L` at budget `j` forces coverage modulo `3^j` for any `j<=L`,
+since reducing a full set of units stays a full set of units) plus Table 1's own already-computed
+strict rows rules out every `j<l` at every level `l=2,...,23`, proving `j*(l)>=l` outright rather
+than only within the range the search happens to try. New Lemma 1, independently verified by direct
+enumeration (`no_smaller_budget.py`, l=2..13, a third code path alongside the DP and `bruteforce`)
+before being added, per the researcher's standing "verify a lead properly, not on a hunch" rule.
+Adding a new numbered result before every other one in the paper renumbers everything after it; the
+document contains no plain-text theorem-number references outside `\ref`, so this ripple is confined
+to `CRITIQUE.md`, `OUTLINE.md` and the repro repo, not to `main.tex` itself.
+
+Two Round-8-vintage sentences turned out to be wrong on inspection, both self-inflicted, both from
+the same round: Section 2's claim that Proposition 2 "already rules out any bounded ceiling in
+general" for `j*(l)-l` is false (a bounded ceiling makes `e(l)` grow linearly, comfortably above a
+logarithmic floor, not below it), and Round 8's own strengthening of the model-comparison
+observation to "the same question... asked in different words" overshot what the free-intercept OLS
+constant model and the constant-rounding model actually share. Both reverted to accurate, narrower
+statements. The plateau test's binomial parameter was also using a rounded intermediate (`3.9/19`)
+instead of the exact `1-log_4(3)`, changing the reported p-value from 0.22 to 0.214; corrected while
+in that paragraph.
+
+The rest split evenly between the two reports: an abstract that stated `e(l)`'s growth-model
+comparison in language ("statistically indistinguishable") that presupposes a sampling model a
+deterministic sequence does not have, an "outside any sparse exceptional set" claim broader than the
+one fixed threshold Section 5.2 actually checks, a self-contradicting Remark that first says a fit
+"is not evidence of any specific limit" and then claims unstated evidence for one anyway, a
+Poisson-model paragraph that assigns `e^{-108}` to an event that occurred and calls the result "no
+single exponent characterizes it" instead of saying the model is falsified, an abstract sentence
+that lets "verified at every level checked" read as covering the whole table instead of the `l=13`
+stopping point it actually has, and a handful of smaller wording, labeling and citation-precision
+points (Corollary 6 now states the explicit `33/2` instead of `O(1)`; a dangling reference to an
+undefined "previous computational range" cut; the corner-redundancy paragraph's self-contradictory
+width range reworded; the checkpoint/resume narration Round 8 deferred as C-139 removed). One
+citation-accuracy claim (Meyerovitch-Young's arXiv identifier) was checked directly against the
+arXiv abstract page and confirmed correct, recorded per Rule 8c since a critique raising a factual
+claim deserves the same verification whether it turns out right or wrong. One item (a symbol-
+collision audit across `e(x)`/`e(l)`, `S`/exponent-set `S`, `J`, and `m`) reviewed and deferred:
+real, but a full audit risks touching load-bearing proof text this late in a ten-round loop for a
+purely notational gain.
+
+Recompiled clean (17 pages, up from 16 with the new lemma, 0 errors, 0 undefined references, 0
+em-dashes, parenthesis balance 618/618, cite/bibitem check clean) and visually re-verified the
+changed pages. Repro repo updated: `section2-jstar-computation/no_smaller_budget.py` and
+`section5-exponential-sum/unreachable_criterion.py` added, both section READMEs and the
+`section4-mean-payoff-game/README.md` resynced for the dcap scoping and the new constant. Full
+findings list above, C-141 through C-157, resolved (fixed, verified-no-change, or deferred with a
+stated reason). Two independent reviewers, at Round 9 of a ten-round cap, still each found a major,
+previously unnoticed issue, by two different mechanisms (Codex from reading the solver's own
+described action set against what the code actually searches; Opus from re-deriving Section 5's
+opening identity from first principles rather than trusting the surrounding prose). The loop is not
+converging yet. Proceeding to Round 10, the last round under the researcher's extension.

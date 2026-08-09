@@ -284,3 +284,35 @@ A push), notes/H-013.md, notes/GAP-A-round4.md, notes/GAP-A-round5*.md.
       attempted this round, left as a carried item for its own dedicated pass rather than rushed.
       Two items reviewed and deferred with stated reasons. Recompiled clean, 16 pages, 0 errors,
       0 em-dashes, parenthesis balance verified, visually re-verified. Round 9 next.
+- [x] **Round 9 complete (2026-08-09).** Codex + Opus 5 max effort, fresh context, PDF frozen. Opus
+      reports re-deriving and checking every proof in Sections 4, 6, 7 line by line plus every
+      numeric claim reachable by direct enumeration: nothing wrong there. Two independent major
+      findings instead, both in Section 5's framing and Section 4's certification language. Codex:
+      Table 3/Theorem 5's "self-certified exactly" language for rho_k rests on an adversary
+      lower-bound computation restricted to actions d<=40 (`mpg4.py`'s dcap), not the full period
+      the paper's own construction defines; verified against the actual solver source before fixing;
+      reworded to scope the "exact" claim to the capped game while confirming the paper's actual
+      proven result (Corollary 6's conditional bound) never depended on it. Opus, independently and
+      by a different mechanism: Section 5's opening offers `sum|S(t)|<T` as a criterion "hard to
+      reach," when it is provably unreachable for every l,j,k (four lines: every element avoids
+      residue 0 mod 3, forcing sum_{t!=0}S(t)=-T exactly); verified computationally before rewriting
+      Proposition 7 (kept in place, no renumbering) to state the impossibility and a sharper
+      localized identity directly, with the old 1.585l threshold demoted to an a-fortiori remark. A
+      third result, prompted by but not stated in either report: the covering search's own `j>=l`
+      clamp never rules out smaller budgets, closed for real with a new Lemma (No smaller budget
+      covers, l=2..23) rather than left as a caveat, independently verified by direct enumeration
+      before being added; this is the paper's first numbered result, so everything after it shifts
+      by one (no plain-text theorem numbers exist in main.tex, so the ripple is confined to
+      CRITIQUE.md, OUTLINE.md and the repro repo). Two Round-8-vintage errors found and fixed, both
+      self-inflicted: Proposition 2 does not rule out a bounded j*(l)-l ceiling (a bounded ceiling
+      makes e(l) linear, not constant, comfortably above a log floor), and Round 8's own
+      strengthening of the model-comparison claim to "the same question... asked in different
+      words" overshot; reverted to "not independent." A dozen smaller precision and overclaim fixes
+      (statistical language on a deterministic sequence, "any sparse exceptional set" narrowed to
+      the one threshold checked, a self-contradicting Remark, a Poisson model reported as "no single
+      exponent" instead of falsified, Corollary 6's O(1) replaced by the explicit 33/2, a dangling
+      reference, the binomial test's rounded parameter corrected). One citation check (arXiv id)
+      verified correct, no change. Recompiled clean, 17 pages (new lemma), 0 errors, 0 em-dashes,
+      parenthesis balance verified, visually re-verified. Repro repo: two new verification scripts,
+      three READMEs resynced. Two majors from two independently-reasoning reviewers at Round 9 of
+      10 means the loop has not converged; Round 10 next, the last under the researcher's extension.
