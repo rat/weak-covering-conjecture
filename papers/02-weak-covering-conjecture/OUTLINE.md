@@ -353,3 +353,23 @@ A push), notes/H-013.md, notes/GAP-A-round4.md, notes/GAP-A-round5*.md.
       parenthesis balance verified, antithesis count back to the 3-item baseline, visually
       re-verified. Repro repo: section3 README resynced for the dropped p-value. l=21 independent
       recomputation still running at round's end; result to follow.
+- [x] **Round 11 complete (2026-08-09).** First round under a frozen PDF snapshot (avoids Round 10's
+      race). No critical or major findings from either reviewer -- the first round since Round 8
+      without a major. Third consecutive round both reviewers re-derived every proof with nothing
+      wrong; Opus additionally recomputed most numeric claims from scratch, including an independent
+      mean-payoff value iteration over the full uncapped action set at k=3..6, matching Table 3
+      exactly. Findings converge on one theme across both reviewers: text stating a computation more
+      precisely than the computation establishes. Most consequential: Opus found Round 10's own
+      "ordered by valuation" fix was itself still false (explicit counterexamples: interleaved
+      valuation classes at l=10, a primitive frequency exceeding a valuation-8 one at l=12),
+      independently verified before rewriting into a properly hedged "correlates... but loosely"
+      statement; Codex flagged the same passage's missing parameters from a different angle. Both
+      reviewers separately caught that the phase-scramble diagnostic's conclusion was largely a
+      corollary of a theorem proved two sentences earlier; fixed by stating the exact accounted-for
+      factor (sqrt(3/2)) and the residual (~2.5) that theorem doesn't explain. Poisson model
+      post-selection caveat added without reversing the conclusion. Several stale cross-references
+      from earlier rounds' own edits, and small scoping fixes. l=21 independent verification still
+      running (j=21, j=22 confirmed against Table 1 so far). Recompiled clean, 17 pages, 0 errors,
+      0 em-dashes, parenthesis balance verified, antithesis at baseline. Combined tally 0/0/7/6: no
+      criticals or majors for the first time, but moderate is far from the zero the stopping rule
+      needs. Round 12 next.

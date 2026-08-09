@@ -56,7 +56,7 @@ $R_{j,k}$ is divisible by $3$; granting the criterion regardless, a
 uniform square-root-cancellation argument still could not beat a threshold worse than the
 mean-payoff bound. Separately, a direct computation at one accessible level finds the bulk of the
 primitive-frequency mass sitting outside the sparse exceptional set a fixed magnitude threshold
-defines. The residues
+defines. At the levels checked, the residues
 that actually fail to be covered sit in
 cells of local hit-density well below the global mean; a phase-randomization experiment at a
 different, more tractable pair of
@@ -206,7 +206,7 @@ $l$ & $j^*(l)$ & $e(l)$ & $l$ & $j^*(l)$ & $e(l)$ & $l$ & $j^*(l)$ & $e(l)$ \\ \
 
 The single plateau in the table, $j^*(15)=j^*(16)=20$, is not an error: $l=15\to16$ is the only
 step among the $22$ from $l=1$ to $l=23$ at which the covering budget does not increase, and it is
-exactly the event Section~\ref{sec:growth}'s plateau-frequency test measures. The integer difference
+exactly the event Section~\ref{sec:growth}'s plateau count records. The integer difference
 $j^*(l)-l$, a coarser cousin of $e(l)$, is $0,2,3,3,4,4,4,4,4,5,5,5,5,5,5,4,4,4,4,4,4,4,4$ for
 $l=1,\dots,23$: it never grows past $5$ over the computed range, and nothing proven here rules out
 that ceiling persisting; Proposition~\ref{prop:lowerbound}'s logarithmic bound on $e(l)$ does not
@@ -278,9 +278,10 @@ source is incompatible with the table's first two entries alone, with no statist
 A direct combinatorial fact rules out the same tail even more sharply, restricted to where the model
 is not already dead over the full table: the constant-rounding model behind it predicts every
 increment
-in $\{0,1\}$, which the full table already refutes (the increments of $2$ and $3$ noted above).
+in $\{0,1\}$, which the full table already refutes (the increment of $3$ noted above, and increments
+of $2$ elsewhere in the table, e.g.\ $j^*(2)=4$ to $j^*(3)=6$).
 Restricted to the $l=10,
-\dots,22$ tail the model comparison above uses ($13$ increments over the same $14$ points, all
+\dots,23$ tail the model comparison above uses ($13$ increments over the same $14$ points, all
 actually in $\{0,1\}$, consistent with the model's own prediction there), a fixed-$c$ model
 $J_l:=\mathrm{round}(l\log_43+c)$ forces the total change over any $13$ consecutive steps into
 $\{\lfloor13\log_43\rfloor,\lceil13\log_43\rceil\}=\{10,11\}$, for every $c$ (a standard fact about
@@ -291,7 +292,7 @@ is an exact, deterministic
 sequence throughout, so nothing in this paragraph carries a sampling interpretation. Among the $13$
 increments, exactly one is zero (the $l=15\to16$ plateau noted above); under the constant-rounding
 model, $e(l+1)-e(l)$ can only be $1-\log_43\approx0.2075$ or $-\log_43\approx-0.7925$. The plateau
-count above and Section~\ref{sec:growth}'s OLS comparison are both functions of the same
+count above and the OLS comparison above are both functions of the same
 $14$-point increment sequence, so they are not independent checks, though the plateau observation
 bears
 specifically on the constant-rounding model, a different object from the free-intercept constant
@@ -590,14 +591,18 @@ treatment (a major/minor-arc split, in the language of the circle method) can do
 Numerically, $|S(t)|$ is far from uniform. Writing $t=3^{l-c}t'$ with $3\nmid t'$ (valuation
 $l-c$), $t\cdot V/3^l=t'\cdot V/3^c$ for every tuple value $V$, so $S(t)$ at modulus $3^l$ equals the
 same sum evaluated at the coarser modulus $3^c$: a frequency of valuation $l-c$ is literally the
-level-$c$ sum of the same tuple family. At the levels checked ($l=10,12,14$), the frequencies of
-largest magnitude are exactly the frequencies of highest $3$-adic valuation, ordered by valuation,
-with the top pair
-$t=3^{l-1},2\cdot3^{l-1}$ (valuation $l-1$, $c=1$, the family Proposition~\ref{prop:sqrtceiling}
-already
-bounds below by $T/2$). The natural
-repair is to restrict to primitive frequencies, excising this whole high-valuation tail (top pair
-included) and controlling the remainder by an averaged bound; whether that remainder stays
+level-$c$ sum of the same tuple family. The single largest frequency pair is exactly
+$t=3^{l-1},2\cdot3^{l-1}$ (valuation $l-1$, $c=1$), a fact this section proves rather than observes:
+Proposition~\ref{prop:sqrtceiling}'s exact bound $|S(3^{l-1})|\ge T/2$ already forces it. Beyond that
+pair, high valuation correlates with large magnitude at the levels directly checked (the family
+$R_{m-1,m}$ at each level's own first-order cardinality threshold: $l=10,m=9$;
+$l=12,m=11$; $l=14,m=13$), but loosely: among the twelve
+largest frequencies at $l=10$, valuations run $9,9,8,8,7,7,8,8,8,8,7,7$, and at $l=12$ the largest
+primitive (valuation-$0$) frequency already exceeds the weakest valuation-$8$ frequency checked. The
+natural
+repair is to restrict to primitive frequencies, excising the whole non-primitive spectrum (every
+valuation $c<l$, the pair above included) and controlling the remainder by an averaged bound;
+whether that remainder stays
 sparse enough at the scale that matters is a question this section answers computationally, for the family $R_{j-1,j}$ at $l=18$,
 $j=16$ (the first-order cardinality threshold, $T:=\binom{32}{16}$, six budgets below the actual
 covering threshold $j^*(18)=22$: coverage necessarily fails here already, and this level sits below
@@ -613,7 +618,8 @@ spectrum, entirely, so $\|S\|_1$ below measures only the primitive-frequency mas
 $\|S\|_1=5226.01$. A fixed threshold makes the visible spikes look sparse, but of the $8{,}014$
 primitive frequencies with $|S(t)|/T$ exceeding $0.001$, their combined contribution to $\|S\|_1$ is
 about $12.2$, so over $99.7\%$ of the primitive-frequency mass at this single computed level lives in
-an exponentially numerous population of near-average-magnitude coefficients. This is evidence
+an exponentially numerous population of coefficients individually below the threshold, with no claim
+here about how that mass is distributed within it. This is evidence
 against a sparse-exceptional-set repair among primitive frequencies at this accessible level; it
 says nothing about nonprimitive frequencies, about every $l$, and, since $j=16$ sits six budgets
 below $j^*(18)$, still less about the mass distribution near the actual covering threshold.
@@ -642,12 +648,14 @@ $e^{-\lambda_c(z)}$. Computed directly from the exact histogram for $l=10,\dots,
 eleven holdouts across these six levels has $\lambda_c$ well below the global mean at every depth
 $c=8,9,10$ with $c<l$ (at $l=10$, only $c=8,9$; $\lambda_c$ from $2.0$ to $108.4$, hole probability
 from $e^{-2}$ to $e^{-108}$). The non-homogeneous Poisson model assigns probability $e^{-108}$ to an
-event that occurred, and is discarded on that basis; what survives is the weaker, descriptive claim
+event that occurred; $z$, the levels, and the depths checked are all selected after seeing the
+holdouts, so this is not a predeclared, calibrated test, but the model is discarded on the strength
+of that exponent regardless. What survives is the weaker, descriptive claim
 underneath it:
 holdouts sit systematically in low-intensity cells, with how far below the mean varying widely by
 depth and level. A separate
 diagnostic at a smaller, more tractable
-pair, $(l,m)=(14,16)$, for the family $R_{m-1,m}$ (mean hit count $188.5$, a budget below the
+pair, $(l,m)=(14,16)$, for the family $R_{m-1,m}$ (mean hit count $188.5$, three budgets below the
 covering threshold $j^*(14)=19$), holds every $|S(t)|$ fixed and randomizes the phases of
 conjugate-symmetric pairs. Writing $N_l(z)$ for the exact hit count of residue $z$ and $N_{l-1}$ for
 the same tuple family's count one level down, restricting to primitive frequencies $3\nmid t$ gives
@@ -657,13 +665,24 @@ non-unit $z$ (both $N_l(z)$ and $N_{l-1}(z\bmod3^{l-1})$ vanish there, since no 
 tuple family is divisible by $3$). Over all $z$, the actual ratio
 of this quantity's maximum absolute value to its root-mean-square is $15.79$, while eight
 independent phase scrambles (fixed seed)
-give ratios only in $[5.11,5.24]$. The scrambles hold every $|S(t)|$ fixed but do not preserve the
+give ratios in $[5.11,5.24]$ (a second, independently seeded batch of eight gives the wider
+$[4.98,5.40]$, so eight trials do not pin the null down tightly). The scrambles hold every $|S(t)|$
+fixed but do not preserve the
 identically-zero-off-units constraint just derived, or integrality, or the level-$l$-to-level-$(l-1)$
-consistency the real histograms satisfy; part of the gap between $15.79$ and $[5.11,5.24]$ is
-already accounted for by that proven constraint rather than being new evidence on its own. What the gap does show
-is that the actual phases are not exchangeable with a generic-phase null respecting only $|S(t)|$,
-though this diagnostic is silent on what mechanism produces that difference or on whether it is what
-decides coverage. At the levels checked, both the raw holdout rarity and the phase-scramble gap
+consistency the real histograms satisfy; that constraint alone accounts for a factor of exactly
+$\sqrt{3/2}\approx1.22$ of the gap between $15.79$ and either scramble range (the ratio between an
+all-$z$ and a units-only root-mean-square once a third of the terms are forced to $0$), leaving a
+residual factor near $2.5$ that this identity alone does not explain. Eight
+trials are too few to calibrate a rigorous significance level regardless (a rank-based test against
+eight draws
+cannot reach below $p=1/9$, however extreme the observed value); what the residual factor suggests,
+descriptively, is that the actual phases are not fully exchangeable with a generic-phase null
+respecting
+only $|S(t)|$, beyond what the vanishing constraint alone forces, though this diagnostic is silent on
+what mechanism produces that residual, on
+whether it is what
+decides coverage, or on how much of it a properly calibrated test would confirm. At the levels
+checked, both the raw holdout rarity and the phase-scramble gap
 point the same way, toward phase structure that magnitude-only methods (uniform bounds, averages,
 low moments of $S(t)$) do not see.
 
@@ -984,8 +1003,8 @@ The converse is not established, and the natural argument for it does not work: 
 Corollary~\ref{cor:bootstrap} downward gives only $\mathrm{maxrun}(H(l,l+1)) \ge j^*(l)-l-1$, a
 \emph{lower} bound on maxrun, which does not force maxrun to stay bounded when $j^*(l)-l$ does.
 Proving the converse would need an upper bound on maxrun in terms of $j^*(l)-l$, equivalent to a
-tightness statement for Corollary~\ref{cor:bootstrap} that Section~\ref{sec:discussion}'s
-corner-redundancy question addresses and that is false in the strong, per-witness form: recall
+tightness statement for Corollary~\ref{cor:bootstrap} that this section's own corner-redundancy
+question below addresses and that is false in the strong, per-witness form: recall
 $1547$ from Section~\ref{sec:holdouts}.
 
 A naive expectation, that a random set of holdouts at the observed density would have doubling
@@ -993,7 +1012,10 @@ chains far longer than the flat ceiling of $3$--$4$ measured at every level $l=5
 survive contact with the actual, rapidly declining density of $H(l,l+1)$. An independence model
 matched to that actual density tracks the observed sequence within about one unit at every level,
 including both the one rise and the one fall in it: $\mathrm{maxrun}(H(l,l+1))$ is typical for the
-set's density under that model. This does not, by itself, say anything about whether
+set's density under that model. This comparison stays descriptive rather than a specified statistical
+test (no
+distributional family, wraparound convention, or reference statistic is fixed here), and does not,
+by itself, say anything about whether
 $\mathrm{maxrun}(H(l,l+1))$ is bounded;
 Proposition~\ref{prop:h014} is the only established link between that question and $j^*(l)$'s rate.
 
