@@ -65,3 +65,80 @@ python3 count_spectrum.py --l-min 5 --l-max 18 --scale counting \
   --thresholds .01 .001 --rms-multipliers .5 1 2 4 8
 python3 count_spectrum.py --l-min 5 --l-max 16 --scale plus2
 ```
+
+## Round-3 inverse-Fourier diagnostics
+
+`analyze_inverse.py` computes the exact hit-count histogram `N_l(z)`, checks
+that an FFT followed by an inverse FFT recovers every integer count, and
+compares the actual signed primitive-frequency sum with its `L1`, `L2`, iid
+occupancy, and phase-scramble benchmarks.  The relevant exact identity is
+
+\[
+ \sum_{3\nmid t}S_l(t)e(-tz/3^l)
+ =3^{l-1}\bigl(3N_l(z)-N_{l-1}(z\bmod 3^{l-1})\bigr).
+\]
+
+Here `N_{l-1}` uses the same tuple parameter `m` and only reduces the
+modulus by a factor of three.
+
+Thus primitive-frequency cancellation measures imbalance among the three
+lifts of one parent; it is not a separate deviation-from-the-global-mean
+quantity.
+
+At the largest full inverse FFT run, `(l,m)=(18,16)`, the transform recovered
+all `387,420,489` direct histogram counts after rounding, with maximum real
+error `2.85e-14`.  On the unit residues:
+
+| quantity | exact value |
+|---|---:|
+| mean hit count | 2.32724032569 |
+| zero hit count | 83,864,386 |
+| iid-uniform expected zeros | 25,199,022.39 |
+| primitive triangle envelope (`L1/q`) | 8,108.12797 counts |
+| actual largest primitive lift deviation | 17 counts |
+| primitive RMS deviation (`L2/q`) | 0.851082552 counts |
+| actual max/RMS | 19.9746 |
+| iid-Gaussian extreme heuristic | 6.3982 |
+
+There is already a factor `476.95` of cancellation relative to the primitive
+triangle envelope.  It does not produce coverage: almost one third of the
+unit residues are still holes, and the extreme lift imbalance is much heavier
+than a generic Gaussian-phase heuristic.
+
+Generic independent occupancy would become relevant to uniform covering near
+the coupon-collector scale
+
+\[
+m=\left\lceil \log_4(3)l+\tfrac32\log_4 l\right\rceil,
+\]
+
+where the mean hit count is of order `log(3^l)`.  At `l=15`, this gives
+`m=15`, unit mean `16.2156` versus `log(2*3^14)=16.0737`.  An iid-uniform
+occupancy model has only `0.8677` expected empty units, while the exact
+histogram has `842,318` empty units.  This result was computed independently
+twice.  It rules out the generic-occupancy model at the scale where that model
+would actually predict covering, not just at the constant-mean scale.
+
+A higher-occupancy check makes the non-generic clustering much sharper.  For
+fixed `l=14`:
+
+| m | mean hits per unit | actual zeros | iid-uniform expected zeros | Fano factor |
+|---:|---:|---:|---:|---:|
+| 14 | 12.5811 | 352,200 | 10.9575 | 21.4689 |
+| 15 | 48.6468 | 112,071 | 2.3799e-15 | 85.7979 |
+| 16 | 188.5065 | 18,895 | 4.3279e-76 | 344.1548 |
+
+At `(l,m)=(14,16)`, the actual primitive max/RMS ratio is `15.7867`.
+Eight conjugate-symmetric phase scrambles preserving every primitive
+`|S(t)|` gave ratios only in `[5.1076, 5.2355]` (fixed seed `20260808`).
+This is numerical evidence that the phases are strongly correlated, but in a
+heavy-tailed/overdispersed way rather than in the uniformly helpful way needed
+for covering.  Phase scrambling is only a null diagnostic: it does not
+preserve nonnegativity or integrality of the inverse transform.
+
+Reproduce the two full diagnostics with:
+
+```bash
+python3 analyze_inverse.py --l 18
+python3 analyze_inverse.py --l 14 --m 16 --scramble-trials 8
+```
