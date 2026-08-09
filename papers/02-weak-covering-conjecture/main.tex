@@ -697,8 +697,16 @@ The Weak Covering Conjecture itself, and the exact asymptotic rate of $e(l)$, re
 \section{Code and data availability}
 \label{sec:code}
 
-The repository \url{https://github.com/faculdade/weak-covering-conjecture} is reserved for this
-paper's code and data, organized by section, and will be populated before submission.
+The repository \url{https://github.com/faculdade/weak-covering-conjecture} holds the code and data
+behind every computation reported here, one folder per section. It contains the covering search
+that produced Table~\ref{tab:jstar}, the model comparison behind Table~\ref{tab:aic}, the
+mean-payoff-game solver, the exponential-sum computations of Section~\ref{sec:gapA}, and the
+holdout computations of Sections~\ref{sec:holdouts} and~\ref{sec:further}, together with the
+stored holdout sets at the final budgets of each level $l=5,\dots,21$. The twelve certificates
+$(\sigma_k,\rho_k,h_k)$ behind Table~\ref{tab:mpg} are stored there with a verifier that re-checks
+each of them against the inequality in Theorem~\ref{thm:mpg}'s proof, without re-running the
+solver. Each folder's README gives what it checks, the command, the output to expect, and what the
+run costs. Most checks take seconds; the three largest levels of Table~\ref{tab:jstar} do not.
 
 \subsection*{Acknowledgments}
 AI assistance was used for textual review and translation.
