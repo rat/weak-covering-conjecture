@@ -93,7 +93,7 @@ entry.
 | C-77 | 5 | Empirical Result 13 called all units modulo 3^7/3^8 (1458, 4374) "children (residues newly required for coverage)," which they are not — they are simply every unit at the finer modulus | minor | fixed: reworded to define "child"/"parent" as finer-modulus unit and its reduction, dropping the inaccurate parenthetical |
 | C-78 | 5 | "j*(l) is the smallest j>=l with U(l,j+l-1)=full" (right after the new Existence proposition) implicitly assumed no j<l could cover first, which Lemma 14 (needing j>=l itself) cannot rule out | minor | fixed: reworded to state the coincidence holds "at every computed level" (verified, Table 1) rather than as an unconditional identity |
 | C-79 | 5 | Proposition 1's "necessary for j>=j*(l)" implicitly used coverage-persistence (not yet proven at that point in the paper) rather than just the definitional fact needed | minor | fixed: narrowed to "necessary at j=j*(l) in particular," which is self-contained |
-| — | 5 | Opus flagged Proposition 8 as "subsuming" Proposition 7's barrier without an explicit cross-reference; Opus's corner-redundancy-implies-tightness proof sketch; Opus's suggestion to upgrade Empirical Result 18 to a proposition (both reviewers, across two rounds, converging on compatible derivations); minor symbol reuse of `T`, `m`, `n` across different local contexts (all proof-local, standard practice, not erroneous); Empirical Result 17/18's thin l-range (5..9); Section 9's stored-data range vs. claims elsewhere (checked directly against the repo: Section 9's specific claims about what is stored are each accurate, the apparent mismatch is against claims Section 9 never made) | minor | deferred / not fixed: new mathematical content (the corner-redundancy proof, the ER18 upgrade) was deliberately not added in this final round without a further review pass no longer available under the 5-round cap; the rest are cosmetic or, on inspection, not actual overclaims |
+| — | 5 | Opus flagged Proposition 8 as "subsuming" Proposition 7's barrier without an explicit cross-reference; Opus's corner-redundancy-implies-tightness proof sketch; Opus's suggestion to upgrade Empirical Result 18 to a proposition (both reviewers, across two rounds, converging on compatible derivations); minor symbol reuse of `T`, `m`, `n` across different local contexts (all proof-local, standard practice, not erroneous); Empirical Result 17/18's thin l-range (5..9); Section 9's stored-data range vs. claims elsewhere (checked directly against the repo: Section 9's specific claims about what is stored are each accurate, the apparent mismatch is against claims Section 9 never made) | minor | superseded: the two credible leads (corner-redundancy-implies-tightness, the mod-9 upgrade) were worked out, verified, and added, researcher-directed, see "Post-loop verification" below; the rest remain cosmetic or, on inspection, not actual overclaims |
 | — | 5 | Opus's l=24 attempt narration (three failed attempts, described in Section 2) flagged as process narration under Rule 5c | — | rejected: researcher's explicit 2026-08-09 decision to keep this passage, real circumstantial detail supplied by the researcher, Rule 5c Section 9's own exception |
 
 ## Full findings
@@ -415,3 +415,56 @@ now reads `fixed`, `deferred` with a stated reason, or `rejected` with a stated 
 fresh pair of eyes; the mandatory pre-publication check (Rule 8, a genuinely independent model or
 the researcher) should still run on this post-fix PDF before submission, whenever that is decided,
 separately from and not satisfied by this critique loop.
+
+## Post-loop verification, researcher-directed, 2026-08-09 (Rule 8e)
+
+After Round 5 closed, the researcher explicitly asked for the two deferred leads (Opus's
+corner-redundancy-implies-tightness sketch, and the mod-9 two-class upgrade both reviewers had
+converged on across rounds) to actually be worked out rather than left as unpursued remarks. This
+is Rule 8e's own discipline: a lead surfaced by a critic trying to break the paper gets a real,
+bounded look, not a hunch-based dismissal.
+
+Both derivations checked out, independently re-derived from scratch (not copied from either
+reviewer's sketch) and verified computationally before being trusted, per Rule 11:
+
+**Corner-redundancy implies tightness.** Corner-redundancy at a width is equivalent, via the
+multiplication-by-2 bijection commuting with complementation and intersection, to the exact set
+identity `D(l,W+1) = D(l,W) cap 2*D(l,W)`, sharpening Theorem 9's inclusion to an identity at that
+width. The first proof attempt, chaining a single fixed maximal chain forward budget by budget,
+had a real gap: it asserted the widths used stay within the hypothesized range without actually
+establishing this, since the chain length `r=maxrun(H(l,j))` was not yet known to be bounded at
+that point in the argument, making the width bound circular. Caught before being trusted, not after
+committing it. The fix uses a cleaner single-step recursion instead: `maxrun(H(l,j'+1)) =
+maxrun(H(l,j'))-1` whenever `H(l,j')` is nonempty and corner-redundancy holds at that width (`<=`
+unconditional, from Corollary 10; `>=` from the same equality), then telescopes this over the fixed,
+already-known number of steps from `j` to `j*(l)` (no dependence on `r` at all), landing on
+`maxrun(H(l,j*(l)))=0` and hence `j*(l)=j+maxrun(H(l,j))` exactly. Verified computationally three
+ways: the `D`-level set identity directly (l=3..7), the exact single-step recursion end to end
+(l=3..8, every `(l,j)` with `l+2<=j<=j*(l)`, zero exceptions), and against the actual `H`/`maxrun`
+data. Unconditional at `l=3..13`, where corner-redundancy is independently verified at every width
+the argument uses; conditional on corner-redundancy in general. Added as Proposition 22.
+
+**Mod-9 two-class containment.** Re-derivation confirmed the containment needs nothing beyond
+Theorem 16's own proof (which already pins the extremal witness's top exponent) substituted into
+the `H`-via-`D` shift identity, plus the elementary fact that `3*2^k mod 9` only ever takes two
+values, regardless of the second-highest exponent `beta_1`'s actual value: no new machinery, and
+critically, the containment does not require pinning `beta_1`, only its parity's effect. Verified
+algebraically for `J=1..14` and directly against the exact holdout sets at `l=3,4` (the two levels
+outside the project's existing `mod9_class_law.py` script, which independently covers `l=5..16` and
+was run to extend the previously-cited computational range for the still-open exclusion claim from
+`l=3..9` to `l=3..16`, zero exceptions either way). Split into a proven Proposition 18 (the
+containment) and a narrower Empirical Result 19 (excluding the lower class `4^J`, still open,
+sharpened: it is now explicit that the open question is about which parity of `beta_1` actually
+occurs, not about the containment itself).
+
+Both added to the paper (new Proposition 18, Proposition 22; Empirical Result 18 relabeled
+Empirical Result 19 and narrowed to just the exclusion claim), with the abstract, Empirical Result
+12, and the Discussion's two-named-questions paragraph updated to match (Rule 8b). Recompiled clean
+(14 pages, 0 errors, 0 em-dashes), visually re-verified. Verification scripts
+(`corner_redundancy_tightness.py`, `mod9_containment_proof_check.py`) added to the reproducibility
+repository; all four affected README files (top level, `section4`, `section6`, `section7`) resynced
+to the new numbering a third time.
+
+This work happened after Round 5 closed and is therefore itself unreviewed by any of the loop's
+fresh reviewers; it does not reopen the loop or count toward the 5-round cap, and does not change
+the standing recommendation that a genuinely independent check should still run before submission.

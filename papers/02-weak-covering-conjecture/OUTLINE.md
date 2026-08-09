@@ -212,3 +212,16 @@ A push), notes/H-013.md, notes/GAP-A-round4.md, notes/GAP-A-round5*.md.
       are unreviewed by any fresh pair of eyes; the mandatory pre-publication check (a genuinely
       independent model, or the researcher) still needs to run before submission, whenever that is
       decided -- this loop does not substitute for it.
+- [x] **Post-loop verification, researcher-directed (2026-08-09, Rule 8e), the two leads left
+      unadded above.** Both worked out from scratch and verified before being trusted (Rule 11);
+      the first proof attempt at corner-redundancy-implies-tightness had a real circularity gap
+      (an unjustified width bound), caught and fixed with a cleaner single-step-recursion argument
+      before being written into the paper. Corner-redundancy implies Corollary 11's bootstrap is
+      tight (new Proposition 22), unconditional at `l=3..13`. The mod-9 two-class containment is
+      unconditionally provable from Theorem 16's own proof (new Proposition 18), splitting off a
+      narrower Empirical Result 19 (excluding the lower class, still open) whose verified range
+      also extended from `l=3..9` to `l=3..16`. Abstract, Empirical Result 12, and the Discussion
+      updated to match (Rule 8b). 14 pages now. Verification scripts added to the reproducibility
+      repo, all four README files resynced a third time. This is new content added after the
+      5-round cap closed; it does not reopen the loop, and the mandatory pre-publication
+      independent check above still applies to it.

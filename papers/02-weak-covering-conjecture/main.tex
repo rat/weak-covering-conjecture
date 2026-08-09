@@ -57,13 +57,14 @@ low local hit-density; a phase-randomization experiment at a different, more tra
 parameters points the same way, toward phase structure that magnitude alone does not capture. We
 prove a theorem on the uncovered residues themselves, for budgets $j\ge l$: the set left uncovered
 at a budget is contained in both twice and four times the set left uncovered at the previous budget,
-giving an explicit recursive upper bound on $j^*(l)$ that is empirically exact at every such budget
-checked. We falsify the natural cost-$1$ form of a local repair rule this theorem might suggest, with
-explicit witness-level exhaustive counts, prove that every last-uncovered residue is $\equiv1\pmod3$
-whenever $j^*(l)\ge l+1$ (every level to which the argument applies but one), and report several
-further exact identities, verified but not proven, governing the last residues to be covered. Two
-precisely stated open questions remain, each narrower than the conjecture itself. The Weak Covering
-Conjecture remains open.
+giving an explicit recursive upper bound on $j^*(l)$ that we prove exact, given one further
+combinatorial property verified at every level checked, and empirically exact everywhere else. We
+falsify the natural cost-$1$ form of a local repair rule this theorem might suggest, with explicit
+witness-level exhaustive counts, prove that every last-uncovered residue is $\equiv1\pmod3$ whenever
+$j^*(l)\ge l+1$ (every level to which the argument applies but one), prove a two-class containment
+law modulo $9$ on the same residues, and report further exact identities, some verified but not
+proven, governing the last residues to be covered. Two precisely stated open questions remain, each
+narrower than the conjecture itself. The Weak Covering Conjecture remains open.
 \end{abstract}
 
 \noindent\textbf{Keywords:} Collatz map, 3-adic dynamics, covering conjecture, mean-payoff games,
@@ -628,7 +629,9 @@ holds there; the claim is only about budgets up to and including $j^*(l)$.) The 
 $j=l+1$ is not merely where computation started: equality fails at $j=l$ (e.g.\
 $\mathrm{maxrun}(H(6,6))=5$, giving $j+\mathrm{maxrun}=11\ne10=j^*(6)$; $\mathrm{maxrun}(H(7,7))=5$,
 giving $12\ne11=j^*(7)$), consistent with Corollary~\ref{cor:chain} and Corollary~\ref{cor:bootstrap}
-both requiring $j\ge l$.
+both requiring $j\ge l$. The sub-range $l+2\le j\le j^*(l)$ is proven, not merely empirical, at
+$l=3,\dots,13$: Proposition~\ref{prop:tight} below. The single boundary budget $j=l+1$ remains
+empirical only, tied to Proposition~\ref{prop:h014}'s own open converse.
 \end{empresult}
 
 The converse direction, that a doubling chain of the observed maximal length is not merely
@@ -774,15 +777,31 @@ $l=2,\dots,6$, $\pi_l(x)$ never lies in $H(l,j^*(l)-1)$ for $x\in H(l+1,j^*(l+1)
 place, so the pattern has no witnessing instance at these levels either. No cross-level relation
 between $H(l+1,\cdot)$ and $H(l,\cdot)$ is established by this paper.
 
-\begin{empresult}[Mod-$9$ two-class bound]
+\begin{proposition}[Mod-$9$ two-class containment]
+\label{prop:mod9}
+Writing $J:=j^*(l)$, if $J\ge l+1$ then $H(l,J-1) \bmod 9 \subseteq \{4^J, 4^{J+1}\}\pmod9$.
+\end{proposition}
+
+\begin{proof}
+As in Theorem~\ref{thm:parity}'s proof, every witness of $x\in D(l,W^*(l))$ at width $W^*(l)+1$ has
+top exponent $\beta_0=W^*(l)+1$; modulo $9$, only the rank-$0$ and rank-$1$ terms survive (rank
+$i\ge2$ contributes a multiple of $3^2$), so $x\equiv2^{\beta_0}+3\cdot2^{\beta_1}\pmod9$ for the
+witness's second-highest exponent $\beta_1$. By \eqref{eq:HviaK}, elements of $H(l,J-1)$ are
+$y=2^{J-1-l}x$, so $y\equiv2^{J-1-l+\beta_0}+3\cdot2^{J-1-l+\beta_1}\pmod9$; using
+$\beta_0=W^*(l)+1=J+l-1$, the first term is $2^{2J-2}=4^{J-1}\bmod9$, fixed. The second term,
+$3\cdot2^m\pmod9$ for $m:=J-1-l+\beta_1$, depends only on the parity of $m$ (since $2^m\bmod3$ has
+period $2$), taking exactly the two values $3$ or $6\pmod9$ regardless of $\beta_1$'s actual value;
+a direct check gives $\{4^{J-1}+3,4^{J-1}+6\}\equiv\{4^J,4^{J+1}\}\pmod9$ for every $J$. So
+$y\bmod9\in\{4^J,4^{J+1}\}$.
+\end{proof}
+
+\begin{empresult}[Exclusion of the lower class]
 \label{er:mod9}
-Writing $J:=j^*(l)$, at every $l=3,\dots,9$ checked, $H(l,J-1) \bmod 9 \subseteq \{4^J,
-4^{J+1}\}\pmod9$, and the class actually occupied is $4^{J+1}$, never $4^J$, at every level
-checked. The two-class containment follows the same mechanism as
-Theorem~\ref{thm:parity} one digit further (the mod-$9$ class of a threshold witness is
-$2^{\beta_0}+3\cdot2^{\beta_1}\bmod9$, with $\beta_0$ pinned and $\beta_1$'s parity giving the two
-options); excluding $4^J$ specifically is the sharpest concrete open question this part of the
-investigation produced.
+The class actually occupied is $4^{J+1}$, never $4^J$, at every level checked, $l=3,\dots,16$
+(extending the previous computational range, $l=3,\dots,9$). Excluding $4^J$ in general is the
+sharpest concrete open question this part of the investigation produced: Proposition~\ref{prop:mod9}
+places no constraint on $\beta_1$ itself, only on the parity-dependent outcome, so ruling out one of
+the two parities needs a different argument.
 \end{empresult}
 
 \begin{proposition}[Sufficiency of bounded maxrun]
@@ -837,21 +856,60 @@ are exhaustive.
 At every width $W$ in the range $2l+1\le W\le j^*(l)+l-1$,
 checked exhaustively for $l=3,\dots,13$ (the upper end is the largest width the exact table reaches
 at each level), $\mathrm{Corner}(l,W+1)$ contributes nothing new: every corner witness's value is
-already covered without it. If this \emph{corner-redundancy} property holds at every width $W\ge2l+1$ in general, it
-would make Corollary~\ref{cor:bootstrap}'s bootstrap tight for every budget $j\ge l+2$ (the width
-$W=j+l-1$ ranges over $W\ge2l+1$ exactly there); it remains unproven, with the only known failures at
-the boundary width $W=2l$, which is exactly $j=l+1$, Proposition~\ref{prop:h014}'s own case, so
-corner-redundancy at $W\ge2l+1$ does not by itself bear on that proposition's converse.
+already covered without it. Call this the \emph{corner-redundancy} property at width $W$; whether it
+holds at every width $W\ge2l+1$ in general is unproven, with the only known failures at the boundary
+width $W=2l$, which is exactly $j=l+1$, Proposition~\ref{prop:h014}'s own case.
+
+\begin{proposition}[Corner-redundancy implies tightness]
+\label{prop:tight}
+Fix $j$ with $l+2\le j\le j^*(l)$. If corner-redundancy holds at every width $2l+1\le W\le
+j^*(l)+l-1$, then $j^*(l)=j+\mathrm{maxrun}(H(l,j))$ exactly.
+\end{proposition}
+
+\begin{proof}
+Corner-redundancy at width $W$ says $\mathrm{Corner}(l,W+1)\subseteq U(l,W)\cup2U(l,W)$, so
+Lemma~\ref{lem:width} gives $U(l,W+1)=U(l,W)\cup2U(l,W)$. Multiplication by $2$ is a bijection of
+$(\Z/3^l\Z)^*$, so it commutes with complementation and with intersection; taking complements turns
+this into $D(l,W+1)=D(l,W)\cap2D(l,W)$, and pushing through the shift in \eqref{eq:HviaK} (itself a
+bijection, for the same reason) turns the width-level equality at $W=j'+l-1$ into an equality of
+holdout sets, $H(l,j'+1)=2H(l,j')\cap4H(l,j')$, sharpening Theorem~\ref{thm:doubling}'s inclusion to
+an identity whenever corner-redundancy holds at that width.
+
+Claim: for every $j'$ with $j\le j'<j^*(l)$, $\mathrm{maxrun}(H(l,j'+1))=\mathrm{maxrun}(H(l,j'))-1$,
+given corner-redundancy at width $j'+l-1$. The inequality $\le$ is unconditional: a maximal chain of
+length $\mathrm{maxrun}(H(l,j'+1))$ in $H(l,j'+1)$ extends, by Corollary~\ref{cor:chain}, to a chain
+one longer in $H(l,j')$. For $\ge$, since $j'<j^*(l)$, minimality of $j^*(l)$ gives $H(l,j')\ne
+\emptyset$, so $s:=\mathrm{maxrun}(H(l,j'))\ge1$; fix a maximal chain $x,2x,\dots,2^{s-1}x\in H(l,j')$.
+For each $k=2,\dots,s$, both $2^{k-1}x$ and $2^{k-2}x$ lie in this chain, so the equality
+$H(l,j'+1)=2H(l,j')\cap4H(l,j')$ places $2^kx\in H(l,j'+1)$; this gives the $s-1$ consecutive powers
+$4x,8x,\dots,2^sx\in H(l,j'+1)$, so $\mathrm{maxrun}(H(l,j'+1))\ge s-1$, proving the claim.
+
+The widths this uses, $j'+l-1$ for $j\le j'<j^*(l)$, all lie in $[j+l-1,j^*(l)+l-2]\subseteq[2l+1,
+j^*(l)+l-1]$ (using $j\ge l+2$), inside the hypothesis, regardless of $\mathrm{maxrun}(H(l,j))$'s
+actual value. Telescoping the claim over every step from $j'=j$ to $j'=j^*(l)-1$ (a fixed number of
+steps, $j^*(l)-j$, fixed before any of this) gives
+$\mathrm{maxrun}(H(l,j^*(l)))=\mathrm{maxrun}(H(l,j))-(j^*(l)-j)$. The left side is $0$
+($H(l,j^*(l))=\emptyset$ by definition), so $\mathrm{maxrun}(H(l,j))=j^*(l)-j$, i.e.\
+$j^*(l)=j+\mathrm{maxrun}(H(l,j))$.
+\end{proof}
+
+Since corner-redundancy is verified at every width the proof above uses for $l=3,\dots,13$,
+Proposition~\ref{prop:tight} is unconditional at those levels: Empirical Result~\ref{er:bootstrap}'s
+equality is a proven theorem there, for every $j$ with $l+2\le j\le j^*(l)$. In general, whether this
+implication's hypothesis holds is exactly the corner-redundancy question above: it does not, by
+itself, bear on Proposition~\ref{prop:h014}'s converse, which turns on the single boundary budget
+$j=l+1$ ($W=2l$), exactly where corner-redundancy is known to fail.
 
 \section{Discussion}
 \label{sec:discussion}
 
 Two named questions summarize what stands between this paper's results and a sharper theorem.
-Deciding which of the two classes in Empirical Result~\ref{er:mod9} is excluded would turn the
-observed single-class pattern into a proven statement. Proving corner-redundancy at every width
-$W\ge2l+1$ would make Corollary~\ref{cor:bootstrap}'s bootstrap tight for every budget $j\ge l+2$,
-not merely empirically exact at every computed instance; it would not, by itself, settle
-Proposition~\ref{prop:h014}'s converse, which turns on the single boundary budget $j=l+1$
+Excluding the lower class in Proposition~\ref{prop:mod9}'s containment (Empirical
+Result~\ref{er:mod9}) would turn the observed single-class pattern into a fully proven statement.
+Proving corner-redundancy at every width $W\ge2l+1$ would, by Proposition~\ref{prop:tight}, make
+Corollary~\ref{cor:bootstrap}'s bootstrap tight for every budget $j\ge l+2$ in general, not merely at
+the levels $l=3,\dots,13$ where corner-redundancy is already verified; it would not, by itself,
+settle Proposition~\ref{prop:h014}'s converse, which turns on the single boundary budget $j=l+1$
 ($W=2l$), exactly where corner-redundancy is known to fail. Neither question is, on its face, as
 hard as the Weak Covering Conjecture itself; whether either is substantially easier is not known.
 
