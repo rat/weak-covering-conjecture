@@ -138,6 +138,26 @@ entry.
 | C-118 | 7 | (Opus) The "independence model" comparison (Section 7, before Lemma 21) and the phase-experiment's population/normalization (Section 5.3) remain under-specified (Bernoulli vs. fixed-cardinality, wraparound, which residues) | minor | deferred: recurring since Round 4, genuine gap but requires either a new formal model definition or new experiments; left as a carried item |
 | C-119 | 7 | (Opus) Durfee depth (Empirical Result 13) is defined and used for one clause, never connected to the "cost-1 local repair rule" the result is named after; the Durfee-depth counts and the symmetric-difference repair costs are two separate measurements presented together | minor | deferred: a real structural clarity point, but restructuring ER13's exposition carries more risk than value this late; left as a carried item |
 | C-120 | 7 | (Opus) Safety condition's three-lift quantifier ("regardless of which digit the adversary supplies") oversells: for every k>=3 used in this paper, 3^k=0 mod 9 makes the quantifier vacuous in one respect (T_d(x) mod 3 depends only on x mod 9) | minor | deferred: correct but narrow observation, not an error in what's claimed; left as a carried item |
+| C-121 | 8 | (Codex) Section 7's corner-redundancy discussion said the property "only becomes an open question from l=7" after describing it as checked to fail at l=7..13; once checked to fail, it is a settled negative fact, not open. Repeated in three places (after Lemma 22, after Proposition 23, and in the Discussion) | major | fixed in all three locations: corrected to distinguish "checked to fail, l=7..13" (settled) from "unchecked beyond l=13" (genuinely open), and from the still-open converse itself |
+| C-122 | 8 | (Opus) Section 5.2's exclusion parenthetical had an unbalanced parenthesis (a whole sentence break nested inside an inner paren, with only one closing paren for two opens) and was unreadable as written | moderate | fixed: rewrote as three clean sentences; verified whole-document paren balance afterward |
+| C-123 | 8 | (Codex) Proposition 23's proof applies Corollary 10 to "a maximal chain of length maxrun(H(l,j'+1))," but Corollary 10 is stated only for chains of length >=1; at the final telescoping step the set is empty (length 0), so no such chain exists to apply it to | minor | fixed: split into the empty case (trivial, since s>=1 always holds there) and the nonempty case (Corollary 10 applies as stated) |
+| C-124 | 8 | (Opus) The "3.9 expected plateaus" figure was presented as an unexplained number from "the earlier manuscript's own table," reading as an empirical measurement rather than the model constant it is (19*(1-log_4(3))) | moderate | fixed: derived the figure explicitly from the constant-rounding model's own math |
+| C-125 | 8 | (Opus) j*(l)-l, in {0,2,3,4,5} across the computed range and flat at 4 for l=16..23, the single integer most directly tied to whether e(l) could be linear, was never displayed anywhere in the paper | moderate | fixed: added the explicit sequence as a sentence near Table 1, with a caveat that this flatness is not a proven bound (Proposition 1 already rules out any bounded ceiling in general) |
+| C-126 | 8 | (Codex) Theorem 4's proof telescopes a potential inequality along "any l-step play s_0,...,s_l," but the preceding paragraph (connecting a real play against the actual digit sequence to this abstract telescoping) never states that the resulting window-k state sequence is literally such a play, with s_{i+1} the successor of s_i under sigma_k's own chosen move | moderate | fixed: added the missing connecting clause |
+| C-127 | 8 | (Codex) "the model comparison and the plateau test are the same question" -- verified: since e(l+1)-e(l) can only take one of two fixed values under the constant model, both diagnostics reduce to the same binary fact, not merely "not independent" as Round 4's earlier fix (C-60) stated | moderate | strengthened: made the equivalence explicit rather than just noting non-independence |
+| C-128 | 8 | (Codex) l=21,22,23's "exact" values rest entirely on one Rust implementation, cross-checked against Python only up to l=20; no independent verification exists in the new range | moderate | reviewed and partly addressed: added a sentence explaining the DP's internal self-certification (minimality is inherent to how j*(l) is defined and searched) and stating plainly that l<=20's cross-check is carried forward by inference, not re-established, for l=21-23; an actual independent re-run at l=21 (Opus estimates hours, not days) was not attempted this round -- deferred, see Round 8 narrative |
+| C-129 | 8 | (Opus) t=3^(l-1)'s conjugate t=2*3^(l-1) has the identical magnitude by S(3^l-t)=conjugate(S(t)), so calling t=3^(l-1) "the single frequency" carrying the largest magnitude is imprecise | minor | fixed |
+| C-130 | 8 | (Opus) "the frequency Proposition 8 shows carries the largest known magnitude" conflates what Proposition 8 proves (an asymptotic value, T/sqrt(3)) with an empirical comparative claim (that this is the largest among all frequencies, observed only at accessible l) | minor | fixed: separated the proven asymptotic value from the empirical "largest observed" claim |
+| C-131 | 8 | (Opus) Empirical Result 12's stated compute range (l=5..20) omits l=3,4, which Proposition 23 (added this round's fixes) now proves the same equality for, reading as if those levels were never checked | minor | fixed: added a parenthetical noting l=3,4 are covered by the later proposition instead |
+| C-132 | 8 | (Opus) Empirical Result 20 (mod-9 exclusion)'s stated range starts at l=3, but Proposition 19 applies from l=2 and l=2 fits the same pattern (verified directly: H(2,3)={7}, matching 4^(J+1) mod 9 for J=4) | minor | fixed: extended the stated range to l=2..16 |
+| C-133 | 8 | (Codex) Corollary 1.8's citation omits the chapter number given for Conjecture 3.9 two lines earlier | minor | fixed |
+| C-134 | 8 | (Opus) Section 5's opening states Corollary 5's bound as if unconditional ("Corollary 5's bound, 1.125l, is well above...") one paragraph after Corollary 5's own conditional label | minor | fixed: added "conditional" at this use |
+| C-135 | 8 | (Opus) One paired-dash appositive (using "--"), against the project's own ban on paired dashes | minor | fixed: replaced with commas |
+| C-136 | 8 | (Opus) Two tricolons in immediate succession in the Discussion's adjacent-areas paragraph, a rhythm marker even though each list's three items are individually real, not padded | minor | fixed: restructured the second list into separate sentences, keeping all three findings |
+| C-137 | 8 | (Opus) Proposition 8 sits in subsection 5.3 though its content belongs with 5.1/5.2 | minor | deferred: same reasoning as Round 7's C-117, organizational only |
+| C-138 | 8 | (Opus) The corner-redundancy open question is posed at exactly W>=2l+1, precisely where the checked failures stop, with no structural reason given and nothing ruling out failure resuming at larger W for l>13 | minor | reviewed: an honest description of what was actually checked, not a hidden methodological choice; the paper already states the range is "checked exhaustively for l=3,...,13" without claiming any special significance to the boundary beyond that; no change made |
+| C-139 | 8 | (Opus) The checkpoint/resume mechanism sentence (Section 2) narrates process with no bearing on any claim, distinct from the l=24 attempts narration the researcher already ruled to keep (that ruling covered the l=24 paragraph specifically, not this one) | minor | deferred: a real Rule 5c point, low value relative to the risk of re-touching a heavily-reviewed paragraph this late; left as a carried item |
+| C-140 | 8 | (Opus) The abstract is one long, low-variance block (~450 words) | minor | deferred: a real Rule 5c point (sentence-length variance), but rewriting the abstract's rhythm risks disturbing content already checked claim-by-claim across 8 rounds; left as a carried item for a dedicated abstract pass |
 
 ## Full findings
 
@@ -608,3 +628,67 @@ forward as open items, not silently dropped.
 Recompiled clean (15 pages, 0 errors, 0 em-dashes, cite/bibitem check clean) and visually
 re-verified. Full findings list above, C-101 through C-120, resolved (fixed, verified-no-change, or
 deferred with a stated reason). Proceeding to Round 8.
+
+## Round 8 (2026-08-09)
+
+Same protocol, fresh context, PDF frozen (16 pages after this round's fixes; 15 going in). Codex
+found 6 issues, Opus found 20, no critical or major mathematical error in either report; both
+independently re-derived or reproduced most of the paper's content, including all 23 values of
+`e(l)`, all of Table 2, every proof line by line, and every reference against its primary source.
+
+The most consequential finding (Codex) was a real logical inconsistency introduced by Round 6's own
+fix: the paper described corner-redundancy at the boundary width `W=2l` as "checked to fail" for
+`l=7,...,13` in one sentence, then called it "an open question from `l=7`" a few sentences later.
+Once checked to fail, a property is a settled negative fact, not an open one; what actually remains
+open is Proposition 20's own converse, a different question the failure does not resolve either
+way. This conflation had propagated into three separate places in the text (after Lemma 22, after
+Proposition 23, and in the Discussion); all three fixed, with the genuinely open question (the
+converse, plus corner-redundancy beyond `l=13`, which is truly unchecked) now stated separately from
+the settled fact (corner-redundancy's failure at `l=7,...,13`).
+
+The second consequential finding (also Codex) was a small but real proof-rigor gap in Proposition 23
+(added this session, after Round 5): its "$\le$" direction applies Corollary 10 to "a maximal chain
+of length `maxrun(H(l,j'+1))`," but Corollary 10 is stated only for chains of length at least 1; at
+the proof's final telescoping step the relevant set is empty. Fixed by splitting into the trivial
+empty case and the nonempty case where Corollary 10 applies as stated.
+
+Opus caught a genuine LaTeX bug in Round 8's own recent text: Section 5.2's parenthetical about
+excluded frequencies had an unbalanced parenthesis, with a full sentence break nested inside an
+inner paren and only one closing paren for two opens, both a hard typo and unreadable prose. Fixed
+by splitting into three clean sentences and verifying whole-document parenthesis balance afterward.
+
+Both reviewers, independently, pushed the "model comparison and the plateau test measure the same
+thing" observation (first noted in Round 4, C-60, as "not independent") further: since
+`e(l+1)-e(l)` can only take one of two fixed values under the constant-rounding null, the two
+diagnostics are not just correlated but reduce to the same binary fact restated in two languages.
+Made explicit rather than just noting non-independence.
+
+Several smaller precision fixes followed familiar patterns: an unexplained numeric constant (`3.9`
+plateaus) turned out to be a directly derivable model quantity, not an empirical figure; `j*(l)-l`,
+arguably the single integer most tied to whether `e(l)` could turn out linear, was never displayed
+anywhere in the paper and is now one sentence near Table 1; Theorem 4's proof had a genuine, narrow
+connecting-clause gap between the real-play construction and the abstract telescoping argument, now
+bridged; and several range/attribution mismatches (Empirical Result 12 and 20's stated ranges not
+matching what later propositions actually cover, a missing chapter number in a citation, a dropped
+conditional tag, a paired dash, two tricolons in immediate succession).
+
+One finding (Codex) was reviewed and only partly addressed: the three newest table values,
+`j*(21),j*(22),j*(23)`, rest entirely on one Rust implementation, cross-checked against an
+independent Python implementation only up to `l=20`. The text now explains the DP's internal
+self-certification (finding the smallest full-coverage budget inherently checks both coverage there
+and its absence one budget earlier) and states plainly that the `l<=20` cross-check is carried
+forward by inference, not re-established, for the three new levels. An actual independent re-run at
+`l=21`, which Opus estimated at hours rather than days, was not attempted this round; left as a
+carried item rather than rushed into the same pass that just fixed a proof-rigor gap and a
+parenthesis-balance bug, on the view that verification work deserves its own dedicated pass, not a
+few spare minutes at the end of a text-fixing round.
+
+Two items reviewed and deferred with reasons rather than fixed: the corner-redundancy open question
+being posed at exactly `W>=2l+1` (checked directly against the paper's own text, this is an honest
+description of what was checked, not a hidden methodological choice, so no change was made) and the
+abstract's low sentence-length variance (a real Rule 5c point, but rewriting the abstract's rhythm
+this late risks disturbing content already checked claim by claim across eight rounds).
+
+Recompiled clean (16 pages, 0 errors, 0 em-dashes, parenthesis balance verified, cite/bibitem check
+clean) and visually re-verified. Full findings list above, C-121 through C-140, resolved (fixed,
+verified-no-change, partly addressed, or deferred with a stated reason). Proceeding to Round 9.

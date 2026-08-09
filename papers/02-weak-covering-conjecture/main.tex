@@ -53,7 +53,7 @@ correspondence. We then examine the natural Fourier approach to a tighter bound:
 square-root-cancellation argument cannot beat a threshold worse than this bound, and in fact no
 constant achieving even that threshold can exist, since one explicit frequency family already
 violates the needed estimate; separately, a direct computation at one accessible level finds the
-bulk of the relevant exponential sum's mass sitting outside any sparse exceptional set. The residues
+bulk of the primitive-frequency mass sitting outside any sparse exceptional set. The residues
 that actually fail to be covered sit in
 cells of local hit-density well below the global mean; a phase-randomization experiment at a
 different, more tractable pair of
@@ -150,7 +150,12 @@ Table~\ref{tab:jstar} gives $j^*(l)$ and $e(l)$ for $l=1,\dots,23$. The values f
 reproduce the earlier manuscript's table exactly; they were independently recomputed here by a
 from-scratch Rust reimplementation of the covering search (a bitset rotation dynamic program over
 residues modulo $3^l$), validated against the original Python implementation at every $l\le20$
-before being trusted for the extension. The values for $l=21,22,23$ are new.
+before being trusted for the extension. Each reported $j^*(l)$ is the smallest budget at which the
+DP's own coverage bitset is full, so the search certifies both coverage at $j^*(l)$ and its absence
+at $j^*(l)-1$ internally, by construction, at every level it runs; the $l\le20$ agreement against an
+independently written implementation is this paper's evidence that the search itself is correct; it
+is carried forward by inference for $l=21,22,23$, without a separate cross-check at those levels.
+The values for $l=21,22,23$ are new.
 
 \begin{table}[h]
 \centering
@@ -171,7 +176,11 @@ $l$ & $j^*(l)$ & $e(l)$ & $l$ & $j^*(l)$ & $e(l)$ & $l$ & $j^*(l)$ & $e(l)$ \\ \
 
 The single plateau in the table, $j^*(15)=j^*(16)=20$, is not an error: $l=15\to16$ is the only
 step among the $22$ from $l=1$ to $l=23$ at which the covering budget does not increase, and it is
-exactly the event Section~\ref{sec:growth}'s plateau-frequency test measures.
+exactly the event Section~\ref{sec:growth}'s plateau-frequency test measures. The integer difference
+$j^*(l)-l$, a coarser cousin of $e(l)$, is $0,2,3,3,4,4,4,4,4,5,5,5,5,5,5,4,4,4,4,4,4,4,4$ for
+$l=1,\dots,23$: it never grows past $5$ over the computed range, but Proposition~\ref{prop:lowerbound}
+already rules out any bounded ceiling in general, so this flatness is a fact about the range checked,
+not a proven bound.
 
 $l=21$ fits in physical RAM once a memory-wasteful parallelization step in the original
 implementation was corrected. $l=22$ needs approximately $84\,\mathrm{GiB}$ of state, above the
@@ -194,7 +203,12 @@ the table stops at $l=23$.
 We compare four candidate functional forms for $e(l)$'s growth against the tail $l=10,\dots,23$
 ($n=14$; the same range choice as the earlier manuscript, now with three more points), each fit by
 ordinary least squares: $e(l)=c$ (constant), $e(l)=a+b\ln l$ (logarithmic), $e(l)=a+b\sqrt l$
-(square-root), and $e(l)=a+bl$ (slow-linear). Table~\ref{tab:aic} gives the fit statistics.
+(square-root), and $e(l)=a+bl$ (slow-linear). Table~\ref{tab:aic} gives the fit statistics, using the
+Gaussian-OLS forms $\mathrm{AIC}=n\ln(\mathrm{RSS}/n)+2k$, $\mathrm{BIC}=n\ln(\mathrm{RSS}/n)+k\ln n$
+(RSS the residual sum of squares, $k$ the number of regression coefficients, $1$ for the constant
+model and $2$ for the other three), and leave-one-out cross-validated RMSE; since only differences
+$\Delta\mathrm{AIC}$, $\Delta\mathrm{BIC}$ are used below, the convention for a shared additive
+constant across models does not affect them.
 
 \begin{table}[h]
 \centering
@@ -233,12 +247,17 @@ in $\{0,1\}$, which the full table already refutes (the increments of $2$ and $3
 plateau count over the full range tests nothing about that model. Restricted to the $l=10,
 \dots,22$ tail the model comparison above uses ($13$ increments over the same $14$ points, all
 actually in $\{0,1\}$, consistent with the model's own prediction), exactly one is zero (the
-$l=15\to16$ plateau noted above); the earlier manuscript's own table, $l\le20$, showed $3.9$ plateaus
-expected in $19$ increments under the same model, and testing the observed count against
-$\mathrm{Bin}(13,3.9/19)$, one-sided, gives $p\approx0.22$. $e(l)$ is an exact, deterministic
+$l=15\to16$ plateau noted above); the constant-rounding model predicts a plateau at a fixed fraction
+$1-\log_43\approx0.2075$ of increments (the fraction of the real line, in the limit, that rounds down
+rather than up under a linear-plus-constant quantity with irrational slope $\log_43$), giving $19
+\times(1-\log_43)\approx3.9$ expected plateaus among the earlier manuscript's own $19$ increments,
+$l\le20$; testing the observed count against $\mathrm{Bin}(13,3.9/19)$, one-sided, gives
+$p\approx0.22$. $e(l)$ is an exact, deterministic
 sequence, so this carries no sampling interpretation; it is best read descriptively, as ``how well
-does a constant-$e(l)$ source fit the observed tail increment pattern,'' and it is not independent
-corroboration of the model comparison above: both look at the same $14$-point tail.
+does a constant-$e(l)$ source fit the observed tail increment pattern.'' Under the constant model,
+$e(l+1)-e(l)$ can only be $1-\log_43\approx0.2075$ or $-\log_43\approx-0.7925$, so ``which growth
+model best fits $e(l)$'' and ``how often does $j^*(l)$ plateau'' are the same question about the
+same $14$-point tail, asked in different words.
 
 A constant $e(l)$ is disfavored descriptively by every measure above. It is also, unconditionally,
 impossible.
@@ -254,7 +273,8 @@ minimal one, so $V=\sum_i 2^{a_i}3^i$ has $2$-adic valuation exactly $a_{j-1}$ (
 divisible by a strictly higher power of $2$), recovering $a_{j-1}$ from $V$ directly. The full term
 $2^{a_{j-1}}3^{j-1}$ is then subtracted off, and the process iterates on the remaining $j-1$ terms. So $R_{j-1,j}$, in bijection with $j$-subsets of the
 $2j$-element set $\{0,\dots,2j-1\}$, has exact cardinality $\binom{2j}{j}$ (this cardinality is
-Wirsching's own Corollary~1.8~\cite{wirsching1998}; the injectivity argument above is this paper's).
+Wirsching's own Corollary~1.8, Chapter~V,~\cite{wirsching1998}; the injectivity argument above is
+this paper's).
 Covering
 $(\Z/3^l\Z)^*$, of size $2\cdot3^{l-1}$, requires the domain to be at least as large as the
 codomain: $\binom{2j}{j} \ge 2\cdot3^{l-1}$ is necessary at $j=j^*(l)$ in particular, since
@@ -372,7 +392,11 @@ Once $l-i<k$, whether because $l<k$ globally or because a play with $l\ge k$ has
 final $k-1$ steps, fix any lift of the true state to a residue modulo $3^k$ and run the policy on
 the lift, which is exactly the situation safety was built for, with the play's own remaining digits
 standing in for the hidden ones, so the chosen move stays legal against the true, lower-precision
-state at every step (this regime is part of what the policy-against-the-covering-DP check at
+state at every step. Writing $s_i$ for whichever window-$k$ state $\sigma_k$ sees this way at step
+$i$ (the true $z_i\bmod3^k$, or a fixed lift of it), $s_{i+1}$ is by construction the successor
+$s_i'(\epsilon)$ under $\sigma_k$'s chosen move and the digit $\epsilon$ that the real play actually
+supplies at that step, so $s_0,\dots,s_l$ is exactly a play of the form the proof below sums over,
+with move costs equal to the real play's (this regime is part of what the policy-against-the-covering-DP check at
 $k=4,7$ against $l$ up to $14$ already exercised, with zero illegal or unsafe moves; every play
 there passes through this same final-$k-1$-steps regime regardless of how large $l$ is).
 
@@ -456,7 +480,7 @@ window relaxation may carry an irreducible gap above the true rate.
 \section{The exponential sum, and why it resists a direct attack}
 \label{sec:gapA}
 
-Corollary~\ref{cor:mpgbound}'s bound, $1.125\,l$, is well above the conjectured rate
+Corollary~\ref{cor:mpgbound}'s conditional bound, $1.125\,l$, is well above the conjectured rate
 $\log_4(3)\,l \approx 0.7925\,l$. The natural route to closing that gap is Fourier-analytic. Here
 $e(x):=e^{2\pi ix}$ denotes the standard additive character, unrelated to the sequence $e(l)$ of
 \eqref{eq:el}. By orthogonality on $\Z/3^l\Z$, the number of tuples landing in
@@ -509,17 +533,20 @@ $j=16$ (the first-order cardinality threshold, $T:=\binom{32}{16}$, six budgets 
 covering threshold $j^*(18)=22$: coverage necessarily fails here already, and this level sits below
 the $j\ge l$ range Sections~\ref{sec:holdouts}--\ref{sec:further} otherwise work in), with a negative
 result. Write
-$\|S\|_1:=\sum_{\gcd(t,3)=1}|S(t)|/T$ for the normalized $L^1$ mass over frequencies coprime to $3$
-(this restriction excludes $t=3^{l-1}$ itself, the single frequency
-Proposition~\ref{prop:1547} shows carries the largest known magnitude for $l\ge2$; the diagnostic
-below concerns only the bulk of the spectrum away from that one point); here $\|S\|_1=5226.01$. A
-fixed threshold makes the visible spikes look sparse, but of the $8{,}014$
-frequencies with $|S(t)|/T$ exceeding $0.001$, their combined contribution to $\|S\|_1$ is under
-$132$, so over $97\%$ of the mass at this single computed level lives in an exponentially numerous
-population of near-average-magnitude coefficients. This is evidence
-against a sparse-exceptional-set repair at this accessible level; it says nothing about every $l$,
-and, since $j=16$ sits six budgets below $j^*(18)$, still less about the mass distribution near the
-actual covering threshold.
+$\|S\|_1:=\sum_{\gcd(t,3)=1}|S(t)|/T$ for the normalized $L^1$ mass over frequencies coprime to $3$.
+This restriction excludes $t=3^{l-1}$, whose magnitude $|S(3^{l-1})|\sim T/\sqrt3$ is fixed by
+Proposition~\ref{prop:1547} and, empirically, is the largest among frequencies checked at accessible
+$l$, along with its conjugate $t=2\cdot3^{l-1}$ (since
+$S(3^l-t)=\overline{S(t)}$, that frequency matches it exactly and is excluded for the same reason).
+The restriction to $\gcd(t,3)=1$ also excludes every nonprimitive frequency, roughly a third of the
+spectrum, entirely, so $\|S\|_1$ below measures only the primitive-frequency mass. Here
+$\|S\|_1=5226.01$. A fixed threshold makes the visible spikes look sparse, but of the $8{,}014$
+primitive frequencies with $|S(t)|/T$ exceeding $0.001$, their combined contribution to $\|S\|_1$ is
+under $132$, so over $97\%$ of the primitive-frequency mass at this single computed level lives in
+an exponentially numerous population of near-average-magnitude coefficients. This is evidence
+against a sparse-exceptional-set repair among primitive frequencies at this accessible level; it
+says nothing about nonprimitive frequencies, about every $l$, and, since $j=16$ sits six budgets
+below $j^*(18)$, still less about the mass distribution near the actual covering threshold.
 
 The same clustering near dyadic rationals connects the problem to a 2011 discussion of Terence
 Tao's, applying Littlewood--Offord and Riesz-product methods to an object built from the same
@@ -663,7 +690,9 @@ $j^*(l)\le j+r=j+\mathrm{maxrun}(H(l,j))$.
 \label{er:bootstrap}
 Corollary~\ref{cor:bootstrap} is empirically exact, $j^*(l) = j + \mathrm{maxrun}(H(l,j))$, at every
 $(l,j)$ with $l+1\le j\le j^*(l)$ we were able to compute, $l=5,\dots,20$ at every such budget and
-$l$ up to $22$ at the single budget $j=l+1$, including a case with $|H(l,j)| > 3\times10^6$. (Past
+$l$ up to $22$ at the single budget $j=l+1$, including a case with $|H(l,j)| > 3\times10^6$
+($l=3,4$ were not separately computed here, but Proposition~\ref{prop:tight} below proves the same
+equality there). (Past
 $j^*(l)$, $H(l,j)=\emptyset$ and $\mathrm{maxrun}(\emptyset)=0$, so the displayed equality no longer
 holds there; the claim is only about budgets up to and including $j^*(l)$.) The lower endpoint
 $j=l+1$ has a real justification behind it: equality at $j=l$ itself holds for $l=1,\dots,5$ but
@@ -676,9 +705,9 @@ budget $j=l+1$ at $l=3,4,5,6$ specifically. From $l=7$ on, $j=l+1$ remains empir
 Proposition~\ref{prop:h014}'s own open converse.
 \end{empresult}
 
-A stronger, per-witness converse of Theorem~\ref{thm:doubling} -- that $x/2,x/4\in H(l,j)$ already
+A stronger, per-witness converse of Theorem~\ref{thm:doubling}, that $x/2,x/4\in H(l,j)$ already
 forces $x\in H(l,j+1)$, which would in turn make a maximal doubling chain both sufficient and
-necessary for survival to a given budget -- is false as an unrestricted statement:
+necessary for survival to a given budget, is false as an unrestricted statement:
 $1547 \in 2H(7,8)\cap4H(7,8)$, yet $1547 \notin H(7,9)$ (both of $1547$'s two
 budget-$9$ witnesses span the full exponent range, the one case Theorem~\ref{thm:doubling}'s
 argument does not directly control). Section~\ref{sec:further} returns to a restricted, weaker form
@@ -859,7 +888,7 @@ $y\bmod9\in\{4^J,4^{J+1}\}$.
 
 \begin{empresult}[Exclusion of the lower class]
 \label{er:mod9}
-The class actually occupied is $4^{J+1}$, never $4^J$, at every level checked, $l=3,\dots,16$
+The class actually occupied is $4^{J+1}$, never $4^J$, at every level checked, $l=2,\dots,16$
 (extending the previous computational range, $l=3,\dots,9$). Excluding $4^J$ in general is the
 sharpest concrete open question this part of the investigation produced: Proposition~\ref{prop:mod9}
 places no constraint on $\beta_1$ itself, only on the parity-dependent outcome, so ruling out one of
@@ -919,12 +948,15 @@ At every width $W$ in the range $2l+1\le W\le j^*(l)+l-1$,
 checked exhaustively for $l=3,\dots,13$ (the upper end is the largest width the exact table reaches
 at each level), $\mathrm{Corner}(l,W+1)$ contributes nothing new: every corner witness's value is
 already covered without it. Call this the \emph{corner-redundancy} property at width $W$; whether it
-holds at every width $W\ge2l+1$ in general is unproven. It also holds, checked directly, at the one
-smaller width $W=2l$ itself for $l=3,4,5,6$; only from $l=7$ on does it fail there, and, checked, at
-every narrower width from $l-1$ up to $2l$ as well. $W=2l$ is exactly $j=l+1$,
-Proposition~\ref{prop:h014}'s own case, so corner-redundancy is not uniformly unknown at that
-boundary: it holds at the four smallest levels checked and only becomes an open question from
-$l=7$.
+holds at every width $W\ge2l+1$ in general, beyond the levels checked, is open. It also holds,
+checked directly, at the one smaller width $W=2l$ itself for $l=3,4,5,6$; from $l=7$ through $13$ it
+is checked to fail there, and at every narrower width from $l-1$ up to $2l$ as well: this is settled
+at those levels, by direct computation, at every $l=3,\dots,13$. $W=2l$ is exactly $j=l+1$,
+Proposition~\ref{prop:h014}'s own
+case; corner-redundancy at that width is known, one way or the other, at every level $l=3,\dots,13$,
+holding only for $l=3,4,5,6$. What remains open is Proposition~\ref{prop:h014}'s own converse itself:
+corner-redundancy's failure at $W=2l$ for $l\ge7$ does not settle it either way, it only means this
+particular mechanism does not prove it there.
 
 \begin{proposition}[Corner-redundancy implies tightness]
 \label{prop:tight}
@@ -942,10 +974,11 @@ holdout sets, $H(l,j'+1)=2H(l,j')\cap4H(l,j')$, sharpening Theorem~\ref{thm:doub
 an identity whenever corner-redundancy holds at that width.
 
 Claim: for every $j'$ with $j\le j'<j^*(l)$, $\mathrm{maxrun}(H(l,j'+1))=\mathrm{maxrun}(H(l,j'))-1$,
-given corner-redundancy at width $j'+l-1$. The inequality $\le$ is unconditional: a maximal chain of
-length $\mathrm{maxrun}(H(l,j'+1))$ in $H(l,j'+1)$ extends, by Corollary~\ref{cor:chain}, to a chain
-one longer in $H(l,j')$. For $\ge$, since $j'<j^*(l)$, minimality of $j^*(l)$ gives $H(l,j')\ne
-\emptyset$, so $s:=\mathrm{maxrun}(H(l,j'))\ge1$; fix a maximal chain $x,2x,\dots,2^{s-1}x\in H(l,j')$.
+given corner-redundancy at width $j'+l-1$. Since $j'<j^*(l)$, minimality of $j^*(l)$ gives
+$H(l,j')\ne\emptyset$, so $s:=\mathrm{maxrun}(H(l,j'))\ge1$ throughout. The inequality $\le$ is
+unconditional: if $H(l,j'+1)=\emptyset$ it reads $0\le s-1$, true since $s\ge1$; otherwise a maximal
+chain of length $\mathrm{maxrun}(H(l,j'+1))\ge1$ in $H(l,j'+1)$ extends, by Corollary~\ref{cor:chain},
+to a chain one longer in $H(l,j')$. For $\ge$, fix a maximal chain $x,2x,\dots,2^{s-1}x\in H(l,j')$.
 For each $k=2,\dots,s$, both $2^{k-1}x$ and $2^{k-2}x$ lie in this chain, so the equality
 $H(l,j'+1)=2H(l,j')\cap4H(l,j')$ places $2^kx\in H(l,j'+1)$; this gives the $s-1$ consecutive powers
 $4x,8x,\dots,2^sx\in H(l,j'+1)$, so $\mathrm{maxrun}(H(l,j'+1))\ge s-1$, proving the claim.
@@ -968,8 +1001,9 @@ At $l=3,4,5,6$, where corner-redundancy also holds at the boundary width $W=2l$,
 (starting the telescoping at $j'=l+1$ instead of $j'\ge l+2$) proves the boundary case too:
 $j^*(l)=(l+1)+\mathrm{maxrun}(H(l,l+1))$ exactly, verified directly ($l=3$: $4+2=6$; $l=4$: $5+2=7$;
 $l=5$: $6+3=9$; $l=6$: $7+3=10$). This is Proposition~\ref{prop:h014}'s own converse, established at
-these four levels specifically. From $l=7$ on, where corner-redundancy at $W=2l$ is open, the
-converse remains open there too.
+these four levels specifically. At $l=7,\dots,13$, corner-redundancy at $W=2l$ is checked to fail, so
+this mechanism does not reach the converse there; beyond $l=13$, corner-redundancy at $W=2l$ is
+itself unchecked. The converse remains open at every $l\ge7$.
 
 \section{Discussion}
 \label{sec:discussion}
@@ -981,19 +1015,20 @@ Proving corner-redundancy at every width $W\ge2l+1$ would, by Proposition~\ref{p
 Corollary~\ref{cor:bootstrap}'s bootstrap tight for every budget $l+2\le j\le j^*(l)$ in general, not
 merely at the levels $l=3,\dots,13$ where corner-redundancy is already verified; it would not, by
 itself, settle Proposition~\ref{prop:h014}'s converse at every level, which turns on the boundary
-budget $j=l+1$ ($W=2l$), established above only at $l=3,4,5,6$ and open from $l=7$ on. Neither
-question is, on its face, as hard as the Weak Covering Conjecture itself; whether either is much
-easier is not known.
+budget $j=l+1$ ($W=2l$), established above only at $l=3,4,5,6$, where corner-redundancy holds there
+too; at $l=7,\dots,13$, where it is checked to fail there, the converse remains open by this
+mechanism, and beyond $l=13$ both the property and the converse are open. Neither question is, on
+its face, as hard as the Weak Covering Conjecture itself; whether either is much easier is not known.
 
 A finite exponential sum built from strictly decreasing, exponentially weighted digit tuples is a
 natural object beyond this specific covering problem: finite-population $L$-statistics at non-CLT
 frequencies and weights, Littlewood--Offord theory for structured coefficient sequences, and the
-analytic side of the Collatz literature via Tao's discussion are all adjacent areas. Three things
-found here may recur there under different names: generic cancellation unable to match a bound
-already conditionally established here by other means, exceptional mass that does not concentrate
-on a sparse set
-at the accessible scale, and an extremal arithmetic obstruction, pointed to by both holdout rarity and
-a phase-randomization null diagnostic, that magnitude-only methods miss. Tao's later, unrelated result
+analytic side of the Collatz literature via Tao's discussion are all adjacent areas. Findings here
+may recur there under different names. Generic cancellation, even at its best conceivable strength,
+cannot match a bound already conditionally established here by other means. Exceptional mass does
+not concentrate on a sparse set at the accessible scale. And an extremal arithmetic obstruction,
+pointed to by both holdout rarity and a phase-randomization null diagnostic, is exactly what
+magnitude-only methods miss. Tao's later, unrelated result
 that almost every Collatz orbit attains an almost bounded value~\cite{tao2019} works with a
 first-passage random variable over a different probabilistic model of the same map and does not
 bear on covering directly, but is the clearest instance of a new kind of technique changing what

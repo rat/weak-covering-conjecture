@@ -261,3 +261,26 @@ A push), notes/H-013.md, notes/GAP-A-round4.md, notes/GAP-A-round5*.md.
       Durfee-depth exposition). Recompiled clean, 15 pages, 0 errors, 0 em-dashes, visually
       re-verified. Reproducibility repo updated (new verification script, all READMEs resynced).
       Round 8 next.
+- [x] **Round 8 complete (2026-08-09).** Codex + Opus 5 max effort, fresh context, PDF frozen. 26
+      findings total (6 Codex, 20 Opus), no critical or major mathematical error in either report.
+      Most consequential (Codex): Round 6's own fix had left a real inconsistency, calling corner-
+      redundancy at W=2l both "checked to fail" (l=7..13) and "open" in the same breath, in three
+      separate places in the text; fixed throughout, distinguishing the settled negative fact
+      (checked to fail, l=7..13) from what is genuinely still open (the converse itself, and
+      corner-redundancy beyond l=13). Second (also Codex): a real proof-rigor gap in Proposition 23
+      (this session's own addition) -- its <= direction applied a corollary stated only for chains
+      of length >=1 to a possibly-empty chain at the proof's final step; fixed by splitting the
+      empty and nonempty cases. Opus caught a genuine LaTeX bug in the paper's own most recent text:
+      an unbalanced parenthesis in Section 5.2, both a hard typo and unreadable prose; fixed and
+      whole-document paren balance verified. Both reviewers pushed the "model comparison and
+      plateau test are the same question" observation (first noted Round 4) from "not independent"
+      to "literally the same binary fact," now stated that way. Several precision fixes (an
+      unexplained numeric constant traced to its actual formula, j*(l)-l displayed for the first
+      time, a genuine connecting-clause gap in Theorem 4's proof, range/attribution mismatches, a
+      paired dash, two tricolons in a row). One finding partly addressed: the l=21,22,23 table
+      values rest on one implementation with no independent cross-check beyond l=20; the text now
+      explains the DP's internal self-certification and states the l<=20 cross-check is carried
+      forward by inference, not re-established -- an actual independent re-run at l=21 was not
+      attempted this round, left as a carried item for its own dedicated pass rather than rushed.
+      Two items reviewed and deferred with stated reasons. Recompiled clean, 16 pages, 0 errors,
+      0 em-dashes, parenthesis balance verified, visually re-verified. Round 9 next.
