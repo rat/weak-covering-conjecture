@@ -104,10 +104,25 @@ A push), notes/H-013.md, notes/GAP-A-round4.md, notes/GAP-A-round5*.md.
 
 - [x] Outline drafted, 2026-08-09, per the researcher's explicit request and confirmed scope
       (include the GAP A results in this paper, not a separate one).
-- [ ] Confirm E-002's exact current growth-model statistics before drafting section 3 (may have
-      shifted with the `l=21-23` data added since the last recorded figures).
-- [ ] Re-read the mean-payoff-game proof construction before drafting section 4 (cite correctly,
-      don't just restate the bound).
+- [x] E-002 reconfirmed, 2026-08-09: reran `experiment.py` directly, every number matches the
+      README exactly (dAIC=16.09, dBIC=15.45, plateau p=0.0426 pooled / ~0.22 tail-only). This IS
+      the final dataset (l=1..23) since l=24 is formally abandoned; nothing left to update.
+- [x] Mean-payoff-game construction re-read and spot-verified, 2026-08-09: reran `mpg4.py 3 4`,
+      matches the README table exactly (`rho_3=2, C_3=5, rho_4=5/3, C_4=19/3`). Proof sketch for
+      section 4: `j*(l)` reformulated as a full-information game (state = unit `z`, legal cost `d`
+      iff `2^d z==1 mod 3`, transition `T_d(z)=(2^{d+1}z-2)/3`); restricting the policy to see only
+      `z mod 3^k` gives a window-k mean-payoff-game relaxation (adversary picks the hidden next
+      3-adic digit), whose value `rho_k` gives `j*(l) <= rho_k*l + C_k`, both exact rationals,
+      self-certified via matching min-max certificates (Howard strategy improvement); `rho_k` is
+      non-increasing in `k`, `rho_13=119/104` is the best computed. **IMPORTANT for citation
+      (Rule 10, don't overclaim)**: the general technique (covering-type problems as mean-payoff
+      games) is NOT new -- Ehrenfeucht-Mycielski 1979, with a close precedent in Meyerovitch & Young
+      (arXiv:2603.21449, 2026, covering radius of sofic shifts). What's new here is the application
+      to `j*(l)`, not the framing; cite both precedents, don't present the technique itself as a
+      contribution. Also: only `j*(l) <= rho_k*l+C_k` is proven; the reverse direction
+      (`inf_k rho_k <= limsup j*(l)/l`, i.e. `rho_k -> log_4(3)`) is an unproven extrapolation, an
+      earlier internal draft wrongly asserted it as proven and was corrected -- do not repeat that
+      mistake in the paper.
 - [x] Dedicated reproducibility repository (Rule 12): `https://github.com/faculdade/weak-covering-conjecture`,
       confirmed to exist 2026-08-09 (`curl` 200, `gh repo view` succeeds). Not yet populated -- no
       code committed there yet; do this before section 8 claims anything is "available" in it.
