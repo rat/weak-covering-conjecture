@@ -50,24 +50,26 @@ the growing alternatives, which remain statistically indistinguishable from one 
 the best bound known to us, $j^*(l) \le \tfrac98 l + O(1)$, via a mean-payoff-game relaxation of the
 covering budget whose proof rests on one computationally verified, not generally proven,
 correspondence. We then examine the natural Fourier approach to a tighter bound: a uniform
-square-root-cancellation argument cannot beat a threshold worse than this bound, and a direct
-computation at one accessible level finds the bulk of the relevant exponential sum's mass sitting
-outside any sparse exceptional set. Separately, the residues that actually fail to be covered sit in
+square-root-cancellation argument cannot beat a threshold worse than this bound, and in fact no
+constant achieving even that threshold can exist, since one explicit frequency family already
+violates the needed estimate; separately, a direct computation at one accessible level finds the
+bulk of the relevant exponential sum's mass sitting outside any sparse exceptional set. The residues
+that actually fail to be covered sit in
 cells of local hit-density well below the global mean; a phase-randomization experiment at a
 different, more tractable pair of
 parameters points the same way, toward phase structure that magnitude alone does not capture. We
 prove a theorem on the uncovered residues themselves, for budgets $j\ge l$: the set left uncovered
 at a budget is contained in both twice and four times the set left uncovered at the previous budget,
 giving an explicit recursive upper bound on $j^*(l)$ that we prove exact at most budgets, given one
-further combinatorial property verified at every level checked, and empirically exact at the
-remaining budget. We
+further combinatorial property verified at every level checked; at the one remaining budget, this
+holds at four small levels checked directly and is otherwise only empirically exact. We
 falsify the natural cost-$1$ form of a local repair rule this theorem might suggest, with explicit
 witness-level exhaustive counts, prove that every last-uncovered residue is $\equiv1\pmod3$ whenever
 $j^*(l)\ge l+1$ (every computed level but one), prove a two-class containment
 law modulo $9$ on the same residues, and report further exact identities, some verified but not
 proven, governing the last residues to be covered. Two of the questions this work leaves open are
-named and precisely stated, each narrower than the conjecture itself; others are noted where they
-arise. The Weak Covering Conjecture remains open.
+named and stated as exact conditions, each narrower than the conjecture itself; others are noted
+where they arise. The Weak Covering Conjecture remains open.
 \end{abstract}
 
 \noindent\textbf{Keywords:} Collatz map, 3-adic dynamics, covering conjecture, mean-payoff games,
@@ -81,10 +83,10 @@ exponential sums, Littlewood--Offord theory.
 Wirsching's 1998 monograph~\cite{wirsching1998} studies the density of predecessor sets under the
 $3n+1$ map through an averaging construction on the $3$-adic integers. A limiting Markov chain
 built from that construction has an invariant density, and Wirsching's own route to positive
-predecessor density passes through a covering question about a family of finite subsets of
-$\Z_3^*$, the $3$-adic units, developed further in a later paper of his own that isolates positive
-predecessor density as a self-contained target and states, as open conjectures, the gaps still
-unbridged between that construction and a proof~\cite{wirsching2003}. For integers $j,k\ge0$, write
+predecessor density, developed further in a later paper of his own that isolates it as a
+self-contained target and states, as open conjectures, the gaps still unbridged between that
+construction and a proof~\cite{wirsching2003}, passes through a covering question about a family of
+finite subsets of $\Z_3^*$, the $3$-adic units. For integers $j,k\ge0$, write
 \begin{equation}
 \label{eq:Rjk}
 R_{j,k} := \Bigl\{\, \sum_{i=0}^{j} 2^{a_i}3^i \ \Bigm|\ j+k \ge a_0 > a_1 > \cdots > a_j \ge 0
@@ -133,11 +135,12 @@ candidate growth models for $e(l)$ against the full range (Sections~\ref{sec:com
 and~\ref{sec:growth}). Second, it gives the best upper bound on $j^*(l)$ we have found, via a
 reformulation of the covering budget as a mean-payoff game
 (Section~\ref{sec:mpg}). Third, and at greatest length, it reports a sustained attempt to close the
-gap to the conjectured rate directly, first by the natural Fourier approach, and, once that approach
-is shown to fail for a precise and checkable reason, by a direct study of the residues that actually
-resist coverage (Sections~\ref{sec:gapA}--\ref{sec:further}). That second attempt does not
-settle the conjecture. It produces a theorem on those residues, a falsification of the cost-$1$
-form of a repair rule the theorem might suggest, and two precisely named open questions, each
+gap to the conjectured rate directly, first by the naive uniform-cancellation version of the natural
+Fourier approach, and, once that version is shown to fail for a checkable reason, by a direct study
+of the residues that actually resist coverage (Sections~\ref{sec:gapA}--\ref{sec:further}). That
+second attempt does not settle the conjecture. It produces a theorem on those residues, a
+falsification of the cost-$1$ form of a repair rule the theorem might suggest, and two named open
+questions, each
 narrower than the conjecture itself and worth a dedicated attack in its own right.
 
 \section{The computation}
@@ -167,8 +170,8 @@ $l$ & $j^*(l)$ & $e(l)$ & $l$ & $j^*(l)$ & $e(l)$ & $l$ & $j^*(l)$ & $e(l)$ \\ \
 \end{table}
 
 The single plateau in the table, $j^*(15)=j^*(16)=20$, is not an error: $l=15\to16$ is the only
-increment among the $22$ steps from $l=1$ to $l=23$ at which the covering budget does not increase,
-and it is exactly the event Section~\ref{sec:growth}'s plateau-frequency test measures.
+step among the $22$ from $l=1$ to $l=23$ at which the covering budget does not increase, and it is
+exactly the event Section~\ref{sec:growth}'s plateau-frequency test measures.
 
 $l=21$ fits in physical RAM once a memory-wasteful parallelization step in the original
 implementation was corrected. $l=22$ needs approximately $84\,\mathrm{GiB}$ of state, above the
@@ -227,7 +230,7 @@ source is incompatible with the table's first two entries alone, with no statist
 A direct combinatorial test tells the same story from a different angle, restricted to where its own
 null hypothesis is not already dead: the constant-rounding model behind it predicts every increment
 in $\{0,1\}$, which the full table already refutes (the increments of $2$ and $3$ noted above), so a
-plateau count over the full range is not a meaningful test of that model. Restricted to the $l=10,
+plateau count over the full range tests nothing about that model. Restricted to the $l=10,
 \dots,22$ tail the model comparison above uses ($13$ increments over the same $14$ points, all
 actually in $\{0,1\}$, consistent with the model's own prediction), exactly one is zero (the
 $l=15\to16$ plateau noted above); the earlier manuscript's own table, $l\le20$, showed $3.9$ plateaus
@@ -325,7 +328,11 @@ against every legal play for $l=1,\dots,4$ as a check, with no exception, before
 j^*(l) = \max_{z_0}\ \min\{J : \text{$z_0$ has a legal full-precision play of total cost $J$}\},
 \]
 the maximum over units $z_0$ modulo $3^l$. Verified against the known exact table of $j^*(l)$ for
-$l=1,\dots,12$, with no discrepancy. Lemma~\ref{lem:ground} does not by itself establish this: the
+$l=1,\dots,12$, with no discrepancy; that a legal full-precision play exists at all from every unit
+$z_0$ (the minimum inside the display is over a nonempty set) is part of what this verification
+confirms empirically. A general proof would additionally need the successor to stay a unit at the
+next modulus at each step, a condition the mod-$3$ legality check alone does not decide.
+Lemma~\ref{lem:ground} does not by itself establish this: the
 twist $2^{J+l-1}$ in the lemma depends on $z_0$ through its own optimal $J$, so it is not a single,
 $z_0$-independent relabeling of the unit group, and we do not have a general proof of the displayed
 identity.
@@ -474,7 +481,9 @@ frequencies, requires $j \ge 2\log_4(3)\,l - O(1) \approx 1.585\,l - O(1)$.
 \end{proposition}
 
 \begin{proof}
-Write $T := |R_{j-1,j}| = \binom{2j}{j}$. Positivity of $N(z)$ for every $z$ via
+From here on, $S(t)$ and $T$ specialize \eqref{eq:Nz}'s general $R_{j,k}$ to the family
+$R_{j-1,j}$ this paper's covering question actually concerns ($j$ terms, not $j+1$): write
+$T := |R_{j-1,j}| = \binom{2j}{j}$. Positivity of $N(z)$ for every $z$ via
 $\sum_{t\ne0}|S(t)| < T$ combined with the uniform estimate $|S(t)| \le C\sqrt{T}$ over the
 $3^l-1$ nonzero frequencies forces $(3^l-1)C\sqrt{T} < T$, so $T > ((3^l-1)C)^2$, i.e.\
 $4^j/\sqrt{3j+1} \ge T > ((3^l-1)C)^2$ (using the explicit bound from Proposition~\ref{prop:lowerbound}'s
@@ -500,8 +509,11 @@ $j=16$ (the first-order cardinality threshold, $T:=\binom{32}{16}$, six budgets 
 covering threshold $j^*(18)=22$: coverage necessarily fails here already, and this level sits below
 the $j\ge l$ range Sections~\ref{sec:holdouts}--\ref{sec:further} otherwise work in), with a negative
 result. Write
-$\|S\|_1:=\sum_{\gcd(t,3)=1}|S(t)|/T$ for the normalized $L^1$ mass over frequencies coprime to $3$;
-here $\|S\|_1=5226.01$. A fixed threshold makes the visible spikes look sparse, but of the $8{,}014$
+$\|S\|_1:=\sum_{\gcd(t,3)=1}|S(t)|/T$ for the normalized $L^1$ mass over frequencies coprime to $3$
+(this restriction excludes $t=3^{l-1}$ itself, the single frequency
+Proposition~\ref{prop:1547} shows carries the largest known magnitude for $l\ge2$; the diagnostic
+below concerns only the bulk of the spectrum away from that one point); here $\|S\|_1=5226.01$. A
+fixed threshold makes the visible spikes look sparse, but of the $8{,}014$
 frequencies with $|S(t)|/T$ exceeding $0.001$, their combined contribution to $\|S\|_1$ is under
 $132$, so over $97\%$ of the mass at this single computed level lives in an exponentially numerous
 population of near-average-magnitude coefficients. This is evidence
@@ -533,17 +545,23 @@ $e^{-\lambda_c(z)}$. Computed directly from the exact histogram for $l=10,\dots,
 eleven holdouts across these six levels has $\lambda_c$ well below the global mean at every depth
 $c=8,9,10$ with $c<l$ (at $l=10$, only $c=8,9$; $\lambda_c$ from $2.0$ to $108.4$, hole probability
 from $e^{-2}$ to $e^{-108}$): holdouts sit systematically in low-intensity cells, with how far below
-the mean varying substantially by depth and level; no single exponent characterizes it. A separate
+the mean varying widely by depth and level; no single exponent characterizes it. A separate
 diagnostic at a smaller, more tractable
-pair, $(l,m)=(14,16)$ (mean hit count $188.5$, a budget below the covering threshold $j^*(14)=19$),
-holds every $|S(t)|$ fixed and randomizes the phases of conjugate-symmetric pairs: writing $N(z)$
-for the exact hit count of residue $z$ and restricting the inverse transform to primitive
-frequencies, the actual ratio of $\max_z|N(z)-\text{mean}|$ to the root-mean-square of
-$N(z)-\text{mean}$ is $15.79$, while eight independent phase scrambles (fixed seed)
+pair, $(l,m)=(14,16)$, for the family $R_{m-1,m}$ (mean hit count $188.5$, a budget below the
+covering threshold $j^*(14)=19$), holds every $|S(t)|$ fixed and randomizes the phases of
+conjugate-symmetric pairs. Writing $N_l(z)$ for the exact hit count of residue $z$ and $N_{l-1}$ for
+the same tuple family's count one level down, restricting to primitive frequencies $3\nmid t$ gives
+exactly $\sum_{3\nmid t}S(t)e(-tz/3^l) = 3^{l-1}\bigl(3N_l(z)-N_{l-1}(z\bmod3^{l-1})\bigr)$, a
+measure of imbalance among the three lifts of each parent residue. Over unit $z$, the actual ratio
+of this quantity's maximum absolute value to its root-mean-square is $15.79$, while eight
+independent phase scrambles (fixed seed)
 give ratios only in $[5.11,5.24]$, collapsing to what a generic-phase model predicts once the phases
-are scrambled away. At the levels checked, both the raw holdout rarity and the phase-scramble gap
-point the same way: coverage failure is decided by phase structure that magnitude-only methods
-(uniform bounds, averages, low moments of $S(t)$) do not see.
+are scrambled away: the primitive lift imbalance in the actual data is far more extreme than a
+generic-phase null would produce, evidence that the true phases are structured rather than random,
+though this diagnostic is silent on what mechanism produces that structure or on whether it is what
+decides coverage. At the levels checked, both the raw holdout rarity and the phase-scramble gap
+point the same way, toward phase structure that magnitude-only methods (uniform bounds, averages,
+low moments of $S(t)$) do not see.
 
 \begin{proposition}
 \label{prop:1547}
@@ -658,12 +676,14 @@ budget $j=l+1$ at $l=3,4,5,6$ specifically. From $l=7$ on, $j=l+1$ remains empir
 Proposition~\ref{prop:h014}'s own open converse.
 \end{empresult}
 
-The converse direction, that a doubling chain of the observed maximal length is not merely
-sufficient but necessary for survival to that budget, is not proven, and is false as an unrestricted
-statement: $1547 \in 2H(7,8)\cap4H(7,8)$, yet $1547 \notin H(7,9)$ (both of $1547$'s two
+A stronger, per-witness converse of Theorem~\ref{thm:doubling} -- that $x/2,x/4\in H(l,j)$ already
+forces $x\in H(l,j+1)$, which would in turn make a maximal doubling chain both sufficient and
+necessary for survival to a given budget -- is false as an unrestricted statement:
+$1547 \in 2H(7,8)\cap4H(7,8)$, yet $1547 \notin H(7,9)$ (both of $1547$'s two
 budget-$9$ witnesses span the full exponent range, the one case Theorem~\ref{thm:doubling}'s
-argument does not directly control). We return to a restricted, still-open form of this converse in
-Section~\ref{sec:further}.
+argument does not directly control). Section~\ref{sec:further} returns to a restricted, weaker form
+of this converse (corner-redundancy, not the per-witness statement this counterexample refutes) that
+remains open in general and is proven at specific levels.
 
 A natural strengthening of Theorem~\ref{thm:doubling}, that every individual witness admits a
 bounded-cost local repair, is also false in its most optimistic form.
@@ -783,17 +803,32 @@ needs $j^*(l)-1\ge l$, elements of $H(l,j^*(l)-1)$ are $2^{j^*(l)-1-l}x$ for suc
 using $W^*(l)+1 = j^*(l)+l-1$ and that $2j^*(l)-2$ is always even.
 \end{proof}
 
+\begin{proposition}[Near-extinction: forward containment]
+\label{prop:extinctionfwd}
+If $j^*(l)\ge l+2$, $H(l,j^*(l)-1) \subseteq 2\cdot\{x \in H(l,j^*(l)-2) : x\equiv2\!\!\pmod3\}$.
+\end{proposition}
+
+\begin{proof}
+Write $J:=j^*(l)$. Theorem~\ref{thm:doubling} at $j'=J-2\ge l$ gives $H(l,J-1)\subseteq2H(l,J-2)$, so
+every $y\in H(l,J-1)$ equals $2x$ for a (unique, since $2$ is a unit) $x\in H(l,J-2)$. By
+Theorem~\ref{thm:parity}, $y\equiv1\pmod3$; since $y=2x$, $2x\equiv1\pmod3$, i.e.\ $x\equiv2\pmod3$.
+So $x$ lies in $\{x\in H(l,J-2):x\equiv2\pmod3\}$ and $y=2x$ lies in twice that set.
+\end{proof}
+
 \begin{empresult}[Near-extinction bijection]
 \label{er:extinction}
 $H(l,j^*(l)-1) = 2\cdot\{x \in H(l,j^*(l)-2) : x\equiv2\!\!\pmod3\}$, exactly, verified at every
-$l=2,\dots,9$ against the exact table with no exception.
+$l=2,\dots,9$ against the exact table with no exception. Proposition~\ref{prop:extinctionfwd} proves
+the $\subseteq$ direction unconditionally (at every level with $j^*(l)\ge l+2$, true throughout this
+range); only the reverse containment, that every $x\equiv2\pmod3$ in $H(l,j^*(l)-2)$ actually
+survives via $2x$, remains empirical.
 \end{empresult}
 
-The same width mechanism that proves Theorem~\ref{thm:parity} governs this bijection one step
-earlier, through the second-highest exponent $\beta_1$ of the extremal witness; unlike the
+The same width mechanism that proves Theorem~\ref{thm:parity} governs the reverse containment one
+step earlier, through the second-highest exponent $\beta_1$ of the extremal witness; unlike the
 top-exponent argument above, pinning $\beta_1$ down needs the one-step width identity of
 Lemma~\ref{lem:width} below. We have not carried that argument through to a full proof of this
-bijection and record it as empirically verified only.
+direction and record it as empirically verified only.
 
 A natural cross-level congruence relating $H(l+1,j^*(l+1)-1)$ to $H(l,j^*(l)-1)$ does not hold.
 Writing $\pi_l$ for reduction modulo $3^l$, the candidate congruence $x\equiv4\,\pi_l(x)\pmod{3^{l+1}}$
@@ -885,8 +920,8 @@ checked exhaustively for $l=3,\dots,13$ (the upper end is the largest width the 
 at each level), $\mathrm{Corner}(l,W+1)$ contributes nothing new: every corner witness's value is
 already covered without it. Call this the \emph{corner-redundancy} property at width $W$; whether it
 holds at every width $W\ge2l+1$ in general is unproven. It also holds, checked directly, at the one
-smaller width $W=2l$ itself for $l=3,4,5,6$; only from $l=7$ on does it first fail there (and,
-checked, at every width below $2l+1$ down to $l-1$). $W=2l$ is exactly $j=l+1$,
+smaller width $W=2l$ itself for $l=3,4,5,6$; only from $l=7$ on does it fail there, and, checked, at
+every narrower width from $l-1$ up to $2l$ as well. $W=2l$ is exactly $j=l+1$,
 Proposition~\ref{prop:h014}'s own case, so corner-redundancy is not uniformly unknown at that
 boundary: it holds at the four smallest levels checked and only becomes an open question from
 $l=7$.
@@ -947,8 +982,8 @@ Corollary~\ref{cor:bootstrap}'s bootstrap tight for every budget $l+2\le j\le j^
 merely at the levels $l=3,\dots,13$ where corner-redundancy is already verified; it would not, by
 itself, settle Proposition~\ref{prop:h014}'s converse at every level, which turns on the boundary
 budget $j=l+1$ ($W=2l$), established above only at $l=3,4,5,6$ and open from $l=7$ on. Neither
-question is, on its face, as hard as the Weak Covering Conjecture itself; whether either is
-substantially easier is not known.
+question is, on its face, as hard as the Weak Covering Conjecture itself; whether either is much
+easier is not known.
 
 A finite exponential sum built from strictly decreasing, exponentially weighted digit tuples is a
 natural object beyond this specific covering problem: finite-population $L$-statistics at non-CLT
@@ -957,8 +992,8 @@ analytic side of the Collatz literature via Tao's discussion are all adjacent ar
 found here may recur there under different names: generic cancellation unable to match a bound
 already conditionally established here by other means, exceptional mass that does not concentrate
 on a sparse set
-at the accessible scale, and coverage failure decided by an extremal arithmetic obstruction that a
-phase-randomization experiment showed magnitude-only methods miss. Tao's later, unrelated result
+at the accessible scale, and an extremal arithmetic obstruction, pointed to by both holdout rarity and
+a phase-randomization null diagnostic, that magnitude-only methods miss. Tao's later, unrelated result
 that almost every Collatz orbit attains an almost bounded value~\cite{tao2019} works with a
 first-passage random variable over a different probabilistic model of the same map and does not
 bear on covering directly, but is the clearest instance of a new kind of technique changing what
@@ -982,7 +1017,9 @@ behind every computation reported here, one folder per section. It contains the 
 that produced Table~\ref{tab:jstar}, the model comparison behind Table~\ref{tab:aic}, the
 mean-payoff-game solver, the exponential-sum computations of Section~\ref{sec:gapA}, and the
 holdout computations of Sections~\ref{sec:holdouts} and~\ref{sec:further}, together with the
-stored holdout sets at the final budgets of each level $l=5,\dots,21$. The twelve certificates
+stored holdout sets at the final budgets of each level $l=5,\dots,21$; the $\mathrm{maxrun}(H(l,l+1))$
+computation behind Proposition~\ref{prop:h014}'s discussion, which reaches $l=22$, lives as a
+directly runnable tool in its own folder. The twelve certificates
 $(\sigma_k,\rho_k,h_k)$ behind Table~\ref{tab:mpg} are stored there with a verifier that re-checks
 each of them against the inequality in Theorem~\ref{thm:mpg}'s proof, without re-running the
 solver. Each folder's README gives what it checks, the command, the output to expect, and what the

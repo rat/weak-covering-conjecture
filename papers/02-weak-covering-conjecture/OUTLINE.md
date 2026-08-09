@@ -241,3 +241,23 @@ A push), notes/H-013.md, notes/GAP-A-round4.md, notes/GAP-A-round5*.md.
       13 instances across Rounds 3-6's additions, uncaught since Round 1; cut back to 2. Same
       corner-redundancy-boundary error found and fixed in the reproducibility repo's own README.
       Recompiled clean, 15 pages, 0 errors, 0 em-dashes, visually re-verified. Round 7 next.
+- [x] **Round 7 complete (2026-08-09).** Codex + Opus 5 max effort, fresh context, PDF frozen. 26
+      findings total (6 Codex, 20 Opus), no critical or major flaw in any formal proof; both
+      reviewers independently re-derived or reproduced most of the paper's content, including all
+      references against primary sources. Most substantive (Codex): Section 5.3's phase-scramble
+      statistic was described as deviation from the global mean, but the underlying script
+      (verified directly) actually measures imbalance among the three lifts of each parent
+      residue, a different quantity with the same numerical value; fixed, along with the
+      overstated "coverage failure is decided by phase structure" conclusion drawn from it.
+      Second most substantive (Opus): the near-extinction bijection's forward direction turned out
+      provable directly from Theorem 9 + Theorem 16 (same pattern as the post-Round-5 upgrades),
+      re-derived, verified computationally, and split into a new Proposition 17 plus a narrower
+      Empirical Result 18. A citation-antecedent ambiguity in the Introduction (checked against
+      the primary source) was also fixed. Several smaller precision fixes (the 1547
+      counterexample's actual target, a `T` notation collision, Section 5.2 excluding the one
+      frequency proven largest, Section 9's silence on the l=22 maxrun tool, banned vocabulary,
+      a self-contradictory sentence). Three items reviewed and explicitly deferred with reasons
+      (Proposition 8's placement, the independence-model/phase-experiment specification, ER13's
+      Durfee-depth exposition). Recompiled clean, 15 pages, 0 errors, 0 em-dashes, visually
+      re-verified. Reproducibility repo updated (new verification script, all READMEs resynced).
+      Round 8 next.

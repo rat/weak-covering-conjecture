@@ -118,6 +118,26 @@ entry.
 | C-98 | 6 | Proposition 1's cardinality result (`|R_{j-1,j}|=binom(2j,j)`) is essentially Wirsching's own Corollary 1.8 (verified against the primary source), re-derived here with no attribution | minor | fixed: added a one-clause credit |
 | C-99 | 6 | Abstract's "capped below even this bound" reads ambiguously (Proposition 7 gives a floor, worse than the 1.125l bound, not an upper cap below it) | minor | fixed: reworded to "cannot beat a threshold worse than this bound" |
 | C-100 | 6 | (Producer-found, neither reviewer flagged it) Rule 5c's antithesis budget (at most 2 "P, not Q" / "not merely P but Q" constructions per document) was blown: 13 instances had accumulated across Rounds 3-6's text additions, none re-checked against this specific budget since Round 1 | moderate | fixed: cut to exactly 2 (the mean-payoff-game bound's verified-not-proven status, and the doubling-chain sufficient-not-necessary distinction), the rest rewritten as plain positive statements |
+| C-101 | 7 | (Codex) Section 5.3's phase-scramble statistic was described as deviation from the global occupancy mean ("N(z)-mean"); the actual quantity computed (verified against `analyze_inverse.py`) is `3^(l-1)(3N_l(z)-N_{l-1}(z mod 3^(l-1)))`, a measure of imbalance among the three lifts of each parent residue, a different quantity | major | fixed: rewrote with the correct identity, verified against the underlying script before acting |
+| C-102 | 7 | (Codex) "coverage failure is decided by phase structure" (Section 5.3 and echoed in the Discussion) overstates what the phase-scramble null diagnostic shows: it compares extremal ratios of a signed transform, not whether valid scrambled models actually contain uncovered residues | moderate | fixed in both locations: reworded to a properly scoped null-diagnostic conclusion |
+| C-103 | 7 | (Codex) Introduction's "the natural Fourier approach... is shown to fail" claims a general negative result the body does not establish; only the naive uniform-cancellation version is shown to fail | moderate | fixed |
+| C-104 | 7 | (Opus) Introduction's citation to Wirsching 2003 had an ambiguous antecedent, readable as claiming that paper develops the covering-question construction itself, which it does not (verified: no "covering", no R_{j,k}, no WCC in its text); the paper develops the broader predecessor-density route | major | fixed: restructured the sentence so the citation attaches unambiguously to "Wirsching's own route to positive predecessor density" |
+| C-105 | 7 | (Opus) ER17 (Near-extinction bijection)'s forward (subset) direction is provable directly from Theorem 9 + Theorem 16, no new machinery, but was labeled "empirically verified only" | moderate | fixed: verified the derivation and computationally at l=2..7, split into a proven Proposition 17 (forward containment) plus a narrower Empirical Result 18 (the reverse containment, still open) |
+| C-106 | 7 | (Opus) Empirical Result 3 (the game's worst case) uses a min over each z0's legal plays without establishing the set of legal plays is ever nonempty; a general proof would also need each move's successor to stay a unit at the next modulus, not just the mod-3 legality check | moderate | fixed: added an explicit note that this is empirically confirmed by the l=1..12 verification but not proven in general, naming the actual gap |
+| C-107 | 7 | (Opus) The 1547 counterexample paragraph described the falsified claim as "a doubling chain... necessary for survival to that budget," but the actual counterexample refutes a different, more specific statement: the per-witness converse of Theorem 9's set inclusion | moderate | fixed: restated the falsified claim precisely as the per-witness converse, connected explicitly to what Section 7 does and does not prove about the weaker (corner-redundancy) converse |
+| C-108 | 7 | (Opus) Section 5.2's L1 mass diagnostic restricts to frequencies coprime to 3, silently excluding t=3^(l-1), the single frequency Proposition 8 proves carries the largest known magnitude | moderate | fixed: added an explicit note about the exclusion and its scope |
+| C-109 | 7 | (Opus) Notation collision: T is defined as `\|R_{j,k}\|` at eq. (3) for the general family, then redefined as `\|R_{j-1,j}\|=binom(2j,j)` in Proposition 7's proof for the specific family actually used from there on | moderate | fixed: added a one-clause note that Proposition 7 specializes eq. (3)'s general T, rather than silently reusing the symbol |
+| C-110 | 7 | (Opus) Section 9 (data availability) never mentions the separate tool behind the l=22 maxrun computation cited in Empirical Result 12 and Proposition 20's discussion; the stored-dump description (l=5..21) does not cover it | moderate | fixed: added an explicit sentence naming this as a separate, directly runnable tool, not a stored dump |
+| C-111 | 7 | (Opus) Abstract advertises the square-root-cancellation threshold (Proposition 7) as a live obstruction while omitting that Proposition 8 shows no constant can even achieve it at one explicit frequency; a reader of the abstract alone gets an incomplete picture. Checked against the current abstract text (Rule 8c) and confirmed the gap was real, not already covered by Round 6's softening | moderate | fixed: added one clause to the abstract stating the premise is refuted outright |
+| C-112 | 7 | (Opus) Abstract's "verified at every level checked" (corner-redundancy) is vague; corner-redundancy is verified only for l=3,...,13, while "levels checked" elsewhere in the paper means l up to 20-23 | minor | reviewed: the abstract's surrounding sentence already scopes this to "one further combinatorial property verified at every level checked" without claiming a specific range; judged adequately scoped in context, no change |
+| C-113 | 7 | (Opus) Self-contradictory phrasing: "the only increment... at which the covering budget does not increase" (an increment at which nothing increases) | minor | fixed: reworded to "the only step... at which" |
+| C-114 | 7 | (Opus) Ambiguous parenthetical after the corrected corner-redundancy boundary claim (Round 6's own fix), readable as contradicting the failure clause it modifies | minor | fixed: reworded for one unambiguous reading |
+| C-115 | 7 | (Opus) Banned vocabulary from the project's writing protocol: "precise/precisely" (twice), "substantially" (twice), "not a meaningful test" | minor | fixed: all five reworded |
+| C-116 | 7 | (Opus) Abstract's "empirically exact at the remaining budget" understates: at l=3,4,5,6 that budget (j=l+1) is now proven, not merely empirical, per Round 6's Proposition 22 extension | minor | fixed |
+| C-117 | 7 | (Opus) Proposition 8 is placed in subsection 5.3 (about holdout cells and phase randomization) though its content (magnitude of S(3^(l-1)), refuting Proposition 7's premise) belongs with 5.1 | minor | deferred: organizational only, not a correctness issue; the content connection between Proposition 7 and 8 is now made explicitly in the text (C-89, Round 6) regardless of section placement; moving a proof block risks new errors for a purely stylistic gain, not attempted this round |
+| C-118 | 7 | (Opus) The "independence model" comparison (Section 7, before Lemma 21) and the phase-experiment's population/normalization (Section 5.3) remain under-specified (Bernoulli vs. fixed-cardinality, wraparound, which residues) | minor | deferred: recurring since Round 4, genuine gap but requires either a new formal model definition or new experiments; left as a carried item |
+| C-119 | 7 | (Opus) Durfee depth (Empirical Result 13) is defined and used for one clause, never connected to the "cost-1 local repair rule" the result is named after; the Durfee-depth counts and the symmetric-difference repair costs are two separate measurements presented together | minor | deferred: a real structural clarity point, but restructuring ER13's exposition carries more risk than value this late; left as a carried item |
+| C-120 | 7 | (Opus) Safety condition's three-lift quantifier ("regardless of which digit the adversary supplies") oversells: for every k>=3 used in this paper, 3^k=0 mod 9 makes the quantifier vacuous in one respect (T_d(x) mod 3 depends only on x mod 9) | minor | deferred: correct but narrow observation, not an error in what's claimed; left as a carried item |
 
 ## Full findings
 
@@ -535,3 +555,56 @@ budget, "at most two 'P, not Q' constructions per document") had not been re-run
 Recompiled clean (15 pages, 0 errors, 0 em-dashes, cite/bibitem check clean) and visually
 re-verified. Full findings list above, C-80 through C-100, all resolved (fixed or verified-no-change).
 Proceeding to Round 7.
+
+## Round 7 (2026-08-09)
+
+Same protocol, fresh context, PDF frozen (15 pages, post-Round-6). Codex found 6 issues, all
+moderate/minor, no critical or major flaw in any formal proof, and confirmed the conditional
+$9l/8+O(1)$ bound is consistently labeled conditional throughout. Opus found 20 issues, also no
+critical or major mathematical error in any proof; it independently re-derived or reproduced all 23
+values of `e(l)`, both fits in Remark 6, Propositions 7, 8, 15, 17 (new this round), 18, 22, Theorems
+9 and 16, Corollaries 10 and 11, Lemmas 14 and 21, and every cited reference against its primary
+source, including re-checking the local copy of Wirsching's book for both citations used.
+
+The most substantive finding (Codex) was a real misidentification: Section 5.3's phase-scramble
+statistic was described as measuring deviation from the global occupancy mean, but the actual
+quantity the underlying script computes (verified directly against `analyze_inverse.py` before
+acting, Rule 8c) is a measure of imbalance among the three lifts of each parent residue, a
+genuinely different object with the same numerical value. Fixed with the correct identity. The
+paper's "coverage failure is decided by phase structure" conclusion, in both Section 5.3 and the
+Discussion, was also overstated relative to what a null diagnostic on that statistic actually shows,
+and was rescoped in both places.
+
+The second substantive finding (Opus) turned into a real proof upgrade, following the same pattern
+as the post-Round-5 work: the forward (subset) direction of Empirical Result 17 (near-extinction
+bijection) is directly provable by combining Theorem 9 and Theorem 16, no new machinery. Re-derived,
+verified computationally at l=2..7 before writing in, and split into a proven Proposition 17 plus a
+narrower Empirical Result 18 for the still-open reverse direction.
+
+A citation-clarity issue (Opus) was also caught and fixed: the Introduction's sentence introducing
+Wirsching's 2003 paper had an ambiguous antecedent, readable as claiming that paper develops the
+covering-question construction itself (verified against the primary source: it does not contain
+"covering," `R_{j,k}`, or WCC anywhere) rather than the broader predecessor-density route it
+actually develops. Restructured so the citation attaches unambiguously to the correct antecedent.
+
+Several smaller precision fixes followed the by-now-familiar pattern of a claim stated more broadly
+than its own justification supports: the Introduction's "shown to fail" for the Fourier approach
+(only the naive uniform-cancellation version is shown to fail), the 1547 counterexample's stated
+target (it refutes a specific per-witness converse, not the general "chain length is necessary for
+survival" claim the surrounding prose named), Section 5.2's L1 diagnostic silently excluding the one
+frequency proven to carry the largest magnitude, a genuine `T` notation collision between the
+general and specialized exponential-sum setups, and Section 9's silence on where the l=22
+`maxrun` computation actually lives. A handful of banned-vocabulary instances ("precise/precisely,"
+"substantially," "not a meaningful test") were also caught and fixed, along with a self-contradictory
+sentence ("the only increment... at which the budget does not increase").
+
+Three findings were reviewed and deferred rather than fixed: Proposition 8's subsection placement
+(organizational only, the content connection is already made in text), the independence-model and
+phase-experiment population definitions (recurring since Round 4, needs a real model specification
+this project has not written), and Empirical Result 13's Durfee-depth exposition (a real structural
+clarity gap, judged lower value than the risk of restructuring it this late). All three carried
+forward as open items, not silently dropped.
+
+Recompiled clean (15 pages, 0 errors, 0 em-dashes, cite/bibitem check clean) and visually
+re-verified. Full findings list above, C-101 through C-120, resolved (fixed, verified-no-change, or
+deferred with a stated reason). Proceeding to Round 8.
