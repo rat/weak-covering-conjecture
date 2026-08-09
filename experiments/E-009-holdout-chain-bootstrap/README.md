@@ -146,6 +146,23 @@ Computed after the main tables (same scripts plus the inline check recorded in
    mod-3-class-2 part of `H(j*-2)` exactly. Same flavor as the bootstrap tightness: near
    extinction the doubling maps are not just inclusions but essentially onto.
 
+## Pointwise coverage is NOT monotone in j (found via the l=13 ancestry funnel)
+
+Residue `128368 mod 3^13` is covered at budgets 13 and 14, NOT covered at 15 and 16, covered
+again at 17 (`nonmonotone_coverage.py`, with an explicit hand-checkable budget-14 witness).
+The mechanism is 0-locking: when every witness of a residue contains exponent 0, no
+residue-preserving extension to the next budget exists. Two consequences:
+
+- The folklore "coverage is monotone in j" (assumed by `jstar-fast`'s bisection since H-001
+  began) is FALSE pointwise. Full-coverage monotonicity IS true, but its only proof on record
+  is this experiment's Theorem 1: `H(l,j)` empty implies `H(l,j+1) subset 2H(l,j)` empty.
+  The bisection is sound, for a previously unarticulated reason.
+- `128368` is also the "fresh defect" whose x4 image is level 13's final holdout `513472`, and
+  its halving orbit `8023*{1,2,4,8}` is the maximal 4-chain of `H(13,14)`: the entire death
+  chronology of level 13 is one geometric 2-progression (`513472 = 64 * 8023` exactly, as
+  integers). The ancestry funnel demanded by Theorem 1 (`h*2^-s in H(17-t)` for `s in [t,2t]`)
+  verifies exactly at every depth `t=1..4`.
+
 ## Files
 
 - `verify_witness_maps_and_inclusions.py`: Lemma 1 (500 random exact checks), Theorem 1 and the

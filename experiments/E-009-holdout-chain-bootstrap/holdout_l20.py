@@ -20,16 +20,13 @@ def coverage_bigint(l, j):
         print(f"  a={a} done", file=sys.stderr, flush=True)
     return dp[j]
 
-def bits_to_list(x):
-    out = []
-    idx = 0
-    while x:
-        tz = (x & -x).bit_length() - 1
-        idx += tz
-        out.append(idx)
-        x >>= tz + 1
-        idx += 1
-    return out
+def bits_to_list(x, q):
+    """Set-bit positions of a q-bit int, via numpy (the per-bit shift loop is quadratic)."""
+    import numpy as np
+    nbytes = (q + 7) // 8
+    arr = np.frombuffer(x.to_bytes(nbytes, 'little'), dtype=np.uint8)
+    bits = np.unpackbits(arr, bitorder='little')[:q]
+    return [int(i) for i in np.nonzero(bits)[0]]
 
 def maxrun_chains(s, q):
     best, best_start = 0, None
@@ -48,7 +45,7 @@ l = 20
 q = 3 ** l
 JSTAR_L = 24
 prev = None
-for j in (22, 23):
+for j in (21, 22, 23):
     cov = coverage_bigint(l, j)
     # holdouts: units (not div by 3) not covered
     units_pat = int(''.join('011' * 1), 2)  # per 3 bits: positions 0 mod 3 excluded
@@ -64,7 +61,7 @@ for j in (22, 23):
         bits *= 2
     units = pat & ((1 << q) - 1)
     holdbits = units & ~cov
-    hold = bits_to_list(holdbits)
+    hold = bits_to_list(holdbits, q)
     s = set(hold)
     mr, start = maxrun_chains(s, q)
     cls = sorted(set(x % 729 for x in hold))
