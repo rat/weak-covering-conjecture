@@ -1,12 +1,14 @@
 # CRITIQUE: papers/02-weak-covering-conjecture
 
-PDF-only blind critique loop, Codex (`gpt-5.6-sol`) + Fable, fresh context each round, per Rule
-8/15. Researcher's explicit request, 2026-08-09, same protocol as papers/01-wirsching-conjecture3.
-Originally up to 5 rounds; the researcher extended the cap to 10 rounds on 2026-08-09 after Round 5
-closed, specifically to test whether the two reviewers converge (a round returning no further real
-findings from either). Iterate until convergence or the round-10 cap, whichever comes first. Full
-findings text preserved below by round; this table is kept current as the producer resolves each
-entry.
+PDF-only blind critique loop, Codex (`gpt-5.6-sol`) + Opus 5 max effort, fresh context each round,
+per Rule 8/15. Researcher's explicit request, 2026-08-09, same protocol as
+papers/01-wirsching-conjecture3. Originally up to 5 rounds, then extended to 10 on 2026-08-09 after
+Round 5 closed. After Round 9 (two majors, both in exposition/framing rather than in the proofs
+themselves, following two rounds with none) the researcher replaced the round cap with a data-driven
+stopping rule, also set 2026-08-09: stop only once critical, major and moderate findings have been
+zero for three consecutive rounds, AND minor findings are below three in that same window. No fixed
+round cap applies from here; iterate until that condition holds. Full findings text preserved below
+by round; this table is kept current as the producer resolves each entry.
 
 ## Status table
 
