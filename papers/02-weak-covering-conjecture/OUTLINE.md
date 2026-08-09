@@ -170,10 +170,22 @@ A push), notes/H-013.md, notes/GAP-A-round4.md, notes/GAP-A-round5*.md.
       being written in. One Opus finding (a claimed modulus typo) was checked and found false per
       Rule 8c, recorded as such rather than silently dropped. See CRITIQUE.md for the full list.
       Recompiled clean, 12 pages, 0 errors, 0 em-dashes, visually re-verified page by page.
+      Three researcher decisions resolved 2026-08-09 before Round 5: (1) bibliography widened,
+      three new references read and verified against primary sources (Rule 11) before citing --
+      Wirsching's own 2003 follow-up on positive predecessor density (directly on-topic, cited in
+      the Introduction), Tao's 2019 "almost bounded values" paper, and Krasikov-Lagarias's
+      difference-inequality density bounds (both cited in the Discussion as adjacent, distinct
+      approaches); (2) Section 5.3's "cell/local intensity/conductor-depth" language formalized --
+      and in the process, a producer-found error surfaced and was fixed (CRITIQUE.md C-62): the
+      "e^-23 to e^-100" figure did not reproduce under the only natural reading of the informal
+      language it came from, direct recomputation from the exact histogram giving `e^-2` to
+      `e^-108` instead. Fixed with a precise definition and the corrected range, backed by a new
+      script now in the reproducibility repo (`section5-exponential-sum/local_intensity.py`);
+      (3) the l=24 attempt narration kept as is (researcher's explicit choice, real circumstantial
+      detail, Rule 9's exception to Rule 5c's usual ban on process narration). 13 pages now.
       Several moderate/minor items carried to Round 5 (Table 3's missing sigma_k/h_k, the cost-1
       repair rule's formal statement, the independence model's formal definition, Table 2's fitted
       slope, the L1-mass computation's exclusion of `t=3^(l-1)`, the mod-9 result's thin l-range,
-      ER16's upgradability); bibliography breadth, Section 5.3's formalize-or-cut question, and the
-      l=24 process-narration paragraph are flagged as researcher scoping decisions, not producer
-      fixes. Round 5 (the final round under the 5-round cap) not yet launched; PDF frozen for its
-      full duration once started, per the lesson recorded in Round 3's CRITIQUE.md narrative.
+      ER16's upgradability). Round 5 (the final round under the 5-round cap) not yet launched; PDF
+      frozen for its full duration once started, per the lesson recorded in Round 3's CRITIQUE.md
+      narrative.
