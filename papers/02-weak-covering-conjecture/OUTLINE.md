@@ -315,4 +315,41 @@ A push), notes/H-013.md, notes/GAP-A-round4.md, notes/GAP-A-round5*.md.
       verified correct, no change. Recompiled clean, 17 pages (new lemma), 0 errors, 0 em-dashes,
       parenthesis balance verified, visually re-verified. Repro repo: two new verification scripts,
       three READMEs resynced. Two majors from two independently-reasoning reviewers at Round 9 of
-      10 means the loop has not converged; Round 10 next, the last under the researcher's extension.
+      10 means the loop has not converged; Round 10 next.
+- **Stopping rule replaced (2026-08-09).** Researcher: stop only after 3 consecutive rounds with
+      zero critical/major/moderate findings and minor findings under 3, tracked in CRITIQUE.md's
+      new tally table. No fixed round cap. Reason: criticals had already zeroed since Round 5, but
+      majors kept recurring on a "no findings from either reviewer" criterion unlikely to ever fire,
+      since substantial edits each round reseed fresh surface regardless of correctness.
+- [x] **Round 10 complete (2026-08-09).** Codex + Opus 5 max effort. Codex's sandbox failed twice
+      (bubblewrap/network-namespace error) before a third attempt succeeded hours later, by which
+      point several Opus-driven fixes were already applied, so Codex reviewed a mid-round PDF, not
+      the frozen Round 9 one; recorded as a protocol slip, findings counted toward Round 10
+      regardless. Combined tally: 0 critical, 1 major, 8 moderate, 8 minor -- not clean, streak
+      resets to 0. Major (Codex): the l=21-23 table extension has no independent certification
+      beyond "carried forward by inference," deferred twice before; closed with an actual
+      from-scratch Python re-implementation (native bignum bitsets), validated exactly against
+      Table 1 through l=17, launched at l=21 in the background rather than deferred a third time;
+      Section 9 now pins the repro repo's commit hash instead of just its URL. Both reviewers
+      re-derived every proof (Lemma 1 through Proposition 24) a second consecutive round with
+      nothing found wrong; every finding sits in Section 3's and Section 5's numerical or
+      statistical framing. Opus: the paper's own recorded script output already contradicted
+      Section 5.2's exceptional-mass figures (12.2/99.7%, not the printed 132/97%, an order of
+      magnitude off and understating the paper's own evidence); the "dyadic rationals" framing for
+      the largest-magnitude frequencies was wrong (they cluster by 3-adic valuation, not dyadic
+      proximity, confirmed by independent FFT computation); a Round-9 addition mislabeled `t=3^(l-1)`
+      as dyadic; the phase-scramble ratio was described as "over unit z" when the script computes it
+      over all z; several smaller wording and pointer fixes. Codex, beyond the major: proved
+      computationally that the plateau test's null was already impossible on the tail alone (the
+      13-step total change is confined to {10,11} under any constant-rounding model, but the
+      observed change is 12), replacing a p-value against a dead null with a deterministic
+      refutation; a real inconsistency in how the mean-payoff certificate's checked condition was
+      described; "falsifies the Poisson model outright" walked back to "discarded on that basis"
+      without swinging past Round 9's own earlier correction of the same sentence; the phase-scramble
+      null's failure to preserve already-proven constraints; three Discussion sentences overstating
+      what Section 5 established, the third round a Section 5 overclaim recurred in a different
+      spot; AIC/BIC/LOOCV's missing no-sampling caveat; this round's own valuation-ordering claim
+      needing a scope and the identity behind it. Recompiled clean, 17 pages, 0 errors, 0 em-dashes,
+      parenthesis balance verified, antithesis count back to the 3-item baseline, visually
+      re-verified. Repro repo: section3 README resynced for the dropped p-value. l=21 independent
+      recomputation still running at round's end; result to follow.

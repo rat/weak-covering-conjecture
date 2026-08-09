@@ -240,7 +240,9 @@ Gaussian-OLS forms $\mathrm{AIC}=n\ln(\mathrm{RSS}/n)+2k$, $\mathrm{BIC}=n\ln(\m
 (RSS the residual sum of squares, $k$ the number of regression coefficients, $1$ for the constant
 model and $2$ for the other three), and leave-one-out cross-validated RMSE; since only differences
 $\Delta\mathrm{AIC}$, $\Delta\mathrm{BIC}$ are used below, the convention for a shared additive
-constant across models does not affect them.
+constant across models does not affect them. $e(l)$ is an exact, deterministic sequence with no
+sampling model behind it, so these are read descriptively throughout, as penalized fit scores over
+the observed table rather than calibrated statistical evidence.
 
 \begin{table}[h]
 \centering
@@ -273,22 +275,25 @@ a constant-plus-linear quantity $l\log_43+c$ to the nearest integer can only cha
 from one $l$ to the next, yet $j^*(1)=1$ and $j^*(2)=4$, an increment of $3$. A constant-$e(l)$
 source is incompatible with the table's first two entries alone, with no statistical test required.
 
-A direct combinatorial test tells the same story from a different angle, restricted to where its own
-null hypothesis is not already dead: the constant-rounding model behind it predicts every increment
-in $\{0,1\}$, which the full table already refutes (the increments of $2$ and $3$ noted above), so a
-plateau count over the full range tests nothing about that model. Restricted to the $l=10,
+A direct combinatorial fact rules out the same tail even more sharply, restricted to where the model
+is not already dead over the full table: the constant-rounding model behind it predicts every
+increment
+in $\{0,1\}$, which the full table already refutes (the increments of $2$ and $3$ noted above).
+Restricted to the $l=10,
 \dots,22$ tail the model comparison above uses ($13$ increments over the same $14$ points, all
-actually in $\{0,1\}$, consistent with the model's own prediction), exactly one is zero (the
-$l=15\to16$ plateau noted above); the constant-rounding model predicts a plateau at a fixed fraction
-$1-\log_43\approx0.2075$ of increments (the fraction of the real line, in the limit, that rounds down
-rather than up under a linear-plus-constant quantity with irrational slope $\log_43$); testing the
-observed count of $1$ against $\mathrm{Bin}(13,1-\log_43)$, one-sided, gives $p\approx0.214$. $e(l)$
+actually in $\{0,1\}$, consistent with the model's own prediction there), a fixed-$c$ model
+$J_l:=\mathrm{round}(l\log_43+c)$ forces the total change over any $13$ consecutive steps into
+$\{\lfloor13\log_43\rfloor,\lceil13\log_43\rceil\}=\{10,11\}$, for every $c$ (a standard fact about
+$\mathrm{round}$ of an arithmetic progression with irrational slope, checked directly over a fine
+grid of $c$). The observed change is $j^*(23)-j^*(10)=27-15=12$, outside that pair for every $c$: no
+constant-rounding model can reproduce this tail at all, a conclusion that needs no probability. $e(l)$
 is an exact, deterministic
-sequence, so this carries no sampling interpretation; it is best read descriptively, as ``how well
-does a constant-$e(l)$ source fit the observed tail increment pattern.'' Under the constant-rounding
-model, $e(l+1)-e(l)$ can only be $1-\log_43\approx0.2075$ or $-\log_43\approx-0.7925$; the plateau
+sequence throughout, so nothing in this paragraph carries a sampling interpretation. Among the $13$
+increments, exactly one is zero (the $l=15\to16$ plateau noted above); under the constant-rounding
+model, $e(l+1)-e(l)$ can only be $1-\log_43\approx0.2075$ or $-\log_43\approx-0.7925$. The plateau
 count above and Section~\ref{sec:growth}'s OLS comparison are both functions of the same
-$14$-point increment sequence, so they are not independent checks, though the plateau test bears
+$14$-point increment sequence, so they are not independent checks, though the plateau observation
+bears
 specifically on the constant-rounding model, a different object from the free-intercept constant
 regression $e(l)=c$ that Table~\ref{tab:aic} fits.
 
@@ -371,8 +376,7 @@ $3\cdot2^{a_1+d_1}z'\equiv\sum_{i=1}^{n-1}2^{a_i}3^i$, so
 \[
 2^{a_0+d_0}z \equiv 2^{a_0} + \sum_{i=1}^{n-1}2^{a_i}3^i = \sum_{i=0}^{n-1}2^{a_i}3^i \pmod{3^n},
 \]
-the claim at length $n$, using $a_0+d_0=J_n+n-1$ (telescoping the recursion). Verified directly
-against every legal play for $l=1,\dots,4$ as a check, with no exception, before being trusted.
+the claim at length $n$, using $a_0+d_0=J_n+n-1$ (telescoping the recursion).
 \end{proof}
 
 \begin{empresult}[The game's worst case is $j^*(l)$]
@@ -443,8 +447,9 @@ $j^*(l) \le \rho_k\cdot l + C_k$ for all $l$.
 
 \begin{proof}
 Fix $k$ in range. The policy $\sigma_k$, the value $\rho_k$, and a potential $h_k:(\Z/3^k\Z)^*\to\Q$
-are computed by a nested Howard strategy-improvement solver and checked, state by state and digit by
-digit over the finite action set established above, against
+are computed by a nested Howard strategy-improvement solver searching over the finite action set
+established above, and $\sigma_k$'s chosen move is checked, state by state and digit by digit,
+against
 \[
 d_{\sigma_k}(s) + h_k(s'(\epsilon)) \le \rho_k + h_k(s)
 \]
@@ -464,13 +469,17 @@ Result~\ref{er:soundness} gives $j^*(l) \le \rho_k l + C_k$.
 $\sigma_k$, $h_k$ and $\rho_k$ are computed as rationals by a nested Howard strategy-improvement
 solver, which searches actions $d$ up to a fixed cap of $40$ (well above the largest $d$ any
 certified policy below actually uses at any $k=3,\dots,14$, which is $11$). The potential inequality
-above is checked, state by state and digit by digit, against the full legal, safe action set at that
-state, so the resulting upper bound $j^*(l)\le\rho_kl+C_k$ does not depend on the cap. The solver
+above is checked only for $\sigma_k$'s chosen move at each state, against all three adversary digits,
+never against the rest of the action set; that chosen move's own legality and safety are verified
+directly from the full-game definitions above ($2^dz\equiv1\pmod3$ and the three-lift condition),
+which do not reference the cap at all, so the resulting upper bound $j^*(l)\le\rho_kl+C_k$ does not
+depend on it either. The solver
 also extracts a matching adversary lower bound from the same run, but that computation ranges only
 over the same capped action set: ``upper bound equals lower bound'' certifies $\rho_k$ exactly as the
 value of the mean-payoff game restricted to $d\le40$, not, without further argument, as the value of
 the unrestricted game on the full action set $\{0,\dots,2\cdot3^k-1\}$ described above, since a move
-with $d>40$ could in principle let the adversary force a lower true value. Table~\ref{tab:mpg}
+with $d>40$, unavailable to the capped lower-bound computation, could in principle let the
+minimizing player achieve a lower true value than the capped certificate rules out. Table~\ref{tab:mpg}
 reports $\rho_k$, $C_k$ under this understanding: certified rates of an exhibited, verified policy,
 which is all Theorem~\ref{thm:mpg} needs, not a proven-exact value of the full window-$k$ game.
 $\sigma_k$ and $\rho_k$ are cross-validated by an independent value-iteration solver and, at $k=4$ and
@@ -487,7 +496,7 @@ $\tfrac{11}{9}$ & $\tfrac65$ & $\tfrac76$ & $\tfrac{119}{104}$ & $\tfrac98$ \\ \
 $C_k$ & $5$ & $\tfrac{19}{3}$ & $\tfrac{15}{2}$ & $9$ & $10$ & $\tfrac{207}{19}$ & $\tfrac{47}{4}$ &
 $\tfrac{115}{9}$ & $\tfrac{69}{5}$ & $\tfrac{44}{3}$ & $\tfrac{1621}{104}$ & $\tfrac{33}{2}$
 \end{tabular}
-\caption{The window-relaxation value $\rho_k$ and constant $C_k$, $k=3,\dots,14$.}
+\caption{The certified window-relaxation rate $\rho_k$ and constant $C_k$, $k=3,\dots,14$.}
 \label{tab:mpg}
 \end{table}
 
@@ -536,7 +545,7 @@ every $z$ as soon as $\sum_{t\ne0}|S(t)| < T$. This route is closed before it op
 Proposition~\ref{prop:sqrtceiling} below shows the sum on the left is never below $T$, for any
 $l$, $j$, $k$: the criterion cannot be reached at all, for any budget. The remainder
 of this section studies what is left once the full-spectrum route is abandoned: a primitive-frequency
-version of the same idea (\S5.3), and why it too resists the reasons below.
+version of the same idea (\S5.2), and the further reasons below why it resists too.
 
 \subsection{A hard ceiling on uniform cancellation}
 
@@ -578,11 +587,17 @@ treatment (a major/minor-arc split, in the language of the circle method) can do
 
 \subsection{A computation: the exceptional mass does not stay small}
 
-Numerically, $|S(t)|$ is far from uniform: the frequencies of largest magnitude sit close to dyadic
-rationals of small denominator, $t/3^l \approx p/2^r$ for small $r$, matching exactly the conjugate
-pair Proposition~\ref{prop:sqrtceiling} exhibits at $t=3^{l-1},2\cdot3^{l-1}$ ($r=0$). The natural
-repair is to restrict to primitive frequencies, excising this pair along with the rest of the
-non-primitive spectrum, and control the remainder by an averaged bound; whether that remainder stays
+Numerically, $|S(t)|$ is far from uniform. Writing $t=3^{l-c}t'$ with $3\nmid t'$ (valuation
+$l-c$), $t\cdot V/3^l=t'\cdot V/3^c$ for every tuple value $V$, so $S(t)$ at modulus $3^l$ equals the
+same sum evaluated at the coarser modulus $3^c$: a frequency of valuation $l-c$ is literally the
+level-$c$ sum of the same tuple family. At the levels checked ($l=10,12,14$), the frequencies of
+largest magnitude are exactly the frequencies of highest $3$-adic valuation, ordered by valuation,
+with the top pair
+$t=3^{l-1},2\cdot3^{l-1}$ (valuation $l-1$, $c=1$, the family Proposition~\ref{prop:sqrtceiling}
+already
+bounds below by $T/2$). The natural
+repair is to restrict to primitive frequencies, excising this whole high-valuation tail (top pair
+included) and controlling the remainder by an averaged bound; whether that remainder stays
 sparse enough at the scale that matters is a question this section answers computationally, for the family $R_{j-1,j}$ at $l=18$,
 $j=16$ (the first-order cardinality threshold, $T:=\binom{32}{16}$, six budgets below the actual
 covering threshold $j^*(18)=22$: coverage necessarily fails here already, and this level sits below
@@ -597,13 +612,13 @@ The restriction to $\gcd(t,3)=1$ also excludes every nonprimitive frequency, rou
 spectrum, entirely, so $\|S\|_1$ below measures only the primitive-frequency mass. Here
 $\|S\|_1=5226.01$. A fixed threshold makes the visible spikes look sparse, but of the $8{,}014$
 primitive frequencies with $|S(t)|/T$ exceeding $0.001$, their combined contribution to $\|S\|_1$ is
-under $132$, so over $97\%$ of the primitive-frequency mass at this single computed level lives in
+about $12.2$, so over $99.7\%$ of the primitive-frequency mass at this single computed level lives in
 an exponentially numerous population of near-average-magnitude coefficients. This is evidence
 against a sparse-exceptional-set repair among primitive frequencies at this accessible level; it
 says nothing about nonprimitive frequencies, about every $l$, and, since $j=16$ sits six budgets
 below $j^*(18)$, still less about the mass distribution near the actual covering threshold.
 
-The same clustering near dyadic rationals connects the problem to a 2011 discussion of Terence
+The same $2^a3^b$-type structure connects the problem to a 2011 discussion of Terence
 Tao's, applying Littlewood--Offord and Riesz-product methods to an object built from the same
 $2^a3^b$-type exponential sums, in the closely related setting of a hypothetical non-trivial
 Collatz cycle~\cite{tao2011blog}; his construction is structurally close to a boundary slice of
@@ -626,8 +641,9 @@ below). A \emph{non-homogeneous Poisson model} fit to that intensity assigns $z$
 $e^{-\lambda_c(z)}$. Computed directly from the exact histogram for $l=10,\dots,15$, every one of the
 eleven holdouts across these six levels has $\lambda_c$ well below the global mean at every depth
 $c=8,9,10$ with $c<l$ (at $l=10$, only $c=8,9$; $\lambda_c$ from $2.0$ to $108.4$, hole probability
-from $e^{-2}$ to $e^{-108}$). Assigning probability $e^{-108}$ to an event that occurred falsifies the
-non-homogeneous Poisson model outright; what survives is the weaker, descriptive claim underneath it:
+from $e^{-2}$ to $e^{-108}$). The non-homogeneous Poisson model assigns probability $e^{-108}$ to an
+event that occurred, and is discarded on that basis; what survives is the weaker, descriptive claim
+underneath it:
 holdouts sit systematically in low-intensity cells, with how far below the mean varying widely by
 depth and level. A separate
 diagnostic at a smaller, more tractable
@@ -636,13 +652,17 @@ covering threshold $j^*(14)=19$), holds every $|S(t)|$ fixed and randomizes the 
 conjugate-symmetric pairs. Writing $N_l(z)$ for the exact hit count of residue $z$ and $N_{l-1}$ for
 the same tuple family's count one level down, restricting to primitive frequencies $3\nmid t$ gives
 exactly $\sum_{3\nmid t}S(t)e(-tz/3^l) = 3^{l-1}\bigl(3N_l(z)-N_{l-1}(z\bmod3^{l-1})\bigr)$, a
-measure of imbalance among the three lifts of each parent residue. Over unit $z$, the actual ratio
+measure of imbalance among the three lifts of each parent residue, identically $0$ at every
+non-unit $z$ (both $N_l(z)$ and $N_{l-1}(z\bmod3^{l-1})$ vanish there, since no element of a
+tuple family is divisible by $3$). Over all $z$, the actual ratio
 of this quantity's maximum absolute value to its root-mean-square is $15.79$, while eight
 independent phase scrambles (fixed seed)
-give ratios only in $[5.11,5.24]$, collapsing to what a generic-phase model predicts once the phases
-are scrambled away: the primitive lift imbalance in the actual data is far more extreme than a
-generic-phase null would produce, evidence that the true phases are structured rather than random,
-though this diagnostic is silent on what mechanism produces that structure or on whether it is what
+give ratios only in $[5.11,5.24]$. The scrambles hold every $|S(t)|$ fixed but do not preserve the
+identically-zero-off-units constraint just derived, or integrality, or the level-$l$-to-level-$(l-1)$
+consistency the real histograms satisfy; part of the gap between $15.79$ and $[5.11,5.24]$ is
+already accounted for by that proven constraint rather than being new evidence on its own. What the gap does show
+is that the actual phases are not exchangeable with a generic-phase null respecting only $|S(t)|$,
+though this diagnostic is silent on what mechanism produces that difference or on whether it is what
 decides coverage. At the levels checked, both the raw holdout rarity and the phase-scramble gap
 point the same way, toward phase structure that magnitude-only methods (uniform bounds, averages,
 low moments of $S(t)$) do not see.
@@ -666,7 +686,7 @@ limit above holds at every scale $m$, including along the covering-relevant diag
 l\log_4(3)$. It sharpens Proposition~\ref{prop:sqrtceiling}'s exact bound $|S(3^{l-1})|\ge T/2$ to
 the precise asymptotic ratio $1/\sqrt3\approx0.577$, and confirms that the mass Proposition
 \ref{prop:sqrtceiling} forces concentrates, at this one frequency at least, exactly where the
-numerics of \S5.2 place it: at the dyadic rational $t/3^l=1/3$, $r=0$.
+numerics of \S5.2 place it: at the highest-valuation frequency, $t/3^l=1/3$.
 
 \section{A theorem on the residues that resist coverage}
 \label{sec:holdouts}
@@ -1056,8 +1076,10 @@ implication's hypothesis holds is exactly the corner-redundancy question above.
 At $l=3,4,5,6$, where corner-redundancy also holds at the boundary width $W=2l$, the same argument
 (starting the telescoping at $j'=l+1$ instead of $j'\ge l+2$) proves the boundary case too:
 $j^*(l)=(l+1)+\mathrm{maxrun}(H(l,l+1))$ exactly, verified directly ($l=3$: $4+2=6$; $l=4$: $5+2=7$;
-$l=5$: $6+3=9$; $l=6$: $7+3=10$). This is Proposition~\ref{prop:h014}'s own converse, established at
-these four levels specifically. At $l=7,\dots,13$, corner-redundancy at $W=2l$ is checked to fail, so
+$l=5$: $6+3=9$; $l=6$: $7+3=10$). This is the per-level identity behind
+Proposition~\ref{prop:h014}'s own converse, proven at these four levels specifically; the converse
+itself is a claim about every $l$, needing the identity at every level, these four included. At
+$l=7,\dots,13$, corner-redundancy at $W=2l$ is checked to fail, so
 this mechanism does not reach the converse there; beyond $l=13$, corner-redundancy at $W=2l$ is
 itself unchecked. The converse remains open at every $l\ge7$.
 
@@ -1080,11 +1102,14 @@ A finite exponential sum built from strictly decreasing, exponentially weighted 
 natural object beyond this specific covering problem: finite-population $L$-statistics at non-CLT
 frequencies and weights, Littlewood--Offord theory for structured coefficient sequences, and the
 analytic side of the Collatz literature via Tao's discussion are all adjacent areas. Findings here
-may recur there under different names. Generic cancellation, even at its best conceivable strength,
-cannot match a bound already conditionally established here by other means. Exceptional mass does
-not concentrate on a sparse set at the accessible scale. And an extremal arithmetic obstruction,
-pointed to by both holdout rarity and a phase-randomization null diagnostic, is exactly what
-magnitude-only methods miss. Tao's later, unrelated result
+may recur there under different names. The full-spectrum, uniform-cancellation route this paper tries
+is unreachable outright (Proposition~\ref{prop:sqrtceiling}); stronger, frequency-dependent
+cancellation strategies remain untried. Exceptional mass does
+not concentrate on a sparse set at the one accessible scale checked ($l=18$, $j=16$, one threshold,
+primitive frequencies only). And the phase structure that both holdout rarity and a
+phase-randomization diagnostic point to is a real departure from a generic-phase model at the levels
+checked, though neither diagnostic says whether it is what decides coverage. Tao's later, unrelated
+result
 that almost every Collatz orbit attains an almost bounded value~\cite{tao2019} works with a
 first-passage random variable over a different probabilistic model of the same map and does not
 bear on covering directly, but is the clearest instance of a new kind of technique changing what
@@ -1115,6 +1140,8 @@ $(\sigma_k,\rho_k,h_k)$ behind Table~\ref{tab:mpg} are stored there with a verif
 each of them against the inequality in Theorem~\ref{thm:mpg}'s proof, without re-running the
 solver. Each folder's README gives what it checks, the command, the output to expect, and what the
 run costs. Most checks take seconds; the three largest levels of Table~\ref{tab:jstar} do not.
+Every claim above matches commit \texttt{4feda4a} of that repository; later
+commits may extend it further but should not change what this specific commit already contains.
 
 \subsection*{Acknowledgments}
 AI assistance was used for textual review and translation.
