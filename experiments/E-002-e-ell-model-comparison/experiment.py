@@ -196,6 +196,13 @@ def main():
     pval = stats.binomtest(n_plateaus, n_increments, expected_rate, alternative="less").pvalue
     print(f"  binomial test (P(plateau)={expected_rate:.4f}, one-sided 'fewer plateaus than expected'): "
           f"p={pval:.4f}")
+    # The same test on the tail the model comparison itself uses, l=10..23.
+    tail_increments = [b - a for (_, a), (_, b) in zip(DATA[9:], DATA[10:])]
+    tail_plateaus = sum(1 for d in tail_increments if d == 0)
+    tail_p = stats.binomtest(tail_plateaus, len(tail_increments), expected_rate,
+                             alternative="less").pvalue
+    print(f"  restricted to the tail l=10..23: {tail_plateaus} plateaus out of "
+          f"{len(tail_increments)} increments, p={tail_p:.4f}")
 
 
 if __name__ == "__main__":

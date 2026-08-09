@@ -30,7 +30,8 @@ Checks:
 import sys
 import numpy as np
 
-JSTAR = {2: 4, 3: 6, 4: 7, 5: 9, 6: 10, 7: 11, 8: 12, 9: 13, 10: 15, 11: 16}
+JSTAR = {2: 4, 3: 6, 4: 7, 5: 9, 6: 10, 7: 11, 8: 12, 9: 13, 10: 15, 11: 16,
+         12: 17, 13: 18}
 # l=1..5 re-verified here by direct brute-force enumeration of R_{j-1,j} (j*(3)=6, not 5)
 # known |H(l,j)| for validation, from verify_witness_maps_and_inclusions.py output
 KNOWN_H = {
@@ -70,6 +71,9 @@ def images_by_width(l, wmax):
 
 def main():
     ok = True
+    # Levels for checks 2-5. The paper's corner-redundancy statement covers
+    # l=3..13; pass a different upper level on the command line to change it.
+    lmax = int(sys.argv[1]) if len(sys.argv) > 1 else 13
 
     # --- check 1: dictionary against known holdout sizes ---
     for l in (5, 6, 7, 10):
@@ -87,7 +91,7 @@ def main():
             print(f'check1 l={l} j={j} (W={j + l - 1}): |H|={got} known={known} {tag}')
 
     # --- checks 2-5 per level ---
-    for l in range(3, 12):
+    for l in range(3, lmax + 1):
         q = 3 ** l
         jstar = JSTAR[l]
         wstar = jstar + l - 1
@@ -104,10 +108,15 @@ def main():
             twoU[(2 * idx) % q] = True
             D = U[W + 1] & ~(U[W] | twoU)
             drow.append(int(D.sum()))
-        # corner-redundancy for W >= 2l  <=>  entries for W+1 > 2l are 0
-        tail = drow[(2 * l) - (l - 1):]
-        tag = 'CORNER-REDUNDANT for W>=2l' if all(d == 0 for d in tail) else 'CORNER-ESSENTIAL SOMEWHERE PAST 2l'
-        print(f'check2 l={l}: |D(W+1)| for W={l-1}..{wmax-1}: {drow}  -> {tag}')
+        # Corner-redundancy as stated in the paper: |D(W+1)| = 0 at every
+        # width W >= 2l+1. The boundary width W = 2l is reported separately,
+        # since that is where the known failures sit.
+        tail = drow[(2 * l + 1) - (l - 1):]
+        boundary = drow[(2 * l) - (l - 1)] if (2 * l) - (l - 1) < len(drow) else 0
+        tag = ('corner-redundant for W>=2l+1'
+               if all(d == 0 for d in tail) else 'CORNER-ESSENTIAL AT SOME W>=2l+1')
+        print(f'check2 l={l}: |D(W+1)| for W={l-1}..{wmax-1}: {drow}  -> {tag}'
+              f'; |D| at the boundary W=2l is {boundary}')
 
         # W_min per unit
         wmin = np.full(q, -1, dtype=np.int64)

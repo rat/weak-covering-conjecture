@@ -112,3 +112,15 @@ shifts via essentially the same kind of construction. What is new here is the
 *application* to Wirsching's `j*(l)`, not the technique. Any future write-up of
 this result should cite both as methodological precedent, not present the
 mean-payoff-game framing itself as a novel contribution.
+
+## Certificate set completed and independently re-checked (2026-08-09)
+
+`certificate_k5.json` .. `certificate_k9.json` were regenerated so the stored set covers every
+`k=3..14` the paper's Theorem 3 cites (`rho_5=3/2`, `rho_6=3/2`, `rho_7=7/5`, `rho_8=25/19`,
+`rho_9=5/4`, all matching the table above, all self-certified tight).
+
+`verify_certificate.py` reads a stored `certificate_k<K>.json` (or `.json.gz`), rebuilds the state
+set and the transitions from `k` alone, and checks legality, safety, the telescoping inequality at
+every state and digit, and `C_k = max h - min h`, without calling the solver. All twelve pass:
+`python3 verify_certificate.py`. `k=14` takes 28 s. This is the check mirrored into the paper's
+reproducibility repository.
