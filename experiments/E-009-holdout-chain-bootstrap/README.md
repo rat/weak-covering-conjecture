@@ -141,10 +141,12 @@ Computed after the main tables (same scripts plus the inline check recorded in
    same-budget holdouts propagate their class upward in `l`, and Theorem 1 shifts the class by 4
    per budget step. IF the single-class property holds (which is exactly the old rounds-1-16
    "mod-9 clustering" anomaly, now structural), the `4^(Delta j*)` law follows rigorously.
-4. A bijectivity hint near extinction: `#(elements of H(l, j*-2) that are == 2 mod 3)` equals
-   `|H(l, j*-1)|` at every computed level, i.e. the Theorem-1 pullback `H(j*-1)/2` exhausts the
-   mod-3-class-2 part of `H(j*-2)` exactly. Same flavor as the bootstrap tightness: near
-   extinction the doubling maps are not just inclusions but essentially onto.
+4. An exact characterization one step before extinction, forced by (1) plus the size data:
+   elements of `H(j*-1)` are `==1 mod 3`, so their halves are `==2 mod 3`, giving
+   `H(j*-1)/2 subset {x in H(j*-2): x==2 mod 3}`; the counts are EQUAL at every computed level,
+   hence **`H(l, j*-1) = 2 * { x in H(l, j*-2) : x == 2 (mod 3) }`** exactly (12/12 levels).
+   Near extinction the doubling map is not just an inclusion but a bijection onto the mod-3
+   minority class, the same phenomenon as the bootstrap tightness.
 
 ## Pointwise coverage is NOT monotone in j (found via the l=13 ancestry funnel)
 
