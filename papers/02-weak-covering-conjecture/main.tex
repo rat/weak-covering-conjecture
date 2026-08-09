@@ -90,7 +90,8 @@ already forces $R_{j-1,j}$ to cover every unit residue modulo $3^l$; the cardina
 that of the tuple family itself, before reduction, which by
 Proposition~\ref{prop:lowerbound}'s bijection equals $\binom{2j}{j}$, not the (a priori much
 smaller) size of its image modulo $3^l$. Writing $j^*(l)$ for the smallest $j$ such that
-$R_{j-1,j}$ covers $(\Z/3^l\Z)^*$ exactly, the conjecture's forcing form and the growth rate of
+$R_{j-1,j}$ covers $(\Z/3^l\Z)^*$ exactly (a quantity that exists for every $l$, unconditionally;
+Proposition~\ref{prop:exist} below), the conjecture's forcing form and the growth rate of
 $j^*(l)$ coincide once coverage, once achieved, persists at every larger budget: this holds for
 $j\ge l$ (Theorem~\ref{thm:doubling}, Section~\ref{sec:holdouts}), which covers every level in
 Table~\ref{tab:jstar}, but is not established below $l$, the regime the conjectured rate would
@@ -100,10 +101,12 @@ eventually enter. With that proviso, the conjecture concerns the growth rate of
 e(l) := j^*(l) - l\log_4 3,
 \end{equation}
 the excess of the true covering budget over the leading-order rate a cardinality argument alone
-predicts ($|R_{j-1,j}| = \binom{2j}{j} \sim 4^j$, so matching $2\cdot3^{l-1}$ residues needs
-$j \sim l\log_4 3$ at leading order). At the threshold, $K(l) \asymp |R_{j^*(l)-1,j^*(l)}|/3^l
-\asymp 4^{j^*(l)}/3^l = 4^{e(l)}$, so $K(l)$ sub-exponential is equivalent to $e(l)=o(l)$: the
-conjecture is exactly the claim that $e(l)$ grows slower than linearly, not just that it grows.
+predicts ($|R_{j-1,j}| = \binom{2j}{j} \sim 4^j/\sqrt{\pi j}$, so matching $2\cdot3^{l-1}$ residues
+needs $j \sim l\log_4 3$ at leading order). At the threshold,
+$K(l) \asymp |R_{j^*(l)-1,j^*(l)}|/3^l \asymp 4^{e(l)}/\sqrt{j^*(l)}$, a polynomial factor in $l$
+away from $4^{e(l)}$; since a polynomial factor never changes whether a sequence is sub-exponential,
+$K(l)$ sub-exponential is equivalent to $e(l)=o(l)$: the conjecture is exactly the claim that $e(l)$
+grows slower than linearly, not just that it grows.
 
 An earlier, unpublished manuscript of the author computed $j^*(l)$ exactly for $l=1,\dots,20$ by
 direct enumeration and reported the resulting table without a growth-rate analysis. This paper does
@@ -190,11 +193,16 @@ rule of thumb, with slow-linear taking a narrow lead on both AIC and leave-one-o
 the three candidate regressors ($\log l$, $\sqrt l$, $l$) are themselves highly correlated over this
 range (pairwise correlation $\ge0.993$), so this ranking says more about how thin the margin
 currently is than about which functional form is correct. The stakes are not merely descriptive:
-by the identity noted after~\eqref{eq:el}, a genuinely linear $e(l)$ would make $K(l)$ exponential,
+by the identity noted after~\eqref{eq:el}, a linear $e(l)$ would make $K(l)$ exponential,
 falsifying the conjecture outright rather than leaving it merely unproven. Fourteen highly
 correlated points cannot distinguish that possibility from logarithmic or square-root growth, so
 this comparison does not settle the question either way; it only says which growth rates remain
 live.
+
+None of this machinery is actually needed to rule out a constant $e(l)$: since $\log_43<1$, rounding
+a constant-plus-linear quantity $l\log_43+c$ to the nearest integer can only change by $0$ or $1$
+from one $l$ to the next, yet $j^*(1)=1$ and $j^*(2)=4$, an increment of $3$. A constant-$e(l)$
+source is incompatible with the table's first two entries alone, with no statistical test required.
 
 A direct combinatorial test tells the same story from a different angle. Among the $22$ increments
 $j^*(l+1)-j^*(l)$ for $l=1,\dots,22$, exactly one is zero (the $l=15\to16$ plateau noted above). The
@@ -205,9 +213,11 @@ the conventional $0.05$ threshold for the first time with the $l=23$ point inclu
 the same tail the model comparison above uses ($n=13$), the same test gives $p\approx0.22$. We
 report both figures: $e(l)$ is an exact, deterministic sequence, so neither AIC/BIC nor this test
 carries the sampling interpretation of a classical inference over noisy data. Both are best read
-descriptively, as ``how well does a constant-$e(l)$ source fit the observed increment pattern.''
+descriptively, as ``how well does a constant-$e(l)$ source fit the observed increment pattern,'' and
+neither is independent corroboration of the other: both are different views of the same fourteen-point
+sequence, and both move together as the same evidence accumulates.
 
-A constant $e(l)$ is disfavored statistically by every measure above. It is also, unconditionally,
+A constant $e(l)$ is disfavored descriptively by every measure above. It is also, unconditionally,
 impossible.
 
 \begin{proposition}[Unboundedness of $e(l)$]
@@ -384,7 +394,7 @@ $\tfrac{115}{9}$ & $\tfrac{69}{5}$ & $\tfrac{44}{3}$ & $\tfrac{1621}{104}$ & $\t
 
 At $k=14$, $\rho_{14} = 9/8 = 1.125$ and $C_{14}=33/2$, giving:
 
-\begin{corollary}
+\begin{corollary}[Conditional on Empirical Result~\ref{er:soundness}]
 \label{cor:mpgbound}
 $j^*(l) \le \tfrac98 l + O(1)$.
 \end{corollary}
@@ -414,8 +424,10 @@ window relaxation may carry an irreducible gap above the true rate.
 \label{sec:gapA}
 
 Corollary~\ref{cor:mpgbound}'s bound, $1.125\,l$, is well above the conjectured rate
-$\log_4(3)\,l \approx 0.7925\,l$. The natural route to closing that gap is Fourier-analytic. By
-orthogonality on $\Z/3^l\Z$, the number of tuples landing in residue class $z$ is
+$\log_4(3)\,l \approx 0.7925\,l$. The natural route to closing that gap is Fourier-analytic. Here
+$e(x):=e^{2\pi ix}$ denotes the standard additive character, unrelated to the sequence $e(l)$ of
+\eqref{eq:el}. By orthogonality on $\Z/3^l\Z$, the number of tuples landing in
+residue class $z$ is
 \begin{equation}
 \label{eq:Nz}
 N(z) = \frac1{3^l}\sum_{t=0}^{3^l-1} S(t)\,e\!\left(-\frac{tz}{3^l}\right), \qquad
@@ -479,17 +491,19 @@ of $2$ and powers of $3$ other than via transcendence theory methods.''
 The most direct test examines the residues that actually fail to be covered, one budget step
 before covering succeeds, i.e.\ $H(l,j^*(l)-1)$ (Section~\ref{sec:holdouts}). For $l=10,\dots,15$
 this set has size $2,1,3,1,3,1$ respectively, tiny against a global occupancy mean
-$\lambda=|R_{j^*(l)-2,j^*(l)-1}|/(2\cdot3^{l-1})$ ranging $1.0$ to $3.7$ over the same levels; each
-holdout sits in a cell whose local intensity, at every conductor-depth resolution $r\le10$ checked,
-assigns it probability between $e^{-23}$ and $e^{-100}$ under a non-homogeneous Poisson model fit to
-that intensity. A separate diagnostic at the higher-occupancy pair $(l,m)=(14,16)$ (mean hit count
-$188.5$, well past the covering threshold) holds every $|S(t)|$ fixed and randomizes the phases of
-conjugate-symmetric pairs: the actual primitive-frequency max/RMS ratio is $15.79$, while eight
-independent phase scrambles (fixed seed) give ratios only in $[5.11,5.24]$, collapsing to what a
-generic-phase model predicts once the phases are scrambled away. At the levels checked, both the
-raw holdout rarity and the phase-scramble gap point the same way: coverage failure is decided by
-phase structure that magnitude-only methods (uniform bounds, averages, low moments of $S(t)$) do
-not see.
+$\lambda=|R_{j^*(l)-2,j^*(l)-1}|/(2\cdot3^{l-1})$ that is itself in the thousands over the same
+levels (from $1019$ at $l=10$ to $3695$ at $l=15$); each holdout sits in a cell whose local
+intensity, at every conductor-depth resolution $r\le10$ checked, assigns it probability between
+$e^{-23}$ and $e^{-100}$ under a non-homogeneous Poisson model fit to that intensity: each holdout sits among
+the globally lowest-intensity cells, not at a typical cell drawn from a mean in the thousands. A
+separate diagnostic at a smaller, more tractable
+pair, $(l,m)=(14,16)$ (mean hit count $188.5$, a budget below the covering threshold $j^*(14)=19$),
+holds every $|S(t)|$ fixed and randomizes the phases of conjugate-symmetric pairs: the actual
+primitive-frequency max/RMS ratio is $15.79$, while eight independent phase scrambles (fixed seed)
+give ratios only in $[5.11,5.24]$, collapsing to what a generic-phase model predicts once the phases
+are scrambled away. At the levels checked, both the raw holdout rarity and the phase-scramble gap
+point the same way: coverage failure is decided by phase structure that magnitude-only methods
+(uniform bounds, averages, low moments of $S(t)$) do not see.
 
 \begin{proposition}
 \label{prop:1547}
@@ -507,10 +521,9 @@ mixture equals $-\tfrac12 - \tfrac{i\sqrt3}6$, of modulus $1/\sqrt3$.
 \end{proof}
 
 Uniform decay across every nonzero frequency, the premise a naive statement of the Fourier approach
-might suggest, is false at this explicit family of frequencies. The regime is off-diagonal: $l$ is
-fixed while $m\to\infty$, far past the covering-relevant scale $m\sim l\log_4(3)$ where $l$ and $m$
-grow together; the proposition rules out uniform decay in this one fixed-$l$ limit, not along the
-diagonal a covering argument would actually use.
+might suggest, is false at this explicit family of frequencies: $t/3^l=1/3$ exactly, so $l$ drops out
+of $S(3^{l-1})$ entirely (only $V\bmod3$ matters), and the limit above holds at every scale $m$,
+including along the covering-relevant diagonal $m\sim l\log_4(3)$.
 
 \section{A theorem on the residues that resist coverage}
 \label{sec:holdouts}
@@ -546,14 +559,22 @@ $z\in2H(l,j)\cap4H(l,j)$.
 
 \begin{corollary}[Chain contraction]
 \label{cor:chain}
-If $x, 2x, \dots, 2^{t-1}x \in H(l,j+1)$ (all reduced modulo $3^l$, $t\ge1$), then
-$x/4, x/2, x, \dots, 2^{t-2}x \in H(l,j)$, a chain of length $t+1$.
+If $x, 2x, \dots, 2^{t-1}x \in H(l,j+1)$ are pairwise distinct (all reduced modulo $3^l$, $t\ge1$),
+then $x/4, x/2, x, \dots, 2^{t-2}x \in H(l,j)$ are pairwise distinct, a chain of length $t+1$.
 \end{corollary}
 
 \begin{proof}
 Apply Theorem~\ref{thm:doubling} to each of the $t$ elements: $2^ix\in H(l,j+1)$ gives
 $2^{i-1}x, 2^{i-2}x\in H(l,j)$ for $i=0,\dots,t-1$. The union of these pairs over all $i$ is exactly
-$\{x/4,x/2,x,\dots,2^{t-2}x\}$, a doubling chain of length $t+1$.
+$\{x/4,x/2,x,\dots,2^{t-2}x\}$, $t+1$ elements indexed by $t+1$ consecutive powers of $2$. Since $2$
+has order $2\cdot3^{l-1}$ modulo $3^l$ (an elementary lifting-the-exponent fact, used already in
+Section~\ref{sec:mpg}), any $2\cdot3^{l-1}$ consecutive powers of $2$ times $x$ exhaust every unit
+modulo $3^l$, and any shorter run is pairwise distinct. The hypothesis that $x,2x,\dots,2^{t-1}x$ are
+pairwise distinct already forces $t\le2\cdot3^{l-1}$, so it remains to rule out equality. If
+$t=2\cdot3^{l-1}$, those $t$ elements would be every unit modulo $3^l$, including every element of
+the (nonempty) image of $R_{j,j+1}$; but $H(l,j+1)$, the complement of that image, contains no such
+element. Hence $t<2\cdot3^{l-1}$, and the $t+1$ output elements, a shorter run of consecutive powers,
+are pairwise distinct.
 \end{proof}
 
 \begin{corollary}[Run-length bootstrap]
@@ -646,11 +667,35 @@ tuples realizable by $R_{j-1,j}$ are exactly $2^{j-l}$ times the decreasing $l$-
 $U(l,j+l-1)$, giving the claimed identity modulo $3^l$.
 \end{proof}
 
+\begin{proposition}[Existence]
+\label{prop:exist}
+$j^*(l)$ exists for every $l\ge1$, with $j^*(l)\le2\cdot3^{l-1}-1$.
+\end{proposition}
+
+\begin{proof}
+$U(l,\cdot)$ is monotone increasing in $W$: enlarging the range $\{0,\dots,W\}$ only adds admissible
+exponent tuples. Shifting every exponent of a tuple realizing $u\in U(l,W)$ up by $1$ gives a
+decreasing $l$-tuple with top exponent at most $W+1$ and bottom exponent at least $1>0$, still
+admissible, realizing $2u$; hence $2\,U(l,W)\subseteq U(l,W+1)$ for every $W\ge l-1$. The tuple
+$\beta_i=l-1-i$ ($i=0,\dots,l-1$) is admissible at $W=l-1$ and gives
+$u_0:=\sum_i2^{l-1-i}3^i\equiv2^{l-1}\pmod3$, a unit, so $u_0\in U(l,l-1)$. Iterating the inclusion,
+$2^ku_0\in U(l,l-1+k)$ for every $k\ge0$. Since $2$ has order $2\cdot3^{l-1}$ modulo $3^l$ (already
+used in Section~\ref{sec:mpg}), $\{2^ku_0 : 0\le k<2\cdot3^{l-1}\}$ is the coset $u_0\langle2\rangle
+=(\Z/3^l\Z)^*$: every unit modulo $3^l$ appears as $2^ku_0$ for some $k$ in that range, hence lies in
+$U(l,l-1+k)\subseteq U(l,W^\dagger)$, $W^\dagger:=l+2\cdot3^{l-1}-2$, by monotonicity. So
+$U(l,W^\dagger)=(\Z/3^l\Z)^*$, and Lemma~\ref{lem:UW} at $j=W^\dagger-l+1=2\cdot3^{l-1}-1\ge l$ gives
+$R_{j-1,j}\equiv(\Z/3^l\Z)^*\pmod{3^l}$, hence $j^*(l)\le2\cdot3^{l-1}-1$.
+\end{proof}
+
+This bound is exponential, far above the conjectured $\log_43\cdot l$ rate; it establishes only that
+$j^*(l)$ is a well-defined finite quantity, which the rest of this section and
+Section~\ref{sec:mpg}'s mean-payoff-game argument then bound far more tightly.
+
 In particular $j^*(l)$ is the smallest $j\ge l$ with $U(l,j+l-1)=(\Z/3^l\Z)^*$, and writing
 $W^*(l):=j^*(l)+l-2$ for the width one step before that,
 \begin{equation}
 \label{eq:HviaK}
-H(l,j) = 2^{j-l}\,K(l,j+l-1), \qquad K(l,W) := (\Z/3^l\Z)^* \setminus U(l,W).
+H(l,j) = 2^{j-l}\,D(l,j+l-1), \qquad D(l,W) := (\Z/3^l\Z)^* \setminus U(l,W).
 \end{equation}
 
 \begin{theorem}[Last-holdout parity]
@@ -662,8 +707,8 @@ below $l+1$.
 \end{theorem}
 
 \begin{proof}
-$U(l,\cdot)$ is monotone increasing in $W$, so $K(l,\cdot)$ is monotone decreasing; every
-$x\in K(l,W^*(l))$ is, by minimality of $j^*(l)$, representable at width $W^*(l)+1$ but not at
+$U(l,\cdot)$ is monotone increasing in $W$, so $D(l,\cdot)$ is monotone decreasing; every
+$x\in D(l,W^*(l))$ is, by minimality of $j^*(l)$, representable at width $W^*(l)+1$ but not at
 $W^*(l)$. Any witness for $x$ at width $W^*(l)+1$ using only exponents $\le W^*(l)$ would already
 witness $x$ at that smaller width, so every such witness has top exponent
 $\beta_0 = W^*(l)+1$. Its contribution to the value, at rank $0$, is $2^{\beta_0}\cdot3^0 =
@@ -683,9 +728,9 @@ $l=2,\dots,9$ against the exact table with no exception.
 
 The same width mechanism that proves Theorem~\ref{thm:parity} governs this bijection one step
 earlier, through the second-highest exponent $\beta_1$ of the extremal witness; unlike the
-top-exponent argument above, pinning $\beta_1$ down needs the one-step width recursion
-$U(l,W+1)=U(l,W)\cup2U(l,W)\cup\mathrm{Corner}(l,W+1)$ stated below; we omit the full derivation and
-record the identity as verified.
+top-exponent argument above, pinning $\beta_1$ down needs the one-step width identity of
+Lemma~\ref{lem:width} below. We have not carried that argument through to a full proof of this
+bijection and record it as empirically verified only.
 
 An earlier stage of this investigation reported a cross-level ``$\times4$-only'' pattern relating
 $H(l+1,j^*(l+1)-1)$ to $H(l,j^*(l)-1)$. Writing $\pi_l$ for reduction modulo $3^l$, the precise
@@ -734,14 +779,32 @@ set's density under that model. This does not, by itself, say anything about whe
 $\mathrm{maxrun}(H(l,l+1))$ is bounded;
 Proposition~\ref{prop:h014} is the only established link between that question and $j^*(l)$'s rate.
 
-The one-step width identity is exact:
+\begin{lemma}[One-step width identity]
+\label{lem:width}
+Let $\mathrm{Corner}(l,W+1)$ be the set of values realized by a witness tuple
+$\beta_0>\cdots>\beta_{l-1}$ with $\beta_0=W+1$ and $\beta_{l-1}=0$ simultaneously. Then
 \[
-U(l,W+1) = U(l,W) \cup 2U(l,W) \cup \mathrm{Corner}(l,W+1),
+U(l,W+1) = U(l,W) \cup 2U(l,W) \cup \mathrm{Corner}(l,W+1).
 \]
-where $\mathrm{Corner}(l,W+1)$ consists of the witnesses using both the top exponent $W+1$ and the
-bottom exponent $0$ simultaneously. At every width $W\ge2l+1$ checked exhaustively, $l=3,\dots,13$,
-$\mathrm{Corner}(l,W+1)$ contributes nothing new: every corner witness's value is already covered
-without it. If this \emph{corner-redundancy} property holds at every width $W\ge2l+1$ in general, it
+\end{lemma}
+
+\begin{proof}
+$\supseteq$: $U(l,W)\subseteq U(l,W+1)$ by monotonicity, $2U(l,W)\subseteq U(l,W+1)$ by the shift
+argument of Proposition~\ref{prop:exist}'s proof, and $\mathrm{Corner}(l,W+1)\subseteq U(l,W+1)$
+since a corner witness is, in particular, a witness at width $W+1$.
+
+$\subseteq$: let $u\in U(l,W+1)$, witnessed by $W+1\ge\beta_0>\cdots>\beta_{l-1}\ge0$. If
+$\beta_0\le W$, the tuple already witnesses $u$ at width $W$, so $u\in U(l,W)$. If $\beta_0=W+1$ and
+$\beta_{l-1}\ge1$, subtracting $1$ from every exponent gives a decreasing tuple in $[0,W]$
+(top exponent $W$, bottom exponent $\ge0$) witnessing $u/2$, so $u\in2U(l,W)$. If $\beta_0=W+1$ and
+$\beta_{l-1}=0$, this is exactly the corner case, so $u\in\mathrm{Corner}(l,W+1)$. These three cases
+are exhaustive.
+\end{proof}
+
+At every width $W$ in the range $2l+1\le W\le j^*(l)+l-1$,
+checked exhaustively for $l=3,\dots,13$ (the upper end is the largest width the exact table reaches
+at each level), $\mathrm{Corner}(l,W+1)$ contributes nothing new: every corner witness's value is
+already covered without it. If this \emph{corner-redundancy} property holds at every width $W\ge2l+1$ in general, it
 would make Corollary~\ref{cor:bootstrap}'s bootstrap tight for every budget $j\ge l+2$ (the width
 $W=j+l-1$ ranges over $W\ge2l+1$ exactly there); it remains unproven, with the only known failures at
 the boundary width $W=2l$, which is exactly $j=l+1$, Proposition~\ref{prop:h014}'s own case, so
@@ -763,8 +826,8 @@ A finite exponential sum built from strictly decreasing, exponentially weighted 
 natural object beyond this specific covering problem: finite-population $L$-statistics at non-CLT
 frequencies and weights, Littlewood--Offord theory for structured coefficient sequences, and the
 analytic side of the Collatz literature via Tao's discussion are all adjacent areas. Three things
-found here may recur there under different names: generic cancellation capping out below what
-combinatorial counting already proves, exceptional mass that does not concentrate on a sparse set
+found here may recur there under different names: generic cancellation unable to match a bound
+already established here by other means, exceptional mass that does not concentrate on a sparse set
 at the accessible scale, and coverage failure decided by an extremal arithmetic obstruction that a
 phase-randomization experiment showed magnitude-only methods miss.
 

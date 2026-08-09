@@ -59,6 +59,22 @@ entry.
 | C-45 | 3 | The paper never states the precise link between K(l)'s sub-exponentiality and e(l)'s growth rate, so a reader cannot see what is actually at stake in Section 3's model comparison; in particular, the paper's own best-fitting model (slow-linear) would falsify the conjecture outright if it were the true asymptotic, a consequence never mentioned | moderate | fixed: added the explicit identity `K(l) =~ 4^{e(l)}` after e(l)'s definition (so sub-exponential K(l) is equivalent to e(l)=o(l)), and a remark in Section 3 noting the real stakes of the model comparison, honestly hedged (14 correlated points cannot settle the question) |
 | C-46 | 3 | Proposition 7 (the 1/sqrt(3) limit) is stated in a fixed-l, m to infinity regime, off the covering-relevant diagonal (m ~ l log_4 3); its "uniform decay is false" conclusion does not by itself say anything about the diagonal a covering argument would use | minor | fixed: added a scoping remark after the proposition stating the regime explicitly and noting it does not cover the diagonal case |
 | — | 3 | Both reviewers independently flagged the title's "A Proven Bound" as an overclaim given the bound is conditional on an empirical (not proven) correspondence | minor | fixed: researcher confirmed conditional language, 2026-08-09; title changed to "a conditional bound" |
+| C-47 | 4 | Section 5.3's occupancy mean lambda, `|R_{j*(l)-2,j*(l)-1}|/(2*3^(l-1))`, was stated as "ranging 1.0 to 3.7" for l=10..15; both reviewers independently found this wrong by a factor of exactly 1000 at both endpoints (a units bug); the true values, `binom(2(J-1),J-1)/(2*3^(l-1))`, are 1019 to 3695 | critical | fixed: text corrected to "in the thousands... from 1019 at l=10 to 3695 at l=15"; root-cause note added to `notes/H-003.md` where the wrong figure originated, dated 2026-08-09 |
+| C-48 | 4 | Round 3's own fix to Proposition 8 (the 1/sqrt(3) limit) stated it rules out uniform decay only "off the covering-relevant diagonal," but this is backwards: since `t/3^l=1/3` exactly, `l` drops out of `S(3^{l-1})` entirely and the limit holds at every scale m, including the diagonal | critical | fixed: text corrected to state the limit holds along the covering-relevant diagonal too, with the reason (`t/3^l=1/3` exactly, only `V mod 3` matters) |
+| C-49 | 4 | The (l,m)=(14,16) phase-randomization diagnostic was described as "well past the covering threshold"; Table 1 gives j*(14)=19, so budget 16 is 3 below the threshold, not past it | major | fixed: corrected to "a budget below the covering threshold j*(14)=19" |
+| C-50 | 4 | The K(l)/e(l) asymptotic identity, `K(l) =~ 4^{e(l)}`, dropped the polynomial correction from Stirling's approximation (`binom(2j,j) ~ 4^j/sqrt(pi*j)`, not `~4^j`), making the displayed `=~` relation technically false | moderate | fixed: corrected to `K(l) =~ |R_{j*(l)-1,j*(l)}|/3^l =~ 4^{e(l)}/sqrt(j*(l))`, with a note that a polynomial factor never changes sub-exponentiality, so the downstream equivalence (`K(l)` sub-exponential iff `e(l)=o(l)`) is unaffected |
+| C-51 | 4 | Corollary 5 (headline `9/8 l + O(1)` bound) carried no visible conditional marker in its own theorem-environment, even though nearby prose says it depends on the unproven Empirical Result 3; downstream text (Remark 6) then describes it as established | major | fixed: added an explicit `[Conditional on Empirical Result 3]` label to the corollary's own statement |
+| C-52 | 4 | Discussion section's "generic cancellation capping out below what combinatorial counting already proves" had the direction backwards: Proposition 7's 1.585l ceiling is worse (above), not below, Corollary 5's 1.125l bound | moderate | fixed: reworded to "generic cancellation unable to match a bound already established here by other means," removing the ambiguous directional language |
+| C-53 | 4 | Corollary 9 (chain contraction)'s proof asserted the output's t+1 elements are pairwise distinct without establishing it, even though `maxrun`'s own definition requires pairwise distinctness | major | fixed: added the distinctness argument via 2's order (2*3^(l-1)) modulo 3^l, and the fact that equality would make the input chain the entire unit group, impossible since it sits inside H(l,j+1), the complement of a nonempty image |
+| C-54 | 4 | Existence of j*(l) for every l was assumed throughout the paper (used from the Introduction on) but never proven | major | fixed: added Proposition 15 (Existence), an unconditional proof via 2 being a primitive root mod 3^l, giving `j*(l) <= 2*3^(l-1)-1`; verified computationally for l=2,3,4 before writing into the paper; Introduction's first use of j*(l) now forward-references it |
+| C-55 | 4 | The one-step width identity `U(l,W+1)=U(l,W) union 2U(l,W) union Corner(l,W+1)` was asserted "exact" with no proof shown (carried from Round 3's "we omit the full derivation" note) | moderate | fixed: given a full three-case proof (new Lemma 14), verified computationally for l=2..5 across several widths before writing into the paper; the downstream Near-extinction bijection (Empirical Result 12) is still left empirical since the further argument pinning beta_1 was not carried through |
+| C-56 | 4 | The complement set `K(l,W) := (Z/3^lZ)^* \ U(l,W)` collided notationally with Wirsching's own `K(l)` from the conjecture statement | minor | fixed: renamed to `D(l,W)` throughout |
+| C-57 | 4 | The additive character `e(x):=e^{2pi i x}` in eq. (3) was never defined, and visually collides with the unrelated sequence `e(l)` from eq. (2) | minor | fixed: definition added at first use, with an explicit note that it is unrelated to `e(l)` |
+| C-58 | 4 | Corner-redundancy's search range, "at every width W>=2l+1 checked exhaustively, l=3,...,13," omitted the upper end of the width range actually checked | minor | fixed: added the explicit upper bound (`W<=j*(l)+l-1`, the largest width the exact table reaches at each level) |
+| C-59 | 4 | Banned-vocabulary residue from this paper's own Round 3 fixes: "genuinely linear e(l)" and "a striking anomaly" | minor | fixed: both reworded |
+| C-60 | 4 | The AIC/BIC model comparison and the binomial plateau test were presented as two corroborating analyses, but both reduce to different views of the same fourteen-point sequence, not independent evidence | minor | fixed: one sentence added noting they move together, not independently |
+| C-61 | 4 | (Addition, not a correction) A constant-e(l) rounding model can only produce increments of 0 or 1 (since log_4(3)<1), yet j*(1)->j*(2) is +3; this refutes a constant e(l) outright with no statistical machinery, a strictly simpler argument than the existing binomial test | minor | fixed: one paragraph added stating this directly, before the statistical tests |
+| — | 4 | Opus 5 claimed the safety condition in Section 4 reads "back into a unit modulo 3m"; checked directly against the text, which reads "back into a unit modulo m" | — | verified false per Rule 8c, no change made |
 
 ## Full findings
 
@@ -231,3 +247,83 @@ is asserted exact without a proof (Opus, moderate); the title's "a proven bound"
 reviewers as an overclaim given the bound is conditional -- not changed unilaterally, flagged to the
 researcher instead. Recompiled clean (12 pages, 0 errors, 0 warnings, 0 em-dashes) and visually
 re-verified, page by page, for every edited section.
+
+## Round 4 (2026-08-09)
+
+Same protocol, both reviewers at maximum reasoning effort, model swap from Fable to Opus 5 per the
+researcher's explicit instruction (Fable set aside for now). Opus 5 needed the same staged-notes
+pattern established late in Round 3 (per-section scratch notes to a fixed file, then one capped
+summary from the notes) to avoid the 64k-output-token failure that had hit it twice before; this is
+now the working invocation for Opus 5 as a reviewer.
+
+The most serious finding was self-inflicted: Round 3's own fix to Proposition 8 had the
+diagonal/off-diagonal direction backwards (C-48), and the occupancy-mean figure it corrected in
+Section 5.3 that same round carried a units bug from the project's own notes, off by exactly 1000 at
+both endpoints, caught independently by both reviewers (C-47). Both are now fixed, and the second is
+also corrected at its source in `notes/H-003.md`, dated, so a future session reading that file does
+not re-import the wrong number. Two rounds in a row where a genuine finding turned out to be
+introduced or inherited by the previous round's own fix, not a pre-existing defect, is worth flagging
+plainly: fixing at this speed has a measurable rate of introducing new small errors, which is exactly
+why every finding here was independently re-derived or re-computed (Rule 8c) before being written in,
+not taken on the reviewers' word.
+
+The most substantial addition this round was not a correction but a closed gap: Codex found that
+`j*(l)`'s existence for every `l` is used from the Introduction onward but never proven anywhere in
+the paper (C-54). This is provable unconditionally, using the elementary fact (already used elsewhere
+in the paper) that 2 is a primitive root modulo `3^l`: a single base unit at width `l-1`, propagated
+by repeated doubling, sweeps out the entire unit group within `2*3^(l-1)` steps. Verified
+computationally for `l=2,3,4` before writing it in as a new Proposition 15, giving the explicit
+(very weak, but unconditional) bound `j*(l) <= 2*3^(l-1)-1`. The same pass closed a second, related
+gap Opus had separately flagged (C-55): the one-step width identity used to derive Theorem 16's parity
+result had been asserted "exact" with the derivation explicitly omitted since Round 2; it turned out
+to be a short three-case argument (reusing the same shift construction as the existence proof),
+verified computationally for `l=2..5` before being written in as Lemma 14. The downstream Near-
+extinction bijection (Empirical Result 12) is deliberately left empirical, since the further step
+pinning the second-highest exponent was not carried through; upgrading only what was actually proven,
+not the whole neighborhood of a fix, follows Rule 8d.
+
+Also fixed this round: Corollary 9's proof asserted a distinctness fact it needed but never
+established (C-53), closed with the same order-of-2 fact used in the existence proof, plus the
+observation that the input chain reaching the full unit group would contradict it sitting inside a
+proper complement; Corollary 5's headline bound carried no visible conditional marker on the
+statement itself despite depending on an unproven Empirical Result (C-51); the K(l)/e(l) asymptotic
+identity dropped a polynomial correction from Stirling's approximation, technically false as displayed
+though the downstream sub-exponentiality equivalence survives it (C-50); a phase-randomization
+diagnostic was described as "well past the covering threshold" when it is actually three budgets
+below it (C-49); the Discussion's summary of how Proposition 7 compares to Corollary 5 had the
+direction backwards (C-52); a leftover symbol collision between the width-recursion's complement set
+and Wirsching's own `K(l)` (C-56), and an undefined additive character notation that visually
+collides with the unrelated sequence `e(l)` (C-57), were both cleaned up; corner-redundancy's checked
+width range was missing its upper bound (C-58); two Rule 5c banned words introduced by this paper's
+own Round 3 fixes were caught and reworded (C-59). Opus separately noted the AIC/BIC model comparison
+and the binomial plateau test are not independent evidence, both being different views of the same
+fourteen-point sequence (C-60), and pointed out a strictly simpler, non-statistical refutation of a
+constant `e(l)`: a constant-rounding model can only produce increments of 0 or 1, but the table's own
+first two entries jump by 3 (C-61); both added.
+
+One Opus finding did not survive Rule 8c verification: a claim that the safety condition's modulus
+was misstated as "$3m$" in the text, checked directly against the actual wording ("modulo $m$"), and
+found to be simply wrong. Recorded as verified-false rather than silently dropped.
+
+Not yet addressed, carried to Round 5 or flagged to the researcher as a scoping decision rather than a
+producer fix: Table 3 does not include the sigma_k/h_k values behind each certified policy, only
+rho_k and C_k (Codex, moderate); the cost-1 local repair rule's falsification (Empirical Result 13)
+is not given a fully formal statement with domain and cost function (Codex, moderate); Empirical
+Result 16 (mod-9 two-class bound) remains a candidate for upgrading to a proposition, both reviewers
+having now supplied compatible derivations across two rounds (Codex, moderate, carried from Round 3);
+the "independence model" in the Discussion (maxrun's typical value under a density-matched random
+model) is described but never formally specified or tabulated (Codex/Opus, moderate); Table 2 gives
+model-comparison statistics but no fitted slope coefficients, the number that most directly bears on
+whether K(l) is exponential (Opus, moderate); Section 5.2's L1-mass computation restricts to
+frequencies coprime to 3, excluding `t=3^(l-1)` itself, which Proposition 7 proves carries the largest
+known magnitude (Opus, moderate); that same computation runs six budgets below the actual covering
+threshold at its one computed level, a gap only partly caveated in the text (Opus, minor); the
+Grounding Lemma, since Theorem 3's proof no longer needs it, is arguably inert content rather than
+load-bearing math (Opus, minor, a judgment call rather than a defect); the mod-9 empirical results are
+verified only to l=9, thin against the exact table now running to l=23 (Opus, minor); the deposited
+holdout data stops at l=21 while Section 7 quotes measurements through l=22 (Opus, minor); and the
+bibliography, at four references, is thin for a paper reopening an active 1998 conjecture (Opus,
+minor) -- widening it means reading and verifying each new reference against its primary source
+(Rule 11) before it goes in, a scope decision for the researcher, not a unilateral producer add.
+Recompiled clean (12 pages, 0 errors, 0 warnings, 0 em-dashes) and visually re-verified, page by page,
+for every edited section.

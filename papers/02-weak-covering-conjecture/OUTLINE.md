@@ -156,6 +156,24 @@ A push), notes/H-013.md, notes/GAP-A-round4.md, notes/GAP-A-round5*.md.
       computation, 780 cases, before being written in). See CRITIQUE.md for full findings.
       Recompiled clean, 12 pages. A handful of moderate/minor items carried to round 4 (statistical-
       inference-flavored language around the plateau p-value, an unspecified independence model, one
-      empirical result upgradeable to proven). The title's "a proven bound" is flagged by both
-      round-3 reviewers as an overclaim given the conditional bound; not changed unilaterally,
-      pending the researcher's call. Round 4 not yet launched.
+      empirical result upgradeable to proven). The title's "a proven bound" was flagged by both
+      round-3 reviewers as an overclaim; researcher confirmed conditional language, title changed to
+      "a conditional bound" (2026-08-09).
+      Round 4 complete and fixed (15 findings, 2 critical -- both self-inflicted, one from Round 3's
+      own fix having the diagonal/off-diagonal direction of Proposition 8 backwards, the other a
+      1000x units bug in the occupancy-mean figure inherited from `notes/H-003.md`, now corrected at
+      its source too). Closed two real proof gaps rather than just prose: existence of `j*(l)` for
+      every `l`, used from the Introduction on but never proven, now has an unconditional proof
+      (new Proposition 15, `j*(l) <= 2*3^(l-1)-1`); the one-step width identity used since Round 2
+      to derive the last-holdout parity theorem, asserted "exact" with the derivation explicitly
+      omitted, now has a full three-case proof (new Lemma 14). Both verified computationally before
+      being written in. One Opus finding (a claimed modulus typo) was checked and found false per
+      Rule 8c, recorded as such rather than silently dropped. See CRITIQUE.md for the full list.
+      Recompiled clean, 12 pages, 0 errors, 0 em-dashes, visually re-verified page by page.
+      Several moderate/minor items carried to Round 5 (Table 3's missing sigma_k/h_k, the cost-1
+      repair rule's formal statement, the independence model's formal definition, Table 2's fitted
+      slope, the L1-mass computation's exclusion of `t=3^(l-1)`, the mod-9 result's thin l-range,
+      ER16's upgradability); bibliography breadth, Section 5.3's formalize-or-cut question, and the
+      l=24 process-narration paragraph are flagged as researcher scoping decisions, not producer
+      fixes. Round 5 (the final round under the 5-round cap) not yet launched; PDF frozen for its
+      full duration once started, per the lesson recorded in Round 3's CRITIQUE.md narrative.
