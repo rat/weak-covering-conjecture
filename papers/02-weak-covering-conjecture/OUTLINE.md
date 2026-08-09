@@ -147,4 +147,11 @@ A push), notes/H-013.md, notes/GAP-A-round4.md, notes/GAP-A-round5*.md.
 - [ ] PDF-only blind critique loop (Codex+Fable, same protocol as paper 01), researcher's explicit
       request 2026-08-09: round 1 complete and fixed (18 findings, 3 critical, substantial
       rewrites to Sections 1/3/4/5/6/7; also caught rho_14=9/8 > paper's stated bound, now fixed),
-      see CRITIQUE.md. Round 2 in progress.
+      see CRITIQUE.md. Round 2 complete and fixed (15 findings, 4 critical -- the most serious was
+      Round 1's own fix to Theorem 2 leaning on premises the game construction didn't actually
+      establish, k=1 counterexample included; fixed by a certificate-based restructure of the
+      proof). One empirical result (cross-level x4-only inheritance) withdrawn outright after being
+      shown algebraically impossible as stated. Recompiled clean, 10 pages. Repro repo population
+      (Rule 12) still pending -- three separate reviewer passes across both rounds have now flagged
+      the empty repo as a real unauditability problem; populate before round 3. Round 3 not yet
+      launched.

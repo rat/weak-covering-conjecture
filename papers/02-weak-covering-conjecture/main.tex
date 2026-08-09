@@ -21,6 +21,7 @@
 \newcommand{\C}{\mathbb{C}}
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
 
 \title[Wirsching's Weak Covering Conjecture]{Wirsching's Weak Covering Conjecture: an extended
 computation, a proven bound, and the structure of what resists it}
@@ -45,8 +46,9 @@ cover every unit residue modulo $3^l$. We extend the exact computation of $j^*(l
 such covering budget, from $l=20$ to $l=23$, and compare four growth models for
 $e(l) := j^*(l) - l\log_4 3$ against the extended table: a constant model is disfavored at every
 statistic checked, but logarithmic, square-root, and slow-linear growth remain statistically
-indistinguishable from one another. We prove the best unconditional bound known to us,
-$j^*(l) \le \tfrac98 l + O(1)$, via a mean-payoff-game relaxation of the covering budget. We then
+indistinguishable from one another. We give the best bound known to us,
+$j^*(l) \le \tfrac98 l + O(1)$, via a mean-payoff-game relaxation of the covering budget whose
+proof rests on one computationally verified, not generally proven, correspondence. We then
 examine the natural Fourier approach to a tighter bound: a uniform square-root-cancellation
 argument is capped below even this bound, a direct computation at one accessible level finds the
 bulk of the relevant exponential sum's mass sitting outside any sparse exceptional set, and the
@@ -82,8 +84,8 @@ R_{j,k} := \Bigl\{\, \sum_{i=0}^{j} 2^{a_i}3^i \ \Bigm|\ j+k \ge a_0 > a_1 > \cd
 \end{equation}
 Each element of $R_{j,k}$ is built from a strictly decreasing sequence of $j+1$ ``digit positions''
 chosen from $\{0,\dots,j+k\}$: the $i$-th chosen position, counting from the top, contributes
-$2^{a_i}$ scaled by $3^i$. Wirsching's Weak Covering Conjecture (Conjecture~3.9
-of~\cite{wirsching1998}) asks for a sub-exponential $K(l)$ such that $|R_{j-1,j}| \ge K(l)\cdot 3^l$
+$2^{a_i}$ scaled by $3^i$. Wirsching's Weak Covering Conjecture (Conjecture~3.9,
+Chapter~V,~\cite{wirsching1998}) asks for a sub-exponential $K(l)$ such that $|R_{j-1,j}| \ge K(l)\cdot 3^l$
 already forces $R_{j-1,j}$ to cover every unit residue modulo $3^l$; the cardinality on the left is
 that of the tuple family itself, before reduction, which by
 Proposition~\ref{prop:lowerbound}'s bijection equals $\binom{2j}{j}$, not the (a priori much
@@ -101,8 +103,8 @@ An earlier, unpublished manuscript of the author computed $j^*(l)$ exactly for $
 direct enumeration and reported the resulting table without a growth-rate analysis. This paper does
 three things. First, it extends that table to $l=23$ and gives a proper statistical comparison of
 candidate growth models for $e(l)$ against the full range (Sections~\ref{sec:computation}
-and~\ref{sec:growth}). Second, it gives the best unconditional upper bound on $j^*(l)$ we have
-found, via a reformulation of the covering budget as a mean-payoff game
+and~\ref{sec:growth}). Second, it gives the best upper bound on $j^*(l)$ we have found, via a
+reformulation of the covering budget as a mean-payoff game
 (Section~\ref{sec:mpg}). Third, and at greatest length, it reports a sustained attempt to close the
 gap to the conjectured rate directly, first by the natural Fourier approach, and, once that approach
 is shown to fail for a precise and checkable reason, by a direct study of the residues that actually
@@ -157,9 +159,9 @@ the table stops at $l=23$.
 \label{sec:growth}
 
 We compare four candidate functional forms for $e(l)$'s growth against the tail $l=10,\dots,23$
-($n=14$; the same range choice as the earlier manuscript, now with three more points): a constant
-(stabilization), a logarithmic term, a square-root term, and a slow-linear term. Table~\ref{tab:aic}
-gives the fit statistics.
+($n=14$; the same range choice as the earlier manuscript, now with three more points), each fit by
+ordinary least squares: $e(l)=c$ (constant), $e(l)=a+b\ln l$ (logarithmic), $e(l)=a+b\sqrt l$
+(square-root), and $e(l)=a+bl$ (slow-linear). Table~\ref{tab:aic} gives the fit statistics.
 
 \begin{table}[h]
 \centering
@@ -203,9 +205,10 @@ $e(l) \ge \tfrac14\log_2 l - O(1)$.
 \end{proposition}
 
 \begin{proof}
-Distinct exponent tuples give distinct sums: the smallest exponent $a_{j-1}$ is recovered from
-$V=\sum_i 2^{a_i}3^i$ as its $2$-adic valuation, $2^{a_{j-1}}$ is then subtracted off, and the
-process iterates on the remaining $j-1$ terms. So $R_{j-1,j}$, in bijection with $j$-subsets of the
+Distinct exponent tuples give distinct sums: since the $a_i$ are distinct, $a_{j-1}$ is the unique
+minimal one, so $V=\sum_i 2^{a_i}3^i$ has $2$-adic valuation exactly $a_{j-1}$ (every other term is
+divisible by a strictly higher power of $2$), recovering $a_{j-1}$ from $V$ directly. The full term
+$2^{a_{j-1}}3^{j-1}$ is then subtracted off, and the process iterates on the remaining $j-1$ terms. So $R_{j-1,j}$, in bijection with $j$-subsets of the
 $2j$-element set $\{0,\dots,2j-1\}$, has exact cardinality $\binom{2j}{j}$. Covering
 $(\Z/3^l\Z)^*$, of size $2\cdot3^{l-1}$, requires the domain to be at least as large as the
 codomain: $\binom{2j}{j} \ge 2\cdot3^{l-1}$ is necessary for $j \ge j^*(l)$. The explicit bound
@@ -214,8 +217,9 @@ $4^j \ge 2\cdot3^{l-1}\sqrt{3j+1}$, hence
 \[
 j \ge l\log_4 3 - \log_4 3 + \log_4 2 + \tfrac12\log_4(3j+1).
 \]
-Corollary~\ref{cor:mpgbound} below already gives $j=O(l)$, so $\log_4(3j+1) = \tfrac12\log_2 l +
-O(1)$, and the claimed bound follows.
+Dropping the last, non-negative term already gives $j \ge l\log_4 3 - O(1)$, so
+$3j+1 = \Omega(l)$, hence $\log_4(3j+1) \ge \log_4 l - O(1) = \tfrac12\log_2 l - O(1)$. Feeding
+this back into the displayed inequality gives the claimed bound.
 \end{proof}
 
 \section{A mean-payoff-game upper bound}
@@ -223,53 +227,80 @@ O(1)$, and the claimed bound follows.
 
 Reading an admissible tuple's exponents from the bottom up encodes covering as a game of
 imperfect information. A state is a unit $z\in\Z_3^*$. A move of cost $d\ge0$ is \emph{legal} at
-$z$ when $2^dz\equiv1\pmod3$ (so that $T_d(z):=(2^{d+1}z-2)/3$ is an integer), and \emph{safe} when
-every one of the three residues $z,z+m,z+2m$ modulo $3m$, for the relevant modulus $m$, maps under
-$T_d$ back into a unit. A minimizing player, seeing only $z\bmod3^k$, chooses a legal, safe $d$;
+$z$ when $2^dz\equiv1\pmod3$ (so that $T_d(z):=(2^{d+1}z-2)/3$ is an integer), and \emph{safe} at
+window $k$ when, for $m:=3^k$, every one of the three residues $z,z+m,z+2m$ modulo $3m$ maps under
+$T_d$ back into a unit modulo $m$. A minimizing player, seeing only $z\bmod3^k$, chooses a legal, safe $d$;
 an adversary then reveals the hidden next $3$-adic digit $\epsilon\in\{0,1,2\}$, forcing the true
 state to $T_d(z+3^k\epsilon)\bmod3^k$. Both requirements matter: legality alone can send a unit to
 $0$ (take $z=1$, $d=0$: $T_0(1)=0$), and the safety filter is exactly what keeps the walk inside
-$\Z_3^*$ regardless of which digit the adversary supplies. That every unit state admits at least
-one legal, safe move has been verified computationally at every $k=3,\dots,14$ used below, not
-proven in general here.
+$\Z_3^*$ regardless of which digit the adversary supplies. Legality depends on $d$ only through
+$d\bmod2$ (since $2$ has order $2$ modulo $3$), and $2$ is a primitive root modulo $3^{k+1}$ for
+every $k\ge0$ (order $2\cdot3^k$, by an elementary lifting-the-exponent induction), so
+$2^{d+1}\bmod3^{k+1}$, and hence $T_d(z)\bmod3^k$ and the safety check itself, depend on $d$ only
+through $d\bmod(2\cdot3^k)$: successor states repeat with this period as $d$ grows, and every
+representative beyond the smallest in its residue class has strictly larger cost for the same
+effect, so is never used by an optimal policy. The action set at each state is therefore, without
+loss, the subset of $\{0,\dots,2\cdot3^k-1\}$ that is legal and safe there, which is finite. That
+this subset is nonempty at every unit state has been verified computationally at every $k=3,\dots,14$
+used below, not proven in general here.
 
-This restricted-visibility game is, by construction, a finite, two-player \emph{mean-payoff game}
-on the $2\cdot3^{k-1}$ unit states modulo $3^k$: legal, safe moves are the minimizer's edges, the
-adversary's three choices of $\epsilon$ are the maximizer's edges, and the payoff is the long-run
-average of the move costs $d$. The correspondence between this game (at full precision, $k=l$) and
-the original covering problem, and hence the equality of the two objects' finite-horizon values,
-was verified computationally against direct brute-force enumeration of $R_{j-1,j}$'s covering sets
-for $l=1,\dots,6$, with no discrepancy; the two constructions are not independently conjectured to
-agree, they are checked to.
+This restricted-visibility game is, by construction, a two-player \emph{mean-payoff game} on the
+$2\cdot3^{k-1}$ unit states modulo $3^k$, with the now finite legal, safe moves as the minimizer's
+edges, the adversary's three choices of $\epsilon$ as the maximizer's edges, and payoff the long-run
+average of the move costs $d$. The classical theory of such games, initiated by Ehrenfeucht and
+Mycielski~\cite{ehrenfeuchtmycielski1979}, guarantees a value and an optimal positional policy in
+general; Theorem~\ref{thm:mpg} below needs none of that generality, only the twelve specific
+policies actually exhibited and directly checked in Table~\ref{tab:mpg}.
 
-\begin{theorem}[Window relaxation bound]
+\begin{empresult}[Soundness of the game]
+\label{er:soundness}
+At full precision ($k=l$: the true state $z\bmod3^l$ known exactly, no adversary), a play needs only
+legality, since $z$ being a unit throughout makes safety automatic: each step chooses $d$ with
+$2^dz\equiv1\pmod3$ and moves to $T_d(z)$. For every $l\ge1$ and every unit $z$ modulo $3^l$, a legal
+$l$-step play with total cost $J$ starting from $z$ witnesses $z\in R_{J-1,J}\bmod3^l$: reading the
+costs $d_0,\dots,d_{J-1}$ from the last step to the first recovers exactly the exponent gaps of an
+admissible tuple. Verified against direct brute-force enumeration of $R_{j-1,j}$'s covering sets for
+$l=1,\dots,6$, and against the known exact table of $j^*(l)$ (via the full-precision game's
+worst-case optimal cost) for $l=1,\dots,12$, with no discrepancy. We do not have a general proof.
+\end{empresult}
+
+A window-$k$ policy is a legal full-precision play in this sense too: safety was defined precisely
+so that whichever of the three lifts $z,z+3^k,z+2\cdot3^k$ turns out to be the true state modulo
+$3^{k+1}$, the move chosen from $z\bmod3^k$ stays legal there, so running a window-$k$ policy against
+the actual digit sequence gives a legal full-precision play, and Empirical
+Result~\ref{er:soundness} applies to it directly.
+
+\begin{theorem}[Window relaxation bound, conditional on Empirical Result~\ref{er:soundness}]
 \label{thm:mpg}
-For every $k\ge1$ there is an explicit rational constant $C_k$ such that
-$j^*(l) \le \rho_k\cdot l + C_k$ for all $l$, where $\rho_k$ is the value of the window-$k$ game
-above, and $\rho_k$ is non-increasing in $k$ (a window-$k$ policy is a special case of a
-window-$(k{+}1)$ policy).
+For each $k=3,\dots,14$, the certified policy underlying Table~\ref{tab:mpg} (a legal, safe move at
+every unit state modulo $3^k$, average cost $\rho_k$) gives an explicit rational $C_k$ with
+$j^*(l) \le \rho_k\cdot l + C_k$ for all $l$.
 \end{theorem}
 
 \begin{proof}
-By the classical theorem of Ehrenfeucht and Mycielski~\cite{ehrenfeuchtmycielski1979}, every
-mean-payoff game on a finite graph has a value $\rho_k$, together with an optimal positional
-minimizing policy carrying a potential (bias) function $h$ satisfying, at every state $s$ and for
-every adversary digit $\epsilon$,
+Fix $k$ in range. The policy $\sigma_k$, the value $\rho_k$, and a potential $h_k:(\Z/3^k\Z)^*\to\Q$
+are computed by a nested Howard strategy-improvement solver and checked, state by state and digit by
+digit over the finite action set established above, against
 \[
-d(s) + h(s'(\epsilon)) \le \rho_k + h(s),
+d_{\sigma_k}(s) + h_k(s'(\epsilon)) \le \rho_k + h_k(s)
 \]
-where $s'(\epsilon)$ is the successor under the minimizer's chosen move. Summing this inequality
-along any $l$-step play $s_0,s_1,\dots,s_l$ telescopes to
+at every state $s$ and every adversary digit $\epsilon$, where $s'(\epsilon)$ is the successor under
+$\sigma_k$'s chosen move; the matching adversary lower bound extracted from the same run certifies
+$\rho_k$ exactly. Summing the inequality along any $l$-step play $s_0,\dots,s_l$ telescopes to
 \[
-\sum_{i=0}^{l-1} d(s_i) \le l\rho_k + h(s_0) - h(s_l) \le l\rho_k + \bigl(\max h - \min h\bigr) =:
-l\rho_k + C_k,
+\sum_{i=0}^{l-1} d_{\sigma_k}(s_i) \le l\rho_k + h_k(s_0) - h_k(s_l) \le l\rho_k + \bigl(\max h_k -
+\min h_k\bigr) =: l\rho_k + C_k,
 \]
-regardless of which digits the adversary actually supplies, since the potential inequality holds
-for every $\epsilon$ at every step. The window-$k$ policy needs only $z\bmod3^k$ to choose each
-move, so it is executable against the true, full-precision covering problem; by the verified
-correspondence above, $\sum d(s_i)$ over $l$ steps started at $z\bmod3^k$ upper-bounds the covering
-budget needed for $z$ modulo $3^l$. Taking the worst-case $z$ gives $j^*(l) \le \rho_k l + C_k$.
+regardless of which digits the adversary actually supplies, since the potential inequality holds for
+every $\epsilon$ at every step. $\sigma_k$ needs only $z\bmod3^k$ to choose each move, so it is
+executable at full precision too, giving a legal $l$-step play at $z$ with total cost at most
+$l\rho_k+C_k$; by Empirical Result~\ref{er:soundness}, this bounds the covering budget for $z$
+modulo $3^l$. Taking the worst-case $z$ gives $j^*(l) \le \rho_k l + C_k$.
 \end{proof}
+
+The gap between this and a fully unconditional theorem is narrow: only the \emph{soundness}
+direction is needed (a completed game play constructs a witness), not the harder converse that the
+game's value equals $j^*(l)$ exactly.
 
 $\rho_k$ and $C_k$ are computed exactly, as rationals, by a nested Howard strategy-improvement
 solver, self-certified at every $k$ via a matching adversary lower bound extracted from the same
@@ -297,10 +328,12 @@ At $k=14$, $\rho_{14} = 9/8 = 1.125$, giving:
 $j^*(l) \le \tfrac98 l + O(1)$.
 \end{corollary}
 
-This is, to our knowledge, the best unconditional bound on $j^*(l)$'s growth rate currently
-established. The general technique, representing a covering-type combinatorial problem as a
-mean-payoff game and computing a decreasing sequence of exact rational relaxation bounds, is not
-new to this application: beyond Ehrenfeucht and Mycielski's foundational
+This is, to our knowledge, the best bound on $j^*(l)$'s growth rate currently available, conditional
+on Empirical Result~\ref{er:soundness}. $\rho_k$ is observed to be non-increasing over the computed
+range $k=3,\dots,14$ (Table~\ref{tab:mpg}); we have not verified this in general, and
+Corollary~\ref{cor:mpgbound} uses only the single value $k=14$. The general technique, representing a
+covering-type combinatorial problem as a mean-payoff game and computing exact rational relaxation
+bounds this way, is not new to this application: beyond Ehrenfeucht and Mycielski's foundational
 theorem~\cite{ehrenfeuchtmycielski1979} itself, a close and recent methodological precedent proves
 rationality and computability of the covering radius of a primitive sofic shift by essentially the
 same construction, applied to a different object~\cite{meyerovitchyoung2026}. We cite both as
@@ -336,20 +369,21 @@ separate and mutually reinforcing reasons.
 
 \begin{proposition}
 \label{prop:sqrtceiling}
-Any proof of covering via a uniform bound $|S(t)| \lesssim \sqrt{T}$ (square-root cancellation),
-applied via the triangle inequality across all $3^l-1$ nonzero frequencies, requires
-$j \ge 2\log_4(3)\,l \approx 1.585\,l$.
+Any proof of covering via a uniform bound $|S(t)| \le C\sqrt{T}$ for a fixed constant $C$
+(square-root cancellation), applied via the triangle inequality across all $3^l-1$ nonzero
+frequencies, requires $j \ge 2\log_4(3)\,l - O(\log l) \approx 1.585\,l - O(\log l)$.
 \end{proposition}
 
 \begin{proof}
 Write $T := |R_{j-1,j}| = \binom{2j}{j}$. Positivity of $N(z)$ for every $z$ via
-$\sum_{t\ne0}|S(t)| < T$ combined with the uniform estimate $|S(t)| \lesssim \sqrt{T}$ over the
-$3^l-1$ nonzero frequencies forces $3^l\sqrt{T} \lesssim T$, i.e.\ $T \gtrsim 3^{2l}$, i.e.\
-$j \gtrsim 2\log_4(3)\,l$.
+$\sum_{t\ne0}|S(t)| < T$ combined with the uniform estimate $|S(t)| \le C\sqrt{T}$ over the
+$3^l-1$ nonzero frequencies forces $(3^l-1)C\sqrt{T} < T$, so $T > ((3^l-1)C)^2$, i.e.\
+$4^j/\sqrt{3j+1} \ge T > ((3^l-1)C)^2$ (using the explicit bound from Proposition~\ref{prop:lowerbound}'s
+proof), which gives $j \ge 2\log_4(3)\,l - O(1)$.
 \end{proof}
 
 Proposition~\ref{prop:sqrtceiling}'s threshold is \emph{worse} than Corollary~\ref{cor:mpgbound}'s
-already-proven bound: any approach that only delivers generic square-root cancellation across every
+bound: any approach that only delivers generic square-root cancellation across every
 frequency cannot even match what is already known by other means, let alone improve on it. This
 rules out the naive version of the Fourier approach cleanly, and directs attention to whether a
 finer, frequency-dependent treatment (a major/minor-arc split, in the language of the circle method)
@@ -364,9 +398,9 @@ remainder by an averaged bound; whether that remainder stays sparse enough at th
 matters is a question this section answers computationally, at $l=18$, with a negative result. A
 fixed threshold makes the visible spikes look sparse; the threshold $\eta \sim c/\sqrt T$ that
 actually governs the $L^1$ norm is different and gives a different picture: summing every one of
-the $8{,}014$ primitive coefficients exceeding a generous fixed threshold of $0.001\cdot T$
-contributes less than $132$ to an $L^1$ norm of $5226$, so over $97\%$ of the mass at this single
-computed level lives in an exponentially numerous population of near-average-magnitude
+the $8{,}014$ coefficients $S(t)$ with $t$ coprime to $3$ that exceed a generous fixed threshold of
+$0.001\cdot T$ contributes less than $132$ to an $L^1$ norm of $5226$, so over $97\%$ of the mass at
+this single computed level lives in an exponentially numerous population of near-average-magnitude
 coefficients. This is evidence against a sparse-exceptional-set repair at accessible $l$; it says
 nothing about every $l$.
 
@@ -412,7 +446,12 @@ might suggest, is false at this explicit family of frequencies.
 \label{sec:holdouts}
 
 Write $H(l,j)$ for the set of units modulo $3^l$ \emph{not} covered by $R_{j-1,j}$, so that
-$j\ge j^*(l)$ exactly when $H(l,j)=\emptyset$.
+$j\ge j^*(l)$ exactly when $H(l,j)=\emptyset$. Every result in this section needs $j\ge l$; at
+every computed level $j^*(l) > l$ (Table~\ref{tab:jstar}), but the conjectured rate
+$\log_4 3 < 1$ would eventually put $j^*(l)$ below $l$, outside this section's reach. Within this
+range, emptiness persists: Theorem~\ref{thm:doubling} below gives $H(l,j)=\emptyset\Rightarrow
+H(l,j+1)\subseteq2\emptyset\cap4\emptyset=\emptyset$, so ``$H(l,j)=\emptyset$ exactly when
+$j\ge j^*(l)$'' is consistent for every $j\ge l$. We make no claim about $j<l$.
 
 \begin{theorem}[Holdout doubling inclusion]
 \label{thm:doubling}
@@ -425,12 +464,13 @@ $\{b_0>\cdots>b_{j-1}\}\subseteq\{0,\dots,2j-1\}$, and $R_{j,j+1}$ the same with
 $\{0,\dots,2j+1\}$. Fix $r\in R_{j-1,j}$ with exponent set $S$, and $s\in\{1,2\}$. Shifting every
 exponent up by $s$ gives $S+s\subseteq\{s,\dots,2j-1+s\}\subseteq\{1,\dots,2j+1\}$, a $j$-subset
 whose induced value is $2^sr$ (a uniform shift of exponents preserves relative rank, so each term's
-power of $3$ is unchanged). Since $S+s$ contains no $0$, prepending the new smallest exponent $0$
+power of $3$ is unchanged). Since $S+s$ contains no $0$, adjoining $0$ as the new smallest exponent
 gives a $(j{+}1)$-subset of $\{0,\dots,2j+1\}$: it becomes the new rank-$j$ term, contributing
 $2^0\cdot3^j=3^j$. So this witness represents $2^sr+3^j$, and $3^j\equiv0\pmod{3^l}$ once $j\ge l$.
-Hence $2R_{j-1,j}\cup4R_{j-1,j}\subseteq R_{j,j+1}\pmod{3^l}$ for $j\ge l$, and every
-$z\notin2R_{j-1,j}\cap4R_{j-1,j}$ failing to be represented at budget $j+1$ must already fail at
-budget $j$ after halving or quartering.
+Hence $2R_{j-1,j}\cup4R_{j-1,j}\subseteq R_{j,j+1}\pmod{3^l}$ for $j\ge l$. So if
+$z\in H(l,j+1)$, i.e.\ $z$ is not represented at budget $j+1$, then $z$ lies in neither
+$2R_{j-1,j}$ nor $4R_{j-1,j}$: both $z/2$ and $z/4$ are unrepresented at budget $j$, i.e.\
+$z\in2H(l,j)\cap4H(l,j)$.
 \end{proof}
 
 \begin{corollary}[Chain contraction]
@@ -447,8 +487,9 @@ $\{x/4,x/2,x,\dots,2^{t-2}x\}$, a doubling chain of length $t+1$.
 
 \begin{corollary}[Run-length bootstrap]
 \label{cor:bootstrap}
-Writing $\mathrm{maxrun}(H)$ for the length of the longest doubling chain contained in $H$,
-$j^*(l) \le j + \mathrm{maxrun}(H(l,j))$ for every $j\ge l$.
+Writing $\mathrm{maxrun}(H)$ for the greatest $t$ such that $H$ contains $t$ pairwise distinct
+elements of the form $x,2x,\dots,2^{t-1}x$ (all reduced modulo $3^l$), with
+$\mathrm{maxrun}(\emptyset):=0$, $j^*(l) \le j + \mathrm{maxrun}(H(l,j))$ for every $j\ge l$.
 \end{corollary}
 
 \begin{proof}
@@ -461,8 +502,10 @@ increasing from $l$, until it reaches $0$, at which point $H$ is empty.
 \begin{empresult}
 \label{er:bootstrap}
 Corollary~\ref{cor:bootstrap} is empirically exact, $j^*(l) = j + \mathrm{maxrun}(H(l,j))$, at every
-$(l,j)$ with $j\ge l+1$ we were able to compute, $l=5,\dots,20$ at every budget and $l$ up to $22$ at
-the single budget $j=l+1$, including a case with $|H(l,j)| > 3\times10^6$.
+$(l,j)$ with $l+1\le j\le j^*(l)$ we were able to compute, $l=5,\dots,20$ at every such budget and
+$l$ up to $22$ at the single budget $j=l+1$, including a case with $|H(l,j)| > 3\times10^6$. (Past
+$j^*(l)$, $H(l,j)=\emptyset$ and $\mathrm{maxrun}(\emptyset)=0$, so the displayed equality no longer
+holds there; the claim is only about budgets up to and including $j^*(l)$.)
 \end{empresult}
 
 The converse direction, that a doubling chain of the observed maximal length is not merely
@@ -483,10 +526,12 @@ count $\#\{i : a_i \ge j\}$, the number of chosen exponents at or above the budg
 At the budget transition $(l,j)=(6,10)\to(7,11)$, $100$ of the $1458$ children (residues newly
 required for coverage at the larger budget) have minimum achievable Durfee depth exceeding their
 parent's minimum depth by more than one, up to three; at $(7,11)\to(8,12)$, $332$ of $4374$
-children do, likewise up to three. A correspondingly exhaustive check of minimum-edit-distance
-witness repair finds distances up to $7$ at both transitions, against a distance of $1$ for the
-overwhelming majority. This is evidence against a repair cost of exactly $1$ at these two
-transitions; it does not establish that no bounded repair cost exists.
+children do, likewise up to three. A correspondingly exhaustive check, measuring witness repair cost
+as the minimum number of exponents that must change between a child's cheapest witness and its
+cheapest parent witness (matched by the natural containment of exponent sets), finds distances up to
+$7$ at both transitions, against a distance of $1$ for the overwhelming majority. This is evidence
+against a repair cost of exactly $1$ at these two transitions; it does not establish that no bounded
+repair cost exists.
 \end{empresult}
 
 This falsifies, in its originally proposed cost-$1$ form, a natural conjecture this project had
@@ -503,14 +548,32 @@ U(l,W) := \Bigl\{\, \textstyle\sum_{i=0}^{l-1} 2^{\beta_i}3^i \bmod 3^l \ \Bigm|
 W\ge\beta_0>\cdots>\beta_{l-1}\ge0 \,\Bigr\},
 \]
 an $l$-term analogue of $R_{j-1,j}$ built from a fixed term count and a growing exponent ceiling
-$W$. For $j\ge l$,
+$W$.
+
+\begin{lemma}[Width scaling identity]
+\label{lem:UW}
+For $j\ge l\ge1$,
 \begin{equation}
 \label{eq:UW}
-R_{j-1,j} \equiv 2^{j-l}\,U(l,j+l-1) \pmod{3^l},
+R_{j-1,j} \equiv 2^{j-l}\,U(l,j+l-1) \pmod{3^l}.
 \end{equation}
-verified computationally with no exception for every $(l,j)$, $l=2,\dots,5$, $j=l,\dots,l+3$: both
-sides list the same residues. In particular $j^*(l)$ is the smallest $j\ge l$ with
-$U(l,j+l-1)=(\Z/3^l\Z)^*$, and writing $W^*(l):=j^*(l)+l-2$ for the width one step before that,
+\end{lemma}
+
+\begin{proof}
+Since $3^i\equiv0\pmod{3^l}$ for $i\ge l$, the residue of $r=\sum_{i=0}^{j-1}2^{b_i}3^i\in R_{j-1,j}$
+modulo $3^l$ depends only on its top $l$ exponents $b_0>\cdots>b_{l-1}$. A decreasing $l$-tuple
+$b_0>\cdots>b_{l-1}\ge0$ with $b_0\le2j-1$ extends to a full admissible $j$-tuple in
+$\{0,\dots,2j-1\}$ (appending $j-l$ further, strictly smaller, distinct exponents) exactly when
+$b_{l-1}\ge j-l$: append $b_{l-1}-1,\dots,b_{l-1}-(j-l)$ when this holds, and no extension exists
+when it does not, since fewer than $j-l$ nonnegative integers lie below $b_{l-1}$. Writing
+$c_i := b_i-(j-l)$ turns $b_{l-1}\ge j-l$ into $c_{l-1}\ge0$ and $b_0\le2j-1$ into
+$c_0\le2j-1-(j-l)=j+l-1$, and $\sum_i2^{b_i}3^i = 2^{j-l}\sum_i2^{c_i}3^i$. So the top-$l$-exponent
+tuples realizable by $R_{j-1,j}$ are exactly $2^{j-l}$ times the decreasing $l$-tuples counted by
+$U(l,j+l-1)$, giving the claimed identity modulo $3^l$.
+\end{proof}
+
+In particular $j^*(l)$ is the smallest $j\ge l$ with $U(l,j+l-1)=(\Z/3^l\Z)^*$, and writing
+$W^*(l):=j^*(l)+l-2$ for the width one step before that,
 \begin{equation}
 \label{eq:HviaK}
 H(l,j) = 2^{j-l}\,K(l,j+l-1), \qquad K(l,W) := (\Z/3^l\Z)^* \setminus U(l,W).
@@ -518,7 +581,10 @@ H(l,j) = 2^{j-l}\,K(l,j+l-1), \qquad K(l,W) := (\Z/3^l\Z)^* \setminus U(l,W).
 
 \begin{theorem}[Last-holdout parity]
 \label{thm:parity}
-Every element of $H(l,j^*(l)-1)$ is $\equiv1\pmod3$.
+If $j^*(l)\ge l+1$, every element of $H(l,j^*(l)-1)$ is $\equiv1\pmod3$. This covers $l=2,\dots,23$
+(Table~\ref{tab:jstar}); it fails only at $l=1$ ($j^*(1)=1$, outside \eqref{eq:HviaK}'s range), and
+would fail again for any $l$ at which the conjectured rate $\log_43<1$ eventually pushes $j^*(l)$
+below $l+1$.
 \end{theorem}
 
 \begin{proof}
@@ -527,8 +593,8 @@ $x\in K(l,W^*(l))$ is, by minimality of $j^*(l)$, representable at width $W^*(l)
 $W^*(l)$. Any witness for $x$ at width $W^*(l)+1$ using only exponents $\le W^*(l)$ would already
 witness $x$ at that smaller width, so every such witness has top exponent
 $\beta_0 = W^*(l)+1$. Its contribution to the value, at rank $0$, is $2^{\beta_0}\cdot3^0 =
-2^{W^*(l)+1}$, so $x \equiv 2^{W^*(l)+1} \equiv (-1)^{W^*(l)+1} \pmod3$. By \eqref{eq:HviaK},
-elements of $H(l,j^*(l)-1)$ are $2^{j^*(l)-1-l}x$ for such $x$, hence
+2^{W^*(l)+1}$, so $x \equiv 2^{W^*(l)+1} \equiv (-1)^{W^*(l)+1} \pmod3$. By \eqref{eq:HviaK}, which
+needs $j^*(l)-1\ge l$, elements of $H(l,j^*(l)-1)$ are $2^{j^*(l)-1-l}x$ for such $x$, hence
 \[
 2^{j^*(l)-1-l}x \equiv (-1)^{j^*(l)-1-l}\cdot(-1)^{W^*(l)+1} = (-1)^{2j^*(l)-2} = 1 \pmod3,
 \]
@@ -544,25 +610,23 @@ $l=2,\dots,9$ against the exact table with no exception.
 The same width mechanism that proves Theorem~\ref{thm:parity} governs this bijection one step
 earlier, through the second-highest exponent $\beta_1$ of the extremal witness; unlike the
 top-exponent argument above, pinning $\beta_1$ down needs the one-step width recursion
-$U(l,W+1)=U(l,W)\cup2U(l,W)\cup\mathrm{Corner}(l,W+1)$ (Section~\ref{sec:discussion}); we omit the
-full derivation and record the identity as verified.
+$U(l,W+1)=U(l,W)\cup2U(l,W)\cup\mathrm{Corner}(l,W+1)$ stated below; we omit the full derivation and
+record the identity as verified.
 
-\begin{empresult}[$\times4$-only inheritance]
-\label{er:times4}
-Writing $\pi_l:(\Z/3^{l+1}\Z)^*\to(\Z/3^l\Z)^*$ for reduction, at every $l=2,\dots,8$ checked, every
-element of $H(l+1,j^*(l+1)-1)$ whose reduction $\pi_l(x)$ lies in $H(l,j^*(l)-1)$ satisfies
-$x \equiv 4\,\pi_l(x) \pmod{3^{l+1}}$; no instance of a $\times2$ relation occurs. We do not have a
-proof: Theorem~\ref{thm:parity} constrains the mod-$3$ class at each level individually but does
-not by itself relate a level-$(l{+}1)$ last holdout to its level-$l$ reduction.
-\end{empresult}
+An earlier stage of this investigation reported a cross-level ``$\times4$-only'' pattern relating
+$H(l+1,j^*(l+1)-1)$ to $H(l,j^*(l)-1)$. Writing $\pi_l$ for reduction modulo $3^l$, the precise
+congruence this suggests, $x\equiv4\,\pi_l(x)\pmod{3^{l+1}}$, is impossible whenever $\pi_l(x)$ is a
+unit and $l\ge2$: reducing both sides modulo $3^l$ forces $\pi_l(x)\equiv4\,\pi_l(x)\pmod{3^l}$,
+i.e.\ $3\,\pi_l(x)\equiv0\pmod{3^l}$. Checked exhaustively at $l=2,\dots,6$, $\pi_l(x)$ never lies in
+$H(l,j^*(l)-1)$ for $x\in H(l+1,j^*(l+1)-1)$ in the first place, so the pattern has no witnessing
+instance at these levels either. No cross-level relation between $H(l+1,\cdot)$ and $H(l,\cdot)$ is
+established by this paper.
 
 \begin{empresult}[Mod-$9$ two-class bound]
 \label{er:mod9}
 Writing $J:=j^*(l)$, at every $l=3,\dots,9$ checked, $H(l,J-1) \bmod 9 \subseteq \{4^J,
 4^{J+1}\}\pmod9$, and the class actually occupied is $4^{J+1}$, never $4^J$, at every level
-checked. (An earlier stage of this investigation recorded the excluded class backwards; the
-values above were independently re-verified by three separate implementations before this
-printing.) The two-class containment follows the same mechanism as
+checked. The two-class containment follows the same mechanism as
 Theorem~\ref{thm:parity} one digit further (the mod-$9$ class of a threshold witness is
 $2^{\beta_0}+3\cdot2^{\beta_1}\bmod9$, with $\beta_0$ pinned and $\beta_1$'s parity giving the two
 options); excluding $4^J$ specifically is the sharpest concrete open question this part of the
