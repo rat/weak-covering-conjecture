@@ -186,6 +186,29 @@ A push), notes/H-013.md, notes/GAP-A-round4.md, notes/GAP-A-round5*.md.
       Several moderate/minor items carried to Round 5 (Table 3's missing sigma_k/h_k, the cost-1
       repair rule's formal statement, the independence model's formal definition, Table 2's fitted
       slope, the L1-mass computation's exclusion of `t=3^(l-1)`, the mod-9 result's thin l-range,
-      ER16's upgradability). Round 5 (the final round under the 5-round cap) not yet launched; PDF
-      frozen for its full duration once started, per the lesson recorded in Round 3's CRITIQUE.md
-      narrative.
+      ER18's upgradability).
+- [x] **Round 5 complete (2026-08-09), the final round under the researcher's 5-round cap.**
+      Codex + Opus 5 max effort, fresh context, PDF frozen for both runs. Neither reviewer found a
+      critical error; both independently verified large parts of the paper from scratch (Opus
+      recomputed all of Table 1/2, several theorems by hand, and all 7 references against primary
+      sources) and confirmed the unconditional core sound. 17 findings fixed (2 major
+      self-inflicted: the Krasikov-Lagarias citation was mischaracterized despite the correct
+      primary-source data sitting in context from the same session's own bibliography work, and the
+      reproducibility repo's README still carried the pre-Round-3 title and numbers stale by two
+      rounds -- both caught independently by both reviewers, both fixed in the repo, not just the
+      paper). Also fixed: Corollary 10's missing `j>=l` hypothesis (verified Theorem 9 fails
+      without it), the Introduction's central equivalence claim narrowed to its actually-proven
+      direction, a genuine validity boundary in Empirical Result 12 (verified computationally,
+      not merely an unchecked range), an undisclosed six-budget gap from the covering threshold in
+      Section 5.2, a degenerate boundary case in Section 5.3's just-added local-intensity range, and
+      a plateau test computed under an already-refuted null. Two credible new-math leads from Opus
+      (a corner-redundancy tightness proof, an Empirical Result 18 upgrade) were deliberately left
+      unadded: this is the last round under the cap, so any new mathematics here ships with no
+      further review, a different risk category from fixing what a fresh reviewer just checked by
+      hand. One Opus finding checked out as not a real overclaim (Section 9's data-availability
+      text), recorded as such rather than silently accepted or dropped. Full list in CRITIQUE.md.
+      Recompiled clean, 13 pages, 0 errors, 0 em-dashes, visually re-verified page by page.
+      **The critique loop is now closed** (5-round cap reached). Per Rule 8/15, Round 5's own fixes
+      are unreviewed by any fresh pair of eyes; the mandatory pre-publication check (a genuinely
+      independent model, or the researcher) still needs to run before submission, whenever that is
+      decided -- this loop does not substitute for it.

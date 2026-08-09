@@ -76,6 +76,25 @@ entry.
 | C-61 | 4 | (Addition, not a correction) A constant-e(l) rounding model can only produce increments of 0 or 1 (since log_4(3)<1), yet j*(1)->j*(2) is +3; this refutes a constant e(l) outright with no statistical machinery, a strictly simpler argument than the existing binomial test | minor | fixed: one paragraph added stating this directly, before the statistical tests |
 | — | 4 | Opus 5 claimed the safety condition in Section 4 reads "back into a unit modulo 3m"; checked directly against the text, which reads "back into a unit modulo m" | — | verified false per Rule 8c, no change made |
 | C-62 | 4 | (Producer-found, not from either reviewer) Section 5.3's "cell/local intensity/conductor-depth" language, requested for formalization by the researcher, was never actually reproducible as a precise statement: "at every resolution r<=10... probability between e^-23 and e^-100" is false under the only natural reading found (residue classes modulo 3^c). Direct recomputation from the exact histogram, l=10..15, depths c=8,9,10, gives hole probability from e^-2 to e^-108, a substantially wider range with a much shallower low end than claimed | major | fixed: sentence replaced with the formal definition (depth-c cell, depth-c local intensity, non-homogeneous Poisson hole probability) and the actually-computed range; the computation is now a script in the reproducibility repo (`section5-exponential-sum/local_intensity.py`) instead of resting on an unreproducible informal note |
+| C-63 | 5 | The equivalence "K(l) sub-exponential iff e(l)=o(l)" was stated as a two-way "exactly," but the converse (e(l)=o(l) implying the conjecture) needs coverage to persist below l, which Theorem 9 does not give | major | fixed: reworded to state only the proven direction (conjecture implies K(l) sub-exponential) unconditionally, with the converse explicitly flagged open below l |
+| C-64 | 5 | Corollary 10 (Chain contraction)'s statement omitted its "j>=l" hypothesis, though its proof invokes Theorem 9, which needs it; verified Theorem 9 is false without it (l=3,4,5, several j) | major | fixed: hypothesis added to the corollary's own statement |
+| C-65 | 5 | Krasikov-Lagarias's paper was mischaracterized as attacking "total stopping time"; both reviewers independently caught this, and the primary source (already fetched this same round for the bibliography) says predecessor-set counting (x^0.84 lower bound), the same broad target as Wirsching's own reduction, by a different mechanism | major | fixed: description corrected, framing changed from "unrelated target" to "same target, different mechanism" |
+| C-66 | 5 | The reproducibility repository's README (a live, public artifact) still titled the paper "a proven bound" (pre-Round-3 title) and every theorem/lemma/corollary number across four of its README files was stale after Round 4/5 added two new results | major | fixed: title updated to "a conditional bound"; all numbers resynced to the paper's current numbering in all four affected files |
+| C-67 | 5 | The local-intensity range (C-62's fix) is undefined at depth c=l (the cell degenerates to a single point, giving lambda=0 for any holdout by definition); the text did not say c=l was excluded | moderate | fixed: added the c<l restriction explicitly, noting the degenerate case, matching what the underlying computation already excluded |
+| C-68 | 5 | Section 5.2's exponential-sum computation is done at (l,j)=(18,16), six budgets below the actual covering threshold j*(18)=22, undisclosed; coverage necessarily fails there regardless of any Fourier-cancellation argument, which the reader was not told | moderate | fixed: added the explicit distance from threshold and the j<l caveat |
+| C-69 | 5 | Empirical Result 12's range l+1<=j<=j*(l) was presented only as a compute limit; verified directly (maxrun(H(6,6))=5, maxrun(H(7,7))=5) that the equality genuinely fails at j=l, a validity boundary, not just an unchecked one | moderate | fixed: added the verified j=l failure with both computed instances |
+| C-70 | 5 | The abstract stated a constant e(l) model is "disfavored at every statistic checked," omitting the paper's own unconditional theorem (Proposition 1) that a constant model is impossible outright | moderate | fixed: abstract now states the unconditional bound explicitly |
+| C-71 | 5 | The abstract conflated two separate diagnostics (the extremal-cell/local-intensity analysis at l=10..15, and the phase-randomization experiment at a different (l,m)=(14,16)) into one causal claim ("shows are decided by") stronger than either individually supports | moderate | fixed: reworded to keep the two diagnostics separate, matching the body's own "both point the same way" scoping |
+| C-72 | 5 | The plateau-frequency test's pooled p=0.0426 (all 22 increments) is computed under a null (constant-e(l) rounding, increments in {0,1}) already refuted with certainty by the same table's early increments (of 2 and 3); presenting it as informative, and as independent of the AIC/BIC comparison's 14-point tail, both overstate it | moderate | fixed: pooled figure dropped, kept only the tail-restricted p≈0.22 where the null is not already dead, and corrected the "same fourteen-point sequence" claim (the pooled test actually used all 23 table entries, not the same range as the regression) |
+| C-73 | 5 | The window-k policy's finite-precision justification claimed the policy sees the true residue mod 3^k "at every step" whenever l>=k; false for the final k-1 steps of any play, where the true remaining modulus is below 3^k regardless of how large l is | moderate | fixed: generalized the existing l<k lifting argument to cover the final k-1 steps of every play, not just the l<k regime |
+| C-74 | 5 | Two passages described the mean-payoff-game bound's conditional status inconsistently ("already established here by other means," "already known by other means") after Corollary 5 was correctly labeled conditional | minor | fixed: both reworded to say "conditionally established"/"conditionally known" |
+| C-75 | 5 | Theorem 16 (parity)'s "fails only at l=1" language, and the abstract's echo of it, confused a hypothesis being inapplicable (j*(1)<l+1) with the conclusion itself failing | minor | fixed: reworded to "inapplicable," with a note that this says nothing about whether the conclusion would hold |
+| C-76 | 5 | "An earlier stage of this investigation reported..." (process narration, Rule 5c) preceded the x4-cross-level impossibility argument; the math is correct but the framing narrates project history | minor | fixed: reworded to state the impossibility directly, no process narration |
+| C-77 | 5 | Empirical Result 13 called all units modulo 3^7/3^8 (1458, 4374) "children (residues newly required for coverage)," which they are not — they are simply every unit at the finer modulus | minor | fixed: reworded to define "child"/"parent" as finer-modulus unit and its reduction, dropping the inaccurate parenthetical |
+| C-78 | 5 | "j*(l) is the smallest j>=l with U(l,j+l-1)=full" (right after the new Existence proposition) implicitly assumed no j<l could cover first, which Lemma 14 (needing j>=l itself) cannot rule out | minor | fixed: reworded to state the coincidence holds "at every computed level" (verified, Table 1) rather than as an unconditional identity |
+| C-79 | 5 | Proposition 1's "necessary for j>=j*(l)" implicitly used coverage-persistence (not yet proven at that point in the paper) rather than just the definitional fact needed | minor | fixed: narrowed to "necessary at j=j*(l) in particular," which is self-contained |
+| — | 5 | Opus flagged Proposition 8 as "subsuming" Proposition 7's barrier without an explicit cross-reference; Opus's corner-redundancy-implies-tightness proof sketch; Opus's suggestion to upgrade Empirical Result 18 to a proposition (both reviewers, across two rounds, converging on compatible derivations); minor symbol reuse of `T`, `m`, `n` across different local contexts (all proof-local, standard practice, not erroneous); Empirical Result 17/18's thin l-range (5..9); Section 9's stored-data range vs. claims elsewhere (checked directly against the repo: Section 9's specific claims about what is stored are each accurate, the apparent mismatch is against claims Section 9 never made) | minor | deferred / not fixed: new mathematical content (the corner-redundancy proof, the ER18 upgrade) was deliberately not added in this final round without a further review pass no longer available under the 5-round cap; the rest are cosmetic or, on inspection, not actual overclaims |
+| — | 5 | Opus's l=24 attempt narration (three failed attempts, described in Section 2) flagged as process narration under Rule 5c | — | rejected: researcher's explicit 2026-08-09 decision to keep this passage, real circumstantial detail supplied by the researcher, Rule 5c Section 9's own exception |
 
 ## Full findings
 
@@ -328,3 +347,71 @@ minor) -- widening it means reading and verifying each new reference against its
 (Rule 11) before it goes in, a scope decision for the researcher, not a unilateral producer add.
 Recompiled clean (12 pages, 0 errors, 0 warnings, 0 em-dashes) and visually re-verified, page by page,
 for every edited section.
+
+## Round 5 (2026-08-09, final round under the 5-round cap)
+
+Before launching Round 5, three researcher decisions carried from Round 4 were resolved: the
+bibliography was widened by three references, each read and verified against its primary source
+(Wirsching's own 2003 follow-up, Tao's 2019 paper, Krasikov-Lagarias); Section 5.3's informal
+"cell/local intensity/conductor-depth" language was formalized, which surfaced a real,
+producer-found error (C-62: the previously stated numeric range did not reproduce under any
+natural reading, corrected via direct recomputation, now backed by a script in the reproducibility
+repo); and the l=24 narration paragraph was kept as is, the researcher's explicit choice. This work
+is recorded in the table above under Round 4 (C-62) since it closed Round 4's own carried items,
+even though it happened just before Round 5 launched.
+
+Round 5 itself: same protocol, Codex and Opus 5 at maximum effort, fresh context, no memory of any
+prior round, PDF frozen for both runs' full duration. Opus used the staged-notes pattern; both
+reviewers independently verified substantial parts of the paper from scratch rather than trusting
+the text (Opus recomputed all 23 values of `e(l)`, `j*(l)` for `l=1..7` from a brute-force
+implementation, every entry of Table 2, all binomial p-values, several theorems and lemmas by hand,
+and all seven bibliography entries against primary sources; Codex read end to end and traced every
+proof). Both reported no critical findings and confirmed the unconditional core mathematics is
+sound; the issues found were hypothesis-placement, framing, and consistency problems, several of
+them introduced by this project's own Round 4/5 fix passes rather than pre-existing.
+
+The two most consequential findings, both independently caught by both reviewers: Krasikov and
+Lagarias's paper (added to the bibliography earlier this same round) was mischaracterized in the
+Discussion as targeting "total stopping time," when the primary source already fetched for that
+citation says predecessor-set counting, the paper's own actual territory -- a wrong recollection
+that leaked past the correct data sitting in context, corrected to state the shared target
+honestly (C-65); and the reproducibility repository's own README, a live public artifact, still
+carried the paper's pre-Round-3 title ("a proven bound") and theorem numbers stale by two rounds of
+additions, meaning a reader who actually followed the paper's own link would see a stronger,
+mismatched paper (C-66). Both are now fixed in the repository, not just the paper.
+
+Corollary 10 (Chain contraction) was missing its own "for j>=l" hypothesis despite its proof
+needing Theorem 9's identical requirement; verified directly (Theorem 9 fails at l=3,4,5 for
+several j<l) before fixing (C-64). The Introduction's central equivalence claim, "K(l)
+sub-exponential is exactly e(l)=o(l)," was two-directional where only one direction is actually
+established without persistence below l; narrowed to the proven direction, converse flagged open
+(C-63). Several precision fixes followed the same pattern of an unstated boundary or an implicit
+assumption not yet available at the point it was used: Empirical Result 12's range turned out to be
+a genuine validity boundary (equality fails at j=l, verified computationally: `maxrun(H(6,6))=5`,
+`maxrun(H(7,7))=5`, not just an unchecked one), Section 5.2's exponential-sum computation sat six
+budgets below the actual covering threshold undisclosed, the local-intensity range from the
+just-finished 5.3 formalization was undefined at its own boundary depth `c=l`, and the plateau test
+computed a pooled p-value under a null already refuted with certainty by the same table it was
+tested against.
+
+Not added this round, deliberately: Opus supplied a short proof sketch for the corner-redundancy
+implies-tightness implication, and both reviewers, across two rounds now, have converged on
+compatible derivations for upgrading Empirical Result 18 from empirical to proven. Both are
+credible leads, but this is the last round under the researcher's 5-round cap, meaning any new
+mathematics added here ships with no further review. Per the same caution that governs every
+correction in this loop (verify before acting, keep corrections scoped), new proofs were judged a
+different category of risk than fixing what a fresh reviewer just checked by hand, and were left
+as documented open items instead of rushed in unreviewed. One Opus finding (Section 9's stored-data
+range not covering every level mentioned elsewhere) was checked directly against the reproducibility
+repository's actual contents and found to not be a real overclaim: Section 9's specific claims each
+hold up against what is actually there; the apparent gaps are against claims Section 9 itself never
+made. Recorded as such rather than silently accepted or silently dropped.
+
+Recompiled clean (13 pages, 0 errors, 0 warnings, 0 em-dashes) and visually re-verified, page by
+page, for every edited section. This is the final round under the researcher's explicit "up to 5
+rounds" instruction; no further critique round is planned. Every entry in the status table above
+now reads `fixed`, `deferred` with a stated reason, or `rejected` with a stated reason, per Rule
+8/15 -- none left `open`. Per Rule 8/15's own logic, Round 5's fixes are themselves unreviewed by any
+fresh pair of eyes; the mandatory pre-publication check (Rule 8, a genuinely independent model or
+the researcher) should still run on this post-fix PDF before submission, whenever that is decided,
+separately from and not satisfied by this critique loop.
