@@ -108,11 +108,12 @@ A push), notes/H-013.md, notes/GAP-A-round4.md, notes/GAP-A-round5*.md.
       shifted with the `l=21-23` data added since the last recorded figures).
 - [ ] Re-read the mean-payoff-game proof construction before drafting section 4 (cite correctly,
       don't just restate the bound).
-- [ ] Dedicated reproducibility repository (Rule 12): not yet set up, needs the researcher's input
-      before section 8 or any "available in the accompanying repository" language is written.
-- [ ] Author/venue/language: same as paper 01 unless told otherwise (Renato Augusto Tavares, UFG;
-      confirm arXiv category -- math.NT fits paper 01 but this paper is more combinatorics/number
-      theory computational, math.CO or math.NT both plausible, ask) and English-first, pt-BR to
-      follow only on request (Rule 5).
+- [x] Dedicated reproducibility repository (Rule 12): `https://github.com/faculdade/weak-covering-conjecture`,
+      confirmed to exist 2026-08-09 (`curl` 200, `gh repo view` succeeds). Not yet populated -- no
+      code committed there yet; do this before section 8 claims anything is "available" in it.
+- [x] arXiv category confirmed: math.NT, 2026-08-09.
+- [ ] Author/venue/language: same as paper 01 unless told otherwise (Renato Augusto Tavares, UFG),
+      English-first, pt-BR to follow only on request (Rule 5). Not yet explicitly reconfirmed for
+      this specific paper.
 - [ ] Prose not yet started (Rule 5: outline before prose, and even this outline needs the two open
       items above resolved first).
