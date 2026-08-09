@@ -89,6 +89,8 @@ citable proof.
       match exactly, every long decimal literal byte-identical); compiles clean, 20 pages, zero
       errors, zero em dashes
 - [ ] researcher's own read: still pending, the one item no critique round can substitute for
+- [x] **submitted to arXiv, 2026-08-09** (category math.NT, license CC BY 4.0, per the decision
+      recorded above). arXiv ID to be filled in here and in `papers/INDEX.md` once assigned.
 
 ## Target venue
 
