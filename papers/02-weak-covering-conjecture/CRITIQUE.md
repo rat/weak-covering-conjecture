@@ -18,14 +18,20 @@ by round; this table is kept current as the producer resolves each entry.
 | 9 | 0 | 2 | 8 | 7 | no | 0 |
 | 10 | 0 | 1 | 8 | 8 | no | 0 |
 | 11 | 0 | 0 | 7 | 6 | no | 0 |
+| 12 | 0 | 1 | 1 | 8 | no | 0 |
 
 Round 10's tally combines both reviewers: Opus 0 critical/0 major/3 moderate/6 minor (C-158, C-159,
 C-160 moderate; C-161-C-166 minor), Codex 0/1/5/2 (C-168 major; C-169-C-173 moderate; C-174, C-175
 minor), combined 0/1/8/8. Round 11: Codex 0/0/4/2 (C-176-C-179 moderate; C-180, C-181 minor), Opus
 0/0/3/4 (C-182, C-185 (folded into C-178's fix), and one more moderate counted once; C-183, C-184,
 C-186-C-188 minor), combined 0/0/7/6 -- no majors or criticals for the first time, but moderate is
-still far from zero. Need 3 consecutive rounds at 0/0/0 crit/major/moderate with minor<3 to
-stop.
+still far from zero. Round 12: the same Fourier-maximality issue was found independently by both
+reviewers (Codex rated it moderate with an explicit counterexample, Opus rated it major and also
+noted an internal contradiction); counted once at the higher severity, consistent with how Round 11
+handled the C-178/C-185 overlap, giving 1 major (C-189). Codex otherwise 0/0/0/1 (C-198 minor,
+rejected), Opus otherwise 0/0/1/7 (C-190 moderate, verified-no-change; C-191-C-197 minor/trivial,
+seven items), combined 0/1/1/8 -- streak resets to 0. Need 3 consecutive rounds at 0/0/0
+crit/major/moderate with minor<3 to stop.
 
 ## Status table
 
@@ -229,6 +235,17 @@ stop.
 | C-187 | 11 | (Opus, minor) Abstract states "the residues that actually fail to be covered sit in cells of local hit-density well below the global mean" as a general fact; the body scopes this to l=10..15 at depths c=8,9,10 | minor | fixed: added "At the levels checked," to the abstract sentence |
 | C-188 | 11 | (Opus, minor) §3's "the full table already refutes (the increments of 2 and 3 noted above)" cites an increment of 2 that was never actually noted anywhere earlier in the text (only the increment of 3, j*(1)=1 to j*(2)=4, was stated explicitly) | minor | fixed: added a concrete increment-of-2 example (j*(2)=4 to j*(3)=6) alongside the existing increment-of-3 citation |
 | — | 11 | Both reviewers independently re-derived every proof (Lemma 1 through Proposition 24) a third consecutive round with nothing found wrong; Opus additionally recomputed most of Table 1-3's and Section 5/6/7's numeric claims from scratch (own DP, own FFT, own value iteration over the *uncapped* action set at k=3..6, matching Table 3 exactly) and confirmed the citation apparatus | — | third consecutive round confirming the combinatorial core; both majors from Round 10 (dcap framing, Fourier unreachability) are gone, but moderate-severity findings in Section 3's and Section 5's numerical/statistical framing continue, now converging on the same theme both rounds: claims stated more precisely/confidently than the underlying computation actually establishes |
+| C-189 | 12 | (Codex moderate + Opus major, dual-found) §5.2's Round-11 rewrite ("a fact this section proves rather than observes... Proposition 8's exact bound already forces it") is a logically invalid inference: a lower bound `\|S(3^{l-1})\|>=T/2` does not establish maximality against frequencies whose only known upper bound is the trivial T. Explicit counterexample (both reviewers independently, Codex's cited below): m=1, l=2, R_{0,1}={1,2}, T=2: \|S(3)\|=1 but \|S(1)\|=2cos(pi/9)~=1.879 exceeds it. Opus additionally noted the claim contradicted two other sentences in the same subsection that correctly hedged the same claim as observational | major | fixed: rewritten to state the bound is "only a lower bound, no claim of maximality," gives the counterexample inline (independently verified in Python before writing), and rescopes "top pair is largest" to being observed only at the three levels this section directly checks (l=10,12,14), never asserted as proven or general. Third consecutive round a fix at this exact locus needed a further fix (Round 10 to intercept the wrong dyadic-rationals claim, Round 11 to fix the wrong valuation-ordering claim, Round 12 for this); no further additions planned at this locus absent a reviewer naming a specific false sentence |
+| C-190 | 12 | (Opus moderate) §2's "500 GiB swap file" possibly conflicts with the machine's current 1.8 TiB swap partition described in CLAUDE.md's Section 1 | moderate | verified-no-change: `lsblk` confirms the machine has two physical disks, `nvme0n1` (476.9G, the 468GB root/boot drive) and a separate `nvme1n1` (1.8T, entirely the swap partition `nvme1n1p1`). The 500GiB swap *file* the paper describes was used contemporaneously with the l=22/23 computation, before the 1.8TiB swap *partition* was later added specifically for l=24 (per notes/H-001.md and CLAUDE.md's own Section 1); no capacity conflict, since the 1.8TB device is separate from the 468GB drive the 500GB file would have lived on. This claim was already verified once, as C-167 in Round 10; Round 12 re-confirms it against the primary source and the disk layout directly, per Rule 8c |
+| C-191 | 12 | (Opus minor) Theorem 5/Corollary 6's caption cites Empirical Result 4 as a full equality (`j*(l) = max_z0 min{J}`), but Theorem 5's proof only ever uses the `j*(l) <= max_z0 min{J}` direction (it bounds every z's min-cost, takes the worst case, then identifies that worst case with j*(l)) | minor | fixed: added a sentence at the end of Theorem 5's proof stating explicitly that only this one direction of Empirical Result 4's equality is used, and that the reverse direction plays no role in the proof; left the theorem's caption and Empirical Result 4's own statement unchanged (the equality is genuinely verified, just not fully needed here) |
+| C-192 | 12 | (Opus minor) Introduction's three-item contributions summary omits the conditional-on-Empirical-Result-4 caveat that both the abstract and Section 4 carry for the mean-payoff bound | minor | fixed: added "conditional on the empirically verified correspondence... stated in Empirical Result 4" to the second contribution item |
+| C-193 | 12 | (Opus minor) §4's "fix any lift of the true state... run the policy on the lift" construction for the final k-1 steps leaves the successor relation unasserted; unclear whether a fresh lift is chosen at each remaining step (which would break the telescoping argument) or one lift fixed once | minor | fixed: reworded to "fix one lift... at the first such step, and run the window-k game forward from that lift on the play's own remaining digits (not a fresh lift at each step)," with an explicit clause that the successor relation used in Theorem 5's proof holds at every step including these last k-1 |
+| C-194 | 12 | (Opus minor-moderate, abstract twin) §5.3's closing "both the raw holdout rarity and the phase-scramble gap point the same way, toward phase structure" pairs two diagnostics as if both bear on phase; holdout rarity is actually a magnitude/local-intensity fact, not a phase fact, so pairing them overstates what the holdout diagnostic shows. The abstract carries the identical overclaim | minor-moderate | fixed in both places: body's §5.3 closing and the Discussion's §8 recap decoupled to state holdout rarity shows coarse magnitude alone does not account for which residues resist, while only the phase-scramble gap bears on phase, descriptively; abstract's parallel sentence reworded the same way (Rule 8b: corrections propagated to the abstract, not just the body) |
+| C-195 | 12 | (Opus minor, Rule 12 discrepancy) §9 states stored holdout sets reach l=21, but Empirical Result 13's "every budget" range was capped at l=20 in the text, with l=21,22 stated as single-budget-only | minor | fixed by evidence, not assumption: ran `h013_round5_dump_analysis.py` directly, confirming the bootstrap identity `j*(l)=j+maxrun(H(l,j))` holds at every budget j=22,23,24 for l=21 (matching j*(21)=25), not just the single budget j=l+1=22 as the text claimed. Empirical Result 13's range corrected to "l=5,...,21 at every such budget and l=22 at the single budget j=l+1," which is what was actually verified and what §9 already correctly stated |
+| C-196 | 12 | (Opus minor) Introduction's citation of [2] (Wirsching 2003) is positioned so a reader could infer the covering-question construction itself comes from [2], when it is stated in [1] (the 1998 monograph); [2] only isolates Wirsching's own route as a self-contained target and states the remaining open conjectures | minor | fixed: restructured the sentence so the covering question attaches explicitly to \cite{wirsching1998}, with [2]'s contribution (isolating the target, stating open conjectures) moved to its own sentence |
+| C-197 | 12 | (Opus trivial/nit) "the precise asymptotic ratio 1/sqrt(3)" should read "exact" to match "Proposition 8's exact bound" earlier in the same sentence, and "precise" sits close to Rule 5c's banned-vocabulary list | trivial | fixed: "precise" to "exact" |
+| C-198 | 12 | (Codex minor) Section 7's independence-model comparison lacks a stated null/independence assumption | minor | rejected, no change: Round 11's own caveat in the same passage already names the missing pieces (no calibrated significance level, descriptive only); a third hedge on the same sentence would be redundant, not more accurate |
+| — | 12 | Both reviewers again re-derived every proof with nothing found wrong (fourth consecutive round for the combinatorial core, Lemma 1 through Proposition 24); five citations now independently verified against primary sources across the loop's history | — | the round's only major (C-189, dual-found) was entirely in text Round 11 itself had written, the third consecutive round a fix at the same Fourier-maximality locus needed a further fix; the loop has become primarily a check on its own edits rather than on the paper's original content, which is the intended argument for why deletion-first, not addition, is now the right default at that locus |
 
 ## Full findings
 
@@ -943,3 +960,73 @@ Recompiled clean (17 pages, 0 errors, 0 em-dashes, parenthesis balance verified,
 the 3-item baseline). Full findings C-176 through C-188 resolved. Combined tally (0/0/7/6): no
 criticals or majors for the first time, but moderate findings are still far from the zero the
 stopping rule needs, and minor stays above the threshold too. Proceeding to Round 12.
+
+### Round 12 (Codex on `gpt-5.6-sol` + Opus 5 max effort, 2026-08-09, PDF snapshot frozen at launch, sha256 `969f80245f9669bbc45e1d0c777a7730404a060f14f5e8a8ec806ee12b8a23d8`)
+
+Both reviewers independently found the same most-severe issue, by different routes: Round 11's own
+fix at the Fourier-maximality locus in Section 5.2 ("a fact this section proves rather than
+observes... Proposition 8's exact bound already forces it") was itself a false, logically invalid
+inference, a lower bound does not establish maximality. Codex supplied an explicit numerical
+counterexample and rated it moderate; Opus supplied the same counterexample independently and rated
+it major, additionally noting the claim directly contradicted two other sentences in the same
+subsection that correctly called the same fact observational rather than proven. This is the third
+consecutive round a fix at this exact locus needed a further fix: Round 10 replaced a wrong
+"dyadic rationals" characterization with 3-adic valuation clustering; Round 11's own fix of that
+("ordered by valuation") was itself still false and got corrected; Round 11's separate fix
+introducing the "provably forces it" language is what broke this round. Verified the counterexample
+independently in Python (`cmath`) before writing the fix, per Rule 8c: `R_{0,1}={1,2}` at `m=1,l=2`
+gives `|S(3)|=1` but `|S(1)|=2cos(pi/9)~=1.879`. Fixed by stating the bound is only a lower bound, no
+claim of maximality, giving the counterexample inline, and rescoping "top pair is largest" to being
+observed only at the three levels the section directly checks (l=10,12,14), never asserted as
+general.
+
+Given the pattern, no further additions were made at this locus beyond what both reviewers named
+specifically; the discipline going forward is deletion-first at this passage; remove or weaken, do
+not add new mathematical assertions there unless a reviewer names a specific false sentence.
+
+The remaining findings, all from Opus (Codex's other three findings, the Poisson-model discard
+language and the Discussion's phase-structure overclaim, were fixed as part of the same locus's
+pass; a fourth, Section 7's independence-model comparison, was rejected as redundant with Round 11's
+already-adequate caveat), were process- and precision-level: a citation-attribution ambiguity that
+could let a reader think Wirsching's 2003 paper contains the covering-question construction, when it
+is stated in the 1998 monograph; a stated hypothesis (Empirical Result 4's full equality) stronger
+than what Theorem 5's proof actually uses (only the `<=` direction); an intro summary dropping a
+conditionality caveat the abstract and body both carry; an ambiguous lift-construction clause in
+Section 4 that could be read as re-lifting at every step rather than once; a pairing of the holdout-
+rarity and phase-scramble diagnostics, in both the body and its abstract twin, that overstated what
+the holdout-rarity diagnostic (a magnitude fact) shows about phase; and a Rule 12 discrepancy between
+Section 9's stated data range (l=21) and Empirical Result 13's narrower stated verification range
+(l=20), resolved by running `h013_round5_dump_analysis.py` directly rather than assuming either side
+was right: it confirmed the bootstrap identity holds at every budget for l=21, not just the single
+budget the text claimed, so Empirical Result 13 was widened to match what was actually verified and
+what Section 9 already correctly stated. One finding (the swap-file detail, C-190) was a re-flag of
+an already-verified-correct claim (C-167, Round 10); re-confirmed directly against `lsblk` output
+this round (two physical disks, the 1.8TiB swap partition entirely separate from the drive the
+500GiB swap file lived on) rather than assumed correct from the earlier check alone, per Rule 8c.
+
+Both reviewers again re-derived every proof with nothing found wrong, the fourth consecutive round
+confirming the combinatorial core (Lemma 1 through Proposition 24). Opus flagged, and this round's
+narrative records honestly, that its own review is not strictly PDF-only: project context in
+CLAUDE.md (the swap-file detail, in particular) is visible to it as a subagent, and it used a web
+fetch to verify a citation; Opus itself labeled this provenance explicitly rather than presenting
+context-derived claims as PDF-derived ones, so no finding this round rested on unlabeled outside
+information, but the blind-protocol description should say so plainly rather than call the process
+"PDF-only" without qualification. Round 13's agent prompt should add one line: project instructions
+may be visible; disregard everything but the frozen PDF for findings, and label anything
+context-derived, as this round's reviewer already did correctly on its own initiative.
+
+Recompiled clean (17 pages, 0 errors, 0 undefined references, 0 em-dashes, parenthesis balance
+645/645, antithesis count returned to the 3-item baseline after a new addition briefly pushed it to
+4). Full findings C-189 through C-198 resolved (fixed, verified-no-change, or rejected with a stated
+reason). Combined tally (0/1/1/8) does not qualify as clean; the streak resets to 0. The round's only
+major was entirely in text Round 11 itself had written, not in the paper's original mathematical
+content, continuing a trend visible since Round 11: the loop is now primarily catching its own
+edits rather than pre-existing errors. Proceeding to Round 13.
+
+**Predeclared acceptance criterion for the l=21 independent verification** (still running as of this
+round's close, launched during Round 10): expect `j=24` to fail to cover and `j=25` to cover,
+matching Table 1's `j*(21)=25`. Any other outcome, `j=24` covering or `j=25` failing, is a
+discrepancy between two independent implementations (the Rust DP and the from-scratch Python
+bignum-bitset reimplementation) and means stop and investigate both, not reconcile quietly. Written
+here before the result lands, per the same predeclaration discipline the Poisson-model fix already
+adopted.

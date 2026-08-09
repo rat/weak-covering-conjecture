@@ -373,3 +373,32 @@ A push), notes/H-013.md, notes/GAP-A-round4.md, notes/GAP-A-round5*.md.
       0 em-dashes, parenthesis balance verified, antithesis at baseline. Combined tally 0/0/7/6: no
       criticals or majors for the first time, but moderate is far from the zero the stopping rule
       needs. Round 12 next.
+
+- [x] **Round 12 complete (2026-08-09).** Frozen PDF snapshot again. Both reviewers independently
+      found the same most-severe issue by different routes: Round 11's own fix at the Fourier-
+      maximality locus (Section 5.2, "Proposition 8's exact bound already forces it") was itself a
+      false, logically invalid inference, a lower bound does not establish maximality. Codex gave an
+      explicit numerical counterexample and rated it moderate; Opus found the same counterexample
+      independently, rated it major, and noted an internal contradiction with two other sentences in
+      the same subsection. Third consecutive round a fix at this exact locus needed a further fix
+      (Round 10, then Round 11, now Round 12); fixed by stating the bound is only a lower bound, no
+      claim of maximality, with the counterexample inline and the "top pair is largest" claim
+      rescoped to only the three levels actually checked. Deletion-first discipline adopted at this
+      locus going forward. Remaining findings (all Opus except one rejected Codex minor): a citation-
+      attribution ambiguity ([2] vs [1] for the covering-question construction); Theorem 5's caption
+      citing a stronger hypothesis (full equality) than its proof uses (one direction only); an intro
+      summary dropping a conditionality caveat the abstract carries; an ambiguous lift-construction
+      clause in Section 4; a holdout-rarity/phase-scramble pairing, in both the body and the abstract,
+      overstating what the magnitude-only holdout diagnostic shows about phase; a Rule 12 discrepancy
+      between Section 9 (l=21) and Empirical Result 13 (l=20) resolved by running the verification
+      script directly, which showed Section 9 was right and Empirical Result 13 undersold what was
+      actually checked. One re-flagged, already-verified-correct detail (the swap-file capacity) was
+      re-confirmed against `lsblk` rather than assumed. Fourth consecutive round both reviewers
+      re-derived every proof with nothing wrong. Opus flagged, and this round records honestly, that
+      its review is not strictly PDF-only (project context is visible to it as a subagent); it
+      labeled context-derived claims itself, but Round 13's prompt should say so explicitly. l=21
+      independent verification still running; acceptance criterion (j=24 fails, j=25 covers,
+      matching Table 1) predeclared in CRITIQUE.md before the result lands. Recompiled clean, 17
+      pages, 0 errors, 0 em-dashes, parenthesis balance verified, antithesis at baseline. Combined
+      tally 0/1/1/8: the round's only major was in text Round 11 itself wrote, not the paper's
+      original content; streak resets to 0. Round 13 next.

@@ -58,9 +58,10 @@ mean-payoff bound. Separately, a direct computation at one accessible level find
 primitive-frequency mass sitting outside the sparse exceptional set a fixed magnitude threshold
 defines. At the levels checked, the residues
 that actually fail to be covered sit in
-cells of local hit-density well below the global mean; a phase-randomization experiment at a
+cells of local hit-density well below the global mean, showing coarse magnitude alone does not
+account for which residues resist; a separate phase-randomization experiment at a
 different, more tractable pair of
-parameters points the same way, toward phase structure that magnitude alone does not capture. We
+parameters points, descriptively, toward phase structure beyond that. We
 prove a theorem on the uncovered residues themselves, for budgets $j\ge l$: the set left uncovered
 at a budget is contained in both twice and four times the set left uncovered at the previous budget,
 giving an explicit recursive upper bound on $j^*(l)$ that we prove exact at most budgets, given one
@@ -87,10 +88,11 @@ exponential sums, Littlewood--Offord theory.
 Wirsching's 1998 monograph~\cite{wirsching1998} studies the density of predecessor sets under the
 $3n+1$ map through an averaging construction on the $3$-adic integers. A limiting Markov chain
 built from that construction has an invariant density, and Wirsching's own route to positive
-predecessor density, developed further in a later paper of his own that isolates it as a
-self-contained target and states, as open conjectures, the gaps still unbridged between that
-construction and a proof~\cite{wirsching2003}, passes through a covering question about a family of
-finite subsets of $\Z_3^*$, the $3$-adic units. For integers $j,k\ge0$, write
+predecessor density passes through a covering question, stated in that same
+monograph~\cite{wirsching1998}, about a family of finite subsets of $\Z_3^*$, the $3$-adic units. A
+later paper of his own isolates this route as a self-contained target and states, as open
+conjectures, the gaps still unbridged between it and a proof~\cite{wirsching2003}. For integers
+$j,k\ge0$, write
 \begin{equation}
 \label{eq:Rjk}
 R_{j,k} := \Bigl\{\, \sum_{i=0}^{j} 2^{a_i}3^i \ \Bigm|\ j+k \ge a_0 > a_1 > \cdots > a_j \ge 0
@@ -137,7 +139,8 @@ direct enumeration and reported the resulting table without a growth-rate analys
 three things. First, it extends that table to $l=23$ and gives a proper statistical comparison of
 candidate growth models for $e(l)$ against the full range (Sections~\ref{sec:computation}
 and~\ref{sec:growth}). Second, it gives the best upper bound on $j^*(l)$ we have found, via a
-reformulation of the covering budget as a mean-payoff game
+reformulation of the covering budget as a mean-payoff game, conditional on the empirically verified
+correspondence between the two stated in Empirical Result~\ref{er:soundness}
 (Section~\ref{sec:mpg}). Third, and at greatest length, it reports a sustained attempt to close the
 gap to the conjectured rate directly, first by the naive uniform-cancellation version of the natural
 Fourier approach, and, once that version is shown to fail for a checkable reason, by a direct study
@@ -428,10 +431,12 @@ A window-$k$ policy, run against the actual digit sequence, gives a legal full-p
 $z$ modulo $3^l$: at step $i$, the true remaining state is $z_i$ modulo $3^{l-i}$, so the policy
 sees the true $z_i\bmod3^k$ directly whenever $l-i\ge k$, i.e.\ for every step but the last $k-1$.
 Once $l-i<k$, whether because $l<k$ globally or because a play with $l\ge k$ has reached its own
-final $k-1$ steps, fix any lift of the true state to a residue modulo $3^k$ and run the policy on
-the lift, which is exactly the situation safety was built for, with the play's own remaining digits
-standing in for the hidden ones, so the chosen move stays legal against the true, lower-precision
-state at every step. Writing $s_i$ for whichever window-$k$ state $\sigma_k$ sees this way at step
+final $k-1$ steps, fix one lift of the true state to a residue modulo $3^k$, at the first such step,
+and run the window-$k$ game forward from that lift on the play's own remaining digits (not a fresh
+lift at each step), which is exactly the situation safety was built for, with the play's own
+remaining digits standing in for the hidden ones, so the chosen move stays legal against the true,
+lower-precision state at every step and the successor relation used below holds at every step,
+including these last $k-1$. Writing $s_i$ for whichever window-$k$ state $\sigma_k$ sees this way at step
 $i$ (the true $z_i\bmod3^k$, or a fixed lift of it), $s_{i+1}$ is by construction the successor
 $s_i'(\epsilon)$ under $\sigma_k$'s chosen move and the digit $\epsilon$ that the real play actually
 supplies at that step, so $s_0,\dots,s_l$ is exactly a play of the form the proof below sums over,
@@ -463,8 +468,9 @@ $\sigma_k$'s chosen move. Summing the inequality along any $l$-step play $s_0,\d
 regardless of which digits the adversary actually supplies, since the potential inequality holds for
 every $\epsilon$ at every step. So $\sigma_k$, run as above, gives every unit $z$ modulo $3^l$ a
 legal full-precision play of total cost at most $l\rho_k+C_k$; the minimum cost over all legal plays
-from $z$ is therefore also at most $l\rho_k+C_k$. Taking the worst-case $z$ and applying Empirical
-Result~\ref{er:soundness} gives $j^*(l) \le \rho_k l + C_k$.
+from $z$ is therefore also at most $l\rho_k+C_k$, hence so is the worst case over $z$. Only the
+$j^*(l)\le\max_{z_0}\min\{J\}$ direction of Empirical Result~\ref{er:soundness}'s equality is used
+here, to identify that worst case with $j^*(l)$; the reverse direction plays no role in this proof.
 \end{proof}
 
 $\sigma_k$, $h_k$ and $\rho_k$ are computed as rationals by a nested Howard strategy-improvement
@@ -591,12 +597,14 @@ treatment (a major/minor-arc split, in the language of the circle method) can do
 Numerically, $|S(t)|$ is far from uniform. Writing $t=3^{l-c}t'$ with $3\nmid t'$ (valuation
 $l-c$), $t\cdot V/3^l=t'\cdot V/3^c$ for every tuple value $V$, so $S(t)$ at modulus $3^l$ equals the
 same sum evaluated at the coarser modulus $3^c$: a frequency of valuation $l-c$ is literally the
-level-$c$ sum of the same tuple family. The single largest frequency pair is exactly
-$t=3^{l-1},2\cdot3^{l-1}$ (valuation $l-1$, $c=1$), a fact this section proves rather than observes:
-Proposition~\ref{prop:sqrtceiling}'s exact bound $|S(3^{l-1})|\ge T/2$ already forces it. Beyond that
-pair, high valuation correlates with large magnitude at the levels directly checked (the family
-$R_{m-1,m}$ at each level's own first-order cardinality threshold: $l=10,m=9$;
-$l=12,m=11$; $l=14,m=13$), but loosely: among the twelve
+level-$c$ sum of the same tuple family. Proposition~\ref{prop:sqrtceiling}'s exact bound
+$|S(3^{l-1})|\ge T/2$ is only a lower bound, no claim of maximality: at $m=1$, $l=2$ (the family
+$R_{0,1}=\{1,2\}$, $T=2$), $|S(3)|=1$ but $|S(1)|=2\cos(\pi/9)\approx1.879$ exceeds it, so the top
+pair is not always the largest frequency. At the levels directly checked in the family this section
+actually uses ($R_{m-1,m}$
+at each level's own first-order cardinality threshold: $l=10,m=9$;
+$l=12,m=11$; $l=14,m=13$), the top pair $t=3^{l-1},2\cdot3^{l-1}$ is observed to be the largest, and
+high valuation correlates with large magnitude beyond it, but loosely: among the twelve
 largest frequencies at $l=10$, valuations run $9,9,8,8,7,7,8,8,8,8,7,7$, and at $l=12$ the largest
 primitive (valuation-$0$) frequency already exceeds the weakest valuation-$8$ frequency checked. The
 natural
@@ -649,8 +657,10 @@ eleven holdouts across these six levels has $\lambda_c$ well below the global me
 $c=8,9,10$ with $c<l$ (at $l=10$, only $c=8,9$; $\lambda_c$ from $2.0$ to $108.4$, hole probability
 from $e^{-2}$ to $e^{-108}$). The non-homogeneous Poisson model assigns probability $e^{-108}$ to an
 event that occurred; $z$, the levels, and the depths checked are all selected after seeing the
-holdouts, so this is not a predeclared, calibrated test, but the model is discarded on the strength
-of that exponent regardless. What survives is the weaker, descriptive claim
+holdouts, so this is not a predeclared, calibrated test: the exponent is suggestive rather than a
+formal
+rejection, and the model is not treated as a live candidate below on that basis. What survives is
+the weaker, descriptive claim
 underneath it:
 holdouts sit systematically in low-intensity cells, with how far below the mean varying widely by
 depth and level. A separate
@@ -682,9 +692,10 @@ only $|S(t)|$, beyond what the vanishing constraint alone forces, though this di
 what mechanism produces that residual, on
 whether it is what
 decides coverage, or on how much of it a properly calibrated test would confirm. At the levels
-checked, both the raw holdout rarity and the phase-scramble gap
-point the same way, toward phase structure that magnitude-only methods (uniform bounds, averages,
-low moments of $S(t)$) do not see.
+checked, the two diagnostics are not evidence of the same thing: the raw holdout rarity shows that
+coarse local intensity (a cell-averaged count) does not by itself pick out which residues resist,
+while only the phase-scramble gap bears on phase as such, and even there only descriptively, for the
+reasons just given.
 
 \begin{proposition}
 \label{prop:1547}
@@ -703,7 +714,7 @@ mixture equals $-\tfrac12 - \tfrac{i\sqrt3}6$, of modulus $1/\sqrt3$.
 $t/3^l=1/3$ exactly, so $l$ drops out of $S(3^{l-1})$ entirely (only $V\bmod3$ matters), and the
 limit above holds at every scale $m$, including along the covering-relevant diagonal $m\sim
 l\log_4(3)$. It sharpens Proposition~\ref{prop:sqrtceiling}'s exact bound $|S(3^{l-1})|\ge T/2$ to
-the precise asymptotic ratio $1/\sqrt3\approx0.577$, and confirms that the mass Proposition
+the exact asymptotic ratio $1/\sqrt3\approx0.577$, and confirms that the mass Proposition
 \ref{prop:sqrtceiling} forces concentrates, at this one frequency at least, exactly where the
 numerics of \S5.2 place it: at the highest-valuation frequency, $t/3^l=1/3$.
 
@@ -783,8 +794,8 @@ $j^*(l)\le j+r=j+\mathrm{maxrun}(H(l,j))$.
 \begin{empresult}
 \label{er:bootstrap}
 Corollary~\ref{cor:bootstrap} is empirically exact, $j^*(l) = j + \mathrm{maxrun}(H(l,j))$, at every
-$(l,j)$ with $l+1\le j\le j^*(l)$ we were able to compute, $l=5,\dots,20$ at every such budget and
-$l$ up to $22$ at the single budget $j=l+1$, including a case with $|H(l,j)| > 3\times10^6$
+$(l,j)$ with $l+1\le j\le j^*(l)$ we were able to compute, $l=5,\dots,21$ at every such budget and
+$l=22$ at the single budget $j=l+1$, including a case with $|H(l,j)| > 3\times10^6$
 ($l=3,4$ were not separately computed here, but Proposition~\ref{prop:tight} below proves the same
 equality there). (Past
 $j^*(l)$, $H(l,j)=\emptyset$ and $\mathrm{maxrun}(\emptyset)=0$, so the displayed equality no longer
@@ -1128,9 +1139,10 @@ may recur there under different names. The full-spectrum, uniform-cancellation r
 is unreachable outright (Proposition~\ref{prop:sqrtceiling}); stronger, frequency-dependent
 cancellation strategies remain untried. Exceptional mass does
 not concentrate on a sparse set at the one accessible scale checked ($l=18$, $j=16$, one threshold,
-primitive frequencies only). And the phase structure that both holdout rarity and a
-phase-randomization diagnostic point to is a real departure from a generic-phase model at the levels
-checked, though neither diagnostic says whether it is what decides coverage. Tao's later, unrelated
+primitive frequencies only). Holdout rarity shows coarse magnitude alone does not account for which
+residues resist, and a separate phase-randomization diagnostic suggests, descriptively, a departure
+from a generic-phase model at the levels checked, though neither calibrates that suggestion or says
+whether it is what decides coverage. Tao's later, unrelated
 result
 that almost every Collatz orbit attains an almost bounded value~\cite{tao2019} works with a
 first-passage random variable over a different probabilistic model of the same map and does not
