@@ -97,8 +97,16 @@ A push), notes/H-013.md, notes/GAP-A-round4.md, notes/GAP-A-round5*.md.
 7. Discussion: what's open, precisely (the two named lemmas), why this project stops here, what a
    human number theorist could do with this (per Rule 10, citation-maximizing framing: make the open
    questions genuinely inviting and precise, not a vague "more work is needed").
-8. Code and data availability (Rule 12: dedicated repro repo, not yet created -- confirm with the
-   researcher before this section is written).
+8. Code and data availability (Rule 12: dedicated repro repo, `https://github.com/faculdade/
+   weak-covering-conjecture`, confirmed to exist, not yet populated). **DOI archival plan
+   (researcher's explicit instruction, 2026-08-09), same flow as paper 01/H-006**: once the repo is
+   fully populated and stable (no further planned changes), create a GitHub Release; Zenodo is
+   already linked to the researcher's account, so it should mint a DOI automatically the same way
+   it did for `faculdade/wirsching-conjecture3-proof` (`doi:10.5281/zenodo.21854549`) -- but
+   re-verify per-repository the Zenodo GitHub toggle is on for this specific repo before assuming
+   the webhook fires (paper 01's own experience: account-level linking was NOT sufficient by
+   itself, a repo-level toggle at zenodo.org/account/settings/github/ was also required). Cite the
+   DOI in this section once minted, not the bare GitHub URL.
 
 ## Status
 
