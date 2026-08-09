@@ -225,3 +225,19 @@ A push), notes/H-013.md, notes/GAP-A-round4.md, notes/GAP-A-round5*.md.
       repo, all four README files resynced a third time. This is new content added after the
       5-round cap closed; it does not reopen the loop, and the mandatory pre-publication
       independent check above still applies to it.
+- [x] **Researcher extended the critique loop to 10 rounds (2026-08-09)**, explicitly to test
+      convergence, superseding the earlier 5-round cap.
+- [x] **Round 6 complete (2026-08-09), first round under the 10-round extension**, and the first
+      round to review Propositions 18/22 (added post-Round-5). Codex + Opus 5 max effort, fresh
+      context, PDF frozen. Both independently confirmed the two new propositions are sound (Opus
+      reimplemented the paper's objects from scratch and reproduced every number checked). 21
+      findings fixed, no critical/major proof-validity errors. The most serious (Opus): "corner-
+      redundancy is known to fail at W=2l" was backwards for l=3,4,5,6, where it actually holds;
+      fixed, and the correction let Proposition 22's mechanism extend to prove Proposition 20's
+      boundary case (j=l+1) at those four levels, a genuine strengthening neither reviewer proposed
+      directly. ER13 (cost-1 repair rule) finally given its actual formal definition after being
+      flagged as under-specified in three consecutive prior rounds, by reading the underlying script
+      directly. One producer-found issue: Rule 5c's antithesis budget (2 per document) had grown to
+      13 instances across Rounds 3-6's additions, uncaught since Round 1; cut back to 2. Same
+      corner-redundancy-boundary error found and fixed in the reproducibility repo's own README.
+      Recompiled clean, 15 pages, 0 errors, 0 em-dashes, visually re-verified. Round 7 next.

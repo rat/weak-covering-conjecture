@@ -2,7 +2,9 @@
 
 PDF-only blind critique loop, Codex (`gpt-5.6-sol`) + Fable, fresh context each round, per Rule
 8/15. Researcher's explicit request, 2026-08-09, same protocol as papers/01-wirsching-conjecture3.
-Up to 5 rounds; iterate until a round returns no further real findings from either reviewer. Full
+Originally up to 5 rounds; the researcher extended the cap to 10 rounds on 2026-08-09 after Round 5
+closed, specifically to test whether the two reviewers converge (a round returning no further real
+findings from either). Iterate until convergence or the round-10 cap, whichever comes first. Full
 findings text preserved below by round; this table is kept current as the producer resolves each
 entry.
 
@@ -95,6 +97,27 @@ entry.
 | C-79 | 5 | Proposition 1's "necessary for j>=j*(l)" implicitly used coverage-persistence (not yet proven at that point in the paper) rather than just the definitional fact needed | minor | fixed: narrowed to "necessary at j=j*(l) in particular," which is self-contained |
 | — | 5 | Opus flagged Proposition 8 as "subsuming" Proposition 7's barrier without an explicit cross-reference; Opus's corner-redundancy-implies-tightness proof sketch; Opus's suggestion to upgrade Empirical Result 18 to a proposition (both reviewers, across two rounds, converging on compatible derivations); minor symbol reuse of `T`, `m`, `n` across different local contexts (all proof-local, standard practice, not erroneous); Empirical Result 17/18's thin l-range (5..9); Section 9's stored-data range vs. claims elsewhere (checked directly against the repo: Section 9's specific claims about what is stored are each accurate, the apparent mismatch is against claims Section 9 never made) | minor | superseded: the two credible leads (corner-redundancy-implies-tightness, the mod-9 upgrade) were worked out, verified, and added, researcher-directed, see "Post-loop verification" below; the rest remain cosmetic or, on inspection, not actual overclaims |
 | — | 5 | Opus's l=24 attempt narration (three failed attempts, described in Section 2) flagged as process narration under Rule 5c | — | rejected: researcher's explicit 2026-08-09 decision to keep this passage, real circumstantial detail supplied by the researcher, Rule 5c Section 9's own exception |
+| C-80 | 6 | Both reviewers independently confirmed Propositions 18 and 22 (the two propositions added after Round 5, never previously reviewed) are logically sound; Codex exhaustively spot-checked both, Opus reimplemented the paper's objects from scratch and reproduced every number it checked | — | verified, no change needed; recorded since it is the reason this round's other findings are prose/scope fixes, not proof-validity ones |
+| C-81 | 6 | (Opus, the round's most serious finding) "the only known failures at the boundary width W=2l" is false in both directions: direct computation shows corner-redundancy fails at every width from l-1 to 2l-1 in general, and at the specific boundary W=2l it actually HOLDS for l=3,4,5,6, only starting to fail from l=7 | major | fixed: corrected the claim with the actual per-l pattern, verified computationally before writing it in |
+| C-82 | 6 | Consequence of C-81, not exploited: since corner-redundancy holds at W=2l for l=3,4,5,6, Proposition 22's mechanism extends to prove Proposition 20's boundary case (j=l+1) at those four levels specifically, previously stated as "empirical only" | moderate | fixed: added as a remark after Proposition 22's proof, verified directly (l=3: 4+2=6, l=4: 5+2=7, l=5: 6+3=9, l=6: 7+3=10) |
+| C-83 | 6 | Discussion overstates Proposition 22's range: "tight for every budget j>=l+2" omits the upper bound j<=j*(l), which the proposition itself requires (the equality is false past j*(l), where H is empty) | moderate | fixed in both the Discussion and the abstract |
+| C-84 | 6 | ER13 (cost-1 repair rule) still not formally specified after being flagged in three prior rounds: "cheapest witness," "matched by natural containment" do not describe what the underlying script actually computes (a minimum symmetric difference over the FULL witness fiber at each budget, not restricted to minimum-depth witnesses) | moderate | fixed: verified the actual computation in `witness_check_6_7.py`/`witness_check_7_8.py` and rewrote the definition to match exactly |
+| C-85 | 6 | Introduction's K(l) ~ 4^e(l)/sqrt(j*(l)) identity calls the correction "a polynomial factor in l" without qualification, but no unconditional polynomial bound on j*(l) is proved (Proposition 15's unconditional bound is exponential) | moderate | fixed: scoped the claim to "at every level actually computed" and cited which bounds are unconditional vs. conditional |
+| C-86 | 6 | Section 6's opening states "j>=j*(l) exactly when H(l,j)=empty" as if following from the definition of j*(l) alone; the converse direction actually needs persistence (Theorem 9), justified only two sentences later | moderate | fixed: reordered to state only the one-directional definitional fact first, then the persistence-dependent equivalence, matching what is actually proven at that point |
+| C-87 | 6 | ER12's "equality fails at j=l" was stated as if general, but direct computation shows it holds for l=1,...,5 and only fails from l=6; the given justification ("Corollary 10 and 11 both requiring j>=l") does not actually explain the failure, since j=l already satisfies j>=l | moderate | fixed: corrected the range and removed the non-explanatory justification |
+| C-88 | 6 | Section 5.2's l=18 computation reports "it says nothing about every l" as its only caveat, when the sharper limitation established earlier in the same paragraph is about the budget j (six below the covering threshold), not the level l | moderate | fixed: added the j-based caveat to the closing sentence |
+| C-89 | 6 | Proposition 7 (the 1.585l sqrt-cancellation ceiling) and Proposition 8 (the 1/sqrt(3) limit) were left unreconciled: Proposition 8 shows no fixed C can even satisfy Proposition 7's hypothesis at the frequency t=3^(l-1), a stronger conclusion than "worse than Corollary 5" | moderate | fixed: added an explicit sentence connecting the two |
+| C-90 | 6 | l=22's "500 GiB of swap" and l=23's "263 GiB of state" read as directly comparable figures reporting more memory for l=22 than l=23, backwards from the real ~84 GiB vs ~263 GiB state progression (500 GiB was swap capacity added, generously, not the amount used) | moderate | fixed: verified against `notes/H-001.md`'s own figures (84 GiB, 500 GiB capacity, 263 GiB), rewrote both sentences to state actual state size vs. swap capacity as distinct quantities |
+| C-91 | 6 | Unparseable sentence describing the l=23 checkpoint/resume mechanism (one sentence conflating the earlier kill, the mechanism's addition, and its non-use) | minor | fixed: split into two sentences |
+| C-92 | 6 | Proposition 18 (mod-9 containment) needs l>=2 stated explicitly; beta_1 and "x mod 9" are ill-posed at l=1 | minor | fixed |
+| C-93 | 6 | Abstract's "two precisely stated open questions remain" reads as if nothing else in the paper is unproven, when ER 3's correspondence, ER 17's bijection, and Proposition 20's converse are all also left open | minor | fixed: reworded to "two of the questions this work leaves open are named and precisely stated... others are noted where they arise" |
+| C-94 | 6 | "the actual primitive-frequency max/RMS ratio is 15.79" never states max/RMS of what | minor | fixed: added "writing N(z) for the exact hit count..." |
+| C-95 | 6 | Abstract's "extremal cells" is stronger than the body, which shows only "well below the global mean," not extremality (ranks/quantiles) | minor | fixed in the abstract, matching the body's own more careful phrasing |
+| C-96 | 6 | Introduction's roadmap "(Sections 5 and 6)" is outdated: the direct holdout study now spans Sections 5-7 after Propositions 18/22 were added to Section 7 | minor | fixed |
+| C-97 | 6 | Corollary 10's element list "x/4, x/2, x, ..., 2^(t-2)x" is degenerate/misleading at t=1, where the correct output is just {x/4, x/2} | minor | fixed: restated as $2^ix$ for $i=-2,\dots,t-2$, correct at every $t\ge1$ including the proof's own use of $t=1$ |
+| C-98 | 6 | Proposition 1's cardinality result (`|R_{j-1,j}|=binom(2j,j)`) is essentially Wirsching's own Corollary 1.8 (verified against the primary source), re-derived here with no attribution | minor | fixed: added a one-clause credit |
+| C-99 | 6 | Abstract's "capped below even this bound" reads ambiguously (Proposition 7 gives a floor, worse than the 1.125l bound, not an upper cap below it) | minor | fixed: reworded to "cannot beat a threshold worse than this bound" |
+| C-100 | 6 | (Producer-found, neither reviewer flagged it) Rule 5c's antithesis budget (at most 2 "P, not Q" / "not merely P but Q" constructions per document) was blown: 13 instances had accumulated across Rounds 3-6's text additions, none re-checked against this specific budget since Round 1 | moderate | fixed: cut to exactly 2 (the mean-payoff-game bound's verified-not-proven status, and the doubling-chain sufficient-not-necessary distinction), the rest rewritten as plain positive statements |
 
 ## Full findings
 
@@ -468,3 +491,47 @@ to the new numbering a third time.
 This work happened after Round 5 closed and is therefore itself unreviewed by any of the loop's
 fresh reviewers; it does not reopen the loop or count toward the 5-round cap, and does not change
 the standing recommendation that a genuinely independent check should still run before submission.
+
+## Round 6 (2026-08-09), first round under the researcher's extended 10-round cap
+
+The researcher asked explicitly for the loop to continue past the original 5-round cap, up to 10
+rounds, specifically to see whether the two reviewers converge. Round 6 is the first round under
+this extension, and the first to review the two propositions (18 and 22) added after Round 5 closed;
+neither had been seen by any reviewer before this round.
+
+Both reviewers independently confirmed Propositions 18 and 22 are logically sound: Codex exhaustively
+spot-checked both proofs and found no gap; Opus reimplemented the paper's core objects from scratch
+(not using the project's own code) and reproduced every number it checked, including both new
+propositions' identities on small exhaustive cases. Neither reviewer found a critical or major
+proof-validity error. This round's findings are prose, scope, and consistency issues, not defects in
+the two new results themselves.
+
+The most serious finding (Opus) was a real factual error in the paper's own prose about corner-
+redundancy's boundary behavior: the claim that corner-redundancy is "known to fail" at the boundary
+width W=2l turned out to be backwards for four of the levels it was checked at. Direct computation
+(verified independently before acting, per Rule 8c) shows corner-redundancy actually HOLDS at W=2l
+for l=3,4,5,6, and only starts failing there from l=7. This was not just a wording fix: since
+Proposition 22's proof mechanism only needs corner-redundancy at the widths it actually uses, the
+corrected fact means the proposition's argument extends cleanly to prove Proposition 20's previously
+"empirical only" boundary case (j=l+1) at exactly those four levels, verified directly. Neither
+reviewer proposed this extension; it fell out of chasing down why the original "known to fail" claim
+did not match a direct check.
+
+Several other findings followed a similar pattern: a paper-level claim stated more strongly, or with
+a less precise justification, than what the underlying computation or proof actually supports (the
+Discussion's missing upper bound on Proposition 22's range, the Introduction's unqualified "polynomial
+factor" claim, ER12's "equality fails at j=l" stated as if general when it only starts at l=6, Section
+5.2's caveat naming the wrong variable). ER13 (the cost-1 repair rule falsification) was finally given
+its actual formal definition after being flagged as under-specified in three consecutive prior rounds;
+the fix required reading the underlying script (`witness_check_6_7.py`) directly rather than guessing
+at what "cheapest witness" and "natural containment" were meant to describe, since the actual
+computation turned out to be a plain minimum symmetric difference over the full witness fiber, not
+the vaguer description the paper had carried since Round 1.
+
+One finding was producer-found, not from either reviewer: a Rule 5c compliance check (the antithesis
+budget, "at most two 'P, not Q' constructions per document") had not been re-run since Round 1, and
+13 such constructions had accumulated across Rounds 3-6's text additions. Cut to exactly 2.
+
+Recompiled clean (15 pages, 0 errors, 0 em-dashes, cite/bibitem check clean) and visually
+re-verified. Full findings list above, C-80 through C-100, all resolved (fixed or verified-no-change).
+Proceeding to Round 7.
