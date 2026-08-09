@@ -144,14 +144,18 @@ A push), notes/H-013.md, notes/GAP-A-round4.md, notes/GAP-A-round5*.md.
       originally stated every computational claim is backed by a script in the repo; corrected to
       state the repo is reserved and will be populated before submission, since it is not yet
       populated (DATA_REPO.md).
-- [ ] PDF-only blind critique loop (Codex+Fable, same protocol as paper 01), researcher's explicit
-      request 2026-08-09: round 1 complete and fixed (18 findings, 3 critical, substantial
-      rewrites to Sections 1/3/4/5/6/7; also caught rho_14=9/8 > paper's stated bound, now fixed),
-      see CRITIQUE.md. Round 2 complete and fixed (15 findings, 4 critical -- the most serious was
-      Round 1's own fix to Theorem 2 leaning on premises the game construction didn't actually
-      establish, k=1 counterexample included; fixed by a certificate-based restructure of the
-      proof). One empirical result (cross-level x4-only inheritance) withdrawn outright after being
-      shown algebraically impossible as stated. Recompiled clean, 10 pages. Repro repo population
-      (Rule 12) still pending -- three separate reviewer passes across both rounds have now flagged
-      the empty repo as a real unauditability problem; populate before round 3. Round 3 not yet
-      launched.
+- [ ] PDF-only blind critique loop (Codex + Opus 5 max effort as of round 3, replacing Fable per
+      researcher's explicit instruction), researcher's explicit request 2026-08-09: round 1 complete
+      and fixed (18 findings, 3 critical). Round 2 complete and fixed (15 findings, 4 critical).
+      Repro repo populated (Rule 12) between rounds 2 and 3:
+      `https://github.com/faculdade/weak-covering-conjecture`, six section-mapped folders, every
+      claim re-run and confirmed. Round 3 complete and fixed (13 findings, 4 critical -- the most
+      serious was a claim in the mean-payoff-game section that had survived two prior rounds while
+      being outright false, caught by Codex via a two-line numeric counterexample; the correct
+      correspondence was re-derived with an outside consultation and independently verified by
+      computation, 780 cases, before being written in). See CRITIQUE.md for full findings.
+      Recompiled clean, 12 pages. A handful of moderate/minor items carried to round 4 (statistical-
+      inference-flavored language around the plateau p-value, an unspecified independence model, one
+      empirical result upgradeable to proven). The title's "a proven bound" is flagged by both
+      round-3 reviewers as an overclaim given the conditional bound; not changed unilaterally,
+      pending the researcher's call. Round 4 not yet launched.
