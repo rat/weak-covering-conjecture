@@ -1,5 +1,22 @@
 # E-009: holdout-set doubling maps, the run-length bootstrap, and the witness-level test of H-012
 
+## Round-5 addendum (2026-08-09, dedicated H-013 push)
+
+Two new scripts; full findings in `notes/H-013.md` (round-5 section):
+
+- `mod9_forcing_analysis.py`: per-budget mod-9 class content `E(l,j)` of every
+  holdout set, `l=5..16`, all budgets; the shadow map
+  `E(j+1) subset (E(j)+1) ^ (E(j)+2)` in `Z/6`; the mod-9 run bound; forcing of
+  the single-class law from `j*-2`; maximal-run ends; writes `dumps/*.u64`.
+  Runtime ~15 min (the `l=16` DP dominates; run it to a file, not a pipe).
+- `h013_round5_dump_analysis.py`: consumes dumps from this folder and from
+  `../E-001-jstar-fast/h013_dumps` (produced by the `h013_sweep` binary there):
+  Theorem-1 inclusion checks, ancestry set-equalities
+  `2^-s H(b) = tail class of H(b-s)` (`s=1,2`, levels 16..21), near-extinction
+  bijection, and the cross-level fresh/inherited 2x2 with mod-729 family split
+  (via-2 inheritance is 0 everywhere; provably impossible given the last-set
+  mod-3 law). Runtime ~2 min once dumps exist.
+
 Round 4 of the fixed 5-round GAP A push (2026-08-08). Attacks H-012 directly (prove-or-falsify),
 with H-013 extension and H-011 cross-links. Everything below was computed exactly (no sampling)
 and every inclusion/bound was checked against the project's independently verified `j*(l)` table.
