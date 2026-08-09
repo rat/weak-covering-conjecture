@@ -45,6 +45,20 @@ entry.
 | C-32 | 2 | Section 6's opening asserts "$j>=j^*(l)$ exactly when $H(l,j)=\emptyset$" for $j\ge l$ without justifying that emptiness persists once reached | minor | fixed: one-line derivation added from Theorem 7 itself (H(l,j)=empty implies H(l,j+1) subseteq 2*empty cap 4*empty = empty) |
 | C-33 | 2 | Residual Rule 5c artifacts flagged by Codex's prose pass (hedge-then-affirm phrasing, meta-commentary about verification) | minor | fixed as a side effect of the C-19..C-32 rewrites; re-confirmed by grep afterward: 0 banned-vocabulary hits, 0 em-dashes, antithesis constructions within budget |
 | — | 2 | Fable's Round 2 pass (run in parallel with Codex's): Theorem 7's proof had a garbled closing sentence from the Round 1 rewrite; Proposition 5 stated an unspecified constant and error term; the four e(l) growth models lacked explicit functional forms in text; the "safe" move definition left the modulus m implicit; Tao's two quoted sentences were not re-verified against the primary source; Empirical Result (mod-9)'s process-narration parenthetical (referencing the earlier reversal) survived Round 1's Rule 5c pass | major/moderate | fixed, all six, before Codex's report was read (Theorem 7 proof-ending rewritten; Prop 5 given an explicit constant C and O(log l) error term; growth models given explicit functional forms; `m:=3^k` pinned down explicitly; both Tao quotes verified via WebFetch against the primary source, confirmed exact; the parenthetical removed) |
+| C-34 | 3 | Empirical Result (soundness)'s witnessing claim, `z in R_{J-1,J} mod 3^l`, was FALSE, not just unproven: Codex found a direct counterexample (l=2, z=4, play costs (0,1), J=1, but 4 is not in R_{0,1} mod 9 = {1,2}), confirmed independently by hand and by a from-scratch computation | critical | fixed: replaced with a correctly-derived Lemma (Grounding), proven by induction and independently verified computationally against every legal play for l=1..4 (780/780 pass), showing the play actually witnesses a *twisted* residue `2^{J+l-1} z_0`, not `z_0` itself; the Empirical Result was restated as the (separately verified, l=1..12) equality `j*(l) = max_z0 min-cost(z0)`, and Theorem 3's proof rewritten to use this correctly (min-cost <= specific policy's cost, not the false direct-witnessing claim) |
+| C-35 | 3 | The "full-precision game" (k=l, no adversary) was not a coherent construction: "safety is automatic since z is a unit" is circular (staying a unit is exactly what needs guaranteeing), and computing T_d(z) mod 3^l after division by 3 needs z mod 3^{l+1}, not merely z mod 3^l | critical | fixed as part of C-34's rewrite: the full-precision game is now defined with a shrinking modulus (state z_i modulo 3^{l-i} at step i), matching the actual verified implementation (`step_a_grounding.py`), not the earlier informal "no adversary" description |
+| C-36 | 3 | A fixed window-k policy cannot literally inspect z mod 3^k when l<k, despite Theorem 3 claiming the bound for all l (window sizes go up to k=14, but the bound is claimed for every l, including l<14) | major | fixed: added an explicit bridging sentence (fix any lift of z to mod 3^k and run the policy on the lift; safety's own guarantee, built for one hidden digit, extends digit-by-digit to every digit beyond position l) |
+| C-37 | 3 | Table 3 calls C_k "explicit" but only lists rho_k; Corollary 4's `+O(1)` cannot be checked by a reader without the actual constant, and (9/8)*23=25.875 < 27=j*(23) shows C_14 must be at least 9/8, worth checking against what's actually stored | moderate | fixed: added a C_k row to Table 3 (all twelve values, from the project's own certificate files; C_14=33/2, consistent with the l=23 check) |
+| C-38 | 3 | Abstract states Theorem 8's inclusion backwards: "contained in the union of its double and its quadruple," where the theorem proves an *intersection* (`H(l,j+1) subseteq 2H(l,j) cap 4H(l,j)`), and the "double/quadruple at the next" phrasing reverses which budget contains which | critical | fixed: abstract corrected to "contained in both twice and four times the set left uncovered at the previous budget," matching Theorem 8 exactly |
+| C-39 | 3 | Abstract states the mod-3 parity theorem unconditionally ("every last-uncovered residue is == 1 mod 3"), omitting Theorem 12's actual hypothesis j*(l)>=l+1 (which the theorem's own statement flags as failing at l=1) | major | fixed: abstract now reads "...whenever j*(l)>=l+1 (every computed level but one)" |
+| C-40 | 3 | The "equivalently" step connecting Wirsching's forcing-form conjecture to j*(l)'s growth rate is not established in general: it requires coverage to persist at every larger budget once reached, which is only proven for j>=l (Theorem 8), not below l, where the conjectured rate would eventually put j*(l) | major | fixed: the Introduction's claim rescoped explicitly to the proven range (j>=l), with an honest note that it is not established below l |
+| C-41 | 3 | Section 6's opening claimed `j*(l) > l` at every computed level; false at l=1, where j*(1)=1=l | moderate | fixed: corrected to `j*(l) >= l, with equality only at l=1` |
+| C-42 | 3 | Corner-redundancy, as actually checked (W>=2l+1), does not bear on Proposition 17's converse: the only known failures are at the boundary width W=2l, which is exactly j=l+1, Proposition 17's own case; the paper's Discussion claimed proving corner-redundancy "would settle" that converse | major | fixed: both the Section 7 paragraph and the Discussion section rescoped -- corner-redundancy at W>=2l+1 would only make the bootstrap tight for j>=l+2, and does not by itself bear on Proposition 17's j=l+1 case |
+| C-43 | 3 | Corollary 10 (run-length bootstrap)'s proof was informal and partly circular: it reasoned "as j decreases from j*(l)," implicitly assuming the quantity being proven | moderate | fixed: rewritten as a genuine proof by contradiction (suppose H(l,j+r) is nonempty for r=maxrun(H(l,j)); iterate Corollary 9 r times starting from a length-1 chain, producing a length-(r+1) chain in H(l,j), contradicting maxrun(H(l,j))=r) |
+| C-44 | 3 | Section 5.2 (the l=18 exponential-sum computation) never specifies the covering budget j used, whether the quoted L1 norm (5226) is normalized, or what "primitive" means; Section 5.3 (phase-randomization) gives no levels, counts, trial numbers, or actual ratios, making both unreproducible from the paper text alone | major | fixed: both rewritten with the actual parameters and numbers from the project's own verified computations (Section 5.2: j=16 stated explicitly, L1 defined as the normalized sum over t coprime to 3; Section 5.3: the exact l=10..15 holdout counts, the e^{-23} to e^{-100} probability range, and the (l,m)=(14,16) phase-scramble ratio 15.79 vs [5.11,5.24]) |
+| C-45 | 3 | The paper never states the precise link between K(l)'s sub-exponentiality and e(l)'s growth rate, so a reader cannot see what is actually at stake in Section 3's model comparison; in particular, the paper's own best-fitting model (slow-linear) would falsify the conjecture outright if it were the true asymptotic, a consequence never mentioned | moderate | fixed: added the explicit identity `K(l) =~ 4^{e(l)}` after e(l)'s definition (so sub-exponential K(l) is equivalent to e(l)=o(l)), and a remark in Section 3 noting the real stakes of the model comparison, honestly hedged (14 correlated points cannot settle the question) |
+| C-46 | 3 | Proposition 7 (the 1/sqrt(3) limit) is stated in a fixed-l, m to infinity regime, off the covering-relevant diagonal (m ~ l log_4 3); its "uniform decay is false" conclusion does not by itself say anything about the diagonal a covering argument would use | minor | fixed: added a scoping remark after the proposition stating the regime explicitly and noting it does not cover the diagonal case |
+| — | 3 | Both reviewers independently flagged the title's "A Proven Bound" as an overclaim given the bound is conditional on an empirical (not proven) correspondence | minor | open -- flagged to the researcher rather than changed unilaterally, since it is a framing/title decision |
 
 ## Full findings
 
@@ -136,3 +150,84 @@ scaling identity's proof by re-deriving it from scratch (matching Codex's own pr
 Empirical Result 10 quantifier bug by re-reading the corollary it restates; and the $\times4$-only
 withdrawal by both an independent algebraic check and a fresh $l=2,\dots,6$ computation.
 Recompiled clean (10 pages, 0 errors, 0 warnings, 0 em-dashes) and visually re-verified page by page.
+
+### Round 3 (Codex on `gpt-5.6-sol` + Opus 5 at maximum reasoning effort, 2026-08-09)
+
+Fable is replaced by Opus 5 at maximum effort as the second reviewer, per the researcher's explicit
+instruction this round, "todas as proximas rodadas use o opus 5 no esforço maximo. esqueça o fable
+por enquanto." Opus 5 needed two retries: its first two attempts each exceeded the harness's
+64,000-output-token limit in a single response (thinking plus text) before producing a report; the
+third attempt succeeded by writing brief per-section scratch notes to disk between reasoning steps,
+then composing a capped, ranked final report from those notes. This staged-notes pattern is the
+working invocation for Opus 5 as a critique-loop reviewer going forward.
+
+The reproducibility repository (`faculdade/weak-covering-conjecture`) was populated between Round 2
+and Round 3 (a background agent mirrored the six section-relevant experiments, regenerated five
+missing mean-payoff-game certificates, and re-ran every check, all before Round 3's reviewers read
+the PDF), addressing a finding both reviewers had raised in Round 1 and Round 2 and that both raised
+again independently in Round 3 before the population had propagated to their read of the PDF (a
+process note, not a live finding: see below).
+
+One process bug this round: because editing happened while Codex's review was still running, part of
+its report reads a slightly earlier state of `main.tex` than what Round 2 actually finished on;
+nothing material was lost, since every item Codex raised was checked against the current text before
+acting, and any already-fixed item was simply not re-fixed. Starting with Round 4, the PDF is frozen
+for the full duration of both reviewers' runs.
+
+Round 3's single most serious finding, from Codex, is that Round 1 and Round 2's own restructuring of
+the mean-payoff-game section had never actually been checked against a concrete example: the claimed
+witnessing statement (a legal $l$-step play of cost $J$ witnesses $z\in R_{J-1,J}\bmod3^l$) is
+**false**, not merely unproven, refuted by a two-line counterexample ($l=2$, $z=4$, play $(0,1)$,
+$J=1$: $4\notin R_{0,1}\bmod9=\{1,2\}$). This had survived two prior rounds of critique because
+neither reviewer, nor the producer, had tried an actual numeric example against the claim as printed;
+it took Codex running a short Python check to surface. Independently re-deriving the real
+correspondence (with help from an outside consultation, per Rule 11b, given the stakes and the
+project's own history of getting exactly this kind of multi-parameter index substitution wrong) found
+that a legal play actually witnesses a *twisted* residue, $2^{J+l-1}z_0$, not $z_0$ itself; this was
+proven by induction (a genuine symbol-by-symbol proof, not another computational assertion) and
+independently checked against every legal play for $l=1,\dots,4$ (780 cases, zero exceptions) before
+being written into the paper. The corrected logical chain needed for Theorem 3 turns out not to
+depend on this twisted-witness fact at all: it only needs the separately-verified equality
+$j^*(l)=\max_{z_0}\min(\text{cost})$ (matching the project's own `step_a_grounding.py`, independently
+re-verified here for $l=1,\dots,8$) plus the observation that any specific policy's realized cost
+upper-bounds the true minimum. The twisted-witness lemma is kept in the paper as genuine, verified
+context connecting the game to Section 7's $U(l,W)$ formalism, but is explicitly flagged as not
+itself establishing the soundness identity, avoiding a second version of the same overclaim.
+
+Both reviewers independently found the abstract had drifted from the body on two claims (Theorem 8's
+inclusion stated as a union instead of an intersection, and the parity theorem stated without its
+$j^*(l)\ge l+1$ hypothesis) exactly the Rule 8b failure mode CLAUDE.md names as the project's most
+validated lesson, here on a paper that had already been through two rounds of critique and an
+explicit Rule 8b pass each time. Both fixes are one-sentence corrections, but the fact that they
+survived two prior "abstract re-check" passes is itself worth recording: a correction to a proof's
+internal machinery (Theorem 3's restructuring in Round 2) does not automatically prompt a re-read of
+an *unrelated* abstract sentence (Theorem 8's phrasing) that a Round 8b pass did not think to
+re-examine, since it had not itself changed. The lesson for future rounds: a full-abstract read
+against the current body, not just against what changed, is the safer default once more than one
+round has passed.
+
+Also fixed this round, each independently checked before acting: the game's action set was asserted
+finite without a real finiteness argument (added, via a periodicity/domination fact); the window-$k$
+policy's applicability to $l<k$ was asserted without an argument (added, one sentence); Table 3
+claimed an "explicit $C_k$" that the table never printed (added, from the project's own certificate
+files, cross-checked against $j^*(23)$); Corollary 10's proof reasoned informally "as $j$ decreases
+from $j^*(l)$," which reads as assuming the quantity being proven (rewritten as a genuine proof by
+contradiction); Sections 5.2 and 5.3 reported percentages and probabilities with no stated budget,
+normalization, or actual counts (rewritten with the real parameters and numbers, pulled from the
+project's own verified experiment records, `experiments/E-008-exceptional-frequencies/README.md` and
+`notes/H-003.md`'s Round 3 section); the corner-redundancy discussion claimed proving it would settle
+Proposition 17's converse, when the only known failures sit exactly at Proposition 17's own budget
+(rescoped in both the body and the Discussion); the paper never stated the precise link between
+$K(l)$'s sub-exponentiality and $e(l)=o(l)$, leaving the growth-model comparison's real stakes
+unstated (added); and Proposition 7's statement and proof disagreed on the error term ($O(\log l)$
+in the statement, $O(1)$ in the proof; tightened to match the proof).
+
+Not yet addressed, carried to Round 4: residual statistical-inference-flavored language around the
+plateau-frequency test's $p=0.0426$ threshold (both reviewers, moderate); the independence model in
+Section 7 is described but not formally specified (Codex, moderate); Empirical Result 16's two-class
+containment is provable by the same mechanism as Theorem 14 and could be upgraded from empirical to
+proven (Opus, moderate, a strict improvement rather than a correction); the one-step width recursion
+is asserted exact without a proof (Opus, moderate); the title's "a proven bound" is flagged by both
+reviewers as an overclaim given the bound is conditional -- not changed unilaterally, flagged to the
+researcher instead. Recompiled clean (12 pages, 0 errors, 0 warnings, 0 em-dashes) and visually
+re-verified, page by page, for every edited section.
