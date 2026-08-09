@@ -1,0 +1,118 @@
+# Paper 02: Wirsching's Weak Covering Conjecture
+
+## Scope
+
+Reports this project's full body of work on Wirsching's 1998 Weak Covering Conjecture (WCC): the
+exact computation of `j*(l)` (the smallest budget at which `R_{j-1,j}` covers every unit residue mod
+`3^l`) extended past the previous paper's table, an analysis of the growth of
+`e(l) := j*(l) - log_4(3)*l`, the best unconditional upper bound on `j*(l)` known to this project,
+and a body of new structural results on the covering problem's "holdout sets" (GAP A: a fixed
+5-round Claude+Codex+Fable push, 2026-08-08/09) -- a real theorem, a real falsification with an
+explicit counterexample, and several further theorems and precisely-characterized open questions.
+WCC itself is NOT resolved by this paper; every result below is labeled by what it actually is
+(Rule 10b), and the paper says so plainly in the abstract and discussion.
+
+## Results, precisely
+
+1. **Computational extension.** Exact `j*(l)` for `l=1..23` (previous paper: `l=1..20`; this
+   project's own extension: `l=21,22,23`, `experiments/E-001-jstar-fast/`, a Rust reimplementation
+   of the original Python DP, independently validated against it for `l<=20`). `l=24` was attempted
+   three times (2026-07-29 through 2026-08-07) and formally abandoned 2026-08-09 (researcher's
+   decision): the last attempt died from an apparent OOM with no surviving kernel-log confirmation;
+   not relaunched. The table stops at `l=23`.
+2. **Growth-rate analysis of `e(l)`.** Model comparison (bounded / logarithmic / sqrt / slow-linear)
+   over the `l=1..23` table (`experiments/E-002-*`), AIC/BIC and a plateau-frequency test; status and
+   exact current p-values/dAIC to be pulled fresh from `E-002`'s README before drafting (the last
+   recorded figures, `l<=23`, are in `HYPOTHESES.md`'s H-001 row -- confirm they're still current,
+   nothing has changed them since 2026-07-30). `e(l)` is proven unbounded via a pigeonhole argument,
+   `e(l) >= (1/2)log_4(l) + O(1)` (this project's own result; locate exact source note before citing).
+3. **Best unconditional upper bound**: `j*(l) <= (119/104)l + O(1) ~ 1.1442*l`, via a mean-payoff-game
+   reformulation of the covering budget (`experiments/E-003-mpg-cylinder/`, `rho_14=9/8` confirmed
+   2026-08-01), no Fourier/character-sum machinery -- this project's own original result, not
+   borrowed. Should be stated as a clean theorem with a full proof sketch; the actual MPG certificate
+   construction needs re-reading before writing this section (notes/H-003.md, the mean-payoff-game
+   rounds) to get the proof outline right rather than just citing the bound.
+4. **GAP A: why the natural Fourier approach fails, unconditionally.** The exponential sum `S(t)`
+   (the Fourier dual of the covering-count problem) is shown to admit no viable magnitude-based proof
+   strategy, via three independent, mutually-reinforcing findings: (a) a hard ceiling,
+   `j >= 2*log_4(3)*l ~ 1.585*l`, on anything provable by uniform square-root-type cancellation --
+   *worse* than the already-proven `1.1442l`, ruling the whole naive approach out cleanly; (b) even
+   after removing sparse "major arc" resonances, the Fourier `L^1` mass is dominated by an
+   exponentially numerous population of near-average-magnitude coefficients (over 97% of the mass at
+   `l=18`), ruling out any sparse-exceptional-set repair; (c) a direct, exact-arithmetic finding that
+   coverage failures ("holdout" residues) sit at extremal, highly non-generic conductor-depth cells no
+   averaging or moment method can see. A real, checked, on-point connection to Terence Tao's 2011
+   blog post on Littlewood-Offord theory and powers of 2 and 3 is part of this section (his own words:
+   this class of obstruction needs transcendence theory or new techniques, not existing tools).
+5. **A real theorem on the covering problem's holdout sets.** Writing `H(l,j)` for the units mod
+   `3^l` NOT covered by `R_{j-1,j}`:
+   $$H(l,j+1) \subseteq 2H(l,j) \cap 4H(l,j)$$
+   (exponent-shift maps), with corollaries: chain contraction (a doubling chain
+   `x,2x,4x,...` of length `t` in `H(l,j+1)` pulls back to length `t+1` in `H(l,j)`) and the
+   run-length bootstrap `j*(l) <= j + maxrun(H(l,j))` for `j>=l`, found empirically EXACT (equality)
+   at every computed `(l,j)` with `j>=l+1`. Independently re-derived and verified from scratch by
+   Claude before being trusted (this session), separately from the two AI legs that found it.
+6. **A real falsification, with an explicit counterexample.** The natural stronger conjecture (a
+   uniform, bounded-cost local witness-repair rule, this project's own prior hypothesis H-012) is
+   false: explicit witness-level counterexamples at two tested budget transitions, and a genuine
+   counterexample to even the weaker "strong converse" reading of result 5
+   (`1547 in 2H(7,8) cap 4H(7,8)` but `1547 not in H(7,9)`, independently reproduced).
+7. **Further exact theorems on the holdout family** (arising while pursuing H-013/H-014): the
+   last-holdout set is provably `== 1 mod 3`; an exact near-extinction bijection
+   `H(l,j*-1) = 2*{x in H(l,j*-2): x==2 mod 3}`; cross-level inheritance of last holdouts is provably
+   `x4`-only; a two-class mod-9 bound `H(l,j*-1) mod 9 subset {4^J, 4^(J+1)}`. The single remaining
+   piece of the mod-9 law (excluding `4^J`) and the "corner-redundancy" lemma needed for the
+   bootstrap's converse direction are both precisely stated, unproven, and explicitly NOT pursued
+   further by this project (researcher's decision, 2026-08-09) -- reported as genuinely open questions
+   for the field, not left vague.
+
+## What this paper does NOT claim
+
+WCC itself; the exact growth rate of `j*(l)` or `e(l)`; any bound below `1.1442l`. Every "in-progress
+research direction" above is presented as exactly that, with the specific missing lemma named, not
+as "future work" boilerplate.
+
+## Source hypotheses
+
+H-001 (computational extension, in-progress -> feeds this paper directly), H-002 (secondary
+entropy-count bridge, real quantified gap, likely a brief mention only, not a main result -- confirm
+during drafting whether it's in scope at all), H-003/GAP A (backlog as of 2026-08-09, this paper is
+its write-up), H-011 (closed-inconclusive), H-012 (closed-refuted), H-013 (backlog, partial
+theorems), H-014 (backlog, partial theorems + equivalence result). Full derivation history:
+notes/H-001.md, notes/H-002.md, notes/H-003.md (very long; the 2026-08-08 section onward is the GAP
+A push), notes/H-013.md, notes/GAP-A-round4.md, notes/GAP-A-round5*.md.
+
+## Structure (draft, revisit once section 2's actual proof text is drafted)
+
+1. Introduction: WCC's statement, its place in Wirsching's 1998 book, relation to the prior paper's
+   Section 7 computation, this paper's actual contributions listed plainly.
+2. The computation: `R_{j,k}`, `j*(l)`, the `l=1..23` table, methodology (Rust reimplementation,
+   validation against the original), what changed for `l=21-23` (swap-assisted, timings), why `l=24`
+   was abandoned.
+3. `e(l)`'s growth: model comparison, current statistical verdict, honest uncertainty.
+4. The mean-payoff-game bound: statement, proof sketch, `1.1442l`.
+5. GAP A: the exponential sum, the three-wall impossibility result, the Tao connection.
+6. The holdout-set theorems: Theorem 1, the bootstrap, the falsification/counterexample, the
+   mod-3/mod-9 laws.
+7. Discussion: what's open, precisely (the two named lemmas), why this project stops here, what a
+   human number theorist could do with this (per Rule 10, citation-maximizing framing: make the open
+   questions genuinely inviting and precise, not a vague "more work is needed").
+8. Code and data availability (Rule 12: dedicated repro repo, not yet created -- confirm with the
+   researcher before this section is written).
+
+## Status
+
+- [x] Outline drafted, 2026-08-09, per the researcher's explicit request and confirmed scope
+      (include the GAP A results in this paper, not a separate one).
+- [ ] Confirm E-002's exact current growth-model statistics before drafting section 3 (may have
+      shifted with the `l=21-23` data added since the last recorded figures).
+- [ ] Re-read the mean-payoff-game proof construction before drafting section 4 (cite correctly,
+      don't just restate the bound).
+- [ ] Dedicated reproducibility repository (Rule 12): not yet set up, needs the researcher's input
+      before section 8 or any "available in the accompanying repository" language is written.
+- [ ] Author/venue/language: same as paper 01 unless told otherwise (Renato Augusto Tavares, UFG;
+      confirm arXiv category -- math.NT fits paper 01 but this paper is more combinatorics/number
+      theory computational, math.CO or math.NT both plausible, ask) and English-first, pt-BR to
+      follow only on request (Rule 5).
+- [ ] Prose not yet started (Rule 5: outline before prose, and even this outline needs the two open
+      items above resolved first).
