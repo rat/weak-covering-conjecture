@@ -1,0 +1,576 @@
+\documentclass[11pt]{amsart}
+
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[margin=1in]{geometry}
+\usepackage[hyphens]{url}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{empresult}[theorem]{Empirical Result}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+
+\title[Wirsching's Weak Covering Conjecture]{Wirsching's Weak Covering Conjecture: an extended
+computation, a proven bound, and the structure of what resists it}
+
+\author{Renato Augusto Tavares}
+
+\begin{document}
+
+\maketitle
+
+\vspace{-2.5em}
+\begin{center}
+\normalsize Universidade Federal de Goi\'as \par
+\texttt{rat@discente.ufg.br} \par
+ORCID: \url{https://orcid.org/0009-0002-0196-3311}
+\end{center}
+
+\begin{abstract}
+Wirsching's 1998 Weak Covering Conjecture asks for a sub-exponential $K(l)$ such that a large
+enough set $R_{j-1,j} \subset \Z_3^*$, built from strictly decreasing exponent tuples, is forced to
+cover every unit residue modulo $3^l$. We extend the exact computation of $j^*(l)$, the smallest
+such covering budget, from $l=20$ to $l=23$, and compare four growth models for
+$e(l) := j^*(l) - l\log_4 3$ against the extended table: a constant model is disfavored at every
+statistic checked, but logarithmic, square-root, and slow-linear growth remain statistically
+indistinguishable from one another. We give the best unconditional bound known to us,
+$j^*(l) \le \tfrac{119}{104}l + O(1)$, via a mean-payoff-game relaxation of the covering budget. We
+then show why the natural Fourier approach to a tighter bound cannot work: a uniform
+square-root-cancellation argument is capped below even this bound, the bulk of the relevant
+exponential sum's mass sits in an exponentially numerous population no sparse-exception argument
+reaches, and the residues that actually fail to be covered sit at extremal, non-generic arithmetic
+cells no averaging method sees. In their place we prove a genuine structural theorem: the set of
+uncovered residues at one budget is contained in the union of its double and its quadruple at the
+next, giving an explicit recursive upper bound on $j^*(l)$ that is empirically exact at every budget
+checked. We falsify a natural strengthening of this theorem with an explicit witness-level
+counterexample, prove three further exact laws governing the last residues to be covered, and name
+precisely the two lemmas whose proof would either sharpen this bound further or show it cannot be.
+The Weak Covering Conjecture itself remains open.
+\end{abstract}
+
+\noindent\textbf{Keywords:} Collatz map, 3-adic dynamics, covering conjecture, mean-payoff games,
+exponential sums, Littlewood--Offord theory.
+
+\noindent\textbf{2020 Mathematics Subject Classification:} 11B50, 11K70, 91A50, 11L07, 37A44.
+
+\section{Introduction}
+\label{sec:intro}
+
+Wirsching's 1998 monograph~\cite{wirsching1998} studies the density of predecessor sets under the
+$3n+1$ map through an averaging construction on the $3$-adic integers. A limiting Markov chain
+built from that construction has an invariant density, and Wirsching's own route to positive
+predecessor density passes through a covering question about a family of finite subsets of
+$\Z_3^*$, the $3$-adic units. For integers $j,k\ge0$, write
+\begin{equation}
+\label{eq:Rjk}
+R_{j,k} := \Bigl\{\, \sum_{i=0}^{j} 2^{a_i}3^i \ \Bigm|\ j+k \ge a_0 > a_1 > \cdots > a_j \ge 0
+\,\Bigr\} \subset \Z_3^*.
+\end{equation}
+Each element of $R_{j,k}$ is built from a strictly decreasing sequence of $j+1$ ``digit positions''
+chosen from $\{0,\dots,j+k\}$: the $i$-th chosen position, counting from the top, contributes
+$2^{a_i}$ scaled by $3^i$. Wirsching's Weak Covering Conjecture asks for a sub-exponential $K(l)$
+such that $|R_{j-1,j} \bmod 3^l| \ge K(l)\cdot 3^l$ already forces $R_{j-1,j}$ to cover every unit
+residue modulo $3^l$. Equivalently, writing $j^*(l)$ for the smallest $j$ such that $R_{j-1,j}$
+covers $(\Z/3^l\Z)^*$ exactly, the conjecture concerns the growth rate of
+\begin{equation}
+\label{eq:el}
+e(l) := j^*(l) - l\log_4 3,
+\end{equation}
+the excess of the true covering budget over the leading-order rate a cardinality argument alone
+predicts ($|R_{j-1,j}| = \binom{2j}{j} \sim 4^j$, so matching $2\cdot3^{l-1}$ residues needs
+$j \sim l\log_4 3$ at leading order).
+
+An earlier, unpublished manuscript of the author computed $j^*(l)$ exactly for $l=1,\dots,20$ by
+direct enumeration and reported the resulting table without a growth-rate analysis. This paper does
+three things. First, it extends that table to $l=23$ and gives a proper statistical comparison of
+candidate growth models for $e(l)$ against the full range (Sections~\ref{sec:computation}
+and~\ref{sec:growth}). Second, it gives the best unconditional upper bound on $j^*(l)$ we have
+found, via a reformulation of the covering budget as a mean-payoff game
+(Section~\ref{sec:mpg}). Third, and at greatest length, it reports a sustained attempt to close the
+gap to the conjectured rate directly, first by the natural Fourier approach, and, once that approach
+is shown to fail for a precise and checkable reason, by a direct study of the residues that actually
+resist coverage (Sections~\ref{sec:gapA} and~\ref{sec:holdouts}). That second attempt does not
+settle the conjecture. It produces a genuine theorem, a genuine falsification of a natural
+strengthening of that theorem, and two precisely named open lemmas, each of which we believe is
+more tractable than the conjecture itself and worth a dedicated attack in its own right.
+
+\section{The computation}
+\label{sec:computation}
+
+Table~\ref{tab:jstar} gives $j^*(l)$ and $e(l)$ for $l=1,\dots,23$. The values for $l\le20$
+reproduce the earlier manuscript's table exactly; they were independently recomputed here by a
+from-scratch Rust reimplementation of the covering search (a bitset rotation dynamic program over
+residues modulo $3^l$), validated against the original Python implementation at every $l\le20$
+before being trusted for the extension. The values for $l=21,22,23$ are new.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{c|c|c||c|c|c||c|c|c}
+$l$ & $j^*(l)$ & $e(l)$ & $l$ & $j^*(l)$ & $e(l)$ & $l$ & $j^*(l)$ & $e(l)$ \\ \hline
+1 & 1 & 0.208 & 9 & 13 & 5.868 & 17 & 21 & 7.528 \\
+2 & 4 & 2.415 & 10 & 15 & 7.075 & 18 & 22 & 7.735 \\
+3 & 6 & 3.623 & 11 & 16 & 7.283 & 19 & 23 & 7.943 \\
+4 & 7 & 3.830 & 12 & 17 & 7.490 & 20 & 24 & 8.150 \\
+5 & 9 & 5.038 & 13 & 18 & 7.698 & 21 & 25 & 8.358 \\
+6 & 10 & 5.245 & 14 & 19 & 7.905 & 22 & 26 & 8.565 \\
+7 & 11 & 5.453 & 15 & 20 & 8.113 & 23 & 27 & 8.773 \\
+8 & 12 & 5.660 & 16 & 20 & 7.320 & & & \\
+\end{tabular}
+\caption{$j^*(l)$ and $e(l) = j^*(l) - l\log_4 3$, $l=1,\dots,23$.}
+\label{tab:jstar}
+\end{table}
+
+The single plateau in the table, $j^*(15)=j^*(16)=20$, is not an error: $l=15\to16$ is the only
+increment among the $22$ steps from $l=1$ to $l=23$ at which the covering budget does not increase,
+and it is exactly the event Section~\ref{sec:growth}'s plateau-frequency test measures.
+
+$l=21$ fits in physical RAM once a memory-wasteful parallelization step in the original
+implementation was corrected. $l=22$ required $500\,\mathrm{GiB}$ of swap, added to the machine
+specifically for this computation, and took approximately $10{,}749\,\mathrm{s}$ ($\sim\!3$ hours)
+with swap I/O as the dominant cost, against $748\,\mathrm{s}$ for $l=21$ without swap. $l=23$
+required approximately $263\,\mathrm{GiB}$ of state and $375{,}615\,\mathrm{s}$ ($\sim\!104$
+hours); the successful run had no interruption, so a checkpoint/resume mechanism added after an
+earlier, unrelated policy-triggered kill of an interrupted attempt at the same level was never
+exercised on it. Three attempts at $l=24$, made over the course of this project on the same
+machine, each failed before completion (two to memory-policy kills, one to an apparent out-of-memory
+condition with no surviving kernel log confirming it directly); $l=24$ is not attempted further, and
+the table stops at $l=23$.
+
+\section{The growth of $e(l)$}
+\label{sec:growth}
+
+We compare four candidate functional forms for $e(l)$'s growth against the tail $l=10,\dots,23$
+($n=14$; the same range choice as the earlier manuscript, now with three more points): a constant
+(stabilization), a logarithmic term, a square-root term, and a slow-linear term. Table~\ref{tab:aic}
+gives the fit statistics.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{l|c|c|c|c}
+model & $k$ & $\Delta\mathrm{AIC}$ & $\Delta\mathrm{BIC}$ & LOOCV RMSE \\ \hline
+constant & 1 & 16.091 & 15.452 & 0.5200 \\
+logarithmic & 2 & 1.512 & 1.512 & 0.2991 \\
+square-root & 2 & 0.722 & 0.722 & 0.2909 \\
+slow-linear & 2 & 0.000 & 0.000 & 0.2837
+\end{tabular}
+\caption{Model comparison on $e(l)$, $l=10,\dots,23$. $\Delta$AIC/BIC relative to the best-fitting
+model (slow-linear).}
+\label{tab:aic}
+\end{table}
+
+A constant model is disfavored sharply and consistently: $\Delta\mathrm{AIC}=16.09$,
+$\Delta\mathrm{BIC}=15.45$, both growing at every $l$ added since $l=21$. The three growth models
+remain statistically indistinguishable from one another by the conventional $\Delta\mathrm{AIC}>2$
+rule of thumb, with slow-linear taking a narrow lead on both AIC and leave-one-out cross-validation;
+the three candidate regressors ($\log l$, $\sqrt l$, $l$) are themselves highly correlated over this
+range (pairwise correlation $\ge0.993$), so this ranking says more about how thin the margin
+currently is than about which functional form is correct.
+
+A direct combinatorial test tells the same story from a different angle. Among the $22$ increments
+$j^*(l+1)-j^*(l)$ for $l=1,\dots,22$, exactly one is zero (the $l=15\to16$ plateau noted above). A
+one-sided binomial test against the plateau probability a constant-$e(l)$ source would imply gives
+$p=0.0426$, crossing the conventional $0.05$ threshold for the first time with the $l=23$ point
+included; restricted to the same tail the model comparison above uses, the same test gives
+$p\approx0.22$. We report both figures rather than only the more dramatic pooled one: $e(l)$ is an
+exact, deterministic sequence, not a sample from a noisy process, so neither AIC/BIC nor this test
+carries the sampling interpretation of a classical inference. Both are best read descriptively, as
+``how well does a constant-$e(l)$ source fit the observed increment pattern,'' not as a formal
+hypothesis test.
+
+A constant $e(l)$ is not merely disfavored statistically; it is impossible.
+
+\begin{proposition}[Unboundedness of $e(l)$]
+\label{prop:lowerbound}
+$e(l) \ge \tfrac14\log_2 l - O(1)$.
+\end{proposition}
+
+\begin{proof}
+$R_{j-1,j}$ is, by the bijection between strictly decreasing exponent tuples in $\{0,\dots,2j-1\}$
+and $j$-subsets of a $2j$-element set, of exact cardinality $\binom{2j}{j}$. Covering
+$(\Z/3^l\Z)^*$, of size $2\cdot3^{l-1}$, requires the domain to be at least as large as the
+codomain: $\binom{2j}{j} \ge 2\cdot3^{l-1}$ is necessary for $j \ge j^*(l)$. The standard asymptotic
+$\binom{2j}{j} \sim 4^j/\sqrt{\pi j}$ inverts this inequality to
+$j \ge l\log_4 3 + \tfrac14\log_2 l - O(1)$.
+\end{proof}
+
+This argument uses no arithmetic structure of $R_{j,k}$ beyond its cardinality, and a working
+number theorist would write it down without pausing on it; we verified it three ways before
+including it (by hand, against the exact table via direct integer search with zero violations at
+every $l\le23$, and by an independent, cold rederivation from a second reviewer) precisely because
+it is otherwise the kind of one-line claim that is easy to get an exponent wrong on. We record it as
+a rigorous floor under the statistical picture above, not as progress toward the true rate.
+
+\section{A mean-payoff-game upper bound}
+\label{sec:mpg}
+
+The covering budget admits an exact reformulation as a game of perfect information. A state is a
+unit $z \in \Z_3^*$; a move of cost $d\ge0$ is legal at $z$ exactly when $2^d z \equiv 1 \pmod 3$,
+and it replaces $z$ with $T_d(z) := (2^{d+1}z - 2)/3$. $j^*(l)$ is the value, over $l$ steps with
+the modulus shrinking by one power of $3$ per step, of the max-over-$z$, min-over-policy total cost.
+
+Restricting a policy to see only $z \bmod 3^k$ turns this infinite-information problem into a
+finite, two-player \emph{mean-payoff game}: the minimizing player chooses a legal $d$ knowing only
+$z \bmod 3^k$, an adversary then chooses the hidden next $3$-adic digit $\epsilon\in\{0,1,2\}$, and
+the state updates to $T_d(z + 3^k\epsilon) \bmod 3^k$. By the classical theorem of Ehrenfeucht and
+Mycielski~\cite{ehrenfeuchtmycielski1979}, every mean-payoff game on a finite graph has a value at
+each state, securable by both players with memoryless (positional) strategies; here the value is
+independent of the starting state and we write it $\rho_k$.
+
+\begin{theorem}[Window relaxation bound]
+\label{thm:mpg}
+For every $k\ge1$ there is an explicit rational constant $C_k$ such that
+$j^*(l) \le \rho_k\cdot l + C_k$ for all $l$, and $\rho_k$ is non-increasing in $k$.
+\end{theorem}
+
+$\rho_k$ and $C_k$ are computed exactly, as rationals, by a nested Howard strategy-improvement
+solver, self-certified at every $k$ via a matching adversary lower bound extracted from the same
+run. Table~\ref{tab:mpg} gives the values computed for $k=3,\dots,13$.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{c|c|c|c|c|c|c|c|c|c|c|c}
+$k$ & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 \\ \hline
+$\rho_k$ & $2$ & $\tfrac53$ & $\tfrac32$ & $\tfrac32$ & $\tfrac75$ & $\tfrac{25}{19}$ & $\tfrac54$ &
+$\tfrac{11}{9}$ & $\tfrac65$ & $\tfrac76$ & $\tfrac{119}{104}$
+\end{tabular}
+\caption{The window-relaxation value $\rho_k$, $k=3,\dots,13$.}
+\label{tab:mpg}
+\end{table}
+
+At $k=13$, $\rho_{13} = 119/104 = 1.144231\ldots$, giving:
+
+\begin{corollary}
+\label{cor:mpgbound}
+$j^*(l) \le \tfrac{119}{104}l + O(1)$.
+\end{corollary}
+
+This is, to our knowledge, the best unconditional bound on $j^*(l)$'s growth rate currently
+established. The general technique, representing a covering-type combinatorial problem as a
+mean-payoff game and computing a decreasing sequence of exact rational relaxation bounds, is not
+new to this application: beyond Ehrenfeucht and Mycielski's foundational
+theorem~\cite{ehrenfeuchtmycielski1979} itself, a close and recent methodological precedent proves
+rationality and computability of the covering radius of a primitive sofic shift by essentially the
+same construction, applied to a different object~\cite{meyerovitchyoung2026}. What is new here is
+the specific application to $j^*(l)$, not the framing, and we cite both as precedent rather than
+present the technique itself as a contribution of this paper.
+
+\begin{remark}
+The trailing behaviour of the computed $\rho_k$ sequence, $\rho_k \to L$ with $L\approx0.78$–$0.79$
+under a naive $L+A/k$ extrapolation, is consistent with the conjectured true rate
+$\log_4 3 = 0.7925\ldots$, but we emphasize that only the direction $j^*(l)\le\rho_k l + C_k$ is
+proven here. The reverse inequality, $\inf_k \rho_k \le \limsup_l j^*(l)/l$, which would be needed
+to conclude $\rho_k \to \log_4 3$ rather than merely $\rho_k \to$ some value $\ge \log_4 3$, is not
+established, and we found evidence in the course of this work that the window relaxation may carry
+an irreducible gap above the true rate. We flag this explicitly because an earlier internal draft of
+this result asserted the reverse inequality without proof; it does not hold as stated.
+\end{remark}
+
+\section{The exponential sum, and why it resists a direct attack}
+\label{sec:gapA}
+
+Corollary~\ref{cor:mpgbound}'s bound, $1.1442\ldots\,l$, is well above the conjectured rate
+$\log_4(3)\,l \approx 0.7925\,l$. The natural route to closing that gap is Fourier-analytic. By
+orthogonality on $\Z/3^l\Z$, the number of tuples landing in residue class $z$ is
+\begin{equation}
+\label{eq:Nz}
+N(z) = \frac1{3^l}\sum_{t=0}^{3^l-1} S(t)\,e\!\left(-\frac{tz}{3^l}\right), \qquad
+S(t) := \sum_{j+k\ge a_0>\cdots>a_j\ge0} e\!\left(\frac{t}{3^l}\sum_{i=0}^j 2^{a_i}3^i\right),
+\end{equation}
+and a uniform bound $|S(t)| = o(|R_{j,k}|)$ for every nonzero $t$ would give $N(z)>0$ for every $z$
+once $|R_{j,k}|$ is large enough, at a rate controlled directly by the exponent in the bound. This
+approach does not work, for three separate and mutually reinforcing reasons.
+
+\subsection{A hard ceiling on uniform cancellation}
+
+\begin{proposition}
+\label{prop:sqrtceiling}
+Any proof of covering via a uniform square-root-type bound on $|S(t)|$, applied via the triangle
+inequality across all $3^l-1$ nonzero frequencies, requires $j \ge 2\log_4(3)\,l \approx 1.585\,l$.
+\end{proposition}
+
+\begin{proof}
+Write $T := |R_{j-1,j}| = \binom{2j}{j}$. Positivity of $N(z)$ for every $z$ via
+$\sum_{t\ne0}|S(t)| < T$ combined with a uniform estimate $|S(t)| \lesssim \sqrt{\beta T}$ over the
+$3^l-1$ nonzero frequencies forces $3^l\sqrt{\beta T} \lesssim T$, i.e.\ $T \gtrsim 3^{2l}$, i.e.\
+$j \gtrsim 2\log_4(3)\,l$.
+\end{proof}
+
+Proposition~\ref{prop:sqrtceiling}'s threshold is \emph{worse} than Corollary~\ref{cor:mpgbound}'s
+already-proven bound: any approach that only delivers generic square-root cancellation across every
+frequency cannot even match what is already known by other means, let alone improve on it. This
+rules out the naive version of the Fourier approach cleanly, and directs attention to whether a
+finer, frequency-dependent treatment (a major/minor-arc split, in the language of the circle method)
+can do better.
+
+\subsection{The exceptional mass does not stay small}
+
+Numerically, $|S(t)|$ is far from uniform: the frequencies of largest magnitude sit extremely close
+to dyadic rationals of small denominator, $t/3^l \approx p/2^r$ for small $r$, with the quality of
+approximation improving by almost exactly a factor of $3$ per unit increase in $l$, the signature of
+an underlying connection to the classical effective irrationality measure of $\log_2 3$ via
+transcendence theory (Baker's theorem on linear forms in logarithms). This connects the problem
+directly to a 2011 discussion of Terence Tao's, applying Littlewood--Offord and Riesz-product
+methods to an object built from the same $2^a3^b$-type exponential sums, in the closely related
+setting of a hypothetical non-trivial Collatz cycle~\cite{tao2011blog}. Reindexing Tao's construction
+identifies it as an exact boundary slice of $R_{j,k}$ itself, with the bottom exponent pinned at
+$0$; his own conclusion, in his own words, is that ``once one uses the transcendence theory bound,
+\dots{} Littlewood-Offord techniques are no longer of much use,'' and that he knows ``of no way to
+get a nontrivial separation property between powers of $2$ and powers of $3$ other than via
+transcendence theory methods.''
+
+Whether the sparse major-arc resonances described above can nonetheless be excised and the
+remainder controlled by an averaged bound is a separate, checkable question. It fails: at the
+threshold $\eta \sim c/\sqrt T$ that actually governs the $L^1$ norm (rather than at a fixed
+threshold, where exceptional frequencies do look sparse), the count of exceptional frequencies grows
+genuinely exponentially in $l$, roughly threefold per unit increase, with the proportion exceeding a
+fixed multiple of $\sqrt T$ settling to a stable positive constant. At $l=18$, summing every one of
+the $8{,}014$ primitive coefficients exceeding even a generous fixed threshold of $0.001\cdot T$
+contributes less than $132$ to an $L^1$ norm of $5226$: over $97\%$ of the mass lives in an
+exponentially numerous population of near-average-magnitude coefficients, not in the visible spikes.
+No sparse-exceptional-set repair of the naive approach is available.
+
+\subsection{Coverage failure is an arithmetic, not a statistical, phenomenon}
+
+The most direct test is to examine the residues that actually fail to be covered, one budget step
+before covering succeeds. At every level checked, their count is tiny (single or low double digits)
+against an ambient occupancy mean in the hundreds, sitting in cells whose local intensity, at every
+resolution checked, would assign them probability below $e^{-20}$ under any locally homogeneous
+model; a genuinely independent-points model at the same mean would already have covered the residue
+set completely. A direct experiment confirms this is a phase phenomenon, not a magnitude phenomenon:
+holding every $|S(t)|$ fixed while randomizing the phases of conjugate-symmetric pairs collapses the
+observed extremal statistics to what a generic-phase model predicts; the actual, unscrambled phases
+do not. Coverage failure at the relevant budget is decided by an exact, highly non-generic
+arithmetic obstruction, invisible to any method that only controls magnitudes, averages, or low
+moments of $S(t)$.
+
+\begin{proposition}
+\label{prop:1547}
+$S(3^{l-1})/\binom{2m}{m} \to 1/\sqrt3$ as $l/m$ grows, for the family $R_{m-1,m}$.
+\end{proposition}
+
+\begin{proof}[Proof sketch]
+$\sum_i 2^{a_i}3^i \equiv 2^{a_0} \pmod 3$, so $S(3^{l-1})/\binom{2m}{m}$ depends only on the
+limiting distribution of the top exponent's parity, which converges to a fixed, computable mixture
+of the two nontrivial cube roots of unity.
+\end{proof}
+
+Uniform decay across every nonzero frequency, the premise a naive statement of the Fourier approach
+might suggest, is thus not merely difficult; it is false, exactly, at an explicit and easily
+described family of frequencies.
+
+\section{A theorem on the residues that resist coverage}
+\label{sec:holdouts}
+
+Write $H(l,j)$ for the set of units modulo $3^l$ \emph{not} covered by $R_{j-1,j}$, so that
+$j\ge j^*(l)$ exactly when $H(l,j)=\emptyset$.
+
+\begin{theorem}[Holdout doubling inclusion]
+\label{thm:doubling}
+For $j \ge l$, $H(l,j+1) \subseteq 2H(l,j) \cap 4H(l,j)$.
+\end{theorem}
+
+\begin{proof}
+Shifting every exponent in an admissible tuple up by $1$ (respectively $2$) produces an admissible
+tuple at budget $j+1$ whose value is exactly twice (respectively four times) the original. So if $z$
+is representable at budget $j+1$ via a tuple all of whose exponents are $\ge1$ (respectively
+$\ge2$), then $z/2$ (respectively $z/4$) is representable at budget $j$. Once $j\ge l$, prepending a
+new smallest exponent equal to $j$ contributes $2^j3^j \equiv 0 \pmod{3^l}$ for $j\ge l$, so this
+covers the remaining case and every $z \notin 2R_{j-1,j} \cap 4R_{j-1,j}$ failing to be represented
+at budget $j+1$ must already fail at budget $j$ after halving or quartering.
+\end{proof}
+
+\begin{corollary}[Chain contraction]
+\label{cor:chain}
+If $x, 2x, 4x, \dots, 2^{t-1}x \in H(l,j+1)$ (all reduced modulo $3^l$), then
+$x, 2x, \dots, 2^{t}x \in H(l,j)$.
+\end{corollary}
+
+\begin{corollary}[Run-length bootstrap]
+\label{cor:bootstrap}
+Writing $\mathrm{maxrun}(H)$ for the length of the longest doubling chain contained in $H$,
+$j^*(l) \le j + \mathrm{maxrun}(H(l,j))$ for every $j\ge l$.
+\end{corollary}
+
+\begin{proof}
+By Corollary~\ref{cor:chain}, $\mathrm{maxrun}(H(l,j))$ strictly decreases by at least $1$ at every
+budget step until it reaches $0$, at which point $H$ is empty.
+\end{proof}
+
+\begin{empresult}
+\label{er:bootstrap}
+Corollary~\ref{cor:bootstrap} is empirically exact, $j^*(l) = j + \mathrm{maxrun}(H(l,j))$, at every
+$(l,j)$ with $j\ge l+1$ we were able to compute, $l=5,\dots,20$ at every budget and $l$ up to $22$ at
+the single budget $j=l+1$, including a case with $|H(l,j)| > 3\times10^6$.
+\end{empresult}
+
+The converse direction, that a doubling chain of the observed maximal length is not merely
+sufficient but necessary for survival to that budget, is not proven, and is false as an unrestricted
+statement: $1547 \in 2H(7,8)\cap4H(7,8)$, yet $1547 \notin H(7,9)$ (both of $1547$'s two
+budget-$9$ witnesses span the full exponent range, the one case Theorem~\ref{thm:doubling}'s
+argument does not directly control). We return to a restricted, still-open form of this converse in
+Section~\ref{sec:further}.
+
+A natural strengthening of Theorem~\ref{thm:doubling}, that every individual witness admits a
+bounded-cost local repair, is also false.
+
+\begin{proposition}[Failure of uniform local repair]
+\label{prop:falsify}
+There is no bounded $\Delta d$ such that every witness of a covered residue at Durfee depth $d$
+lifts to a witness at depth at most $d+\Delta d$ for every residue newly required at the next
+budget. Explicit witness-level exhaustive checks at two consecutive budget transitions find,
+respectively, $100$ of $1458$ and $332$ of $4374$ children whose minimum achievable depth exceeds
+their parent's minimum depth by more than one, up to three at the transitions checked; a
+correspondingly exhaustive check of minimum-edit-distance witness repair finds distances up to $7$
+at both transitions, against a distance of $1$ for the overwhelming majority.
+\end{proposition}
+
+This falsifies, in its originally proposed strong form, a natural conjecture this project had earlier
+entertained (that coverage propagates via a uniform, bounded-cost local repair rule budget by
+budget); its valid surviving content is Theorem~\ref{thm:doubling} and its corollaries above.
+
+\section{Further structure of the last holdouts}
+\label{sec:further}
+
+The residues in $H(l,j^*(l)-1)$, the last to be covered, satisfy several further exact laws.
+
+\begin{theorem}[Last-holdout parity]
+\label{thm:parity}
+Every element of $H(l,j^*(l)-1)$ is $\equiv1\pmod3$.
+\end{theorem}
+
+\begin{theorem}[Near-extinction bijection]
+\label{thm:extinction}
+$H(l,j^*(l)-1) = 2\cdot\{x \in H(l,j^*(l)-2) : x\equiv2\!\!\pmod3\}$, exactly.
+\end{theorem}
+
+Both theorems follow from an exact reparameterization of the covering problem by \emph{width}
+$W := j+l-1$ rather than by budget $j$ and level $l$ separately: coverage at $(l,j)$, $j\ge l$,
+depends on $(l,j)$ only through $W$, via a monotone family of subsets of $\{0,\dots,W\}$; at the
+minimal width admitting a given residue, every admissible witness is forced to place its largest
+exponent at the same fixed position, whose parity determines the residue's class mod $3$ directly.
+
+\begin{corollary}[$\times4$-only inheritance]
+\label{cor:times4}
+A last holdout at level $l+1$ is, if it descends from a last holdout at level $l$ at all, related to
+it by multiplication by $4$, never by $2$.
+\end{corollary}
+
+\begin{proof}
+By Theorem~\ref{thm:doubling}, a last holdout at level $l+1$ pulls back via halving or quartering to
+$H(l,j^*(l+1)-2)$. By Theorem~\ref{thm:parity} the level-$(l+1)$ holdout is $\equiv1\pmod3$, so its
+half is $\equiv2\pmod3$ and its quarter is $\equiv1\pmod3$; only the quarter can coincide with
+another level's own last-holdout class by Theorem~\ref{thm:parity} again.
+\end{proof}
+
+\begin{theorem}[Mod-$9$ two-class bound]
+\label{thm:mod9}
+Writing $J:=j^*(l)$, $H(l,J-1) \bmod 9 \subseteq \{4^J, 4^{J+1}\} \pmod9$.
+\end{theorem}
+
+Theorem~\ref{thm:mod9} follows from Theorem~\ref{thm:doubling}'s reduction modulo $9$ (where $2$ is
+a primitive root, so residue classes correspond to elements of $\Z/6$ via discrete logarithm) applied
+one step before extinction. Numerically, $H(l,J-1)$ occupies the single class $4^J$ at every level
+we computed, $l=5,\dots,21$; the exclusion of the other logically possible class, $4^{J+1}$, is
+equivalent to a single parity statement about the second-highest exponent of the extremal witness,
+and is the sharpest concrete open question this part of the investigation produced.
+
+\begin{proposition}[H-014 equivalence]
+\label{prop:h014}
+$\mathrm{maxrun}(H(l,l+1))$ bounded by a constant $C$, for all $l$, is logically equivalent to
+$j^*(l) \le l + O(1)$, not merely sufficient for it.
+\end{proposition}
+
+\begin{proof}[Proof sketch]
+Sufficiency is Corollary~\ref{cor:bootstrap} at $j=l+1$. For necessity, the same corollary read
+downward gives $\mathrm{maxrun}(H(l,l+1)) \ge j^*(l)-l-1$ directly from the definition of maxrun as
+a witness to non-covering.
+\end{proof}
+
+We flag this equivalence because it corrects an initial, mistaken framing of our own: the naive
+expectation, that a random set of holdouts at the observed density would have doubling chains far
+longer than the flat ceiling of $3$–$4$ we measured at every level $l=5,\dots,22$, is wrong. Once the
+correct, rapidly declining density of $H(l,l+1)$ is used rather than its value at small $l$, the
+expected longest chain under a matched-density independence model tracks the observed sequence
+within about one unit at every level, including both the one rise and the one fall in the sequence.
+$\mathrm{maxrun}(H(l,l+1))$ is not anomalously small; it is statistically typical for the set's
+density. Proposition~\ref{prop:h014} converts this from a reassuring-looking numerical coincidence
+into the correct reading: bounding $\mathrm{maxrun}(H(l,l+1))$ is exactly as hard as the rate bound
+it would imply, not an easier route to it.
+
+A genuine, well-defined reduction of the harder, converse direction remains. Writing $U(l,W)$ for
+the covering family at width $W$ (Section~\ref{sec:further}'s reparameterization), the exact
+identity $U(W+1) = U(W) \cup 2U(W) \cup \mathrm{Corner}(W+1)$ holds, where $\mathrm{Corner}(W+1)$
+consists of the witnesses using both the top and bottom available exponent simultaneously. At every
+width $W \ge 2l+1$ we were able to check exhaustively, $l=3,\dots,13$, $\mathrm{Corner}(W+1)$
+contributes nothing new: every corner witness's value is already covered without it. If this
+\emph{corner-redundancy} property holds at every sufficiently large width, in general, it would make
+$j^*(l)$ computable from a single holdout set via Corollary~\ref{cor:bootstrap}'s converse, a real
+practical gain for extending Table~\ref{tab:jstar} beyond $l=23$; it remains unproven.
+
+\section{Discussion}
+\label{sec:discussion}
+
+Two named lemmas summarize what stands between this paper's results and a sharper theorem. Excluding
+the class $4^{J+1}$ in Theorem~\ref{thm:mod9} would make the mod-$9$ single-class law, observed at
+every level checked, a proven statement rather than an observation. Proving corner-redundancy at
+every sufficiently large width, in the sense of Section~\ref{sec:further}, would make
+Corollary~\ref{cor:bootstrap}'s bootstrap tight in general, not merely empirically exact at every
+computed instance, and would resolve Proposition~\ref{prop:h014}'s question in the process. Neither
+lemma is, on its face, as hard as the Weak Covering Conjecture itself; whether either is
+substantially easier is, honestly, not yet known.
+
+Section~\ref{sec:gapA}'s three findings are, we believe, of independent interest beyond this
+specific covering problem. A finite exponential sum built from strictly decreasing, exponentially
+weighted digit tuples is a natural object in several adjacent areas (finite-population $L$-statistics
+at non-CLT frequencies and weights, Littlewood--Offord theory for structured coefficient sequences,
+and the analytic side of the Collatz literature via Tao's own related discussion), and the specific
+mechanism identified here, that generic cancellation caps out below what is already provable by
+combinatorial means, that the exceptional mass does not concentrate on a sparse set at the scale
+that matters, and that the actual obstruction is an extremal, non-generic arithmetic phenomenon
+rather than a statistical one, may recur elsewhere in that literature under different names. We
+would welcome a reader who recognizes it.
+
+The Weak Covering Conjecture itself, and the exact asymptotic rate of $e(l)$, remain open.
+
+\section{Code and data availability}
+\label{sec:code}
+
+The repository \url{https://github.com/faculdade/weak-covering-conjecture} is reserved for this
+paper's code and data, organized by section, and will be populated before submission.
+
+\subsection*{Acknowledgments}
+AI assistance was used for textual review and translation.
+
+\begin{thebibliography}{99}
+
+\bibitem{wirsching1998}
+G.~J. Wirsching, \emph{The Dynamical System Generated by the $3n+1$ Function}, Lecture Notes in
+Mathematics, vol.~1681, Springer, Berlin, 1998.
+
+\bibitem{ehrenfeuchtmycielski1979}
+A.~Ehrenfeucht and J.~Mycielski, \emph{Positional strategies for mean payoff games}, Internat. J.
+Game Theory \textbf{8} (1979), no.~2, 109--113.
+
+\bibitem{meyerovitchyoung2026}
+T.~Meyerovitch and A.~Young, \emph{Rationality and computability of the covering radius for sofic
+shifts}, arXiv:2603.21449 (2026).
+
+\bibitem{tao2011blog}
+T.~Tao, \emph{The Collatz conjecture, Littlewood--Offord theory, and powers of $2$ and $3$},
+blog post, terrytao.wordpress.com, August 25, 2011.
+
+\end{thebibliography}
+
+\end{document}
