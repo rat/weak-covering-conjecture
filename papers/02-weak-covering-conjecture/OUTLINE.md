@@ -744,4 +744,16 @@ A push), notes/H-013.md, notes/GAP-A-round4.md, notes/GAP-A-round5*.md.
       reported standalone; four other candidates were checked and correctly rejected with reasons.
       Empirical Result 4, the load-bearing input to the paper's headline bound, independently
       reproduced exactly for l=1..12. Recompiled clean, 20 pages, 0 errors, parenthesis balance
-      757/757. One more clean round closes this loop. Round 29 next.
+      757/757. One more clean round closes this loop.
+
+- [x] **Round 29 complete (2026-08-10). THIRD consecutive clean round (0/0/0/1). STOPPING RULE
+      MET. This critique loop is closed.** One real fix: the Discussion's local-intensity sentence
+      carried no scope qualifier where every neighboring empirical clause in the same paragraph
+      has one; fixed by naming the actual checked range (`l=12,13,14`), verified against Section
+      5.3's own text. Three other candidates checked and correctly left unreported. Verification
+      this round specifically targeted hypothesis tightness, not just correctness, for every
+      numbered proof (confirming e.g. Theorem 10's `j>=l` hypothesis is tight via constructed
+      counterexamples at `j<l`, not merely sufficient). Recompiled clean, 20 pages, 0 errors,
+      parenthesis balance 758/758. **29 rounds total, 296 findings opened, every one fixed,
+      rejected with reason, or superseded; none left open.** Next: researcher's own review pass,
+      Zenodo archival of the reproducibility repository, and a decision on `main-pt.tex`.
