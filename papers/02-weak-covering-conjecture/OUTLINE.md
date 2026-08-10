@@ -683,4 +683,22 @@ A push), notes/H-013.md, notes/GAP-A-round4.md, notes/GAP-A-round5*.md.
       own stated l<=9; corner-redundancy cross-checked for internal consistency against Theorem
       10's own failure point). Recompiled clean, 20 pages, 0 errors, parenthesis balance 756/756,
       abstract re-measured at 1893/1800 chars (raw/rendered). Minor count falling each round
-      (7, 7, 5). Round 25 next.
+      (7, 7, 5).
+
+- [x] **Round 25 complete (2026-08-10).** Abstract came back clean for the first time in four
+      rounds: every scope qualifier fixed in Rounds 22-24 re-checked and confirmed correct. One
+      real fix (minor): Section 5.3 compared a measured correlation statistic against an
+      unmeasured one at coarser depths, when the paper's own text explicitly says the coarse-depth
+      check says nothing about resident-level correlation; fixed by removing the false
+      comparative. Two findings independently re-verified and rejected: a moderate flagging
+      Section 2's swap description as inconsistent with hardware details recalled from outside the
+      PDF (the fourth occurrence of this exact recurring false pattern, now five times total;
+      confirmed via `lsblk` that the swap partition and primary disk are separate physical
+      devices, and via `notes/H-001.md` that the paper's `500GiB` figure is historically accurate
+      for what it describes); and a second independent flag of the abstract's "neither null" count
+      first considered in Round 22, still correct once the disqualified null is excluded. Both
+      rejections still count toward the tally per this project's established convention. Widest
+      single-check extension yet on some fronts (`rho_6` independently confirmed, extending
+      Round 24's `rho_3`-`rho_5`; corner-redundancy to `l=11`). Recompiled clean, 20 pages, 0
+      errors, parenthesis balance 756/756, abstract unchanged at 1893 characters. Combined tally
+      (0/0/1/2), the smallest finding count since Round 17. Round 26 next.

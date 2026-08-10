@@ -31,6 +31,7 @@ by round; this table is kept current as the producer resolves each entry.
 | 22 | 0 | 0 | 1 | 7 | no | 0 |
 | 23 | 0 | 0 | 1 | 7 | no | 0 |
 | 24 | 0 | 0 | 1 | 5 | no | 0 |
+| 25 | 0 | 0 | 1 | 2 | no | 0 |
 
 Round 10's tally combines both reviewers: Opus 0 critical/0 major/3 moderate/6 minor (C-158, C-159,
 C-160 moderate; C-161-C-166 minor), Codex 0/1/5/2 (C-168 major; C-169-C-173 moderate; C-174, C-175
@@ -444,6 +445,9 @@ Need 3 consecutive rounds at 0/0/0 crit/major/moderate with minor<3 to stop; str
 | — | 24 | (Opus minor, acknowledged, not fixed this round) The antithesis budget (Rule 5c: at most two ", not Y" / "not merely P but Q" constructions per document) is exceeded by a wide margin: 9 instances of ", not ", 15 of "rather than", 3 of "instead of", concentrated in Section 5.3 | acknowledged, deferred | matches this project's own established, explicitly calibrated baseline above the strict Rule 5c budget for this specific paper, tracked each round via the antithesis count check since Round 18 (see C-255). A full-paper antithesis sweep is a substantial rewrite in its own right, not a targeted fix; deferred to a dedicated pass rather than attempted piecemeal under this round's time budget |
 | — | 24 | (Opus minor, deferred) The introduction and Section 8 both promise "two named open questions", but neither question is set off as a numbered environment; both live in running prose, which makes them hard for a later author to cite by number, undercutting the citability goal Rule 10 states explicitly | deferred, tracked | a real, low-risk-to-defer citability improvement (defining a new numbered environment and wrapping two existing prose statements), but a structural LaTeX change under this round's time pressure risks introducing new cross-reference bugs for a stylistic gain; left as a tracked improvement for a session with room to implement and re-verify it carefully, not attempted this round |
 | — | 24 | (Opus, Rule 8e lead, independently reconfirmed) The `e(l)` growth-model AIC/BIC leadership flip (logarithmic leads through `l<=21`; slow-linear only overtakes once `l=22,23` are added) was independently re-derived by this round's reviewer without seeing Round 22's report of the same finding | logged, not added to paper | second independent derivation of H-017's finding; updated that row in `HYPOTHESES.md` to record the reconfirmation. Per the researcher's standing instruction to keep any paper-side impact of informational leads minimal, still not added to the paper this round |
+| C-288 | 25 | (Opus, moderate, self-disclosed as out-of-PDF) Section 2's "a `500 GiB` swap file was added to the machine specifically for this computation" (for `l=22`) was flagged as conflicting with a `1.8 TiB` swap partition and a `468 GiB` primary disk the reviewer recalled from outside the PDF, on the reasoning that a 500GiB file could not fit on a 468GiB disk | rejected, verified wrong | fourth occurrence of this exact recurring flag (after C-167, C-190, C-233, all Round 16 or earlier), every one independently verified correct. Re-verified from scratch this round rather than assumed: `lsblk` confirms the `1.8TiB` swap partition (`/dev/nvme1n1p1`) lives on a physically separate NVMe device from the `468GiB` primary disk (`/dev/nvme0n1p1`), so the two capacities were never in competition; `notes/H-001.md` confirms the `500GiB` figure is historically correct and specific to `l=22`/`l=23` ("500GiB was chosen generously... No swap resizing was needed between l=22 and l=23"); the `1.8TiB` size is a later resize, made specifically for the now-fully-removed `l=24` material (see Round 22's dated narrative below and the researcher's explicit instruction to drop `l=24` from the paper entirely), and has no bearing on what Section 2 currently describes. No change made. Per this project's established convention (Round 16, C-233; Round 19, C-256), the tally still records this as one moderate despite the rejection |
+| C-289 | 25 | (Opus minor) Section 5.3's "correlates strongly with which residues resist, more strongly than the coarser depths `c=8,9,10` alone suggest" compares a measured rank-based statistic (computed only at depth `c=l-1`) against an unmeasured one at `c=8,9,10`; the paper's own text three sentences earlier states the coarse-depth aggregate check "does not by itself say anything about whether intensity picks out the correct residues", so there is no "suggestion" at that depth to be more or less strong than | minor | verified against the surrounding paragraph's own explicit disclaimer before editing. Fixed: "more strongly than the coarser depths `c=8,9,10` alone suggest" replaced with "a question the coarser depths `c=8,9,10` do not by themselves address", removing the false comparative without touching the true claim (fine-depth intensity does correlate with resistance). Checked the Discussion's parallel passage (Rule 8b): it already reads "correlates strongly with which residues resist without fully determining it," with no comparative claim, so it needed no matching fix |
+| C-290 | 25 | (Opus minor, independently re-raised) The abstract's "structure neither null forces" undercounts Section 5.3's three null constructions by one (the unconstrained phase scrambles are explicitly disqualified, "not the right null on their own," leaving two), a concern first raised and considered in Round 22 (C-266's narrative) | rejected, no change, second occurrence | the substance is unchanged from Round 22's consideration: the count is correct once the disqualified null is excluded, and the abstract is at its practical length ceiling (1893 of ~1920 characters). A second independent reviewer reaching the same soft conclusion is worth recording, not worth spending scarce abstract characters on without a materially cheaper fix than was available last time; none was found this round either |
 | — | 22 | (Opus, non-tallied observation) Section 2's swap/`l=24` history ("a `500 GiB` swap file"..."Three attempts at `l=24`... each failed... `l=24` is not attempted further") flagged as worth reconciling against the project's own external notes, since Opus could not verify it from the PDF alone and had (correctly) recalled a conflicting `1.8 TiB` swap figure from context | investigated and found to be a real, independent problem | checked `swapon --show` (confirms `1.8TiB` `/dev/nvme1n1p1`, matching CLAUDE.md's own compute-environment note) and `notes/H-001.md` in full: the `500GiB` figure is historically correct for `l=22`/`l=23` (no resize was needed for either), but swap was resized to `1.8TiB` specifically before the `l=24` attempts (confirmed via `notes/H-001.md`'s 2026-07-23 entry, discovered via `swapon --show` and unexplained reboots at the time), making the projected `~822GiB` requirement fit comfortably; the paper's silence on the resize left the false impression that `l=24` was arithmetically blocked. Worse, "three attempts, each failed... not attempted further" undercounts the real history (at least four launches: lost to a reboot; lost to a `systemd-oomd` policy kill; deliberately killed by the researcher to free the machine for a competing computation; and a further attempt that ran for many hours, was paused and resumed more than once, and was still active, not failed, when the project's effort moved to writing up the results already in hand per `HYPOTHESES.md`'s H-001 row, "l=24 formally aborted, 2026-08-09, researcher's explicit final decision"). Fixed: rewrote the passage to state the swap resize, attribute the early losses to their actual, memory-unrelated causes, and state plainly that `l=24` was not pursued to completion rather than implying every attempt technically failed. **Superseded, same day, researcher's explicit instruction**: rather than keep a corrected-but-still-present account of an incomplete computation the paper has no real data from, the researcher asked for the `l=24` material to be removed from the paper entirely, since `l=23` is the last level with real data and describing an attempt that did not finish only adds bulk without adding a result. Section 2 now ends its "the computation" narrative at `l=23`'s timing figures, with no mention of `l=24` at all; the corrected `l=24` history above remains accurate and stays on record here and in `notes/H-001.md`/`HYPOTHESES.md`, just not in the paper |
 | — | 22 | (Opus, non-tallied "bico") Lemma 1's statement, "no `j<l` has `R_{j-1,j}` covering," literally includes `j=0`, for which `R_{j-1,j}=R_{-1,0}` is not a defined object (equation (1) requires both indices `>=0`) | fixed | changed to "no `j` with `1<=j<l`," matching what the proof itself actually establishes (it handles `j=1` and `2<=j_0<l` separately, never `j=0`) |
 | — | 22 | (Opus, non-tallied "bico") Corollary 11 (Chain contraction)'s proof says the `t+1` output elements form "a shorter run of consecutive powers," but `t<2*3^{l-1}` strictly only gives `t+1<=2*3^{l-1}`, so the output run can equal, not just fall short of, the full order of `2` modulo `3^l` | fixed | changed to "a run of at most `2*3^{l-1}` consecutive powers," which covers the equality case; the pairwise-distinctness conclusion itself was already correct and unaffected (a window of length equal to the full order is still injective) |
@@ -2064,6 +2068,65 @@ Full findings C-283 through C-287 resolved, all fixed; two further items logged 
 reasons recorded. Combined tally (0/0/1/5): the streak stays at 0, though minor count continues to
 fall each round (7, 7, 5). Need 3 consecutive rounds at 0/0/0 crit/major/moderate with minor<3 to
 stop. Proceeding to Round 25.
+
+### Round 25 (Opus 5 max effort only, 2026-08-10, PDF snapshot frozen at launch, sha256 `8d25eff385e2386b56bc0a4c4f16f9ba28216970a2edea27e3b0c92f605e2dc3`)
+
+The abstract came back clean for the first time in four rounds: the reviewer read it
+sentence by sentence against the body, specifically re-checking every scope qualifier fixed in
+Rounds 22 through 24 rather than trusting the earlier fixes were right, and confirmed all of them
+correct (the `j>l` quantifier, the `l=3,...,13` and `l=3,...,6` ranges, the `l=21`/`l=22` empirical
+reach, the `l=1` exception, both numeric bounds). No new abstract finding this round, the streak of
+abstract-only real findings breaks.
+
+What the round did find split into a real fix and two rejections, both independently re-verified
+before being rejected rather than assumed. C-289 (minor, fixed): Section 5.3 compared a measured
+rank-based correlation statistic (computed only at the finest depth, `c=l-1`) against an unmeasured
+one at the coarser depths `c=8,9,10`, via "more strongly than [they] alone suggest", when the
+paper's own text three sentences earlier explicitly says the coarse-depth check "does not by itself
+say anything about whether intensity picks out the correct residues." Fixed by removing the false
+comparative; checked the Discussion's parallel passage per Rule 8b and found it already free of the
+same phrasing, so no second fix was needed there.
+
+C-288 (moderate, rejected) is the fourth occurrence of a recurring pattern this loop has now seen
+five times total (C-167, C-190, C-233, and now this one, all independently reaching the same wrong
+conclusion): a reviewer, working from context it has outside the PDF rather than the PDF itself,
+flags Section 2's swap-provisioning description as internally inconsistent with a larger swap
+partition and a smaller primary disk. Verified from scratch rather than taken on the strength of
+three prior confirmations: `lsblk` confirms the `1.8TiB` swap partition and the `468GiB` primary
+disk are two entirely separate physical NVMe devices, never in capacity competition, and
+`notes/H-001.md` confirms the paper's `500GiB` figure is historically accurate for the `l=22`/`l=23`
+computations it describes; the `1.8TiB` size belongs to a later resize made for the `l=24` material
+this paper no longer even mentions, per the researcher's own explicit instruction earlier this same
+day. No change made. Per this project's established convention for this exact recurring pattern
+(Round 16's C-233, Round 19's C-256), the rejection still counts toward this round's tally.
+
+C-290 (minor, rejected, second occurrence) independently re-raised the abstract's "neither null"
+undercount first considered in Round 22 (that round's own non-tallied entry). The substance has not
+changed: the count is correct once the disqualified unconstrained-scramble null is excluded, and no
+cheaper fix than was available last time turned up this round either, with the abstract sitting at
+1893 of roughly 1920 characters. Recorded as a second independent reviewer reaching the same soft
+conclusion, not acted on.
+
+Verification breadth this round: a from-scratch Python DP (not reusing any prior round's code)
+reproducing Table 1 for `l=1,...,12`, Table 2 to three decimals including the constant model's
+growing `dAIC` at each added level, Empirical Result 4 for `l=1,...,7`, `rho_3` through `rho_6` by
+independent value iteration (extended from `rho_5` to `rho_6` in a follow-up pass after the review's
+background process was stopped, still matching Table 3 exactly), corner-redundancy's exact pattern
+for `l=3,...,11` including the `l=7` boundary failure, every Empirical Result 13 value, the `1547`
+counterexample, Proposition 9's asymptotic and its `l=2,m=1` counterexample, and every cardinality
+threshold and Section 5.3 statistic reported. Lemma 3, Proposition 2, Proposition 8, Proposition 24,
+Corollary 11, and the window-`k` padding argument walked by hand, no gap found between any stated
+hypothesis and what its proof uses.
+
+Recompiled clean (20 pages, unchanged; 0 errors, 0 undefined references, 0 em-dashes, parenthesis
+balance 756/756; abstract unchanged at 1893 raw characters, since the round's one substantive fix
+was outside the abstract).
+
+Full findings: C-289 fixed; C-288 and C-290 rejected with reasons recorded, both still counted per
+established convention. Combined tally (0/0/1/2): the streak stays at 0, but this is the smallest
+total finding count of any round since Round 17, and neither surviving item required a paper
+change. Need 3 consecutive rounds at 0/0/0 crit/major/moderate with minor<3 to stop. Proceeding to
+Round 26.
 
 Two more non-tallied "bicos" Opus reported alongside the two minors were also given a real look and
 fixed, both quick and both real: Lemma 1's statement literally includes `j=0`, for which
