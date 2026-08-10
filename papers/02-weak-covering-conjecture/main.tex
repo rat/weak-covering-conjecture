@@ -58,17 +58,20 @@ mean-payoff bound. Separately, a direct computation at one accessible level find
 primitive-frequency mass sitting outside the sparse exceptional set a fixed magnitude threshold
 defines. At the levels checked, the residues
 that actually fail to be covered sit in
-cells of local hit-density well below the global mean, showing coarse magnitude alone does not
-account for which residues resist; a separate phase-randomization experiment at a
+cells of local hit-density well below the global mean; read at a fine enough averaging depth, that
+local intensity correlates strongly with resistance without fully determining it. A separate
+phase-randomization experiment at a
 different, more tractable pair of
 parameters points, descriptively, toward phase structure beyond that. We
 prove a theorem on the uncovered residues themselves, for budgets $j\ge l$: the set left uncovered
 at a budget is contained in both twice and four times the set left uncovered at the previous budget,
-giving an explicit recursive upper bound on $j^*(l)$ that we prove exact at most budgets, given one
+giving an explicit recursive upper bound on $j^*(l)$ that we prove exact at most budgets $j\ge l+1$,
+given one
 further combinatorial property verified for $l=3,\dots,13$ (the exact computation itself, separately,
 runs to $l=23$); at the
-one remaining budget, this holds at four small levels checked directly and is otherwise only
-empirically exact. We
+one remaining budget in that range, this holds at four small levels checked directly and is
+otherwise only
+empirically exact, and at $j=l$ itself the bound is not tight from $l=6$ on. We
 falsify the natural cost-$1$ form of a local repair rule this theorem might suggest, with explicit
 witness-level exhaustive counts, prove that every last-uncovered residue is $\equiv1\pmod3$ whenever
 $j^*(l)\ge l+1$ (every computed level but one), prove a two-class containment
@@ -190,8 +193,10 @@ $j=1$ never covers at $l\ge2$: $j^*(l)\ge2$ for $l\ge2$.
 Fix $l$ with $2\le l\le23$ and suppose, for contradiction, some $j_0$ with $2\le j_0<l$ has
 $R_{j_0-1,j_0}$ covering $(\Z/3^l\Z)^*$. The reduction above, with $L=l$, gives $R_{j_0-1,j_0}$
 covering $(\Z/3^{j_0}\Z)^*$ too, i.e.\ $j^*(j_0)\le j_0$. But $j_0<l\le23$, so $j_0$ is itself a
-level the search above already ran, at budgets starting from $j_0$ itself; Table~\ref{tab:jstar}
-reports $j^*(j_0)>j_0$ strictly there. Contradiction. So no $j_0<l$ covers, giving $j^*(l)\ge l$.
+level the search above already ran, starting from budget $j_0$ itself, and the search directly
+certifies that budget $j_0$ fails to cover $(\Z/3^{j_0}\Z)^*$ there (this is the raw content of
+Table~\ref{tab:jstar}'s $j^*(j_0)>j_0$ entry, independent of whether any smaller budget also fails,
+which is not assumed). Contradiction. So no $j_0<l$ covers, giving $j^*(l)\ge l$.
 \end{proof}
 
 \begin{table}[h]
@@ -525,8 +530,10 @@ Corollary~\ref{cor:mpgbound} uses only the single value $k=14$. The general tech
 covering-type combinatorial problem as a mean-payoff game and computing exact rational relaxation
 bounds this way, is not new to this application: beyond Ehrenfeucht and Mycielski's foundational
 theorem~\cite{ehrenfeuchtmycielski1979} itself, a close and recent methodological precedent proves
-rationality and computability of the covering radius of a primitive sofic shift by essentially the
-same construction, applied to a different object~\cite{meyerovitchyoung2026}. We cite both as
+rationality and computability of the covering radius of a primitive sofic shift by a mean-payoff-game
+reduction of the same kind, applied to a different object~\cite{meyerovitchyoung2026}; that reduction
+uses non-alternating mean-payoff games, its own variant of the classical alternating games
+of~\cite{ehrenfeuchtmycielski1979} used here. We cite both as
 precedent for the framing; what is new here is its specific application to $j^*(l)$.
 
 \begin{remark}
@@ -667,7 +674,17 @@ rejection, and the model is not treated as a live candidate below on that basis.
 the weaker, descriptive claim
 underneath it:
 holdouts sit systematically in low-intensity cells, with how far below the mean varying widely by
-depth and level. A separate
+depth and level. At the finest depth the definition allows short of the degenerate case, $c=l-1$ (a
+class of only $3$ siblings), the same model, with each residue's own count excluded from its own
+estimate to avoid the self-referential bias a class that small would otherwise carry, gives an
+expected total hole count that meets or exceeds what is actually observed at every level checked:
+$2.1$ against $2$ holdouts at $l=10$, $3.5$ against $1$ at $l=11$, $4.5$ against $3$ at $l=12$, $5.3$
+against $1$ at $l=13$, $5.0$ against $3$ at $l=14$ ($l=15$ not run at this depth). Ranking every unit
+by this same leave-one-out intensity, the actual holdouts sit deep in the low-intensity tail at every
+level checked this way (ranks $12$ to $582$ among $354{,}294$ to $3{,}188{,}646$ units, $l=12,13,14$),
+though not always among the very lowest few residues by rank. Read at this depth, local intensity
+correlates strongly with which residues resist, more strongly than the coarser depths $c=8,9,10$
+alone suggest, but does not fully determine it. A separate
 diagnostic at a smaller, more tractable
 pair, $(l,m)=(14,16)$, for the family $R_{m-1,m}$ (mean hit count $188.5$, three budgets below the
 covering threshold $j^*(14)=19$), holds every $|S(t)|$ fixed and randomizes the phases of
@@ -689,19 +706,26 @@ The zero-off-units constraint has a direct algebraic meaning for the phases. Gro
 frequencies into triples $t=r,\,r+3^{l-1},\,r+2\cdot3^{l-1}$ by parent residue $r$ modulo $3^{l-1}$
 ($3\nmid r$), the vanishing of $F$ on the subgroup $3(\Z/3^l\Z)$ is equivalent, by the same
 character-sum collapse used in Proposition~\ref{prop:sqrtceiling}, to $S(t_1)+S(t_2)+S(t_3)=0$ for
-every such triple: three fixed magnitudes forming a closed triangle. For a generic (scalene) triple
-this pins the phases down to a one-parameter family, a common rotation of the actual configuration,
-together with its mirror image (negating all three phases before rotating, which also sums to zero).
-A null built this way, independently for each triple, a uniformly random rotation and an independent
-coin flip for the reflection, keeps every $|S(t)|$ fixed and vanishes off units exactly by
-construction. Implemented and run at $(l,m)=(14,16)$ (30 trials, checked into the repository, Section
+every such triple: three fixed magnitudes forming a closed, non-degenerate triangle. This pins the
+phases down to a one-parameter family, a common rotation of the actual configuration, together with
+its mirror image (negating all three phases before rotating, which also sums to zero). The conjugate
+partner of the triple at parent $r$ is the triple at parent $3^{l-1}-r$, and $S(3^l-t)=\overline{S(t)}$
+(used already in Section~\ref{sec:gapA}) links the two: only one triple per conjugate pair is given
+an independent random rotation and an independent coin flip for the reflection; the partner's
+phases are then fixed by conjugation rather than drawn on their own, so the resulting field stays
+real, matching $F$ itself. This keeps every $|S(t)|$ fixed and vanishes off units exactly by construction.
+Implemented and run at $(l,m)=(14,16)$ (30 trials, checked into the repository, Section
 9): the constrained null gives $\max/\mathrm{RMS}$ ratios averaging $6.35$, range $[5.93,7.20]$,
 against the real array's $15.79$, a residual factor of about $2.5$. This lands close to
-$\sqrt{3/2}\approx1.22$ times the unconstrained scrambles' range, an approximate match the triple-
-rigidity argument explains directly (both classes of primitive frequency carry, on average, an even
-share of the constrained power), but the constrained figure is the one actually tied to the stated
-constraint; the earlier $\sqrt{3/2}$ arithmetic on its own was only a same-array RMS renormalization
-and said nothing about how a constrained null behaves, superseded here by this direct construction.
+$\sqrt{3/2}\approx1.22$ times the unconstrained scrambles' range: by Parseval, $\sum_z F(z)^2$ (hence
+the all-$z$ mean square) is the same for the actual array and for any phase null preserving every
+$|S(t)|$, constrained or not, since it depends only on the magnitudes; a null respecting the
+zero-off-units property puts that same total squared mass on only the $2\cdot3^{l-1}$ unit positions
+instead of spreading it over all $3^l$, raising the typical, and so the maximum, magnitude by
+$\sqrt{3/2}$ relative to an unconstrained null with the same magnitudes. The earlier $\sqrt{3/2}$
+arithmetic on its own was only this same-array RMS renormalization applied directly to the real
+ratio, without constructing the null it was implicitly describing; superseded here by the actual
+construction.
 Both the eight-trial unconstrained batches above and this thirty-trial constrained one are still too
 few to calibrate a rigorous significance level (a rank-based test against thirty draws cannot reach
 below $p\approx1/31$, however extreme the observed value); what the residual factor near $2.5$
@@ -709,9 +733,9 @@ suggests, descriptively, is that the actual phases are not fully exchangeable wi
 respects only $|S(t)|$ and the zero-off-units constraint, though this diagnostic is silent on
 whether it is what
 decides coverage, or on how much of it a properly calibrated test would confirm. At the levels
-checked, the two diagnostics are not evidence of the same thing: the raw holdout rarity shows that
-coarse local intensity (a cell-averaged count) does not by itself pick out which residues resist,
-while only the phase-scramble gap bears on phase as such, and even there only descriptively, for the
+checked, the two diagnostics are not evidence of the same thing: holdout rarity, read at a fine
+enough depth, correlates strongly with local intensity without being fully determined by it, while
+only the phase-scramble gap bears on phase as such, and even there only descriptively, for the
 reasons just given.
 
 \begin{proposition}
@@ -1160,8 +1184,9 @@ may recur there under different names. The full-spectrum, uniform-cancellation r
 is unreachable outright (Proposition~\ref{prop:sqrtceiling}); stronger, frequency-dependent
 cancellation strategies remain untried. Exceptional mass does
 not concentrate on a sparse set at the one accessible scale checked ($l=18$, $j=16$, one threshold,
-primitive frequencies only). Holdout rarity shows coarse magnitude alone does not account for which
-residues resist, and a separate phase-randomization diagnostic suggests, descriptively, a departure
+primitive frequencies only). Local intensity, read at a fine enough depth, correlates strongly with
+which residues resist without fully determining it, and a separate phase-randomization diagnostic
+suggests, descriptively, a departure
 from a generic-phase model at the levels checked, though neither calibrates that suggestion or says
 whether it is what decides coverage. Tao's later, unrelated
 result
@@ -1195,7 +1220,7 @@ $(\sigma_k,\rho_k,h_k)$ behind Table~\ref{tab:mpg} are stored there with a verif
 each of them against the inequality in Theorem~\ref{thm:mpg}'s proof, without re-running the
 solver. Each folder's README gives what it checks, the command, the output to expect, and what the
 run costs. Most checks take seconds; the three largest levels of Table~\ref{tab:jstar} do not.
-Every claim above matches commit \texttt{0c6b4c9} of that repository; later
+Every claim above matches commit \texttt{a1a926f} of that repository; later
 commits may extend it further but should not change what this specific commit already contains.
 
 \subsection*{Acknowledgments}

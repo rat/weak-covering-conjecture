@@ -429,3 +429,26 @@ A push), notes/H-013.md, notes/GAP-A-round4.md, notes/GAP-A-round5*.md.
       single-line grep missing line-wrapped instances; true pre-existing count is 6, not the
       previously-tracked 3; one new instance this round was caught and reworded. Combined tally
       0/0/2/6: no criticals or majors, but 2 moderates keeps the streak at 0. Round 14 next.
+
+- [x] **Round 14 complete (2026-08-10).** Both reviewers, asked to look hard at Round 13's freshly
+      written constrained-null passage, independently found the same issue: "independently for each
+      triple" is ambiguous and, read literally, breaks the conjugate-symmetry relation the paper
+      relies on elsewhere. Opus built three explicit null variants and showed only the correct,
+      conjugate-paired one reproduces the printed numbers; checked the actual script directly rather
+      than trusting either report (conjugate-symmetry error exactly `0.0`, imaginary part at
+      floating-point noise) and found the code was already right, only the prose was ambiguous.
+      Fixed the wording and added permanent self-checks to the script's own output. Opus's second
+      finding: the "coarse local intensity does not by itself pick out which residues resist" claim
+      outran its own support (the body's only quantitative check disclaims itself two sentences
+      before "shows" reasserts it at full strength three times); ran the aggregate check the paper
+      never ran (expected-hole-count under its own model, leave-one-out, finest depth) and
+      independently reproduced Opus's exact figures before touching the paper, confirming the model
+      predicts as many or more holes than observed at that depth. Checked and rejected one of Opus's
+      own stronger claims (lowest-intensity residues always covered) as false at 2 of 3 levels
+      tested. Softened the overclaiming language in all three locations it appeared (abstract, body,
+      Discussion); added a new script to the repro repo. Three more minor fixes (a near-circular
+      proof step in Lemma 1, an overstated citation match for [6], an abstract scoping gap) and one
+      rejected finding (already addressed at the same locus in Round 13). Sixth consecutive round
+      the combinatorial core re-derived clean. Recompiled clean, 18 pages, 0 errors, 0 em-dashes,
+      parenthesis balance verified, antithesis at the corrected 6-item baseline. Combined tally
+      0/0/2/4: no criticals or majors, but 2 moderates keeps the streak at 0. Round 15 next.

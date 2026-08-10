@@ -20,6 +20,7 @@ by round; this table is kept current as the producer resolves each entry.
 | 11 | 0 | 0 | 7 | 6 | no | 0 |
 | 12 | 0 | 1 | 1 | 8 | no | 0 |
 | 13 | 0 | 0 | 2 | 6 | no | 0 |
+| 14 | 0 | 0 | 2 | 4 | no | 0 |
 
 Round 10's tally combines both reviewers: Opus 0 critical/0 major/3 moderate/6 minor (C-158, C-159,
 C-160 moderate; C-161-C-166 minor), Codex 0/1/5/2 (C-168 major; C-169-C-173 moderate; C-174, C-175
@@ -38,8 +39,15 @@ the higher severity (C-199); Codex also raised the l=21-23 certification gap as 
 moderate (C-200, partially resolved this round: l=21 confirmed independently, matching
 the predeclared criterion exactly). Codex otherwise 0/0/0/2 (C-201, C-202 minor), Opus
 otherwise 0/0/0/4 (C-203-C-206 minor, one of which, C-204, turned out moot on arrival).
-Combined 0/0/2/6 -- no criticals or majors, but 2 moderates keeps the streak at 0. Need 3
-consecutive rounds at 0/0/0 crit/major/moderate with minor<3 to stop.
+Combined 0/0/2/6 -- no criticals or majors, but 2 moderates keeps the streak at 0. Round
+14: both reviewers independently flagged the same description-versus-numbers gap in
+Round 13's new constrained-null passage (C-207, dual-found, both moderate this time,
+counted once), and Opus separately found the local-intensity "does not account for"
+claim outran its own stated support (C-208, moderate, independently reproduced before
+fixing). Opus otherwise 0/0/0/3 fixed (C-209-C-211 minor) plus one rejected as already
+addressed at the same locus (Section 7's independence-model wording, Round 13's C-201).
+Combined 0/0/2/4 -- no criticals or majors, but 2 moderates again keeps the streak at 0.
+Need 3 consecutive rounds at 0/0/0 crit/major/moderate with minor<3 to stop.
 
 ## Status table
 
@@ -264,6 +272,14 @@ consecutive rounds at 0/0/0 crit/major/moderate with minor<3 to stop.
 | C-206 | 13 | (Opus minor) Two citation-precision items: Empirical Result 13 attributes the `l=3,4` boundary case to Proposition 24 itself, when it is actually proven by the boundary-width argument following Proposition 24; the abstract's "verified for l=3,...,13 against a table running to l=23" can be misread as claiming verification to l=23 | minor | fixed both: attributed to "the boundary-width argument following Proposition 24"; abstract reworded to separate the two facts ("(the exact computation itself, separately, runs to l=23)") |
 | — | 13 | (Opus, repro-repo only, not a paper finding) `section5-exponential-sum/README.md` and `local_intensity.py`'s docstring both state `T=17,672,631,900` for the l=15 local-intensity run; the correct value (verified: `m=19` from `local_intensity.py`'s own `j-1` formula, `T=C(38,19)`) is `35,345,263,800` (`17,672,631,900` is `C(37,18)`, a copy-paste slip); the paper's own printed `lambda=3695` at l=15 already matches the correct value, only the repro repo was wrong | — | fixed in the repro repo (both files), verified against the paper's own printed figure before changing anything, per Rule 8c |
 | — | 13 | Both reviewers again re-derived every proof with nothing found wrong (fifth consecutive round for the combinatorial core); Opus additionally re-verified Empirical Result 4 from scratch (`l=1,...,9`, shortest-path DP), Table 2's AIC/BIC/LOOCV figures to every printed digit, and fetched [6]'s full text to confirm the methodological-precedent claim; every citation in the bibliography is now primary-source-verified | — | the round's most substantive outcome is that the phase diagnostic's headline number (residual `~2.5`) was independently confirmed while its printed justification was found unsound and replaced with a verified mechanism; two Rule 8e leads registered as H-015 and H-016 in HYPOTHESES.md (a genuine power-class asymmetry the constrained null does not force; whether Empirical Result 4's one needed direction is provable outright), neither pursued further since GAP A/WCC is not an active research direction for this project |
+| C-207 | 14 | (Codex moderate + Opus moderate, dual-found) Round 13's new Section 5.3 passage describes the constrained-null construction as "independently for each triple," which, taken literally, breaks the exact conjugate-symmetry relation `S(3^l-t)=conj(S(t))` the paper itself uses elsewhere; Opus built three explicit null variants (independent-per-triple, conjugate-paired, unconstrained) and showed only the conjugate-paired one reproduces the printed numbers (`6.35` vs `4.84` for the literal-as-written null, over 4 standard deviations apart); Codex found the same description-versus-numbers gap independently via a Parseval argument | moderate | verified directly against the actual script (`constrained_phase_null.py`) rather than assumed either way: computed the maximum conjugate-symmetry error over every nonzero entry (`0.0`, exact) and the maximum imaginary part of the resulting field (`3.2e-14` against real values near `10^2`, floating-point noise) -- the code already implements the correct, conjugate-paired construction, so the paper's numbers were right all along; only the prose description was ambiguous. Fixed by rewriting the passage to state explicitly that only one triple per conjugate pair is independently randomized, with the partner fixed by conjugation, and by adding permanent, printed self-checks (conjugate-symmetry error, real-valuedness) to the script itself so this is verified on every run, not just asserted. Also replaced the passage's vague "even share of the constrained power" mechanism with Opus's cleaner, independently-checked Parseval argument (the all-z mean square is identical for the real array and any magnitude-preserving null; a constrained null concentrates the same total power onto the `2*3^(l-1)` unit positions instead of all `3^l`, which is exactly what raises the ratio by `sqrt(3/2)`) |
+| C-208 | 14 | (Opus moderate) The claim that "coarse local intensity does not by itself pick out which residues resist" (abstract, Section 5.3, Discussion) outruns its own stated support: the only quantitative check in the body (depths c=8,9,10) is explicitly disclaimed as "suggestive rather than a formal rejection" two sentences before "shows"/"showing" reassert it at full strength three times; the aggregate expected-hole-count check that would actually settle the question was never run, and Opus ran it, finding the model predicts MORE holes than observed at the finest depth the paper's own definition allows | moderate | independently reproduced Opus's exact figures before writing anything: a from-scratch leave-one-out computation at depth `c=l-1` (excluding each residue's own count from its own intensity estimate, since a class of only 3 siblings is otherwise self-referentially biased for every residue, not just holdouts) gives expected total hole counts of `2.1,3.5,4.5,5.3,5.0` against `2,1,3,1,3` actually observed at `l=10,...,14`, matching Opus's numbers to the last printed digit; a rank check at `l=12,13,14` independently confirms holdouts sit at ranks `12` to `582` among `354,294` to `3,188,646` units, deep in the low-intensity tail. Also checked, and rejected, Opus's stronger phrasing that "the very lowest-intensity residues are all covered": true at `l=13` (holdout at rank `582`) but false at `l=12,13,14` combined since `l=12` and `l=14` each have a holdout within the lowest `20` by rank, so this specific claim was not written into the paper. Fixed: added the finest-depth expected-hole-count and rank results to Section 5.3 (new script `local_intensity_finest.py`, checked into the repro repo), and softened "shows"/"showing... does not account for" to "correlates strongly with... without fully determining it" in all three locations (abstract, body, Discussion) |
+| C-209 | 14 | (Opus minor) Lemma 1's proof invokes "Table 1 reports `j*(j_0)>j_0` strictly there" to derive a contradiction, which reads as assuming the full, global `j*(j_0)` is already established, close to circular given Lemma 1 itself is what establishes that no smaller budget covers | minor | fixed: clarified that what the proof actually uses is the narrower, directly-certified fact from the search itself ("budget `j_0` fails to cover... independent of whether any smaller budget also fails, which is not assumed"), removing the appearance of circularity without changing the proof's actual logic |
+| C-210 | 14 | (Opus minor) Section 4's citation of [6] as proving rationality/computability of the covering radius "by essentially the same construction" overstates the match: Opus fetched [6]'s full text and found it uses non-alternating mean-payoff games, its own variant of the classical alternating games this paper uses (from [5]) | minor | verified against the fetched primary source before changing anything; fixed to "a mean-payoff-game reduction of the same kind," with the alternating/non-alternating distinction stated explicitly |
+| C-211 | 14 | (Opus minor) The abstract's "prove exact at most budgets" does not scope which budgets, and never states that the bootstrap is not tight at `j=l` itself from `l=6` on (stated plainly by Empirical Result 13), which Corollary 12's "for every `j>=l`" could let a reader infer holds too | minor | fixed: scoped explicitly to "budgets `j>=l+1`" and added "at `j=l` itself the bound is not tight from `l=6` on" |
+| — | 14 | (Opus minor, rejected) Section 7's independence-model comparison ("tracks the observed sequence within about one unit") is unreproducible from the text alone | minor | rejected, no further change: this is the same locus Codex flagged in Round 13 (C-201), already fixed there by removing the overclaimed "typical" language and adding an explicit hedge about the missing distributional specification; a third pass at the identical sentence would re-litigate already-reviewed text without new evidence, against Rule 8d |
+| — | 14 | (Opus, remark not a finding) The introduction's citation of [2] could be read as suggesting [2] restates the covering conjecture itself, though Opus confirms the sentence is accurate as written ([2]'s own conjectures are the Elka-function/Markov-chain conditions) | — | no change: Opus explicitly did not raise this as a finding, and Round 12's restructuring (C-196) already separated [1]'s and [2]'s roles into two sentences, reducing the juxtaposition risk this remark flags |
+| — | 14 | Both reviewers again re-derived every proof with nothing found wrong (sixth consecutive round for the combinatorial core); Opus additionally recomputed Table 1 for `l<=12` from scratch, Empirical Result 4 for `l=1,...,9`, Table 2 and Remark 7's figures to every printed digit, Table 3's `rho_k` for `k=3,...,7` via an independently-built uncapped value-iteration solver, corner-redundancy's exact boundary pattern, and every citation against primary sources | — | both moderates this round were about whether Round 13's own new content (the constrained null, unexamined at the level of whether depth choice affects the local-intensity conclusion) was fully justified by what was written, not about the paper's original material; both were caught by a genuinely adversarial re-read of freshly-written text, exactly the failure mode the loop exists to catch |
 
 ## Full findings
 
@@ -1134,3 +1150,73 @@ from earlier, already-reviewed rounds and were not touched this round, consisten
 (fixing what was actually flagged, not re-litigating settled prose). Full findings C-199 through
 C-206 resolved (fixed or found moot on arrival). Combined tally (0/0/2/6) does not meet the stopping
 criterion; the streak stays at 0. Proceeding to Round 14.
+
+### Round 14 (Codex on `gpt-5.6-sol` + Opus 5 max effort, 2026-08-10, PDF snapshot frozen at launch, sha256 `fb05f8e9fc4226b8a8b8df240366d66cd68c483f9d4a569a5ada7d5fc15450fc`)
+
+Second round under the researcher's autonomous-loop instruction. Codex completed normally; Opus
+completed on the first attempt this round (no spend-limit interruption). Both prompts specifically
+asked the reviewers to look hard at Round 13's newly-written constrained-null passage, since freshly
+written text is exactly where this loop's last several rounds have found real problems.
+
+Both reviewers independently found the same issue: the passage's phrase "independently for each
+triple" is ambiguous, and read literally describes a null that breaks the exact conjugate-symmetry
+relation `S(3^l-t)=conj(S(t))` the paper itself relies on elsewhere. Opus went further and built
+three explicit null variants from scratch (independent-per-triple, conjugate-paired, unconstrained)
+and showed only the conjugate-paired variant reproduces the paper's printed numbers (the literal,
+independent-per-triple null gives `4.84`, more than four standard deviations from the printed
+`6.35`). Codex found the identical description-versus-numbers gap independently via a Parseval
+argument. Rather than assume either reviewer was describing the actual implementation correctly,
+checked the real script directly: the maximum conjugate-symmetry error over every nonzero entry in
+the constructed null is exactly `0.0`, and the maximum imaginary part of the resulting field is
+`3.2e-14` against real values near `10^2`, floating-point noise. The code was already correct; only
+the prose was ambiguous about what it did. Fixed by stating explicitly that only one triple per
+conjugate pair is independently randomized, with the partner fixed by conjugation, and by adding
+permanent conjugate-symmetry and real-valuedness checks to the script's own printed output so this
+is verified on every run rather than merely asserted. The passage's vague "even share of the
+constrained power" mechanism was also replaced with Opus's cleaner, independently-checked Parseval
+argument for the `sqrt(3/2)` factor.
+
+Opus's second finding was more consequential: the claim that "coarse local intensity does not by
+itself pick out which residues resist" outran its own support. The only quantitative check in the
+body (depths `c=8,9,10`) is explicitly disclaimed two sentences earlier as "suggestive rather than a
+formal rejection," yet "shows"/"showing" reassert the conclusion at full strength three times across
+the abstract, body, and Discussion. The aggregate check that would actually settle the question, an
+expected-hole-count comparison under the paper's own model, was never run; Opus ran it and found
+that at the finest depth the paper's own definition allows (`c=l-1`, leave-one-out to avoid every
+residue's own class-of-three average being self-referentially biased, not just holdouts'), the model
+predicts as many or more holes than are actually observed. Independently reproduced before touching
+the paper: a from-scratch leave-one-out computation gives expected hole counts of `2.1, 3.5, 4.5,
+5.3, 5.0` against `2, 1, 3, 1, 3` actually observed at `l=10,\dots,14`, matching Opus's figures to the
+last printed digit, and a rank check at `l=12,13,14` confirms holdouts sit deep in the low-intensity
+tail (ranks `12` to `582` among `354{,}294` to `3{,}188{,}646` units). One of Opus's own stronger
+claims, that the very lowest-intensity residues are always covered, was checked and found false at
+two of the three levels checked (a holdout sits within the lowest `20` by rank at both `l=12` and
+`l=14`), so it was not written into the paper. Fixed by adding the finest-depth results to Section
+5.3 (a new script, `local_intensity_finest.py`, checked into the repro repo) and softening
+"shows"/"showing... does not account for" to "correlates strongly with... without fully determining
+it" in all three locations it appeared, per Rule 8b.
+
+Three further minor fixes: Lemma 1's proof read as invoking the not-yet-established global `j*(j_0)`
+to derive its own contradiction, close to circular; clarified that only the search's own direct
+certificate at budget `j_0` is used. Citation [6]'s description as using "essentially the same
+construction" overstated the match; fetched the primary source (again, independently of Opus's own
+fetch) and confirmed it uses non-alternating mean-payoff games, its own variant of the alternating
+games this paper uses, and reworded accordingly. The abstract's "prove exact at most budgets" did
+not scope which budgets or mention that tightness fails at `j=l` itself from `l=6` on; both added.
+One finding (Section 7's independence-model wording) was rejected as already addressed at the same
+locus by Round 13's C-201, per Rule 8d's discipline against re-litigating the same sentence twice
+without new evidence.
+
+Both reviewers again re-derived every proof with nothing found wrong, a sixth consecutive round for
+the combinatorial core. Opus additionally recomputed Table 1 for `l\le12` from scratch, Empirical
+Result 4 for `l=1,\dots,9`, Table 2 and Remark 7's figures to every printed digit, Table 3's `rho_k`
+for `k=3,\dots,7` via an independently-built uncapped value-iteration solver, and corner-redundancy's
+exact boundary pattern; every citation checked against a primary source again confirmed correct.
+
+Recompiled clean (18 pages, 0 errors, 0 undefined references, 0 em-dashes, parenthesis balance
+667/667, antithesis count returned to the 6-item baseline after briefly rising to 7). Full findings
+C-207 through C-211 resolved (fixed or rejected with a stated reason). Both moderates this round were
+about whether Round 13's own new content held up under a genuinely adversarial re-read, not about
+the paper's original material, continuing the trend since Round 11 that the loop's remaining value is
+mostly in checking its own recent edits. Combined tally (0/0/2/4) does not meet the stopping
+criterion; the streak stays at 0. Proceeding to Round 15.
