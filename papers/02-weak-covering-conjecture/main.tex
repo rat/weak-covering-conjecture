@@ -62,13 +62,17 @@ cells of local hit-density well below the global mean; read at a fine enough ave
 local intensity correlates strongly with resistance without fully determining it. A separate
 phase-randomization experiment at a
 different, more tractable pair of
-parameters departs from a null respecting only frequency magnitudes, but a further null carrying
-only local-intensity information reproduces the same departure, so this does not on its own
-establish phase structure beyond what intensity already explains. We
+parameters departs from a null respecting only frequency magnitudes; a further null conditioned only
+on coarse parent totals matches that departure's ratio of extreme value to root-mean-square, but only
+because both quantities fall short of the actual data by comparable factors, and in absolute terms the
+actual total energy exceeds this second null's own expectation by a factor of $2.59$, about a thousand
+of the null's own standard deviations. Read on the scale that matters, neither null explains the other
+away: both point to structure beyond what parent totals alone force, without on their own establishing
+what decides coverage. We
 prove a theorem on the uncovered residues themselves, for budgets $j\ge l$: the set left uncovered
 at a budget is contained in both twice and four times the set left uncovered at the previous budget,
-giving an explicit recursive upper bound on $j^*(l)$ that we prove exact at most budgets $j\ge l+1$,
-given one
+giving an explicit recursive upper bound on $j^*(l)$ that we prove exact at all but one budget
+$j\ge l+1$, given one
 further combinatorial property verified for $l=3,\dots,13$ (the exact computation itself, separately,
 runs to $l=23$); at the
 one remaining budget in that range, this holds at four small levels checked directly and is
@@ -132,14 +136,17 @@ needs $j \sim l\log_4 3$ at leading order). At the threshold,
 $K(l) \asymp |R_{j^*(l)-1,j^*(l)}|/3^l \asymp 4^{e(l)}/\sqrt{j^*(l)}$; the $\sqrt{j^*(l)}$ correction
 is polynomial in $l$ at every level actually computed, where $j^*(l)=O(l)$ (Table~\ref{tab:jstar}),
 though no unconditional polynomial bound on $j^*(l)$ is proved here (Proposition~\ref{prop:exist}'s
-unconditional bound is exponential; Corollary~\ref{cor:mpgbound}'s linear bound is conditional). Since
-a polynomial correction never changes whether a sequence is sub-exponential, this identification, like
-the rest of this paragraph, carries the persistence proviso above: with that understood, the
-conjecture's truth would force $e(l)$ to grow strictly slower than linearly. The converse,
-that
-$e(l)=o(l)$ would in turn establish the conjecture, needs coverage to persist at every budget past
-$j^*(l)$, which Theorem~\ref{thm:doubling} only gives for $j\ge l$; below $l$, the regime a truly
-sub-linear $e(l)$ would eventually reach, the converse is open.
+unconditional bound is exponential; Corollary~\ref{cor:mpgbound}'s linear bound is conditional). This forward direction needs no persistence proviso: $j^*(l)$ is defined as a minimum, the conjecture
+(for any valid sub-exponential $K$) makes the first budget $j$ with $\binom{2j}{j}\ge K(l)\cdot3^l$ a
+covering budget, and a minimum is at most any member of its own defining set, so
+$j^*(l)\le l\log_43+o(l)$ follows outright; combined with the unconditional lower bound of
+Proposition~\ref{prop:lowerbound}, the conjecture's truth forces $e(l)$ to grow strictly slower than
+linearly, with no proviso attached. The proviso above belongs to the \emph{equivalence} claimed at the
+start of this paragraph, not to this one-directional implication: constructing a valid $K$ \emph{from}
+the threshold density needs coverage to persist at every budget past $j^*(l)$, unproven below $l$. The
+converse, that $e(l)=o(l)$ would in turn establish the conjecture, needs the same persistence, which
+Theorem~\ref{thm:doubling} only gives for $j\ge l$; below $l$, the regime a truly sub-linear $e(l)$
+would eventually reach, the converse is open.
 
 An earlier, unpublished manuscript of the author computed $j^*(l)$ exactly for $l=1,\dots,20$ by
 direct enumeration and reported the resulting table without a growth-rate analysis. This paper does
@@ -227,9 +234,9 @@ $l=1,\dots,23$: it never grows past $5$ over the computed range, and nothing pro
 that ceiling persisting; Proposition~\ref{prop:lowerbound}'s logarithmic bound on $e(l)$ does not
 touch it, since a bounded $j^*(l)-l$ makes $e(l)=(j^*(l)-l)+l(1-\log_43)$ grow linearly, comfortably
 above a logarithmic floor. If the ceiling did persist, $j^*(l)=l+O(1)$ would make $e(l)$ linear, and,
-by the identity noted after \eqref{eq:el}, would (subject to the persistence proviso stated there)
-make $K(l)$ exponential and falsify the conjecture. This flatness is a fact about the range checked,
-not a proven bound either way.
+by the identity noted after \eqref{eq:el}, would make $K(l)$ exponential and falsify the conjecture,
+the contrapositive of the proviso-free forward direction stated there. This flatness is a fact about
+the range checked, not a proven bound either way.
 
 $l=21$ fits in physical RAM once a memory-wasteful parallelization step in the original
 implementation was corrected. $l=22$ needs approximately $84\,\mathrm{GiB}$ of state, above the
@@ -444,14 +451,32 @@ $z$ modulo $3^l$: at step $i$, the true remaining state is $z_i$ modulo $3^{l-i}
 sees the true $z_i\bmod3^k$ directly whenever $l-i\ge k$, i.e.\ for every step but the last $k-1$.
 Once $l-i<k$, whether because $l<k$ globally or because a play with $l\ge k$ has reached its own
 final $k-1$ steps, fix one lift of the true state to a residue modulo $3^k$, at the first such step,
-and run the window-$k$ game forward from that lift on the play's own remaining digits (not a fresh
-lift at each step), which is exactly the situation safety was built for, with the play's own
-remaining digits standing in for the hidden ones, so the chosen move stays legal against the true,
+by padding the true state's remaining $l-i$ digits with $k-(l-i)$ arbitrary further digits, and run
+the window-$k$ game forward from that lift on the play's own remaining digits (not a fresh lift at
+each step). Two separate facts keep this consistent with the true state. First, safety, by
+construction, keeps every one of the three possible one-digit extensions of a safe state a unit
+modulo $3^k$, so the window-$k$ policy always has a well-defined next state
+$s_{i+1}:=T_d(s_i+3^k\epsilon_i)\bmod3^k$ to act on for any extending digit $\epsilon_i\in\{0,1,2\}$,
+real or padding, matching the general successor $s'(\epsilon)$ used in the theorem's proof below.
+Second, from the defining formula $T_d(z)=(2^{d+1}z-2)/3$, $T_d(z)\bmod3^{k'}$ depends only on
+$z\bmod3^{k'+1}$ for every $k'\ge0$; since $k>l-i-1$ throughout this regime, the term $3^k\epsilon_i$
+never affects any digit below position $k$, in particular none of the $l-i-1$ low-order digits this
+step tracks, so which $\epsilon_i$ is used, real when the true state still supplies one or arbitrary
+padding once it does not, is irrelevant to them. Consequently, if the window-$k$ state $s_i$ agrees
+with the true $z_i$ on its lowest $l-i$ digits, as it does by construction at the first padded step
+and by induction thereafter, then $s_{i+1}$ agrees with the true $z_{i+1}$ on its lowest $l-i-1$
+digits regardless of $\epsilon_i$, one fewer digit of guaranteed agreement each step, exactly matching
+how many true digits remain. Legality of the chosen
+move at step $i$ depends only on $z_i\bmod3$, the lowest digit, which is among the true, agreeing
+digits at every one of these steps since $l-i\ge1$ throughout; at the last step, $l-i=0$, the unit
+requirement modulo $3^0=1$ is vacuous. So the chosen move stays legal against the true,
 lower-precision state at every step and the successor relation used below holds at every step,
-including these last $k-1$. Writing $s_i$ for whichever window-$k$ state $\sigma_k$ sees this way at step
+including these last $k-1$, with $\epsilon_i$ taken to be the real next digit whenever the true state
+still has one and an arbitrary fixed digit thereafter. Writing $s_i$ for whichever window-$k$ state
+$\sigma_k$ sees this way at step
 $i$ (the true $z_i\bmod3^k$, or a fixed lift of it), $s_{i+1}$ is by construction the successor
-$s_i'(\epsilon)$ under $\sigma_k$'s chosen move and the digit $\epsilon$ that the real play actually
-supplies at that step, so $s_0,\dots,s_l$ is exactly a play of the form the proof below sums over,
+$s_i'(\epsilon_i)$ under $\sigma_k$'s chosen move,
+so $s_0,\dots,s_l$ is exactly a play of the form the proof below sums over,
 with move costs equal to the real play's (this regime is part of what the policy-against-the-covering-DP check at
 $k=4,7$ against $l$ up to $14$ already exercised, with zero illegal or unsafe moves; every play
 there passes through this same final-$k-1$-steps regime regardless of how large $l$ is).
@@ -632,8 +657,8 @@ the $j\ge l$ range Sections~\ref{sec:holdouts}--\ref{sec:further} otherwise work
 result. Write
 $\|S\|_1:=\sum_{\gcd(t,3)=1}|S(t)|/T$ for the normalized $L^1$ mass over frequencies coprime to $3$.
 This restriction excludes $t=3^{l-1}$, whose magnitude $|S(3^{l-1})|\sim T/\sqrt3$ is fixed by
-Proposition~\ref{prop:1547} and, empirically, is the largest at the specific levels Section~5.2
-checks directly (not in general, as Section~5.2's own counterexample there shows), along with its
+Proposition~\ref{prop:1547} and, empirically, is the largest at the specific levels this section
+checks directly (not in general, as the counterexample above shows), along with its
 conjugate $t=2\cdot3^{l-1}$ (since
 $S(3^l-t)=\overline{S(t)}$, that frequency matches it exactly and is excluded for the same reason).
 The restriction to $\gcd(t,3)=1$ also excludes every nonprimitive frequency, roughly a third of the
@@ -752,33 +777,56 @@ factor of $2.5$ rests on these measured numbers rather than on the Parseval iden
 Both the eight-trial unconstrained batches above and this thirty-trial constrained one are still too
 few to calibrate a rigorous significance level (a rank-based test against thirty draws cannot reach
 below $p\approx1/31$, however extreme the observed value); what the residual factor near $2.5$
-shows, on its own, is that the actual phases are not fully exchangeable with a null that
-respects only $|S(t)|$ and the zero-off-units constraint. It does not, by itself, say that this
+provides, on its own, is evidence against the actual phases being fully exchangeable with a null that
+respects only $|S(t)|$ and the zero-off-units constraint, rather than a deductive demonstration
+(thirty draws
+too few to calibrate a significance level, as just noted, can suggest but not establish
+non-exchangeability). It does not, by itself, say that this
 departure needs phase structure specifically, since neither null above carries any information about
 the level-$(l-1)$ local intensity documented earlier in this section.
 
-A third null tests that directly: instead of fixing $|S(t)|$, fix the local intensity exactly, the
-parent count $N_{l-1}(r)$ for every $r$, and split each parent's total multinomially
-$(\tfrac13,\tfrac13,\tfrac13)$ among its three lifts, carrying no information about the
-primitive-frequency phases at all. Run $30$ times (checked into the repository, Section~9): this
-local-intensity-only null gives $\max/\mathrm{RMS}$ ratios averaging $17.4$, range $[14.9,21.1]$,
-exceeding the actual array's $15.79$ in about $83\%$ of trials. The observed extremity is therefore
-comfortably consistent with the local-intensity skew alone ($\lambda_c$ from $2.0$ to $108.4$ against
-a global mean in the thousands, established above), with no need to invoke phase structure to explain
-it: a null carrying only local-intensity information, and no phase information whatsoever, matches or
-exceeds the same statistic. This does not undo the phase-only null's own departure from the actual
-data (the actual phases genuinely are not exchangeable with a null respecting only $|S(t)|$ and the
-zero-off-units constraint, as established above), but it removes the basis for attributing that
-departure to phase structure beyond local intensity specifically: a null with zero phase information
-reproduces the same order of statistic. At the levels checked, holdout rarity and the phase-scramble
-gap are not established as independent phenomena; both are plausibly evidence of the same underlying
-local-intensity skew, and this diagnostic is silent on
-whether it is what
-decides coverage, or on how much of it a properly calibrated test would confirm.
+A third null tests that directly: instead of fixing $|S(t)|$, fix each parent's raw total,
+$N_{l-1}(r)$ for every $r$, and split that total multinomially
+$(\tfrac13,\tfrac13,\tfrac13)$ among its three lifts, carrying no information about the observed
+primitive-frequency phases (the split does still fix each triple's total and is not a claim about
+the finer leave-one-out intensity used in the rank check above, a property of individual
+children rather than of the parent total this null actually conditions on). Run $30$ times (checked into the
+repository, Section~9): this
+parent-total-conditioned null gives $\max/\mathrm{RMS}$ ratios averaging $17.4$, range $[14.9,21.1]$,
+exceeding the actual array's $15.79$ in about $83\%$ of trials, a match a previous round of this
+critique loop read as removing the need for phase structure to explain the observed extremity. That
+reading does not survive a look at the two absolute quantities the ratio divides. For each lift $i$
+of a parent total $N$ under this null, $n_i$ is $\mathrm{Binomial}(N,\tfrac13)$, so the imbalance
+$3n_i-N$ has variance $2N$; summing the three lifts of every parent over the whole array gives
+$\mathbf{E}[\sum_z F(z)^2]=6T$ exactly, $T=\binom{2m}{m}$. The actual array's $\sum_z F(z)^2$ is
+$9.35\times10^9$ against an expectation of $6T=3.61\times10^9$, a factor of $2.59$ and, against the
+null's own trial-to-trial spread over the $30$ runs (standard deviation $5.6\times10^6$), about
+$1{,}031$ null standard deviations out. The null's absolute maximum, averaging $477$ and never
+exceeding $580$ over the $30$ trials, falls short of the actual array's $698$ in every trial. The
+$\max/\mathrm{RMS}$ ratios agree only because both quantities fall short together: the null's mean
+maximum undershoots the actual maximum by a factor of $1.46$, and its mean RMS undershoots the actual
+RMS ($27.5$ against $44.2$) by a factor of $1.61$, so their quotient lands close by coincidence,
+not because parent-total randomness reproduces the real array. (This uses the $R_{15,16}$ array's own
+parent totals directly, rather than the $\lambda_c$ figures reported earlier in this section, which
+come from a different family and depth, $R_{j^*(l)-2,j^*(l)-1}$ at $c=8,9,10$; the two are separate
+measurements of the same qualitative phenomenon, coarse skew in tuple counts, rather than the same
+measurement.) Read this way, the multinomial null does not remove the basis for attributing the
+observed extremity to structure beyond the parent totals; it adds to it. The excess energy it
+identifies is a statement about magnitudes, $|S(t)|$ itself departing from what independent splitting
+of the exact parent counts produces, distinct from the phase-only null's statement about phases: that
+null holds every $|S(t)|$ fixed by construction (Parseval then guarantees identical RMS for the actual
+array and the null alike) and still finds the actual maximum, $698$, well above the constrained null's
+mean of about $280$ in the same units ($6.35$ times the shared RMS of $44.2$), a purely phase-driven
+departure the multinomial null is silent on since it never holds $|S(t)|$ fixed to begin with. Neither
+null, on its own or together, establishes which mechanism, if either, decides coverage, or how much of
+either departure a properly calibrated test would confirm. At the levels and pair checked, holdout
+rarity ($l=10,\dots,15$) and the phase-scramble gap ($(l,m)=(14,16)$ alone) are not established as
+independent phenomena; both are plausibly connected to the same underlying skew in tuple counts.
 
 \begin{proposition}
 \label{prop:1547}
-$|S(3^{l-1})|/\binom{2m}{m} \to 1/\sqrt3$ as $m\to\infty$, for the family $R_{m-1,m}$.
+For every $l\ge1$, $|S(3^{l-1})|/\binom{2m}{m} \to 1/\sqrt3$ as $m\to\infty$, for the family
+$R_{m-1,m}$.
 \end{proposition}
 
 \begin{proof}[Proof sketch]
@@ -875,8 +923,9 @@ $j^*(l)\le j+r=j+\mathrm{maxrun}(H(l,j))$.
 Corollary~\ref{cor:bootstrap} is empirically exact, $j^*(l) = j + \mathrm{maxrun}(H(l,j))$, at every
 $(l,j)$ with $l+1\le j\le j^*(l)$ we were able to compute, $l=5,\dots,21$ at every such budget and
 $l=22$ at the single budget $j=l+1$, including a case with $|H(l,j)| > 3\times10^6$
-($l=3,4$ were not separately computed here, but the boundary-width argument following
-Proposition~\ref{prop:tight} below proves the same equality there). (Past
+($l=2$ checked directly at its only nontrivial budget, $j=l+1=3$: $H(2,3)=\{7\}$ modulo $9$,
+$\mathrm{maxrun}=1$, matching $j^*(2)=4$; $l=3,4$ were not separately computed here, but the
+boundary-width argument following Proposition~\ref{prop:tight} below proves the same equality there). (Past
 $j^*(l)$, $H(l,j)=\emptyset$ and $\mathrm{maxrun}(\emptyset)=0$, so the displayed equality no longer
 holds there; the claim is only about budgets up to and including $j^*(l)$.) The lower endpoint
 $j=l+1$ has a real justification behind it: equality at $j=l$ itself holds for $l=1,\dots,5$ but
@@ -917,9 +966,9 @@ parent residue $p$ as $\min_{S,S'}|S\triangle S'|$, the smallest symmetric diffe
 sets over every witness $S\in R_{j-1,j}$ of $p$ and every witness $S'\in R_{j,j+1}$ of $r$ ($|S|=j$,
 $|S'|=j+1$, so this distance is always odd, $\ge1$, and the minimum ranges over the full witness
 fiber at each budget). This finds repair costs up to $7$ at both
-transitions, against a cost of $1$ for the overwhelming majority. This is evidence against a repair
-cost of exactly $1$ at these two transitions; it does not establish that no bounded repair cost
-exists.
+transitions, against a cost of $1$ for the overwhelming majority. Since every child at both
+transitions is checked exhaustively, this falsifies a repair cost of exactly $1$ at these two
+transitions outright; it does not establish that no bounded repair cost exists.
 \end{empresult}
 
 This falsifies, in its originally proposed cost-$1$ form, a natural conjecture this project had
@@ -1229,11 +1278,13 @@ not concentrate on a sparse set at the one accessible scale checked ($l=18$, $j=
 primitive frequencies only). Local intensity, read at a fine enough depth, correlates strongly with
 which residues resist without fully determining it, and a separate phase-randomization diagnostic
 departs
-from a null respecting only frequency magnitudes at the levels checked, though a further null
-carrying only local-intensity information reproduces the same departure, so it does not on its own
-establish anything about phase beyond what intensity already explains, calibrate that finding, or
-say
-whether it is what decides coverage. Tao's later, unrelated
+from a null respecting only frequency magnitudes at the one pair checked, $(l,m)=(14,16)$. A further null carrying no
+primitive-frequency phase information matches that diagnostic's ratio statistic, but does so only by
+falling short of the actual array's absolute maximum and total energy by comparable factors in every
+trial run; read in the absolute units the ratio divides, this second null is the one that departs from
+the data, by about a thousand of its own standard deviations on total energy. Neither null, on its own
+or together, establishes what decides coverage, or calibrates either departure to a significance
+level. Tao's later, unrelated
 result
 that almost every Collatz orbit attains an almost bounded value~\cite{tao2019} works with a
 first-passage random variable over a different probabilistic model of the same map and does not
@@ -1265,7 +1316,7 @@ $(\sigma_k,\rho_k,h_k)$ behind Table~\ref{tab:mpg} are stored there with a verif
 each of them against the inequality in Theorem~\ref{thm:mpg}'s proof, without re-running the
 solver. Each folder's README gives what it checks, the command, the output to expect, and what the
 run costs. Most checks take seconds; the three largest levels of Table~\ref{tab:jstar} do not.
-Every claim above matches commit \texttt{8256867} of that repository; later
+Every claim above matches commit \texttt{b69d0d3} of that repository; later
 commits may extend it further but should not change what this specific commit already contains.
 
 \subsection*{Acknowledgments}

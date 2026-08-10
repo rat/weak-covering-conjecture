@@ -473,3 +473,36 @@ A push), notes/H-013.md, notes/GAP-A-round4.md, notes/GAP-A-round5*.md.
       combinatorial core re-derived clean. Recompiled clean, 19 pages (up from 18), 0 errors, 0
       em-dashes, parenthesis balance verified. Combined tally 0/1/4/6: the major is a genuine
       strengthening of the paper, not a defect, but resets the streak hard regardless. Round 16 next.
+
+- [x] **Round 16 complete (2026-08-10).** Second consecutive major, and the loop catching an
+      overreach in its own immediately preceding round's fix rather than anything in the paper's
+      original material. Codex found five wording/scoping issues in Round 15's new multinomial-null
+      passage (parent-total vs leave-one-out conflation, a wrong-experiment lambda_c citation, a
+      categorical exchangeability claim, an overstated "no phase information whatsoever," an
+      abstract/Discussion overclaim), all fixed directly. Opus's read of the same passage went
+      further: Round 15's headline conclusion, that the multinomial null "removes the basis for
+      attributing the departure to phase structure," does not survive a look at absolute units. The
+      null's max/RMS ratio matches the actual array's by coincidence, two compensating shortfalls
+      (max undershoot 1.46x, RMS undershoot 1.61x) whose quotient happens to land close; in absolute
+      terms the null is decisively refuted (actual total energy 2.59x the null's own exact
+      expectation, about 1031 of its own standard deviations, absolute maximum never reached across
+      many trials). Independently verified every one of these numbers from scratch against the
+      actual histogram data before touching the paper. Rewrote Section 5.3 and its abstract and
+      Discussion twins to report the null in absolute units before any ratio, concluding the null
+      adds to, rather than removes, the case for structure beyond the parent totals. Extended
+      multinomial_null.py to print the absolute quantities directly; repro repo README rewritten and
+      committed separately (b69d0d3); Section 9's pinned commit bumped. A second Opus finding (M3,
+      moderate) caught that Section 4's window-k lift-construction justification named the wrong
+      mechanism (safety, not the actual T_d precision-reduction fact); re-derived the correct
+      3-part argument from the paper's own definitions, caught and fixed a further notational seam
+      via advisor review before finalizing. Eight further minor fixes (Proposition 9's unquantified
+      l, an abstract/body register mismatch on Empirical Result 14, an ambiguous "at most budgets"
+      phrase, a "levels checked" plural naming a single pair, Section 5.2's self-reference, a
+      genuine l=2 gap in Empirical Result 13's stated range checked directly by hand, and an
+      unnecessary persistence proviso on the conjecture's forward implication, confirmed via
+      advisor consultation) plus one re-flagged item rejected with reason (third occurrence,
+      already verified twice before). Eighth consecutive round the combinatorial core re-derived
+      clean. New standing discipline adopted: conclusion rewrites wait one round, and ratio
+      comparisons against a null get checked in absolute units before the ratio is cited. Recompiled
+      clean, 20 pages (up from 19), 0 errors, 0 em-dashes, parenthesis balance 713/713. Combined
+      tally 0/1/4/10: second consecutive major resets the streak hard again. Round 17 next.

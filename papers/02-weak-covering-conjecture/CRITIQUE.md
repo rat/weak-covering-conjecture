@@ -22,6 +22,7 @@ by round; this table is kept current as the producer resolves each entry.
 | 13 | 0 | 0 | 2 | 6 | no | 0 |
 | 14 | 0 | 0 | 2 | 4 | no | 0 |
 | 15 | 0 | 1 | 4 | 6 | no | 0 |
+| 16 | 0 | 1 | 4 | 10 | no | 0 |
 
 Round 10's tally combines both reviewers: Opus 0 critical/0 major/3 moderate/6 minor (C-158, C-159,
 C-160 moderate; C-161-C-166 minor), Codex 0/1/5/2 (C-168 major; C-169-C-173 moderate; C-174, C-175
@@ -52,6 +53,15 @@ Round 15: Codex 0/0/1/1 (C-212 moderate, C-213 minor), Opus 0/1/3/5 (C-214 the l
 major since Round 11, an independently-reproduced finding that the phase-scramble
 diagnostic's headline number does not need phase structure to explain it; C-215/C-216/C-217
 moderate; five minor/moot items). Combined 0/1/4/6 -- the major resets the streak hard.
+Round 16: Codex 0/0/3/2 (C-219, C-220, C-221 moderate; C-222, C-223 minor), Opus 0/1/2/8
+(C-224 the loop's second major in as many rounds, and a genuine reversal of Round 15's own
+conclusion; C-220 dual-found with Codex, counted once; C-225 a second moderate; C-226-C-233
+minor, one of them, C-233, rejected with reason). Combined 0/1/4/10. This is the second
+consecutive round whose major finding was created by fixing the previous round's own major
+finding, the fourth reversal at the Section 5.3 phase-diagnostic locus across Rounds
+13-16; see the Round 16 narrative below for the new standing discipline adopted in
+response ("conclusion rewrites wait one round; report absolute units before citing a
+ratio").
 Need 3 consecutive rounds at 0/0/0 crit/major/moderate with minor<3 to stop.
 
 ## Status table
@@ -293,6 +303,21 @@ Need 3 consecutive rounds at 0/0/0 crit/major/moderate with minor<3 to stop.
 | C-217 | 15 | (Opus moderate) Section 7's "an independence model... tracks the observed sequence within about one unit... including both the one rise and the one fall in it" is nearly vacuous: `maxrun(H(l,l+1))` only ever takes the values `3` or `4` over the entire computed range `l=5,...,22` (a one-unit-wide range), so any constant prediction in `[3,4]` would trivially satisfy "within about one unit" without showing the model captures the specific transition level at all | moderate | independently verified against this project's own H-001 computational record (`0,1,2,2,3,3,3,3,3,4,4,4,4,4,4,3,3,3,3,3,3,3` for `l=1,...,22`) before writing anything, confirming the range really is only `{3,4}`. Fixed: reworded to state the range is narrow, that this mainly rules out gross overprediction by the naive model, and explicitly does not establish that the independence model tracks the specific rise-and-fall transition level |
 | C-218 | 15 | (Opus minor) Empirical Result 13's "fails from `l=6` on" states an unbounded range without saying through which level it was actually checked, unlike every other empirical claim in the paper | minor | fixed: reworded to "fails at every level checked from `l=6` on" in both the body and the parallel abstract sentence, removing the implication of an unbounded, fully-verified claim without needing to pin down and cite an exact upper level under time pressure |
 | — | 15 | (Opus minor) The unconstrained scramble is rejected partly for not preserving "integrality," and the constrained null does not preserve it either, but the text never returns to the point | minor | addressed by the new content rather than a direct patch: the multinomial null added for C-214 is explicitly the null that DOES preserve integrality (and non-negativity, and the exact local intensity), so the concern is resolved by what the paper now actually contains, not by editing the older sentence further |
+| C-219 | 16 | (Codex moderate) Section 5.3's multinomial-null paragraph conflates the parent TOTAL it actually conditions on with the finer leave-one-out intensity `local_intensity_finest.py` uses in the rank check; the two are related but distinct quantities and the text did not distinguish them | moderate | fixed: reworded to state explicitly that the null fixes each parent's total, not the leave-one-out intensity (a property of individual children), with a parenthetical distinguishing the two; the repro script and README renamed from "local-intensity-only" to "parent-total-conditioned" to match |
+| C-220 | 16 | (Codex moderate + Opus M2, dual-found) The `lambda_c` range (`2.0` to `108.4`) cited near the multinomial-null discussion comes from a different experiment entirely, `R_{j*(l)-2,j*(l)-1}` at depths `c=8,9,10` for `l=10,...,15`, not from the `(l,m)=(14,16)` array the phase experiment actually uses; the two are only qualitatively related (both are coarse skew in tuple counts), not the same measurement | moderate | fixed: added a parenthetical stating plainly that the parent totals used in the phase experiment come from the `R_{15,16}` array directly, distinct from the `lambda_c` figures reported elsewhere in the section, which are a separate measurement of a different family and depth |
+| C-221 | 16 | (Codex moderate) The claim that the phase-only null's departure shows the actual phases "are not fully exchangeable... genuinely... established" is stated categorically, despite the paper's own two sentences earlier noting thirty draws are too few to calibrate a significance level | moderate | fixed: reworded to "provides... evidence against... rather than a deductive demonstration," with the thirty-draws caveat now directly attached to the claim it qualifies instead of sitting two sentences away |
+| C-222 | 16 | (Codex minor) "carrying no phase information whatsoever" overstates what the multinomial null discards: parent counts do carry lower-level, nonprimitive phase information, just not the primitive-frequency phases the rank check and constrained null are about | minor | fixed: reworded to "carrying no information about the observed primitive-frequency phases," with a parenthetical noting the split does still fix each triple's total |
+| C-223 | 16 | (Codex minor) The abstract and Discussion state the multinomial null "reproduces the same departure" when the body only ever shows it reproduces or exceeds the raw ratio statistic, not that it reproduces "the departure" as a phenomenon | minor | fixed in the same pass as C-224 below: both instances rewritten as part of the larger correction to how the multinomial null's result is reported (absolute units, not a bare ratio match) |
+| C-224 | 16 | (Opus **major**) The multinomial null's `max/RMS` ratio match (`17.4` vs the actual `15.79`, Round 15's headline finding) is an artifact of two compensating absolute-scale shortfalls, not evidence that parent-total randomness explains the observed extremity: the null undershoots the actual maximum by `1.46x` and the actual RMS by `1.61x`, so their quotient lands close to the actual ratio by coincidence. In absolute terms the null is decisively refuted: actual `sum_z F(z)^2 = 9.35e9` against the null's own exact expectation `6T = 3.61e9` (a factor of `2.59`, about `1031` of the null's own standard deviations), and the null's absolute maximum (mean `477`, never above `580` over `30` trials) never once reaches the actual array's `698` | major | independently verified both of Opus's key numbers from scratch against the actual histogram data before touching the paper, per Rule 8c: matched `sum_sq_actual=9350349762.0`, `6T=3606482340`, ratio `2.5927`, `max=698.0` exactly, and ran an independent 30-trial null (mean `sum F^2=3.6075e9`, sd `5.41e6`; mean `max|F|=475.27`, max-over-trials `596.0`) confirming the actual maximum exceeds every null trial's maximum. This is the loop's second consecutive major finding, and a genuine reversal of Round 15's own conclusion (C-214), not a proof gap: Round 15's null construction and numbers were correct, but its ratio-only interpretation was not. Fixed by rewriting Section 5.3 (and its abstract and Discussion twins) to report the null in absolute units first (energy, maximum, their shortfalls) and only then note the ratio and why it misleads on its own; the corrected passage states the multinomial null does not remove the basis for attributing the extremity to structure beyond the parent totals, but adds to it, as a magnitude-driven excess distinct from the phase-only null's own phase-driven departure. `multinomial_null.py` extended to print the absolute quantities directly (`sum_z F(z)^2`, `6T`, the null's own standard deviation, the max comparison), and the repro repo's README rewritten to match, committed separately from the paper (`faculdade/weak-covering-conjecture@b69d0d3`) |
+| C-225 | 16 | (Opus M3, moderate) Section 4's justification for the window-`k` policy's final `k-1` steps ("which is exactly the situation safety was built for, with the play's own remaining digits standing in for the hidden ones") does not correctly identify the mechanism: safety alone does not explain why the low-order digits of the padded lift keep tracking the true state, and the theorem's conclusion, though true, was not actually established by the stated argument | moderate | independently re-derived the correct mechanism from the paper's own definitions before rewriting, per the multi-parameter-index-error caution this project tracks: from `T_d(z)=(2^{d+1}z-2)/3`, `T_d(z) mod 3^k'` depends only on `z mod 3^{k'+1}`, which is the actual reason the padded lift's low-order digits keep matching the true state regardless of the padding, one fewer digit of guaranteed agreement each step; safety's real role is only to keep the extended state a unit modulo `3^k` at every step, a separate fact. Confirmed via advisor review that the initial fix's notation (`s_{i+1}:=T_d(s_i)`) did not match the game's own successor definition (`T_d(z+3^k*epsilon) mod 3^k`, a `(k+1)`-to-`k`-digit map, not `k`-to-`(k-1)`); corrected to `s_{i+1}:=T_d(s_i+3^k*epsilon_i) mod 3^k` and the argument re-derived to show the extending digit `epsilon_i` (real when the true state still supplies one, arbitrary padding once it does not) never affects the low-order digits the induction tracks, since `3^k*epsilon_i` sits at a digit position above all of them throughout this regime |
+| C-226 | 16 | (Opus minor) Proposition 9's statement, `|S(3^{l-1})|/binom(2m,m) -> 1/sqrt3` as `m -> infinity`, for the family `R_{m-1,m}`, leaves `l` unquantified; a reader must read the following paragraph to learn `l` is actually free (the limit holds at every `l`, independent of `m`) | minor | fixed: added "For every `l>=1`" directly to the proposition statement, making it self-contained without needing the following remark to resolve the quantifier |
+| C-227 | 16 | (Opus minor) The abstract says "we falsify" the cost-1 local repair rule while Empirical Result 14's own text says only "this is evidence against... it does not establish," a register mismatch given the check is in fact exhaustive over every child at both transitions | minor | fixed by strengthening Empirical Result 14 to match the abstract, not by weakening the abstract: since every child is checked exhaustively, finding even one repair cost above 1 is a genuine falsification of "repair cost exactly 1," not just evidence against it; reworded to "this falsifies a repair cost of exactly 1... outright," keeping the separate, correct caveat that this does not rule out some other bounded repair cost |
+| C-228 | 16 | (Opus minor) The abstract's "we prove exact at most budgets `j>=l+1`" is ambiguous: "at most budgets" can misread as an upper-bounded count rather than "at all but one budget," and does not make clear the range is finite | minor | fixed: reworded to "at all but one budget `j>=l+1`," matching the immediately following clause about "the one remaining budget in that range" |
+| C-229 | 16 | (Opus minor) The Discussion's "a separate phase-randomization diagnostic departs from a null respecting only frequency magnitudes at the levels checked" uses the plural "levels" though the diagnostic was run at exactly one `(l,m)` pair, `(14,16)`; a nearby sentence in Section 5.3 has the same issue where it discusses both diagnostics together | minor | fixed both: the Discussion sentence now names the pair explicitly, "(l,m)=(14,16)"; the Section 5.3 sentence now separates the two ranges explicitly ("holdout rarity (l=10,...,15) and the phase-scramble gap ((l,m)=(14,16) alone)") |
+| C-230 | 16 | (Opus minor) Section 5.2 refers to itself in the third person from within itself ("the specific levels Section 5.2 checks directly... as Section 5.2's own counterexample there shows"), which is self-referential and reads oddly to someone inside the section | minor | fixed: reworded both instances to "this section" and "the counterexample above," removing the self-naming |
+| C-231 | 16 | (Opus minor) Empirical Result 13's stated verification range has a gap: it lists `l=5,...,21` (empirical) and separately notes `l=3,4` (proven via the boundary-width argument), but never mentions `l=2`, which is neither vacuous (since `j*(2)=4>2`, unlike `l=1`) nor covered by either list | minor | checked directly rather than left unresolved, per Rule 11: computed `H(2,3)={7} mod 9` and `maxrun(H(2,3))=1` (since `2*7=5 mod 9 \notin H(2,3)`) by hand from the family's own definition, matching this project's own previously hand-verified `l=2,j=2` image `{1,2,5,7}`; confirms `j+maxrun=3+1=4=j*(2)`. Fixed: added `l=2`'s check explicitly to the stated range |
+| C-232 | 16 | (Opus minor) The claim that the conjecture's truth "would force `e(l)` to grow strictly slower than linearly" is stated as carrying "the persistence proviso above," but on inspection this one-directional implication needs no such proviso: `j*(l)` is a minimum, so a sub-exponential `K` making some budget a covering budget bounds `j*(l)` above regardless of whether coverage persists at any other budget; only the converse, and the equivalence claimed earlier in the same paragraph, genuinely need persistence | minor | independently re-derived and confirmed via advisor consultation before editing, per the multi-parameter-index-error caution this project tracks for exactly this class of claim: a minimum is at most any member of its own defining set, so the forward direction is proviso-free. Fixed: detached the forward direction from the proviso, stated it flat with the one-line minimality reason, and left the proviso attached only to the equivalence and the converse, which still need it. Checked the ripples (Rule 8b): the contrapositive stated later in the paper ("a linear `e(l)` would... make `K(l)` exponential and falsify the conjecture") carried the same unnecessary hedge in one place and was already flat in another; both now read flat, consistently |
+| C-233 | 16 | (Opus, re-flagged) The swap-partition/hardware description in Section 1 was flagged as possibly inconsistent with the compute-environment note, a concern Opus itself disclosed as arising from its own context rather than from the PDF alone | rejected, no change | third occurrence of this exact flag (after C-167, C-190), both of which already verified the detail correct against the researcher's own compute-environment note; re-affirmed, not re-litigated, per Rule 8d (keep corrections scoped) |
 | — | 15 | (Opus minor, moot) Two typography defects: a stray hyphen-space in "naive doubling- chain," and a closing quote mark used to open `"within about one unit"` | minor | moot on arrival: both instances were inside the passage rewritten for C-217, which no longer contains either the line-wrapped phrase or the quoted phrase |
 | — | 15 | (Opus minor) Section 5.1's "is the largest among frequencies checked at accessible `l`" drops the family/level qualification Section 5.2 itself uses to reconcile the same claim with its own counterexample; Proposition 9 is printed outside any subsection heading | minor | partially fixed: the family/level qualification added ("at the specific levels Section 5.2 checks directly (not in general, as Section 5.2's own counterexample there shows)"); Proposition 9's placement is a structural/cosmetic point, deferred as lower priority |
 | — | 15 | Both reviewers again re-derived every proof with nothing found wrong (seventh consecutive round for the combinatorial core); Opus additionally recomputed Table 1 for `l<=12`, Table 2 and Remark 7's figures, corner-redundancy's boundary pattern, and every citation, all again exact | — | the round's headline result is C-214: a real, substantive, independently-reproduced major finding that changes what the paper can honestly claim about phase structure, caught by a genuinely adversarial re-read of Section 5.3's own recent content rather than a proof error. The paper is more honest, and arguably more interesting, for having found it: a local-intensity-only null explaining the diagnostic's headline number is a real finding in its own right, not just a correction |
@@ -1316,3 +1341,113 @@ C-212 through C-218 resolved (fixed or addressed via new content), plus three fu
 disposed of (one addressed by the new content, one moot, one partially fixed). Combined tally
 (0/1/4/6): the round's major finding is a genuine strengthening of the paper, not a defect found and
 patched over, but it resets the stopping-criterion streak hard regardless. Proceeding to Round 16.
+
+### Round 16 (Codex on `gpt-5.6-sol` + Opus 5 max effort, 2026-08-10, PDF snapshot frozen at launch, sha256 `30a3a887fa474bb746924e7882ef3b23f92bf86896c6e854fc5132594f3d3ae5`)
+
+Codex found five issues, all in Section 5.3's multinomial-null passage added last round, none of
+them changing the conclusion: C-219, the paragraph conflates the parent TOTAL the null actually
+conditions on with the finer leave-one-out intensity used in the rank check; C-220, the `lambda_c`
+figures cited nearby come from a different experiment (`R_{j*(l)-2,j*(l)-1}` at `c=8,9,10`) than the
+`(l,m)=(14,16)` array the phase experiment uses; C-221, "the actual phases are not fully
+exchangeable... genuinely... established" is stated categorically two sentences after the paper's own
+admission that thirty draws cannot calibrate a significance level; C-222, "no phase information
+whatsoever" overstates what the multinomial null discards (parent counts still carry nonprimitive
+phase information); C-223, the abstract and Discussion say the null "reproduces the same departure"
+when the body only shows it reproduces the raw ratio statistic. All five fixed directly; C-220 turned
+out to be the same issue Opus found independently (below), counted once.
+
+Opus's read of the same passage went further and found something Codex's narrower brief did not
+catch: Round 15's own headline conclusion, that the multinomial null "removes the basis for
+attributing [the] departure to phase structure," is itself an overreach. The null's `max/RMS` ratio
+does land close to the actual array's (`17.4` vs `15.79`), but this is a coincidence of two
+compensating shortfalls, not evidence the null explains the data. Opus derived the null's exact
+expectation analytically (`E[sum_z F(z)^2] = 6T` from `Var(3n_i-N)=2N` per lift, summed) and computed
+both the actual array's total energy and the null's own trial-to-trial spread: the actual `sum_z
+F(z)^2 = 9.35e9` is `2.59x` the null's expectation of `3.61e9`, about `1031` of the null's own
+standard deviations, and the null's absolute maximum (mean `477`, never above `580` across `200`
+trials in Opus's run) never once reaches the actual array's `698`. The ratio match is the quotient of
+a `1.46x` maximum shortfall and a `1.61x` RMS shortfall, not a sign that parent-total randomness
+reproduces the real array.
+
+This claim was not taken on faith. Independently re-derived the `6T` formula from scratch and
+verified it both analytically and against the actual histogram data: `sum_sq_actual=9350349762.0`,
+`6T=3606482340`, ratio `2.5926509214516216`, `max|F|=698.0`, all matching Opus's figures exactly, and
+ran an independent 30-trial null (mean `sum F^2=3.6075e9`, sd `5.41e6`; mean `max|F|=475.27`,
+max-over-trials `596.0`) confirming the actual maximum exceeds every one of the 30 trials' maxima.
+This is the loop's second consecutive major finding (C-224), and the fourth reversal at this exact
+locus across Rounds 13-16: Round 13 found the phase-only null's `sqrt(3/2)` claim needed a proper
+constrained construction; Round 14 found the construction's own description was ambiguous (though the
+code was already right); Round 15 added the multinomial null and drew a deflationary conclusion from
+its ratio; Round 16 finds that conclusion itself does not survive a look at absolute units. Unlike the
+first three, this is not a bug in the paper's math or code, both of which check out on every pass; it
+is a genuine interpretive correction, the kind a scale-free ratio invites when nothing pins the two
+sides' RMS to the same value (Parseval does that for the phase-only null, which is exactly why
+Rounds 13-14's version of this comparison was sound and this one was not).
+
+Fixed by rewriting Section 5.3 and its abstract and Discussion twins to report the null in absolute
+units before citing any ratio: the energy excess, the maximum shortfall, and only then the ratio and
+why it misleads taken alone. The corrected passage states plainly that the multinomial null does not
+remove the basis for attributing the observed extremity to structure beyond the parent totals; it
+adds to it, as a magnitude-driven excess (`|S(t)|` itself departing from independent-splitting
+predictions) distinct from the phase-only null's own, purely phase-driven departure (the actual
+maximum, `698`, against the constrained null's mean of about `280` in the same units, at identical
+RMS by Parseval). `multinomial_null.py` extended to print the absolute quantities directly, and the
+repro repo's README rewritten to match and committed separately from the paper
+(`faculdade/weak-covering-conjecture@b69d0d3`); Section 9's pinned commit bumped to match. Registered
+the `2.59x` energy excess in `HYPOTHESES.md` (H-015, Rule 8e), alongside the class-2/class-1 power
+asymmetry Round 13 logged at the same locus, since it is exactly the kind of "structure the nulls
+don't force" observation that entry already tracks.
+
+Opus's second finding (M3, C-225, moderate) was in different territory: Section 4's justification for
+the window-`k` policy's final `k-1` steps, where the true remaining state runs out of digits before
+the window fills, claimed this was "exactly the situation safety was built for, with the play's own
+remaining digits standing in for the hidden ones." That description does not correctly identify the
+mechanism; safety only keeps the extended state a unit modulo `3^k`, it does not explain why the
+padded lift's low-order digits keep tracking the true state. Independently re-derived the actual
+mechanism from the paper's own definition of `T_d` before rewriting, per this project's standing
+multi-parameter-index caution: `T_d(z) mod 3^k'` depends only on `z mod 3^{k'+1}`, which is what
+makes the low-order-digit agreement survive arbitrary padding, one fewer digit of guaranteed
+agreement each step, matching exactly how many true digits remain. A follow-up advisor consultation
+caught a further notational seam in the first pass at this fix: the successor was written
+`s_{i+1}:=T_d(s_i)`, which does not match the game's own successor definition (`T_d(z+3^k*epsilon)
+mod 3^k`, a `(k+1)`-to-`k`-digit map). Corrected to `s_{i+1}:=T_d(s_i+3^k*epsilon_i) mod 3^k`, with
+the argument re-derived to show `epsilon_i` (real when available, arbitrary padding otherwise) cannot
+affect the low-order digits the induction tracks, since `3^k*epsilon_i` sits above all of them
+throughout this regime.
+
+Eight further minor items, all from Opus, all fixed: Proposition 9's statement left `l` unquantified
+(added "for every `l>=1`" directly to the statement, C-226); the abstract's "we falsify" and
+Empirical Result 14's own "evidence against... does not establish" were a register mismatch, resolved
+by strengthening the empirical result to match the abstract, since the check is in fact exhaustive
+over every child at both transitions and a single such counterexample is a genuine falsification, not
+just evidence (C-227); the abstract's "at most budgets `j>=l+1`" reads ambiguously as an upper-bounded
+count rather than "all but one," reworded (C-228); the Discussion and a Section 5.3 sentence both used
+the plural "levels checked" for a diagnostic run at exactly one `(l,m)` pair, now named explicitly
+(C-229); Section 5.2 referred to itself in the third person from within itself, reworded to "this
+section" (C-230); Empirical Result 13's stated verification range skipped `l=2` entirely, neither
+vacuous (`j*(2)=4>2`) nor covered by either the empirical or the proven sub-range, checked directly
+by hand from the family's own definition (`H(2,3)={7} mod 9`, `maxrun=1`, matching `j*(2)=4`,
+consistent with this project's own previously verified `l=2,j=2` image) and added to the stated range
+(C-231); and the claim that the conjecture's truth "would force `e(l)` to grow strictly slower than
+linearly... subject to the persistence proviso" turned out not to need that proviso at all, since
+`j*(l)` is a minimum and a sub-exponential `K` making some budget a covering budget bounds `j*(l)`
+above regardless of persistence elsewhere (C-232, confirmed via advisor consultation before editing
+given this project's standing caution on exactly this class of claim; the contrapositive stated later
+in the paper carried the same unnecessary hedge in one place and was already flat in another, both
+now consistent). One further Opus item, a third re-flag of the swap-partition/hardware description,
+was rejected without change: Opus itself disclosed the concern came from its own context rather than
+the PDF, and C-167 and C-190 already verified the detail correct (C-233).
+
+Both reviewers again re-derived the combinatorial core with nothing found wrong, an eighth
+consecutive round. This round's real content, for the second round running, was the loop catching an
+overreach in its own immediately preceding fix rather than anything in the paper's original material.
+New standing discipline adopted in response, to be applied starting Round 17: when a reviewer's
+analysis changes a prior round's conclusion rather than fixing an outright error, the same round adds
+only the verified numbers and the weakest correct interpretation, not a stronger rewrite; and any
+comparison between a real quantity and a null's ratio statistic gets checked in absolute units before
+the ratio is cited in the paper, not after.
+
+Recompiled clean (20 pages, up from 19, 0 errors, 0 undefined references, 0 em-dashes, parenthesis
+balance 713/713). Full findings C-219 through C-233 resolved (fixed, addressed via the new absolute-
+units content, or rejected with reason). Combined tally (0/1/4/10): the second consecutive major
+resets the stopping-criterion streak hard again. Proceeding to Round 17.
