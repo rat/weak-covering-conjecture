@@ -641,4 +641,25 @@ A push), notes/H-013.md, notes/GAP-A-round4.md, notes/GAP-A-round5*.md.
       entirely, since `l=23` is the last level with real data and describing an unfinished
       computation only adds bulk with no result attached. Removed; Section 2 now ends its
       computation narrative at `l=23`'s timing figures. Recompiled clean, 20 pages, 0 errors,
-      parenthesis balance 754/754. Round 23 next.
+      parenthesis balance 754/754.
+
+- [x] **Round 23 complete (2026-08-10).** Streak stays at 0 (0/0/1/7): the abstract drew another
+      real finding for the second consecutive round. One moderate, confirmed against Section 5.2's
+      own text before editing: the abstract's "ruling out sparse-exceptional repair" claims
+      unqualified elimination where the body explicitly scopes itself to "evidence
+      against...at this accessible level" and disclaims the covering-threshold regime by name.
+      Fixed together with a companion minor (a dangling "the threshold" in the same sentence that
+      could misread as the covering threshold). Five more minors: an independence-model paragraph
+      in Section 7 fixed by reordering an existing caveat next to the claim it qualifies, without
+      inventing or removing content; a Section 2 antecedent ambiguity ("the original
+      implementation") resolved by naming the Rust reimplementation explicitly; a lemma missing
+      its `W>=l-1` quantifier; a minimality claim false at the vacuous `l=1` case; and an
+      overstated "exact conditions" phrase in the abstract's closing sentence. One further minor
+      considered and rejected with reason (a defensible "neither null" count, abstract already at
+      its practical length ceiling). Bibliography re-verified fresh against primary sources
+      (Crossref, full-text downloads); all exact. Widest single-round reproduction of proofs yet:
+      all twenty numbered results walked line by line, Table 1 to l=13, Table 2 to every digit,
+      Empirical Results 4/13/14/19/21 and Theorem 17 at every claimed level, corner-redundancy's
+      exact pattern to l=8. No l=24 leftovers found anywhere. Recompiled clean, 20 pages, 0 errors,
+      parenthesis balance 756/756, abstract re-measured at 1891/1804 chars (raw/rendered), still
+      under arXiv's limit. Round 24 next.

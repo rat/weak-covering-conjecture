@@ -50,16 +50,17 @@ $j^*(l)\le\tfrac98l+\tfrac{33}2$, comes from a mean-payoff-game relaxation via o
 verified computationally, not proven generally. The Fourier route is blocked at its first step:
 its positivity criterion is provably unreachable at every budget; granting it, square-root
 cancellation could not beat the mean-payoff bound. A further computation finds most
-primitive-frequency mass below the threshold, ruling out sparse-exceptional repair. Null-model
+primitive-frequency mass below a fixed threshold, evidence against sparse-exceptional repair.
+Null-model
 diagnostics at one tractable pair find structure neither null forces, left uncalibrated. We prove
 that, for budgets $j>l$, the uncovered set at a budget is contained in both twice and four times
 the uncovered set at the previous budget, giving a recursive upper bound on $j^*(l)$. This bound
 is proven exact for $l+2\le j\le j^*(l)$ at $l=3,\dots,13$ (verified exhaustively), empirical
-beyond; the boundary $j=l+1$ is proven at $l=3,\dots,6$, empirical otherwise. We falsify a natural
-cost-$1$ repair rule it suggests, prove every last-uncovered residue is $\equiv1\pmod3$ whenever
+beyond; the boundary $j=l+1$ is proven at $l=3,\dots,6$, empirical otherwise. We falsify a cost-$1$
+repair rule it suggests, prove every last-uncovered residue is $\equiv1\pmod3$ whenever
 $j^*(l)\ge l+1$ (all but one computed level), prove a two-class containment law mod $9$ on these
 residues, and report further identities, some verified but not proven. Two open questions are
-named as exact conditions narrower than the conjecture; others arise elsewhere. The Weak Covering
+stated precisely, narrower than the conjecture; others arise elsewhere. The Weak Covering
 Conjecture remains open.
 \end{abstract}
 
@@ -148,7 +149,9 @@ from-scratch Rust reimplementation of the covering search (a bitset rotation dyn
 residues modulo $3^l$), validated against the original Python implementation at every $l\le20$
 before being trusted for the extension. Each reported $j^*(l)$ is the smallest budget at which the
 DP's own coverage bitset is full, so the search certifies both coverage at $j^*(l)$ and its absence
-at $j^*(l)-1$ internally, by construction, at every level it runs; the $l\le20$ agreement against an
+at $j^*(l)-1$ internally, by construction, at every level it runs where $j^*(l)-1\ge l$ (vacuously
+excepting $l=1$, where $j^*(1)-1=0$ is not itself a budget $R_{j-1,j}$ is defined at); the $l\le20$
+agreement against an
 independently written implementation is this paper's evidence that the search itself is correct.
 $l=21$ has since been cross-checked the same way: a separate, from-scratch Python implementation
 (native bignum bitsets, following the Rust DP's recurrence as a specification rather than copying
@@ -213,8 +216,8 @@ by the identity noted after \eqref{eq:el}, would make $K(l)$ exponential and fal
 the contrapositive of the proviso-free forward direction stated there. This flatness is a fact about
 the range checked, not a proven bound either way.
 
-$l=21$ fits in physical RAM once a memory-wasteful parallelization step in the original
-implementation was corrected. $l=22$ needs approximately $84\,\mathrm{GiB}$ of state, above the
+$l=21$ fits in physical RAM once a memory-wasteful parallelization step in the Rust reimplementation
+was corrected. $l=22$ needs approximately $84\,\mathrm{GiB}$ of state, above the
 machine's $62\,\mathrm{GiB}$ of physical RAM, so a $500\,\mathrm{GiB}$ swap file was added to the
 machine specifically for this computation; the run took approximately $10{,}749\,\mathrm{s}$
 ($\sim\!3$ hours) with swap I/O as
@@ -1159,22 +1162,22 @@ $1547$ from Section~\ref{sec:holdouts}.
 A naive expectation, that a random set of holdouts at the observed density would have doubling
 chains far longer than the flat ceiling of $3$--$4$ measured at every level $l=5,\dots,22$, does not
 survive contact with the actual, rapidly declining density of $H(l,l+1)$. An independence model
-matched to that actual density predicts values in the same narrow range the observed sequence
-occupies, without the flagrant mismatch a naive doubling-chain estimate would predict. That range is
+matched to that actual density, descriptive rather than a specified statistical test since no
+distributional family or wraparound convention is fixed, keeps its predicted values inside the same
+narrow range the observed sequence occupies, without the flagrant mismatch a naive doubling-chain
+estimate would predict. That range is
 itself narrow, only $3$ or $4$ over the entire computed range $l=5,\dots,22$, so this comparison
 mainly rules out gross overprediction by the naive model; it does not, on its own, establish that the
 independence model tracks the specific level at which the observed sequence rises from $3$ to $4$
-and falls back, only that its predicted values stay inside that same narrow band. This comparison
-stays descriptive rather than a specified statistical
-test (no
-distributional family or wraparound convention is fixed), and does not,
+and falls back, only that its predicted values stay inside that same narrow band. This descriptive
+comparison does not,
 by itself, say anything about whether
 $\mathrm{maxrun}(H(l,l+1))$ is bounded;
 Proposition~\ref{prop:h014} is the only established link between that question and $j^*(l)$'s rate.
 
 \begin{lemma}[One-step width identity]
 \label{lem:width}
-Let $\mathrm{Corner}(l,W+1)$ be the set of values realized by a witness tuple
+For $W\ge l-1$, let $\mathrm{Corner}(l,W+1)$ be the set of values realized by a witness tuple
 $\beta_0>\cdots>\beta_{l-1}$ with $\beta_0=W+1$ and $\beta_{l-1}=0$ simultaneously. Then
 \[
 U(l,W+1) = U(l,W) \cup 2U(l,W) \cup \mathrm{Corner}(l,W+1).
