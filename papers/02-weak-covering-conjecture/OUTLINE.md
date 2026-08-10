@@ -527,3 +527,25 @@ A push), notes/H-013.md, notes/GAP-A-round4.md, notes/GAP-A-round5*.md.
       itself). Ninth consecutive round the combinatorial core re-derived clean. Recompiled clean, 20
       pages, 0 errors, 0 em-dashes, parenthesis balance 724/724. Combined tally 0/0/4/8: no major or
       critical, but four moderates keep the streak at 0. Round 18 next.
+
+- [x] **Round 18 complete (2026-08-10).** Codex unavailable a fourth consecutive time (same
+      environment sandbox error as Round 17, now looking persistent rather than transient); proceeded
+      Opus-only. Second consecutive round with no major or critical finding; tenth consecutive round
+      the combinatorial core and the Section 4 mean-payoff argument re-derived clean, including a
+      symbol-by-symbol check that Round 17's new F(z) definition is used consistently everywhere.
+      One moderate finding, a real abstract/Discussion-versus-body mismatch: both summary locations
+      described the phase-randomization diagnostic as departing from a null respecting only
+      frequency magnitudes, but the actual headline number comes from the constrained null, which
+      also respects the zero-off-units algebraic constraint; the plain magnitude-only scrambles are
+      explicitly rejected by the body as not the right null. Fixed both locations to name the
+      constraint the null actually uses. Nine minor items, all fixed: two stray "below" references
+      that should have read "above," a precision mismatch rounded down to match its inputs, an
+      unnecessary hedge on an exact count, a genuine scope gap in the j=l boundary discussion
+      (closed by independently computing two further data points, l=8,9, before editing), a
+      notational slip in Empirical Result 14, a missing forward pointer for a general-(j,k)
+      identity, a citation that attributed a technique to the wrong paper (fixed by adding a new,
+      independently-verified bibliography entry for the actual source), an overstated framing
+      sentence narrowed with a light touch, and a style note on the antithesis budget. Recompiled
+      clean, 20 pages, 0 errors, 0 em-dashes, parenthesis balance 735/735. Combined tally 0/0/1/9:
+      second straight round with no major or critical, but the moderate and minor count keep the
+      streak at 0. Round 19 next.

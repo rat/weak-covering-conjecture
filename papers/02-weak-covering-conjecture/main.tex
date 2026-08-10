@@ -62,7 +62,8 @@ cells of local hit-density well below the global mean; read at a fine enough ave
 local intensity correlates strongly with resistance without fully determining it. A separate
 phase-randomization experiment at a
 different, more tractable pair of
-parameters departs from a null respecting only frequency magnitudes; a further null conditioned only
+parameters departs from a null respecting the frequency magnitudes and the zero-off-units constraint
+they satisfy; a further null conditioned only
 on coarse parent totals matches that departure's ratio of extreme value to root-mean-square, but only
 because both quantities fall short of the actual data by comparable factors, and in absolute terms the
 actual total energy exceeds this second null's own expectation by a factor of $2.59$, about a thousand
@@ -77,7 +78,7 @@ further combinatorial property verified for $l=3,\dots,13$ (the exact computatio
 runs to $l=23$); at the
 one remaining budget in that range, this holds at four small levels checked directly and is
 otherwise only
-empirically exact, and at $j=l$ itself the bound is not tight at every level checked from $l=6$ on.
+empirically exact, and at $j=l$ itself the bound is not tight at every level checked, $l=6,\dots,9$.
 We
 falsify the natural cost-$1$ form of a local repair rule this theorem might suggest, with explicit
 witness-level exhaustive counts, prove that every last-uncovered residue is $\equiv1\pmod3$ whenever
@@ -562,8 +563,9 @@ bounds this way, is not new to this application: beyond Ehrenfeucht and Mycielsk
 theorem~\cite{ehrenfeuchtmycielski1979} itself, a close and recent methodological precedent proves
 rationality and computability of the covering radius of a primitive sofic shift by a mean-payoff-game
 reduction of the same kind, applied to a different object~\cite{meyerovitchyoung2026}; that reduction
-uses non-alternating mean-payoff games, its own variant of the classical alternating games
-of~\cite{ehrenfeuchtmycielski1979} used here. We cite both as
+uses non-alternating mean-payoff games, introduced by the same authors
+in~\cite{meyerovitchyoung2025nonalt}, a variant of the classical alternating games
+of~\cite{ehrenfeuchtmycielski1979} used here. We cite all three as
 precedent for the framing; what is new here is its specific application to $j^*(l)$.
 
 \begin{remark}
@@ -588,7 +590,10 @@ residue class $z$ is
 N(z) = \frac1{3^l}\sum_{t=0}^{3^l-1} S(t)\,e\!\left(-\frac{tz}{3^l}\right), \qquad
 S(t) := \sum_{j+k\ge a_0>\cdots>a_j\ge0} e\!\left(\frac{t}{3^l}\sum_{i=0}^j 2^{a_i}3^i\right),
 \end{equation}
-and $S(0)=|R_{j,k}|=:T$. The natural route to positivity is the triangle inequality: $N(z)>0$ for
+and $S(0)=|R_{j,k}|=:T$, since $S(0)$ counts exponent tuples and the injectivity argument in the
+proof of Proposition~\ref{prop:lowerbound} above (distinct tuples give distinct sums, recovering
+$a_j$ from the sum's $2$-adic valuation) applies unchanged to general $(j,k)$, not only $(j-1,j)$.
+The natural route to positivity is the triangle inequality: $N(z)>0$ for
 every $z$ as soon as $\sum_{t\ne0}|S(t)| < T$. This route is closed before it opens.
 Proposition~\ref{prop:sqrtceiling} below shows the sum on the left is never below $T$, for any
 $l$, $j$, $k$: the criterion cannot be reached at all, for any budget. The remainder
@@ -663,7 +668,7 @@ Proposition~\ref{prop:1547} and, empirically, is the largest at the specific lev
 checks directly (not in general, as the counterexample above shows), along with its
 conjugate $t=2\cdot3^{l-1}$ (since
 $S(3^l-t)=\overline{S(t)}$, that frequency matches it exactly and is excluded for the same reason).
-The restriction to $\gcd(t,3)=1$ also excludes every nonprimitive frequency, roughly a third of the
+The restriction to $\gcd(t,3)=1$ also excludes every nonprimitive frequency, exactly a third of the
 spectrum, entirely, so $\|S\|_1$ below measures only the primitive-frequency mass. Here
 $\|S\|_1=5226.01$. A fixed threshold makes the visible spikes look sparse, but of the $8{,}014$
 primitive frequencies with $|S(t)|/T$ exceeding $0.001$, their combined contribution to $\|S\|_1$ is
@@ -795,7 +800,8 @@ non-exchangeability). It does not, by itself, say that this
 departure needs phase structure specifically, since neither null above carries any information about
 the level-$(l-1)$ local intensity documented earlier in this section.
 
-A third null tests that directly: instead of fixing $|S(t)|$, fix each parent's raw total,
+A third null tests the analogous parent-level information directly, for this array's own family:
+instead of fixing $|S(t)|$, fix each parent's raw total,
 $N_{l-1}(r)$ for every $r$, and split that total multinomially
 $(\tfrac13,\tfrac13,\tfrac13)$ among its three lifts, carrying no information about the observed
 primitive-frequency phases (the split does still fix each parent's three lifts to sum to its total
@@ -812,7 +818,7 @@ $3n_i-N$ has variance $2N$; summing the three lifts of every parent over the who
 $\mathbf{E}[\sum_z F(z)^2]=6T$ exactly, $T=\binom{2m}{m}$. The actual array's $\sum_z F(z)^2$ is
 $9.35\times10^9$ against an expectation of $6T=3.61\times10^9$, a factor of $2.59$ and, against the
 null's own trial-to-trial spread over the $30$ runs (standard deviation $5.6\times10^6$), about
-$1{,}031$ null standard deviations out: this is the genuine departure, a magnitude excess, $|S(t)|$
+$1{,}030$ null standard deviations out: this is the genuine departure, a magnitude excess, $|S(t)|$
 itself departing from what independent splitting of the exact parent counts produces. The null's
 absolute maximum, averaging $477$ and never
 exceeding $580$ over the $30$ trials, falls short of the actual array's $698$ in every trial, but this
@@ -823,14 +829,14 @@ shortfall restated, not an independent one. The
 $\max/\mathrm{RMS}$ ratios themselves agree, or rather the null exceeds the actual ratio in most
 trials, precisely because both the maximum and the root-mean-square fall short by comparable factors
 ($1.46$ and $1.61$); on this scale-free statistic the null is not refuted at all, and the extremity
-claim below rests entirely on the constrained phase null, at identical root-mean-square.
+claim above rests entirely on the constrained phase null, at identical root-mean-square.
 (This uses the $R_{15,16}$ array's own
 parent totals directly, rather than the $\lambda_c$ figures reported earlier in this section, which
 come from a different family and depth, $R_{j^*(l)-2,j^*(l)-1}$ at $c=8,9,10$; the two are separate
 measurements of the same qualitative phenomenon, coarse skew in tuple counts, rather than the same
 measurement.) So the multinomial null does not remove the basis for attributing the
 observed excess energy to structure beyond the parent totals; it is that excess. It says nothing
-about phase, which is the constrained null's own territory below: that
+about phase, which is the constrained null's own territory above: that
 null holds every $|S(t)|$ fixed by construction (Parseval then guarantees identical RMS for the actual
 array and the null alike) and still finds the actual maximum, $698$, well above the constrained null's
 mean of about $280$ in the same units ($6.35$ times the shared RMS of $44.2$), a purely phase-driven
@@ -948,9 +954,10 @@ there as a theorem rather than an empirical check). (Past
 $j^*(l)$, $H(l,j)=\emptyset$ and $\mathrm{maxrun}(\emptyset)=0$, so the displayed equality no longer
 holds there; the claim is only about budgets up to and including $j^*(l)$.) The lower endpoint
 $j=l+1$ has a real justification behind it: equality at $j=l$ itself holds for $l=1,\dots,5$ but
-fails at every level checked from $l=6$ on (e.g.\ $\mathrm{maxrun}(H(6,6))=5$, giving
+fails at every level checked, $l=6,\dots,9$ ($\mathrm{maxrun}(H(6,6))=5$, giving
 $j+\mathrm{maxrun}=11\ne10=j^*(6)$;
-$\mathrm{maxrun}(H(7,7))=5$, giving $12\ne11=j^*(7)$); Corollary~\ref{cor:chain} and
+$\mathrm{maxrun}(H(7,7))=5$, giving $12\ne11=j^*(7)$; $\mathrm{maxrun}(H(8,8))=8$, giving
+$16\ne12=j^*(8)$; $\mathrm{maxrun}(H(9,9))=8$, giving $17\ne13=j^*(9)$); Corollary~\ref{cor:chain} and
 Corollary~\ref{cor:bootstrap} both need $j\ge l$ to apply at all, but that alone does not explain why
 $j=l$ specifically starts failing at $l=6$. The sub-range $l+2\le j\le j^*(l)$ is proven at
 $l=3,\dots,13$: Proposition~\ref{prop:tight} below, which also proves the boundary
@@ -982,7 +989,8 @@ minimum achievable Durfee depth exceeding their parent's minimum depth by more t
 three; at $(7,11)\to(8,12)$, $332$ of $4374$ children (all units modulo $3^8$) do, likewise up to
 three. A correspondingly exhaustive check defines the \emph{repair cost} of a child residue $r$ with
 parent residue $p$ as $\min_{S,S'}|S\triangle S'|$, the smallest symmetric difference of exponent
-sets over every witness $S\in R_{j-1,j}$ of $p$ and every witness $S'\in R_{j,j+1}$ of $r$ ($|S|=j$,
+sets over every witness exponent set $S$ for $p$ at budget $j$ and every witness exponent set $S'$
+for $r$ at budget $j+1$ ($|S|=j$,
 $|S'|=j+1$, so this distance is always odd, $\ge1$, and the minimum ranges over the full witness
 fiber at each budget). This finds repair costs up to $7$ at both
 transitions, against a cost of $1$ for the overwhelming majority. Since every child at both
@@ -1297,7 +1305,8 @@ not concentrate on a sparse set at the one accessible scale checked ($l=18$, $j=
 primitive frequencies only). Local intensity, read at a fine enough depth, correlates strongly with
 which residues resist without fully determining it, and a separate phase-randomization diagnostic
 departs
-from a null respecting only frequency magnitudes at the one pair checked, $(l,m)=(14,16)$. A further null carrying no
+from a null respecting the frequency magnitudes and the zero-off-units constraint they satisfy, at
+the one pair checked, $(l,m)=(14,16)$. A further null carrying no
 primitive-frequency phase information matches that diagnostic's ratio statistic, but does so only by
 falling short of the actual array's absolute maximum and root-mean-square by comparable factors in
 every trial run; read in the absolute units the ratio divides, this second null is the one that
@@ -1367,6 +1376,9 @@ Game Theory \textbf{8} (1979), no.~2, 109--113.
 \bibitem{meyerovitchyoung2026}
 T.~Meyerovitch and A.~Young, \emph{Rationality and computability of the covering radius for sofic
 shifts}, arXiv:2603.21449 (2026).
+
+\bibitem{meyerovitchyoung2025nonalt}
+T.~Meyerovitch and A.~Young, \emph{Non-alternating mean payoff games}, arXiv:2505.02183 (2025).
 
 \bibitem{tao2011blog}
 T.~Tao, \emph{The Collatz conjecture, Littlewood--Offord theory, and powers of $2$ and $3$},

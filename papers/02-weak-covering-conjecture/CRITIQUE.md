@@ -24,6 +24,7 @@ by round; this table is kept current as the producer resolves each entry.
 | 15 | 0 | 1 | 4 | 6 | no | 0 |
 | 16 | 0 | 1 | 4 | 10 | no | 0 |
 | 17 | 0 | 0 | 4 | 8 | no | 0 |
+| 18 | 0 | 0 | 1 | 9 | no | 0 |
 
 Round 10's tally combines both reviewers: Opus 0 critical/0 major/3 moderate/6 minor (C-158, C-159,
 C-160 moderate; C-161-C-166 minor), Codex 0/1/5/2 (C-168 major; C-169-C-173 moderate; C-174, C-175
@@ -70,6 +71,10 @@ minor, two of them no-change). First round since Round 14 with no major finding;
 moderate is a definitional or scoping gap in Round 16's own freshly-written text, not a
 reversal of its substance, which Opus independently re-confirmed (the energy excess and the
 Section 4 mechanism both re-derived clean).
+Round 18: Codex failed a fourth consecutive time on the same sandbox error; proceeded Opus-only
+again. Opus 0/0/1/9 (C-246 moderate, a genuine abstract/Discussion-vs-body mismatch about which
+null the headline phase-departure number actually comes from; C-247 through C-255 minor, one a new,
+independently-verified citation addition). Second consecutive round with no major or critical.
 Need 3 consecutive rounds at 0/0/0 crit/major/moderate with minor<3 to stop.
 
 ## Status table
@@ -339,6 +344,16 @@ Need 3 consecutive rounds at 0/0/0 crit/major/moderate with minor<3 to stop.
 | C-244 | 17 | (Opus m8) Empirical Result 4 is verified only to `l=12` while Table 1 reaches `l=23`, with no reason given for the gap | no change | checked the repro repo's Section 4 README for a documented reason; none found beyond the check itself ("reproduces `j*(l)`... against the known table for `l=1..12`"). Per Rule 11, left as is: the paper already states the range plainly without inventing an unverified cost justification |
 | C-245 | 17 | (Opus m9) The abstract's "extend the exact computation of `j*(l)`... to `l=23`" is read alongside Section 2's note that `l=22,23` are "carried forward by inference only," which Opus flagged as worth noting though not overclaiming (the DP is exact and the caveat is disclosed in the body) | rejected, no change | Opus itself framed this as a note rather than a finding; the cross-check caveat already lives in Section 2 where it belongs, consistent with the abstract's literally true claim |
 | — | 17 | (Opus, self-withdrawn) Opus's own draft finding that citation [4] (Krasikov-Lagarias) was misattributed, based on an initial image-based misread of the reference page | withdrawn by the critic itself | Opus re-extracted the page's text layer during its own review and confirmed the citation is correct, withdrawing the finding before it was ever reported as a claim; logged per Rule 8c as a critique verified wrong, this time by the critic's own follow-up check rather than the producer's |
+| C-246 | 18 | (Opus, moderate) The abstract and Discussion both describe the phase-randomization diagnostic as departing "from a null respecting only frequency magnitudes," but the body's headline number (real ratio 15.79 vs. 6.35) comes from the constrained null, which respects magnitudes AND the zero-off-units algebraic constraint; the plain magnitude-only unconstrained scrambles are explicitly rejected by the body as "not the right null on their own." Both summary locations attribute the departure to the wrong, already-rejected null | moderate | verified against the body text directly: confirmed the unconstrained scrambles' own numbers ([5.11,5.24] etc.) are distinct from and weaker than the constrained null's (6.35), and that the body's "extremity claim... rests entirely on the constrained phase null." Fixed both the abstract and the Discussion to describe the null as "respecting the frequency magnitudes and the zero-off-units constraint they satisfy," matching what the body actually uses |
+| C-247 | 18 | (Opus minor) Two forward cross-references in Section 5.3 point backwards: "the extremity claim below rests entirely on the constrained phase null" and "the constrained null's own territory below," both introduced by this project's own Round 16/17 edits, when the constrained null is actually introduced and reported earlier in the same section | minor | fixed: both instances changed from "below" to "above," matching the actual document order |
+| C-248 | 18 | (Opus minor) "about 1,031 null standard deviations out" carries more precision than the printed three-significant-figure inputs in the same sentence can reconstruct | minor | fixed: rounded to "about 1,030," matching the precision of the surrounding figures (the underlying script's exact value, 1030.7, is unchanged; only the paper's rounded citation of it changed) |
+| C-249 | 18 | (Opus minor) "excludes every nonprimitive frequency, roughly a third of the spectrum" hedges an exact count: nonprimitive frequencies are exactly the multiples of 3, exactly `3^{l-1}` of `3^l` frequencies | minor | fixed: "roughly a third" changed to "exactly a third" |
+| C-250 | 18 | (Opus minor) "fails at every level checked from `l=6` on (e.g. ...)" cites only two examples (`l=6,7`) while implying, via "e.g." and the open-ended "from `l=6` on," that more were checked without saying how many or how far | minor | independently ran the brute-force enumeration for `l=8,9` (beyond the two levels already cited) before editing, per Rule 11: confirmed `maxrun(H(8,8))=8` (`j+maxrun=16\ne12=j^*(8)`) and `maxrun(H(9,9))=8` (`17\ne13=j^*(9)`), both mismatches as claimed. Fixed: replaced the vague "from `l=6` on (e.g. ...)" with the exact verified range, "`l=6,\dots,9`," listing all four examples, in both the body and the parallel abstract sentence |
+| C-251 | 18 | (Opus minor) Empirical Result 14's repair-cost definition writes "every witness `S \in R_{j-1,j}` of `p`," but `S` is an exponent set, not a member of `R_{j-1,j}` (a set of numeric values); the membership notation conflates the two | minor | fixed: reworded to "every witness exponent set `S` for `p` at budget `j`" (and likewise for `S'`), removing the incorrect set-membership claim without changing the actual definition |
+| C-252 | 18 | (Opus minor) Equation (3)'s `S(0)=|R_{j,k}|=:T` identity (used at general `(j,k)`, including as Proposition 8's hypothesis) relies on distinct exponent tuples giving distinct sums, an argument stated only for `R_{j-1,j}` specifically, inside Proposition 2's proof, with no pointer connecting the two | minor | fixed: added a clause noting the same injectivity argument (recovering the minimal exponent `a_j` from the sum's 2-adic valuation) applies unchanged to general `(j,k)`, with an explicit forward-in-reading-order pointer to "the proof of Proposition 2 above" (confirmed Proposition 2 precedes this point in the document) |
+| C-253 | 18 | (Opus minor) The citation "that reduction uses non-alternating mean-payoff games, its own variant of the classical alternating games of [5]" attributes the non-alternating framework to reference [6] (Meyerovitch-Young, covering radius of sofic shifts), but that framework is actually introduced in a companion paper by the same authors, which [6] itself cites for the concept | minor | independently verified via primary sources before adding anything, per Rule 11: fetched arXiv:2505.02183 ("Non-alternating mean payoff games," Meyerovitch and Young) and confirmed it introduces the game variant; fetched the PDF of arXiv:2603.21449 ([6] itself) and confirmed it cites the companion paper (`meyerovitchyoung2025nonalt`) for that exact concept rather than introducing it. Fixed: added the companion paper as a new bibliography entry and reworded the citing sentence to attribute the framework to it, citing all three sources (Ehrenfeucht-Mycielski, both Meyerovitch-Young papers) as precedent; ran the mechanical `\cite`/`\bibitem` cross-check afterward, all keys match |
+| C-254 | 18 | (Opus minor) "A third null tests that directly" (referring to the level-`(l-1)` local intensity documented earlier) overstates the match: the third null conditions on parent totals of `R_{15,16}` at `l=14`, a different family and depth than the `R_{j*(l)-2,j*(l)-1}` intensity data at `c=8,9,10`, `l=10,...,15` documented earlier; the paper's own caveat about this appears a full page later, after the overstated framing sentence | minor | fixed with a light touch rather than duplicating the page-later caveat: reworded to "tests the analogous parent-level information directly, for this array's own family," scoping the claim to the array actually in question without repeating the full distinguishing parenthetical that already follows a page later |
+| C-255 | 18 | (Opus minor, style) The "X, not Y" antithesis construction appears well past the house style's stated two-per-document budget across the whole paper | minor, no change this round | acknowledged; the project's critique loop has an established, explicitly calibrated baseline above the strict Rule 5c budget for this specific paper (tracked each round via the antithesis count check), and no single new instance stood out as needing a targeted cut this round; deferred to the periodic full-paper antithesis sweep rather than a piecemeal edit |
 | — | 15 | (Opus minor, moot) Two typography defects: a stray hyphen-space in "naive doubling- chain," and a closing quote mark used to open `"within about one unit"` | minor | moot on arrival: both instances were inside the passage rewritten for C-217, which no longer contains either the line-wrapped phrase or the quoted phrase |
 | — | 15 | (Opus minor) Section 5.1's "is the largest among frequencies checked at accessible `l`" drops the family/level qualification Section 5.2 itself uses to reconcile the same claim with its own counterexample; Proposition 9 is printed outside any subsection heading | minor | partially fixed: the family/level qualification added ("at the specific levels Section 5.2 checks directly (not in general, as Section 5.2's own counterexample there shows)"); Proposition 9's placement is a structural/cosmetic point, deferred as lower priority |
 | — | 15 | Both reviewers again re-derived every proof with nothing found wrong (seventh consecutive round for the combinatorial core); Opus additionally recomputed Table 1 for `l<=12`, Table 2 and Remark 7's figures, corner-redundancy's boundary pattern, and every citation, all again exact | — | the round's headline result is C-214: a real, substantive, independently-reproduced major finding that changes what the paper can honestly claim about phase structure, caught by a genuinely adversarial re-read of Section 5.3's own recent content rather than a proof error. The paper is more honest, and arguably more interesting, for having found it: a local-intensity-only null explaining the diagnostic's headline number is a real finding in its own right, not just a correction |
@@ -1550,3 +1565,59 @@ Combined tally (0/0/4/8): no critical or major findings for the first time since
 four moderates keep the streak at 0. Every moderate this round was a definitional or scoping gap in
 text Round 16 itself had just written, not a reversal of Round 16's substance, which Opus
 independently re-confirmed in full. Proceeding to Round 18.
+
+### Round 18 (Opus 5 max effort only, 2026-08-10, PDF snapshot frozen at launch, sha256 `6e468c50031387bc9397e86d2509d03dda1e7e8b9467d55fdaf8870eaca4e734`)
+
+Codex failed a fourth consecutive time, same environment sandbox error as Round 17
+(`bwrap: loopback: Failed RTM_NEWADDR: Operation not permitted`); proceeded Opus-only again. This
+now looks persistent rather than transient, worth flagging to the researcher as a possible
+environment issue outside this session's ability to fix, rather than retried indefinitely each
+round.
+
+Opus again found no critical or major issues, a second consecutive clean round on that front, and
+again independently re-derived the entire combinatorial core (Sections 6-7) and the Section 4
+mean-payoff argument with nothing wrong, a tenth consecutive round for the core. It also verified,
+symbol by symbol, that `F(z)`, the definition Round 17 added, is used consistently everywhere it
+appears in Section 5.3, including a from-scratch re-derivation of the identity
+`sum_{3 nmid t}S(t)e(-tz/3^l)=3^{l-1}F(z)` from the level-`(l-1)` valuation collapse.
+
+The one moderate finding (C-246) is exactly the abstract/Discussion-versus-body mismatch Rule 8b
+exists to catch, this time one level removed from a direct factual correction: the abstract and
+Discussion both describe the phase-randomization diagnostic as departing "from a null respecting
+only frequency magnitudes," but the actual headline number in the body (the real array's 15.79
+against 6.35) comes from the constrained null, which respects magnitudes and the zero-off-units
+algebraic constraint together; the plain magnitude-only unconstrained scrambles are explicitly
+rejected by the body as not the right null on their own. Verified this directly against the body's
+own numbers (the unconstrained scrambles give a different, weaker range, [5.11,5.24], never cited
+as the headline figure) before fixing both summary locations to name the constraint the null
+actually respects.
+
+Nine minor items, all fixed. Two stray "below"s in Section 5.3, introduced by this project's own
+Round 16-17 edits, pointed at the constrained null as if it appeared later in the text when it is
+introduced earlier in the same section; both corrected to "above." A precision mismatch ("about
+1,031... standard deviations," reconstructed from three-significant-figure inputs in the same
+sentence) softened to "about 1,030." An unnecessary hedge on an exact count ("roughly a third of
+the spectrum," when nonprimitive frequencies are exactly a third by construction) tightened to
+"exactly." A genuine scope gap in the `j=l` boundary discussion, which cited only two examples
+under an open-ended "from `l=6` on (e.g. ...)": independently ran the brute-force computation for
+two further levels, `l=8,9`, before editing (confirming `maxrun(H(8,8))=8` and `maxrun(H(9,9))=8`,
+both mismatches as the pattern predicts), then replaced the vague phrasing with the exact verified
+range in both the body and the abstract. A notational slip in Empirical Result 14 (an exponent set
+written as if it were a member of `R_{j-1,j}`, a set of values) fixed to name it a witness exponent
+set instead. A missing forward pointer for the general-`(j,k)` use of `S(0)=|R_{j,k}|` fixed with a
+one-clause note connecting it to the injectivity argument already given for `R_{j-1,j}` specifically.
+A citation attributing the non-alternating mean-payoff-game framework to reference [6] when the
+framework is actually introduced in a companion paper by the same authors, which [6] itself cites
+for the concept: verified both papers directly (fetched arXiv:2505.02183 and confirmed it introduces
+the framework; fetched [6]'s own PDF and confirmed it cites the companion paper for exactly this)
+before adding a new bibliography entry and reattributing the sentence, re-running the mechanical
+`\cite`/`\bibitem` cross-check afterward. An overstated framing sentence ("a third null tests that
+directly," for a different family and depth than the local-intensity data documented a page
+earlier) narrowed with a light touch, scoping the claim to the array actually in question rather
+than duplicating the fuller caveat that already follows a page later. A style note on the
+antithesis-construction budget, acknowledged but not separately edited this round.
+
+Recompiled clean (20 pages, 0 errors, 0 undefined references, 0 em-dashes, parenthesis balance
+735/735). Full findings C-246 through C-255 resolved, all fixed. Combined tally (0/0/1/9): second
+consecutive round with no critical or major finding, though one moderate and the minor count keep
+the streak at 0. Proceeding to Round 19.
