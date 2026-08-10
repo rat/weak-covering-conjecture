@@ -716,4 +716,18 @@ A push), notes/H-013.md, notes/GAP-A-round4.md, notes/GAP-A-round5*.md.
       its proof needs) was verified and left as is, since the proof's own text already discloses
       the tighter range it actually uses. Combined tally 0/0/0/3: misses the clean threshold by
       exactly one item, same margin as Round 20, the closest this loop has come since Round 21.
-      Recompiled clean, 20 pages, 0 errors, parenthesis balance 757/757. Round 27 next.
+      Recompiled clean, 20 pages, 0 errors, parenthesis balance 757/757.
+
+- [x] **Round 27 complete (2026-08-10). First clean round since Round 21.** Zero critical, major,
+      or moderate findings, one minor (0/0/0/1), clearing the "minor<3" bar. Streak now 1 of 3.
+      The one fix: Section 7 had the same failure class Round 26 found, a phrase reading as
+      covering a wider verified range (`l>=7`) than was actually checked (`l=7,...,13`), while the
+      paper's own adjacent sentence and the Discussion already stated the correct range. Fixed to
+      match. Four other candidates were considered and explicitly rejected with reasons (an
+      unnumbered "two named questions" phrase, a Fourier-strategy sentence checked against
+      Section 5.2 and found accurate, Round 26's own new `m`-definition checked for collision
+      risk elsewhere and found clean, and a sofic-shift description verified against the actual
+      arXiv abstract). Widest reproduction yet of the combinatorial core: 271/271 independent DP
+      checks at l<=13, Empirical Result 4 exact through l=10, Table 3 by value iteration over the
+      full uncapped action set for k=3..7, references [6] and [7] verified directly against
+      arXiv. Recompiled clean, 20 pages, 0 errors, parenthesis balance 757/757. Round 28 next.
