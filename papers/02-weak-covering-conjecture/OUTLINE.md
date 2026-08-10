@@ -730,4 +730,18 @@ A push), notes/H-013.md, notes/GAP-A-round4.md, notes/GAP-A-round5*.md.
       arXiv abstract). Widest reproduction yet of the combinatorial core: 271/271 independent DP
       checks at l<=13, Empirical Result 4 exact through l=10, Table 3 by value iteration over the
       full uncapped action set for k=3..7, references [6] and [7] verified directly against
-      arXiv. Recompiled clean, 20 pages, 0 errors, parenthesis balance 757/757. Round 28 next.
+      arXiv. Recompiled clean, 20 pages, 0 errors, parenthesis balance 757/757.
+
+- [x] **Round 28 complete (2026-08-10). Second consecutive clean round (0/0/0/2). Streak 2 of 3.**
+      Two real fixes: the Introduction said the earlier manuscript's table had "no growth-rate
+      analysis," but Section 3's parenthetical presupposed that manuscript chose a fit range,
+      contradicting it directly; cut the parenthetical. The Discussion's opening sentence claimed
+      two named questions were all that stood between the paper and a sharper theorem, but
+      Corollary 6's headline bound is separately conditional on the unproven Empirical Result 4,
+      never mentioned in that section; reworded to match the Introduction's own correct scoping.
+      The producer's report was notably disciplined: a tail-start AIC-sensitivity check was
+      investigated and found not to contradict any actual claim, folded in as context rather than
+      reported standalone; four other candidates were checked and correctly rejected with reasons.
+      Empirical Result 4, the load-bearing input to the paper's headline bound, independently
+      reproduced exactly for l=1..12. Recompiled clean, 20 pages, 0 errors, parenthesis balance
+      757/757. One more clean round closes this loop. Round 29 next.

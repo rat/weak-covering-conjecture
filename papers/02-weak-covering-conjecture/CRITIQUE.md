@@ -34,6 +34,7 @@ by round; this table is kept current as the producer resolves each entry.
 | 25 | 0 | 0 | 1 | 2 | no | 0 |
 | 26 | 0 | 0 | 0 | 3 | no | 0 |
 | 27 | 0 | 0 | 0 | 1 | yes | 1 |
+| 28 | 0 | 0 | 0 | 2 | yes | 2 |
 
 Round 10's tally combines both reviewers: Opus 0 critical/0 major/3 moderate/6 minor (C-158, C-159,
 C-160 moderate; C-161-C-166 minor), Codex 0/1/5/2 (C-168 major; C-169-C-173 moderate; C-174, C-175
@@ -453,6 +454,8 @@ Need 3 consecutive rounds at 0/0/0 crit/major/moderate with minor<3 to stop; str
 | C-291 | 26 | (Opus minor) Section 5.2's "empirically, is the largest at the specific levels this section checks directly" claims verification coverage for `|S(3^{l-1})|` at `l=18` (where `\|S\|_1=5226.01` is actually computed and the exclusion matters) but the top-pair-largest check was only established one paragraph earlier at `l=10,12,14`, not `l=18` | minor | verified against the enumerated levels one paragraph earlier before editing. Fixed: "the specific levels this section checks directly" replaced with "the three levels checked above (`l=10,12,14`)", naming the actual verified levels instead of a phrase that reads as covering wherever the section operates, including `l=18` |
 | C-292 | 26 | (Opus minor) The symbol `m` is used throughout Section 5.2/5.3 as the budget index of `R_{m-1,m}`, the role `j` plays everywhere else including the adjacent sentence in the same section ("the family `R_{j-1,j}` at `l=18`, `j=16`"), with no definition given; Section 4 separately binds `m:=3^k` to an unrelated quantity, so the same letter means two different things in two sections | minor | fixed: added an explicit one-sentence definition at `m`'s first use in Section 5.2 ("Throughout this subsection, `m` denotes a budget for the family `R_{m-1,m}`, the role `j` plays elsewhere in this paper (not the depth parameter `m:=3^k` of Section 4)"), resolving both the missing definition and the cross-section collision in one clause |
 | C-293 | 27 | (Opus minor) Section 7's "corner-redundancy's failure at `W=2l` for `l>=7` does not settle it either way" reads as an open-ended claim (failure at every `l>=7`), but only `l=7,...,13` was ever checked; the paper's own text two sentences earlier ("known, one way or the other, at every level `l=3,...,13`") and the Discussion both state the correct, bounded range | minor | verified against both the immediately preceding sentence and the Discussion's parallel passage before editing; confirmed both already state the correct `l=7,...,13` range. Fixed: "for `l>=7`" changed to "for `l=7,...,13`", matching the rest of the paper's own text |
+| C-294 | 28 | (Opus minor) The Introduction states the earlier manuscript reported its `l<=20` table "without a growth-rate analysis," but Section 3's parenthetical "(n=14; the same range choice as the earlier manuscript, now with three more points)" presupposes that manuscript chose an `l>=10` tail for a growth-model fit, contradicting the Introduction directly | minor | verified both passages' exact wording before editing; confirmed the contradiction is real (a document with no growth-rate analysis has no range choice to inherit). Fixed by cutting the parenthetical entirely from Section 3, which also removes a process-narration aside about a document readers cannot see (Rule 5c) |
+| C-295 | 28 | (Opus minor) The Discussion's opening sentence, "Two named questions summarize what stands between this paper's results and a sharper theorem," is unscoped, but Corollary 6 (the paper's headline quantitative bound) is conditional on Empirical Result 4, which Section 4 states plainly is unproven ("we do not have a general proof of the displayed identity") and which Section 8 never mentions; the Introduction's own parallel sentence correctly scopes the same two questions to the last-holdout strand specifically | minor | verified the Introduction's correctly-scoped version and Section 4's unproven-correspondence disclosure before editing. Fixed: reworded to "Two named questions summarize what stands between the last-holdout results above and a sharper theorem there," matching the Introduction's own scoping instead of implying these two questions are all that stands between the whole paper and a stronger result |
 | — | 26 | (Opus minor, cosmetic, acknowledged, no change) Proposition 24's stated hypothesis (corner-redundancy at every width `2l+1<=W<=j*(l)+l-1`) is one range wider than its own proof uses (`[j+l-1,j*(l)+l-2]`), making the stated proposition marginally weaker than what is actually proved | acknowledged, no change | verified the proof's own width-range accounting before deciding: the proof already states explicitly, in its own text, "The widths this uses...lie in `[j+l-1,j*(l)+l-2]\subseteq[2l+1,j*(l)+l-1]`...inside the hypothesis," so the tighter range actually used is already transparently disclosed to the reader inside the proof itself, not hidden. Narrowing the proposition's stated hypothesis would require touching Empirical Result 13's and the Discussion's cross-references to corner-redundancy "verified at `l=3,...,13`" (checked over the wider range in practice) for a purely cosmetic gain the critic's own report already downgrades to "cosmetic"; left as is |
 | — | 22 | (Opus, non-tallied observation) Section 2's swap/`l=24` history ("a `500 GiB` swap file"..."Three attempts at `l=24`... each failed... `l=24` is not attempted further") flagged as worth reconciling against the project's own external notes, since Opus could not verify it from the PDF alone and had (correctly) recalled a conflicting `1.8 TiB` swap figure from context | investigated and found to be a real, independent problem | checked `swapon --show` (confirms `1.8TiB` `/dev/nvme1n1p1`, matching CLAUDE.md's own compute-environment note) and `notes/H-001.md` in full: the `500GiB` figure is historically correct for `l=22`/`l=23` (no resize was needed for either), but swap was resized to `1.8TiB` specifically before the `l=24` attempts (confirmed via `notes/H-001.md`'s 2026-07-23 entry, discovered via `swapon --show` and unexplained reboots at the time), making the projected `~822GiB` requirement fit comfortably; the paper's silence on the resize left the false impression that `l=24` was arithmetically blocked. Worse, "three attempts, each failed... not attempted further" undercounts the real history (at least four launches: lost to a reboot; lost to a `systemd-oomd` policy kill; deliberately killed by the researcher to free the machine for a competing computation; and a further attempt that ran for many hours, was paused and resumed more than once, and was still active, not failed, when the project's effort moved to writing up the results already in hand per `HYPOTHESES.md`'s H-001 row, "l=24 formally aborted, 2026-08-09, researcher's explicit final decision"). Fixed: rewrote the passage to state the swap resize, attribute the early losses to their actual, memory-unrelated causes, and state plainly that `l=24` was not pursued to completion rather than implying every attempt technically failed. **Superseded, same day, researcher's explicit instruction**: rather than keep a corrected-but-still-present account of an incomplete computation the paper has no real data from, the researcher asked for the `l=24` material to be removed from the paper entirely, since `l=23` is the last level with real data and describing an attempt that did not finish only adds bulk without adding a result. Section 2 now ends its "the computation" narrative at `l=23`'s timing figures, with no mention of `l=24` at all; the corrected `l=24` history above remains accurate and stays on record here and in `notes/H-001.md`/`HYPOTHESES.md`, just not in the paper |
 | — | 22 | (Opus, non-tallied "bico") Lemma 1's statement, "no `j<l` has `R_{j-1,j}` covering," literally includes `j=0`, for which `R_{j-1,j}=R_{-1,0}` is not a defined object (equation (1) requires both indices `>=0`) | fixed | changed to "no `j` with `1<=j<l`," matching what the proof itself actually establishes (it handles `j=1` and `2<=j_0<l` separately, never `j=0`) |
@@ -2230,6 +2233,55 @@ balance 757/757).
 
 Full finding C-293 resolved, fixed. Combined tally (0/0/0/1): first clean round since Round 21.
 Streak 1 of 3. Proceeding to Round 28.
+
+### Round 28 (Opus 5 max effort only, 2026-08-10, PDF snapshot frozen at launch, sha256 `4d020f4f69e58d76cf5efb356f071ed526230be61338e42944f609374dbbdc91`)
+
+Second consecutive clean round: 0/0/0/2. Streak now 2 of the 3 needed to stop.
+
+C-294 (minor, fixed): the Introduction states the earlier manuscript's `l<=20` table was reported
+"without a growth-rate analysis," but Section 3's parenthetical claimed the current tail range
+`l=10,...,23` was "the same range choice as the earlier manuscript," presupposing exactly the
+growth-rate analysis the Introduction says never happened. Verified both passages' exact wording
+before editing; the contradiction was real. Fixed by cutting the parenthetical, which also removed
+a process-narration aside about a document readers cannot see.
+
+C-295 (minor, fixed): the Discussion's opening sentence claimed two named questions were "what
+stands between this paper's results and a sharper theorem," unscoped, but Corollary 6, the paper's
+own headline bound, is conditional on Empirical Result 4, which Section 4 explicitly says is
+unproven, and Section 8 never mentions it. The Introduction's own parallel sentence already scopes
+the same two questions correctly, to the last-holdout strand specifically. Fixed to match that
+scoping rather than implying these two questions are all that stands between the whole paper and a
+stronger result.
+
+The producer's own report was unusually disciplined about what it declined to raise: a tail-start
+sensitivity check (the AIC ranking flips depending on where the fit window starts) was investigated
+in full, found not to contradict any claim the paper actually makes, and folded into C-294 as
+context rather than reported as its own finding; four other candidates (a notation aside in Section
+5.2, a stored-versus-runnable holdout-data distinction in Section 9, the post-hoc Poisson
+probability already self-disclosed as non-predeclared, and a unit-preservation argument in Theorem
+5) were each checked and correctly rejected with reasons. Section 2's resource description was, per
+this round's briefing, not raised at all; the reviewer instead used its allotted attention to check
+the description's internal coherence on its own terms and confirmed it (263/84 ratio matching the
+expected per-level scaling, timings consistent, back-extrapolated `l=21` figure consistent with
+"fits in physical RAM").
+
+Verification breadth: independent DP reproduction of Table 1 for `l=1,...,10`; Lemma 1's premise for
+`l=2,...,10`; Table 2 to every printed statistic including the monotone `dAIC`/`dBIC` growth
+claim; Empirical Result 4, the load-bearing input to Corollary 6, reproduced exactly for
+`l=1,...,12` with the action cap confirmed non-binding; Remark 7; Proposition 8 by FFT at
+`l=10,12,14`; Proposition 9's limit and counterexample; every Section 5.2 valuation and threshold
+figure, including confirming the `l=12` top-primitive-exceeds-weakest-valuation-8` claim is
+non-trivially true and would be false at `l=10`, exactly why the paper picks `l=12` for that
+specific claim; every Section 5.3 statistic; Empirical Results 13, 14, 19, 21 and the `1547`
+counterexample; corner-redundancy for `l=3,...,10`; and every numbered proof walked against its
+stated hypotheses, no gap found, including confirming the index discipline across the `(j,k)` to
+`(j-1,j)` substitution stays correct everywhere it recurs.
+
+Recompiled clean (20 pages, unchanged; 0 errors, 0 undefined references, 0 em-dashes, parenthesis
+balance 757/757).
+
+Full findings C-294 and C-295 resolved, both fixed. Combined tally (0/0/0/2): second consecutive
+clean round. Streak 2 of 3. One more clean round closes this loop. Proceeding to Round 29.
 
 Two more non-tallied "bicos" Opus reported alongside the two minors were also given a real look and
 fixed, both quick and both real: Lemma 1's statement literally includes `j=0`, for which
