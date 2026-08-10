@@ -701,4 +701,19 @@ A push), notes/H-013.md, notes/GAP-A-round4.md, notes/GAP-A-round5*.md.
       single-check extension yet on some fronts (`rho_6` independently confirmed, extending
       Round 24's `rho_3`-`rho_5`; corner-redundancy to `l=11`). Recompiled clean, 20 pages, 0
       errors, parenthesis balance 756/756, abstract unchanged at 1893 characters. Combined tally
-      (0/0/1/2), the smallest finding count since Round 17. Round 26 next.
+      (0/0/1/2), the smallest finding count since Round 17.
+
+- [x] **Round 26 complete (2026-08-10).** Interrupted three times by a genuine power outage at the
+      researcher's location; resumed from the same background critic's saved transcript each time
+      rather than relaunched, finished cleanly once power stabilized. Zero critical, major, or
+      moderate findings, clearing every severity above minor for the first time since Round 21.
+      Three minors, all outside the abstract (which held up completely under another
+      sentence-by-sentence re-check): Section 5.2 claimed verification coverage at a level (l=18)
+      it never actually checked for that specific claim, fixed by naming the three levels actually
+      verified (l=10,12,14); the symbol `m` was used throughout Section 5.2/5.3 with no
+      definition, colliding with Section 4's unrelated `m:=3^k`, fixed with one clarifying
+      sentence. A third, cosmetic-only finding (Proposition 24's hypothesis one width wider than
+      its proof needs) was verified and left as is, since the proof's own text already discloses
+      the tighter range it actually uses. Combined tally 0/0/0/3: misses the clean threshold by
+      exactly one item, same margin as Round 20, the closest this loop has come since Round 21.
+      Recompiled clean, 20 pages, 0 errors, parenthesis balance 757/757. Round 27 next.

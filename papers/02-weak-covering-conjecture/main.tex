@@ -617,7 +617,9 @@ treatment (a major/minor-arc split, in the language of the circle method) can do
 Numerically, $|S(t)|$ is far from uniform. Writing $t=3^{l-c}t'$ with $3\nmid t'$ (valuation
 $l-c$), $t\cdot V/3^l=t'\cdot V/3^c$ for every tuple value $V$, so $S(t)$ at modulus $3^l$ equals the
 same sum evaluated at the coarser modulus $3^c$: a frequency of valuation $l-c$ is literally the
-level-$c$ sum of the same tuple family. Proposition~\ref{prop:sqrtceiling}'s exact bound
+level-$c$ sum of the same tuple family. Throughout this subsection, $m$ denotes a budget for the
+family $R_{m-1,m}$, the role $j$ plays elsewhere in this paper (not the depth parameter $m:=3^k$
+of Section~\ref{sec:mpg}). Proposition~\ref{prop:sqrtceiling}'s exact bound
 $|S(3^{l-1})|\ge T/2$ is only a lower bound, no claim of maximality: at $m=1$, $l=2$ (the family
 $R_{0,1}=\{1,2\}$, $T=2$), $|S(3)|=1$ but $|S(1)|=2\cos(\pi/9)\approx1.879$ exceeds it, so the top
 pair is not always the largest frequency. At the levels directly checked in the family this section
@@ -638,8 +640,8 @@ the $j\ge l$ range Sections~\ref{sec:holdouts}--\ref{sec:further} otherwise work
 result. Write
 $\|S\|_1:=\sum_{\gcd(t,3)=1}|S(t)|/T$ for the normalized $L^1$ mass over frequencies coprime to $3$.
 This restriction excludes $t=3^{l-1}$, whose magnitude $|S(3^{l-1})|\sim T/\sqrt3$ is fixed by
-Proposition~\ref{prop:1547} and, empirically, is the largest at the specific levels this section
-checks directly (not in general, as the counterexample above shows), along with its
+Proposition~\ref{prop:1547} and, empirically, is the largest at the three levels checked above
+($l=10,12,14$; not in general, as the counterexample above shows), along with its
 conjugate $t=2\cdot3^{l-1}$ (since
 $S(3^l-t)=\overline{S(t)}$, that frequency matches it exactly and is excluded for the same reason).
 The restriction to $\gcd(t,3)=1$ also excludes every nonprimitive frequency, exactly a third of the
