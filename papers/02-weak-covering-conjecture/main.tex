@@ -42,25 +42,25 @@ ORCID: \url{https://orcid.org/0009-0002-0196-3311}
 \begin{abstract}
 Wirsching's 1998 Weak Covering Conjecture asks for a sub-exponential $K(l)$ such that a large
 enough set $R_{j-1,j}\subset\Z_3^*$ is forced to cover every unit residue modulo $3^l$. We extend
-the exact computation of $j^*(l)$, the smallest such budget, from $l=20$ to $l=23$, and compare
-four growth models for $e(l):=j^*(l)-l\log_4 3$ against the extension's tail. A constant model is
+the exact computation of $j^*(l)$, the smallest covering budget, from $l=20$ to $l=23$, and
+compare four growth models for $e(l):=j^*(l)-l\log_4 3$ against its tail. A constant model is
 unconditionally impossible (we prove $e(l)\ge\tfrac14\log_2l-O(1)$) and disfavored throughout;
-the growing alternatives are not distinguished by these criteria. Our best bound,
-$j^*(l)\le\tfrac98l+\tfrac{33}2$, comes from a mean-payoff-game relaxation resting on one
-correspondence, verified computationally but not proven in general. The natural Fourier route is
-blocked at its first step: its positivity criterion is provably unreachable at every budget;
-granting it regardless, square-root cancellation still could not beat the mean-payoff bound.
-Separately, null-model diagnostics at one tractable pair find structure neither construction
-forces, left uncalibrated. We prove that, for budgets $j\ge l$, the uncovered set at a budget is
-contained in both twice and four times the uncovered set at the previous budget, giving a
-recursive upper bound on $j^*(l)$. This bound is proven exact for $l+2\le j\le j^*(l)$ at
-$l=3,\dots,13$ (given one further verified property), empirical beyond; the boundary $j=l+1$ is
-proven at $l=3,\dots,6$, empirical otherwise. We falsify a natural cost-$1$ repair rule it
-suggests, prove every last-uncovered residue is $\equiv1\pmod3$ whenever $j^*(l)\ge l+1$ (all but
-one level), prove a two-class containment law mod $9$ on these residues, and report further
-identities, some verified but not proven. Two open questions are named as exact conditions, each
-narrower than the conjecture; others arise where noted. The Weak Covering Conjecture remains
-open.
+the growing alternatives are not distinguished. Our best bound,
+$j^*(l)\le\tfrac98l+\tfrac{33}2$, comes from a mean-payoff-game relaxation via one correspondence,
+verified computationally, not proven generally. The Fourier route is blocked at its first step:
+its positivity criterion is provably unreachable at every budget; granting it, square-root
+cancellation could not beat the mean-payoff bound. A further computation finds most
+primitive-frequency mass below the threshold, ruling out sparse-exceptional repair. Null-model
+diagnostics at one tractable pair find structure neither null forces, left uncalibrated. We prove
+that, for budgets $j>l$, the uncovered set at a budget is contained in both twice and four times
+the uncovered set at the previous budget, giving a recursive upper bound on $j^*(l)$. This bound
+is proven exact for $l+2\le j\le j^*(l)$ at $l=3,\dots,13$ (verified exhaustively), empirical
+beyond; the boundary $j=l+1$ is proven at $l=3,\dots,6$, empirical otherwise. We falsify a natural
+cost-$1$ repair rule it suggests, prove every last-uncovered residue is $\equiv1\pmod3$ whenever
+$j^*(l)\ge l+1$ (all but one computed level), prove a two-class containment law mod $9$ on these
+residues, and report further identities, some verified but not proven. Two open questions are
+named as exact conditions narrower than the conjecture; others arise elsewhere. The Weak Covering
+Conjecture remains open.
 \end{abstract}
 
 \noindent\textbf{Keywords:} Collatz map, 3-adic dynamics, covering conjecture, mean-payoff games,
@@ -161,7 +161,7 @@ against smaller candidates within that range.
 
 \begin{lemma}[No smaller budget covers]
 \label{lem:nosmaller}
-For $l=2,\dots,23$, no $j<l$ has $R_{j-1,j}$ covering $(\Z/3^l\Z)^*$, so $j^*(l)\ge l$ holds outright,
+For $l=2,\dots,23$, no $j$ with $1\le j<l$ has $R_{j-1,j}$ covering $(\Z/3^l\Z)^*$, so $j^*(l)\ge l$ holds outright,
 not only relative to the range the search above tries.
 \end{lemma}
 
@@ -220,11 +220,13 @@ machine specifically for this computation; the run took approximately $10{,}749\
 ($\sim\!3$ hours) with swap I/O as
 the dominant cost, against $748\,\mathrm{s}$ for $l=21$ without swap. $l=23$ required approximately
 $263\,\mathrm{GiB}$ of state, comfortably within the same swap budget, and $375{,}615\,\mathrm{s}$
-($\sim\!104$ hours). Three attempts at $l=24$, made over the
-course of this project on the same
-machine, each failed before completion (two to memory-policy kills, one to an apparent out-of-memory
-condition with no surviving kernel log confirming it directly); $l=24$ is not attempted further, and
-the table stops at $l=23$.
+($\sim\!104$ hours). Swap was later expanded to $1.8\,\mathrm{TiB}$ on the same machine specifically
+to pursue $l=24$ (projected at approximately $822\,\mathrm{GiB}$ of state, comfortably within that
+budget). Several launches followed; two were lost early to causes unrelated to memory capacity (a
+machine reboot, and an operating-system memory-policy kill later diagnosed and masked), and a
+further attempt ran for multiple hours with memory usage tracking the projected working set before
+the project's effort moved to writing up the results already in hand. $l=24$ was not pursued to
+completion, and the table stops at $l=23$.
 
 \section{The growth of $e(l)$}
 \label{sec:growth}
@@ -901,8 +903,8 @@ modulo $3^l$, and any shorter run is pairwise distinct. The hypothesis that $x,2
 pairwise distinct already forces $t\le2\cdot3^{l-1}$, so it remains to rule out equality. If
 $t=2\cdot3^{l-1}$, those $t$ elements would be every unit modulo $3^l$, including every element of
 the (nonempty) image of $R_{j,j+1}$; but $H(l,j+1)$, the complement of that image, contains no such
-element. Hence $t<2\cdot3^{l-1}$, and the $t+1$ output elements, a shorter run of consecutive powers,
-are pairwise distinct.
+element. Hence $t<2\cdot3^{l-1}$, and the $t+1$ output elements, a run of at most $2\cdot3^{l-1}$
+consecutive powers, are pairwise distinct.
 \end{proof}
 
 \begin{corollary}[Run-length bootstrap]
@@ -935,10 +937,13 @@ $l=22$ at the single budget $j=l+1$, including a case with $|H(l,j)| > 3\times10
 $j^*(l)$, $H(l,j)=\emptyset$ and $\mathrm{maxrun}(\emptyset)=0$, so the displayed equality no longer
 holds there; the claim is only about budgets up to and including $j^*(l)$.) The lower endpoint
 $j=l+1$ has a real justification behind it: equality at $j=l$ itself holds for $l=1,\dots,5$ but
-fails at every level checked, $l=6,\dots,9$ ($\mathrm{maxrun}(H(6,6))=5$, giving
+fails at every level checked, $l=6,\dots,13$ ($\mathrm{maxrun}(H(6,6))=5$, giving
 $j+\mathrm{maxrun}=11\ne10=j^*(6)$;
 $\mathrm{maxrun}(H(7,7))=5$, giving $12\ne11=j^*(7)$; $\mathrm{maxrun}(H(8,8))=8$, giving
-$16\ne12=j^*(8)$; $\mathrm{maxrun}(H(9,9))=8$, giving $17\ne13=j^*(9)$); Corollary~\ref{cor:chain} and
+$16\ne12=j^*(8)$; $\mathrm{maxrun}(H(9,9))=8$, giving $17\ne13=j^*(9)$;
+$\mathrm{maxrun}(H(10,10))=9$, giving $19\ne15=j^*(10)$; $\mathrm{maxrun}(H(11,11))=8$, giving
+$19\ne16=j^*(11)$; $\mathrm{maxrun}(H(12,12))=8$, giving $20\ne17=j^*(12)$;
+$\mathrm{maxrun}(H(13,13))=8$, giving $21\ne18=j^*(13)$); Corollary~\ref{cor:chain} and
 Corollary~\ref{cor:bootstrap} both need $j\ge l$ to apply at all, but that alone does not explain why
 $j=l$ specifically starts failing at $l=6$. The sub-range $l+2\le j\le j^*(l)$ is proven at
 $l=3,\dots,13$: Proposition~\ref{prop:tight} below, which also proves the boundary
@@ -1201,9 +1206,7 @@ at each level), $\mathrm{Corner}(l,W+1)$ contributes nothing new: every corner w
 already covered without it. Call this the \emph{corner-redundancy} property at width $W$; whether it
 holds at every width $W\ge2l+1$ in general, beyond the levels checked, is open. It also holds,
 checked directly, at the one smaller width $W=2l$ itself for $l=3,4,5,6$; from $l=7$ through $13$ it
-is checked to fail there. The same exhaustive check also covers every width strictly below $2l$, down
-to $W=l-1$, at every $l=3,\dots,13$, though no result in this paper depends on that wider range.
-$W=2l$ is exactly $j=l+1$,
+is checked to fail there. $W=2l$ is exactly $j=l+1$,
 Proposition~\ref{prop:h014}'s own
 case; corner-redundancy at that width is known, one way or the other, at every level $l=3,\dots,13$,
 holding only for $l=3,4,5,6$. What remains open is Proposition~\ref{prop:h014}'s own converse itself:

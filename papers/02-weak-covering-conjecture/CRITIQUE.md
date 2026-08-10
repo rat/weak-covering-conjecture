@@ -28,6 +28,7 @@ by round; this table is kept current as the producer resolves each entry.
 | 19 | 0 | 0 | 1 | 6 | no | 0 |
 | 20 | 0 | 0 | 0 | 3 | no | 0 |
 | 21 | 0 | 0 | 0 | 2 | yes | 1 |
+| 22 | 0 | 0 | 1 | 7 | no | 0 |
 
 Round 10's tally combines both reviewers: Opus 0 critical/0 major/3 moderate/6 minor (C-158, C-159,
 C-160 moderate; C-161-C-166 minor), Codex 0/1/5/2 (C-168 major; C-169-C-173 moderate; C-174, C-175
@@ -101,6 +102,33 @@ small levels checked directly" undervaluing the boundary budget's proven-as-theo
 l=3,...,6) was folded into the same rewrite rather than patched separately, since both findings
 targeted the same sentence region.
 Need 3 consecutive rounds at 0/0/0 crit/major/moderate with minor<3 to stop; 2 more to go.
+Round 22: Opus 0/0/1/7 (C-268 moderate, C-269 through C-275 minor, all fixed). Streak reset to 0:
+the abstract, rewritten wholesale in Round 21, drew heavy new scrutiny, exactly as expected for the
+least-reviewed text in the paper. C-268 (moderate) is a real, independently-confirmed error: the
+abstract's "for budgets `j>=l`" reads naturally as claiming the doubling inclusion at `j=l` itself,
+which is false (verified by direct computation, `l=2,...,8`); the theorem it paraphrases only
+covers `j>l`. Fixed with a one-character-class change. Six of seven minors are further abstract
+precision gaps surfaced by the same close read (a missing antecedent for "budget," a mislabeled
+"construction" that should read "null," a dropped "computed" that changed what "all but one level"
+quantifies over, an "given one further verified property" phrasing that reads as an open condition
+where the body says unconditional, and a complete omission of the paper's own Section 5.2 result);
+the seventh (C-274) is a body-text gap in Section 7 where a sentence claims a check was performed
+without ever stating its outcome. Investigating that seventh finding's non-tallied companion
+(Section 2's swap/`l=24` history, which Opus explicitly flagged as unverifiable from the PDF alone)
+surfaced a real, independent factual problem: cross-checking against `notes/H-001.md` showed the
+table's "three attempts, each failed... not attempted further" undercounts the actual launch
+history and, more importantly, misattributes why `l=24` stopped, a deliberate project-scope
+decision, not a technical failure of the final attempt, which was in fact still running when the
+project's effort moved to writing up the results already in hand. Rewritten with the accurate
+history (swap resize to 1.8 TiB before the `l=24` attempts, the actual causes of the early losses,
+and the true reason the table stops at `l=23`). Two additional non-tallied precision gaps ("bicos"
+in Opus's own framing) were also fixed on the same pass: Lemma 1's statement technically included
+`j=0`, for which `R_{j-1,j}=R_{-1,0}` is undefined (equation (1) requires both indices `>=0`); and
+Corollary 11's "a shorter run of consecutive powers" is false at the exact boundary case where the
+run reaches the full order of 2.
+Full findings text and the l=24/Lemma-1/Corollary-11 investigation are in the Round 22 section
+below.
+Need 3 consecutive rounds at 0/0/0 crit/major/moderate with minor<3 to stop; streak reset, 3 to go.
 
 ## Status table
 
@@ -391,6 +419,16 @@ Need 3 consecutive rounds at 0/0/0 crit/major/moderate with minor<3 to stop; 2 m
 | C-265 | 20 | (Opus minor) Two passages (Section 6 and Section 7) attribute "`j*(l)>=l` holds outright for `l=1,...,23`" entirely to Lemma 1 ("No smaller budget covers"), but that lemma's own statement is restricted to `l=2,...,23`; the `l=1` case (`j*(1)=1>=1`) comes from Table 1 directly, a separate fact | minor | verified against Lemma 1's own statement before editing (confirmed the lemma text reads "For `l=2,...,23`"). Fixed both occurrences to attribute `l=1` to Table 1 directly and `l=2,...,23` to the lemma, rather than crediting the lemma with a case it does not cover |
 | C-266 | 21 | (Opus minor) The abstract, at 3773-3971 characters measured by two independent methods (Opus: 3715 chars/633 words; producer: 3773 chars/572 words), exceeds arXiv's own stated submission cap ("abstracts longer than 1920 characters will not be accepted," confirmed by fetching `info.arxiv.org/help/prep.html` directly), and the paper's stated first venue is an arXiv preprint; a genuine, previously unchecked submission blocker, not a correctness issue | minor | rewrote the abstract from scratch to fit under the cap while covering every substantive claim the original made (K(l), the extension to `l=23`, the four-growth-model comparison and its verdict, the proven lower bound on `e(l)`, the best conditional bound, the Fourier barrier, the null-model diagnostics, the boundary theorem's exact/empirical scope, the falsification and residue-class theorems, both open questions). Independently reviewed against Rule 5c's full checklist before applying (zero banned-vocabulary hits, zero em/en dashes, zero "not X but Y" antitheses, sentence lengths ranging 6-42 words) and against Rule 8b's trio check on the compressed null-model sentence (verified it asserts nothing that could conflict with Section 5.3's or the Discussion's constrained/unconstrained distinction, by naming no specific null or mechanism at all, matching the advisor-reviewed wording). Measured twice after the edit (raw LaTeX source: 1878 chars; TeX-stripped rendered text: 1790 chars), both comfortably under 1920. Recompiled clean (0 errors, 0 undefined refs, 0 em-dashes, 743/743 balanced parens, page count unchanged at 20) |
 | C-267 | 21 | (Opus minor) The abstract's "this holds at four small levels checked directly" (the boundary budget `j=l+1`, at `l=3,...,6`) reads as computational verification only, but the body proves this outright as a theorem at those four levels via Proposition 24's boundary-width extension; a residual ambiguity in "not at every level checked beyond that, `l=6,...,9`" (fails at some vs. all) was also flagged, together with Opus's own independent finding, not yet in the paper, that the tightness failure extends through `l=10,...,13` as well | minor | folded into the same abstract rewrite as C-266, since both targeted the same sentence: the new abstract states the boundary budget "is proven at `l=3,...,6`, empirical otherwise," correctly distinguishing proven from merely-checked and removing the ambiguous "not at every level checked" phrasing entirely. Opus's `l=10,...,13` extension is new information, not yet independently reproduced by the producer; logged for the researcher rather than added to the paper this round (informational, not a body-side claim requiring an immediate edit) |
+| C-268 | 22 | (Opus moderate) The abstract's "We prove that, for budgets `j>=l`, the uncovered set at a budget is contained in both twice and four times the uncovered set at the previous budget" reads naturally as claiming this at `j=l` itself, but Theorem 10 (the result being paraphrased) states `H(l,j+1) subset 2H(l,j) cap 4H(l,j)` "for `j>=l`," i.e. the left-hand budget is `j+1` with `j>=l`, so the smallest left-hand instance is `j=l+1`, not `j=l` | moderate | independently verified before touching anything (Rule 8c): wrote a from-scratch brute-force computation of `H(l,l)` and `2H(l,l-1) cap 4H(l,l-1)` for `l=2,...,8` and confirmed `H(l,l)` is NOT a subset of the right-hand side at every one of these levels (e.g. `l=8`: `|H(8,8)|=1217` vs `|RHS|=1354`, not contained), so the abstract's natural reading is not just unproven but false. Fixed by changing the quantifier from `j>=l` to `j>l`: under this reading "a budget" `j>l` and "the previous budget" `j-1>=l` match Theorem 10 exactly (`j-1>=l` triggers the theorem, giving the inclusion at budget `(j-1)+1=j`), independently re-verified true at the same levels |
+| C-269 | 22 | (Opus minor) The abstract's "the smallest such budget" (for `j*(l)`) has no antecedent: no earlier abstract sentence introduces "budget" as a name for `j`, only the subscript notation `R_{j-1,j}` | minor | fixed: restored the pre-Round-21 phrasing "the smallest covering budget," tying the term to "is forced to cover" one clause earlier |
+| C-270 | 22 | (Opus minor) The abstract's "structure neither construction forces" is ambiguous, since the two preceding sentences both discuss constructions (the Fourier route, the mean-payoff game); the body's own parallel passage (Discussion) says "Neither null" | minor | fixed: changed "construction" to "null," matching the body's own term for what is actually being compared |
+| C-271 | 22 | (Opus minor) The abstract's "(all but one level)," for the residue-class theorem's `j*(l)>=l+1` hypothesis, drops "computed" from the pre-Round-21 wording ("every computed level but one"), and the hypothesis is verified for `l=2,...,23` specifically (Theorem 17), not claimed to hold at every `l` in general | minor | fixed: restored "computed," now "(all but one computed level)" |
+| C-272 | 22 | (Opus minor) The abstract's "(given one further verified property)," for the boundary-budget exactness claim, reads as an open or pending condition, but the body states plainly that "Proposition 24 is unconditional at those levels" once the property (corner-redundancy) is verified for `l=3,...,13`, which it is | minor | verified against the body's exact wording before editing (confirmed "Proposition~\ref{prop:tight} is unconditional at those levels"). Fixed: reworded to "(verified exhaustively)," matching the body's own unconditional framing rather than implying a live caveat |
+| C-273 | 22 | (Opus minor) The abstract omits Section 5.2 entirely: a direct computation showing most primitive-frequency mass already sits below the fixed magnitude threshold, ruling out a sparse-exceptional-set repair at that level, is reported in the Discussion as one of the paper's own findings but never appears in the abstract, which jumps from the Fourier barrier straight to the null-model diagnostics | minor | fixed: added one compressed clause ("A further computation finds most primitive-frequency mass below the threshold, ruling out sparse-exceptional repair") between the Fourier-route sentence and the null-model sentence, funded by trims elsewhere so the abstract stays under arXiv's limit |
+| C-274 | 22 | (Opus minor) Section 7's sentence "The same exhaustive check also covers every width strictly below `2l`, down to `W=l-1`, at every `l=3,...,13`, though no result in this paper depends on that wider range" states that a check was performed but never states its outcome, inviting a reader to guess whether corner-redundancy holds or fails at those widths | minor | the sentence's own final clause ("no result in this paper depends on that wider range") confirmed nothing else in the paper rests on this claim, so declaring the outcome would add an unused fact requiring its own verification burden (Opus verified only `l<=8` of the `l=3,...,13` claimed, not the full range). Fixed by cutting the sentence entirely, per Rule 11 (no unverified claim, even a vague one, left standing) rather than asserting a range-wide outcome not independently checked here |
+| — | 22 | (Opus, non-tallied observation) Section 2's swap/`l=24` history ("a `500 GiB` swap file"..."Three attempts at `l=24`... each failed... `l=24` is not attempted further") flagged as worth reconciling against the project's own external notes, since Opus could not verify it from the PDF alone and had (correctly) recalled a conflicting `1.8 TiB` swap figure from context | investigated and found to be a real, independent problem | checked `swapon --show` (confirms `1.8TiB` `/dev/nvme1n1p1`, matching CLAUDE.md's own compute-environment note) and `notes/H-001.md` in full: the `500GiB` figure is historically correct for `l=22`/`l=23` (no resize was needed for either), but swap was resized to `1.8TiB` specifically before the `l=24` attempts (confirmed via `notes/H-001.md`'s 2026-07-23 entry, discovered via `swapon --show` and unexplained reboots at the time), making the projected `~822GiB` requirement fit comfortably; the paper's silence on the resize left the false impression that `l=24` was arithmetically blocked. Worse, "three attempts, each failed... not attempted further" undercounts the real history (at least four launches: lost to a reboot; lost to a `systemd-oomd` policy kill; deliberately killed by the researcher to free the machine for a competing computation; and a further attempt that ran for many hours, was paused and resumed more than once, and was still active, not failed, when the project's effort moved to writing up the results already in hand per `HYPOTHESES.md`'s H-001 row, "l=24 formally aborted, 2026-08-09, researcher's explicit final decision"). Fixed: rewrote the passage to state the swap resize, attribute the early losses to their actual, memory-unrelated causes, and state plainly that `l=24` was not pursued to completion rather than implying every attempt technically failed |
+| — | 22 | (Opus, non-tallied "bico") Lemma 1's statement, "no `j<l` has `R_{j-1,j}` covering," literally includes `j=0`, for which `R_{j-1,j}=R_{-1,0}` is not a defined object (equation (1) requires both indices `>=0`) | fixed | changed to "no `j` with `1<=j<l`," matching what the proof itself actually establishes (it handles `j=1` and `2<=j_0<l` separately, never `j=0`) |
+| — | 22 | (Opus, non-tallied "bico") Corollary 11 (Chain contraction)'s proof says the `t+1` output elements form "a shorter run of consecutive powers," but `t<2*3^{l-1}` strictly only gives `t+1<=2*3^{l-1}`, so the output run can equal, not just fall short of, the full order of `2` modulo `3^l` | fixed | changed to "a run of at most `2*3^{l-1}` consecutive powers," which covers the equality case; the pairwise-distinctness conclusion itself was already correct and unaffected (a window of length equal to the full order is still injective) |
 | — | 15 | (Opus minor, moot) Two typography defects: a stray hyphen-space in "naive doubling- chain," and a closing quote mark used to open `"within about one unit"` | minor | moot on arrival: both instances were inside the passage rewritten for C-217, which no longer contains either the line-wrapped phrase or the quoted phrase |
 | — | 15 | (Opus minor) Section 5.1's "is the largest among frequencies checked at accessible `l`" drops the family/level qualification Section 5.2 itself uses to reconcile the same claim with its own counterexample; Proposition 9 is printed outside any subsection heading | minor | partially fixed: the family/level qualification added ("at the specific levels Section 5.2 checks directly (not in general, as Section 5.2's own counterexample there shows)"); Proposition 9's placement is a structural/cosmetic point, deferred as lower priority |
 | — | 15 | Both reviewers again re-derived every proof with nothing found wrong (seventh consecutive round for the combinatorial core); Opus additionally recomputed Table 1 for `l<=12`, Table 2 and Remark 7's figures, corner-redundancy's boundary pattern, and every citation, all again exact | — | the round's headline result is C-214: a real, substantive, independently-reproduced major finding that changes what the paper can honestly claim about phase structure, caught by a genuinely adversarial re-read of Section 5.3's own recent content rather than a proof error. The paper is more honest, and arguably more interesting, for having found it: a local-intensity-only null explaining the diagnostic's headline number is a real finding in its own right, not just a correction |
@@ -1860,3 +1898,87 @@ stop. The `l=10,...,13` tightness-failure extension and the `O(3^n)` reformulati
 for the researcher's attention rather than written into the paper this round, since neither is a
 correction to an existing claim; both are candidate Rule 8e leads if the researcher wants them taken
 further. Proceeding to Round 22.
+
+### Round 22 (Opus 5 max effort only, 2026-08-10, PDF snapshot frozen at launch, sha256 `189e8247fc5f3aeb0fc2b1a16d0d6c35589bd8eadd0fb32c43998f73b434784c`)
+
+Codex not retried (six consecutive identical sandbox failures across Rounds 17-20 already settled
+this; not attempted again absent a signal the environment changed). Opus was specifically prompted
+to give the Round-21 abstract rewrite, the newest and least-reviewed text in the paper, its
+sharpest attention, alongside the usual whole-paper pass.
+
+The streak breaks: 0/0/1/7, after Round 21's 0/0/0/2. One moderate, C-268, is a genuine,
+independently-confirmed error, not a false alarm: the abstract's "for budgets `j>=l`" reads
+naturally as claiming the holdout-doubling inclusion at `j=l` itself, but Theorem 10 only proves
+it from `j+1` with `j>=l`, i.e. the smallest left-hand budget the theorem actually covers is
+`l+1`. Wrote an independent brute-force check before touching anything (Rule 8c): computed
+`H(l,l)` and `2H(l,l-1) cap 4H(l,l-1)` directly from the family's own definition for `l=2,...,8`
+and confirmed the natural reading is false at every one of them (at `l=8`, `|H(8,8)|=1217` against
+`|RHS|=1354`, no containment). One-character-class fix (`j>=l` to `j>l`) resolves it exactly,
+matching the theorem's real range.
+
+Six of the seven minors are further precision gaps in the same rewritten abstract, all found by
+the close, sentence-by-sentence read the round was asked to give it: a missing antecedent for
+"budget" (C-269), a "construction" that should read "null" to match the body's own term (C-270),
+a dropped "computed" that changed what "all but one level" quantifies over (C-271), a
+"given one further verified property" phrasing that reads as an open condition where the body
+states the result is unconditional once verified (C-272, checked against the body's exact wording
+before editing), and a complete omission of Section 5.2's own finding (C-273, added back in one
+compressed clause, funded by trims elsewhere in the abstract to stay under arXiv's limit). All six
+fixed in the same pass as C-268, in the abstract itself.
+
+The seventh minor, C-274, is a body-text gap: Section 7 states a corner-redundancy check was
+performed at widths below `2l` but never states its outcome. Rather than assert a range-wide
+result not independently checked here (Opus itself verified only `l<=8` of the paper's claimed
+`l=3,...,13`), the sentence was cut outright, since its own final clause already confirms nothing
+else in the paper depends on it.
+
+Opus also flagged, explicitly outside the PDF-only tally, that Section 2's swap and `l=24` history
+looked suspicious against context it recalled but could not verify from the PDF alone. Rule 8e
+says every lead a critique surfaces gets a real, bounded look, so this was investigated properly
+rather than dismissed as out of scope: `swapon --show` confirms a `1.8TiB` partition today, and
+`notes/H-001.md`'s full history shows the paper's `500GiB` figure is correct for `l=22` and `l=23`
+(no resize was needed for either) but swap was resized to `1.8TiB` specifically before the `l=24`
+attempts, well before the paper's account picks back up. Worse, "three attempts, each failed...
+not attempted further" undercounts the real history and misattributes why the table stops at
+`l=23`: there were at least four `l=24` launches (a reboot loss, a `systemd-oomd` policy kill, a
+deliberate kill by the researcher to free the machine for a competing computation, and a further
+attempt that ran for many hours, was paused and resumed more than once, and was still active, not
+failed, when the project's effort moved to writing up the results already in hand). `HYPOTHESES.md`'s
+own H-001 row records the real reason: "`l=24` formally aborted, 2026-08-09, researcher's explicit
+final decision," a scope decision, not a technical failure. Rewrote the passage to state the swap
+resize, attribute the early losses to their actual causes, and describe `l=24` as not pursued to
+completion rather than uniformly failed.
+
+Two more non-tallied "bicos" Opus reported alongside the two minors were also given a real look and
+fixed, both quick and both real: Lemma 1's statement literally includes `j=0`, for which
+`R_{j-1,j}=R_{-1,0}` is not a defined object under equation (1)'s `j,k>=0` requirement, fixed by
+restricting to `1<=j<l`, matching what the proof itself actually handles; and Corollary 11's "a
+shorter run of consecutive powers" is false at the exact boundary where the run reaches the full
+order of `2` modulo `3^l` (`t+1` can equal, not just fall short of, `2*3^{l-1}`), fixed to "a run
+of at most `2*3^{l-1}` consecutive powers," which covers the equality case without changing the
+(already correct) distinctness conclusion.
+
+Verification breadth this round matched or exceeded every prior round: Table 1 reproduced for
+`l=1,...,12` from an independent bitset DP; Table 2's AIC/BIC/LOOCV figures matched to the last
+printed digit, including the exact `ln 14 - 2` identity between `dAIC` and `dBIC` for the constant
+model; Remark 7's `L` values at both cited ranges; Empirical Result 4 solved from scratch for
+`l=1,...,9`; Table 3's `rho_3` through `rho_6` solved from a from-scratch mean-payoff-game solver;
+Propositions 8 and 9's exact and asymptotic figures, including the `l=2,m=1` counterexample;
+Section 5.2's valuation list and cardinality thresholds at `l=10,12,14,18`; Section 5.3's holdout
+counts, `lambda` values, and the full multinomial-null arithmetic chain; and every result in
+Sections 6 and 7 (Theorem 10, Corollaries 11 and 12, Lemma 15, Propositions 16, 20, 21, 23, 24,
+Empirical Results 13, 19, 21) checked numerically or line by line, with nothing wrong found beyond
+what is logged above. Two suggestions, not defects, were also offered and not acted on this round
+(logged for the researcher rather than the paper): extending Empirical Result 4's own verification
+depth past `l=12` using a faster `O(3^n)` reformulation Opus used for its own check, and a
+model-leadership sensitivity Opus independently reproduced (the logarithmic model led the AIC
+comparison through `l=21`; slow-linear only overtakes it once `l=22,23` are added), offered as
+concrete support for the Discussion's existing "how thin the current margin is" remark.
+
+Recompiled clean (20 pages, unchanged; 0 errors, 0 undefined references, 0 em-dashes, parenthesis
+balance 744/744). Visually re-verified the abstract page, the rewritten Section 2 `l=24` passage,
+and the Section 7 corner-redundancy passage via rendered PNGs.
+
+Full findings C-268 through C-274 resolved, all fixed, plus the two non-tallied bicos and the
+Section 2 investigation. Combined tally (0/0/1/7): the streak resets to 0. Need 3 consecutive
+rounds at 0/0/0 crit/major/moderate with minor<3 to stop. Proceeding to Round 23.

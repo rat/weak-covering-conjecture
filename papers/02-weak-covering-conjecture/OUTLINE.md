@@ -607,3 +607,31 @@ A push), notes/H-013.md, notes/GAP-A-round4.md, notes/GAP-A-round5*.md.
       technique are logged in CRITIQUE.md for the researcher, not yet written into the paper.
       Recompiled clean, 20 pages, 0 errors, 0 em-dashes, parenthesis balance 743/743. Streak 1 of
       3. Round 22 next.
+
+- [x] **Round 22 complete (2026-08-10).** Codex not retried. Streak resets to 0 (0/0/1/7): the
+      abstract rewritten in Round 21 got the sharpest scrutiny, as expected. One moderate,
+      independently confirmed by brute force before acting (l=2,...,8): the abstract's "for
+      budgets j>=l" reads as claiming the doubling inclusion at j=l itself, which is false;
+      Theorem 10 only covers j>l. Six of seven minors are further abstract precision gaps from the
+      same close read (missing antecedent, a mislabeled "construction," a dropped "computed," an
+      "given one further verified property" phrasing reading as conditional where the body is
+      unconditional, and a complete omission of Section 5.2's finding, added back in one clause).
+      The seventh is a Section 7 sentence stating a check was performed without stating its
+      outcome; cut rather than guessing the unverified result. Investigating a non-tallied
+      observation about Section 2's swap/l=24 history (flagged by Opus as suspicious but
+      unverifiable from the PDF) surfaced a real problem: the paper's "three attempts, each
+      failed... not attempted further" undercounts the real history and misattributes why l=24
+      stopped (a deliberate scope decision per HYPOTHESES.md's H-001 row, not a technical
+      failure of the final, still-active attempt). Rewrote with the accurate history. Two more
+      non-tallied precision gaps fixed: Lemma 1 technically included the undefined j=0 case;
+      Corollary 11's "shorter run" is false at the exact boundary where the run reaches the full
+      order of 2. Separately, per the researcher's explicit go-ahead to pursue Round 21's two
+      informational leads with minimal paper impact: independently verified (brute force,
+      l=1,...,9 sanity-checked against the paper's own l=6,...,9 pattern first) that j=l tightness
+      also fails at l=10,...,13, and extended Empirical Result 13's own stated range accordingly,
+      the smallest possible edit. Deferred extending Empirical Result 4 past l=12 (Opus's own
+      O(3^n) reformulation is unseen and a from-scratch reimplementation was not ready to trust
+      without independent cross-checking; logged in H-016 rather than rushed) and the
+      model-leadership-sensitivity observation (logged in new H-017, descriptive color, not a
+      correction). Recompiled clean, 20 pages, 0 errors, 0 em-dashes, parenthesis balance
+      756/756. Streak reset to 0, 3 to go. Round 23 next.
