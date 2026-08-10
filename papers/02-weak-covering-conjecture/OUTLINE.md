@@ -755,5 +755,19 @@ A push), notes/H-013.md, notes/GAP-A-round4.md, notes/GAP-A-round5*.md.
       numbered proof (confirming e.g. Theorem 10's `j>=l` hypothesis is tight via constructed
       counterexamples at `j<l`, not merely sufficient). Recompiled clean, 20 pages, 0 errors,
       parenthesis balance 758/758. **29 rounds total, 296 findings opened, every one fixed,
-      rejected with reason, or superseded; none left open.** Next: researcher's own review pass,
-      Zenodo archival of the reproducibility repository, and a decision on `main-pt.tex`.
+      rejected with reason, or superseded; none left open.**
+
+- [x] **`main-pt.tex` written, 2026-08-10, synchronized with `main.tex` post-loop-closure.** Full
+      Portuguese translation, same structure, labels, bibliography, and every decimal/large-integer
+      literal verified identical to `main.tex` by direct diff (labels, `\cite`/`\ref`/`\eqref`
+      usage, the bibliography block word-for-word, every 2+ decimal-digit number, every 4+ digit
+      integer). Environment counts match exactly (3 theorems, 8 propositions, 4 lemmas, 3
+      corollaries, 1 remark, 5 empirical results). Added `babel[brazil]` and an explicit
+      `\refname` override so auto-generated text (``Proof'' to ``Demonstração'', ``Table'' to
+      ``Tabela'', ``References'' to ``Referências'') localizes correctly, not just the
+      hand-translated prose; also added an `arXiv` hyphenation exception after babel's Portuguese
+      rules broke it awkwardly in the bibliography. Recompiles clean, 22 pages (vs. `main.tex`'s
+      20, expected from Portuguese running slightly longer), 0 errors, 0 em-dashes, parenthesis
+      balance 759/759 matching `main.tex` exactly. Visually spot-checked five pages (title/abstract,
+      Table 1, Table 3, Discussion, references). Zenodo archival already done (see Section 9 of
+      both language versions, DOI `10.5281/zenodo.21877643`). Next: researcher's own review pass.

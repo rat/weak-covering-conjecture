@@ -1,0 +1,1408 @@
+\documentclass[11pt]{amsart}
+
+\usepackage[brazil]{babel}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[margin=1in]{geometry}
+\usepackage[hyphens]{url}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Teorema}
+\newtheorem{proposition}[theorem]{Proposi\c{c}\~ao}
+\newtheorem{lemma}[theorem]{Lema}
+\newtheorem{corollary}[theorem]{Corol\'ario}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Defini\c{c}\~ao}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Observa\c{c}\~ao}
+\newtheorem{empresult}[theorem]{Resultado Emp\'irico}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\hyphenation{arXiv}
+
+\title[A Conjectura da Cobertura Fraca de Wirsching]{A Conjectura da Cobertura Fraca de Wirsching: um
+c\'alculo estendido, uma cota condicional e a estrutura do que resiste \`a cobertura}
+
+\author{Renato Augusto Tavares}
+
+\begin{document}
+
+\maketitle
+
+\vspace{-2.5em}
+\begin{center}
+\normalsize Universidade Federal de Goi\'as \par
+\texttt{rat@discente.ufg.br} \par
+ORCID: \url{https://orcid.org/0009-0002-0196-3311}
+\end{center}
+
+\begin{abstract}
+A Conjectura da Cobertura Fraca de Wirsching, de 1998, pede um $K(l)$ subexponencial tal que um
+conjunto $R_{j-1,j}\subset\Z_3^*$ suficientemente grande seja forçado a cobrir todo resíduo unidade
+módulo $3^l$. Estendemos o cálculo exato de $j^*(l)$, o menor orçamento de cobertura, de $l=20$
+para $l=23$, e comparamos quatro modelos de crescimento para $e(l):=j^*(l)-l\log_4 3$ contra sua
+cauda. Um modelo constante é incondicionalmente impossível (provamos $e(l)\ge\tfrac14\log_2l-O(1)$)
+e desfavorecido do início ao fim; as alternativas crescentes não são distinguidas entre si. Nossa
+melhor cota, $j^*(l)\le\tfrac98l+\tfrac{33}2$, vem de um relaxamento por jogo de payoff médio via
+uma correspondência, verificada computacionalmente, não provada em geral. A rota de Fourier é
+bloqueada logo em seu primeiro passo: seu critério de positividade é comprovadamente inatingível em
+todo orçamento; concedendo-o, cancelamento de raiz quadrada não conseguiria superar a cota do jogo
+de payoff médio. Um cálculo adicional encontra a maior parte da massa das frequências primitivas em
+coeficientes abaixo de um limiar fixo, evidência contra um reparo por conjunto excepcional esparso.
+Diagnósticos de modelo nulo em um par encontram estrutura que nenhum dos nulos força, não
+calibrada. Provamos que, para orçamentos $j>l$, o conjunto não coberto em um orçamento está contido
+tanto em duas vezes quanto em quatro vezes o conjunto não coberto no orçamento anterior, dando uma
+cota superior recursiva para $j^*(l)$. Essa cota é provada exata para $l+2\le j\le j^*(l)$ em
+$l=3,\dots,13$ (verificado exaustivamente), empírica até $l=21$; o caso de fronteira $j=l+1$ é
+provado em $l=3,\dots,6$ e empírico até $l=22$. Falsificamos uma regra de reparo de custo $1$ que
+ele sugere, provamos que todo resíduo não coberto por último é $\equiv1\pmod3$ sempre que
+$j^*(l)\ge l+1$ (todos os níveis calculados menos um), provamos uma lei de contenção de duas
+classes mod $9$, e reportamos identidades adicionais, algumas verificadas mas não provadas. Duas
+questões abertas são enunciadas com exatidão, mais estreitas que a conjectura; outras surgem em
+outros pontos. A Conjectura da Cobertura Fraca permanece aberta.
+\end{abstract}
+
+\noindent\textbf{Palavras-chave:} mapa de Collatz, dinâmica $3$-ádica, conjectura de cobertura,
+jogos de payoff médio, somas exponenciais, teoria de Littlewood--Offord.
+
+\noindent\textbf{Classificação de Assuntos Matemáticos 2020:} 11B50, 11K70, 91A50, 11L07, 37A44.
+
+\section{Introdução}
+\label{sec:intro}
+
+A monografia de 1998 de Wirsching~\cite{wirsching1998} estuda a densidade de conjuntos de
+predecessores sob o mapa $3n+1$ através de uma construção de médias sobre os inteiros $3$-ádicos.
+Uma cadeia de Markov limite construída a partir dessa construção tem uma densidade invariante, e a
+própria rota de Wirsching até uma densidade positiva de predecessores passa por uma questão de
+cobertura, enunciada nessa mesma monografia~\cite{wirsching1998}, sobre uma família de subconjuntos
+finitos de $\Z_3^*$, as unidades $3$-ádicas. Um artigo posterior, do próprio autor, isola essa rota
+como um alvo autocontido e enuncia, como conjecturas abertas, as lacunas ainda não transpostas entre
+ela e uma prova~\cite{wirsching2003}. Para inteiros $j,k\ge0$, escreva
+\begin{equation}
+\label{eq:Rjk}
+R_{j,k} := \Bigl\{\, \sum_{i=0}^{j} 2^{a_i}3^i \ \Bigm|\ j+k \ge a_0 > a_1 > \cdots > a_j \ge 0
+\,\Bigr\} \subset \Z_3^*.
+\end{equation}
+Cada elemento de $R_{j,k}$ é construído a partir de uma sequência estritamente decrescente de $j+1$
+``posições de dígito'' escolhidas em $\{0,\dots,j+k\}$: a $i$-ésima posição escolhida, contando do
+topo, contribui $2^{a_i}$ escalado por $3^i$. A Conjectura da Cobertura Fraca de Wirsching
+(Conjectura~3.9, Capítulo~V,~\cite{wirsching1998}) pede um $K(l)$ subexponencial, ou seja,
+$\lim_{l\to\infty} K(l)e^{-\gamma l}=0$ para toda constante $\gamma>0$ (definição do próprio
+Wirsching, mesmo capítulo), tal que $|R_{j-1,j}| \ge K(l)\cdot 3^l$ já force $R_{j-1,j}$ a cobrir
+todo resíduo unidade módulo $3^l$; a cardinalidade do lado esquerdo é a da própria família de
+tuplas, antes da redução, que pela bijeção da Proposição~\ref{prop:lowerbound} vale $\binom{2j}{j}$;
+o tamanho (a priori muito menor) de sua imagem módulo $3^l$ é uma quantidade diferente. Escrevendo
+$j^*(l)$ para o menor $j$ tal que $R_{j-1,j}$ cobre $(\Z/3^l\Z)^*$ exatamente (uma quantidade que
+existe para todo $l$, incondicionalmente; Proposição~\ref{prop:exist} abaixo), a forma forçante da
+conjectura e a taxa de crescimento de $j^*(l)$ coincidem uma vez que a cobertura, ao ser alcançada,
+persista em todo orçamento maior: isso vale para $j\ge l$ (Teorema~\ref{thm:doubling},
+Seção~\ref{sec:holdouts}), o que cobre todo nível da Tabela~\ref{tab:jstar}, mas não está
+estabelecido abaixo de $l$, o regime que a taxa conjecturada acabaria por alcançar. Com essa
+ressalva, a conjectura diz respeito à taxa de crescimento de
+\begin{equation}
+\label{eq:el}
+e(l) := j^*(l) - l\log_4 3,
+\end{equation}
+o excesso do orçamento de cobertura verdadeiro sobre a taxa de ordem principal que um argumento de
+cardinalidade sozinho prediz ($|R_{j-1,j}| = \binom{2j}{j} \sim 4^j/\sqrt{\pi j}$, logo igualar
+$2\cdot3^{l-1}$ resíduos exige $j \sim l\log_4 3$ em ordem principal). No limiar,
+$K(l) \asymp |R_{j^*(l)-1,j^*(l)}|/3^l \asymp 4^{e(l)}/\sqrt{j^*(l)}$; a correção
+$\sqrt{j^*(l)}$ é polinomial em $l$ em todo nível de fato calculado, onde $j^*(l)=O(l)$
+(Tabela~\ref{tab:jstar}), embora nenhuma cota polinomial incondicional sobre $j^*(l)$ seja provada
+aqui (a cota incondicional da Proposição~\ref{prop:exist} é exponencial; a cota linear do
+Corolário~\ref{cor:mpgbound} é condicional). Essa direção direta não precisa de ressalva de
+persistência alguma: $j^*(l)$ é definido como um mínimo, a conjectura (para qualquer $K$
+subexponencial válido) torna o primeiro orçamento $j$ com $\binom{2j}{j}\ge K(l)\cdot3^l$ um
+orçamento de cobertura, e um mínimo é no máximo qualquer elemento de seu próprio conjunto
+definidor, logo $j^*(l)\le l\log_43+o(l)$ segue diretamente; combinada com a cota inferior
+incondicional da Proposição~\ref{prop:lowerbound}, a veracidade da conjectura força $e(l)$ a
+crescer estritamente mais devagar que linearmente, sem ressalva alguma anexada. A ressalva acima
+pertence à \emph{equivalência} enunciada no início deste parágrafo, não a essa implicação em uma só
+direção: construir um $K$ válido \emph{a partir} da densidade limiar exige que a cobertura persista
+em todo orçamento além de $j^*(l)$, não provado abaixo de $l$. A recíproca, que $e(l)=o(l)$
+estabeleceria por sua vez a conjectura, precisa da mesma persistência, que o
+Teorema~\ref{thm:doubling} só dá para $j\ge l$; abaixo de $l$, o regime que um $e(l)$ verdadeiramente
+sublinear acabaria por alcançar, a recíproca é aberta.
+
+Um manuscrito anterior, não publicado, do autor calculou $j^*(l)$ exatamente para $l=1,\dots,20$
+por enumeração direta e reportou a tabela resultante sem uma análise da taxa de crescimento. Este
+artigo faz três coisas. Primeiro, estende essa tabela até $l=23$ e dá uma comparação estatística
+apropriada de modelos candidatos de crescimento para $e(l)$ contra a cauda da tabela estendida
+(Seções~\ref{sec:computation} e~\ref{sec:growth}). Segundo, dá a melhor cota superior sobre
+$j^*(l)$ que encontramos, via uma reformulação do orçamento de cobertura como um jogo de payoff
+médio, condicional à correspondência verificada empiricamente entre os dois, enunciada no Resultado
+Empírico~\ref{er:soundness} (Seção~\ref{sec:mpg}). Terceiro, e com maior extensão, reporta uma
+tentativa sustentada de fechar a lacuna até a taxa conjecturada diretamente, primeiro pela versão
+ingênua de cancelamento uniforme da abordagem natural de Fourier e, uma vez que essa versão se
+mostra malsucedida por uma razão verificável, por um estudo direto dos resíduos que de fato resistem
+à cobertura (Seções~\ref{sec:gapA}--\ref{sec:further}). Essa segunda tentativa não resolve a
+conjectura. Ela produz um teorema sobre esses resíduos, uma falsificação da forma de custo $1$ de
+uma regra de reparo que o teorema poderia sugerir, e duas questões abertas nomeadas, cada uma mais
+estreita que a própria conjectura e merecedora de um ataque dedicado por conta própria.
+
+\section{O cálculo}
+\label{sec:computation}
+
+A Tabela~\ref{tab:jstar} dá $j^*(l)$ e $e(l)$ para $l=1,\dots,23$. Os valores para $l\le20$
+reproduzem exatamente a tabela do manuscrito anterior; foram recalculados aqui de forma
+independente por uma reimplementação em Rust feita do zero da busca de cobertura (um programa
+dinâmico de rotação de bitsets sobre resíduos módulo $3^l$), validada contra a implementação
+original em Python em todo $l\le20$ antes de ser confiada para a extensão. Cada $j^*(l)$ reportado
+é o menor orçamento no qual o bitset de cobertura do próprio programa dinâmico está cheio, de modo
+que a busca certifica tanto a cobertura em $j^*(l)$ quanto sua ausência em $j^*(l)-1$ internamente,
+por construção, em todo nível em que roda com $j^*(l)-1\ge l$ (excetuando vacuamente $l=1$, onde
+$j^*(1)-1=0$ não é sequer um orçamento em que $R_{j-1,j}$ esteja definido); a concordância em
+$l\le20$ contra uma implementação escrita de forma independente é a evidência deste artigo de que a
+própria busca está correta. $l=21$ foi desde então conferido de forma cruzada da mesma maneira: uma
+implementação separada em Python, feita do zero (bitsets de inteiros grandes nativos, seguindo a
+recorrência do programa dinâmico em Rust como uma especificação em vez de copiar seu código),
+reproduz de forma independente $j^*(21)=25$, confirmando tanto que $j=24$ falha em cobrir quanto que
+$j=25$ cobre. $l=22,23$ são levados adiante apenas por inferência, sem uma conferência cruzada
+separada nesses níveis; ambos são novos.
+
+A busca acima só tenta orçamentos $j\ge l$ no nível $l$, de modo que, por si só, certifica $j^*(l)$
+apenas contra candidatos menores dentro dessa faixa.
+
+\begin{lemma}[Nenhum orçamento menor cobre]
+\label{lem:nosmaller}
+Para $l=2,\dots,23$, nenhum $j$ com $1\le j<l$ tem $R_{j-1,j}$ cobrindo $(\Z/3^l\Z)^*$, de modo que
+$j^*(l)\ge l$ vale diretamente, não apenas em relação à faixa que a busca acima tenta.
+\end{lemma}
+
+\begin{proof}
+Se $R_{j-1,j}$ cobre $(\Z/3^L\Z)^*$ para algum $L\ge j$, ele também cobre $(\Z/3^j\Z)^*$: a redução
+módulo $3^j$ se fatora através da redução módulo $3^L$, e o homomorfismo de anéis
+$\Z/3^L\Z\to\Z/3^j\Z$ se restringe a uma sobrejeção de grupos de unidades (toda unidade módulo $3^j$
+se levanta a uma unidade módulo $3^L$), de modo que a imagem de um conjunto completo de unidades
+módulo $3^L$ é um conjunto completo de unidades módulo $3^j$.
+
+$R_{0,1}=\{1,2\}$ tem $2$ elementos, aquém de $|(\Z/3^l\Z)^*|=2\cdot3^{l-1}\ge6$ para $l\ge2$, logo
+$j=1$ nunca cobre em $l\ge2$: $j^*(l)\ge2$ para $l\ge2$.
+
+Fixe $l$ com $2\le l\le23$ e suponha, por contradição, que algum $j_0$ com $2\le j_0<l$ tenha
+$R_{j_0-1,j_0}$ cobrindo $(\Z/3^l\Z)^*$. A redução acima, com $L=l$, dá $R_{j_0-1,j_0}$ cobrindo
+também $(\Z/3^{j_0}\Z)^*$, isto é, $j^*(j_0)\le j_0$. Mas $j_0<l\le23$, logo $j_0$ é ele mesmo um
+nível que a busca acima já rodou, começando do próprio orçamento $j_0$, e a busca certifica
+diretamente que o orçamento $j_0$ falha em cobrir $(\Z/3^{j_0}\Z)^*$ ali (esse é o conteúdo bruto da
+entrada $j^*(j_0)>j_0$ da Tabela~\ref{tab:jstar}, independente de qualquer orçamento menor também
+falhar, o que não é suposto). Contradição. Logo nenhum $j_0<l$ cobre, dando $j^*(l)\ge l$.
+\end{proof}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{c|c|c||c|c|c||c|c|c}
+$l$ & $j^*(l)$ & $e(l)$ & $l$ & $j^*(l)$ & $e(l)$ & $l$ & $j^*(l)$ & $e(l)$ \\ \hline
+1 & 1 & 0.208 & 9 & 13 & 5.868 & 17 & 21 & 7.528 \\
+2 & 4 & 2.415 & 10 & 15 & 7.075 & 18 & 22 & 7.735 \\
+3 & 6 & 3.623 & 11 & 16 & 7.283 & 19 & 23 & 7.943 \\
+4 & 7 & 3.830 & 12 & 17 & 7.490 & 20 & 24 & 8.150 \\
+5 & 9 & 5.038 & 13 & 18 & 7.698 & 21 & 25 & 8.358 \\
+6 & 10 & 5.245 & 14 & 19 & 7.905 & 22 & 26 & 8.565 \\
+7 & 11 & 5.453 & 15 & 20 & 8.113 & 23 & 27 & 8.773 \\
+8 & 12 & 5.660 & 16 & 20 & 7.320 & & & \\
+\end{tabular}
+\caption{$j^*(l)$ e $e(l) = j^*(l) - l\log_4 3$, $l=1,\dots,23$.}
+\label{tab:jstar}
+\end{table}
+
+O único platô na tabela, $j^*(15)=j^*(16)=20$, não é um erro: $l=15\to16$ é o único passo, entre os
+$22$ de $l=1$ a $l=23$, em que o orçamento de cobertura não aumenta, e é exatamente o evento que a
+contagem de platôs da Seção~\ref{sec:growth} registra. A diferença inteira $j^*(l)-l$, uma prima
+mais grosseira de $e(l)$, é $0,2,3,3,4,4,4,4,4,5,5,5,5,5,5,4,4,4,4,4,4,4,4$ para $l=1,\dots,23$:
+ela nunca cresce além de $5$ na faixa calculada, e nada provado aqui descarta que esse teto
+persista; a cota logarítmica da Proposição~\ref{prop:lowerbound} sobre $e(l)$ não a toca, já que um
+$j^*(l)-l$ limitado faz $e(l)=(j^*(l)-l)+l(1-\log_43)$ crescer linearmente, confortavelmente acima
+de um piso logarítmico. Se o teto persistisse, $j^*(l)=l+O(1)$ tornaria $e(l)$ linear e, pela
+identidade notada após \eqref{eq:el}, tornaria $K(l)$ exponencial e falsificaria a conjectura, a
+contrapositiva da direção direta sem ressalva ali enunciada. Essa planicidade é um fato sobre a
+faixa verificada, não uma cota provada em nenhum dos dois sentidos.
+
+$l=21$ cabe na RAM física uma vez corrigido um passo de paralelização que desperdiçava memória na
+reimplementação em Rust. $l=22$ precisa de aproximadamente $84\,\mathrm{GiB}$ de estado, acima dos
+$62\,\mathrm{GiB}$ de RAM física da máquina, de modo que um arquivo de swap de $500\,\mathrm{GiB}$
+foi adicionado à máquina especificamente para este cálculo; a execução levou aproximadamente
+$10{,}749\,\mathrm{s}$ ($\sim\!3$ horas), com E/S de swap como o custo dominante, contra
+$748\,\mathrm{s}$ para $l=21$ sem swap. $l=23$ exigiu aproximadamente $263\,\mathrm{GiB}$ de estado,
+confortavelmente dentro do mesmo orçamento de swap, e $375{,}615\,\mathrm{s}$ ($\sim\!104$ horas).
+
+\section{O crescimento de $e(l)$}
+\label{sec:growth}
+
+Comparamos quatro formas funcionais candidatas para o crescimento de $e(l)$ contra a cauda
+$l=10,\dots,23$ ($n=14$), cada uma ajustada por mínimos quadrados ordinários: $e(l)=c$ (constante),
+$e(l)=a+b\ln l$ (logarítmica), $e(l)=a+b\sqrt l$ (raiz quadrada), e $e(l)=a+bl$ (linear lenta). A
+Tabela~\ref{tab:aic} dá as estatísticas de ajuste, usando as formas gaussiano-MQO
+$\mathrm{AIC}=n\ln(\mathrm{RSS}/n)+2k$, $\mathrm{BIC}=n\ln(\mathrm{RSS}/n)+k\ln n$ (RSS a soma dos
+quadrados dos resíduos, $k$ o número de coeficientes de regressão, $1$ para o modelo constante e
+$2$ para os outros três), e o RMSE validado por leave-one-out; como apenas as diferenças
+$\Delta\mathrm{AIC}$, $\Delta\mathrm{BIC}$ são usadas abaixo, a convenção para uma constante
+aditiva compartilhada entre os modelos não as afeta. $e(l)$ é uma sequência exata e determinística,
+sem modelo de amostragem por trás, de modo que estas são lidas de forma descritiva do início ao
+fim, como escores de ajuste penalizados sobre a tabela observada, e não como evidência estatística
+calibrada.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{l|c|c|c|c}
+modelo & $k$ & $\Delta\mathrm{AIC}$ & $\Delta\mathrm{BIC}$ & RMSE LOOCV \\ \hline
+constante & 1 & 16.091 & 15.452 & 0.5200 \\
+logarítmico & 2 & 1.512 & 1.512 & 0.2991 \\
+raiz quadrada & 2 & 0.722 & 0.722 & 0.2909 \\
+linear lento & 2 & 0.000 & 0.000 & 0.2837
+\end{tabular}
+\caption{Comparação de modelos para $e(l)$, $l=10,\dots,23$. $\Delta$AIC/BIC relativos ao modelo de
+melhor ajuste (linear lento).}
+\label{tab:aic}
+\end{table}
+
+Um modelo constante é desfavorecido de forma acentuada e consistente: $\Delta\mathrm{AIC}=16.09$,
+$\Delta\mathrm{BIC}=15.45$, ambos crescendo a cada $l$ adicionado desde $l=21$. Os três modelos de
+crescimento não são distinguidos entre si pela regra prática convencional
+$\Delta\mathrm{AIC}>2$, com o linear lento tomando uma dianteira estreita tanto em AIC quanto em
+validação cruzada leave-one-out; os três regressores candidatos ($\log l$, $\sqrt l$, $l$) são eles
+mesmos altamente correlacionados nessa faixa (correlação par a par $\ge0.993$), de modo que esse
+ranqueamento reflete principalmente o quão fina é a margem atual. Pela identidade notada
+após~\eqref{eq:el}, um $e(l)$ linear tornaria $K(l)$ exponencial, falsificando a conjectura
+diretamente. Catorze pontos altamente correlacionados não conseguem distinguir essa possibilidade
+de um crescimento logarítmico ou de raiz quadrada, de modo que essa comparação não resolve a
+questão em nenhum dos dois sentidos; ela apenas diz quais taxas de crescimento permanecem vivas.
+
+Nada desse aparato é de fato necessário para descartar um $e(l)$ constante: como $\log_43<1$,
+arredondar uma quantidade constante mais linear $l\log_43+c$ ao inteiro mais próximo só pode mudar
+por $0$ ou $1$ de um $l$ para o próximo, e no entanto $j^*(1)=1$ e $j^*(2)=4$, um incremento de
+$3$. Uma origem com $e(l)$ constante é incompatível já com as duas primeiras entradas da tabela,
+sem exigir nenhum teste estatístico.
+
+Um fato combinatório direto descarta a mesma cauda de forma ainda mais acentuada, restrito a onde o
+modelo ainda não está morto sobre a tabela completa: o modelo de arredondamento-constante por trás
+dele prediz todo incremento em $\{0,1\}$, o que a tabela completa já refuta (o incremento de $3$
+notado acima, e incrementos de $2$ em outros pontos da tabela, por exemplo de $j^*(2)=4$ para
+$j^*(3)=6$). Restrito à cauda $l=10,\dots,23$ que a comparação de modelos acima usa ($13$
+incrementos sobre os mesmos $14$ pontos, todos de fato em $\{0,1\}$, consistentes com a própria
+predição do modelo ali), um modelo de $c$ fixo $J_l:=\mathrm{arredonda}(l\log_43+c)$ força a
+mudança total sobre quaisquer $13$ passos consecutivos a
+$\{\lfloor13\log_43\rfloor,\lceil13\log_43\rceil\}=\{10,11\}$, para todo $c$ (um fato padrão sobre
+o arredondamento de uma progressão aritmética de inclinação irracional, verificado diretamente
+sobre uma malha fina de valores de $c$). A mudança observada é $j^*(23)-j^*(10)=27-15=12$, fora
+desse par para todo $c$: nenhum modelo de arredondamento-constante consegue reproduzir essa cauda
+de forma alguma, uma conclusão que não precisa de probabilidade nenhuma. $e(l)$ é uma sequência
+exata e determinística do início ao fim, de modo que nada neste parágrafo carrega uma interpretação
+amostral. Entre os $13$ incrementos, exatamente um é zero (o platô $l=15\to16$ notado acima); sob o
+modelo de arredondamento-constante, $e(l+1)-e(l)$ só pode ser $1-\log_43\approx0.2075$ ou
+$-\log_43\approx-0.7925$. A contagem de platôs acima e a comparação por MQO acima são ambas funções
+da mesma sequência de incrementos de $14$ pontos, de modo que não são conferências independentes,
+embora a observação do platô incida especificamente sobre o modelo de arredondamento-constante, um
+objeto diferente da regressão constante de intercepto livre $e(l)=c$ que a Tabela~\ref{tab:aic}
+ajusta.
+
+Um $e(l)$ constante é desfavorecido descritivamente por toda medida acima. Ele é também,
+incondicionalmente, impossível.
+
+\begin{proposition}[Ilimitação de $e(l)$]
+\label{prop:lowerbound}
+$e(l) \ge \tfrac14\log_2 l - O(1)$.
+\end{proposition}
+
+\begin{proof}
+Tuplas de expoentes distintas dão somas distintas: como os $a_i$ são distintos, $a_{j-1}$ é o único
+mínimo, de modo que $V=\sum_i 2^{a_i}3^i$ tem valuação $2$-ádica exatamente $a_{j-1}$ (todo outro
+termo é divisível por uma potência de $2$ estritamente maior), o que recupera $a_{j-1}$ diretamente
+a partir de $V$. O termo completo $2^{a_{j-1}}3^{j-1}$ é então subtraído, e o processo itera sobre
+os $j-1$ termos restantes. Assim $R_{j-1,j}$, em bijeção com $j$-subconjuntos do conjunto de $2j$
+elementos $\{0,\dots,2j-1\}$, tem cardinalidade exata $\binom{2j}{j}$ (essa cardinalidade é o
+próprio Corolário~1.8 de Wirsching, Capítulo~V,~\cite{wirsching1998}; o argumento de injetividade
+acima é elementar e já aparece, para o mesmo tipo de somas $2^a3^b$, em~\cite{tao2011blog}).
+Cobrir $(\Z/3^l\Z)^*$, de tamanho $2\cdot3^{l-1}$, exige que o domínio seja ao menos tão grande
+quanto o contradomínio: $\binom{2j}{j} \ge 2\cdot3^{l-1}$ é necessário em $j=j^*(l)$ em particular,
+já que $R_{j^*(l)-1,j^*(l)}$ cobre por definição de $j^*(l)$. A cota explícita
+$\binom{2n}{n} \le 4^n/\sqrt{3n+1}$, válida para todo $n\ge1$, transforma isso em
+$4^j \ge 2\cdot3^{l-1}\sqrt{3j+1}$, logo
+\[
+j \ge l\log_4 3 - \log_4 3 + \log_4 2 + \tfrac12\log_4(3j+1).
+\]
+Descartando o último termo, não negativo, já dá $j \ge l\log_4 3 - O(1)$, logo
+$3j+1 = \Omega(l)$, portanto $\log_4(3j+1) \ge \log_4 l - O(1) = \tfrac12\log_2 l - O(1)$.
+Realimentando isso na desigualdade exibida dá a cota enunciada.
+\end{proof}
+
+\section{Uma cota superior por jogo de payoff médio}
+\label{sec:mpg}
+
+\subsection*{O jogo de precisão total}
+
+Fixe $l\ge1$. Uma \emph{jogada de precisão total} a partir de uma unidade $z_0$ módulo $3^l$ é uma
+sequência de $l$ movimentos: no passo $i=0,\dots,l-1$, a partir de uma unidade $z_i$ módulo
+$3^{l-i}$, um movimento de custo $d_i\ge0$ é \emph{legal} quando $2^{d_i}z_i\equiv1\pmod3$, e
+produz $z_{i+1}:=T_{d_i}(z_i):=(2^{d_i+1}z_i-2)/3$, que então precisa ser uma unidade módulo
+$3^{l-i-1}$ (automático em $i=l-1$, onde $3^{l-i-1}=1$). Escreva $J:=\sum_{i=0}^{l-1}d_i$ para o
+custo total.
+
+\begin{lemma}[Fundamentação]
+\label{lem:ground}
+Para uma jogada de precisão total legal a partir de $z_0$ com custos $d_0,\dots,d_{l-1}$ e custo
+total $J$, defina $a_{l-1}:=0$ e $a_{i-1}:=a_i+d_i+1$ para $i=l-1,\dots,1$ (logo
+$a_0=J-d_0+l-1$). Então
+\[
+2^{J+l-1}z_0 \equiv \sum_{i=0}^{l-1} 2^{a_i}3^i \pmod{3^l}.
+\]
+O lado direito é, por construção, um elemento de $U(l,a_0)$ (Seção~\ref{sec:further}) com expoente
+mais baixo $a_{l-1}=0$.
+\end{lemma}
+
+\begin{proof}
+Por indução no comprimento $n$ da jogada ($n=1,\dots,l$), enunciado para uma jogada de comprimento
+$n$ começando em uma unidade $z$ módulo $3^n$ (correspondendo à notação do lema em $n=l$,
+$z=z_0$). Escreva $J_n:=\sum_{i=0}^{n-1}d_i$ e $a_{n-1}:=0$, $a_{i-1}:=a_i+d_i+1$ para
+$i=n-1,\dots,1$, como acima.
+
+Caso base $n=1$: o único movimento tem $2^{d_0}z\equiv1\pmod3$, que é exatamente
+$2^{a_0+d_0}z\equiv2^{a_0}3^0\pmod3$ já que $a_0=0$ quando $n=1$.
+
+Passo indutivo: suponha que a afirmação vale no comprimento $n-1$ para a subjogada com custos
+$d_1,\dots,d_{n-1}$ começando em $z':=T_{d_0}(z)$, uma unidade módulo $3^{n-1}$; escrevendo
+$a'_i:=a_{i+1}$ para essa subjogada, $a'_{n-2}=a_{n-1}=0$ corresponde ao seu caso base, e sua
+recursão $a'_{i-1}=a'_i+d_{i+1}+1$ corresponde a $a_i=a_{i+1}+d_{i+1}+1$ (a recursão original no
+índice $i+1$), de modo que a hipótese de indução dá
+\[
+2^{a_1+d_1}z' \equiv \sum_{i=0}^{n-2}2^{a_{i+1}}3^i \pmod{3^{n-1}}.
+\]
+Pela definição de $T_{d_0}$, $2^{d_0+1}z\equiv3z'+2\pmod{3^n}$. Multiplicando pela unidade
+$2^{a_1+d_1}$ dá
+\[
+2^{a_1+d_1+d_0+1}z \equiv 3\cdot2^{a_1+d_1}z' + 2^{a_1+d_1+1} \pmod{3^n}.
+\]
+Como $a_0=a_1+d_1+1$ (a recursão em $i=1$), o lado esquerdo é $2^{a_0+d_0}z$ e o último termo é
+$2^{a_0}$. Multiplicando a hipótese de indução por $3$, ela se torna, módulo $3^n$,
+$3\cdot2^{a_1+d_1}z'\equiv\sum_{i=1}^{n-1}2^{a_i}3^i$, logo
+\[
+2^{a_0+d_0}z \equiv 2^{a_0} + \sum_{i=1}^{n-1}2^{a_i}3^i = \sum_{i=0}^{n-1}2^{a_i}3^i \pmod{3^n},
+\]
+a afirmação no comprimento $n$, usando $a_0+d_0=J_n+n-1$ (telescopando a recursão).
+\end{proof}
+
+\begin{empresult}[O pior caso do jogo é $j^*(l)$]
+\label{er:soundness}
+\[
+j^*(l) = \max_{z_0}\ \min\{J : \text{$z_0$ tem uma jogada de precisão total legal de custo total
+$J$}\},
+\]
+o máximo sobre unidades $z_0$ módulo $3^l$. Verificado contra a tabela exata conhecida de $j^*(l)$
+para $l=1,\dots,12$, sem discrepância; que uma jogada de precisão total legal exista a partir de
+toda unidade $z_0$ (o mínimo dentro da expressão é tomado sobre um conjunto não vazio) é parte do
+que essa verificação confirma empiricamente. Uma prova geral precisaria adicionalmente que o
+sucessor permaneça uma unidade no próximo módulo em cada passo, uma condição que a checagem de
+legalidade mod $3$ sozinha não decide. O Lema~\ref{lem:ground} não estabelece isso por si só: o
+giro $2^{J+l-1}$ no lema depende de $z_0$ através de seu próprio $J$ ótimo, de modo que não é uma
+única reetiquetagem do grupo de unidades independente de $z_0$, e não temos uma prova geral da
+identidade exibida.
+\end{empresult}
+
+\subsection*{O relaxamento de janela $k$}
+
+Um movimento de custo $d\ge0$ em $z$ é \emph{legal} quando $2^dz\equiv1\pmod3$, como acima, e
+\emph{seguro} na janela $k$ quando, para $m:=3^k$, cada um dos três resíduos $z,z+m,z+2m$ módulo
+$3m$ mapeia sob $T_d$ de volta a uma unidade módulo $m$. Um jogador minimizador, vendo apenas
+$z\bmod3^k$, escolhe um $d$ legal e seguro; um adversário então revela o próximo dígito $3$-ádico
+oculto $\epsilon\in\{0,1,2\}$, forçando o estado verdadeiro a $T_d(z+3^k\epsilon)\bmod3^k$. Ambas
+as exigências importam: legalidade sozinha pode enviar uma unidade a $0$ (tome $z=1$, $d=0$:
+$T_0(1)=0$), e o filtro de segurança é exatamente o que mantém o passeio dentro de $\Z_3^*$
+independentemente de qual dígito o adversário fornece. Legalidade depende de $d$ apenas através de
+$d\bmod2$ (já que $2$ tem ordem $2$ módulo $3$), e $2$ é raiz primitiva módulo $3^{k+1}$ para todo
+$k\ge0$ (ordem $2\cdot3^k$, por uma indução elementar de elevação do expoente), de modo que
+$2^{d+1}\bmod3^{k+1}$, e portanto $T_d(z)\bmod3^k$ e a própria checagem de segurança, dependem de
+$d$ apenas através de $d\bmod(2\cdot3^k)$: estados sucessores se repetem com esse período à medida
+que $d$ cresce, e todo representante além do menor em sua classe residual tem custo estritamente
+maior para o mesmo efeito, de modo que nunca é usado por uma política ótima. O conjunto de ações em
+cada estado é, portanto, sem perda, o subconjunto de $\{0,\dots,2\cdot3^k-1\}$ que ali é legal e
+seguro, que é finito. Que esse subconjunto seja não vazio em todo estado unidade foi verificado
+computacionalmente em todo $k=3,\dots,14$ usado abaixo; uma prova geral fica em aberto aqui.
+
+Esse jogo de visibilidade restrita é, por construção, um \emph{jogo de payoff médio} de dois
+jogadores sobre os $2\cdot3^{k-1}$ estados unidade módulo $3^k$, com os agora finitos movimentos
+legais e seguros como as arestas do minimizador, as três escolhas de $\epsilon$ do adversário como
+as arestas do maximizador, e payoff a média de longo prazo dos custos de movimento $d$. A teoria
+clássica de tais jogos, iniciada por Ehrenfeucht e Mycielski~\cite{ehrenfeuchtmycielski1979},
+garante um valor e uma política posicional ótima em geral; o Teorema~\ref{thm:mpg} abaixo não
+precisa dessa generalidade, apenas das doze políticas específicas cujos $(\rho_k,C_k)$ resultantes
+são reportados na Tabela~\ref{tab:mpg}, cada uma conferida de forma independente conforme descrito
+na Seção~\ref{sec:code}.
+
+Uma política de janela $k$, rodada contra a sequência real de dígitos, dá uma jogada de precisão
+total legal em qualquer $z$ módulo $3^l$: no passo $i$, o estado remanescente verdadeiro é $z_i$
+módulo $3^{l-i}$, de modo que a política vê o verdadeiro $z_i\bmod3^k$ diretamente sempre que
+$l-i\ge k$, isto é, em todo passo exceto os últimos $k-1$. Uma vez que $l-i<k$, seja porque $l<k$
+globalmente ou porque uma jogada com $l\ge k$ alcançou seus próprios últimos $k-1$ passos, fixe um
+levantamento do estado verdadeiro a um resíduo módulo $3^k$, no primeiro desses passos, preenchendo
+os $l-i$ dígitos remanescentes do estado verdadeiro com $k-(l-i)$ dígitos adicionais arbitrários, e
+rode o jogo de janela $k$ adiante a partir desse levantamento sobre os próprios dígitos
+remanescentes da jogada (não um novo levantamento a cada passo). Dois fatos separados mantêm isso
+consistente com o estado verdadeiro. Primeiro, segurança, por construção, mantém a imagem sob
+$T_d$ de cada uma das três possíveis extensões de um dígito de um estado seguro como uma unidade
+módulo $3^k$, de modo que a política de janela $k$ sempre tem um próximo estado bem definido
+$s_{i+1}:=T_d(s_i+3^k\epsilon_i)\bmod3^k$ sobre o qual agir para qualquer dígito de extensão
+$\epsilon_i\in\{0,1,2\}$, real ou de preenchimento, correspondendo ao sucessor geral $s'(\epsilon)$
+usado na prova do teorema abaixo. Segundo, a partir da fórmula que define $T_d(z)=(2^{d+1}z-2)/3$,
+$T_d(z)\bmod3^{k'}$ depende apenas de $z\bmod3^{k'+1}$ para todo $k'\ge0$; como $k>l-i-1$ ao longo
+desse regime, o termo $3^k\epsilon_i$ nunca afeta nenhum dígito abaixo da posição $k$, em
+particular nenhum dos $l-i$ dígitos de baixa ordem da entrada $s_i$, que pelo fato de precisão são
+exatamente o que determina os $l-i-1$ dígitos de saída de baixa ordem que este passo acompanha, de
+modo que qual $\epsilon_i$ é usado, real enquanto o estado verdadeiro ainda fornece um ou
+arbitrário de preenchimento uma vez que não fornece mais, é irrelevante para eles. Consequentemente,
+se o estado de janela $k$ $s_i$ concorda com o verdadeiro $z_i$ em seus $l-i$ dígitos mais baixos,
+como acontece por construção no primeiro passo de preenchimento e por indução depois disso, então
+$s_{i+1}$ concorda com o verdadeiro $z_{i+1}$ em seus $l-i-1$ dígitos mais baixos independentemente
+de $\epsilon_i$, um dígito a menos de concordância garantida a cada passo, correspondendo
+exatamente a quantos dígitos verdadeiros restam. A legalidade do movimento escolhido no passo $i$
+depende apenas de $z_i\bmod3$, o dígito mais baixo, que está entre os dígitos verdadeiros e
+concordantes em cada um desses passos já que $l-i\ge1$ ao longo de todos eles (os passos rodam
+$i=0,\dots,l-1$); no estado terminal $z_l$, alcançado após o último passo, $l-i=0$ e a exigência de
+unidade módulo $3^0=1$ é vazia. Assim o movimento escolhido permanece legal contra o estado
+verdadeiro de menor precisão em todo passo, e a relação sucessora usada abaixo vale em todo passo,
+incluindo esses últimos $k-1$, com $\epsilon_i$ tomado como o próximo dígito real sempre que o
+estado verdadeiro ainda tem um e um dígito fixo arbitrário depois disso. Escrevendo $s_i$ para
+qualquer que seja o estado de janela $k$ que $\sigma_k$ veja dessa forma no passo $i$ (o verdadeiro
+$z_i\bmod3^k$, ou um levantamento fixo dele), $s_{i+1}$ é por construção o sucessor $s_i'(\epsilon_i)$
+sob o movimento escolhido por $\sigma_k$, de modo que $s_0,\dots,s_l$ é exatamente uma jogada da
+forma sobre a qual a prova abaixo soma, com custos de movimento iguais aos da jogada real (esse
+regime é parte do que a checagem da política contra o programa dinâmico de cobertura em $k=4,7$
+contra $l$ até $14$ já exercitou, com zero movimentos ilegais ou inseguros; toda jogada ali passa
+por esse mesmo regime de últimos $k-1$ passos independentemente de quão grande $l$ seja).
+
+\begin{theorem}[Cota do relaxamento de janela, condicional ao Resultado Empírico~\ref{er:soundness}]
+\label{thm:mpg}
+Para cada $k=3,\dots,14$, a política certificada por trás da Tabela~\ref{tab:mpg} (um movimento
+legal e seguro em todo estado unidade módulo $3^k$, custo médio $\rho_k$) dá um $C_k$ racional
+explícito com $j^*(l) \le \rho_k\cdot l + C_k$ para todo $l$.
+\end{theorem}
+
+\begin{proof}
+Fixe $k$ na faixa. A política $\sigma_k$, o valor $\rho_k$, e um potencial
+$h_k:(\Z/3^k\Z)^*\to\Q$ são calculados por um solucionador aninhado de melhoria de estratégia de
+Howard que busca sobre o conjunto de ações finito estabelecido acima, e o movimento escolhido por
+$\sigma_k$ é conferido, estado por estado e dígito por dígito, contra
+\[
+d_{\sigma_k}(s) + h_k(s'(\epsilon)) \le \rho_k + h_k(s)
+\]
+em todo estado $s$ e todo dígito $\epsilon$ do adversário, onde $s'(\epsilon)$ é o sucessor sob o
+movimento escolhido por $\sigma_k$. Somando a desigualdade ao longo de qualquer jogada de $l$
+passos $s_0,\dots,s_l$, ela telescopa para
+\[
+\sum_{i=0}^{l-1} d_{\sigma_k}(s_i) \le l\rho_k + h_k(s_0) - h_k(s_l) \le l\rho_k + \bigl(\max h_k -
+\min h_k\bigr) =: l\rho_k + C_k,
+\]
+independentemente de quais dígitos o adversário de fato fornece, já que a desigualdade do potencial
+vale para todo $\epsilon$ em todo passo. Assim $\sigma_k$, rodada como acima, dá a toda unidade $z$
+módulo $3^l$ uma jogada de precisão total legal de custo total no máximo $l\rho_k+C_k$; o custo
+mínimo sobre todas as jogadas legais a partir de $z$ é, portanto, também no máximo $l\rho_k+C_k$,
+logo também o pior caso sobre $z$. Apenas a direção
+$j^*(l)\le\max_{z_0}\min\{J\}$ da igualdade do Resultado Empírico~\ref{er:soundness} é usada aqui,
+para identificar esse pior caso com $j^*(l)$; a direção reversa não desempenha papel algum nesta
+prova.
+\end{proof}
+
+$\sigma_k$, $h_k$ e $\rho_k$ são calculados como racionais por um solucionador aninhado de melhoria
+de estratégia de Howard, que busca ações $d$ até um teto fixo de $40$ (bem acima do maior $d$ que
+qualquer política certificada abaixo de fato usa em qualquer $k=3,\dots,14$, que é $11$). A
+desigualdade do potencial acima é conferida apenas para o movimento escolhido por $\sigma_k$ em
+cada estado, contra os três dígitos do adversário, nunca contra o resto do conjunto de ações; a
+legalidade e a segurança desse movimento escolhido são verificadas diretamente a partir das
+definições completas do jogo acima ($2^dz\equiv1\pmod3$ e a condição dos três levantamentos), que
+não fazem referência alguma ao teto, de modo que a cota superior resultante $j^*(l)\le\rho_kl+C_k$
+também não depende dele. O solucionador também extrai uma cota inferior correspondente do
+adversário a partir da mesma execução, mas esse cálculo abrange apenas o mesmo conjunto de ações
+com teto: ``cota superior igual a cota inferior'' certifica $\rho_k$ exatamente como o valor do
+jogo de payoff médio restrito a $d\le40$, não, sem argumento adicional, como o valor do jogo
+irrestrito sobre o conjunto de ações completo $\{0,\dots,2\cdot3^k-1\}$ descrito acima, já que um
+movimento com $d>40$, indisponível ao cálculo com teto da cota inferior, poderia em princípio
+permitir ao jogador minimizador alcançar um valor verdadeiro menor do que o certificado com teto
+descarta. A Tabela~\ref{tab:mpg} reporta $\rho_k$, $C_k$ sob esse entendimento: taxas certificadas
+de uma política exibida e verificada, que é tudo o que o Teorema~\ref{thm:mpg} precisa, não um
+valor provado-exato do jogo de janela $k$ completo. $\sigma_k$ e $\rho_k$ são validados de forma
+cruzada por um solucionador independente de iteração de valor e, em $k=4$ e $k=7$, rodando a
+política resultante contra o programa dinâmico de cobertura finito real para todo resíduo unidade
+módulo $3^l$, $l$ até $14$, com zero movimentos ilegais ou inseguros encontrados.
+A Tabela~\ref{tab:mpg} dá os valores calculados para $k=3,\dots,14$.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{c|c|c|c|c|c|c|c|c|c|c|c|c}
+$k$ & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & 14 \\ \hline
+$\rho_k$ & $2$ & $\tfrac53$ & $\tfrac32$ & $\tfrac32$ & $\tfrac75$ & $\tfrac{25}{19}$ & $\tfrac54$ &
+$\tfrac{11}{9}$ & $\tfrac65$ & $\tfrac76$ & $\tfrac{119}{104}$ & $\tfrac98$ \\ \hline
+$C_k$ & $5$ & $\tfrac{19}{3}$ & $\tfrac{15}{2}$ & $9$ & $10$ & $\tfrac{207}{19}$ & $\tfrac{47}{4}$ &
+$\tfrac{115}{9}$ & $\tfrac{69}{5}$ & $\tfrac{44}{3}$ & $\tfrac{1621}{104}$ & $\tfrac{33}{2}$
+\end{tabular}
+\caption{A taxa certificada de relaxamento de janela $\rho_k$ e a constante $C_k$, $k=3,\dots,14$.}
+\label{tab:mpg}
+\end{table}
+
+Em $k=14$, $\rho_{14} = 9/8 = 1.125$ e $C_{14}=33/2$, dando:
+
+\begin{corollary}[Condicional ao Resultado Empírico~\ref{er:soundness}]
+\label{cor:mpgbound}
+$j^*(l) \le \tfrac98 l + \tfrac{33}2$.
+\end{corollary}
+
+Essa é, ao que sabemos, a melhor cota sobre a taxa de crescimento de $j^*(l)$ atualmente
+disponível, condicional ao Resultado Empírico~\ref{er:soundness}. Observa-se que $\rho_k$ é não
+crescente na faixa calculada $k=3,\dots,14$ (Tabela~\ref{tab:mpg}); não verificamos isso em geral,
+e o Corolário~\ref{cor:mpgbound} usa apenas o único valor $k=14$. A técnica geral, representar um
+problema combinatório do tipo cobertura como um jogo de payoff médio e calcular cotas racionais
+exatas de relaxamento dessa forma, não é nova para esta aplicação: além do próprio teorema
+fundacional de Ehrenfeucht e Mycielski~\cite{ehrenfeuchtmycielski1979}, um precedente metodológico
+próximo e recente prova a racionalidade e computabilidade do raio de cobertura de um deslocamento
+sófico primitivo por uma redução a jogo de payoff médio do mesmo tipo, aplicada a um objeto
+diferente~\cite{meyerovitchyoung2026}; essa redução usa jogos de payoff médio não alternantes,
+introduzidos pelos mesmos autores em~\cite{meyerovitchyoung2025nonalt}, uma variante dos jogos
+alternantes clássicos de~\cite{ehrenfeuchtmycielski1979} usados aqui. Citamos os três como
+precedente para o enquadramento; o que é novo aqui é sua aplicação específica a $j^*(l)$.
+
+\begin{remark}
+Ajustar $\rho_k = L + A/k$ por mínimos quadrados ordinários a $k=10,\dots,14$ dá $L\approx0.876$,
+ainda bem acima da taxa verdadeira conjecturada $\log_4 3 = 0.7925\ldots$; o ajuste é sensível à
+faixa usada (todo o intervalo $k=3,\dots,14$ dá $L\approx0.904$) e não é evidência de nenhum limite
+específico. Apenas a direção $j^*(l)\le\rho_k l + C_k$, provada acima, está estabelecida. A
+desigualdade reversa, $\inf_k \rho_k \le \limsup_l j^*(l)/l$, que seria necessária para concluir
+qualquer coisa sobre para onde $\rho_k$ está caminhando, não está estabelecida.
+\end{remark}
+
+\section{A soma exponencial, e por que ela resiste a um ataque direto}
+\label{sec:gapA}
+
+A cota condicional do Corolário~\ref{cor:mpgbound}, $1.125\,l$, está bem acima da taxa conjecturada
+$\log_4(3)\,l \approx 0.7925\,l$. A rota natural para fechar essa lacuna é analítico-Fourier. Aqui
+$e(x):=e^{2\pi ix}$ denota o caractere aditivo padrão, sem relação com a sequência $e(l)$ de
+\eqref{eq:el}. Por ortogonalidade em $\Z/3^l\Z$, o número de tuplas caindo na classe residual $z$ é
+\begin{equation}
+\label{eq:Nz}
+N(z) = \frac1{3^l}\sum_{t=0}^{3^l-1} S(t)\,e\!\left(-\frac{tz}{3^l}\right), \qquad
+S(t) := \sum_{j+k\ge a_0>\cdots>a_j\ge0} e\!\left(\frac{t}{3^l}\sum_{i=0}^j 2^{a_i}3^i\right),
+\end{equation}
+e $S(0)=|R_{j,k}|=:T$, já que $S(0)$ conta tuplas de expoentes e o argumento de injetividade na
+prova da Proposição~\ref{prop:lowerbound} acima (tuplas distintas dão somas distintas, recuperando
+$a_j$ a partir da valuação $2$-ádica da soma) se aplica sem alteração ao $(j,k)$ geral, não apenas
+a $(j-1,j)$. A rota natural até a positividade é a desigualdade triangular: $N(z)>0$ para todo $z$
+assim que $\sum_{t\ne0}|S(t)| < T$. Essa rota se fecha antes de se abrir. A
+Proposição~\ref{prop:sqrtceiling} abaixo mostra que a soma à esquerda nunca fica abaixo de $T$, para
+qualquer $l$, $j$, $k$: o critério não pode ser alcançado de forma alguma, para nenhum orçamento. O
+restante desta seção estuda o que resta uma vez abandonada a rota de espectro completo: uma versão
+de frequência primitiva da mesma ideia (\S5.2), e as razões adicionais abaixo pelas quais ela também
+resiste.
+
+\subsection{Um teto rígido sobre o cancelamento uniforme}
+
+\begin{proposition}[O critério de espectro completo é inatingível]
+\label{prop:sqrtceiling}
+Para todo $l\ge1$ e todo $R_{j,k}$ com $T:=|R_{j,k}|>0$, $\sum_{t\ne0}|S(t)| \ge T$; em particular
+$|S(3^{l-1})|\ge T/2$. Consequentemente o critério $\sum_{t\ne0}|S(t)|<T$ nunca é satisfeito, para
+nenhum $l$, $j$, $k$, e tampouco a cota uniforme $|S(t)|=o(T/3^l)$ em todo $t$ não nulo, já que
+isso forçaria $\sum_{t\ne0}|S(t)|=o(T)$.
+\end{proposition}
+
+\begin{proof}
+Todo elemento de $R_{j,k}$ se reduz a $2^{a_0}\bmod3$ (todo outro termo carrega uma potência
+positiva de $3$), logo é $\equiv1$ ou $2\pmod3$: nenhum elemento é divisível por $3$. Logo $N(z)=0$
+para todo $z$ divisível por $3$, em particular $N(0)=0$, de modo que $\sum_{t=0}^{3^l-1}S(t)=3^lN(0)=0$
+e $\sum_{t\ne0}S(t)=-S(0)=-T$; a desigualdade triangular dá
+$\sum_{t\ne0}|S(t)|\ge\bigl|\sum_{t\ne0} S(t)\bigr|=T$.
+
+O mesmo colapso se localiza: somando a fórmula de inversão sobre os $3^{l-1}$ resíduos divisíveis
+por $3$, restam apenas as três frequências $t\in\{0,3^{l-1},2\cdot3^{l-1}\}$ na soma interna (todo
+outro caractere é não constante nessa classe lateral do subgrupo de índice $3$ e tem média $0$),
+dando $S(3^{l-1})+S(2\cdot3^{l-1})=-T$ exatamente, em todo $l$, $j$, $k$. Como
+$S(3^l-t)=\overline{S(t)}$, os dois termos são conjugados, de modo que $\mathrm{Re}\,S(3^{l-1})=-T/2$
+exatamente e $|S(3^{l-1})|\ge T/2$: um único par conjugado já força a cota, antes que o resto do
+espectro seja somado.
+\end{proof}
+
+A Proposição~\ref{prop:sqrtceiling} fecha a rota ingênua diretamente, em todo $j$: não há limiar a
+partir do qual ela passe a funcionar. Mesmo concedendo a premissa inatingível para efeito de
+comparação, especializando $S(t)$, $T$ à família $R_{j-1,j}$ que a questão de cobertura deste
+artigo trata ($T=\binom{2j}{j}$) e perguntando qual $j$ uma cota uniforme $|S(t)|\le C\sqrt{T}$
+(cancelamento de raiz quadrada), aplicada via a desigualdade triangular sobre todas as $3^l-1$
+frequências não nulas, forçaria dá $(3^l-1)C\sqrt{T} < T$, logo $T > ((3^l-1)C)^2$, isto é,
+$4^j/\sqrt{3j+1} \ge T > ((3^l-1)C)^2$ (a cota explícita da prova da
+Proposição~\ref{prop:lowerbound}), donde $j \ge 2\log_4(3)\,l - O(1) \approx 1.585\,l - O(1)$: já
+\emph{pior} do que o $1.125\,l$ do Corolário~\ref{cor:mpgbound}, além de repousar sobre uma
+premissa que a Proposição~\ref{prop:sqrtceiling} descarta em todo $j$. Ambos os fatos juntos
+descartam a versão ingênua da abordagem de Fourier, e voltam a atenção para se um tratamento mais
+fino, dependente de frequência (uma separação em arcos maiores e menores, na linguagem do método
+do círculo), consegue fazer melhor.
+
+\subsection{Um cálculo: a massa excepcional não permanece pequena}
+
+Numericamente, $|S(t)|$ está longe de ser uniforme. Escrevendo $t=3^{l-c}t'$ com $3\nmid t'$
+(valuação $l-c$), $t\cdot V/3^l=t'\cdot V/3^c$ para todo valor $V$ de tupla, de modo que $S(t)$ no
+módulo $3^l$ é igual à mesma soma avaliada no módulo mais grosseiro $3^c$: uma frequência de
+valuação $l-c$ é literalmente a soma de nível $c$ da mesma família de tuplas. Ao longo desta
+subseção, $m$ denota um orçamento para a família $R_{m-1,m}$, o papel que $j$ desempenha no resto
+deste artigo (não o parâmetro de profundidade $m:=3^k$ da Seção~\ref{sec:mpg}). A cota exata
+$|S(3^{l-1})|\ge T/2$ da Proposição~\ref{prop:sqrtceiling} é apenas uma cota inferior, sem
+reivindicação de maximalidade: em $m=1$, $l=2$ (a família $R_{0,1}=\{1,2\}$, $T=2$), $|S(3)|=1$
+mas $|S(1)|=2\cos(\pi/9)\approx1.879$ excede isso, de modo que o par de topo nem sempre é a maior
+frequência. Nos níveis diretamente verificados na família que esta seção de fato usa ($R_{m-1,m}$
+no próprio limiar de cardinalidade de primeira ordem de cada nível: $l=10,m=9$; $l=12,m=11$;
+$l=14,m=13$), o par de topo $t=3^{l-1},2\cdot3^{l-1}$ é observado como o maior, e valuação alta se
+correlaciona com magnitude grande além dele, mas de forma frouxa: entre as doze maiores frequências
+em $l=10$, as valuações são $9,9,8,8,7,7,8,8,8,8,7,7$, e em $l=12$ a maior frequência primitiva
+(valuação $0$) já excede a mais fraca frequência de valuação $8$ verificada. O reparo natural é
+restringir a frequências primitivas, excisando todo o espectro não primitivo (todo $c<l$, o par
+acima incluído) e controlando o restante por uma cota mediada; se esse restante permanece esparso o
+suficiente na escala que importa é uma questão que esta seção responde computacionalmente, para a
+família $R_{j-1,j}$ em $l=18$, $j=16$ (o limiar de cardinalidade de primeira ordem, $T:=\binom{32}{16}$,
+seis orçamentos abaixo do limiar de cobertura real $j^*(18)=22$: a cobertura necessariamente já
+falha aqui, e este nível está abaixo da faixa $j\ge l$ em que as Seções~\ref{sec:holdouts}--\ref{sec:further}
+trabalham por outro lado), com um resultado negativo. Escreva
+$\|S\|_1:=\sum_{\gcd(t,3)=1}|S(t)|/T$ para a massa $L^1$ normalizada sobre frequências coprimas com
+$3$. Essa restrição exclui $t=3^{l-1}$, cuja magnitude $|S(3^{l-1})|\sim T/\sqrt3$ é fixada pela
+Proposição~\ref{prop:1547} e, empiricamente, é a maior nos três níveis verificados acima
+($l=10,12,14$; não em geral, como o contraexemplo acima mostra), junto com sua conjugada
+$t=2\cdot3^{l-1}$ (já que $S(3^l-t)=\overline{S(t)}$, essa frequência corresponde exatamente a ela
+e é excluída pela mesma razão). A restrição a $\gcd(t,3)=1$ também exclui toda frequência não
+primitiva, exatamente um terço do espectro, inteiramente, de modo que $\|S\|_1$ abaixo mede apenas
+a massa das frequências primitivas. Aqui $\|S\|_1=5226.01$. Um limiar fixo faz os picos visíveis
+parecerem esparsos, mas das $8{,}014$ frequências primitivas com $|S(t)|/T$ excedendo $0.001$, sua
+contribuição combinada para $\|S\|_1$ é de cerca de $12.2$, de modo que mais de $99.7\%$ da massa
+das frequências primitivas neste único nível calculado vive em uma população exponencialmente
+numerosa de coeficientes em coeficientes abaixo de um limiar fixo, sem reivindicação alguma aqui
+sobre como essa massa está distribuída dentro dela. Isso é evidência contra um reparo por conjunto
+excepcional esparso entre as frequências primitivas neste nível acessível; nada diz sobre
+frequências não primitivas, sobre todo $l$, e, já que $j=16$ está seis orçamentos abaixo de
+$j^*(18)$, muito menos sobre a distribuição de massa perto do limiar de cobertura real.
+
+Essa mesma estrutura do tipo $2^a3^b$ conecta o problema a uma discussão de 2011 de Terence Tao,
+aplicando métodos de Littlewood--Offord e produtos de Riesz a um objeto construído a partir das
+mesmas somas exponenciais do tipo $2^a3^b$, no contexto intimamente relacionado de um ciclo não
+trivial hipotético de Collatz~\cite{tao2011blog}; sua construção é estruturalmente próxima de uma
+fatia de fronteira de $R_{j,k}$ com o expoente mais baixo fixado em $0$. Sua própria conclusão, em
+suas próprias palavras, é que ``uma vez que se usa a cota da teoria da transcendência, \dots{}
+técnicas de Littlewood-Offord já não são de muita utilidade'', e que ele não conhece ``nenhuma
+maneira de obter uma propriedade de separação não trivial entre potências de $2$ e potências de
+$3$ além de via métodos da teoria da transcendência''.
+
+\subsection{Um teste direto dos resíduos que de fato falham}
+
+O teste mais direto examina os resíduos que de fato falham em ser cobertos, um passo de orçamento
+antes de a cobertura ser bem-sucedida, isto é, $H(l,j^*(l)-1)$ (Seção~\ref{sec:holdouts}). Para
+$l=10,\dots,15$ esse conjunto tem tamanho $2,1,3,1,3,1$ respectivamente, minúsculo frente a uma
+média global de ocupação $\lambda=|R_{j^*(l)-2,j^*(l)-1}|/(2\cdot3^{l-1})$ que está ela mesma na
+casa dos milhares nos mesmos níveis (de $1019$ em $l=10$ a $3695$ em $l=15$). Escreva a
+\emph{célula de profundidade $c$} de um resíduo $z$ para sua classe módulo $3^c$, e sua
+\emph{intensidade local de profundidade $c$} $\lambda_c(z)$ para a contagem total de acertos dentro
+dessa classe dividida por $3^{l-c}$, o tamanho da classe (definida para $c<l$; em $c=l$ a classe é
+$\{z\}$ ela mesma, e $\lambda_l(z)=0$ identicamente para qualquer retido, um caso degenerado
+excluído abaixo). Um \emph{modelo de Poisson não homogêneo} ajustado a essa intensidade atribui a
+$z$ a probabilidade de buraco $e^{-\lambda_c(z)}$. Calculado diretamente a partir do histograma
+exato para $l=10,\dots,15$, cada um dos onze resíduos retidos ao longo desses seis níveis tem
+$\lambda_c$ bem abaixo da média global em toda profundidade $c=8,9,10$ com $c<l$ (em $l=10$,
+apenas $c=8,9$; $\lambda_c$ de $2.0$ a $108.4$, probabilidade de buraco de $e^{-2}$ a $e^{-108}$).
+O modelo de Poisson não homogêneo atribui probabilidade $e^{-108}$ a um evento que ocorreu; $z$, os
+níveis, e as profundidades verificadas são todos selecionados após ver os resíduos retidos, de modo
+que este não é um teste pré-declarado e calibrado: o expoente é sugestivo, não uma rejeição formal,
+e o modelo não é tratado como um candidato vivo abaixo com base nisso. A afirmação descritiva mais
+fraca por trás disso continua de pé: resíduos retidos se situam sistematicamente em células de
+baixa intensidade, com o quão abaixo da média variando amplamente por profundidade e nível. Na
+profundidade mais fina que a definição permite, aquém do caso degenerado $c=l-1$ (uma classe de
+apenas $3$ irmãos), o mesmo modelo usa a intensidade leave-one-out
+$\lambda_{l-1}^{-z}(z):=\bigl(\text{soma das contagens de acertos dos outros $2$
+irmãos}\bigr)/2$ no lugar de $\lambda_{l-1}(z)$, excluindo a própria contagem de $z$ e dividindo
+pelo tamanho remanescente da classe (não $3$), para evitar o viés autorreferencial que uma classe
+tão pequena carregaria de outra forma, para todo resíduo, não apenas para os retidos. Duas
+conferências separadas seguem disso, tratando duas questões separadas. Primeiro, o modelo ainda
+parece grosseiramente refutado nessa profundidade, do jeito que as profundidades mais grosseiras
+acima pareciam (probabilidade de buraco até $e^{-108}$)? Não: a contagem total esperada de buracos
+sob o modelo, somada sobre toda unidade, é $2.1$ contra $2$ resíduos retidos de fato observados em
+$l=10$, $3.5$ contra $1$ em $l=11$, $4.5$ contra $3$ em $l=12$, $5.3$ contra $1$ em $l=13$, $5.0$
+contra $3$ em $l=14$ ($l=15$ não rodado nessa profundidade); esse total agregado é invariante a
+quais resíduos os buracos de fato são, de modo que não diz nada por si só sobre se a intensidade
+acerta os resíduos corretos, apenas que o modelo não está mais grosseiramente descalibrado em
+agregado nessa profundidade (os dois níveis em que o modelo mais superprediz, $l=11$ e $l=13$, são
+eles mesmos evidência de que o ajuste é frouxo, não apertado). Segundo, a intensidade acerta quais
+resíduos específicos resistem? Aqui a resposta é mais informativa: ranqueando toda unidade por essa
+mesma intensidade leave-one-out (empates, onde a soma de valor inteiro coincide, quebrados de forma
+arbitrária mas consistente, e irrelevantes para a conclusão já que nenhum resíduo retido está
+dentro de um grande bloco empatado), os resíduos retidos reais se situam profundamente na cauda de
+baixa intensidade em todo nível verificado dessa forma (ranques $12$ a $582$ entre $354{,}294$ a
+$3{,}188{,}646$ unidades, apenas $l=12,13,14$), embora nem sempre entre os pouquíssimos resíduos de
+ranque mais baixo. É essa conferência de ranque, e não o total agregado acima, que sustenta a
+afirmação de correlação: lida nessa profundidade, a intensidade local se correlaciona fortemente
+com quais resíduos resistem, uma questão que as profundidades mais grosseiras $c=8,9,10$ não
+tratam por si sós, mas não a determina completamente. Um diagnóstico separado em um par menor e
+mais tratável, $(l,m)=(14,16)$, para a família $R_{m-1,m}$ (contagem média de acertos $188.5$, três
+orçamentos abaixo do limiar de cobertura $j^*(14)=19$), mantém todo $|S(t)|$ fixo e aleatoriza as
+fases de pares conjugado-simétricos. Escrevendo $N_l(z)$ para a contagem exata de acertos do
+resíduo $z$, $N_{l-1}$ para a contagem da mesma família de tuplas um nível abaixo, e
+\[
+F(z) := 3N_l(z)-N_{l-1}(z\bmod3^{l-1})
+\]
+para o desequilíbrio entre os três levantamentos de cada resíduo pai, restringir a frequências
+primitivas $3\nmid t$ dá exatamente $\sum_{3\nmid t}S(t)e(-tz/3^l) = 3^{l-1}F(z)$, de modo que $F$
+é identicamente $0$ em todo $z$ não unidade (tanto $N_l(z)$ quanto $N_{l-1}(z\bmod3^{l-1})$ se
+anulam ali, já que nenhum elemento de uma família de tuplas é divisível por $3$). Sobre todo $z$, a
+razão real entre o valor absoluto máximo dessa quantidade e sua raiz quadrada média é $15.79$,
+enquanto oito embaralhamentos de fase independentes (semente fixa) dão razões em $[5.11,5.24]$ (um
+segundo lote de oito, com semente independente, dá o intervalo mais largo $[4.98,5.40]$, de modo
+que oito tentativas não fixam bem o nulo). Os embaralhamentos mantêm todo $|S(t)|$ fixo mas não
+preservam a restrição de anulação-fora-de-unidades recém derivada, nem a integralidade, de modo que
+não são, por si sós, o nulo correto.
+
+A restrição de anulação-fora-de-unidades tem um significado algébrico direto para as fases.
+Agrupando frequências primitivas em trios $t=r,\,r+3^{l-1},\,r+2\cdot3^{l-1}$ por resíduo pai $r$
+módulo $3^{l-1}$ ($3\nmid r$), a anulação de $F$ no subgrupo $3(\Z/3^l\Z)$ é equivalente, pelo
+mesmo colapso de soma de caracteres usado na Proposição~\ref{prop:sqrtceiling}, a
+$S(t_1)+S(t_2)+S(t_3)=0$ para cada trio: três magnitudes fixas formando um triângulo fechado, não
+degenerado exceto por uma fração desprezível (verificado diretamente em $(l,m)=(14,16)$: exatamente
+dois dos $1{,}062{,}882$ trios primitivos de pai, um par conjugado, têm a maior magnitude igual à
+soma das outras duas; a construção de rotação e reflexão do nulo abaixo só é possivelmente menos
+aleatória nesses dois, sem efeito visível sobre uma estatística de $30$ tentativas). Isso fixa as
+fases a uma família de um parâmetro, uma rotação comum da configuração real, junto com sua imagem
+espelhada (negando as três fases antes de rotacionar, o que também soma zero). O parceiro conjugado
+do trio no pai $r$ é o trio no pai $3^{l-1}-r$, e $S(3^l-t)=\overline{S(t)}$ (já usado na prova da
+Proposição~\ref{prop:sqrtceiling}) liga os dois: apenas um trio por par conjugado recebe uma
+rotação aleatória independente e um lançamento de moeda independente para a reflexão; as fases do
+parceiro são então fixadas por conjugação, e não sorteadas por conta própria, de modo que o campo
+resultante permanece real, correspondendo ao próprio $F$. Isso mantém todo $|S(t)|$ fixo e se anula
+fora das unidades exatamente por construção, embora não a integralidade (o vetor real satisfaz
+restrições adicionais que esse nulo não satisfaz, por exemplo $-N_{l-1}(r)\le F(z)\le2N_{l-1}(r)$
+por pai, e ainda assim é mais extremo). Implementado e rodado em $(l,m)=(14,16)$ (30 tentativas,
+registradas no repositório, Seção 9): o nulo restrito dá razões $\max/\mathrm{RMS}$ com média
+$6.35$, faixa $[5.93,7.20]$, contra $15.79$ do vetor real, um fator residual de cerca de $2.5$. Por
+Parseval, $\sum_z F(z)^2$ (logo a média quadrática sobre todo $z$) é a mesma para o vetor real e
+para qualquer nulo de fase que preserve todo $|S(t)|$, restrito ou não, já que depende apenas das
+magnitudes; um nulo que respeita a propriedade de anulação-fora-de-unidades coloca essa mesma massa
+quadrada total apenas nas $2\cdot3^{l-1}$ posições unidade em vez de espalhá-la sobre todas as
+$3^l$, o que é exatamente o que força $\mathrm{RMS}_{\mathrm{unidades}}=\sqrt{3/2}\cdot\mathrm{RMS}_{\mathrm{todas}}$
+para tal nulo. ($\mathrm{RMS}_{\mathrm{unidades}}$ em si não entra em nenhum número reportado
+abaixo; toda razão citada, real, irrestrita, ou restrita, usa $\mathrm{RMS}_{\mathrm{todas}}$ do
+início ao fim, idêntica nas três por Parseval, de modo que toda a diferença entre $6.35$ e $5.2$
+entre os nulos restrito e irrestrito vive no máximo, não em qual RMS é usado.) Essa identidade
+governa apenas o RMS, não o máximo: Parseval nada diz sobre como concentrar essa mesma massa
+quadrada em menos posições, mutuamente restritas, afeta uma estatística de valor extremo, e as
+correlações de trio que a construção introduz poderiam em princípio empurrar $\max/\mathrm{RMS}$ em
+qualquer direção. Que a razão medida do nulo restrito, $6.35$, caia perto de $\sqrt{3/2}\approx1.22$
+vezes a faixa dos embaralhamentos irrestritos é uma propriedade empírica desta construção
+específica, observada diretamente nas 30 tentativas, e não deduzida da identidade de Parseval
+sozinha; o fator residual de $2.5$ repousa sobre esses números medidos, não sobre a identidade de
+Parseval por si só. Tanto os lotes irrestritos de oito tentativas acima quanto este restrito de
+trinta ainda são poucos demais para calibrar um nível de significância rigoroso (um teste baseado
+em ranque contra trinta sorteios não consegue descer abaixo de $p\approx1/31$, por mais extremo que
+seja o valor observado); o que o fator residual próximo de $2.5$ fornece, por si só, é evidência
+contra as fases reais serem plenamente permutáveis com um nulo que respeita apenas $|S(t)|$ e a
+restrição de anulação-fora-de-unidades, em vez de uma demonstração dedutiva (trinta sorteios de
+fato poucos demais para calibrar um nível de significância, como acabamos de notar, podem sugerir
+mas não estabelecer não permutabilidade). Isso não diz, por si só, que esse desvio precise de
+estrutura de fase especificamente, já que nenhum dos dois nulos acima carrega informação alguma
+sobre a intensidade local de nível $(l-1)$ documentada mais cedo nesta seção.
+
+Um terceiro nulo testa diretamente a informação análoga de nível de pai, para a própria família
+deste vetor: em vez de fixar $|S(t)|$, fixe o total bruto de cada pai, $N_{l-1}(r)$ para todo $r$, e
+divida esse total multinomialmente $(\tfrac13,\tfrac13,\tfrac13)$ entre seus três levantamentos,
+sem carregar informação alguma sobre as fases de frequência primitiva observadas (a divisão ainda
+fixa os três levantamentos de cada pai a somarem seu total e não é uma afirmação sobre a intensidade
+leave-one-out mais fina usada na conferência de ranque acima, uma propriedade de filhos individuais,
+e não do total do pai que este nulo de fato condiciona). Rodado $30$ vezes (registrado no
+repositório, Seção~9): esse nulo condicionado por total de pai dá razões $\max/\mathrm{RMS}$ com
+média $17.4$, faixa $[14.9,21.1]$, excedendo o $15.79$ do vetor real em cerca de $83\%$ das
+tentativas. A razão sozinha sugeriria que a aleatoriedade de total de pai reproduz a extremidade
+observada; ela não sobrevive a um olhar sobre as duas quantidades absolutas que a razão divide.
+Para cada levantamento $i$ de um total de pai $N$ sob esse nulo, $n_i$ é $\mathrm{Binomial}(N,\tfrac13)$,
+de modo que o desequilíbrio $3n_i-N$ tem variância $2N$; somando os três levantamentos de todo pai
+sobre o vetor inteiro dá $\mathbf{E}[\sum_z F(z)^2]=6T$ exatamente, $T=\binom{2m}{m}$. O
+$\sum_z F(z)^2$ do vetor real é $9.35\times10^9$ contra uma expectativa de $6T=3.61\times10^9$, um
+fator de $2.59$ e, contra a própria dispersão de tentativa a tentativa do nulo sobre as $30$
+execuções (desvio padrão $5.6\times10^6$), cerca de $1{,}030$ desvios padrão do nulo: esse é o
+desvio, um excesso de magnitude, o próprio $|S(t)|$ se desviando do que uma divisão independente
+das contagens exatas de pai produz. O máximo absoluto do nulo, com média $477$ e nunca excedendo
+$580$ sobre as $30$ tentativas, fica aquém do $698$ do vetor real em toda tentativa, mas isso não
+acrescenta evidência adicional além do mesmo excesso: na própria raiz quadrada média do vetor real
+($44.2$ contra $27.5$ do nulo, um fator de $1.61$), o máximo médio do nulo escalaria para cerca de
+$477\times1.61\approx768$, acima do $698$ real, de modo que a comparação de máximo é o déficit de
+raiz quadrada média reafirmado, não uma comparação independente. As próprias razões
+$\max/\mathrm{RMS}$ concordam, ou melhor, o nulo excede a razão real na maioria das tentativas,
+porque tanto o máximo quanto a raiz quadrada média ficam aquém por fatores comparáveis ($1.46$ e
+$1.61$); nessa estatística livre de escala o nulo não é refutado de forma alguma, e a afirmação de
+extremidade acima repousa inteiramente sobre o nulo de fase restrito, na mesma raiz quadrada média.
+(Isso usa os próprios totais de pai do vetor $R_{15,16}$ diretamente, e não as figuras de
+$\lambda_c$ reportadas mais cedo nesta seção, que vêm de uma família e profundidade diferentes,
+$R_{j^*(l)-2,j^*(l)-1}$ em $c=8,9,10$; os dois são medições separadas do mesmo fenômeno
+qualitativo, distorção grosseira nas contagens de tuplas, e não a mesma medição.) Assim o nulo
+multinomial não remove a base para atribuir o excesso de energia observado a estrutura além dos
+totais de pai; ele é esse excesso. Ele nada diz sobre fase, que é o próprio território do nulo
+restrito acima: aquele nulo mantém todo $|S(t)|$ fixo por construção (Parseval então garante RMS
+idêntico para o vetor real e o nulo igualmente) e ainda assim encontra o máximo real, $698$, bem
+acima da média do nulo restrito, de cerca de $280$ nas mesmas unidades ($6.35$ vezes o RMS
+compartilhado de $44.2$), um desvio puramente conduzido por fase que o nulo multinomial não pode
+tratar já que nunca mantém $|S(t)|$ fixo para começar. Nenhum dos dois nulos, por si só ou juntos,
+estabelece qual mecanismo, se algum, decide a cobertura, ou o quanto de cada desvio um teste
+devidamente calibrado confirmaria. Nos níveis e no par verificados, a raridade de resíduos retidos
+($l=10,\dots,15$) e a lacuna do embaralhamento de fase ($(l,m)=(14,16)$ apenas) não estão
+estabelecidas como fenômenos independentes; ambas estão plausivelmente conectadas à mesma distorção
+subjacente nas contagens de tuplas.
+
+\begin{proposition}
+\label{prop:1547}
+Para todo $l\ge1$, $|S(3^{l-1})|/\binom{2m}{m} \to 1/\sqrt3$ quando $m\to\infty$, para a família
+$R_{m-1,m}$.
+\end{proposition}
+
+\begin{proof}[Esboço da prova]
+$\sum_i 2^{a_i}3^i \equiv 2^{a_0} \pmod 3$, de modo que $S(3^{l-1})/\binom{2m}{m}$ depende apenas
+da distribuição limite da paridade do expoente de topo $a_0$ quando $m\to\infty$, que converge à
+mistura $\tfrac13\omega + \tfrac23\omega^2$ das duas raízes cúbicas não triviais da unidade
+$\omega=e^{2\pi i/3}$ (o intervalo limite $2m-1-a_0$ do máximo de um subconjunto aleatório de $m$
+elementos de $\{0,\dots,2m-1\}$ é geométrico com parâmetro $1/2$, dando
+$\Pr[a_0\text{ par}]\to1/3$). Essa mistura é igual a $-\tfrac12 - \tfrac{i\sqrt3}6$, de módulo
+$1/\sqrt3$.
+\end{proof}
+
+$t/3^l=1/3$ exatamente, de modo que $l$ desaparece de $S(3^{l-1})$ por completo (apenas $V\bmod3$
+importa), e o limite acima vale em toda escala $m$, incluindo ao longo da diagonal relevante para a
+cobertura $m\sim l\log_4(3)$. Ele afia a cota exata $|S(3^{l-1})|\ge T/2$ da
+Proposição~\ref{prop:sqrtceiling} até a razão assintótica exata $1/\sqrt3\approx0.577$, e confirma
+que a massa que a Proposição~\ref{prop:sqrtceiling} força se concentra, nesta única frequência ao
+menos, exatamente onde a numérica da \S5.2 a situa: na frequência de maior valuação, $t/3^l=1/3$.
+
+\section{Um teorema sobre os resíduos que resistem à cobertura}
+\label{sec:holdouts}
+
+Escreva $H(l,j)$ para o conjunto das unidades módulo $3^l$ \emph{não} cobertas por $R_{j-1,j}$. Por
+definição de $j^*(l)$ como o menor orçamento de cobertura, $H(l,j^*(l))=\emptyset$ e $H(l,j)\ne\emptyset$
+para todo $j<j^*(l)$; se isso se estende a ``$j\ge j^*(l)$ exatamente quando $H(l,j)=\emptyset$''
+exige que a vacuidade persista em todo orçamento maior também, o que não é automático apenas a
+partir da definição. Todo resultado nesta seção precisa de $j\ge l$; $j^*(l) \ge l$ vale
+diretamente para $l=1,\dots,23$ ($l=1$ pela Tabela~\ref{tab:jstar} diretamente, $l=2,\dots,23$ pelo
+Lema~\ref{lem:nosmaller} acima; igualdade apenas em $l=1$), mas a taxa conjecturada $\log_4 3 < 1$
+acabaria por colocar $j^*(l)$ abaixo de $l$, fora do alcance desta seção. Dentro dessa faixa, a
+persistência de fato vale: o Teorema~\ref{thm:doubling} abaixo dá
+$H(l,j)=\emptyset\Rightarrow H(l,j+1)\subseteq2\emptyset\cap4\emptyset=\emptyset$, de modo que
+``$H(l,j)=\emptyset$ exatamente quando $j\ge j^*(l)$'' está estabelecido para todo $j\ge l$. Não
+fazemos afirmação alguma sobre $j<l$.
+
+\begin{theorem}[Inclusão de duplicação dos resíduos retidos]
+\label{thm:doubling}
+Para $j \ge l$, $H(l,j+1) \subseteq 2H(l,j) \cap 4H(l,j)$.
+\end{theorem}
+
+\begin{proof}
+$R_{j-1,j}$ é o conjunto de valores $r=\sum_{i=0}^{j-1}2^{b_i}3^i$ sobre $j$-subconjuntos
+$\{b_0>\cdots>b_{j-1}\}\subseteq\{0,\dots,2j-1\}$, e $R_{j,j+1}$ o mesmo com $(j{+}1)$-subconjuntos
+de $\{0,\dots,2j+1\}$. Fixe $r\in R_{j-1,j}$ com conjunto de expoentes $S$, e $s\in\{1,2\}$.
+Deslocando cada expoente para cima por $s$ dá $S+s\subseteq\{s,\dots,2j-1+s\}\subseteq\{1,\dots,2j+1\}$,
+um $j$-subconjunto cujo valor induzido é $2^sr$ (um deslocamento uniforme de expoentes preserva o
+ranque relativo, de modo que a potência de $3$ de cada termo permanece inalterada). Como $S+s$ não
+contém $0$, adjuntar $0$ como o novo menor expoente dá um $(j{+}1)$-subconjunto de
+$\{0,\dots,2j+1\}$: ele se torna o novo termo de ranque $j$, contribuindo $2^0\cdot3^j=3^j$. Assim
+essa testemunha representa $2^sr+3^j$, e $3^j\equiv0\pmod{3^l}$ uma vez que $j\ge l$. Logo
+$2R_{j-1,j}\cup4R_{j-1,j}\subseteq R_{j,j+1}\pmod{3^l}$ para $j\ge l$. Assim, se $z\in H(l,j+1)$,
+isto é, $z$ não é representado no orçamento $j+1$, então $z$ não está nem em $2R_{j-1,j}$ nem em
+$4R_{j-1,j}$: tanto $z/2$ quanto $z/4$ não são representados no orçamento $j$, isto é,
+$z\in2H(l,j)\cap4H(l,j)$.
+\end{proof}
+
+\begin{corollary}[Contração de cadeia]
+\label{cor:chain}
+Para $j\ge l$: se $x, 2x, \dots, 2^{t-1}x \in H(l,j+1)$ são dois a dois distintos (todos reduzidos
+módulo $3^l$, $t\ge1$), então $2^ix \in H(l,j)$ para todo $i=-2,\dots,t-2$ (isto é, $x/4,x/2$ e,
+quando $t\ge2$, $x,2x,\dots,2^{t-2}x$), dois a dois distintos, uma cadeia de comprimento $t+1$.
+\end{corollary}
+
+\begin{proof}
+Aplique o Teorema~\ref{thm:doubling} a cada um dos $t$ elementos: $2^ix\in H(l,j+1)$ dá
+$2^{i-1}x, 2^{i-2}x\in H(l,j)$ para $i=0,\dots,t-1$. A união desses pares sobre todo $i$ é
+exatamente $\{2^ix : i=-2,\dots,t-2\}$, $t+1$ elementos indexados por $t+1$ potências consecutivas
+de $2$. Como $2$ tem ordem $2\cdot3^{l-1}$ módulo $3^l$ (um fato elementar de elevação do
+expoente, já usado na Seção~\ref{sec:mpg}), quaisquer $2\cdot3^{l-1}$ potências consecutivas de $2$
+vezes $x$ esgotam toda unidade módulo $3^l$, e qualquer sequência mais curta é dois a dois
+distinta. A hipótese de que $x,2x,\dots,2^{t-1}x$ são dois a dois distintos já força
+$t\le2\cdot3^{l-1}$, de modo que resta descartar a igualdade. Se $t=2\cdot3^{l-1}$, esses $t$
+elementos seriam toda unidade módulo $3^l$, incluindo todo elemento da imagem (não vazia) de
+$R_{j,j+1}$; mas $H(l,j+1)$, o complemento dessa imagem, não contém elemento algum assim. Logo
+$t<2\cdot3^{l-1}$, e os $t+1$ elementos de saída, uma sequência de no máximo $2\cdot3^{l-1}$
+potências consecutivas, são dois a dois distintos.
+\end{proof}
+
+\begin{corollary}[Bootstrap de comprimento de sequência]
+\label{cor:bootstrap}
+Escrevendo $\mathrm{maxrun}(H)$ para o maior $t$ tal que $H$ contém $t$ elementos dois a dois
+distintos da forma $x,2x,\dots,2^{t-1}x$ (todos reduzidos módulo $3^l$), com
+$\mathrm{maxrun}(\emptyset):=0$, $j^*(l) \le j + \mathrm{maxrun}(H(l,j))$ para todo $j\ge l$.
+\end{corollary}
+
+\begin{proof}
+Seja $r:=\mathrm{maxrun}(H(l,j))$ e suponha, por contradição, $H(l,j+r)\ne\emptyset$; escolha
+$z\in H(l,j+r)$, uma cadeia de comprimento $1$ ($t=1$) no sentido do Corolário~\ref{cor:chain}.
+Aplicando o Corolário~\ref{cor:chain} uma vez em cada um dos $r$ orçamentos
+$j+r-1,j+r-2,\dots,j$ (todos $\ge l$, já que $j\ge l$), uma cadeia de comprimento $t$ no orçamento
+$j'+1$ se torna uma cadeia de comprimento $t+1$ no orçamento $j'$ a cada vez, de modo que, após $r$
+aplicações, a cadeia de comprimento $1$ em $j+r$ se torna uma cadeia de comprimento $r+1$ em
+$H(l,j)$, contradizendo $\mathrm{maxrun}(H(l,j))=r$. Logo $H(l,j+r)=\emptyset$, isto é,
+$j^*(l)\le j+r=j+\mathrm{maxrun}(H(l,j))$.
+\end{proof}
+
+\begin{empresult}
+\label{er:bootstrap}
+O Corolário~\ref{cor:bootstrap} é empiricamente exato, $j^*(l) = j + \mathrm{maxrun}(H(l,j))$, em
+todo $(l,j)$ com $l+1\le j\le j^*(l)$ que conseguimos calcular: $l=2$ verificado diretamente em seu
+único orçamento não trivial, $j=l+1=3$ ($H(2,3)=\{7\}$ módulo $9$, $\mathrm{maxrun}=1$,
+correspondendo a $j^*(2)=4$), $l=3,4$ verificados diretamente da mesma forma em $j=l+1$
+($\mathrm{maxrun}(H(3,4))=2$ e $\mathrm{maxrun}(H(4,5))=2$, correspondendo a $j^*(3)=6$ e
+$j^*(4)=7$, com o argumento de extensão de largura de fronteira seguindo a
+Proposição~\ref{prop:tight} abaixo também provando essa mesma igualdade ali como um teorema, não
+como uma verificação empírica), $l=5,\dots,21$ em todo orçamento assim, e $l=22$ no único orçamento
+$j=l+1$, incluindo um caso com $|H(l,j)| > 3\times10^6$. (Além de $j^*(l)$, $H(l,j)=\emptyset$ e
+$\mathrm{maxrun}(\emptyset)=0$, de modo que a igualdade exibida deixa de valer ali; a afirmação
+diz respeito apenas a orçamentos até e incluindo $j^*(l)$.) O extremo inferior $j=l+1$ tem uma
+justificativa real por trás: a igualdade no próprio $j=l$ vale para $l=1,\dots,5$ mas falha em todo
+nível verificado, $l=6,\dots,13$ ($\mathrm{maxrun}(H(6,6))=5$, dando
+$j+\mathrm{maxrun}=11\ne10=j^*(6)$; $\mathrm{maxrun}(H(7,7))=5$, dando $12\ne11=j^*(7)$;
+$\mathrm{maxrun}(H(8,8))=8$, dando $16\ne12=j^*(8)$; $\mathrm{maxrun}(H(9,9))=8$, dando
+$17\ne13=j^*(9)$; $\mathrm{maxrun}(H(10,10))=9$, dando $19\ne15=j^*(10)$;
+$\mathrm{maxrun}(H(11,11))=8$, dando $19\ne16=j^*(11)$; $\mathrm{maxrun}(H(12,12))=8$, dando
+$20\ne17=j^*(12)$; $\mathrm{maxrun}(H(13,13))=8$, dando $21\ne18=j^*(13)$); os
+Corolários~\ref{cor:chain} e~\ref{cor:bootstrap} precisam ambos de $j\ge l$ para valer, mas isso
+sozinho não explica por que $j=l$ especificamente começa a falhar em $l=6$. A subfaixa
+$l+2\le j\le j^*(l)$ é provada em $l=3,\dots,13$: a Proposição~\ref{prop:tight} abaixo, que também
+prova o orçamento de fronteira $j=l+1$ em $l=3,4,5,6$ especificamente. A partir de $l=7$, $j=l+1$
+permanece apenas empírico, ligado à própria recíproca aberta da Proposição~\ref{prop:h014}.
+\end{empresult}
+
+Uma recíproca mais forte, por testemunha, do Teorema~\ref{thm:doubling}, de que $x/2,x/4\in H(l,j)$
+já força $x\in H(l,j+1)$, o que por sua vez tornaria uma cadeia de duplicação máxima tanto
+suficiente quanto necessária para a sobrevivência até um dado orçamento, é falsa como afirmação
+irrestrita: $1547 \in 2H(7,8)\cap4H(7,8)$, e no entanto $1547 \notin H(7,9)$ (ambas as duas
+testemunhas de orçamento $9$ de $1547$ têm uma configuração de expoentes que a construção de
+deslocamento-e-adjunção do Teorema~\ref{thm:doubling} não reconstrói diretamente a partir de uma
+testemunha de orçamento $8$). A Seção~\ref{sec:further} retoma uma forma restrita e mais fraca
+dessa recíproca (redundância de canto, não a afirmação por testemunha que este contraexemplo
+refuta), que permanece aberta em geral e é provada em níveis específicos.
+
+Um fortalecimento natural do Teorema~\ref{thm:doubling}, de que toda testemunha individual admite
+um reparo local de custo limitado, também é falso em sua forma mais otimista.
+
+Chame de \emph{profundidade de Durfee} de uma testemunha $\{a_0>\cdots>a_{j-1}\}\in R_{j-1,j}$ no
+orçamento $j$ a contagem $\#\{i : a_i \ge j\}$, o número de expoentes escolhidos no orçamento ou
+acima dele.
+
+\begin{empresult}[Falha da regra de reparo local de custo $1$]
+\label{er:falsify}
+Na transição de orçamento $(l,j)=(6,10)\to(7,11)$, chame uma unidade módulo $3^7$ de \emph{filha} e
+sua redução módulo $3^6$ de sua \emph{mãe}; $100$ das $1458$ filhas (todas as unidades módulo
+$3^7$) têm profundidade de Durfee mínima atingível excedendo a profundidade mínima de sua mãe em
+mais de um, até três; em $(7,11)\to(8,12)$, $332$ das $4374$ filhas (todas as unidades módulo
+$3^8$) fazem o mesmo, também até três. Uma verificação igualmente exaustiva define o \emph{custo de
+reparo} de um resíduo filho $r$ com resíduo mãe $p$ como $\min_{S,S'}|S\triangle S'|$, a menor
+diferença simétrica de conjuntos de expoentes sobre toda testemunha de conjunto de expoentes $S$
+para $p$ no orçamento $j$ e toda testemunha de conjunto de expoentes $S'$ para $r$ no orçamento
+$j+1$ ($|S|=j$, $|S'|=j+1$, de modo que essa distância é sempre ímpar, $\ge1$, e o mínimo abrange
+toda a fibra de testemunhas em cada orçamento). Isso encontra custos de reparo até $7$ em ambas as
+transições, contra um custo de $1$ para a esmagadora maioria. Como toda filha em ambas as
+transições é verificada exaustivamente, isso falsifica um custo de reparo de exatamente $1$ nessas
+duas transições diretamente; não estabelece que nenhum custo de reparo limitado exista.
+\end{empresult}
+
+Isso falsifica, em sua forma de custo $1$ originalmente proposta, uma conjectura natural que este
+projeto vinha considerando anteriormente (de que a cobertura se propaga via uma regra uniforme de
+reparo local de custo $1$, orçamento por orçamento); seu conteúdo válido remanescente é o
+Teorema~\ref{thm:doubling} e seus corolários acima.
+
+\section{Estrutura adicional dos últimos resíduos retidos}
+\label{sec:further}
+
+Os resíduos em $H(l,j^*(l)-1)$, os últimos a serem cobertos, satisfazem várias leis exatas
+adicionais. Para $W\ge l-1$, escreva
+\[
+U(l,W) := \Bigl\{\, \textstyle\sum_{i=0}^{l-1} 2^{\beta_i}3^i \bmod 3^l \ \Bigm|\
+W\ge\beta_0>\cdots>\beta_{l-1}\ge0 \,\Bigr\},
+\]
+um análogo de $l$ termos de $R_{j-1,j}$, construído a partir de uma contagem de termos fixa e um
+teto de expoente $W$ crescente.
+
+\begin{lemma}[Identidade de escala de largura]
+\label{lem:UW}
+Para $j\ge l\ge1$,
+\begin{equation}
+\label{eq:UW}
+R_{j-1,j} \equiv 2^{j-l}\,U(l,j+l-1) \pmod{3^l}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Como $3^i\equiv0\pmod{3^l}$ para $i\ge l$, o resíduo de $r=\sum_{i=0}^{j-1}2^{b_i}3^i\in R_{j-1,j}$
+módulo $3^l$ depende apenas de seus $l$ expoentes de topo $b_0>\cdots>b_{l-1}$. Uma $l$-tupla
+decrescente $b_0>\cdots>b_{l-1}\ge0$ com $b_0\le2j-1$ se estende a uma $j$-tupla admissível
+completa em $\{0,\dots,2j-1\}$ (anexando $j-l$ expoentes adicionais, estritamente menores e
+distintos) exatamente quando $b_{l-1}\ge j-l$: anexe $b_{l-1}-1,\dots,b_{l-1}-(j-l)$ quando isso
+valer, e nenhuma extensão existe quando não valer, já que menos de $j-l$ inteiros não negativos
+estão abaixo de $b_{l-1}$. Escrever $c_i := b_i-(j-l)$ transforma $b_{l-1}\ge j-l$ em $c_{l-1}\ge0$
+e $b_0\le2j-1$ em $c_0\le2j-1-(j-l)=j+l-1$, e $\sum_i2^{b_i}3^i = 2^{j-l}\sum_i2^{c_i}3^i$. Assim
+as tuplas dos $l$ expoentes de topo realizáveis por $R_{j-1,j}$ são exatamente $2^{j-l}$ vezes as
+$l$-tuplas decrescentes contadas por $U(l,j+l-1)$, dando a identidade enunciada módulo $3^l$.
+\end{proof}
+
+\begin{proposition}[Existência]
+\label{prop:exist}
+$j^*(l)$ existe para todo $l\ge1$, com $j^*(l)\le2\cdot3^{l-1}-1$.
+\end{proposition}
+
+\begin{proof}
+$U(l,\cdot)$ é monótona crescente em $W$: alargar a faixa $\{0,\dots,W\}$ só adiciona tuplas de
+expoentes admissíveis. Deslocar cada expoente de uma tupla que realiza $u\in U(l,W)$ para cima por
+$1$ dá uma $l$-tupla decrescente com expoente de topo no máximo $W+1$ e expoente de base ao menos
+$1>0$, ainda admissível, realizando $2u$; logo $2\,U(l,W)\subseteq U(l,W+1)$ para todo $W\ge l-1$.
+A tupla $\beta_i=l-1-i$ ($i=0,\dots,l-1$) é admissível em $W=l-1$ e dá
+$u_0:=\sum_i2^{l-1-i}3^i\equiv2^{l-1}\pmod3$, uma unidade, de modo que $u_0\in U(l,l-1)$. Iterando
+a inclusão, $2^ku_0\in U(l,l-1+k)$ para todo $k\ge0$. Como $2$ tem ordem $2\cdot3^{l-1}$ módulo
+$3^l$ (já usado na Seção~\ref{sec:mpg}), $\{2^ku_0 : 0\le k<2\cdot3^{l-1}\}$ é a classe lateral
+$u_0\langle2\rangle=(\Z/3^l\Z)^*$: toda unidade módulo $3^l$ aparece como $2^ku_0$ para algum $k$
+nessa faixa, logo está em $U(l,l-1+k)\subseteq U(l,W^\dagger)$, $W^\dagger:=l+2\cdot3^{l-1}-2$, por
+monotonicidade. Assim $U(l,W^\dagger)=(\Z/3^l\Z)^*$, e o Lema~\ref{lem:UW} em
+$j=W^\dagger-l+1=2\cdot3^{l-1}-1\ge l$ dá $R_{j-1,j}\equiv(\Z/3^l\Z)^*\pmod{3^l}$, logo
+$j^*(l)\le2\cdot3^{l-1}-1$.
+\end{proof}
+
+Essa cota é exponencial, bem acima da taxa conjecturada $\log_43\cdot l$; ela estabelece apenas que
+$j^*(l)$ é uma quantidade finita e bem definida, o que o resto desta seção e o argumento de jogo de
+payoff médio da Seção~\ref{sec:mpg} então limitam de forma muito mais estreita.
+
+Pelo Lema~\ref{lem:UW}, que precisa ele mesmo de $j\ge l$, o menor $j\ge l$ com
+$U(l,j+l-1)=(\Z/3^l\Z)^*$ é o menor $j\ge l$ no qual $R_{j-1,j}$ cobre; como $j^*(l)\ge l$ para
+$l=1,\dots,23$ ($l=1$ pela Tabela~\ref{tab:jstar} diretamente, $l=2,\dots,23$ pelo
+Lema~\ref{lem:nosmaller}), com igualdade apenas em $l=1$, isso coincide com o próprio $j^*(l)$ em
+toda a faixa em que este artigo trabalha, embora nada aqui descarte cobertura em algum $j<l$ ainda
+não verificado para um nível ainda não calculado. Escrevendo $W^*(l):=j^*(l)+l-2$ para a largura
+um passo antes disso,
+\begin{equation}
+\label{eq:HviaK}
+H(l,j) = 2^{j-l}\,D(l,j+l-1), \qquad D(l,W) := (\Z/3^l\Z)^* \setminus U(l,W).
+\end{equation}
+
+\begin{theorem}[Paridade do último resíduo retido]
+\label{thm:parity}
+Se $j^*(l)\ge l+1$, todo elemento de $H(l,j^*(l)-1)$ é $\equiv1\pmod3$. Isso cobre $l=2,\dots,23$
+(Tabela~\ref{tab:jstar}); a hipótese é inaplicável apenas em $l=1$ ($j^*(1)=1$, fora da faixa de
+\eqref{eq:HviaK}), o que nada diz sobre se a conclusão em si valeria ali, e voltaria a ser
+inaplicável para qualquer $l$ no qual a taxa conjecturada $\log_43<1$ acabe por empurrar $j^*(l)$
+abaixo de $l+1$.
+\end{theorem}
+
+\begin{proof}
+$U(l,\cdot)$ é monótona crescente em $W$, de modo que $D(l,\cdot)$ é monótona decrescente; todo
+$x\in D(l,W^*(l))$ é, por minimalidade de $j^*(l)$, representável na largura $W^*(l)+1$ mas não em
+$W^*(l)$. Qualquer testemunha para $x$ na largura $W^*(l)+1$ usando apenas expoentes $\le W^*(l)$
+já testemunharia $x$nessa largura menor, de modo que toda tal testemunha tem expoente de topo
+$\beta_0 = W^*(l)+1$. Sua contribuição ao valor, no ranque $0$, é $2^{\beta_0}\cdot3^0 =
+2^{W^*(l)+1}$, logo $x \equiv 2^{W^*(l)+1} \equiv (-1)^{W^*(l)+1} \pmod3$. Por \eqref{eq:HviaK}, que
+precisa de $j^*(l)-1\ge l$, elementos de $H(l,j^*(l)-1)$ são $2^{j^*(l)-1-l}x$ para tal $x$, logo
+\[
+2^{j^*(l)-1-l}x \equiv (-1)^{j^*(l)-1-l}\cdot(-1)^{W^*(l)+1} = (-1)^{2j^*(l)-2} = 1 \pmod3,
+\]
+usando $W^*(l)+1 = j^*(l)+l-1$ e que $2j^*(l)-2$ é sempre par.
+\end{proof}
+
+\begin{proposition}[Quase extinção: contenção direta]
+\label{prop:extinctionfwd}
+Se $j^*(l)\ge l+2$, $H(l,j^*(l)-1) \subseteq 2\cdot\{x \in H(l,j^*(l)-2) : x\equiv2\!\!\pmod3\}$.
+\end{proposition}
+
+\begin{proof}
+Escreva $J:=j^*(l)$. O Teorema~\ref{thm:doubling} em $j'=J-2\ge l$ dá $H(l,J-1)\subseteq2H(l,J-2)$,
+de modo que todo $y\in H(l,J-1)$ é igual a $2x$ para um (único, já que $2$ é uma unidade)
+$x\in H(l,J-2)$. Pelo Teorema~\ref{thm:parity}, $y\equiv1\pmod3$; como $y=2x$, $2x\equiv1\pmod3$,
+isto é, $x\equiv2\pmod3$. Assim $x$ está em $\{x\in H(l,J-2):x\equiv2\pmod3\}$ e $y=2x$ está em duas
+vezes esse conjunto.
+\end{proof}
+
+\begin{empresult}[Bijeção de quase extinção]
+\label{er:extinction}
+$H(l,j^*(l)-1) = 2\cdot\{x \in H(l,j^*(l)-2) : x\equiv2\!\!\pmod3\}$, exatamente, verificado em
+todo $l=2,\dots,9$ contra a tabela exata, sem exceção. A Proposição~\ref{prop:extinctionfwd} prova
+a direção $\subseteq$ incondicionalmente (em todo nível com $j^*(l)\ge l+2$, verdadeiro ao longo
+desta faixa); apenas a contenção reversa, de que todo $x\equiv2\pmod3$ em $H(l,j^*(l)-2)$ de fato
+sobrevive via $2x$, permanece empírica.
+\end{empresult}
+
+O mesmo mecanismo de largura que prova o Teorema~\ref{thm:parity} governa a contenção reversa um
+passo antes, através do segundo maior expoente $\beta_1$ da testemunha extremal; ao contrário do
+argumento do expoente de topo acima, fixar $\beta_1$ precisa da identidade de largura em um passo
+do Lema~\ref{lem:width} abaixo. Não levamos esse argumento até uma prova completa dessa direção, e
+o registramos como verificado apenas empiricamente.
+
+Uma congruência natural entre níveis, relacionando $H(l+1,j^*(l+1)-1)$ a $H(l,j^*(l)-1)$, não vale.
+Escrevendo $\pi_l$ para a redução módulo $3^l$, a congruência candidata
+$x\equiv4\,\pi_l(x)\pmod{3^{l+1}}$ é impossível sempre que $\pi_l(x)$ é uma unidade e $l\ge2$:
+reduzindo ambos os lados módulo $3^l$ força $\pi_l(x)\equiv4\,\pi_l(x)\pmod{3^l}$, isto é,
+$3\,\pi_l(x)\equiv0\pmod{3^l}$. Verificado exaustivamente em $l=2,\dots,6$, $\pi_l(x)$ nunca está
+em $H(l,j^*(l)-1)$ para $x\in H(l+1,j^*(l+1)-1)$ em primeiro lugar, de modo que o padrão não tem
+sequer uma instância testemunhando-o nesses níveis também. Nenhuma relação entre níveis, entre
+$H(l+1,\cdot)$ e $H(l,\cdot)$, é estabelecida por este artigo.
+
+\begin{proposition}[Contenção de duas classes mod $9$]
+\label{prop:mod9}
+Para $l\ge2$, escrevendo $J:=j^*(l)$, se $J\ge l+1$ então $H(l,J-1) \bmod 9 \subseteq \{4^J,
+4^{J+1}\}\pmod9$.
+\end{proposition}
+
+\begin{proof}
+Como na prova do Teorema~\ref{thm:parity}, toda testemunha de $x\in D(l,W^*(l))$ na largura
+$W^*(l)+1$ tem expoente de topo $\beta_0=W^*(l)+1$; módulo $9$, apenas os termos de ranque $0$ e
+ranque $1$ sobrevivem (ranque $i\ge2$ contribui um múltiplo de $3^2$), de modo que
+$x\equiv2^{\beta_0}+3\cdot2^{\beta_1}\pmod9$ para o segundo maior expoente $\beta_1$ da testemunha.
+Por \eqref{eq:HviaK}, elementos de $H(l,J-1)$ são $y=2^{J-1-l}x$, logo
+$y\equiv2^{J-1-l+\beta_0}+3\cdot2^{J-1-l+\beta_1}\pmod9$; usando $\beta_0=W^*(l)+1=J+l-1$, o
+primeiro termo é $2^{2J-2}=4^{J-1}\bmod9$, fixo. O segundo termo, $3\cdot2^m\pmod9$ para
+$m:=J-1-l+\beta_1$, depende apenas da paridade de $m$ (já que $2^m\bmod3$ tem período $2$),
+tomando exatamente os dois valores $3$ ou $6\pmod9$ independentemente do valor real de $\beta_1$;
+uma verificação direta dá $\{4^{J-1}+3,4^{J-1}+6\}\equiv\{4^J,4^{J+1}\}\pmod9$ para todo $J$. Logo
+$y\bmod9\in\{4^J,4^{J+1}\}$.
+\end{proof}
+
+\begin{empresult}[Exclusão da classe inferior]
+\label{er:mod9}
+A classe de fato ocupada é $4^{J+1}$, nunca $4^J$, em todo nível verificado, $l=2,\dots,16$.
+Excluir $4^J$ em geral é a questão aberta concreta mais aguda que esta parte da investigação
+produziu: a Proposição~\ref{prop:mod9} não impõe restrição alguma sobre o próprio $\beta_1$,
+apenas sobre o resultado dependente da paridade, de modo que descartar uma das duas paridades
+precisa de um argumento diferente.
+\end{empresult}
+
+\begin{proposition}[Suficiência de maxrun limitado]
+\label{prop:h014}
+Se $\mathrm{maxrun}(H(l,l+1))$ é limitado por uma constante $C$ para todo $l$, então
+$j^*(l) \le l + C + 1$.
+\end{proposition}
+
+\begin{proof}
+Corolário~\ref{cor:bootstrap} em $j=l+1$.
+\end{proof}
+
+A recíproca não está estabelecida, e o argumento natural para ela não funciona: lendo o
+Corolário~\ref{cor:bootstrap} de trás para frente dá apenas $\mathrm{maxrun}(H(l,l+1)) \ge j^*(l)-l-1$,
+uma cota \emph{inferior} sobre maxrun, que não força maxrun a permanecer limitado quando $j^*(l)-l$
+não permanece. Provar a recíproca precisaria de uma cota superior sobre maxrun em termos de
+$j^*(l)-l$, equivalente a uma afirmação de tightness para o Corolário~\ref{cor:bootstrap} que a
+própria questão de redundância de canto desta seção abaixo trata, e que é falsa em sua forma forte,
+por testemunha: relembre $1547$ da Seção~\ref{sec:holdouts}.
+
+Uma expectativa ingênua, de que um conjunto aleatório de resíduos retidos na densidade observada
+teria cadeias de duplicação muito mais longas do que o teto plano de $3$--$4$ medido em todo nível
+$l=5,\dots,22$, não sobrevive ao contato com a densidade real, rapidamente decrescente, de
+$H(l,l+1)$. Um modelo de independência ajustado a essa densidade real, descritivo em vez de um
+teste estatístico especificado já que nenhuma família distribucional ou convenção de wraparound é
+fixada, mantém seus valores preditos dentro da mesma faixa estreita que a sequência observada
+ocupa, sem o descompasso flagrante que uma estimativa ingênua de cadeia de duplicação prediria.
+Essa faixa é ela mesma estreita, apenas $3$ ou $4$ sobre toda a faixa calculada $l=5,\dots,22$, de
+modo que essa comparação principalmente descarta uma superpredição grosseira pelo modelo ingênuo;
+ela não estabelece, por si só, que o modelo de independência acompanhe o nível específico em que a
+sequência observada sobe de $3$ para $4$ e recua, apenas que seus valores preditos permanecem
+dentro dessa mesma faixa estreita. Essa comparação descritiva não diz nada, por si só, sobre se
+$\mathrm{maxrun}(H(l,l+1))$ é limitado; a Proposição~\ref{prop:h014} é o único elo estabelecido
+entre essa questão e a taxa de $j^*(l)$.
+
+\begin{lemma}[Identidade de largura em um passo]
+\label{lem:width}
+Para $W\ge l-1$, seja $\mathrm{Corner}(l,W+1)$ o conjunto de valores realizados por uma tupla
+testemunha $\beta_0>\cdots>\beta_{l-1}$ com $\beta_0=W+1$ e $\beta_{l-1}=0$ simultaneamente. Então
+\[
+U(l,W+1) = U(l,W) \cup 2U(l,W) \cup \mathrm{Corner}(l,W+1).
+\]
+\end{lemma}
+
+\begin{proof}
+$\supseteq$: $U(l,W)\subseteq U(l,W+1)$ por monotonicidade, $2U(l,W)\subseteq U(l,W+1)$ pelo
+argumento de deslocamento da prova da Proposição~\ref{prop:exist}, e
+$\mathrm{Corner}(l,W+1)\subseteq U(l,W+1)$ já que uma testemunha de canto é, em particular, uma
+testemunha na largura $W+1$.
+
+$\subseteq$: seja $u\in U(l,W+1)$, testemunhado por $W+1\ge\beta_0>\cdots>\beta_{l-1}\ge0$. Se
+$\beta_0\le W$, a tupla já testemunha $u$ na largura $W$, de modo que $u\in U(l,W)$. Se $\beta_0=W+1$
+e $\beta_{l-1}\ge1$, subtrair $1$ de cada expoente dá uma tupla decrescente em $[0,W]$ (expoente de
+topo $W$, expoente de base $\ge0$) testemunhando $u/2$, de modo que $u\in2U(l,W)$. Se $\beta_0=W+1$
+e $\beta_{l-1}=0$, esse é exatamente o caso de canto, de modo que $u\in\mathrm{Corner}(l,W+1)$.
+Esses três casos são exaustivos.
+\end{proof}
+
+Em toda largura $W$ na faixa $2l+1\le W\le j^*(l)+l-1$, verificado exaustivamente para
+$l=3,\dots,13$ (o extremo superior é a maior largura que a tabela exata alcança em cada nível),
+$\mathrm{Corner}(l,W+1)$ não contribui nada de novo: o valor de toda testemunha de canto já está
+coberto sem ela. Chame isso de propriedade de \emph{redundância de canto} na largura $W$; se ela
+vale em toda largura $W\ge2l+1$ em geral, além dos níveis verificados, é aberto. Ela também vale,
+verificado diretamente, na única largura menor $W=2l$ em si, para $l=3,4,5,6$; de $l=7$ até $13$
+ela é verificada como falhando ali. $W=2l$ é exatamente $j=l+1$, o próprio caso da
+Proposição~\ref{prop:h014}; a redundância de canto nessa largura é conhecida, de um jeito ou de
+outro, em todo nível $l=3,\dots,13$, valendo apenas para $l=3,4,5,6$. O que permanece aberto é a
+própria recíproca da Proposição~\ref{prop:h014}: a falha da redundância de canto em $W=2l$ para
+$l=7,\dots,13$ não a resolve em nenhum dos dois sentidos, apenas significa que esse mecanismo em
+particular não a prova ali.
+
+\begin{proposition}[Redundância de canto implica tightness]
+\label{prop:tight}
+Fixe $j$ com $l+2\le j\le j^*(l)$. Se redundância de canto vale em toda largura
+$2l+1\le W\le j^*(l)+l-1$, então $j^*(l)=j+\mathrm{maxrun}(H(l,j))$ exatamente.
+\end{proposition}
+
+\begin{proof}
+Redundância de canto na largura $W$ diz $\mathrm{Corner}(l,W+1)\subseteq U(l,W)\cup2U(l,W)$, de
+modo que o Lema~\ref{lem:width} dá $U(l,W+1)=U(l,W)\cup2U(l,W)$. Multiplicação por $2$ é uma
+bijeção de $(\Z/3^l\Z)^*$, de modo que comuta com complementação e com interseção; tomando
+complementos, isso se torna $D(l,W+1)=D(l,W)\cap2D(l,W)$, e empurrando isso através do
+deslocamento em \eqref{eq:HviaK} (ele mesmo uma bijeção, pela mesma razão), a igualdade de nível de
+largura em $W=j'+l-1$ se torna uma igualdade de conjuntos de resíduos retidos,
+$H(l,j'+1)=2H(l,j')\cap4H(l,j')$, afiando a inclusão do Teorema~\ref{thm:doubling} a uma identidade
+sempre que redundância de canto vale nessa largura.
+
+Afirmação: para todo $j'$ com $j\le j'<j^*(l)$, $\mathrm{maxrun}(H(l,j'+1))=\mathrm{maxrun}(H(l,j'))-1$,
+dada redundância de canto na largura $j'+l-1$. Como $j'<j^*(l)$, minimalidade de $j^*(l)$ dá
+$H(l,j')\ne\emptyset$, de modo que $s:=\mathrm{maxrun}(H(l,j'))\ge1$ ao longo de tudo. A
+desigualdade $\le$ é incondicional: se $H(l,j'+1)=\emptyset$ ela lê $0\le s-1$, verdadeiro já que
+$s\ge1$; caso contrário, uma cadeia máxima de comprimento $\mathrm{maxrun}(H(l,j'+1))\ge1$ em
+$H(l,j'+1)$ se estende, pelo Corolário~\ref{cor:chain}, a uma cadeia um elemento mais longa em
+$H(l,j')$. Para $\ge$, fixe uma cadeia máxima $x,2x,\dots,2^{s-1}x\in H(l,j')$. Para cada
+$k=2,\dots,s$, tanto $2^{k-1}x$ quanto $2^{k-2}x$ estão nessa cadeia, de modo que a igualdade
+$H(l,j'+1)=2H(l,j')\cap4H(l,j')$ coloca $2^kx\in H(l,j'+1)$; isso dá as $s-1$ potências consecutivas
+$4x,8x,\dots,2^sx\in H(l,j'+1)$, de modo que $\mathrm{maxrun}(H(l,j'+1))\ge s-1$, provando a
+afirmação.
+
+As larguras que isso usa, $j'+l-1$ para $j\le j'<j^*(l)$, estão todas em
+$[j+l-1,j^*(l)+l-2]\subseteq[2l+1,j^*(l)+l-1]$ (usando $j\ge l+2$), dentro da hipótese,
+independentemente do valor real de $\mathrm{maxrun}(H(l,j))$. Telescopando a afirmação sobre cada
+passo de $j'=j$ a $j'=j^*(l)-1$ (um número fixo de passos, $j^*(l)-j$, fixado antes de qualquer
+coisa disso) dá $\mathrm{maxrun}(H(l,j^*(l)))=\mathrm{maxrun}(H(l,j))-(j^*(l)-j)$. O lado esquerdo é
+$0$ ($H(l,j^*(l))=\emptyset$ por definição), de modo que $\mathrm{maxrun}(H(l,j))=j^*(l)-j$, isto
+é, $j^*(l)=j+\mathrm{maxrun}(H(l,j))$.
+\end{proof}
+
+Como redundância de canto é verificada em toda largura que a prova acima usa para $l=3,\dots,13$, a
+Proposição~\ref{prop:tight} é incondicional nesses níveis: a igualdade do Resultado
+Empírico~\ref{er:bootstrap} é um teorema provado ali, para todo $j$ com $l+2\le j\le j^*(l)$. Em
+geral, se a hipótese dessa implicação vale é exatamente a questão de redundância de canto acima.
+
+Em $l=3,4,5,6$, onde redundância de canto também vale na largura de fronteira $W=2l$, o mesmo
+argumento (começando a telescopagem em $j'=l+1$ em vez de $j'\ge l+2$) prova o caso de fronteira
+também: $j^*(l)=(l+1)+\mathrm{maxrun}(H(l,l+1))$ exatamente, verificado diretamente ($l=3$:
+$4+2=6$; $l=4$: $5+2=7$; $l=5$: $6+3=9$; $l=6$: $7+3=10$). Essa é a identidade por nível por trás
+da própria recíproca da Proposição~\ref{prop:h014}, provada nesses quatro níveis especificamente; a
+recíproca em si é uma afirmação sobre todo $l$, e essa rota até ela precisa da identidade em todo
+nível, esses quatro incluídos (uma cota superior sobre $\mathrm{maxrun}(H(l,l+1))$ mais fraca que
+igualdade exata também bastaria, pela discussão acima, mas nenhuma cota assim é estabelecida
+aqui). Em $l=7,\dots,13$, redundância de canto em $W=2l$ é verificada como falhando, de modo que
+essa rota não alcança a recíproca ali; além de $l=13$, redundância de canto em $W=2l$ é ela mesma
+não verificada. A recíproca permanece aberta em todo $l\ge7$.
+
+\section{Discussão}
+\label{sec:discussion}
+
+Duas questões nomeadas resumem o que separa os resultados sobre os últimos resíduos retidos acima
+de um teorema mais afiado ali. Excluir a classe inferior na contenção da
+Proposição~\ref{prop:mod9} (Resultado Empírico~\ref{er:mod9}) transformaria o padrão de classe
+única observado em uma afirmação plenamente provada. Provar redundância de canto em toda largura
+$W\ge2l+1$ tornaria, pela Proposição~\ref{prop:tight}, o bootstrap do Corolário~\ref{cor:bootstrap}
+tight para todo orçamento $l+2\le j\le j^*(l)$ em geral, não apenas nos níveis $l=3,\dots,13$ onde
+redundância de canto já está verificada; isso não resolveria, por si só, a recíproca da
+Proposição~\ref{prop:h014} em todo nível, que gira em torno do orçamento de fronteira $j=l+1$
+($W=2l$), estabelecido acima apenas em $l=3,4,5,6$, onde redundância de canto também vale ali; em
+$l=7,\dots,13$, onde ela é verificada como falhando ali, a recíproca permanece aberta por esse
+mecanismo, e além de $l=13$ tanto a propriedade quanto a recíproca são abertas. Nenhuma das duas
+questões é, à primeira vista, tão difícil quanto a própria Conjectura da Cobertura Fraca; se
+alguma das duas é muito mais fácil não é sabido.
+
+Uma soma exponencial finita construída a partir de tuplas de dígitos estritamente decrescentes e
+ponderadas exponencialmente é um objeto natural além deste problema específico de cobertura:
+estatísticas $L$ de população finita em frequências e pesos não CLT, teoria de Littlewood--Offord
+para sequências de coeficientes estruturadas, e o lado analítico da literatura de Collatz via a
+discussão de Tao são todas áreas adjacentes. Achados aqui podem reaparecer lá sob outros nomes. A
+rota de espectro completo e cancelamento uniforme que este artigo tenta é inatingível diretamente
+(Proposição~\ref{prop:sqrtceiling}); estratégias de cancelamento mais fortes, dependentes de
+frequência, permanecem não tentadas. A massa excepcional não se concentra em um conjunto esparso na
+única escala acessível verificada ($l=18$, $j=16$, um limiar, apenas frequências primitivas). A
+intensidade local, lida em uma profundidade suficientemente fina ($l=12,13,14$), se correlaciona
+fortemente com quais resíduos resistem sem determiná-lo completamente, e um diagnóstico de
+aleatorização de fase separado se desvia de um nulo que respeita as magnitudes de frequência e a
+restrição de anulação-fora-de-unidades que elas satisfazem, no único par verificado,
+$(l,m)=(14,16)$. Um nulo adicional, sem carregar informação alguma de fase de frequência
+primitiva, corresponde à estatística de razão desse diagnóstico, mas o faz apenas ficando aquém do
+máximo absoluto e da raiz quadrada média do vetor real por fatores comparáveis em toda execução;
+lido nas unidades absolutas que a razão divide, é esse segundo nulo que se desvia dos dados, por
+cerca de mil de seus próprios desvios padrão em energia total, um excesso de magnitude sobre o qual
+a estatística de razão é silente. Nenhum dos dois nulos, sozinho ou juntos, estabelece o que decide
+a cobertura, ou calibra qualquer um dos desvios a um nível de significância. O resultado posterior
+e não relacionado de Tao, de que quase toda órbita de Collatz atinge um valor quase limitado
+\cite{tao2019}, trabalha com uma variável aleatória de primeira passagem sobre um modelo
+probabilístico diferente do mesmo mapa e não incide diretamente sobre cobertura, mas é a instância
+mais clara de um novo tipo de técnica mudando o que conta como tratável nesta área, o tipo de
+mudança que uma resolução de qualquer uma das duas questões abertas acima precisaria. Cotas de
+densidade de predecessores sobre a própria estrutura de órbitas de $3n+1$, mais desenvolvidas na
+abordagem de desigualdades de diferença de Krasikov e Lagarias~\cite{krasikovlagarias2003} (uma
+cota inferior de $x^{0.84}$ sobre a contagem de inteiros abaixo de $x$ cuja órbita alcança $1$),
+visam a mesma questão ampla que a própria redução de Wirsching de cobertura a densidade positiva de
+predecessores, por um mecanismo diferente: desigualdades de diferença em nível de órbita, e não a
+estrutura de cobertura de uma família finita $R_{j-1,j}$. Nada nessa literatura atualmente se
+transfere para $K(l)$ ou $j^*(l)$ diretamente, mas o alvo compartilhado torna uma transferência
+mais plausível do que um resultado não relacionado, e se uma existe é ela mesma uma questão aberta.
+
+A própria Conjectura da Cobertura Fraca, e a taxa assintótica exata de $e(l)$, permanecem abertas.
+
+\section{Disponibilidade de código e dados}
+\label{sec:code}
+
+O repositório \url{https://github.com/faculdade/weak-covering-conjecture} contém o código e os
+dados por trás de todo cálculo reportado aqui, uma pasta por seção. Ele contém a busca de cobertura
+que produziu a Tabela~\ref{tab:jstar}, a comparação de modelos por trás da Tabela~\ref{tab:aic}, o
+solucionador do jogo de payoff médio, os cálculos de soma exponencial da Seção~\ref{sec:gapA}, e os
+cálculos de resíduos retidos das Seções~\ref{sec:holdouts} e~\ref{sec:further}, junto com os
+conjuntos de resíduos retidos armazenados nos orçamentos finais de cada nível $l=5,\dots,21$; o
+cálculo de $\mathrm{maxrun}(H(l,l+1))$ por trás da discussão da Proposição~\ref{prop:h014}, que
+alcança $l=22$, vive como uma ferramenta diretamente executável em sua própria pasta. Os doze
+certificados $(\sigma_k,\rho_k,h_k)$ por trás da Tabela~\ref{tab:mpg} estão armazenados ali com um
+verificador que reconfere cada um deles contra a desigualdade na prova do Teorema~\ref{thm:mpg},
+sem rodar novamente o solucionador. O README de cada pasta dá o que ela verifica, o comando, a
+saída esperada, e o que a execução custa. A maioria das verificações leva segundos; os três maiores
+níveis da Tabela~\ref{tab:jstar} não. A versão do repositório referenciada ao longo deste artigo
+está arquivada, independentemente de quaisquer mudanças posteriores no ramo padrão do repositório,
+em \href{https://doi.org/10.5281/zenodo.21877643}{doi:10.5281/zenodo.21877643} (commit
+\texttt{17f1b05}).
+
+\subsection*{Agradecimentos}
+Assistência de IA foi usada para revisão textual e tradução.
+
+\renewcommand{\refname}{Refer\^encias}
+\begin{thebibliography}{99}
+
+\bibitem{wirsching1998}
+G.~J. Wirsching, \emph{The Dynamical System Generated by the $3n+1$ Function}, Lecture Notes in
+Mathematics, vol.~1681, Springer, Berlin, 1998.
+
+\bibitem{wirsching2003}
+G.~J. Wirsching, \emph{On the problem of positive predecessor density in $3n+1$ dynamics}, Discrete
+Contin. Dyn. Syst. \textbf{9} (2003), no.~3, 771--787.
+
+\bibitem{tao2019}
+T.~Tao, \emph{Almost all orbits of the Collatz map attain almost bounded values}, Forum Math. Pi
+\textbf{10} (2022), Paper No.~e12, 1--56; arXiv:1909.03562.
+
+\bibitem{krasikovlagarias2003}
+I.~Krasikov and J.~C. Lagarias, \emph{Bounds for the $3x+1$ problem using difference inequalities},
+Acta Arith. \textbf{109} (2003), no.~3, 237--258.
+
+\bibitem{ehrenfeuchtmycielski1979}
+A.~Ehrenfeucht and J.~Mycielski, \emph{Positional strategies for mean payoff games}, Internat. J.
+Game Theory \textbf{8} (1979), no.~2, 109--113.
+
+\bibitem{meyerovitchyoung2026}
+T.~Meyerovitch and A.~Young, \emph{Rationality and computability of the covering radius for sofic
+shifts}, arXiv:2603.21449 (2026).
+
+\bibitem{meyerovitchyoung2025nonalt}
+T.~Meyerovitch and A.~Young, \emph{Non-alternating mean payoff games}, arXiv:2505.02183 (2025).
+
+\bibitem{tao2011blog}
+T.~Tao, \emph{The Collatz conjecture, Littlewood--Offord theory, and powers of $2$ and $3$},
+blog post, terrytao.wordpress.com, August 25, 2011.
+
+\end{thebibliography}
+
+\end{document}
