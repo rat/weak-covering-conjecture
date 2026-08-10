@@ -506,3 +506,24 @@ A push), notes/H-013.md, notes/GAP-A-round4.md, notes/GAP-A-round5*.md.
       comparisons against a null get checked in absolute units before the ratio is cited. Recompiled
       clean, 20 pages (up from 19), 0 errors, 0 em-dashes, parenthesis balance 713/713. Combined
       tally 0/1/4/10: second consecutive major resets the streak hard again. Round 17 next.
+
+- [x] **Round 17 complete (2026-08-10).** Codex unavailable all three attempts (environment-level
+      sandbox error, not quota); proceeded Opus-only per the standing fallback's evident intent.
+      First round since Round 14 with no major finding. Opus independently re-confirmed Round 16's
+      substance in full (the energy excess and the Section 4 mechanism both re-derived clean) and
+      found four moderate issues, all definitional or scoping gaps in Round 16's own freshly-written
+      text rather than a reversal of it. Most substantive: the symbol F used throughout the
+      multinomial-null passage was never defined, and under the natural reading the paper's own
+      E[sum F^2]=6T claim would be off by 3^26; fixed by adding an explicit definition after
+      verifying every printed number is consistent with it. Also removed a sentence narrating the
+      paper's own revision history (a Rule 5c violation), fixed a wrong quantity pairing in the
+      Discussion (root-mean-square, not total energy), and sharpened the multinomial null's
+      conclusion to specifically claim excess energy rather than "extremity," since rescaling the
+      null's mean maximum to the actual RMS shows the max/RMS ratio itself is not refuted at all.
+      Eight minor items: two index slips in Section 4's Round-16 fix, a genuine factual gap in
+      Empirical Result 13 about l=3,4 (resolved by independently rerunning the brute-force
+      computation, same approach as l=2 last round), three clarity fixes, and two items needing no
+      change (one already correctly scoped, one a self-withdrawn citation concern from the reviewer
+      itself). Ninth consecutive round the combinatorial core re-derived clean. Recompiled clean, 20
+      pages, 0 errors, 0 em-dashes, parenthesis balance 724/724. Combined tally 0/0/4/8: no major or
+      critical, but four moderates keep the streak at 0. Round 18 next.

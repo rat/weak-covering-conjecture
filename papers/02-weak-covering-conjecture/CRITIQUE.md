@@ -23,6 +23,7 @@ by round; this table is kept current as the producer resolves each entry.
 | 14 | 0 | 0 | 2 | 4 | no | 0 |
 | 15 | 0 | 1 | 4 | 6 | no | 0 |
 | 16 | 0 | 1 | 4 | 10 | no | 0 |
+| 17 | 0 | 0 | 4 | 8 | no | 0 |
 
 Round 10's tally combines both reviewers: Opus 0 critical/0 major/3 moderate/6 minor (C-158, C-159,
 C-160 moderate; C-161-C-166 minor), Codex 0/1/5/2 (C-168 major; C-169-C-173 moderate; C-174, C-175
@@ -61,7 +62,14 @@ consecutive round whose major finding was created by fixing the previous round's
 finding, the fourth reversal at the Section 5.3 phase-diagnostic locus across Rounds
 13-16; see the Round 16 narrative below for the new standing discipline adopted in
 response ("conclusion rewrites wait one round; report absolute units before citing a
-ratio").
+ratio"). Round 17: Codex failed three times on an environment-level sandbox error
+(`bwrap: loopback: Failed RTM_NEWADDR: Operation not permitted`), not a token or quota issue,
+tried under three different sandbox configurations; proceeded Opus-only per the standing
+fallback's evident intent. Opus 0/0/4/8 (C-234 through C-237 moderate; C-238 through C-245
+minor, two of them no-change). First round since Round 14 with no major finding; every
+moderate is a definitional or scoping gap in Round 16's own freshly-written text, not a
+reversal of its substance, which Opus independently re-confirmed (the energy excess and the
+Section 4 mechanism both re-derived clean).
 Need 3 consecutive rounds at 0/0/0 crit/major/moderate with minor<3 to stop.
 
 ## Status table
@@ -318,6 +326,19 @@ Need 3 consecutive rounds at 0/0/0 crit/major/moderate with minor<3 to stop.
 | C-231 | 16 | (Opus minor) Empirical Result 13's stated verification range has a gap: it lists `l=5,...,21` (empirical) and separately notes `l=3,4` (proven via the boundary-width argument), but never mentions `l=2`, which is neither vacuous (since `j*(2)=4>2`, unlike `l=1`) nor covered by either list | minor | checked directly rather than left unresolved, per Rule 11: computed `H(2,3)={7} mod 9` and `maxrun(H(2,3))=1` (since `2*7=5 mod 9 \notin H(2,3)`) by hand from the family's own definition, matching this project's own previously hand-verified `l=2,j=2` image `{1,2,5,7}`; confirms `j+maxrun=3+1=4=j*(2)`. Fixed: added `l=2`'s check explicitly to the stated range |
 | C-232 | 16 | (Opus minor) The claim that the conjecture's truth "would force `e(l)` to grow strictly slower than linearly" is stated as carrying "the persistence proviso above," but on inspection this one-directional implication needs no such proviso: `j*(l)` is a minimum, so a sub-exponential `K` making some budget a covering budget bounds `j*(l)` above regardless of whether coverage persists at any other budget; only the converse, and the equivalence claimed earlier in the same paragraph, genuinely need persistence | minor | independently re-derived and confirmed via advisor consultation before editing, per the multi-parameter-index-error caution this project tracks for exactly this class of claim: a minimum is at most any member of its own defining set, so the forward direction is proviso-free. Fixed: detached the forward direction from the proviso, stated it flat with the one-line minimality reason, and left the proviso attached only to the equivalence and the converse, which still need it. Checked the ripples (Rule 8b): the contrapositive stated later in the paper ("a linear `e(l)` would... make `K(l)` exponential and falsify the conjecture") carried the same unnecessary hedge in one place and was already flat in another; both now read flat, consistently |
 | C-233 | 16 | (Opus, re-flagged) The swap-partition/hardware description in Section 1 was flagged as possibly inconsistent with the compute-environment note, a concern Opus itself disclosed as arising from its own context rather than from the PDF alone | rejected, no change | third occurrence of this exact flag (after C-167, C-190), both of which already verified the detail correct against the researcher's own compute-environment note; re-affirmed, not re-litigated, per Rule 8d (keep corrections scoped) |
+| C-234 | 17 | (Opus M1, moderate) The symbol `F` used throughout Section 5.3's multinomial-null passage (added Round 16) is never defined. Under the only available reading (`F` = the primitive-frequency exponential sum from the display two paragraphs earlier), the reported `E[sum_z F(z)^2]=6T` is off by `3^26`; every printed number is actually in units of the unscaled imbalance `3N_l(z)-N_{l-1}(z mod 3^{l-1})` | moderate | verified Opus's arithmetic before touching the paper: `sqrt(9.35e9/3^14)=44.21` and `sqrt(6T/3^14)=27.46` both match the printed RMS figures exactly under the unscaled reading. Fixed: added an explicit definition, `F(z) := 3N_l(z)-N_{l-1}(z mod 3^{l-1})`, at its first use, with the exponential-sum display restated as `=3^{l-1}F(z)`; checked that the two downstream uses of `F` ("matching `F` itself," the Parseval sentence) survive unchanged under the unscaled definition, since Parseval only needs the scale factor to be constant, which it is |
+| C-235 | 17 | (Opus M2, moderate) Section 5.3 narrates its own editing history ("a match a previous round of this critique loop read as removing the need for phase structure..."), which describes the manuscript's revision process rather than the mathematics, a Rule 5c violation this round's own new text introduced | moderate | fixed: replaced with content-only phrasing, "The ratio alone would suggest parent-total randomness reproduces the observed extremity; it does not survive a look at the two absolute quantities the ratio divides," removing the reference to the critique loop itself; the actual history stays in this file, not in the paper |
+| C-236 | 17 | (Opus M3, moderate) The Discussion says the multinomial null falls short of the actual array's "absolute maximum and total energy by comparable factors," but the comparable pair is maximum (`1.46x`) and root-mean-square (`1.61x`); total energy falls short by `2.59x` (`=1.61^2`), not a comparable factor to `1.46x`. The abstract already states this correctly; only the Discussion drifted | moderate | fixed: changed "total energy" to "root-mean-square" in the Discussion, matching the abstract and the body |
+| C-237 | 17 | (Opus M4, moderate) The Section 5.3 conclusion that the multinomial null "does not remove the basis for attributing the observed extremity to structure beyond the parent totals; it adds to it" conflates two different statistics. Rescaling the null's mean maximum to the actual array's root-mean-square gives `477x1.61=768`, above the actual `698`, so the maximum comparison is the RMS shortfall restated, not independent evidence; on the scale-free max/RMS ratio itself the null is not refuted at all (it exceeds the actual ratio in most trials). The genuine, non-redundant departure is total energy, a magnitude excess, not "extremity" | moderate | independently reproduced the `477x1.61=768` derivation from already-printed quantities before rewriting (no new script run needed, per advisor consultation). Fixed: narrowed the conclusion to "the multinomial null does not remove the basis for attributing the observed excess energy to structure beyond the parent totals; it is that excess," made the maximum-comparison sentence explicitly derivative of the RMS shortfall, and stated plainly that on the scale-free ratio statistic the null is not refuted, with the extremity/phase claim resting entirely on the constrained phase null at identical RMS. Abstract's unsupported evaluative "Read on the scale that matters" deleted; Discussion's parallel sentence reworded to match |
+| C-238 | 17 | (Opus m1, minor) Section 4's corrected window-`k` argument (Round 16, C-225) says `3^k*epsilon_i` affects none of "the `l-i-1` low-order digits this step tracks," naming the output precision where the argument needs the input precision (`l-i` digits, via `k>l-i-1` i.e. `k>=l-i`) to conclude output agreement mod `3^{l-i-1}` | minor | fixed: reworded to name the input digits explicitly ("none of the `l-i` low-order digits of the input `s_i`, which by the precision fact are exactly what determine the `l-i-1` low-order output digits this step tracks") |
+| C-239 | 17 | (Opus m2, minor) Section 4 says legality holds "since `l-i>=1` throughout" and then "at the last step, `l-i=0`," but steps run `i=0,...,l-1` so `l-i>=1` at every step and `l-i=0` only at the terminal state `z_l`, reached after the last step, not at a step itself | minor | fixed: reworded to "at the terminal state `z_l`, reached after the last step, `l-i=0`," removing the contradiction |
+| C-240 | 17 | (Opus m3, minor) Empirical Result 13 says `l=3,4` "were not separately computed here," while the boundary-width discussion after Proposition 24 later prints `maxrun(H(3,4))=2` and `maxrun(H(4,5))=2` as computed numbers ("`l=3`: `4+2=6`; `l=4`: `5+2=7`"), an apparent factual conflict about whether these were computed | minor | resolved the way `l=2`'s gap (C-231) was resolved, not by rewording blind: independently ran the brute-force enumeration for `l=3,4` from the family's own definition, confirming `j^*(3)=6`, `maxrun(H(3,4))=2`, `j^*(4)=7`, `maxrun(H(4,5))=2`, matching Proposition 24's numbers exactly. Fixed: Empirical Result 13 now states `l=3,4` were checked directly the same way as `l=2`, with the boundary-width argument proving the same equality as a theorem rather than an empirical check, replacing the inaccurate "not separately computed" |
+| C-241 | 17 | (Opus m5, minor) The `RMS_units=sqrt(3/2)*RMS_all` identity is stated in a passage where every actually-reported ratio uses `RMS_all` throughout (confirmed: `698/44.2=15.79` uses the all-`z` RMS), so `RMS_units` itself never enters any compared quantity, and the surrounding prose could read as if it did | minor | fixed: added a parenthetical stating plainly that `RMS_units` enters no reported number, that every ratio quoted (actual, unconstrained, constrained) uses `RMS_all` throughout, identical across all three by Parseval, so the `6.35`-vs-`5.2` gap between the constrained and unconstrained nulls lives entirely in the maximum |
+| C-242 | 17 | (Opus m6, minor) "the split does still fix each triple's total" reuses "triple" for a different object than the frequency triples `t=r,r+3^{l-1},r+2*3^{l-1}` defined four paragraphs earlier, momentarily confusing since a frequency triple's sum is identically zero under the first meaning | minor | fixed: reworded to "fix each parent's three lifts to sum to its total," avoiding the reused term |
+| C-243 | 17 | (Opus m7, minor) "`S(3^l-t)=conj(S(t))` (used already in Section 5)" is a self-reference: this passage is itself inside Section 5 | minor | fixed: repointed to "the proof of Proposition 8," the actual earlier location (Section 5.1) where the identity is first used |
+| C-244 | 17 | (Opus m8) Empirical Result 4 is verified only to `l=12` while Table 1 reaches `l=23`, with no reason given for the gap | no change | checked the repro repo's Section 4 README for a documented reason; none found beyond the check itself ("reproduces `j*(l)`... against the known table for `l=1..12`"). Per Rule 11, left as is: the paper already states the range plainly without inventing an unverified cost justification |
+| C-245 | 17 | (Opus m9) The abstract's "extend the exact computation of `j*(l)`... to `l=23`" is read alongside Section 2's note that `l=22,23` are "carried forward by inference only," which Opus flagged as worth noting though not overclaiming (the DP is exact and the caveat is disclosed in the body) | rejected, no change | Opus itself framed this as a note rather than a finding; the cross-check caveat already lives in Section 2 where it belongs, consistent with the abstract's literally true claim |
+| — | 17 | (Opus, self-withdrawn) Opus's own draft finding that citation [4] (Krasikov-Lagarias) was misattributed, based on an initial image-based misread of the reference page | withdrawn by the critic itself | Opus re-extracted the page's text layer during its own review and confirmed the citation is correct, withdrawing the finding before it was ever reported as a claim; logged per Rule 8c as a critique verified wrong, this time by the critic's own follow-up check rather than the producer's |
 | — | 15 | (Opus minor, moot) Two typography defects: a stray hyphen-space in "naive doubling- chain," and a closing quote mark used to open `"within about one unit"` | minor | moot on arrival: both instances were inside the passage rewritten for C-217, which no longer contains either the line-wrapped phrase or the quoted phrase |
 | — | 15 | (Opus minor) Section 5.1's "is the largest among frequencies checked at accessible `l`" drops the family/level qualification Section 5.2 itself uses to reconcile the same claim with its own counterexample; Proposition 9 is printed outside any subsection heading | minor | partially fixed: the family/level qualification added ("at the specific levels Section 5.2 checks directly (not in general, as Section 5.2's own counterexample there shows)"); Proposition 9's placement is a structural/cosmetic point, deferred as lower priority |
 | — | 15 | Both reviewers again re-derived every proof with nothing found wrong (seventh consecutive round for the combinatorial core); Opus additionally recomputed Table 1 for `l<=12`, Table 2 and Remark 7's figures, corner-redundancy's boundary pattern, and every citation, all again exact | — | the round's headline result is C-214: a real, substantive, independently-reproduced major finding that changes what the paper can honestly claim about phase structure, caught by a genuinely adversarial re-read of Section 5.3's own recent content rather than a proof error. The paper is more honest, and arguably more interesting, for having found it: a local-intensity-only null explaining the diagnostic's headline number is a real finding in its own right, not just a correction |
@@ -1451,3 +1472,81 @@ Recompiled clean (20 pages, up from 19, 0 errors, 0 undefined references, 0 em-d
 balance 713/713). Full findings C-219 through C-233 resolved (fixed, addressed via the new absolute-
 units content, or rejected with reason). Combined tally (0/1/4/10): the second consecutive major
 resets the stopping-criterion streak hard again. Proceeding to Round 17.
+
+### Round 17 (Opus 5 max effort only, 2026-08-10, PDF snapshot frozen at launch, sha256 `9b56290ebe984512153799b956f90b9f4264757c6f4e39ba84257b41ba77911e`)
+
+Codex failed three times before producing any review. All three attempts hit the same
+environment-level sandbox error, `bwrap: loopback: Failed RTM_NEWADDR: Operation not permitted`,
+under three different configurations (`--sandbox read-only`, `--sandbox workspace-write`, and no
+`--sandbox` flag at all); Codex itself declined to substitute any other file or guess at findings,
+consistent with Rule 11. This is not the token-exhaustion failure mode the researcher's standing
+fallback names explicitly, but the practical effect (Codex unavailable) is the same, so proceeded
+Opus-only for this round under the fallback's evident intent, per advisor consultation.
+
+Opus's review found no critical or major issues (the first round since Round 14 without a major)
+and confirmed, rather than reopened, Round 16's substance: it independently re-derived that the
+energy excess stands (matching every number this project had already verified) and confirmed
+Round 16's Section 4 mechanism fix ("the precision fact itself is correct... the conclusion drawn
+is sound"), plus re-derived the entire combinatorial core clean, a ninth consecutive round.
+
+What Opus did find is that Round 16's own new prose needed tightening in four places, all in the
+text that round had just written. The most substantive (C-234, moderate): the symbol `F`, used
+throughout the multinomial-null passage, was never actually defined. Under the only available
+reading (`F` as the exponential sum from the display two paragraphs earlier), the paper's own
+`E[sum_z F(z)^2]=6T` claim is off by `3^26`, since every printed number is really in units of the
+unscaled imbalance `3N_l(z)-N_{l-1}(z mod 3^{l-1})`. Verified Opus's arithmetic first
+(`sqrt(9.35e9/3^14)=44.21`, matching the printed RMS exactly under the unscaled reading), then fixed
+by inserting an explicit definition, `F(z):=3N_l(z)-N_{l-1}(z mod 3^{l-1})`, restating the
+exponential-sum identity as `=3^{l-1}F(z)`; both downstream uses of `F` survive unchanged since
+Parseval only needs the scale factor constant, which it is regardless of which reading is meant.
+
+A second finding (C-235, moderate) caught the paper narrating its own revision history ("a match a
+previous round of this critique loop read as..."), a Rule 5c violation introduced by Round 16's own
+text; fixed by describing only the mathematics, not the manuscript's editing process.
+
+The other two moderates (C-236, C-237) sharpen Round 16's own absolute-units argument rather than
+undoing it. The Discussion had paired "absolute maximum and total energy" as the two quantities
+falling short "by comparable factors," but the comparable pair is maximum (`1.46x`) and
+root-mean-square (`1.61x`); total energy's `2.59x` shortfall is `1.61` squared, not a third,
+comparable figure (fixed, matching the abstract, which already had this right). More substantively,
+Opus showed that rescaling the null's mean maximum to the actual array's root-mean-square gives
+`477x1.61=768`, above the actual `698`: the maximum comparison is the RMS shortfall restated, not
+independent evidence, and on the scale-free max/RMS ratio itself the null is not refuted at all (it
+exceeds the actual ratio in most trials). The one genuine, non-redundant departure is total energy, a
+magnitude excess, not "extremity" as Round 16's conclusion sentence had put it. Reproduced the
+`477x1.61=768` derivation from already-printed quantities (no new script run needed) before
+rewriting: narrowed the conclusion to state the null does not remove the basis for attributing the
+observed excess energy specifically to structure beyond the parent totals, made the maximum
+comparison explicitly derivative of the RMS shortfall, and stated plainly that the extremity/phase
+claim rests entirely on the constrained phase null at identical RMS, not on the multinomial null at
+all. The abstract's unsupported "Read on the scale that matters" was deleted in the same pass.
+
+Eight further minor items, six fixed and two left unchanged with reason. Two index slips in Section
+4's Round-16 fix: one named the output digit count where the argument needed the input digit count
+(C-238), the other asserted `l-i>=1` throughout and then `l-i=0` "at the last step," when `l-i=0`
+only holds at the terminal state after the last step, not at a step itself (C-239). A genuine
+factual gap in Empirical Result 13 (C-240): it says `l=3,4` "were not separately computed," while
+the boundary-width discussion later prints `maxrun(H(3,4))=2` and `maxrun(H(4,5))=2` as computed
+numbers. Resolved the way `l=2`'s gap was resolved last round, not by rewording blind: independently
+ran the brute-force enumeration for `l=3,4`, confirmed both numbers exactly, and fixed Empirical
+Result 13 to say these were checked directly. Three smaller clarity fixes: the `RMS_units` identity
+read as if it entered a reported comparison when every reported ratio actually uses `RMS_all`
+throughout, clarified with a parenthetical (C-241); "each triple's total" reused a term already
+assigned to the frequency triples, reworded (C-242); a cross-reference to "Section 5" from inside
+Section 5 itself, repointed to the actual earlier location, the proof of Proposition 8 (C-243). Two
+items needed no change: Empirical Result 4's stop at `l=12` has no documented reason anywhere in
+this project's own materials, and the paper already states the range plainly without inventing one,
+which is the correct response under Rule 11 (C-244, checked, no change); and a note that the
+abstract's "`l=23`" claim sits alongside Section 2's inference-only caveat for `l=22,23`, which Opus
+itself flagged as a note rather than a finding, since the caveat is already disclosed where it
+belongs (C-245, rejected). Separately, Opus caught and withdrew its own draft finding about citation
+[4] mid-review, after an initial image-based misread of the reference page; its own follow-up
+extraction of the page's text layer confirmed the citation is correct. Logged per Rule 8c: a
+critique claim verified wrong, this time by the critic's own check rather than the producer's.
+
+Recompiled clean (20 pages, 0 errors, 0 undefined references, 0 em-dashes, parenthesis balance
+724/724). Full findings C-234 through C-245 resolved (fixed, or left unchanged with reason).
+Combined tally (0/0/4/8): no critical or major findings for the first time since Round 14, though
+four moderates keep the streak at 0. Every moderate this round was a definitional or scoping gap in
+text Round 16 itself had just written, not a reversal of Round 16's substance, which Opus
+independently re-confirmed in full. Proceeding to Round 18.

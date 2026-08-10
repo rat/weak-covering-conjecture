@@ -66,9 +66,9 @@ parameters departs from a null respecting only frequency magnitudes; a further n
 on coarse parent totals matches that departure's ratio of extreme value to root-mean-square, but only
 because both quantities fall short of the actual data by comparable factors, and in absolute terms the
 actual total energy exceeds this second null's own expectation by a factor of $2.59$, about a thousand
-of the null's own standard deviations. Read on the scale that matters, neither null explains the other
-away: both point to structure beyond what parent totals alone force, without on their own establishing
-what decides coverage. We
+of the null's own standard deviations, a magnitude excess distinct from the phase-only null's own
+departure at fixed magnitude, which the second null is silent on. Neither null, on its own or
+together, establishes what decides coverage. We
 prove a theorem on the uncovered residues themselves, for budgets $j\ge l$: the set left uncovered
 at a budget is contained in both twice and four times the set left uncovered at the previous budget,
 giving an explicit recursive upper bound on $j^*(l)$ that we prove exact at all but one budget
@@ -460,15 +460,17 @@ $s_{i+1}:=T_d(s_i+3^k\epsilon_i)\bmod3^k$ to act on for any extending digit $\ep
 real or padding, matching the general successor $s'(\epsilon)$ used in the theorem's proof below.
 Second, from the defining formula $T_d(z)=(2^{d+1}z-2)/3$, $T_d(z)\bmod3^{k'}$ depends only on
 $z\bmod3^{k'+1}$ for every $k'\ge0$; since $k>l-i-1$ throughout this regime, the term $3^k\epsilon_i$
-never affects any digit below position $k$, in particular none of the $l-i-1$ low-order digits this
-step tracks, so which $\epsilon_i$ is used, real when the true state still supplies one or arbitrary
-padding once it does not, is irrelevant to them. Consequently, if the window-$k$ state $s_i$ agrees
+never affects any digit below position $k$, in particular none of the $l-i$ low-order digits of the
+input $s_i$, which by the precision fact are exactly what determine the $l-i-1$ low-order output
+digits this step tracks, so which $\epsilon_i$ is used, real when the true state still supplies one or
+arbitrary padding once it does not, is irrelevant to them. Consequently, if the window-$k$ state $s_i$ agrees
 with the true $z_i$ on its lowest $l-i$ digits, as it does by construction at the first padded step
 and by induction thereafter, then $s_{i+1}$ agrees with the true $z_{i+1}$ on its lowest $l-i-1$
 digits regardless of $\epsilon_i$, one fewer digit of guaranteed agreement each step, exactly matching
 how many true digits remain. Legality of the chosen
 move at step $i$ depends only on $z_i\bmod3$, the lowest digit, which is among the true, agreeing
-digits at every one of these steps since $l-i\ge1$ throughout; at the last step, $l-i=0$, the unit
+digits at every one of these steps since $l-i\ge1$ throughout (steps run $i=0,\dots,l-1$); at the
+terminal state $z_l$, reached after the last step, $l-i=0$ and the unit
 requirement modulo $3^0=1$ is vacuous. So the chosen move stays legal against the true,
 lower-precision state at every step and the successor relation used below holds at every step,
 including these last $k-1$, with $\epsilon_i$ taken to be the real next digit whenever the true state
@@ -732,10 +734,14 @@ alone suggest, but does not fully determine it. A separate
 diagnostic at a smaller, more tractable
 pair, $(l,m)=(14,16)$, for the family $R_{m-1,m}$ (mean hit count $188.5$, three budgets below the
 covering threshold $j^*(14)=19$), holds every $|S(t)|$ fixed and randomizes the phases of
-conjugate-symmetric pairs. Writing $N_l(z)$ for the exact hit count of residue $z$ and $N_{l-1}$ for
-the same tuple family's count one level down, restricting to primitive frequencies $3\nmid t$ gives
-exactly $\sum_{3\nmid t}S(t)e(-tz/3^l) = 3^{l-1}\bigl(3N_l(z)-N_{l-1}(z\bmod3^{l-1})\bigr)$, a
-measure of imbalance among the three lifts of each parent residue, identically $0$ at every
+conjugate-symmetric pairs. Writing $N_l(z)$ for the exact hit count of residue $z$, $N_{l-1}$ for
+the same tuple family's count one level down, and
+\[
+F(z) := 3N_l(z)-N_{l-1}(z\bmod3^{l-1})
+\]
+for their imbalance among the three lifts of each parent residue, restricting to primitive
+frequencies $3\nmid t$ gives exactly $\sum_{3\nmid t}S(t)e(-tz/3^l) = 3^{l-1}F(z)$, so $F$ is
+identically $0$ at every
 non-unit $z$ (both $N_l(z)$ and $N_{l-1}(z\bmod3^{l-1})$ vanish there, since no element of a
 tuple family is divisible by $3$). Over all $z$, the actual ratio
 of this quantity's maximum absolute value to its root-mean-square is $15.79$, while eight
@@ -754,7 +760,7 @@ every such triple: three fixed magnitudes forming a closed, non-degenerate trian
 phases down to a one-parameter family, a common rotation of the actual configuration, together with
 its mirror image (negating all three phases before rotating, which also sums to zero). The conjugate
 partner of the triple at parent $r$ is the triple at parent $3^{l-1}-r$, and $S(3^l-t)=\overline{S(t)}$
-(used already in Section~\ref{sec:gapA}) links the two: only one triple per conjugate pair is given
+(used already in the proof of Proposition~\ref{prop:sqrtceiling}) links the two: only one triple per conjugate pair is given
 an independent random rotation and an independent coin flip for the reflection; the partner's
 phases are then fixed by conjugation rather than drawn on their own, so the resulting field stays
 real, matching $F$ itself. This keeps every $|S(t)|$ fixed and vanishes off units exactly by construction.
@@ -766,7 +772,11 @@ the all-$z$ mean square) is the same for the actual array and for any phase null
 $|S(t)|$, constrained or not, since it depends only on the magnitudes; a null respecting the
 zero-off-units property puts that same total squared mass on only the $2\cdot3^{l-1}$ unit positions
 instead of spreading it over all $3^l$, which is exactly what forces
-$\mathrm{RMS}_{\mathrm{units}}=\sqrt{3/2}\cdot\mathrm{RMS}_{\mathrm{all}}$ for such a null. This
+$\mathrm{RMS}_{\mathrm{units}}=\sqrt{3/2}\cdot\mathrm{RMS}_{\mathrm{all}}$ for such a null.
+($\mathrm{RMS}_{\mathrm{units}}$ itself enters no reported number below; every ratio quoted, actual,
+unconstrained, or constrained, uses $\mathrm{RMS}_{\mathrm{all}}$ throughout, identical across all
+three by Parseval, so the entire $6.35$-vs-$5.2$ gap between the constrained and unconstrained nulls
+lives in the maximum, not in which RMS is used.) This
 identity governs only the RMS, not the maximum: Parseval says nothing about how concentrating the
 same squared mass onto fewer, mutually constrained positions affects an extreme-value statistic, and
 the triple correlations the construction introduces could in principle push $\max/\mathrm{RMS}$
@@ -788,36 +798,43 @@ the level-$(l-1)$ local intensity documented earlier in this section.
 A third null tests that directly: instead of fixing $|S(t)|$, fix each parent's raw total,
 $N_{l-1}(r)$ for every $r$, and split that total multinomially
 $(\tfrac13,\tfrac13,\tfrac13)$ among its three lifts, carrying no information about the observed
-primitive-frequency phases (the split does still fix each triple's total and is not a claim about
+primitive-frequency phases (the split does still fix each parent's three lifts to sum to its total
+and is not a claim about
 the finer leave-one-out intensity used in the rank check above, a property of individual
 children rather than of the parent total this null actually conditions on). Run $30$ times (checked into the
 repository, Section~9): this
 parent-total-conditioned null gives $\max/\mathrm{RMS}$ ratios averaging $17.4$, range $[14.9,21.1]$,
-exceeding the actual array's $15.79$ in about $83\%$ of trials, a match a previous round of this
-critique loop read as removing the need for phase structure to explain the observed extremity. That
-reading does not survive a look at the two absolute quantities the ratio divides. For each lift $i$
+exceeding the actual array's $15.79$ in about $83\%$ of trials. The ratio alone would suggest
+parent-total randomness reproduces the observed extremity; it does not survive a look at the two
+absolute quantities the ratio divides. For each lift $i$
 of a parent total $N$ under this null, $n_i$ is $\mathrm{Binomial}(N,\tfrac13)$, so the imbalance
 $3n_i-N$ has variance $2N$; summing the three lifts of every parent over the whole array gives
 $\mathbf{E}[\sum_z F(z)^2]=6T$ exactly, $T=\binom{2m}{m}$. The actual array's $\sum_z F(z)^2$ is
 $9.35\times10^9$ against an expectation of $6T=3.61\times10^9$, a factor of $2.59$ and, against the
 null's own trial-to-trial spread over the $30$ runs (standard deviation $5.6\times10^6$), about
-$1{,}031$ null standard deviations out. The null's absolute maximum, averaging $477$ and never
-exceeding $580$ over the $30$ trials, falls short of the actual array's $698$ in every trial. The
-$\max/\mathrm{RMS}$ ratios agree only because both quantities fall short together: the null's mean
-maximum undershoots the actual maximum by a factor of $1.46$, and its mean RMS undershoots the actual
-RMS ($27.5$ against $44.2$) by a factor of $1.61$, so their quotient lands close by coincidence,
-not because parent-total randomness reproduces the real array. (This uses the $R_{15,16}$ array's own
+$1{,}031$ null standard deviations out: this is the genuine departure, a magnitude excess, $|S(t)|$
+itself departing from what independent splitting of the exact parent counts produces. The null's
+absolute maximum, averaging $477$ and never
+exceeding $580$ over the $30$ trials, falls short of the actual array's $698$ in every trial, but this
+adds no further evidence beyond the same excess: at the actual array's own root-mean-square ($44.2$
+against the null's $27.5$, a factor of $1.61$), the null's mean maximum would scale to about
+$477\times1.61\approx768$, above the actual $698$, so the maximum comparison is the root-mean-square
+shortfall restated, not an independent one. The
+$\max/\mathrm{RMS}$ ratios themselves agree, or rather the null exceeds the actual ratio in most
+trials, precisely because both the maximum and the root-mean-square fall short by comparable factors
+($1.46$ and $1.61$); on this scale-free statistic the null is not refuted at all, and the extremity
+claim below rests entirely on the constrained phase null, at identical root-mean-square.
+(This uses the $R_{15,16}$ array's own
 parent totals directly, rather than the $\lambda_c$ figures reported earlier in this section, which
 come from a different family and depth, $R_{j^*(l)-2,j^*(l)-1}$ at $c=8,9,10$; the two are separate
 measurements of the same qualitative phenomenon, coarse skew in tuple counts, rather than the same
-measurement.) Read this way, the multinomial null does not remove the basis for attributing the
-observed extremity to structure beyond the parent totals; it adds to it. The excess energy it
-identifies is a statement about magnitudes, $|S(t)|$ itself departing from what independent splitting
-of the exact parent counts produces, distinct from the phase-only null's statement about phases: that
+measurement.) So the multinomial null does not remove the basis for attributing the
+observed excess energy to structure beyond the parent totals; it is that excess. It says nothing
+about phase, which is the constrained null's own territory below: that
 null holds every $|S(t)|$ fixed by construction (Parseval then guarantees identical RMS for the actual
 array and the null alike) and still finds the actual maximum, $698$, well above the constrained null's
 mean of about $280$ in the same units ($6.35$ times the shared RMS of $44.2$), a purely phase-driven
-departure the multinomial null is silent on since it never holds $|S(t)|$ fixed to begin with. Neither
+departure the multinomial null cannot speak to since it never holds $|S(t)|$ fixed to begin with. Neither
 null, on its own or together, establishes which mechanism, if either, decides coverage, or how much of
 either departure a properly calibrated test would confirm. At the levels and pair checked, holdout
 rarity ($l=10,\dots,15$) and the phase-scramble gap ($(l,m)=(14,16)$ alone) are not established as
@@ -924,8 +941,10 @@ Corollary~\ref{cor:bootstrap} is empirically exact, $j^*(l) = j + \mathrm{maxrun
 $(l,j)$ with $l+1\le j\le j^*(l)$ we were able to compute, $l=5,\dots,21$ at every such budget and
 $l=22$ at the single budget $j=l+1$, including a case with $|H(l,j)| > 3\times10^6$
 ($l=2$ checked directly at its only nontrivial budget, $j=l+1=3$: $H(2,3)=\{7\}$ modulo $9$,
-$\mathrm{maxrun}=1$, matching $j^*(2)=4$; $l=3,4$ were not separately computed here, but the
-boundary-width argument following Proposition~\ref{prop:tight} below proves the same equality there). (Past
+$\mathrm{maxrun}=1$, matching $j^*(2)=4$; $l=3,4$ checked directly the same way at $j=l+1$
+($\mathrm{maxrun}(H(3,4))=2$ and $\mathrm{maxrun}(H(4,5))=2$, matching $j^*(3)=6$ and $j^*(4)=7$), and
+the boundary-width argument following Proposition~\ref{prop:tight} below proves the same equality
+there as a theorem rather than an empirical check). (Past
 $j^*(l)$, $H(l,j)=\emptyset$ and $\mathrm{maxrun}(\emptyset)=0$, so the displayed equality no longer
 holds there; the claim is only about budgets up to and including $j^*(l)$.) The lower endpoint
 $j=l+1$ has a real justification behind it: equality at $j=l$ itself holds for $l=1,\dots,5$ but
@@ -1280,9 +1299,10 @@ which residues resist without fully determining it, and a separate phase-randomi
 departs
 from a null respecting only frequency magnitudes at the one pair checked, $(l,m)=(14,16)$. A further null carrying no
 primitive-frequency phase information matches that diagnostic's ratio statistic, but does so only by
-falling short of the actual array's absolute maximum and total energy by comparable factors in every
-trial run; read in the absolute units the ratio divides, this second null is the one that departs from
-the data, by about a thousand of its own standard deviations on total energy. Neither null, on its own
+falling short of the actual array's absolute maximum and root-mean-square by comparable factors in
+every trial run; read in the absolute units the ratio divides, this second null is the one that
+departs from the data, by about a thousand of its own standard deviations on total energy, a magnitude
+excess the ratio statistic is silent on. Neither null, on its own
 or together, establishes what decides coverage, or calibrates either departure to a significance
 level. Tao's later, unrelated
 result
