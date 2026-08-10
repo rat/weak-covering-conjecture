@@ -78,7 +78,8 @@ further combinatorial property verified for $l=3,\dots,13$ (the exact computatio
 runs to $l=23$); at the
 one remaining budget in that range, this holds at four small levels checked directly and is
 otherwise only
-empirically exact, and at $j=l$ itself the bound is not tight at every level checked, $l=6,\dots,9$.
+empirically exact, and at $j=l$ itself the bound is tight for $l=1,\dots,5$ but not at every level
+checked beyond that, $l=6,\dots,9$.
 We
 falsify the natural cost-$1$ form of a local repair rule this theorem might suggest, with explicit
 witness-level exhaustive counts, prove that every last-uncovered residue is $\equiv1\pmod3$ whenever
@@ -152,7 +153,7 @@ would eventually reach, the converse is open.
 An earlier, unpublished manuscript of the author computed $j^*(l)$ exactly for $l=1,\dots,20$ by
 direct enumeration and reported the resulting table without a growth-rate analysis. This paper does
 three things. First, it extends that table to $l=23$ and gives a proper statistical comparison of
-candidate growth models for $e(l)$ against the full range (Sections~\ref{sec:computation}
+candidate growth models for $e(l)$ against the extended table's tail (Sections~\ref{sec:computation}
 and~\ref{sec:growth}). Second, it gives the best upper bound on $j^*(l)$ we have found, via a
 reformulation of the covering budget as a mean-payoff game, conditional on the empirically verified
 correspondence between the two stated in Empirical Result~\ref{er:soundness}
@@ -336,7 +337,7 @@ divisible by a strictly higher power of $2$), recovering $a_{j-1}$ from $V$ dire
 $2^{a_{j-1}}3^{j-1}$ is then subtracted off, and the process iterates on the remaining $j-1$ terms. So $R_{j-1,j}$, in bijection with $j$-subsets of the
 $2j$-element set $\{0,\dots,2j-1\}$, has exact cardinality $\binom{2j}{j}$ (this cardinality is
 Wirsching's own Corollary~1.8, Chapter~V,~\cite{wirsching1998}; the injectivity argument above is
-this paper's).
+elementary and appears already, for the same $2^a3^b$-type sums, in~\cite{tao2011blog}).
 Covering
 $(\Z/3^l\Z)^*$, of size $2\cdot3^{l-1}$, requires the domain to be at least as large as the
 codomain: $\binom{2j}{j} \ge 2\cdot3^{l-1}$ is necessary at $j=j^*(l)$ in particular, since
@@ -761,14 +762,20 @@ The zero-off-units constraint has a direct algebraic meaning for the phases. Gro
 frequencies into triples $t=r,\,r+3^{l-1},\,r+2\cdot3^{l-1}$ by parent residue $r$ modulo $3^{l-1}$
 ($3\nmid r$), the vanishing of $F$ on the subgroup $3(\Z/3^l\Z)$ is equivalent, by the same
 character-sum collapse used in Proposition~\ref{prop:sqrtceiling}, to $S(t_1)+S(t_2)+S(t_3)=0$ for
-every such triple: three fixed magnitudes forming a closed, non-degenerate triangle. This pins the
+every such triple: three fixed magnitudes forming a closed triangle, non-degenerate for all but a
+negligible fraction (checked directly at $(l,m)=(14,16)$: exactly two of the $1{,}062{,}882$
+primitive-parent triples, a conjugate pair, have the largest magnitude equal to the sum of the
+other two; the null's rotation-and-reflection construction below is only possibly less random on
+these two, with no visible effect on a $30$-trial statistic). This pins the
 phases down to a one-parameter family, a common rotation of the actual configuration, together with
 its mirror image (negating all three phases before rotating, which also sums to zero). The conjugate
 partner of the triple at parent $r$ is the triple at parent $3^{l-1}-r$, and $S(3^l-t)=\overline{S(t)}$
 (used already in the proof of Proposition~\ref{prop:sqrtceiling}) links the two: only one triple per conjugate pair is given
 an independent random rotation and an independent coin flip for the reflection; the partner's
 phases are then fixed by conjugation rather than drawn on their own, so the resulting field stays
-real, matching $F$ itself. This keeps every $|S(t)|$ fixed and vanishes off units exactly by construction.
+real, matching $F$ itself. This keeps every $|S(t)|$ fixed and vanishes off units exactly by
+construction, though not integrality (the actual array satisfies further constraints this null does
+not, e.g.\ $-N_{l-1}(r)\le F(z)\le2N_{l-1}(r)$ per parent, and is nonetheless more extreme).
 Implemented and run at $(l,m)=(14,16)$ (30 trials, checked into the repository, Section
 9): the constrained null gives $\max/\mathrm{RMS}$ ratios averaging $6.35$, range $[5.93,7.20]$,
 against the real array's $15.79$, a residual factor of about $2.5$. By Parseval, $\sum_z F(z)^2$
@@ -944,13 +951,13 @@ $j^*(l)\le j+r=j+\mathrm{maxrun}(H(l,j))$.
 \begin{empresult}
 \label{er:bootstrap}
 Corollary~\ref{cor:bootstrap} is empirically exact, $j^*(l) = j + \mathrm{maxrun}(H(l,j))$, at every
-$(l,j)$ with $l+1\le j\le j^*(l)$ we were able to compute, $l=5,\dots,21$ at every such budget and
-$l=22$ at the single budget $j=l+1$, including a case with $|H(l,j)| > 3\times10^6$
-($l=2$ checked directly at its only nontrivial budget, $j=l+1=3$: $H(2,3)=\{7\}$ modulo $9$,
-$\mathrm{maxrun}=1$, matching $j^*(2)=4$; $l=3,4$ checked directly the same way at $j=l+1$
-($\mathrm{maxrun}(H(3,4))=2$ and $\mathrm{maxrun}(H(4,5))=2$, matching $j^*(3)=6$ and $j^*(4)=7$), and
-the boundary-width argument following Proposition~\ref{prop:tight} below proves the same equality
-there as a theorem rather than an empirical check). (Past
+$(l,j)$ with $l+1\le j\le j^*(l)$ we were able to compute: $l=2$ checked directly at its only
+nontrivial budget, $j=l+1=3$ ($H(2,3)=\{7\}$ modulo $9$,
+$\mathrm{maxrun}=1$, matching $j^*(2)=4$), $l=3,4$ checked directly the same way at $j=l+1$
+($\mathrm{maxrun}(H(3,4))=2$ and $\mathrm{maxrun}(H(4,5))=2$, matching $j^*(3)=6$ and $j^*(4)=7$, with
+the boundary-width argument following Proposition~\ref{prop:tight} below also proving the same
+equality there as a theorem rather than an empirical check), $l=5,\dots,21$ at every such budget, and
+$l=22$ at the single budget $j=l+1$, including a case with $|H(l,j)| > 3\times10^6$. (Past
 $j^*(l)$, $H(l,j)=\emptyset$ and $\mathrm{maxrun}(\emptyset)=0$, so the displayed equality no longer
 holds there; the claim is only about budgets up to and including $j^*(l)$.) The lower endpoint
 $j=l+1$ has a real justification behind it: equality at $j=l$ itself holds for $l=1,\dots,5$ but

@@ -549,3 +549,22 @@ A push), notes/H-013.md, notes/GAP-A-round4.md, notes/GAP-A-round5*.md.
       clean, 20 pages, 0 errors, 0 em-dashes, parenthesis balance 735/735. Combined tally 0/0/1/9:
       second straight round with no major or critical, but the moderate and minor count keep the
       streak at 0. Round 19 next.
+
+- [x] **Round 19 complete (2026-08-10).** Codex not retried (four consecutive identical
+      environment-error failures already looked persistent by Round 18); Opus-only. First rejected
+      moderate finding of the loop: Opus claimed the depth-c local intensity lambda_c undercounts
+      by 2/3 relative to the global per-unit mean, but an independent from-scratch derivation
+      (knowing a residue mod 3^c already fixes it mod 3, so every element of a unit's depth-c cell
+      is itself a unit, with no fractional discount) refuted this cleanly, confirmed by hand on a
+      small case and against the actual implementing script. No change made; rejection recorded
+      with the full derivation per Rule 8c. Six further minor items, all genuine, all fixed: an
+      introduction/body scope mismatch, a priority claim disproved by a reference already in this
+      paper's own bibliography (checked against the archived primary source), a disclosure gap
+      about the constrained null's residual defects, an abstract/body ambiguity of the same class
+      Rule 8b names, and an unchecked "non-degenerate triangle" claim that turned out to have
+      exactly two genuine exceptions out of 1,062,882 triples when actually computed via FFT
+      (Opus's own suggested fix text would have been wrong had it been applied without this check).
+      Eleventh consecutive round the combinatorial core and Section 4 re-derived clean. Recompiled
+      clean, 20 pages, 0 errors, 0 em-dashes, parenthesis balance 742/742. Combined tally 0/0/1/6:
+      third straight round with no major or critical; the rejected moderate still counts at its
+      reported severity per this project's convention, so the streak stays at 0. Round 20 next.

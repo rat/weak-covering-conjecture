@@ -25,6 +25,7 @@ by round; this table is kept current as the producer resolves each entry.
 | 16 | 0 | 1 | 4 | 10 | no | 0 |
 | 17 | 0 | 0 | 4 | 8 | no | 0 |
 | 18 | 0 | 0 | 1 | 9 | no | 0 |
+| 19 | 0 | 0 | 1 | 6 | no | 0 |
 
 Round 10's tally combines both reviewers: Opus 0 critical/0 major/3 moderate/6 minor (C-158, C-159,
 C-160 moderate; C-161-C-166 minor), Codex 0/1/5/2 (C-168 major; C-169-C-173 moderate; C-174, C-175
@@ -75,6 +76,12 @@ Round 18: Codex failed a fourth consecutive time on the same sandbox error; proc
 again. Opus 0/0/1/9 (C-246 moderate, a genuine abstract/Discussion-vs-body mismatch about which
 null the headline phase-departure number actually comes from; C-247 through C-255 minor, one a new,
 independently-verified citation addition). Second consecutive round with no major or critical.
+Round 19: Opus 0/0/1/6 (C-256 moderate, reported by Opus, verified WRONG on independent
+derivation and rejected per Rule 8c, the loop's first rejected moderate; C-257 through C-262
+minor, all fixed). Third consecutive round with no major or critical; the tally still shows a
+nonzero moderate because a rejected finding is still counted at its reported severity, per this
+project's established convention (Round 16, C-233), even though the paper needed no substantive
+change for it.
 Need 3 consecutive rounds at 0/0/0 crit/major/moderate with minor<3 to stop.
 
 ## Status table
@@ -354,6 +361,13 @@ Need 3 consecutive rounds at 0/0/0 crit/major/moderate with minor<3 to stop.
 | C-253 | 18 | (Opus minor) The citation "that reduction uses non-alternating mean-payoff games, its own variant of the classical alternating games of [5]" attributes the non-alternating framework to reference [6] (Meyerovitch-Young, covering radius of sofic shifts), but that framework is actually introduced in a companion paper by the same authors, which [6] itself cites for the concept | minor | checked before adding anything, but the original check (2026-08-10, same day) used `WebFetch` against the arXiv abstract pages and a PDF-summarization prompt, an AI-mediated paraphrase of the source, not the same as reading the paper directly, and was overstated in this row at the time as "verified via primary sources." Corrected 2026-08-10, same day, after the researcher pointed out the distinction: both PDFs were actually downloaded (`literature/papers/meyerovitchyoung2025-nonalternating.pdf`, `literature/papers/meyerovitchyoung2026-covering-radius.pdf`) and their text extracted directly (`pdftotext`), giving genuine primary-source confirmation this time: arXiv:2505.02183's own abstract and introduction state "We call these games 'non-alternating mean payoff games'... a variation on the mean payoff games introduced by A. Ehrenfeucht and J. Mycielski in [2]"; arXiv:2603.21449's own text reads "'non-alternating mean-payoff games.' As mentioned in [6], these games can be considered as..." with its bibliography entry [6] being exactly the companion paper. Fixed: added the companion paper as a new bibliography entry and reworded the citing sentence to attribute the framework to it, citing all three sources (Ehrenfeucht-Mycielski, both Meyerovitch-Young papers) as precedent; ran the mechanical `\cite`/`\bibitem` cross-check afterward, all keys match. The correction itself was right; the verification-method claim was not, until re-done properly |
 | C-254 | 18 | (Opus minor) "A third null tests that directly" (referring to the level-`(l-1)` local intensity documented earlier) overstates the match: the third null conditions on parent totals of `R_{15,16}` at `l=14`, a different family and depth than the `R_{j*(l)-2,j*(l)-1}` intensity data at `c=8,9,10`, `l=10,...,15` documented earlier; the paper's own caveat about this appears a full page later, after the overstated framing sentence | minor | fixed with a light touch rather than duplicating the page-later caveat: reworded to "tests the analogous parent-level information directly, for this array's own family," scoping the claim to the array actually in question without repeating the full distinguishing parenthetical that already follows a page later |
 | C-255 | 18 | (Opus minor, style) The "X, not Y" antithesis construction appears well past the house style's stated two-per-document budget across the whole paper | minor, no change this round | acknowledged; the project's critique loop has an established, explicitly calibrated baseline above the strict Rule 5c budget for this specific paper (tracked each round via the antithesis count check), and no single new instance stood out as needing a targeted cut this round; deferred to the periodic full-paper antithesis sweep rather than a piecemeal edit |
+| C-256 | 19 | (Opus, moderate) Section 5.3's `lambda_c(z)` (total hit count in a depth-`c` cell divided by the cell's full size, `3^{l-c}`) is claimed to undercount by a factor of `2/3` relative to the global mean `lambda` (defined per unit, divided by `2*3^{l-1}`), since Opus's reasoning holds only `2*3^{l-c-1}` of a depth-`c` cell's `3^{l-c}` elements are units | rejected, verified wrong | independently re-derived from first principles before touching anything, per Rule 8c: for `c>=1` (the only depths ever used, `c=8,9,10`), every element `w` of a residue `z`'s depth-`c` cell satisfies `w = z (mod 3)` automatically, since `3 | 3^c` means `w mod 3^c` determines `w mod 3`; so if `z` is a unit (`3 nmid z`, the only case this diagnostic considers), every one of the cell's `3^{l-c}` elements is *also* a unit, with no `2/3` discount, contrary to the claim. Checked a concrete case by hand (`l=3, c=1, z=1`: the cell `{1,4,7,10,13,16,19,22,25}` has all 9 elements `\equiv 1 (mod 3)`, none divisible by 3) and against the actual implementing script (`local_intensity.py`'s `depth_c_intensity`, which sums hits over exactly the `3^{l-c}`-element cell and divides by that same count, with no separate unit-filtering step, because none is needed). `lambda_c`'s definition, and every number reported from it, is correct as written; no change made to the paper. Logged per Rule 8c: a critique verified wrong by the producer's own independent derivation, not left standing |
+| C-257 | 19 | (Opus minor) The introduction promises the model comparison runs "against the full range," but Section 3 itself, and Table 2's caption, restrict the comparison to the tail `l=10,...,23`; the abstract's own looser "against the extended table" is accurate and survives | minor | fixed: reworded the introduction's clause to "against the extended table's tail," matching what Section 3 actually does |
+| C-258 | 19 | (Opus minor) Proposition 2's proof claims "the injectivity argument above is this paper's," but the identical argument (recovering exponents in order from a sum's divisibility) already appears, for the same `2^a 3^b`-type sums, in reference [8] (Tao's 2011 blog post), already cited elsewhere in this same paper | minor | verified directly against the archived primary source (`literature/papers/tao2011blog-littlewood-offord.html`) before editing: confirmed the matching parenthetical remark is present verbatim ("once one fixes k, all the sums of the form (8) are distinct; because given (8) and k, one can read off a_1 as the largest power of 2 that divides (8), and then subtracting off one can then read off a_2, and so forth"). Fixed: reworded the priority claim to "elementary and appears already, for the same `2^a3^b`-type sums, in [8]," removing the unsupported priority assertion without disputing that the argument itself is correct and was derived independently |
+| C-259 | 19 | (Opus minor) The unconstrained phase scrambles are explicitly rejected partly for not preserving integrality; the constrained null is then credited with fixing "every `|S(t)|`... and vanishes off units exactly by construction" with no mention that it, too, fails to preserve integrality or the further per-parent bound the real array satisfies (`-N_{l-1}(r) <= F(z) <= 2*N_{l-1}(r)`) | minor | verified the bound algebraically (`F(z)=3*N_l(z)-N_{l-1}(r)` with `0<=N_l(z)<=N_{l-1}(r)` forces exactly this range) before adding it. Fixed: added a clause noting the constrained null does not restore integrality either, and that the actual array satisfies this further constraint and is nonetheless more extreme; the omission favored the paper's own conclusion (the real data is even more constrained than the null and still more extreme), so this was a disclosure gap, not a correctness issue |
+| C-260 | 19 | (Opus minor) The abstract's "the bound is not tight at every level checked, `l=6,...,9`" reads, in isolation, as failing at every level tested; the body's parallel sentence is unambiguous only because a preceding clause ("holds for `l=1,...,5`") supplies the contrast, which the abstract omits | minor | fixed: added the missing contrast to the abstract, "the bound is tight for `l=1,...,5` but not at every level checked beyond that, `l=6,...,9`," matching the body |
+| C-261 | 19 | (Opus minor) "three fixed magnitudes forming a closed, non-degenerate triangle" is asserted as a blanket fact about every primitive-parent triple, without checking whether any triple is actually degenerate (a zero magnitude, or one magnitude equal to the sum of the other two, which would make the null's reflection coincide with a rotation on that triple) | minor | checked directly rather than assumed either way, per Rule 11: computed `|S(t)|` for all `1,062,882` primitive-parent triples at `(l,m)=(14,16)` via FFT and found exactly two (a conjugate pair, `r=422818` and `r=1594323-422818`) with the largest magnitude equal to the sum of the other two to floating-point precision (relative gap `~1e-15`), zero triples with a zero magnitude. Opus's own suggested fix ("degenerate triples do not occur at this pair") would have been factually wrong had it been applied without this check. Fixed instead with the verified fact: "non-degenerate for all but a negligible fraction," naming the exact count and the negligible practical effect on a 30-trial statistic |
+| C-262 | 19 | (Opus minor) Empirical Result 13 states its range as "`l=5,...,21`... and `l=22`..." before a parenthetical retroactively adds `l=2,3,4`, so the numeric range as first read (starting at 5) undersells what is actually claimed | minor | fixed by reordering, not just rewording: restructured the sentence so `l=2`, then `l=3,4`, then `l=5,...,21`, then `l=22` appear in increasing numeric order, removing the need for a reader to backtrack |
 | — | 15 | (Opus minor, moot) Two typography defects: a stray hyphen-space in "naive doubling- chain," and a closing quote mark used to open `"within about one unit"` | minor | moot on arrival: both instances were inside the passage rewritten for C-217, which no longer contains either the line-wrapped phrase or the quoted phrase |
 | — | 15 | (Opus minor) Section 5.1's "is the largest among frequencies checked at accessible `l`" drops the family/level qualification Section 5.2 itself uses to reconcile the same claim with its own counterexample; Proposition 9 is printed outside any subsection heading | minor | partially fixed: the family/level qualification added ("at the specific levels Section 5.2 checks directly (not in general, as Section 5.2's own counterexample there shows)"); Proposition 9's placement is a structural/cosmetic point, deferred as lower priority |
 | — | 15 | Both reviewers again re-derived every proof with nothing found wrong (seventh consecutive round for the combinatorial core); Opus additionally recomputed Table 1 for `l<=12`, Table 2 and Remark 7's figures, corner-redundancy's boundary pattern, and every citation, all again exact | — | the round's headline result is C-214: a real, substantive, independently-reproduced major finding that changes what the paper can honestly claim about phase structure, caught by a genuinely adversarial re-read of Section 5.3's own recent content rather than a proof error. The paper is more honest, and arguably more interesting, for having found it: a local-intensity-only null explaining the diagnostic's headline number is a real finding in its own right, not just a correction |
@@ -1621,3 +1635,63 @@ Recompiled clean (20 pages, 0 errors, 0 undefined references, 0 em-dashes, paren
 735/735). Full findings C-246 through C-255 resolved, all fixed. Combined tally (0/0/1/9): second
 consecutive round with no critical or major finding, though one moderate and the minor count keep
 the streak at 0. Proceeding to Round 19.
+
+### Round 19 (Opus 5 max effort only, 2026-08-10, PDF snapshot frozen at launch, sha256 `98cc1c0e58a629166293f302ce36f9a2e1a5d83a242e7edfa5b6e427c991ceba`)
+
+Codex was not retried this round: it had failed four consecutive times on the identical
+environment sandbox error, and by Round 18 that already looked persistent rather than transient.
+Proceeded Opus-only directly.
+
+The moderate finding this round (C-256) is the loop's first rejected moderate, and a genuine
+demonstration of Rule 8c working as intended rather than a rubber stamp. Opus claimed
+`lambda_c(z)`, the depth-`c` local intensity used earlier in Section 5.3, undercounts by a factor
+of `2/3` relative to the global per-unit mean it is compared against, reasoning that a depth-`c`
+cell's `3^{l-c}` elements include only `2*3^{l-c-1}` units. Before touching anything, re-derived
+the actual fact from the definitions: for every depth `c>=1` this paper ever uses (`c=8,9,10`),
+knowing a residue mod `3^c` already determines it mod `3`, since `3` divides `3^c`; so if the
+cell's base point `z` is a unit, every element of the whole cell is automatically a unit too, with
+no fractional discount at all. Checked this by hand on a small case (`l=3,c=1,z=1`) and against
+the actual implementing script, `local_intensity.py`, which sums hits over the full `3^{l-c}`-cell
+and divides by that same count, needing no separate unit-filter because none is needed. The
+finding does not survive this check; no change was made to `lambda_c`'s definition or to any
+number derived from it. Recorded as rejected, verified wrong, with the full derivation, per Rule
+8c's instruction that a wrong critique, once verified as wrong, is itself worth keeping on the
+record rather than silently discarded.
+
+Six further minor items, all genuine and all fixed. Two attribution/scoping precision issues in
+early sections: the introduction promised the model comparison ran "against the full range" when
+Section 3 restricts it to the tail `l=10,...,23` (reworded to match); Proposition 2's proof claimed
+priority for an injectivity argument that, checked directly against the archived copy of reference
+[8] (Tao's 2011 blog post, already cited elsewhere in this paper), turns out to already appear
+there verbatim on the same `2^a3^b`-type sums (reworded to drop the priority claim, keeping the
+correct math). One disclosure gap in Section 5.3: the constrained phase null is credited with
+fixing the zero-off-units property but not flagged as still failing to restore integrality or a
+further per-parent bound the real array satisfies; verified the bound algebraically
+(`-N_{l-1}(r)<=F(z)<=2N_{l-1}(r)`, from `0<=N_l(z)<=N_{l-1}(r)`) before adding one clause noting
+the omission, which favors the paper's own conclusion rather than threatening it. One abstract/body
+ambiguity, structurally the same class of bug Rule 8b names (a clause present in the body's version
+of a claim, missing from the abstract's, changing what the sentence reads as in isolation): fixed
+by adding the missing contrast. One claim asserted without checking, caught and actually checked:
+"non-degenerate triangle" for every primitive-parent triple, computed directly via FFT over all
+`1,062,882` such triples at `(l,m)=(14,16)` and found exactly two, an exact conjugate pair,
+genuinely degenerate to floating-point precision. Opus's own suggested fix text ("degenerate
+triples do not occur") would itself have been wrong had it been applied without this check, a
+second reminder this round that a critique's proposed *fix* needs the same verification as its
+*finding*. Fixed with the true count instead. One ordering fix in Empirical Result 13, reordering
+a numeric range to appear in increasing order rather than needing a parenthetical to patch it
+after the fact.
+
+Independently reproduced, not merely re-checked: `j^*(l)` for `l=2,...,16` from scratch (two
+different algorithms per Opus's own account), the holdout counts at `l=10,...,15`, Theorem 17's
+residue-1 property, Proposition 20's mod-9 class pattern, and Empirical Result 13's maxrun values
+at every level from `l=2` through `l=9`, all matching. Every printed number in Table 1, Table 2,
+Table 3, Remark 7, and Section 5.3 reproduced to the stated precision. All eight references
+verified against primary sources, including both direct quotations from Tao's 2011 post checked
+verbatim against the live page. Every proof in the combinatorial core and the Section 4 argument
+re-derived line by line with nothing wrong, an eleventh consecutive round for the core.
+
+Recompiled clean (20 pages, 0 errors, 0 undefined references, 0 em-dashes, parenthesis balance
+742/742). Full findings C-256 through C-262 resolved (one rejected with reason, six fixed).
+Combined tally (0/0/1/6): third consecutive round with no critical or major finding, and the
+rejected moderate is not a paper defect, but it still counts at its reported severity per this
+project's established convention, so the streak stays at 0. Proceeding to Round 20.
