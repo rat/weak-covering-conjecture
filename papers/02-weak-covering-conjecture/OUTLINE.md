@@ -452,3 +452,24 @@ A push), notes/H-013.md, notes/GAP-A-round4.md, notes/GAP-A-round5*.md.
       the combinatorial core re-derived clean. Recompiled clean, 18 pages, 0 errors, 0 em-dashes,
       parenthesis balance verified, antithesis at the corrected 6-item baseline. Combined tally
       0/0/2/4: no criticals or majors, but 2 moderates keeps the streak at 0. Round 15 next.
+
+- [x] **Round 15 complete (2026-08-10).** This loop's first major finding since Round 11. Codex
+      caught that Round 14's own fix had smuggled in a new overclaim (Parseval governs the RMS, not
+      the maximum, but the text said "so the maximum" too); fixed by stating the max increase is an
+      empirical property of the 30 trials, not a deduced consequence. Opus found something more
+      consequential: the claim that the phase-scramble diagnostic shows "phase structure beyond"
+      local intensity was unsupported, since neither null tried so far carried any local-intensity
+      information at all. Opus built a third null (each parent's exact count, split multinomially
+      among its three lifts, zero phase information) and found it reproduces or exceeds the actual
+      statistic in about 83% of trials. Independently reproduced this before touching the paper
+      (matched Opus's figures almost exactly) and added it to Section 5.3 as new, verified content,
+      rewriting the "phase structure beyond that" claims in the abstract, body, and Discussion to
+      say plainly that the departure does not on its own establish anything about phase. Two more
+      moderate fixes in the same section (a dangling reference to draft history, deleted; an
+      aggregate-vs-rank conflation, separated into two explicit questions with the honest fit-quality
+      caveat) and one in Section 7 (a "tracks within about one unit" claim that turned out nearly
+      vacuous since the tracked quantity only takes two values total, verified against this
+      project's own H-001 data before fixing). Four more minor items. Seventh consecutive round the
+      combinatorial core re-derived clean. Recompiled clean, 19 pages (up from 18), 0 errors, 0
+      em-dashes, parenthesis balance verified. Combined tally 0/1/4/6: the major is a genuine
+      strengthening of the paper, not a defect, but resets the streak hard regardless. Round 16 next.

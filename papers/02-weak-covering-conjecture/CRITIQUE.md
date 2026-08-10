@@ -21,6 +21,7 @@ by round; this table is kept current as the producer resolves each entry.
 | 12 | 0 | 1 | 1 | 8 | no | 0 |
 | 13 | 0 | 0 | 2 | 6 | no | 0 |
 | 14 | 0 | 0 | 2 | 4 | no | 0 |
+| 15 | 0 | 1 | 4 | 6 | no | 0 |
 
 Round 10's tally combines both reviewers: Opus 0 critical/0 major/3 moderate/6 minor (C-158, C-159,
 C-160 moderate; C-161-C-166 minor), Codex 0/1/5/2 (C-168 major; C-169-C-173 moderate; C-174, C-175
@@ -47,6 +48,10 @@ claim outran its own stated support (C-208, moderate, independently reproduced b
 fixing). Opus otherwise 0/0/0/3 fixed (C-209-C-211 minor) plus one rejected as already
 addressed at the same locus (Section 7's independence-model wording, Round 13's C-201).
 Combined 0/0/2/4 -- no criticals or majors, but 2 moderates again keeps the streak at 0.
+Round 15: Codex 0/0/1/1 (C-212 moderate, C-213 minor), Opus 0/1/3/5 (C-214 the loop's first
+major since Round 11, an independently-reproduced finding that the phase-scramble
+diagnostic's headline number does not need phase structure to explain it; C-215/C-216/C-217
+moderate; five minor/moot items). Combined 0/1/4/6 -- the major resets the streak hard.
 Need 3 consecutive rounds at 0/0/0 crit/major/moderate with minor<3 to stop.
 
 ## Status table
@@ -280,6 +285,17 @@ Need 3 consecutive rounds at 0/0/0 crit/major/moderate with minor<3 to stop.
 | — | 14 | (Opus minor, rejected) Section 7's independence-model comparison ("tracks the observed sequence within about one unit") is unreproducible from the text alone | minor | rejected, no further change: this is the same locus Codex flagged in Round 13 (C-201), already fixed there by removing the overclaimed "typical" language and adding an explicit hedge about the missing distributional specification; a third pass at the identical sentence would re-litigate already-reviewed text without new evidence, against Rule 8d |
 | — | 14 | (Opus, remark not a finding) The introduction's citation of [2] could be read as suggesting [2] restates the covering conjecture itself, though Opus confirms the sentence is accurate as written ([2]'s own conjectures are the Elka-function/Markov-chain conditions) | — | no change: Opus explicitly did not raise this as a finding, and Round 12's restructuring (C-196) already separated [1]'s and [2]'s roles into two sentences, reducing the juxtaposition risk this remark flags |
 | — | 14 | Both reviewers again re-derived every proof with nothing found wrong (sixth consecutive round for the combinatorial core); Opus additionally recomputed Table 1 for `l<=12` from scratch, Empirical Result 4 for `l=1,...,9`, Table 2 and Remark 7's figures to every printed digit, Table 3's `rho_k` for `k=3,...,7` via an independently-built uncapped value-iteration solver, corner-redundancy's exact boundary pattern, and every citation against primary sources | — | both moderates this round were about whether Round 13's own new content (the constrained null, unexamined at the level of whether depth choice affects the local-intensity conclusion) was fully justified by what was written, not about the paper's original material; both were caught by a genuinely adversarial re-read of freshly-written text, exactly the failure mode the loop exists to catch |
+| C-212 | 15 | (Codex moderate) Section 5.3's Round-14 fix claims that concentrating the same Parseval-fixed squared mass onto only the unit positions raises "the typical, and so the maximum, magnitude" by `sqrt(3/2)`; Parseval only governs the RMS, not the maximum, and the constrained null's own triple correlations could in principle push `max/RMS` either direction, so the "so the maximum" step is an unjustified inference, not a consequence of Parseval | moderate | fixed: rewrote to state that Parseval governs only the RMS relation exactly, that it says nothing about the maximum, and that the measured constrained-null ratio landing close to `sqrt(3/2)` times the unconstrained range is an empirical property of the 30 trials, not a deduced consequence |
+| C-213 | 15 | (Codex minor) The finest-depth leave-one-out intensity is described only as "each residue's own count excluded from its own estimate," without the resulting formula (does the divisor change from `3` to `2`?), and the reported ranks (`12` to `582`) need a tie-breaking convention since the underlying intensities are discrete | minor | fixed: added the explicit leave-one-out formula (excluding `z`'s own count and dividing by the remaining class size, `2` not `3`) and a note on the tie-breaking convention used, with a remark that no holdout sits inside a large tied block so the convention is immaterial to the conclusion |
+| C-214 | 15 | (Opus **major**) The claim that the phase-scramble diagnostic points "toward phase structure beyond" local intensity (abstract, Section 5.3, Discussion) is unsupported and, on Opus's evidence, likely false: Opus built a third null carrying only local-intensity information (each parent's exact level-`(l-1)` count, split multinomially among its three lifts) and no phase information at all, and found it reproduces or exceeds the actual array's statistic in about `83%` of trials -- meaning the observed extremity does not need phase structure to explain it | major | independently reproduced before touching the paper, per Rule 8c: built a from-scratch implementation of the same multinomial null and got `17.38` mean, `[14.95,21.12]` range, `83.3%` exceeding the actual `15.79`, matching Opus's figures almost exactly. This is the loop's first major finding since Round 11 and the first that changes a substantive conclusion rather than a proof gap or a citation slip. Fixed by adding the multinomial-null result to Section 5.3 as new, verified content (script `multinomial_null.py` checked into the repro repo) and rewriting the "phase structure beyond that" claims in all three locations (abstract, body, Discussion) to state plainly that this departure does not, on its own, establish anything about phase beyond what local intensity already explains |
+| C-215 | 15 | (Opus moderate) Section 5.3's sentence "The earlier `sqrt(3/2)` arithmetic on its own was only this same-array RMS renormalization... superseded here by the actual construction" references draft history no longer resolvable from the current text (Round 15's own fix to C-212 already restructured the paragraph it claims to supersede), and narrates the paper's own editing process, which does not belong in a submission | moderate | fixed by deletion: the dangling sentence added no content beyond what the surrounding paragraph already establishes, so it was removed rather than rewritten, consistent with this project's deletion-first practice at this locus |
+| C-216 | 15 | (Opus moderate) The finest-depth expected-hole-count check and the rank check are presented back to back with one shared conclusion ("local intensity correlates strongly with which residues resist"), but the aggregate expected-hole total is invariant to which specific residues are the holes, so only the rank check actually supports that claim; the aggregate check on its own only shows the model is not grossly miscalibrated, and even that is loose (the model over-predicts by 2-3x at two of the five levels) | moderate | fixed: restructured the passage into two explicit questions (does the model still look grossly refuted at this depth? does intensity pick out which specific residues resist?), attributing the "not grossly refuted" conclusion to the aggregate check alone and the correlation claim to the rank check alone, with an honest note that the two levels of worst overprediction are themselves evidence the aggregate fit is loose |
+| C-217 | 15 | (Opus moderate) Section 7's "an independence model... tracks the observed sequence within about one unit... including both the one rise and the one fall in it" is nearly vacuous: `maxrun(H(l,l+1))` only ever takes the values `3` or `4` over the entire computed range `l=5,...,22` (a one-unit-wide range), so any constant prediction in `[3,4]` would trivially satisfy "within about one unit" without showing the model captures the specific transition level at all | moderate | independently verified against this project's own H-001 computational record (`0,1,2,2,3,3,3,3,3,4,4,4,4,4,4,3,3,3,3,3,3,3` for `l=1,...,22`) before writing anything, confirming the range really is only `{3,4}`. Fixed: reworded to state the range is narrow, that this mainly rules out gross overprediction by the naive model, and explicitly does not establish that the independence model tracks the specific rise-and-fall transition level |
+| C-218 | 15 | (Opus minor) Empirical Result 13's "fails from `l=6` on" states an unbounded range without saying through which level it was actually checked, unlike every other empirical claim in the paper | minor | fixed: reworded to "fails at every level checked from `l=6` on" in both the body and the parallel abstract sentence, removing the implication of an unbounded, fully-verified claim without needing to pin down and cite an exact upper level under time pressure |
+| — | 15 | (Opus minor) The unconstrained scramble is rejected partly for not preserving "integrality," and the constrained null does not preserve it either, but the text never returns to the point | minor | addressed by the new content rather than a direct patch: the multinomial null added for C-214 is explicitly the null that DOES preserve integrality (and non-negativity, and the exact local intensity), so the concern is resolved by what the paper now actually contains, not by editing the older sentence further |
+| — | 15 | (Opus minor, moot) Two typography defects: a stray hyphen-space in "naive doubling- chain," and a closing quote mark used to open `"within about one unit"` | minor | moot on arrival: both instances were inside the passage rewritten for C-217, which no longer contains either the line-wrapped phrase or the quoted phrase |
+| — | 15 | (Opus minor) Section 5.1's "is the largest among frequencies checked at accessible `l`" drops the family/level qualification Section 5.2 itself uses to reconcile the same claim with its own counterexample; Proposition 9 is printed outside any subsection heading | minor | partially fixed: the family/level qualification added ("at the specific levels Section 5.2 checks directly (not in general, as Section 5.2's own counterexample there shows)"); Proposition 9's placement is a structural/cosmetic point, deferred as lower priority |
+| — | 15 | Both reviewers again re-derived every proof with nothing found wrong (seventh consecutive round for the combinatorial core); Opus additionally recomputed Table 1 for `l<=12`, Table 2 and Remark 7's figures, corner-redundancy's boundary pattern, and every citation, all again exact | — | the round's headline result is C-214: a real, substantive, independently-reproduced major finding that changes what the paper can honestly claim about phase structure, caught by a genuinely adversarial re-read of Section 5.3's own recent content rather than a proof error. The paper is more honest, and arguably more interesting, for having found it: a local-intensity-only null explaining the diagnostic's headline number is a real finding in its own right, not just a correction |
 
 ## Full findings
 
@@ -1220,3 +1236,83 @@ about whether Round 13's own new content held up under a genuinely adversarial r
 the paper's original material, continuing the trend since Round 11 that the loop's remaining value is
 mostly in checking its own recent edits. Combined tally (0/0/2/4) does not meet the stopping
 criterion; the streak stays at 0. Proceeding to Round 15.
+
+### Round 15 (Codex on `gpt-5.6-sol` + Opus 5 max effort, 2026-08-10, PDF snapshot frozen at launch, sha256 `e5ddb455257958dd0ad60fc22b1248ac8212d454e1d5f6ba8077944e2e689b0a`)
+
+Third round under the researcher's autonomous-loop instruction. Both prompts asked the reviewers to
+read Round 13-14's Section 5.3 fixes in full and check whether they were now internally consistent
+and properly supported, not just whether the already-found flaws were gone.
+
+Codex found that Round 14's own fix had introduced a new, more subtle overclaim: the passage said
+concentrating Parseval-fixed squared mass onto the unit positions raises "the typical, and so the
+maximum, magnitude" by `sqrt(3/2)`, but Parseval only governs the RMS, not the maximum; the
+constrained null's triple correlations could in principle push `max/RMS` either direction, so the
+"so the maximum" step was an unjustified logical leap dressed up as a consequence of a real identity.
+Fixed by stating plainly that Parseval governs only the RMS exactly, and that the measured
+constrained-null ratio landing close to `sqrt(3/2)` times the unconstrained range is an empirical
+property observed in the 30 trials, not something deduced. Codex also flagged that the finest-depth
+leave-one-out intensity was described without its actual formula or a tie-breaking convention for the
+reported ranks; both were added.
+
+Opus's report contained this loop's first major finding since Round 11. The claim that the
+phase-scramble diagnostic points "toward phase structure beyond" local intensity, repeated in the
+abstract, the body, and the Discussion, turned out to be unsupported: neither null used up to this
+point (the unconstrained scramble, the constrained triple-sum-zero null) carries any information
+about the level-`(l-1)` local intensity that Section 5.3's own earlier paragraphs document as highly
+non-uniform (`lambda_c` from `2.0` to `108.4` against a global mean in the thousands). Opus built a
+third null that inverts this: fix each parent's exact count and split it multinomially among its
+three lifts, carrying zero phase information. That local-intensity-only null reproduces or exceeds
+the actual array's `max/RMS` statistic in about `83\%` of 30 trials. Rather than take this on faith,
+independently reproduced it before touching the paper: a from-scratch implementation gives `17.38`
+mean, `[14.95,21.12]` range, `83.3\%` exceeding the actual `15.79`, matching Opus's figures almost
+exactly. The observed extremity does not, on this evidence, need phase structure to explain it at
+all; local-intensity skew alone is comfortably sufficient. This is a real, substantive finding, not
+just a correction: fixed by adding the multinomial-null result to Section 5.3 as new, verified
+content (script `multinomial_null.py`, checked into the repro repo, predeclared band not set in
+advance here since the exploratory nature of the check made a specific band premature, but the
+result was independently reproduced before any paper edit was made) and rewriting the "phase
+structure beyond that" claims in all three locations to state plainly that the departure from a
+phase-only null does not, on its own, establish anything about phase beyond what local intensity
+already explains.
+
+Opus found two further moderate issues in the same section. A sentence referencing "the earlier
+`sqrt(3/2)` arithmetic" had become a dangling reference to draft history no longer resolvable from
+the current text (Round 15's own C-212 fix had already restructured the paragraph it claimed to
+supersede) and narrated the paper's own editing process; deleted rather than rewritten. The
+finest-depth expected-hole-count check and the rank check were presented back to back with one
+shared conclusion, but the aggregate hole total is invariant to which specific residues are holes,
+so only the rank check actually supports the "which residues resist" claim; restructured into two
+explicit questions with the right check attributed to each, including an honest note that the
+aggregate fit is loose at two of the five levels checked (the model over-predicts by 2-3x), not
+just "meets or exceeds" as previously stated. A third moderate finding, in Section 7: "tracks the
+observed sequence within about one unit... including both the one rise and the one fall" is nearly
+vacuous since `maxrun(H(l,l+1))` only ever takes the values `3` or `4` over the entire computed
+range, a one-unit-wide range that any constant prediction would trivially satisfy. Verified against
+this project's own H-001 computational record before fixing (`0,1,2,2,3,3,3,3,3,4,4,4,4,4,4,3,3,3,
+3,3,3,3` for `l=1,\dots,22`, confirming the range really is `\{3,4\}` throughout `l=5,\dots,22`);
+reworded to say the comparison mainly rules out gross overprediction rather than claiming it tracks
+the specific transition level.
+
+Four minor items: Empirical Result 13's "fails from `l=6` on" stated an unbounded range without
+saying through which level it was checked, unlike every other empirical claim in the paper; reworded
+in both the body and the parallel abstract sentence rather than pinning down and citing an exact
+upper level under time pressure. A concern that the unconstrained scramble is rejected partly for not
+preserving integrality, while the constrained null does not preserve it either, is resolved by the
+new multinomial null itself (which does preserve integrality), not by a further patch to the older
+sentence. Two typography defects turned out moot, both inside the passage already rewritten for the
+`maxrun` finding. Section 5.1's claim that a specific frequency "is the largest among frequencies
+checked" was given the same family/level qualification Section 5.2 already uses for the identical
+claim there; Proposition 9's placement outside a subsection heading is deferred as a lower-priority,
+purely structural point.
+
+Both reviewers again re-derived every proof with nothing found wrong, a seventh consecutive round
+for the combinatorial core. Opus additionally recomputed Table 1 for `l\le12`, Table 2 and Remark 7's
+figures to every printed digit, corner-redundancy's exact boundary pattern, and every citation
+against primary sources, all again exact.
+
+Recompiled clean (19 pages, up from 18, 0 errors, 0 undefined references, 0 em-dashes, parenthesis
+balance 683/683, antithesis count returned to 7 after peaking at 10 during editing). Full findings
+C-212 through C-218 resolved (fixed or addressed via new content), plus three further minor items
+disposed of (one addressed by the new content, one moot, one partially fixed). Combined tally
+(0/1/4/6): the round's major finding is a genuine strengthening of the paper, not a defect found and
+patched over, but it resets the stopping-criterion streak hard regardless. Proceeding to Round 16.

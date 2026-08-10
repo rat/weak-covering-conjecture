@@ -62,7 +62,9 @@ cells of local hit-density well below the global mean; read at a fine enough ave
 local intensity correlates strongly with resistance without fully determining it. A separate
 phase-randomization experiment at a
 different, more tractable pair of
-parameters points, descriptively, toward phase structure beyond that. We
+parameters departs from a null respecting only frequency magnitudes, but a further null carrying
+only local-intensity information reproduces the same departure, so this does not on its own
+establish phase structure beyond what intensity already explains. We
 prove a theorem on the uncovered residues themselves, for budgets $j\ge l$: the set left uncovered
 at a budget is contained in both twice and four times the set left uncovered at the previous budget,
 giving an explicit recursive upper bound on $j^*(l)$ that we prove exact at most budgets $j\ge l+1$,
@@ -71,7 +73,8 @@ further combinatorial property verified for $l=3,\dots,13$ (the exact computatio
 runs to $l=23$); at the
 one remaining budget in that range, this holds at four small levels checked directly and is
 otherwise only
-empirically exact, and at $j=l$ itself the bound is not tight from $l=6$ on. We
+empirically exact, and at $j=l$ itself the bound is not tight at every level checked from $l=6$ on.
+We
 falsify the natural cost-$1$ form of a local repair rule this theorem might suggest, with explicit
 witness-level exhaustive counts, prove that every last-uncovered residue is $\equiv1\pmod3$ whenever
 $j^*(l)\ge l+1$ (every computed level but one), prove a two-class containment
@@ -629,8 +632,9 @@ the $j\ge l$ range Sections~\ref{sec:holdouts}--\ref{sec:further} otherwise work
 result. Write
 $\|S\|_1:=\sum_{\gcd(t,3)=1}|S(t)|/T$ for the normalized $L^1$ mass over frequencies coprime to $3$.
 This restriction excludes $t=3^{l-1}$, whose magnitude $|S(3^{l-1})|\sim T/\sqrt3$ is fixed by
-Proposition~\ref{prop:1547} and, empirically, is the largest among frequencies checked at accessible
-$l$, along with its conjugate $t=2\cdot3^{l-1}$ (since
+Proposition~\ref{prop:1547} and, empirically, is the largest at the specific levels Section~5.2
+checks directly (not in general, as Section~5.2's own counterexample there shows), along with its
+conjugate $t=2\cdot3^{l-1}$ (since
 $S(3^l-t)=\overline{S(t)}$, that frequency matches it exactly and is excluded for the same reason).
 The restriction to $\gcd(t,3)=1$ also excludes every nonprimitive frequency, roughly a third of the
 spectrum, entirely, so $\|S\|_1$ below measures only the primitive-frequency mass. Here
@@ -675,14 +679,29 @@ the weaker, descriptive claim
 underneath it:
 holdouts sit systematically in low-intensity cells, with how far below the mean varying widely by
 depth and level. At the finest depth the definition allows short of the degenerate case, $c=l-1$ (a
-class of only $3$ siblings), the same model, with each residue's own count excluded from its own
-estimate to avoid the self-referential bias a class that small would otherwise carry, gives an
-expected total hole count that meets or exceeds what is actually observed at every level checked:
-$2.1$ against $2$ holdouts at $l=10$, $3.5$ against $1$ at $l=11$, $4.5$ against $3$ at $l=12$, $5.3$
-against $1$ at $l=13$, $5.0$ against $3$ at $l=14$ ($l=15$ not run at this depth). Ranking every unit
-by this same leave-one-out intensity, the actual holdouts sit deep in the low-intensity tail at every
-level checked this way (ranks $12$ to $582$ among $354{,}294$ to $3{,}188{,}646$ units, $l=12,13,14$),
-though not always among the very lowest few residues by rank. Read at this depth, local intensity
+class of only $3$ siblings), the same model uses the leave-one-out intensity
+$\lambda_{l-1}^{-z}(z):=\bigl(\text{sum of the other $2$ siblings' hit counts}\bigr)/2$ in place of
+$\lambda_{l-1}(z)$, excluding $z$'s own count and dividing by the remaining class size (not $3$), to
+avoid the self-referential bias a class that small would otherwise carry, for every residue rather
+than only holdouts. Two separate checks follow from this, addressing two separate questions. First,
+does the model still look grossly refuted at this depth, the way the coarser depths above looked
+(hole probability down to $e^{-108}$)? No: the expected total hole count under the model, summed
+over every unit, is $2.1$ against $2$ holdouts actually observed at $l=10$, $3.5$ against $1$ at
+$l=11$, $4.5$ against $3$ at $l=12$, $5.3$ against $1$ at $l=13$, $5.0$ against $3$ at $l=14$ ($l=15$
+not run at this depth); this aggregate total is invariant to which residues the holes actually are,
+so it does not by itself say anything about whether intensity picks out the correct residues, only
+that the model is no longer grossly miscalibrated in aggregate at this depth (the two levels where
+the model most overpredicts, $l=11$ and $l=13$, are themselves evidence the fit is loose rather than tight).
+Second, does intensity pick out which specific residues resist? Here the answer is more informative:
+ranking every unit
+by this same leave-one-out intensity (ties, where the integer-valued sum coincides, broken
+arbitrarily but consistently, and immaterial to the conclusion since no holdout sits inside a large
+tied block), the actual holdouts sit deep in the low-intensity tail at every
+level checked this way (ranks $12$ to $582$ among $354{,}294$ to $3{,}188{,}646$ units, $l=12,13,14$
+only),
+though not always among the very lowest few residues by rank. It is this rank check, rather than the
+aggregate
+total above, that supports the correlation claim: read at this depth, local intensity
 correlates strongly with which residues resist, more strongly than the coarser depths $c=8,9,10$
 alone suggest, but does not fully determine it. A separate
 diagnostic at a smaller, more tractable
@@ -716,27 +735,46 @@ phases are then fixed by conjugation rather than drawn on their own, so the resu
 real, matching $F$ itself. This keeps every $|S(t)|$ fixed and vanishes off units exactly by construction.
 Implemented and run at $(l,m)=(14,16)$ (30 trials, checked into the repository, Section
 9): the constrained null gives $\max/\mathrm{RMS}$ ratios averaging $6.35$, range $[5.93,7.20]$,
-against the real array's $15.79$, a residual factor of about $2.5$. This lands close to
-$\sqrt{3/2}\approx1.22$ times the unconstrained scrambles' range: by Parseval, $\sum_z F(z)^2$ (hence
+against the real array's $15.79$, a residual factor of about $2.5$. By Parseval, $\sum_z F(z)^2$
+(hence
 the all-$z$ mean square) is the same for the actual array and for any phase null preserving every
 $|S(t)|$, constrained or not, since it depends only on the magnitudes; a null respecting the
 zero-off-units property puts that same total squared mass on only the $2\cdot3^{l-1}$ unit positions
-instead of spreading it over all $3^l$, raising the typical, and so the maximum, magnitude by
-$\sqrt{3/2}$ relative to an unconstrained null with the same magnitudes. The earlier $\sqrt{3/2}$
-arithmetic on its own was only this same-array RMS renormalization applied directly to the real
-ratio, without constructing the null it was implicitly describing; superseded here by the actual
-construction.
+instead of spreading it over all $3^l$, which is exactly what forces
+$\mathrm{RMS}_{\mathrm{units}}=\sqrt{3/2}\cdot\mathrm{RMS}_{\mathrm{all}}$ for such a null. This
+identity governs only the RMS, not the maximum: Parseval says nothing about how concentrating the
+same squared mass onto fewer, mutually constrained positions affects an extreme-value statistic, and
+the triple correlations the construction introduces could in principle push $\max/\mathrm{RMS}$
+either direction. That the measured constrained-null ratio, $6.35$, lands close to $\sqrt{3/2}\approx
+1.22$ times the unconstrained scrambles' range is an empirical property of this specific
+construction, observed directly in the 30 trials rather than deduced from Parseval; the residual
+factor of $2.5$ rests on these measured numbers rather than on the Parseval identity alone.
 Both the eight-trial unconstrained batches above and this thirty-trial constrained one are still too
 few to calibrate a rigorous significance level (a rank-based test against thirty draws cannot reach
 below $p\approx1/31$, however extreme the observed value); what the residual factor near $2.5$
-suggests, descriptively, is that the actual phases are not fully exchangeable with a null that
-respects only $|S(t)|$ and the zero-off-units constraint, though this diagnostic is silent on
+shows, on its own, is that the actual phases are not fully exchangeable with a null that
+respects only $|S(t)|$ and the zero-off-units constraint. It does not, by itself, say that this
+departure needs phase structure specifically, since neither null above carries any information about
+the level-$(l-1)$ local intensity documented earlier in this section.
+
+A third null tests that directly: instead of fixing $|S(t)|$, fix the local intensity exactly, the
+parent count $N_{l-1}(r)$ for every $r$, and split each parent's total multinomially
+$(\tfrac13,\tfrac13,\tfrac13)$ among its three lifts, carrying no information about the
+primitive-frequency phases at all. Run $30$ times (checked into the repository, Section~9): this
+local-intensity-only null gives $\max/\mathrm{RMS}$ ratios averaging $17.4$, range $[14.9,21.1]$,
+exceeding the actual array's $15.79$ in about $83\%$ of trials. The observed extremity is therefore
+comfortably consistent with the local-intensity skew alone ($\lambda_c$ from $2.0$ to $108.4$ against
+a global mean in the thousands, established above), with no need to invoke phase structure to explain
+it: a null carrying only local-intensity information, and no phase information whatsoever, matches or
+exceeds the same statistic. This does not undo the phase-only null's own departure from the actual
+data (the actual phases genuinely are not exchangeable with a null respecting only $|S(t)|$ and the
+zero-off-units constraint, as established above), but it removes the basis for attributing that
+departure to phase structure beyond local intensity specifically: a null with zero phase information
+reproduces the same order of statistic. At the levels checked, holdout rarity and the phase-scramble
+gap are not established as independent phenomena; both are plausibly evidence of the same underlying
+local-intensity skew, and this diagnostic is silent on
 whether it is what
-decides coverage, or on how much of it a properly calibrated test would confirm. At the levels
-checked, the two diagnostics are not evidence of the same thing: holdout rarity, read at a fine
-enough depth, correlates strongly with local intensity without being fully determined by it, while
-only the phase-scramble gap bears on phase as such, and even there only descriptively, for the
-reasons just given.
+decides coverage, or on how much of it a properly calibrated test would confirm.
 
 \begin{proposition}
 \label{prop:1547}
@@ -842,7 +880,8 @@ Proposition~\ref{prop:tight} below proves the same equality there). (Past
 $j^*(l)$, $H(l,j)=\emptyset$ and $\mathrm{maxrun}(\emptyset)=0$, so the displayed equality no longer
 holds there; the claim is only about budgets up to and including $j^*(l)$.) The lower endpoint
 $j=l+1$ has a real justification behind it: equality at $j=l$ itself holds for $l=1,\dots,5$ but
-fails from $l=6$ on (e.g.\ $\mathrm{maxrun}(H(6,6))=5$, giving $j+\mathrm{maxrun}=11\ne10=j^*(6)$;
+fails at every level checked from $l=6$ on (e.g.\ $\mathrm{maxrun}(H(6,6))=5$, giving
+$j+\mathrm{maxrun}=11\ne10=j^*(6)$;
 $\mathrm{maxrun}(H(7,7))=5$, giving $12\ne11=j^*(7)$); Corollary~\ref{cor:chain} and
 Corollary~\ref{cor:bootstrap} both need $j\ge l$ to apply at all, but that alone does not explain why
 $j=l$ specifically starts failing at $l=6$. The sub-range $l+2\le j\le j^*(l)$ is proven at
@@ -1063,12 +1102,15 @@ $1547$ from Section~\ref{sec:holdouts}.
 A naive expectation, that a random set of holdouts at the observed density would have doubling
 chains far longer than the flat ceiling of $3$--$4$ measured at every level $l=5,\dots,22$, does not
 survive contact with the actual, rapidly declining density of $H(l,l+1)$. An independence model
-matched to that actual density tracks the observed sequence within about one unit at every level,
-including both the one rise and the one fall in it, without the flagrant mismatch a naive doubling-
-chain estimate would predict. This comparison stays descriptive rather than a specified statistical
+matched to that actual density predicts values in the same narrow range the observed sequence
+occupies, without the flagrant mismatch a naive doubling-chain estimate would predict. That range is
+itself narrow, only $3$ or $4$ over the entire computed range $l=5,\dots,22$, so this comparison
+mainly rules out gross overprediction by the naive model; it does not, on its own, establish that the
+independence model tracks the specific level at which the observed sequence rises from $3$ to $4$
+and falls back, only that its predicted values stay inside that same narrow band. This comparison
+stays descriptive rather than a specified statistical
 test (no
-distributional family, wraparound convention, or reference statistic is fixed, so "within about one
-unit" is a direct count rather than a calibrated interval), and does not,
+distributional family or wraparound convention is fixed), and does not,
 by itself, say anything about whether
 $\mathrm{maxrun}(H(l,l+1))$ is bounded;
 Proposition~\ref{prop:h014} is the only established link between that question and $j^*(l)$'s rate.
@@ -1186,8 +1228,11 @@ cancellation strategies remain untried. Exceptional mass does
 not concentrate on a sparse set at the one accessible scale checked ($l=18$, $j=16$, one threshold,
 primitive frequencies only). Local intensity, read at a fine enough depth, correlates strongly with
 which residues resist without fully determining it, and a separate phase-randomization diagnostic
-suggests, descriptively, a departure
-from a generic-phase model at the levels checked, though neither calibrates that suggestion or says
+departs
+from a null respecting only frequency magnitudes at the levels checked, though a further null
+carrying only local-intensity information reproduces the same departure, so it does not on its own
+establish anything about phase beyond what intensity already explains, calibrate that finding, or
+say
 whether it is what decides coverage. Tao's later, unrelated
 result
 that almost every Collatz orbit attains an almost bounded value~\cite{tao2019} works with a
@@ -1220,7 +1265,7 @@ $(\sigma_k,\rho_k,h_k)$ behind Table~\ref{tab:mpg} are stored there with a verif
 each of them against the inequality in Theorem~\ref{thm:mpg}'s proof, without re-running the
 solver. Each folder's README gives what it checks, the command, the output to expect, and what the
 run costs. Most checks take seconds; the three largest levels of Table~\ref{tab:jstar} do not.
-Every claim above matches commit \texttt{a1a926f} of that repository; later
+Every claim above matches commit \texttt{8256867} of that repository; later
 commits may extend it further but should not change what this specific commit already contains.
 
 \subsection*{Acknowledgments}
