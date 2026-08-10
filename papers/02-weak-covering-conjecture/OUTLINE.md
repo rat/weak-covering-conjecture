@@ -568,3 +568,19 @@ A push), notes/H-013.md, notes/GAP-A-round4.md, notes/GAP-A-round5*.md.
       clean, 20 pages, 0 errors, 0 em-dashes, parenthesis balance 742/742. Combined tally 0/0/1/6:
       third straight round with no major or critical; the rejected moderate still counts at its
       reported severity per this project's convention, so the streak stays at 0. Round 20 next.
+
+- [x] **Round 20 complete (2026-08-10).** Codex tried once more (sixth attempt) and failed
+      identically; not retried further this round. Best round yet: zero critical, major, or
+      moderate findings, the first time every severity above minor has cleared. Three minor fixes,
+      two of the same shape (an abstract left with an older, looser scoping after the body had
+      already been tightened in an earlier round, one of them a phrase Round 19 fixed in the
+      introduction but missed in the abstract's own copy) and one citation-precision fix (two
+      passages credited a lemma with a case, l=1, that the lemma's own statement does not cover).
+      Opus independently re-checked and re-confirmed Round 19's rejected finding without being
+      asked to. Widest independent reproduction of any round so far: j*(l) recomputed from scratch
+      for l=1 through 17 (matching every value), Empirical Result 4 verified independently via a
+      separate backward DP for l=1..10, and Section 5.2's l=18 computation redone entirely from
+      scratch. Twelfth consecutive round the combinatorial core held up. Recompiled clean, 20
+      pages, 0 errors, 0 em-dashes, parenthesis balance 743/743. Combined tally 0/0/0/3: misses the
+      clean threshold (minor<3) by exactly one item, the closest the loop has come to stopping.
+      Round 21 next.

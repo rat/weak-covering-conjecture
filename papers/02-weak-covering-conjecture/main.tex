@@ -44,7 +44,7 @@ Wirsching's 1998 Weak Covering Conjecture asks for a sub-exponential $K(l)$ such
 enough set $R_{j-1,j} \subset \Z_3^*$, built from strictly decreasing exponent tuples, is forced to
 cover every unit residue modulo $3^l$. We extend the exact computation of $j^*(l)$, the smallest
 such covering budget, from $l=20$ to $l=23$, and compare four growth models for
-$e(l) := j^*(l) - l\log_4 3$ against the extended table: a constant model is unconditionally
+$e(l) := j^*(l) - l\log_4 3$ against the extended table's tail: a constant model is unconditionally
 impossible (we prove $e(l)\ge\tfrac14\log_2l-O(1)$) and disfavored at every statistic checked; the
 growing alternatives are not distinguished from one another by these criteria. We give
 the best bound known to us, $j^*(l) \le \tfrac98 l + \tfrac{33}2$, via a mean-payoff-game relaxation
@@ -72,8 +72,8 @@ departure at fixed magnitude, which the second null is silent on. Neither null, 
 together, establishes what decides coverage. We
 prove a theorem on the uncovered residues themselves, for budgets $j\ge l$: the set left uncovered
 at a budget is contained in both twice and four times the set left uncovered at the previous budget,
-giving an explicit recursive upper bound on $j^*(l)$ that we prove exact at all but one budget
-$j\ge l+1$, given one
+giving an explicit recursive upper bound on $j^*(l)$ that we prove exact at all but one budget $j$
+with $l+1\le j\le j^*(l)$, given one
 further combinatorial property verified for $l=3,\dots,13$ (the exact computation itself, separately,
 runs to $l=23$); at the
 one remaining budget in that range, this holds at four small levels checked directly and is
@@ -882,8 +882,9 @@ Write $H(l,j)$ for the set of units modulo $3^l$ \emph{not} covered by $R_{j-1,j
 $j^*(l)$ as the least covering budget, $H(l,j^*(l))=\emptyset$ and $H(l,j)\ne\emptyset$ for every
 $j<j^*(l)$; whether this extends to ``$j\ge j^*(l)$ exactly when $H(l,j)=\emptyset$'' needs emptiness
 to persist at every larger budget too, which is not automatic from the definition alone. Every result
-in this section needs $j\ge l$; $j^*(l) \ge l$ holds outright for $l=1,\dots,23$ (equality only at $l=1$),
-by Lemma~\ref{lem:nosmaller} above, but the conjectured rate $\log_4 3 < 1$ would eventually put
+in this section needs $j\ge l$; $j^*(l) \ge l$ holds outright for $l=1,\dots,23$ ($l=1$ from
+Table~\ref{tab:jstar} directly, $l=2,\dots,23$ by Lemma~\ref{lem:nosmaller} above; equality only at
+$l=1$), but the conjectured rate $\log_4 3 < 1$ would eventually put
 $j^*(l)$ below $l$, outside this section's reach. Within this range, persistence does hold:
 Theorem~\ref{thm:doubling}
 below gives $H(l,j)=\emptyset\Rightarrow H(l,j+1)\subseteq2\emptyset\cap4\emptyset=\emptyset$, so
@@ -1069,7 +1070,8 @@ Section~\ref{sec:mpg}'s mean-payoff-game argument then bound far more tightly.
 
 By Lemma~\ref{lem:UW}, which itself needs $j\ge l$, the smallest $j\ge l$ with
 $U(l,j+l-1)=(\Z/3^l\Z)^*$ is the smallest $j\ge l$ at which $R_{j-1,j}$ covers; since $j^*(l)\ge l$
-for $l=1,\dots,23$, with equality only at $l=1$ (Lemma~\ref{lem:nosmaller}), this coincides with
+for $l=1,\dots,23$ ($l=1$ from Table~\ref{tab:jstar} directly, $l=2,\dots,23$ by
+Lemma~\ref{lem:nosmaller}), with equality only at $l=1$, this coincides with
 $j^*(l)$ itself throughout the range this paper works in, though nothing here rules out coverage at
 some unchecked $j<l$ for a level not yet computed. Writing $W^*(l):=j^*(l)+l-2$ for the width one
 step before that,

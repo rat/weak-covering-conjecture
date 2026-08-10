@@ -26,6 +26,7 @@ by round; this table is kept current as the producer resolves each entry.
 | 17 | 0 | 0 | 4 | 8 | no | 0 |
 | 18 | 0 | 0 | 1 | 9 | no | 0 |
 | 19 | 0 | 0 | 1 | 6 | no | 0 |
+| 20 | 0 | 0 | 0 | 3 | no | 0 |
 
 Round 10's tally combines both reviewers: Opus 0 critical/0 major/3 moderate/6 minor (C-158, C-159,
 C-160 moderate; C-161-C-166 minor), Codex 0/1/5/2 (C-168 major; C-169-C-173 moderate; C-174, C-175
@@ -82,6 +83,10 @@ minor, all fixed). Third consecutive round with no major or critical; the tally 
 nonzero moderate because a rejected finding is still counted at its reported severity, per this
 project's established convention (Round 16, C-233), even though the paper needed no substantive
 change for it.
+Round 20: Opus 0/0/0/3 (C-263 through C-265, all minor, all fixed). First round with zero
+critical/major/moderate findings, but minor=3 misses the "minor<3" threshold by exactly one, so
+this round does not count toward the streak either; the closest the loop has come to a clean round
+so far.
 Need 3 consecutive rounds at 0/0/0 crit/major/moderate with minor<3 to stop.
 
 ## Status table
@@ -368,6 +373,9 @@ Need 3 consecutive rounds at 0/0/0 crit/major/moderate with minor<3 to stop.
 | C-260 | 19 | (Opus minor) The abstract's "the bound is not tight at every level checked, `l=6,...,9`" reads, in isolation, as failing at every level tested; the body's parallel sentence is unambiguous only because a preceding clause ("holds for `l=1,...,5`") supplies the contrast, which the abstract omits | minor | fixed: added the missing contrast to the abstract, "the bound is tight for `l=1,...,5` but not at every level checked beyond that, `l=6,...,9`," matching the body |
 | C-261 | 19 | (Opus minor) "three fixed magnitudes forming a closed, non-degenerate triangle" is asserted as a blanket fact about every primitive-parent triple, without checking whether any triple is actually degenerate (a zero magnitude, or one magnitude equal to the sum of the other two, which would make the null's reflection coincide with a rotation on that triple) | minor | checked directly rather than assumed either way, per Rule 11: computed `|S(t)|` for all `1,062,882` primitive-parent triples at `(l,m)=(14,16)` via FFT and found exactly two (a conjugate pair, `r=422818` and `r=1594323-422818`) with the largest magnitude equal to the sum of the other two to floating-point precision (relative gap `~1e-15`), zero triples with a zero magnitude. Opus's own suggested fix ("degenerate triples do not occur at this pair") would have been factually wrong had it been applied without this check. Fixed instead with the verified fact: "non-degenerate for all but a negligible fraction," naming the exact count and the negligible practical effect on a 30-trial statistic |
 | C-262 | 19 | (Opus minor) Empirical Result 13 states its range as "`l=5,...,21`... and `l=22`..." before a parenthetical retroactively adds `l=2,3,4`, so the numeric range as first read (starting at 5) undersells what is actually claimed | minor | fixed by reordering, not just rewording: restructured the sentence so `l=2`, then `l=3,4`, then `l=5,...,21`, then `l=22` appear in increasing numeric order, removing the need for a reader to backtrack |
+| C-263 | 20 | (Opus minor) The abstract's "we prove exact at all but one budget `j>=l+1`" has no upper bound on `j`, but Empirical Result 13 restricts the claimed equality to `l+1<=j<=j*(l)` and explicitly disclaims it above `j*(l)`; "the one remaining budget in that range" then has no range to refer to | minor | fixed: reworded to "at all but one budget `j` with `l+1<=j<=j*(l)`", matching the body's own scoping exactly |
+| C-264 | 20 | (Opus minor) The abstract's "against the extended table" (for the four-growth-model comparison) was missed by Round 19's C-257 fix, which corrected the same phrase in the introduction but not this earlier occurrence in the abstract itself; Section 3 and Table 2 both restrict the fit to the tail `l=10,...,23` | minor | fixed: reworded the abstract's instance to "against the extended table's tail", matching the introduction's already-corrected wording |
+| C-265 | 20 | (Opus minor) Two passages (Section 6 and Section 7) attribute "`j*(l)>=l` holds outright for `l=1,...,23`" entirely to Lemma 1 ("No smaller budget covers"), but that lemma's own statement is restricted to `l=2,...,23`; the `l=1` case (`j*(1)=1>=1`) comes from Table 1 directly, a separate fact | minor | verified against Lemma 1's own statement before editing (confirmed the lemma text reads "For `l=2,...,23`"). Fixed both occurrences to attribute `l=1` to Table 1 directly and `l=2,...,23` to the lemma, rather than crediting the lemma with a case it does not cover |
 | — | 15 | (Opus minor, moot) Two typography defects: a stray hyphen-space in "naive doubling- chain," and a closing quote mark used to open `"within about one unit"` | minor | moot on arrival: both instances were inside the passage rewritten for C-217, which no longer contains either the line-wrapped phrase or the quoted phrase |
 | — | 15 | (Opus minor) Section 5.1's "is the largest among frequencies checked at accessible `l`" drops the family/level qualification Section 5.2 itself uses to reconcile the same claim with its own counterexample; Proposition 9 is printed outside any subsection heading | minor | partially fixed: the family/level qualification added ("at the specific levels Section 5.2 checks directly (not in general, as Section 5.2's own counterexample there shows)"); Proposition 9's placement is a structural/cosmetic point, deferred as lower priority |
 | — | 15 | Both reviewers again re-derived every proof with nothing found wrong (seventh consecutive round for the combinatorial core); Opus additionally recomputed Table 1 for `l<=12`, Table 2 and Remark 7's figures, corner-redundancy's boundary pattern, and every citation, all again exact | — | the round's headline result is C-214: a real, substantive, independently-reproduced major finding that changes what the paper can honestly claim about phase structure, caught by a genuinely adversarial re-read of Section 5.3's own recent content rather than a proof error. The paper is more honest, and arguably more interesting, for having found it: a local-intensity-only null explaining the diagnostic's headline number is a real finding in its own right, not just a correction |
@@ -1695,3 +1703,51 @@ Recompiled clean (20 pages, 0 errors, 0 undefined references, 0 em-dashes, paren
 Combined tally (0/0/1/6): third consecutive round with no critical or major finding, and the
 rejected moderate is not a paper defect, but it still counts at its reported severity per this
 project's established convention, so the streak stays at 0. Proceeding to Round 20.
+
+### Round 20 (Opus 5 max effort only, 2026-08-10, PDF snapshot frozen at launch, sha256 `c00a9f399d64e2293b6abc945deab2f86cb07a46d5f9566961097291f19adefa`)
+
+Codex was tried once more this round (a sixth attempt, after the sandbox failure looked persistent
+across five straight identical failures) and failed again with the same `bwrap: loopback` error;
+not retried further. Proceeded Opus-only.
+
+The best round yet on substance: zero critical, major, or moderate findings, the first time this
+loop has cleared all three severities above minor. Three minor findings, all real, all fixed. Two
+were the same class of bug (a body-side scoping correction from an earlier round that never
+propagated to its abstract twin, exactly Rule 8b's failure shape): the abstract's "we prove exact
+at all but one budget `j>=l+1`" carried no upper bound though the body restricts the claim to
+`l+1<=j<=j*(l)` and explicitly disclaims anything past `j*(l)`; and the abstract's "against the
+extended table" for the model-comparison claim was the one instance C-257 (Round 19) missed when
+it fixed the same phrase in the introduction, leaving the abstract's own copy uncorrected. Both
+fixed by matching the abstract to the body's already-correct scoping. The third finding was a
+citation-precision issue: two passages (Sections 6 and 7) credit Lemma 1 ("No smaller budget
+covers") with the full range `l=1,...,23`, but the lemma's own statement is `l=2,...,23`; the `l=1`
+case comes from the computed table directly, a separate fact. Verified against the lemma's actual
+statement before editing (it does read "For `l=2,...,23`"), then fixed both occurrences to
+attribute each case to its real source rather than crediting the lemma with ground it does not
+cover.
+
+Opus also re-examined Round 19's rejected `lambda_c` finding independently, without being asked to,
+and confirmed the rejection was correct: "for `c>=1`, a residue class mod `3^c` is entirely units
+whenever its base point is, so there is no `2/3` discount." A second independent confirmation of a
+rejected finding, not just an acceptance of the producer's word for it.
+
+Independent reproduction this round was the widest yet: `j^*(l)` for `l=1` through `17` from
+scratch (matching every value, including the plateau; `l=17` confirmed in an addendum after the
+initial report, a 282-second background computation), the largest independent-reproduction range
+any single round of this loop has covered; Empirical Result 4 via an independent
+backward DP over the full-precision game, `l=1,...,10`, matching `j^*(l)` at every level (this is
+the correspondence Theorem 5's bound is conditional on, not yet independently re-verified at this
+breadth in any earlier round); Section 5.2's `l=18,j=16` computation entirely from scratch (a fresh
+`3^18`-count DP plus a 387,420,489-point FFT), reproducing `\|S\|_1=5226.01`, the `8{,}014` count,
+and the `12.2` contribution exactly; every Section 5.3 number at `(l,m)=(14,16)` reproduced exactly,
+including confirming the two degenerate triples from Round 19's C-261 are a genuine conjugate pair,
+cleanly separated from the next candidates by five orders of magnitude; the holdout statistics at
+`l=10,...,15` (counts, `lambda_c` range, expected-hole and rank figures) all exact; and the
+combinatorial core re-derived and independently recomputed at `l=2` through `l=13` depending on the
+result, an twelfth consecutive round with nothing wrong found there. Every reference re-fetched
+fresh from primary sources, all matching.
+
+Recompiled clean (20 pages, 0 errors, 0 undefined references, 0 em-dashes, parenthesis balance
+743/743). Full findings C-263 through C-265 resolved, all fixed. Combined tally (0/0/0/3): the
+first round with zero critical, major, and moderate findings, missing the "minor<3" clean
+threshold by exactly one minor item. Closest the loop has come to closing. Proceeding to Round 21.
