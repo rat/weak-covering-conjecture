@@ -19,6 +19,7 @@ by round; this table is kept current as the producer resolves each entry.
 | 10 | 0 | 1 | 8 | 8 | no | 0 |
 | 11 | 0 | 0 | 7 | 6 | no | 0 |
 | 12 | 0 | 1 | 1 | 8 | no | 0 |
+| 13 | 0 | 0 | 2 | 6 | no | 0 |
 
 Round 10's tally combines both reviewers: Opus 0 critical/0 major/3 moderate/6 minor (C-158, C-159,
 C-160 moderate; C-161-C-166 minor), Codex 0/1/5/2 (C-168 major; C-169-C-173 moderate; C-174, C-175
@@ -30,8 +31,15 @@ reviewers (Codex rated it moderate with an explicit counterexample, Opus rated i
 noted an internal contradiction); counted once at the higher severity, consistent with how Round 11
 handled the C-178/C-185 overlap, giving 1 major (C-189). Codex otherwise 0/0/0/1 (C-198 minor,
 rejected), Opus otherwise 0/0/1/7 (C-190 moderate, verified-no-change; C-191-C-197 minor/trivial,
-seven items), combined 0/1/1/8 -- streak resets to 0. Need 3 consecutive rounds at 0/0/0
-crit/major/moderate with minor<3 to stop.
+seven items), combined 0/1/1/8 -- streak resets to 0. Round 13: the phase-scramble
+sqrt(3/2) issue was again dual-found (Codex moderate via a Parseval argument, Opus minor
+after showing the number itself survives under the correct mechanism), counted once at
+the higher severity (C-199); Codex also raised the l=21-23 certification gap as a second
+moderate (C-200, partially resolved this round: l=21 confirmed independently, matching
+the predeclared criterion exactly). Codex otherwise 0/0/0/2 (C-201, C-202 minor), Opus
+otherwise 0/0/0/4 (C-203-C-206 minor, one of which, C-204, turned out moot on arrival).
+Combined 0/0/2/6 -- no criticals or majors, but 2 moderates keeps the streak at 0. Need 3
+consecutive rounds at 0/0/0 crit/major/moderate with minor<3 to stop.
 
 ## Status table
 
@@ -246,6 +254,16 @@ crit/major/moderate with minor<3 to stop.
 | C-197 | 12 | (Opus trivial/nit) "the precise asymptotic ratio 1/sqrt(3)" should read "exact" to match "Proposition 8's exact bound" earlier in the same sentence, and "precise" sits close to Rule 5c's banned-vocabulary list | trivial | fixed: "precise" to "exact" |
 | C-198 | 12 | (Codex minor) Section 7's independence-model comparison lacks a stated null/independence assumption | minor | rejected, no change: Round 11's own caveat in the same passage already names the missing pieces (no calibrated significance level, descriptive only); a third hedge on the same sentence would be redundant, not more accurate |
 | — | 12 | Both reviewers again re-derived every proof with nothing found wrong (fourth consecutive round for the combinatorial core, Lemma 1 through Proposition 24); five citations now independently verified against primary sources across the loop's history | — | the round's only major (C-189, dual-found) was entirely in text Round 11 itself had written, the third consecutive round a fix at the same Fourier-maximality locus needed a further fix; the loop has become primarily a check on its own edits rather than on the paper's original content, which is the intended argument for why deletion-first, not addition, is now the right default at that locus |
+| C-199 | 13 | (Codex moderate + Opus minor, dual-found) Section 5.3's `sqrt(3/2)` justification for the phase-scramble "residual factor near 2.5" is a non-sequitur: it is a same-array RMS renormalization identity, not a statement about how a null constrained to respect the zero-off-units property would behave (Codex found this via a Parseval argument showing the unconstrained scrambles' RMS is literally identical to the actual array's; Opus independently found the same gap, but also showed computationally that the printed number survives under the correct mechanism) | moderate | fixed: built and ran an actual constrained null (`constrained_phase_null.py`, new script, checked into the repro repo), using the triple-sum-to-zero structure the zero-off-units constraint reduces to (verified by hand via a DFT-duality argument on the subgroup `3(Z/3^l Z)`, matching both reviewers' independent derivations); 30 trials give `max/RMS_all` averaging `6.35`, range `[5.93,7.20]`, against the actual `15.79`, a residual of `2.49`, matching the predeclared acceptance band `[6.2,6.6]`/`[2.4,2.6]` set before running. Rewrote the passage to cite this constructed null instead of the naive RMS rescaling, drop "exactly," and state the triple-rigidity mechanism in one sentence |
+| C-200 | 13 | (Codex moderate) `j*(21)`, `j*(22)`, `j*(23)` are new to this paper and lack an independently auditable certification comparable to the mean-payoff-game certificates; carried forward by inference from the Rust DP alone | moderate | partially resolved by evidence, not just acknowledged: the from-scratch Python bignum-bitset independent verification launched in Round 10 completed this round, confirming `j*(21)=25` exactly (matching the predeclared acceptance criterion, `j=24` fails, `j=25` covers), closing the gap at `l=21`. Section 2 rewritten to state this explicitly; `l=22,23` remain carried forward by inference only, stated as such rather than left ambiguous |
+| C-201 | 13 | (Codex minor) The independence-model "typical" language in Section 7 (maxrun comparison) asserts more precision than the immediately following sentence admits (no distributional family, wraparound convention, or reference statistic is fixed) | minor | fixed: removed "is typical for the set's density under that model," replaced with a direct description of what was actually observed (tracks within about one unit, including both the rise and the fall, without the mismatch a naive doubling-chain estimate would predict) |
+| C-202 | 13 | (Codex minor) Section 7's discussion after Proposition 24 says the converse "needs the identity at every level," overclaiming: exact equality is only one sufficient route to the converse, not a necessary one (a weaker uniform upper bound on maxrun would also suffice) | minor | fixed: reworded to "this route to it needs the identity," with a parenthetical noting a weaker bound would also suffice but is not established here |
+| C-203 | 13 | (Opus minor) Section 5.3's list of properties the unconstrained scrambles fail to preserve includes "the level-l-to-level-(l-1) consistency the real histograms satisfy," but this holds automatically for any primitive-frequency-supported field (a direct character-sum identity, `sum_{j=0}^{2} e(-tj/3)=0` for `3 nmid t`), so it is not something the scrambles actually fail to preserve | minor | verified by hand (the character-sum identity checks out) and fixed: removed the redundant list item |
+| C-204 | 13 | (Opus minor, moot) "the ratio between an all-z and a units-only root-mean-square," as literally ordered, describes `sqrt(2/3)`, not the quoted `sqrt(3/2)` | minor | already resolved: the Round 13 rewrite of this passage (C-199) states the two quantities "differ by" the factor rather than giving an ordered ratio, which was already unambiguous; no separate edit needed |
+| C-205 | 13 | (Opus minor) The `1547` counterexample's gloss ("both witnesses span the full exponent range, the one case Theorem 10's argument does not directly control") is imprecise: spanning the range is necessary but not sufficient to escape the shift-and-adjoin construction, the exact condition involves specific exponents (0, 1, and the top exponent all present), and a second, structurally distinct escape case exists (witnesses without exponent 0) that "the one case" wording excludes | minor | independently re-derived the exact condition by hand from Theorem 10's proof (confirmed: both `s=1` and `s=2` shifts fail exactly when `{0,1,\text{top exponent}}` are all present in the witness, and a witness without `0` escapes for a different, structural reason), but per the multi-parameter-index-error caution this project tracks, did not write that unverified-in-full-detail taxonomy into the paper; fixed with the minimal safe rewording ("an exponent configuration that Theorem 10's shift-and-adjoin construction does not directly reconstruct from a budget-8 witness"), which makes no incorrect uniqueness or mechanism claim |
+| C-206 | 13 | (Opus minor) Two citation-precision items: Empirical Result 13 attributes the `l=3,4` boundary case to Proposition 24 itself, when it is actually proven by the boundary-width argument following Proposition 24; the abstract's "verified for l=3,...,13 against a table running to l=23" can be misread as claiming verification to l=23 | minor | fixed both: attributed to "the boundary-width argument following Proposition 24"; abstract reworded to separate the two facts ("(the exact computation itself, separately, runs to l=23)") |
+| — | 13 | (Opus, repro-repo only, not a paper finding) `section5-exponential-sum/README.md` and `local_intensity.py`'s docstring both state `T=17,672,631,900` for the l=15 local-intensity run; the correct value (verified: `m=19` from `local_intensity.py`'s own `j-1` formula, `T=C(38,19)`) is `35,345,263,800` (`17,672,631,900` is `C(37,18)`, a copy-paste slip); the paper's own printed `lambda=3695` at l=15 already matches the correct value, only the repro repo was wrong | — | fixed in the repro repo (both files), verified against the paper's own printed figure before changing anything, per Rule 8c |
+| — | 13 | Both reviewers again re-derived every proof with nothing found wrong (fifth consecutive round for the combinatorial core); Opus additionally re-verified Empirical Result 4 from scratch (`l=1,...,9`, shortest-path DP), Table 2's AIC/BIC/LOOCV figures to every printed digit, and fetched [6]'s full text to confirm the methodological-precedent claim; every citation in the bibliography is now primary-source-verified | — | the round's most substantive outcome is that the phase diagnostic's headline number (residual `~2.5`) was independently confirmed while its printed justification was found unsound and replaced with a verified mechanism; two Rule 8e leads registered as H-015 and H-016 in HYPOTHESES.md (a genuine power-class asymmetry the constrained null does not force; whether Empirical Result 4's one needed direction is provable outright), neither pursued further since GAP A/WCC is not an active research direction for this project |
 
 ## Full findings
 
@@ -1030,3 +1048,89 @@ discrepancy between two independent implementations (the Rust DP and the from-sc
 bignum-bitset reimplementation) and means stop and investigate both, not reconcile quietly. Written
 here before the result lands, per the same predeclaration discipline the Poisson-model fix already
 adopted.
+
+### Round 13 (Codex on `gpt-5.6-sol` + Opus 5 max effort, 2026-08-09, PDF snapshot frozen at launch, sha256 `06ee95f5c06fa157346c84413b76fb7e57d5c38bd6c578548e510d0e35233cd8`)
+
+First round run under the researcher's new standing instruction to loop rounds automatically until
+the stopping criterion is met, reporting each round's tally without pausing for a launch command.
+Codex's first pass completed normally; Opus's first attempt failed on an account-level API spend
+limit (not a paper issue) and was relaunched once the researcher confirmed the limit had cleared.
+
+The independent l=21 verification (running since Round 10) completed during this round:
+`j*(21)=25` confirmed exactly, matching the predeclared acceptance criterion from Round 12's close
+(`j=24` fails, `j=25` covers). Section 2 rewritten to state this cross-check explicitly; `l=22,23`
+remain carried forward by inference only, now said so plainly rather than lumped in with `l=21`.
+
+Both reviewers independently converged on the same substantive issue, by different routes and at
+different severities: Section 5.3's claim that the `sqrt(3/2)` RMS-normalization factor "accounts
+for" part of the gap between the actual phase-scramble ratio (`15.79`) and the unconstrained
+scrambles' range, leaving a "residual factor near 2.5," rests on comparing two ratios normalized
+against different, non-comparable populations. Codex found this via a Parseval argument (the
+unconstrained scrambles' all-z RMS is provably identical to the actual array's, so the `sqrt(3/2)`
+adjustment cannot be bridging what the sentence claims it bridges) and rated it moderate. Opus
+independently found the same gap but additionally *constructed a null that respects the
+zero-off-units constraint directly* (grouping primitive frequencies into triples that must sum to
+zero, a rigid-triangle argument giving a rotation-plus-reflection null) and showed the printed
+number survives almost exactly under that construction, rating the finding minor since the number
+was right even though the justification was not. Rather than take either report on faith, an
+independent implementation was built and run this round (`constrained_phase_null.py`, new,
+following the same triple-sum-to-zero derivation, verified by hand via a direct DFT-duality
+argument before writing any code): 30 trials at `(l,m)=(14,16)` give `max/RMS_all` averaging `6.35`,
+range `[5.93,7.20]`, against a predeclared acceptance band of `[6.2,6.6]` set before running,
+residual `2.49` against a predeclared `[2.4,2.6]`. Both bands were met. Section 5.3 rewritten to
+cite this constructed null instead of the naive RMS rescaling, drop "exactly," and state the
+triple-rigidity mechanism directly; the script is checked into the repro repo with a predeclared
+expected output. Counted once, at the higher (moderate) severity, per the same dual-find convention
+used for C-178/C-185 (Round 11) and C-189 (Round 12).
+
+Codex separately raised the new `l=21,22,23` values' certification gap (no independent cross-check
+in the PDF beyond agreement with the Rust DP, unlike the mean-payoff certificates) as a second
+moderate; this round's l=21 confirmation above closes it at that level, with `l=22,23` now stated
+honestly as inference-only.
+
+Remaining findings, all minor: Codex flagged that Section 7's "is typical for the set's density
+under that model" overclaims precision the surrounding sentence itself disclaims (fixed by
+describing what was actually observed instead of naming it "typical"), and that "the converse itself
+... needs the identity at every level" overstates necessity when exact equality is only one
+sufficient route (fixed: "this route to it needs the identity"). Opus flagged a redundant item in
+Section 5.3's list of properties the unconstrained scrambles fail to preserve (the
+level-to-level consistency holds automatically for any primitive-supported field, verified by hand
+via a three-term character-sum identity, removed); an ordering slip in the same passage that turned
+out moot once the passage was rewritten anyway; an imprecise gloss on the `1547` counterexample
+(the actual escape condition, re-derived by hand from Theorem 10's proof, needs specific exponents
+`{0,1,\text{top}}` all present, and a second, structurally distinct escape case exists for witnesses
+without `0`, which "the one case" excludes; fixed with a minimal, mechanism-free rewording rather
+than writing that unverified-in-full-detail taxonomy into the paper, per this project's own
+multi-parameter-index-error caution); and two citation-precision items (Empirical Result 13
+attributing an `l=3,4` boundary case to Proposition 24 itself rather than the paragraph following
+it; the abstract's "l=3,...,13 against a table running to l=23" phrasing, which could be misread as
+verification to `l=23`).
+
+Opus, unprompted, also caught a repository-only bug outside the PDF's scope: `local_intensity.py`'s
+docstring and its section README both state the wrong `T` value for the `l=15` local-intensity run
+(`17,672,631,900`, which is `C(37,18)`, not the correct `C(38,19)=35,345,263,800`); the paper's own
+printed `lambda=3695` at that level already matches the correct value, so only the repro repo was
+wrong. Fixed in both files; verified against the paper's own figure before changing anything.
+
+Both reviewers again re-derived every proof with nothing found wrong, a fifth consecutive round for
+the combinatorial core. Opus additionally re-verified Empirical Result 4 from scratch (a fresh
+shortest-path DP over the full-precision game, `l=1,...,9`), reproduced Table 2's AIC/BIC/LOOCV
+figures to every printed digit, and fetched citation [6]'s full text directly to confirm the
+methodological-precedent claim; every citation in the bibliography is now primary-source-verified
+across the loop's history. Two Rule 8e leads surfaced this round (a genuine power-class asymmetry
+the constrained null does not force between residues 1 and 2 mod 3; whether Empirical Result 4's one
+needed direction, `j^*(l)\le\max_{z_0}\min\{J\}`, is provable outright) are registered as H-015 and
+H-016 in `HYPOTHESES.md`, neither pursued further since GAP A/WCC is not an active research
+direction for this project.
+
+Recompiled clean (18 pages, up from 17 with the constrained-null passage, 0 errors, 0 undefined
+references, 0 em-dashes, parenthesis balance 659/659). A process note, not a paper finding: the
+antithesis-construction count tracked in earlier rounds' "returned to baseline" language was itself
+undercounted by a naive single-line `grep`, since several instances span a line wrap in the LaTeX
+source; a multiline-aware count puts the paper's actual, pre-existing total at 6, not the 3 this
+project's rounds had been tracking against. One new instance introduced this round was caught by the
+corrected count and reworded before it landed; the paper's other 6 are unchanged pre-existing text
+from earlier, already-reviewed rounds and were not touched this round, consistent with Rule 8d
+(fixing what was actually flagged, not re-litigating settled prose). Full findings C-199 through
+C-206 resolved (fixed or found moot on arrival). Combined tally (0/0/2/6) does not meet the stopping
+criterion; the streak stays at 0. Proceeding to Round 14.

@@ -402,3 +402,30 @@ A push), notes/H-013.md, notes/GAP-A-round4.md, notes/GAP-A-round5*.md.
       pages, 0 errors, 0 em-dashes, parenthesis balance verified, antithesis at baseline. Combined
       tally 0/1/1/8: the round's only major was in text Round 11 itself wrote, not the paper's
       original content; streak resets to 0. Round 13 next.
+
+- [x] **Round 13 complete (2026-08-09).** First round run under the researcher's standing
+      instruction to loop automatically until the stopping criterion is met. The l=21 independent
+      verification (running since Round 10) completed: `j*(21)=25` confirmed exactly, matching the
+      predeclared criterion; Section 2 now states this explicitly, with `l=22,23` honestly labeled
+      inference-only. Both reviewers independently caught the same issue in Section 5.3's phase-
+      scramble diagnostic: the `sqrt(3/2)` "residual factor near 2.5" claim compared two ratios
+      normalized against non-comparable populations (Codex via a Parseval argument, moderate; Opus
+      by constructing a null that actually respects the zero-off-units constraint and showing the
+      printed number survives under it, minor). Independently re-verified by building a fresh
+      implementation of that constrained null (triples of primitive frequencies forced to sum to
+      zero, a rotation-plus-reflection construction derived and checked by hand before coding):
+      matched a predeclared acceptance band exactly (`max/RMS_all` mean `6.35`, residual `2.49`).
+      Section 5.3 rewritten to cite the constructed null instead of the naive RMS rescaling; script
+      checked into the repro repo. Codex's second moderate (l=21-23 lack independent certification)
+      resolved at l=21 by the verification above. Four more minor fixes (an overclaimed "typical"
+      characterization, a "needs the identity" necessity overclaim, a redundant preserved-property
+      list item, an imprecise `1547` counterexample gloss fixed with a minimal mechanism-free
+      rewording rather than an unverified taxonomy, two citation-precision items). Opus also caught
+      a repository-only `T`-value typo (unrelated to the paper's own correct figure), fixed. Fifth
+      consecutive round the combinatorial core re-derived clean; every citation now primary-source
+      verified. Two Rule 8e leads registered as H-015, H-016 (not pursued, GAP A/WCC inactive).
+      Recompiled clean, 18 pages (up from 17), 0 errors, 0 em-dashes, parenthesis balance verified.
+      A process note: the antithesis-count tracking in earlier rounds undercounted due to a
+      single-line grep missing line-wrapped instances; true pre-existing count is 6, not the
+      previously-tracked 3; one new instance this round was caught and reworded. Combined tally
+      0/0/2/6: no criticals or majors, but 2 moderates keeps the streak at 0. Round 14 next.

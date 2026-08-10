@@ -65,7 +65,8 @@ parameters points, descriptively, toward phase structure beyond that. We
 prove a theorem on the uncovered residues themselves, for budgets $j\ge l$: the set left uncovered
 at a budget is contained in both twice and four times the set left uncovered at the previous budget,
 giving an explicit recursive upper bound on $j^*(l)$ that we prove exact at most budgets, given one
-further combinatorial property verified for $l=3,\dots,13$ against a table running to $l=23$; at the
+further combinatorial property verified for $l=3,\dots,13$ (the exact computation itself, separately,
+runs to $l=23$); at the
 one remaining budget, this holds at four small levels checked directly and is otherwise only
 empirically exact. We
 falsify the natural cost-$1$ form of a local repair rule this theorem might suggest, with explicit
@@ -160,9 +161,12 @@ residues modulo $3^l$), validated against the original Python implementation at 
 before being trusted for the extension. Each reported $j^*(l)$ is the smallest budget at which the
 DP's own coverage bitset is full, so the search certifies both coverage at $j^*(l)$ and its absence
 at $j^*(l)-1$ internally, by construction, at every level it runs; the $l\le20$ agreement against an
-independently written implementation is this paper's evidence that the search itself is correct; it
-is carried forward by inference for $l=21,22,23$, without a separate cross-check at those levels.
-The values for $l=21,22,23$ are new.
+independently written implementation is this paper's evidence that the search itself is correct.
+$l=21$ has since been cross-checked the same way: a separate, from-scratch Python implementation
+(native bignum bitsets, following the Rust DP's recurrence as a specification rather than copying
+its code) independently reproduces $j^*(21)=25$, confirming both that $j=24$ fails to cover and that
+$j=25$ does. $l=22,23$ are carried forward by inference only, without a separate cross-check at
+those levels; both are new.
 
 The search above only tries budgets $j\ge l$ at level $l$, so on its own it certifies $j^*(l)$ only
 against smaller candidates within that range.
@@ -678,18 +682,31 @@ independent phase scrambles (fixed seed)
 give ratios in $[5.11,5.24]$ (a second, independently seeded batch of eight gives the wider
 $[4.98,5.40]$, so eight trials do not pin the null down tightly). The scrambles hold every $|S(t)|$
 fixed but do not preserve the
-identically-zero-off-units constraint just derived, or integrality, or the level-$l$-to-level-$(l-1)$
-consistency the real histograms satisfy; that constraint alone accounts for a factor of exactly
-$\sqrt{3/2}\approx1.22$ of the gap between $15.79$ and either scramble range (the ratio between an
-all-$z$ and a units-only root-mean-square once a third of the terms are forced to $0$), leaving a
-residual factor near $2.5$ that this identity alone does not explain. Eight
-trials are too few to calibrate a rigorous significance level regardless (a rank-based test against
-eight draws
-cannot reach below $p=1/9$, however extreme the observed value); what the residual factor suggests,
-descriptively, is that the actual phases are not fully exchangeable with a generic-phase null
-respecting
-only $|S(t)|$, beyond what the vanishing constraint alone forces, though this diagnostic is silent on
-what mechanism produces that residual, on
+identically-zero-off-units constraint just derived, or integrality, so they are not the right null on
+their own.
+
+The zero-off-units constraint has a direct algebraic meaning for the phases. Grouping primitive
+frequencies into triples $t=r,\,r+3^{l-1},\,r+2\cdot3^{l-1}$ by parent residue $r$ modulo $3^{l-1}$
+($3\nmid r$), the vanishing of $F$ on the subgroup $3(\Z/3^l\Z)$ is equivalent, by the same
+character-sum collapse used in Proposition~\ref{prop:sqrtceiling}, to $S(t_1)+S(t_2)+S(t_3)=0$ for
+every such triple: three fixed magnitudes forming a closed triangle. For a generic (scalene) triple
+this pins the phases down to a one-parameter family, a common rotation of the actual configuration,
+together with its mirror image (negating all three phases before rotating, which also sums to zero).
+A null built this way, independently for each triple, a uniformly random rotation and an independent
+coin flip for the reflection, keeps every $|S(t)|$ fixed and vanishes off units exactly by
+construction. Implemented and run at $(l,m)=(14,16)$ (30 trials, checked into the repository, Section
+9): the constrained null gives $\max/\mathrm{RMS}$ ratios averaging $6.35$, range $[5.93,7.20]$,
+against the real array's $15.79$, a residual factor of about $2.5$. This lands close to
+$\sqrt{3/2}\approx1.22$ times the unconstrained scrambles' range, an approximate match the triple-
+rigidity argument explains directly (both classes of primitive frequency carry, on average, an even
+share of the constrained power), but the constrained figure is the one actually tied to the stated
+constraint; the earlier $\sqrt{3/2}$ arithmetic on its own was only a same-array RMS renormalization
+and said nothing about how a constrained null behaves, superseded here by this direct construction.
+Both the eight-trial unconstrained batches above and this thirty-trial constrained one are still too
+few to calibrate a rigorous significance level (a rank-based test against thirty draws cannot reach
+below $p\approx1/31$, however extreme the observed value); what the residual factor near $2.5$
+suggests, descriptively, is that the actual phases are not fully exchangeable with a null that
+respects only $|S(t)|$ and the zero-off-units constraint, though this diagnostic is silent on
 whether it is what
 decides coverage, or on how much of it a properly calibrated test would confirm. At the levels
 checked, the two diagnostics are not evidence of the same thing: the raw holdout rarity shows that
@@ -796,8 +813,8 @@ $j^*(l)\le j+r=j+\mathrm{maxrun}(H(l,j))$.
 Corollary~\ref{cor:bootstrap} is empirically exact, $j^*(l) = j + \mathrm{maxrun}(H(l,j))$, at every
 $(l,j)$ with $l+1\le j\le j^*(l)$ we were able to compute, $l=5,\dots,21$ at every such budget and
 $l=22$ at the single budget $j=l+1$, including a case with $|H(l,j)| > 3\times10^6$
-($l=3,4$ were not separately computed here, but Proposition~\ref{prop:tight} below proves the same
-equality there). (Past
+($l=3,4$ were not separately computed here, but the boundary-width argument following
+Proposition~\ref{prop:tight} below proves the same equality there). (Past
 $j^*(l)$, $H(l,j)=\emptyset$ and $\mathrm{maxrun}(\emptyset)=0$, so the displayed equality no longer
 holds there; the claim is only about budgets up to and including $j^*(l)$.) The lower endpoint
 $j=l+1$ has a real justification behind it: equality at $j=l$ itself holds for $l=1,\dots,5$ but
@@ -814,8 +831,9 @@ A stronger, per-witness converse of Theorem~\ref{thm:doubling}, that $x/2,x/4\in
 forces $x\in H(l,j+1)$, which would in turn make a maximal doubling chain both sufficient and
 necessary for survival to a given budget, is false as an unrestricted statement:
 $1547 \in 2H(7,8)\cap4H(7,8)$, yet $1547 \notin H(7,9)$ (both of $1547$'s two
-budget-$9$ witnesses span the full exponent range, the one case Theorem~\ref{thm:doubling}'s
-argument does not directly control). Section~\ref{sec:further} returns to a restricted, weaker form
+budget-$9$ witnesses have an exponent configuration that Theorem~\ref{thm:doubling}'s
+shift-and-adjoin construction does not directly reconstruct from a budget-$8$ witness).
+Section~\ref{sec:further} returns to a restricted, weaker form
 of this converse (corner-redundancy, not the per-witness statement this counterexample refutes) that
 remains open in general and is proven at specific levels.
 
@@ -1022,10 +1040,11 @@ A naive expectation, that a random set of holdouts at the observed density would
 chains far longer than the flat ceiling of $3$--$4$ measured at every level $l=5,\dots,22$, does not
 survive contact with the actual, rapidly declining density of $H(l,l+1)$. An independence model
 matched to that actual density tracks the observed sequence within about one unit at every level,
-including both the one rise and the one fall in it: $\mathrm{maxrun}(H(l,l+1))$ is typical for the
-set's density under that model. This comparison stays descriptive rather than a specified statistical
+including both the one rise and the one fall in it, without the flagrant mismatch a naive doubling-
+chain estimate would predict. This comparison stays descriptive rather than a specified statistical
 test (no
-distributional family, wraparound convention, or reference statistic is fixed here), and does not,
+distributional family, wraparound convention, or reference statistic is fixed, so "within about one
+unit" is a direct count rather than a calibrated interval), and does not,
 by itself, say anything about whether
 $\mathrm{maxrun}(H(l,l+1))$ is bounded;
 Proposition~\ref{prop:h014} is the only established link between that question and $j^*(l)$'s rate.
@@ -1111,9 +1130,11 @@ At $l=3,4,5,6$, where corner-redundancy also holds at the boundary width $W=2l$,
 $j^*(l)=(l+1)+\mathrm{maxrun}(H(l,l+1))$ exactly, verified directly ($l=3$: $4+2=6$; $l=4$: $5+2=7$;
 $l=5$: $6+3=9$; $l=6$: $7+3=10$). This is the per-level identity behind
 Proposition~\ref{prop:h014}'s own converse, proven at these four levels specifically; the converse
-itself is a claim about every $l$, needing the identity at every level, these four included. At
+itself is a claim about every $l$, and this route to it needs the identity at every level, these
+four included (an upper bound on $\mathrm{maxrun}(H(l,l+1))$ weaker than exact equality would also
+suffice, per the discussion above, but no such bound is established here). At
 $l=7,\dots,13$, corner-redundancy at $W=2l$ is checked to fail, so
-this mechanism does not reach the converse there; beyond $l=13$, corner-redundancy at $W=2l$ is
+this route does not reach the converse there; beyond $l=13$, corner-redundancy at $W=2l$ is
 itself unchecked. The converse remains open at every $l\ge7$.
 
 \section{Discussion}
@@ -1174,7 +1195,7 @@ $(\sigma_k,\rho_k,h_k)$ behind Table~\ref{tab:mpg} are stored there with a verif
 each of them against the inequality in Theorem~\ref{thm:mpg}'s proof, without re-running the
 solver. Each folder's README gives what it checks, the command, the output to expect, and what the
 run costs. Most checks take seconds; the three largest levels of Table~\ref{tab:jstar} do not.
-Every claim above matches commit \texttt{4feda4a} of that repository; later
+Every claim above matches commit \texttt{0c6b4c9} of that repository; later
 commits may extend it further but should not change what this specific commit already contains.
 
 \subsection*{Acknowledgments}
