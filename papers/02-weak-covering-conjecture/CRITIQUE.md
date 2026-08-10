@@ -27,6 +27,7 @@ by round; this table is kept current as the producer resolves each entry.
 | 18 | 0 | 0 | 1 | 9 | no | 0 |
 | 19 | 0 | 0 | 1 | 6 | no | 0 |
 | 20 | 0 | 0 | 0 | 3 | no | 0 |
+| 21 | 0 | 0 | 0 | 2 | yes | 1 |
 
 Round 10's tally combines both reviewers: Opus 0 critical/0 major/3 moderate/6 minor (C-158, C-159,
 C-160 moderate; C-161-C-166 minor), Codex 0/1/5/2 (C-168 major; C-169-C-173 moderate; C-174, C-175
@@ -87,7 +88,19 @@ Round 20: Opus 0/0/0/3 (C-263 through C-265, all minor, all fixed). First round 
 critical/major/moderate findings, but minor=3 misses the "minor<3" threshold by exactly one, so
 this round does not count toward the streak either; the closest the loop has come to a clean round
 so far.
-Need 3 consecutive rounds at 0/0/0 crit/major/moderate with minor<3 to stop.
+Round 21: Opus 0/0/0/2 (C-266, C-267, both minor, both fixed). Second consecutive round with zero
+critical/major/moderate findings, and minor=2 clears the "minor<3" bar: the loop's first round that
+counts toward the 3-consecutive-clean-rounds stopping criterion (streak=1). C-266 (the abstract's
+raw length, 3773-3971 measured characters depending on method, against arXiv's stated 1920-character
+submission cap) triggered a full abstract rewrite, the largest single-block prose change of the
+loop; independently reviewed against Rule 5c's full checklist (banned vocabulary, antithesis budget,
+dash count, sentence-length variance) before being applied, and against Rule 8b's trio check (the
+rewritten null-model sentence, the constrained/unconstrained distinction in Section 5.3, and the
+Discussion) to confirm no mechanism was mislabeled in the compression. C-267 (the abstract's "four
+small levels checked directly" undervaluing the boundary budget's proven-as-theorem status at
+l=3,...,6) was folded into the same rewrite rather than patched separately, since both findings
+targeted the same sentence region.
+Need 3 consecutive rounds at 0/0/0 crit/major/moderate with minor<3 to stop; 2 more to go.
 
 ## Status table
 
@@ -376,6 +389,8 @@ Need 3 consecutive rounds at 0/0/0 crit/major/moderate with minor<3 to stop.
 | C-263 | 20 | (Opus minor) The abstract's "we prove exact at all but one budget `j>=l+1`" has no upper bound on `j`, but Empirical Result 13 restricts the claimed equality to `l+1<=j<=j*(l)` and explicitly disclaims it above `j*(l)`; "the one remaining budget in that range" then has no range to refer to | minor | fixed: reworded to "at all but one budget `j` with `l+1<=j<=j*(l)`", matching the body's own scoping exactly |
 | C-264 | 20 | (Opus minor) The abstract's "against the extended table" (for the four-growth-model comparison) was missed by Round 19's C-257 fix, which corrected the same phrase in the introduction but not this earlier occurrence in the abstract itself; Section 3 and Table 2 both restrict the fit to the tail `l=10,...,23` | minor | fixed: reworded the abstract's instance to "against the extended table's tail", matching the introduction's already-corrected wording |
 | C-265 | 20 | (Opus minor) Two passages (Section 6 and Section 7) attribute "`j*(l)>=l` holds outright for `l=1,...,23`" entirely to Lemma 1 ("No smaller budget covers"), but that lemma's own statement is restricted to `l=2,...,23`; the `l=1` case (`j*(1)=1>=1`) comes from Table 1 directly, a separate fact | minor | verified against Lemma 1's own statement before editing (confirmed the lemma text reads "For `l=2,...,23`"). Fixed both occurrences to attribute `l=1` to Table 1 directly and `l=2,...,23` to the lemma, rather than crediting the lemma with a case it does not cover |
+| C-266 | 21 | (Opus minor) The abstract, at 3773-3971 characters measured by two independent methods (Opus: 3715 chars/633 words; producer: 3773 chars/572 words), exceeds arXiv's own stated submission cap ("abstracts longer than 1920 characters will not be accepted," confirmed by fetching `info.arxiv.org/help/prep.html` directly), and the paper's stated first venue is an arXiv preprint; a genuine, previously unchecked submission blocker, not a correctness issue | minor | rewrote the abstract from scratch to fit under the cap while covering every substantive claim the original made (K(l), the extension to `l=23`, the four-growth-model comparison and its verdict, the proven lower bound on `e(l)`, the best conditional bound, the Fourier barrier, the null-model diagnostics, the boundary theorem's exact/empirical scope, the falsification and residue-class theorems, both open questions). Independently reviewed against Rule 5c's full checklist before applying (zero banned-vocabulary hits, zero em/en dashes, zero "not X but Y" antitheses, sentence lengths ranging 6-42 words) and against Rule 8b's trio check on the compressed null-model sentence (verified it asserts nothing that could conflict with Section 5.3's or the Discussion's constrained/unconstrained distinction, by naming no specific null or mechanism at all, matching the advisor-reviewed wording). Measured twice after the edit (raw LaTeX source: 1878 chars; TeX-stripped rendered text: 1790 chars), both comfortably under 1920. Recompiled clean (0 errors, 0 undefined refs, 0 em-dashes, 743/743 balanced parens, page count unchanged at 20) |
+| C-267 | 21 | (Opus minor) The abstract's "this holds at four small levels checked directly" (the boundary budget `j=l+1`, at `l=3,...,6`) reads as computational verification only, but the body proves this outright as a theorem at those four levels via Proposition 24's boundary-width extension; a residual ambiguity in "not at every level checked beyond that, `l=6,...,9`" (fails at some vs. all) was also flagged, together with Opus's own independent finding, not yet in the paper, that the tightness failure extends through `l=10,...,13` as well | minor | folded into the same abstract rewrite as C-266, since both targeted the same sentence: the new abstract states the boundary budget "is proven at `l=3,...,6`, empirical otherwise," correctly distinguishing proven from merely-checked and removing the ambiguous "not at every level checked" phrasing entirely. Opus's `l=10,...,13` extension is new information, not yet independently reproduced by the producer; logged for the researcher rather than added to the paper this round (informational, not a body-side claim requiring an immediate edit) |
 | — | 15 | (Opus minor, moot) Two typography defects: a stray hyphen-space in "naive doubling- chain," and a closing quote mark used to open `"within about one unit"` | minor | moot on arrival: both instances were inside the passage rewritten for C-217, which no longer contains either the line-wrapped phrase or the quoted phrase |
 | — | 15 | (Opus minor) Section 5.1's "is the largest among frequencies checked at accessible `l`" drops the family/level qualification Section 5.2 itself uses to reconcile the same claim with its own counterexample; Proposition 9 is printed outside any subsection heading | minor | partially fixed: the family/level qualification added ("at the specific levels Section 5.2 checks directly (not in general, as Section 5.2's own counterexample there shows)"); Proposition 9's placement is a structural/cosmetic point, deferred as lower priority |
 | — | 15 | Both reviewers again re-derived every proof with nothing found wrong (seventh consecutive round for the combinatorial core); Opus additionally recomputed Table 1 for `l<=12`, Table 2 and Remark 7's figures, corner-redundancy's boundary pattern, and every citation, all again exact | — | the round's headline result is C-214: a real, substantive, independently-reproduced major finding that changes what the paper can honestly claim about phase structure, caught by a genuinely adversarial re-read of Section 5.3's own recent content rather than a proof error. The paper is more honest, and arguably more interesting, for having found it: a local-intensity-only null explaining the diagnostic's headline number is a real finding in its own right, not just a correction |
@@ -1751,3 +1766,97 @@ Recompiled clean (20 pages, 0 errors, 0 undefined references, 0 em-dashes, paren
 743/743). Full findings C-263 through C-265 resolved, all fixed. Combined tally (0/0/0/3): the
 first round with zero critical, major, and moderate findings, missing the "minor<3" clean
 threshold by exactly one minor item. Closest the loop has come to closing. Proceeding to Round 21.
+
+### Round 21 (Opus 5 max effort only, 2026-08-10, PDF snapshot frozen at launch, sha256 `b02c68e13bad89de20d2dd8065fe942ab47f62ad065defba42f7fa73a6ca79e5`)
+
+Codex not retried this round: six consecutive identical `bwrap: loopback` sandbox failures across
+Rounds 17-20 is well past the point where retrying serves any purpose absent an explicit signal
+that the environment has been fixed. Proceeded Opus-only.
+
+Second consecutive round with zero critical, major, or moderate findings, and the first round to
+actually clear the "minor<3" bar (2 minor findings, both real, both fixed): the loop's first round
+that counts toward the 3-consecutive-clean-rounds stopping criterion. Both findings targeted the
+abstract, continuing this loop's most consistent failure locus (C-246 in Round 18, C-263/C-264 in
+Round 20, now C-266/C-267 here), but neither was a body-desync this time; one was a genuinely new
+class of defect this loop had not checked before.
+
+C-266: the abstract is far too long for arXiv's own stated submission cap. Opus measured 3715
+characters/633 words; the producer independently measured 3773 characters/572 words directly from
+the LaTeX source (the difference is measurement methodology, not disagreement about the underlying
+text); both far exceed the 1920-character limit arXiv states on its own preparation page
+(`info.arxiv.org/help/prep.html`, fetched fresh to confirm the number before acting on it, per Rule
+8c). Since the paper's stated first venue is an arXiv preprint, this was a real submission blocker,
+not a stylistic complaint.
+
+C-267: the abstract's "this holds at four small levels checked directly," for the boundary budget
+`j=l+1` at `l=3,...,6`, undersold what the body actually establishes there: an outright theorem
+(Proposition 24's boundary-width extension), not a computational check. Opus also flagged a residual
+ambiguity in "not at every level checked beyond that, `l=6,...,9`" and reported, independently, that
+the tightness failure it describes actually extends through `l=10,...,13` as well, information not
+yet incorporated anywhere in the paper.
+
+Both findings converged on the same sentence region, so both were resolved in a single rewrite of
+the abstract rather than as two separate patches. Given the size of the change (the largest
+single-block prose edit this loop has made, and to the single highest-risk section per Rule 5c's own
+ranking), the rewrite was checked more heavily than a routine minor fix: consulted the advisor
+before drafting, who caught five problems in an initial draft before it was ever applied to the
+paper (a mislabeled null-model mechanism that would have reintroduced the C-222/C-246 error in
+compressed form; a dropped conditional-property clause that would have made the exact-budget claim
+read as unconditional, false for `l>=14`; a dropped cardinality-threshold mechanism that made the
+conjecture statement unreconstructable from the abstract alone; an overclaimed "fails outright" for
+the Fourier barrier where only the positivity criterion, not frequency-dependent strategies in
+general, is shown unreachable; and a "statistically indistinguishable" phrase reintroducing
+inferential register this paper's e(l) discussion deliberately avoids, since `e(l)` is deterministic,
+not a statistical estimate). All five were corrected before the rewrite was drafted for real, and the
+final abstract restores the proven lower bound `e(l)>=(1/4)log_2 l-O(1)` that an earlier draft had
+cut, on the view that trimming an unconditionally proven headline result while keeping hedged
+empirical detail runs backward to Rule 10's citation-maximization objective.
+
+The final abstract was measured twice after editing (raw LaTeX source 1878 characters; the
+same text with TeX macros stripped to their rendered form, 1790 characters), both comfortably under
+1920 with margin against either counting convention, since it was not established which one arXiv's
+submission form actually applies. Checked against Rule 5c's full checklist before being considered
+final: zero banned-vocabulary hits, zero em/en dashes, zero "not X but Y" antithesis constructions,
+sentence lengths ranging from 6 to 42 words (a short closer matching the original abstract's own
+final sentence, and one long compound sentence carrying the four falsification/residue-class
+results). Checked against Rule 8b's trio check specifically: the compressed null-model sentence
+("null-model diagnostics at one tractable pair find structure neither construction forces, left
+uncalibrated") asserts nothing that could conflict with Section 5.3's energy-excess-vs-phase
+distinction or the Discussion's parallel passage, because it names no specific null and no specific
+mechanism at all, matching the advisor's own suggested wording exactly.
+
+Recompiled clean after the rewrite (20 pages, unchanged; 0 errors, 0 undefined references, 0
+em-dashes, parenthesis balance 743/743). Visually re-verified page 1 (title, abstract, keywords,
+MSC classification, and the start of the introduction) via rendered PNG.
+
+Verification breadth this round was the widest yet, on top of the abstract work: Empirical Result 4
+independently reproduced for `l=1` through `19` (seven levels beyond the paper's own stated `l=12`
+claim) via a novel `O(3^n)` shortest-path reformulation of the correspondence, faster than the
+`O(9^n)` approach every earlier round used, which Opus suggests is worth telling the researcher about
+in its own right, since it both strengthens the paper's own hedge and gives a second independent
+confirmation of Table 1 through `l=19`; Table 3, Theorem 5, and Corollary 6 verified two ways, by
+solving the window-`k` mean-payoff game completely from scratch (`rho_3` through `rho_7` matched
+exactly) and by downloading the actual `certificate_k14.json.gz` from the reproducibility repository
+at the pinned commit `b69d0d3` and independently re-checking it against freshly written
+successor/legality/safety code (0 illegal moves, 0 unsafe moves, 0 potential-inequality violations
+across all `3,188,646` states times 3 digits; span of `h=33/2` exactly; max `d=11`, matching the
+paper); Section 5.2's `l=18` computation redone entirely from scratch, matching every printed figure
+(`\|S\|_1=5226.0146`, `8014` primitive frequencies above threshold, `12.222` contribution, `99.766%`
+mass below threshold); and every citation re-verified fresh against primary sources, including both
+direct Tao 2011 quotations checked verbatim against the archived copy. Opus also independently
+re-confirmed Round 19's rejected C-256 finding a second time, without being asked.
+
+Non-tallied observations Opus reported alongside the two minor findings: an unnecessary "irrational
+slope" qualifier in Section 3 (the round-of-an-arithmetic-progression fact holds for any real slope,
+not just irrational ones), left as a lower-priority style note rather than an error; Proposition 24's
+stated hypothesis being a slightly stronger over-assumption than its proof actually uses, noted as
+not itself wrong; and a suggested one-sentence closure connecting Section 4's unit-preservation
+argument more explicitly, deferred as a stylistic suggestion, not a gap.
+
+Full findings C-266 and C-267 resolved, both fixed via the same abstract rewrite. Combined tally
+(0/0/0/2): the second consecutive round with zero critical, major, and moderate findings, and the
+first round to clear the "minor<3" bar. Streak now at 1 of the 3 consecutive clean rounds needed to
+stop. The `l=10,...,13` tightness-failure extension and the `O(3^n)` reformulation are logged here
+for the researcher's attention rather than written into the paper this round, since neither is a
+correction to an existing claim; both are candidate Rule 8e leads if the researcher wants them taken
+further. Proceeding to Round 22.

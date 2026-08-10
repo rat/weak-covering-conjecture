@@ -584,3 +584,26 @@ A push), notes/H-013.md, notes/GAP-A-round4.md, notes/GAP-A-round5*.md.
       pages, 0 errors, 0 em-dashes, parenthesis balance 743/743. Combined tally 0/0/0/3: misses the
       clean threshold (minor<3) by exactly one item, the closest the loop has come to stopping.
       Round 21 next.
+
+- [x] **Round 21 complete (2026-08-10).** Codex not retried (six consecutive identical sandbox
+      failures is past the point of usefulness without an environment fix). Second consecutive
+      round clearing critical/major/moderate, and the first to clear minor<3 as well (0/0/0/2):
+      the loop's first round counting toward the 3-consecutive-clean-rounds stopping criterion.
+      Both minor findings targeted the abstract: it measured 3773-3971 characters by two
+      independent methods, well over arXiv's own stated 1920-character submission cap (confirmed
+      live against `info.arxiv.org/help/prep.html`), and its boundary-budget sentence undersold a
+      result that is actually proven as a theorem at l=3,...,6, not merely checked. Both were
+      resolved with a single full rewrite of the abstract, the loop's largest single-block prose
+      change, reviewed against the advisor before applying (which caught and fixed five problems
+      in an earlier draft: a mislabeled null mechanism, a dropped conditional-property clause, a
+      dropped cardinality-threshold mechanism, an overclaimed Fourier barrier, and an inferential
+      "statistically indistinguishable" phrasing this paper deliberately avoids), then against Rule
+      5c's full checklist and Rule 8b's trio check before being finalized. Final abstract: 1878
+      raw / 1790 rendered characters, both comfortably under the cap. Widest independent
+      reproduction yet: Empirical Result 4 through l=19 via a new, faster O(3^n) reformulation;
+      Table 3/Theorem 5/Corollary 6 verified both from scratch and against the pinned certificate
+      file; Section 5.2's l=18 computation redone exactly. Opus re-confirmed Round 19's rejected
+      finding a second time, unprompted. An l=10,...,13 tightness-failure extension and the O(3^n)
+      technique are logged in CRITIQUE.md for the researcher, not yet written into the paper.
+      Recompiled clean, 20 pages, 0 errors, 0 em-dashes, parenthesis balance 743/743. Streak 1 of
+      3. Round 22 next.

@@ -41,53 +41,26 @@ ORCID: \url{https://orcid.org/0009-0002-0196-3311}
 
 \begin{abstract}
 Wirsching's 1998 Weak Covering Conjecture asks for a sub-exponential $K(l)$ such that a large
-enough set $R_{j-1,j} \subset \Z_3^*$, built from strictly decreasing exponent tuples, is forced to
-cover every unit residue modulo $3^l$. We extend the exact computation of $j^*(l)$, the smallest
-such covering budget, from $l=20$ to $l=23$, and compare four growth models for
-$e(l) := j^*(l) - l\log_4 3$ against the extended table's tail: a constant model is unconditionally
-impossible (we prove $e(l)\ge\tfrac14\log_2l-O(1)$) and disfavored at every statistic checked; the
-growing alternatives are not distinguished from one another by these criteria. We give
-the best bound known to us, $j^*(l) \le \tfrac98 l + \tfrac{33}2$, via a mean-payoff-game relaxation
-of the
-covering budget whose proof rests on one computationally verified, not generally proven,
-correspondence. We then examine the natural Fourier approach to a tighter bound: the natural
-full-spectrum positivity criterion is provably unreachable at every budget, since no element of
-$R_{j,k}$ is divisible by $3$; granting the criterion regardless, a
-uniform square-root-cancellation argument still could not beat a threshold worse than the
-mean-payoff bound. Separately, a direct computation at one accessible level finds the bulk of the
-primitive-frequency mass sitting outside the sparse exceptional set a fixed magnitude threshold
-defines. At the levels checked, the residues
-that actually fail to be covered sit in
-cells of local hit-density well below the global mean; read at a fine enough averaging depth, that
-local intensity correlates strongly with resistance without fully determining it. A separate
-phase-randomization experiment at a
-different, more tractable pair of
-parameters departs from a null respecting the frequency magnitudes and the zero-off-units constraint
-they satisfy; a further null conditioned only
-on coarse parent totals matches that departure's ratio of extreme value to root-mean-square, but only
-because both quantities fall short of the actual data by comparable factors, and in absolute terms the
-actual total energy exceeds this second null's own expectation by a factor of $2.59$, about a thousand
-of the null's own standard deviations, a magnitude excess distinct from the phase-only null's own
-departure at fixed magnitude, which the second null is silent on. Neither null, on its own or
-together, establishes what decides coverage. We
-prove a theorem on the uncovered residues themselves, for budgets $j\ge l$: the set left uncovered
-at a budget is contained in both twice and four times the set left uncovered at the previous budget,
-giving an explicit recursive upper bound on $j^*(l)$ that we prove exact at all but one budget $j$
-with $l+1\le j\le j^*(l)$, given one
-further combinatorial property verified for $l=3,\dots,13$ (the exact computation itself, separately,
-runs to $l=23$); at the
-one remaining budget in that range, this holds at four small levels checked directly and is
-otherwise only
-empirically exact, and at $j=l$ itself the bound is tight for $l=1,\dots,5$ but not at every level
-checked beyond that, $l=6,\dots,9$.
-We
-falsify the natural cost-$1$ form of a local repair rule this theorem might suggest, with explicit
-witness-level exhaustive counts, prove that every last-uncovered residue is $\equiv1\pmod3$ whenever
-$j^*(l)\ge l+1$ (every computed level but one), prove a two-class containment
-law modulo $9$ on the same residues, and report further exact identities, some verified but not
-proven, governing the last residues to be covered. Two of the questions this work leaves open are
-named and stated as exact conditions, each narrower than the conjecture itself; others are noted
-where they arise. The Weak Covering Conjecture remains open.
+enough set $R_{j-1,j}\subset\Z_3^*$ is forced to cover every unit residue modulo $3^l$. We extend
+the exact computation of $j^*(l)$, the smallest such budget, from $l=20$ to $l=23$, and compare
+four growth models for $e(l):=j^*(l)-l\log_4 3$ against the extension's tail. A constant model is
+unconditionally impossible (we prove $e(l)\ge\tfrac14\log_2l-O(1)$) and disfavored throughout;
+the growing alternatives are not distinguished by these criteria. Our best bound,
+$j^*(l)\le\tfrac98l+\tfrac{33}2$, comes from a mean-payoff-game relaxation resting on one
+correspondence, verified computationally but not proven in general. The natural Fourier route is
+blocked at its first step: its positivity criterion is provably unreachable at every budget;
+granting it regardless, square-root cancellation still could not beat the mean-payoff bound.
+Separately, null-model diagnostics at one tractable pair find structure neither construction
+forces, left uncalibrated. We prove that, for budgets $j\ge l$, the uncovered set at a budget is
+contained in both twice and four times the uncovered set at the previous budget, giving a
+recursive upper bound on $j^*(l)$. This bound is proven exact for $l+2\le j\le j^*(l)$ at
+$l=3,\dots,13$ (given one further verified property), empirical beyond; the boundary $j=l+1$ is
+proven at $l=3,\dots,6$, empirical otherwise. We falsify a natural cost-$1$ repair rule it
+suggests, prove every last-uncovered residue is $\equiv1\pmod3$ whenever $j^*(l)\ge l+1$ (all but
+one level), prove a two-class containment law mod $9$ on these residues, and report further
+identities, some verified but not proven. Two open questions are named as exact conditions, each
+narrower than the conjecture; others arise where noted. The Weak Covering Conjecture remains
+open.
 \end{abstract}
 
 \noindent\textbf{Keywords:} Collatz map, 3-adic dynamics, covering conjecture, mean-payoff games,
