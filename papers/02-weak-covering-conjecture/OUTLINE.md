@@ -634,4 +634,11 @@ A push), notes/H-013.md, notes/GAP-A-round4.md, notes/GAP-A-round5*.md.
       without independent cross-checking; logged in H-016 rather than rushed) and the
       model-leadership-sensitivity observation (logged in new H-017, descriptive color, not a
       correction). Recompiled clean, 20 pages, 0 errors, 0 em-dashes, parenthesis balance
-      756/756. Streak reset to 0, 3 to go. Round 23 next.
+      756/756. Streak reset to 0, 3 to go.
+
+      **Post-round correction, same day, researcher's explicit instruction**: rather than keep
+      the corrected `l=24` account in Section 2, the researcher asked for it to be dropped
+      entirely, since `l=23` is the last level with real data and describing an unfinished
+      computation only adds bulk with no result attached. Removed; Section 2 now ends its
+      computation narrative at `l=23`'s timing figures. Recompiled clean, 20 pages, 0 errors,
+      parenthesis balance 754/754. Round 23 next.

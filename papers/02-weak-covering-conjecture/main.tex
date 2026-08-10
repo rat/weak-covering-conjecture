@@ -220,13 +220,7 @@ machine specifically for this computation; the run took approximately $10{,}749\
 ($\sim\!3$ hours) with swap I/O as
 the dominant cost, against $748\,\mathrm{s}$ for $l=21$ without swap. $l=23$ required approximately
 $263\,\mathrm{GiB}$ of state, comfortably within the same swap budget, and $375{,}615\,\mathrm{s}$
-($\sim\!104$ hours). Swap was later expanded to $1.8\,\mathrm{TiB}$ on the same machine specifically
-to pursue $l=24$ (projected at approximately $822\,\mathrm{GiB}$ of state, comfortably within that
-budget). Several launches followed; two were lost early to causes unrelated to memory capacity (a
-machine reboot, and an operating-system memory-policy kill later diagnosed and masked), and a
-further attempt ran for multiple hours with memory usage tracking the projected working set before
-the project's effort moved to writing up the results already in hand. $l=24$ was not pursued to
-completion, and the table stops at $l=23$.
+($\sim\!104$ hours).
 
 \section{The growth of $e(l)$}
 \label{sec:growth}
