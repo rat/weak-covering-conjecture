@@ -7,4 +7,4 @@ k=3..14 certificates and a standalone verifier), `section5-exponential-sum` (Sec
 there was run and reproduces the value the paper quotes; each folder README records the claim, the
 command, the expected output and the measured cost.
 
-DOI archival on Zenodo is still pending, as planned for paper 01's repository.
+Archived (immutable), commit 17f1b05, DOI: https://doi.org/10.5281/zenodo.21877643
