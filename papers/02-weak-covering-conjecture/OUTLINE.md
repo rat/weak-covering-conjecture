@@ -662,4 +662,25 @@ A push), notes/H-013.md, notes/GAP-A-round4.md, notes/GAP-A-round5*.md.
       Empirical Results 4/13/14/19/21 and Theorem 17 at every claimed level, corner-redundancy's
       exact pattern to l=8. No l=24 leftovers found anywhere. Recompiled clean, 20 pages, 0 errors,
       parenthesis balance 756/756, abstract re-measured at 1891/1804 chars (raw/rendered), still
-      under arXiv's limit. Round 24 next.
+      under arXiv's limit.
+
+- [x] **Round 24 complete (2026-08-10).** Third consecutive round finding something real in the
+      abstract. One moderate, verified against Empirical Result 13's own text before editing: the
+      abstract's "empirical beyond" / "empirical otherwise" read as a positive verification claim,
+      but interior budgets are checked only through l=21 and the boundary budget only through
+      l=22, neither reaching l=23, the level the abstract's own opening sentence advertises as
+      new. Fixed by naming the actual checked range. Five minors, three real precision gaps
+      outside the abstract for the first time in three rounds (mass-vs-coefficients conflation, a
+      mislabeled valuation letter in Section 5.2, a missing "under T_d" in a Section 4 clause) plus
+      four banned-vocabulary hits (Rule 5c) that had survived every prior round. Two items
+      surfaced and deliberately deferred with reasons logged: the antithesis-construction count
+      (matches this paper's already-tracked calibrated baseline, not a new problem) and the two
+      "named" open questions not actually being numbered environments (real but structural,
+      deferred to a session with room to implement and re-verify carefully). Opus also
+      independently re-derived the l=22/23 model-leadership sensitivity Round 22 first found,
+      without seeing that report; logged in H-017 as a second independent confirmation. Widest
+      reproduction yet on some fronts (Empirical Result 19 verified to l=13 against the paper's
+      own stated l<=9; corner-redundancy cross-checked for internal consistency against Theorem
+      10's own failure point). Recompiled clean, 20 pages, 0 errors, parenthesis balance 756/756,
+      abstract re-measured at 1893/1800 chars (raw/rendered). Minor count falling each round
+      (7, 7, 5). Round 25 next.

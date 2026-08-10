@@ -50,17 +50,18 @@ $j^*(l)\le\tfrac98l+\tfrac{33}2$, comes from a mean-payoff-game relaxation via o
 verified computationally, not proven generally. The Fourier route is blocked at its first step:
 its positivity criterion is provably unreachable at every budget; granting it, square-root
 cancellation could not beat the mean-payoff bound. A further computation finds most
-primitive-frequency mass below a fixed threshold, evidence against sparse-exceptional repair.
-Null-model
-diagnostics at one tractable pair find structure neither null forces, left uncalibrated. We prove
+primitive-frequency mass in coefficients below a fixed threshold, evidence against
+sparse-exceptional repair. Null-model
+diagnostics at one pair find structure neither null forces, left uncalibrated. We prove
 that, for budgets $j>l$, the uncovered set at a budget is contained in both twice and four times
 the uncovered set at the previous budget, giving a recursive upper bound on $j^*(l)$. This bound
 is proven exact for $l+2\le j\le j^*(l)$ at $l=3,\dots,13$ (verified exhaustively), empirical
-beyond; the boundary $j=l+1$ is proven at $l=3,\dots,6$, empirical otherwise. We falsify a cost-$1$
+through $l=21$; the boundary $j=l+1$ is proven at $l=3,\dots,6$ and empirical through $l=22$. We
+falsify a cost-$1$
 repair rule it suggests, prove every last-uncovered residue is $\equiv1\pmod3$ whenever
-$j^*(l)\ge l+1$ (all but one computed level), prove a two-class containment law mod $9$ on these
-residues, and report further identities, some verified but not proven. Two open questions are
-stated precisely, narrower than the conjecture; others arise elsewhere. The Weak Covering
+$j^*(l)\ge l+1$ (all but one computed level), prove a two-class containment law mod $9$, and
+report further identities, some verified but not proven. Two open questions are
+stated exactly, narrower than the conjecture; others arise elsewhere. The Weak Covering
 Conjecture remains open.
 \end{abstract}
 
@@ -428,8 +429,8 @@ final $k-1$ steps, fix one lift of the true state to a residue modulo $3^k$, at 
 by padding the true state's remaining $l-i$ digits with $k-(l-i)$ arbitrary further digits, and run
 the window-$k$ game forward from that lift on the play's own remaining digits (not a fresh lift at
 each step). Two separate facts keep this consistent with the true state. First, safety, by
-construction, keeps every one of the three possible one-digit extensions of a safe state a unit
-modulo $3^k$, so the window-$k$ policy always has a well-defined next state
+construction, keeps the image under $T_d$ of every one of the three possible one-digit extensions
+of a safe state a unit modulo $3^k$, so the window-$k$ policy always has a well-defined next state
 $s_{i+1}:=T_d(s_i+3^k\epsilon_i)\bmod3^k$ to act on for any extending digit $\epsilon_i\in\{0,1,2\}$,
 real or padding, matching the general successor $s'(\epsilon)$ used in the theorem's proof below.
 Second, from the defining formula $T_d(z)=(2^{d+1}z-2)/3$, $T_d(z)\bmod3^{k'}$ depends only on
@@ -628,7 +629,7 @@ largest frequencies at $l=10$, valuations run $9,9,8,8,7,7,8,8,8,8,7,7$, and at 
 primitive (valuation-$0$) frequency already exceeds the weakest valuation-$8$ frequency checked. The
 natural
 repair is to restrict to primitive frequencies, excising the whole non-primitive spectrum (every
-valuation $c<l$, the pair above included) and controlling the remainder by an averaged bound;
+$c<l$, the pair above included) and controlling the remainder by an averaged bound;
 whether that remainder stays
 sparse enough at the scale that matters is a question this section answers computationally, for the family $R_{j-1,j}$ at $l=18$,
 $j=16$ (the first-order cardinality threshold, $T:=\binom{32}{16}$, six budgets below the actual
@@ -679,9 +680,9 @@ from $e^{-2}$ to $e^{-108}$). The non-homogeneous Poisson model assigns probabil
 event that occurred; $z$, the levels, and the depths checked are all selected after seeing the
 holdouts, so this is not a predeclared, calibrated test: the exponent is suggestive rather than a
 formal
-rejection, and the model is not treated as a live candidate below on that basis. What survives is
-the weaker, descriptive claim
-underneath it:
+rejection, and the model is not treated as a live candidate below on that basis. The weaker,
+descriptive claim
+underneath it still stands:
 holdouts sit systematically in low-intensity cells, with how far below the mean varying widely by
 depth and level. At the finest depth the definition allows short of the degenerate case, $c=l-1$ (a
 class of only $3$ siblings), the same model uses the leave-one-out intensity
@@ -797,7 +798,7 @@ $3n_i-N$ has variance $2N$; summing the three lifts of every parent over the who
 $\mathbf{E}[\sum_z F(z)^2]=6T$ exactly, $T=\binom{2m}{m}$. The actual array's $\sum_z F(z)^2$ is
 $9.35\times10^9$ against an expectation of $6T=3.61\times10^9$, a factor of $2.59$ and, against the
 null's own trial-to-trial spread over the $30$ runs (standard deviation $5.6\times10^6$), about
-$1{,}030$ null standard deviations out: this is the genuine departure, a magnitude excess, $|S(t)|$
+$1{,}030$ null standard deviations out: this is the departure, a magnitude excess, $|S(t)|$
 itself departing from what independent splitting of the exact parent counts produces. The null's
 absolute maximum, averaging $477$ and never
 exceeding $580$ over the $30$ trials, falls short of the actual array's $698$ in every trial, but this
@@ -806,7 +807,7 @@ against the null's $27.5$, a factor of $1.61$), the null's mean maximum would sc
 $477\times1.61\approx768$, above the actual $698$, so the maximum comparison is the root-mean-square
 shortfall restated, not an independent one. The
 $\max/\mathrm{RMS}$ ratios themselves agree, or rather the null exceeds the actual ratio in most
-trials, precisely because both the maximum and the root-mean-square fall short by comparable factors
+trials, because both the maximum and the root-mean-square fall short by comparable factors
 ($1.46$ and $1.61$); on this scale-free statistic the null is not refuted at all, and the extremity
 claim above rests entirely on the constrained phase null, at identical root-mean-square.
 (This uses the $R_{15,16}$ array's own
